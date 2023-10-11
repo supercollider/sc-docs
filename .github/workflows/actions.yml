@@ -11,6 +11,8 @@ jobs:
   build_docs:
     name: "Build and deploy docs"
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v4
         name: Checkout repository
