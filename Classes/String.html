@@ -182,7 +182,7 @@ var scdoc_sc_version = '3.13.0';
 <div id='summary'>array of Chars</div>
 </div>
 <div class='subheader'>
-<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/develop/SCClassLibrary/Common/Collections/String.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Collections/String.sc'>String.sc</a></div><div id='related'>See also: <a href="./../Classes/Char.html">Char</a></div>
+<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/Common/Collections/String.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Collections/String.sc'>String.sc</a></div><div id='related'>See also: <a href="./../Classes/Char.html">Char</a></div>
 </div>
 <h2><a class='anchor' name='description'>Description</a></h2>
 
@@ -201,7 +201,7 @@ y = "this is a\n"
 <h3 class='method-code'><span class='method-prefix'>String.</span><a class='method-name' name='*readNew' href='./../Overviews/Methods.html#readNew'>readNew</a>(<span class='argstr'>file</span>)</h3>
 <div class='method'>
 <p>Read the entire contents of a <a href="./../Classes/File.html">File</a> and return them as a new String.</div><h3 class='method-code'><span class='method-prefix'>String.</span><a class='method-name' name='*scDir' href='./../Overviews/Methods.html#scDir'>scDir</a></h3>
-<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/develop/SCClassLibrary/deprecated/3.11/deprecated-3.11.sc'>/usr/local/share/SuperCollider/SCClassLibrary/deprecated/3.11/deprecated-3.11.sc</a></div>
+<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/deprecated/3.11/deprecated-3.11.sc'>/usr/local/share/SuperCollider/SCClassLibrary/deprecated/3.11/deprecated-3.11.sc</a></div>
 <div class='method'>
 <p>Deprecated alias for <code>Platform.resourceDir</code>. Please use <a href="./../Classes/Platform.html#*resourceDir">Platform: *resourceDir</a> instead.</div><h3><a class='anchor' name='Inherited%20class%20methods'>Inherited class methods</a></h3>
 <div id='inheritedclassmets'></div><h2><a class='anchor' name='instancemethods'>Instance Methods</a></h2>
@@ -585,7 +585,7 @@ Post &lt;&lt;&lt; "Store this on Post";</textarea>
 <p>Executes a UNIX command <strong>synchronously</strong> using the standard shell (sh).<h4>Returns:</h4>
 <div class='returnvalue'>
 <p>Error code of the UNIX command</div></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-runInTerminal' href='./../Overviews/Methods.html#runInTerminal'>runInTerminal</a>(<span class='argstr'>shell: "/bin/sh"</span>)</h3>
-<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/develop/SCClassLibrary/Common/Collections/linux/extString_linux.sc'>/usr/local/share/SuperCollider/SCClassLibrary/Common/Collections/linux/extString_linux.sc</a></div>
+<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/Common/Collections/linux/extString_linux.sc'>/usr/local/share/SuperCollider/SCClassLibrary/Common/Collections/linux/extString_linux.sc</a></div>
 <div class='method'>
 <p>Execute the String in a new terminal window (<strong>asynchronously</strong>).<h4>Arguments:</h4>
 <table class='arguments'>
@@ -640,7 +640,7 @@ File.use("/tmp/loadPaths_example.scd", "w", { |file|
 <div class='method'>
 <p>Expand ~ to your home directory, and resolve aliases on macOS. See <a href="./../Classes/PathName.html">PathName</a> for more complex needs. See <a href="./../Classes/File.html#*realpath">File: *realpath</a> if you want to resolve symlinks.<textarea class='editor'>"~/".standardizePath; //This will print your home directory</textarea>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-openOS' href='./../Overviews/Methods.html#openOS'>openOS</a></h3>
-<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/develop/SCClassLibrary/Common/Collections/linux/extString_linux.sc'>/usr/local/share/SuperCollider/SCClassLibrary/Common/Collections/linux/extString_linux.sc</a></div>
+<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/Common/Collections/linux/extString_linux.sc'>/usr/local/share/SuperCollider/SCClassLibrary/Common/Collections/linux/extString_linux.sc</a></div>
 <div class='method'>
 <p>Open file, directory or URL via the operating system. On macOS this is implemented via <code>open</code>, on Linux via <code>xdg-open</code> and on Windows via <code>start</code>.<textarea class='editor'>Platform.userConfigDir.openOS;
 "http://supercollider.sf.net".openOS;</textarea>
@@ -804,23 +804,23 @@ w.refresh;
 <tr><td class='argumentname'>font<td class='argumentdesc'>
 <p>A <a href="./../Classes/Font.html">Font</a></table></div><h3><a class='anchor' name='Extensions%20by%20SCDoc'>Extensions by SCDoc</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-stripWhiteSpace' href='./../Overviews/Methods.html#stripWhiteSpace'>stripWhiteSpace</a></h3>
-<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/develop/SCClassLibrary/SCDoc/SCDoc.sc'>/usr/local/share/SuperCollider/SCClassLibrary/SCDoc/SCDoc.sc</a></div>
+<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/SCDoc/SCDoc.sc'>/usr/local/share/SuperCollider/SCClassLibrary/SCDoc/SCDoc.sc</a></div>
 <div class='method'>
 <p>Strips whitespace at the beginning and end of the string.<h4>Returns:</h4>
 <div class='returnvalue'>
 <p>The stripped string</div></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-unixCmdGetStdOutLines' href='./../Overviews/Methods.html#unixCmdGetStdOutLines'>unixCmdGetStdOutLines</a></h3>
-<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/develop/SCClassLibrary/SCDoc/SCDoc.sc'>/usr/local/share/SuperCollider/SCClassLibrary/SCDoc/SCDoc.sc</a></div>
+<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/SCDoc/SCDoc.sc'>/usr/local/share/SuperCollider/SCClassLibrary/SCDoc/SCDoc.sc</a></div>
 <div class='method'>
 <p>Like <a href="#-unixCmdGetStdOut">-unixCmdGetStdOut</a> but returns the lines in an Array instead.<h4>Returns:</h4>
 <div class='returnvalue'>
 <p>an <a href="./../Classes/Array.html">Array</a> of each line of output</div></div><h3><a class='anchor' name='Inherited%20instance%20methods'>Inherited instance methods</a></h3>
 <div id='inheritedinstmets'></div><h3><a class='anchor' name='Undocumented%20instance%20methods'>Undocumented instance methods</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-asDefName' href='./../Overviews/Methods.html#asDefName'>asDefName</a></h3>
-<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/develop/SCClassLibrary/Common/Control/asDefName.sc'>/usr/local/share/SuperCollider/SCClassLibrary/Common/Control/asDefName.sc</a></div>
+<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/Common/Control/asDefName.sc'>/usr/local/share/SuperCollider/SCClassLibrary/Common/Control/asDefName.sc</a></div>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-asOSCArgArray' href='./../Overviews/Methods.html#asOSCArgArray'>asOSCArgArray</a></h3>
-<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/develop/SCClassLibrary/Common/Control/extConvertToOSC.sc'>/usr/local/share/SuperCollider/SCClassLibrary/Common/Control/extConvertToOSC.sc</a></div>
+<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/Common/Control/extConvertToOSC.sc'>/usr/local/share/SuperCollider/SCClassLibrary/Common/Control/extConvertToOSC.sc</a></div>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-asOSCArgEmbeddedArray' href='./../Overviews/Methods.html#asOSCArgEmbeddedArray'>asOSCArgEmbeddedArray</a>(<span class='argstr'>array</span>)</h3>
-<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/develop/SCClassLibrary/Common/Control/extConvertToOSC.sc'>/usr/local/share/SuperCollider/SCClassLibrary/Common/Control/extConvertToOSC.sc</a></div>
+<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/Common/Control/extConvertToOSC.sc'>/usr/local/share/SuperCollider/SCClassLibrary/Common/Control/extConvertToOSC.sc</a></div>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-asString' href='./../Overviews/Methods.html#asString'>asString</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-codegen_UGenCtorArg' href='./../Overviews/Methods.html#codegen_UGenCtorArg'>codegen_UGenCtorArg</a>(<span class='argstr'>stream</span>)</h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-die' href='./../Overviews/Methods.html#die'>die</a>( <span class='argstr'>... culprits</span>)</h3>
@@ -837,5 +837,5 @@ w.refresh;
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-stripHTML' href='./../Overviews/Methods.html#stripHTML'>stripHTML</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-ugenCodeString' href='./../Overviews/Methods.html#ugenCodeString'>ugenCodeString</a>(<span class='argstr'>ugenIndex</span>, <span class='argstr'>isDecl</span>, <span class='argstr'>inputNames: [  ]</span>, <span class='argstr'>inputStrings: [  ]</span>)</h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-wrapExtend' href='./../Overviews/Methods.html#wrapExtend'>wrapExtend</a>(<span class='argstr'>size</span>)</h3>
-<div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/develop/HelpSource/Classes/String.schelp'>https://github.com/supercollider/supercollider/tree/develop/HelpSource/Classes/String.schelp</a><br>link::Classes/String::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+<div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/String.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/String.schelp</a><br>link::Classes/String::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
 </body></html>

@@ -48,7 +48,7 @@ var scdoc_sc_version = '3.13.0';
 <div id='summary'>Helper class that collects information about internal state of streams that needs to be released</div>
 </div>
 <div class='subheader'>
-<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/develop/SCClassLibrary/Common/Streams/EventStreamCleanup.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Streams/EventStreamCleanup.sc'>EventStreamCleanup.sc</a></div></div>
+<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/Common/Streams/EventStreamCleanup.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Streams/EventStreamCleanup.sc'>EventStreamCleanup.sc</a></div></div>
 <h2><a class='anchor' name='description'>Description</a></h2>
 
 <p>Event streams created by objects like <a href="./../Classes/Pmono.html">Pmono</a> or <a href="./../Classes/Pfx.html">Pfx</a> are special: when they start, they create some state (like a new synth) that is present over the whole period of the stream, or at least over several events. When such a stream ends, it releases this state. There are other streams, however, <strong>that may stop their input stream at any time</strong> (e.g. <a href="./../Classes/Pfindur.html">Pfindur</a> or <a href="./../Classes/Pdef.html">Pdef</a>). Them the state of any stream buried in the hierarchy of input streams must be released by them. EventStreamCleanup collects the cleanup functions and can run them when the stream is cut.<div class='note'><span class='notelabel'>NOTE:</span> So all event patterns that can end a subpattern (and streams respectively) have to use an EventStreamCleanup.</div>
@@ -219,5 +219,5 @@ Pbus : FilterPattern {
         }
     }
 }</textarea>
-<div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/develop/HelpSource/Classes/EventStreamCleanup.schelp'>https://github.com/supercollider/supercollider/tree/develop/HelpSource/Classes/EventStreamCleanup.schelp</a><br>link::Classes/EventStreamCleanup::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+<div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/EventStreamCleanup.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/EventStreamCleanup.schelp</a><br>link::Classes/EventStreamCleanup::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
 </body></html>

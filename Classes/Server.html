@@ -220,7 +220,7 @@ var scdoc_sc_version = '3.13.0';
 <div id='summary'>Object representing a server application</div>
 </div>
 <div class='subheader'>
-<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/develop/SCClassLibrary/Common/Control/Server.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Control/Server.sc'>Server.sc</a></div><div id='subclasses'>Subclasses: <a href="../Classes/ScoreStreamPlayer.html">ScoreStreamPlayer</a></div>
+<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/Common/Control/Server.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Control/Server.sc'>Server.sc</a></div><div id='subclasses'>Subclasses: <a href="../Classes/ScoreStreamPlayer.html">ScoreStreamPlayer</a></div>
 <div id='related'>See also: <a href="./../Guides/Server-Guide.html">Server Guide</a>, <a href="./../Guides/MultiClient_Setups.html">Multi-client Setups</a>, <a href="./../Classes/ServerOptions.html">ServerOptions</a>, <a href="./../Reference/Server-Architecture.html">Server Architecture</a>, <a href="./../Reference/Server-Command-Reference.html">Server Command Reference</a>, <a href="./../Classes/ServerStatusWatcher.html">ServerStatusWatcher</a>, <a href="./../Reference/AudioDeviceSelection.html">Audio device selection</a></div>
 </div>
 <h2><a class='anchor' name='description'>Description</a></h2>
@@ -336,7 +336,7 @@ s.postln; // see: it is alice.</textarea>
 <h3 class='method-code'><span class='method-prefix'>Server.</span><a class='method-name' name='*resumeThreads' href='./../Overviews/Methods.html#resumeThreads'>resumeThreads</a></h3>
 <h3 class='method-code'><span class='method-prefix'>Server.</span><a class='method-name' name='*set' href='./../Overviews/Methods.html#set'>set</a></h3>
 <h3 class='method-code'><span class='method-prefix'>Server.</span><a class='method-name' name='*set' href='./../Overviews/Methods.html#set'>set</a> = <span class='argstr'>item</span></h3>
-<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/develop/SCClassLibrary/deprecated/3.10/deprecated-3.10.sc'>/usr/local/share/SuperCollider/SCClassLibrary/deprecated/3.10/deprecated-3.10.sc</a></div>
+<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/deprecated/3.10/deprecated-3.10.sc'>/usr/local/share/SuperCollider/SCClassLibrary/deprecated/3.10/deprecated-3.10.sc</a></div>
 <h2><a class='anchor' name='instancemethods'>Instance Methods</a></h2>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-sendMsg' href='./../Overviews/Methods.html#sendMsg'>sendMsg</a>( <span class='argstr'>... msg</span>)</h3>
 <div class='method'>
@@ -504,7 +504,7 @@ s.quit;</textarea>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-remoteControlled' href='./../Overviews/Methods.html#remoteControlled'>remoteControlled</a> = value</h3>
 <div class='method'>
 <p><code>true</code> if the server is not being controlled by the machine on which it is running, <code>false</code> otherwise. This value is the same as <code>isLocal</code> unless explicitly set.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-userSpecifiedClientID' href='./../Overviews/Methods.html#userSpecifiedClientID'>userSpecifiedClientID</a></h3>
-<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/develop/SCClassLibrary/deprecated/3.10/deprecated-3.10.sc'>/usr/local/share/SuperCollider/SCClassLibrary/deprecated/3.10/deprecated-3.10.sc</a></div>
+<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/deprecated/3.10/deprecated-3.10.sc'>/usr/local/share/SuperCollider/SCClassLibrary/deprecated/3.10/deprecated-3.10.sc</a></div>
 <div class='method'>
 <p>Deprecated in 3.9. Returns <code>false</code>. Server:clientID can now be set while a server is off, and is locked while the server is running. Thus, userSpecifiedClientID is no longer needed internally, and meaningless.</div><h3><a class='anchor' name='Message%20Bundling'>Message Bundling</a></h3>
 
@@ -770,7 +770,7 @@ Routine.run {
 )</textarea>
 </div><h3><a class='anchor' name='Bela'>Bela</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-belaScope' href='./../Overviews/Methods.html#belaScope'>belaScope</a>(<span class='argstr'>scopeChannel</span>, <span class='argstr'>index: 0</span>, <span class='argstr'>numChannels</span>)</h3>
-<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/develop/SCClassLibrary/Common/Audio/Bela/BelaScope.sc'>/usr/local/share/SuperCollider/SCClassLibrary/Common/Audio/Bela/BelaScope.sc</a></div>
+<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/Common/Audio/Bela/BelaScope.sc'>/usr/local/share/SuperCollider/SCClassLibrary/Common/Audio/Bela/BelaScope.sc</a></div>
 <div class='method'>
 <p>Scope a number of channels from a Bus on this Server, to Bela's Oscilloscope (see <a href="./../Classes/BelaScope.html">BelaScope</a> for required setup). It is required that this Server is running on a Bela, and that it is thus capable of using BelaScope.<h4>Arguments:</h4>
 <table class='arguments'>
@@ -788,13 +788,13 @@ Routine.run {
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-archiveAsCompileString' href='./../Overviews/Methods.html#archiveAsCompileString'>archiveAsCompileString</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-archiveAsObject' href='./../Overviews/Methods.html#archiveAsObject'>archiveAsObject</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-asBus' href='./../Overviews/Methods.html#asBus'>asBus</a>(<span class='argstr'>rate</span>, <span class='argstr'>numChannels: 1</span>)</h3>
-<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/develop/SCClassLibrary/Common/Control/asBus.sc'>/usr/local/share/SuperCollider/SCClassLibrary/Common/Control/asBus.sc</a></div>
+<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/Common/Control/asBus.sc'>/usr/local/share/SuperCollider/SCClassLibrary/Common/Control/asBus.sc</a></div>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-asGroup' href='./../Overviews/Methods.html#asGroup'>asGroup</a></h3>
-<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/develop/SCClassLibrary/Common/Control/asGroup.sc'>/usr/local/share/SuperCollider/SCClassLibrary/Common/Control/asGroup.sc</a></div>
+<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/Common/Control/asGroup.sc'>/usr/local/share/SuperCollider/SCClassLibrary/Common/Control/asGroup.sc</a></div>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-asNodeID' href='./../Overviews/Methods.html#asNodeID'>asNodeID</a></h3>
-<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/develop/SCClassLibrary/Common/Control/asTarget.sc'>/usr/local/share/SuperCollider/SCClassLibrary/Common/Control/asTarget.sc</a></div>
+<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/Common/Control/asTarget.sc'>/usr/local/share/SuperCollider/SCClassLibrary/Common/Control/asTarget.sc</a></div>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-asTarget' href='./../Overviews/Methods.html#asTarget'>asTarget</a></h3>
-<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/develop/SCClassLibrary/Common/Control/asTarget.sc'>/usr/local/share/SuperCollider/SCClassLibrary/Common/Control/asTarget.sc</a></div>
+<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/Common/Control/asTarget.sc'>/usr/local/share/SuperCollider/SCClassLibrary/Common/Control/asTarget.sc</a></div>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-audioBusAllocator' href='./../Overviews/Methods.html#audioBusAllocator'>audioBusAllocator</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-bootInProcess' href='./../Overviews/Methods.html#bootInProcess'>bootInProcess</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-bootInit' href='./../Overviews/Methods.html#bootInit'>bootInit</a>(<span class='argstr'>recover: false</span>)</h3>
@@ -832,17 +832,17 @@ Routine.run {
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-nodeAllocator' href='./../Overviews/Methods.html#nodeAllocator'>nodeAllocator</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-notified' href='./../Overviews/Methods.html#notified'>notified</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-onBootAdd' href='./../Overviews/Methods.html#onBootAdd'>onBootAdd</a>(<span class='argstr'>object</span>)</h3>
-<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/develop/SCClassLibrary/Common/Control/extSystemActions.sc'>/usr/local/share/SuperCollider/SCClassLibrary/Common/Control/extSystemActions.sc</a></div>
+<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/Common/Control/extSystemActions.sc'>/usr/local/share/SuperCollider/SCClassLibrary/Common/Control/extSystemActions.sc</a></div>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-onBootRemove' href='./../Overviews/Methods.html#onBootRemove'>onBootRemove</a>(<span class='argstr'>object</span>)</h3>
-<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/develop/SCClassLibrary/Common/Control/extSystemActions.sc'>/usr/local/share/SuperCollider/SCClassLibrary/Common/Control/extSystemActions.sc</a></div>
+<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/Common/Control/extSystemActions.sc'>/usr/local/share/SuperCollider/SCClassLibrary/Common/Control/extSystemActions.sc</a></div>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-onQuitAdd' href='./../Overviews/Methods.html#onQuitAdd'>onQuitAdd</a>(<span class='argstr'>object</span>)</h3>
-<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/develop/SCClassLibrary/Common/Control/extSystemActions.sc'>/usr/local/share/SuperCollider/SCClassLibrary/Common/Control/extSystemActions.sc</a></div>
+<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/Common/Control/extSystemActions.sc'>/usr/local/share/SuperCollider/SCClassLibrary/Common/Control/extSystemActions.sc</a></div>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-onQuitRemove' href='./../Overviews/Methods.html#onQuitRemove'>onQuitRemove</a>(<span class='argstr'>object</span>)</h3>
-<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/develop/SCClassLibrary/Common/Control/extSystemActions.sc'>/usr/local/share/SuperCollider/SCClassLibrary/Common/Control/extSystemActions.sc</a></div>
+<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/Common/Control/extSystemActions.sc'>/usr/local/share/SuperCollider/SCClassLibrary/Common/Control/extSystemActions.sc</a></div>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-openBundle' href='./../Overviews/Methods.html#openBundle'>openBundle</a>(<span class='argstr'>bundle</span>)</h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-quitInProcess' href='./../Overviews/Methods.html#quitInProcess'>quitInProcess</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-recordNode' href='./../Overviews/Methods.html#recordNode'>recordNode</a></h3>
-<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/develop/SCClassLibrary/deprecated/3.10/deprecated-3.10.sc'>/usr/local/share/SuperCollider/SCClassLibrary/deprecated/3.10/deprecated-3.10.sc</a></div>
+<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/deprecated/3.10/deprecated-3.10.sc'>/usr/local/share/SuperCollider/SCClassLibrary/deprecated/3.10/deprecated-3.10.sc</a></div>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-recorder' href='./../Overviews/Methods.html#recorder'>recorder</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-remove' href='./../Overviews/Methods.html#remove'>remove</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-schedSync' href='./../Overviews/Methods.html#schedSync'>schedSync</a>(<span class='argstr'>func</span>)</h3>
@@ -865,5 +865,5 @@ Routine.run {
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-tree' href='./../Overviews/Methods.html#tree'>tree</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-tree' href='./../Overviews/Methods.html#tree'>tree</a> = value</h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-window' href='./../Overviews/Methods.html#window'>window</a></h3>
-<div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/develop/HelpSource/Classes/Server.schelp'>https://github.com/supercollider/supercollider/tree/develop/HelpSource/Classes/Server.schelp</a><br>link::Classes/Server::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+<div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/Server.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/Server.schelp</a><br>link::Classes/Server::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
 </body></html>
