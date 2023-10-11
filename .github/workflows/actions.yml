@@ -6,81 +6,44 @@ on:
     - main
   schedule:
     - cron: "0 0 */7 * *"
-  
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
 jobs:
-  build_docs:
-    runs-on: ubuntu-22.04
+  build_image:
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-        with:
-          submodules: recursive
-          repository: 'supercollider/supercollider'
-      - name: prepare daily timestamp for cache
-        id: current-date
-        run: echo "::set-output name=stamp::$(date '+%Y-%m-%d')"
-      - name: install dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install build-essential cmake libjack-jackd2-dev libsndfile1-dev libfftw3-dev libxt-dev libavahi-client-dev
-      - name: configure
-        run: |
-          mkdir build && cd build
-          cmake -DSC_EL=OFF -DSC_VIM=OFF -DSC_ED=OFF -DSC_QT=OFF -DSC_IDE=OFF -DCMAKE_BUILD_TYPE=Release ..
-      - name: build
-        run: |
-          cd build
-          make install -j2
-      - name: upload artifacts
-        uses: actions/upload-artifact@v2
-        if: matrix.artifact-suffix
-        with:
-          name: ${{ env.ARTIFACT_FILE }}
-          path: ${{ env.INSTALL_PATH }}/${{ env.ARTIFACT_FILE }}.zip
+      - uses: actions/checkout@v4
+        name: Checkout repository
 
-  # originated from a combination of cmake target "doc" and GHA linux test
-  deploy_docs:
-    needs: [Linux]
-    runs-on: ubuntu-22.04
-    name: 'deploy documentation'
-    env:
-      INSTALL_PATH: ${{ github.workspace }}/build/Install
-      SCLANG: 'build/Install/bin/sclang'
-      ARTIFACT_FILE: SuperCollider-${{ needs.lint.outputs.sc-version }}-linux-bionic-gcc10
-      RENDERED_HELP: ${{ github.workspace }}/RenderedHelp
-    steps:
-      - uses: actions/checkout@v2
+      - name: Log in to the Container registry
+        uses: docker/login-action@65b78e6e13532edd9afa3aa52ac7964289d1a9c1
         with:
-          submodules: false
-      - name: download linux artifact
-        uses: actions/download-artifact@v2
-        with:
-          name: ${{ env.ARTIFACT_FILE }}
-          path: ${{ env.INSTALL_PATH }}
-      - name: extract artifact
-        run: |
-          cd $INSTALL_PATH
-          unzip $ARTIFACT_FILE.zip
-      - name: setup Linux environment
-        run: |
-          # install dependencies
-          sudo apt-get update
-          sudo apt-get install --yes libsndfile1 libavahi-client-dev libfftw3-dev libicu-dev libudev-dev qt5-default qtwebengine5-dev jackd1
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
-          # start jack
-          jackd --no-realtime -d dummy & 
-      - name: build HTML documentation
-        run: |
-          mkdir $RENDERED_HELP
-          xvfb-run --server-args="-screen 0, 1280x720x24" -a $SCLANG ${{ github.workspace }}/platform/renderAllHelp.scd ${{ github.workspace }}/HelpSource $RENDERED_HELP
-      - name: replace URLs to GitHub URLs
-        run: |
-          cp $RENDERED_HELP/Help.html $RENDERED_HELP/index.html
-          find ./RenderedHelp/ -type f -exec sed -i -e 's_file:///home/runner/work/supercollider/supercollider/build/Install/share/SuperCollider/SCClassLibrary/_https://github.com/supercollider/supercollider/tree/develop/SCClassLibrary/_g' {} \;
-          find ./RenderedHelp/ -type f -exec sed -i -e 's_file:///home/runner/work/supercollider/supercollider/HelpSource/_https://github.com/supercollider/supercollider/tree/develop/HelpSource/_g' {} \; 
-          find ./RenderedHelp/ -type f -exec sed -i -e 's_/home/runner/work/supercollider/supercollider/build/Install/share/SuperCollider/SCClassLibrary/_https://github.com/supercollider/supercollider/tree/develop/SCClassLibrary/_g' {} \; 
-          find ./RenderedHelp/ -type f -exec sed -i -e 's_/home/runner/work/supercollider/supercollider/HelpSource/_https://github.com/supercollider/supercollider/tree/develop/HelpSource_g' {} \; 
+      - name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@f2a1d5e99d037542a71f64918e516c093c6f3fc4
+        with:
+          context: .
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+
+      - name: Build docs in Docker container
+        run: docker run -v ${PWD}/build:/root/scdocs ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }} /root/build_docs.sh
+
       - name: upload HTML documentation as gh-pages branch
         uses: peaceiris/actions-gh-pages@v3.6.1
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: RenderedHelp
+          publish_dir: build
