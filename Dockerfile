@@ -18,11 +18,11 @@ RUN apt-get update && \
         libudev-dev \
         sed
 
-ARG branch=3.13
+ENV SC_BRANCH=3.13
 
 RUN git clone \
     --depth 1 \
-    --branch $branch \
+    --branch $SC_BRANCH \
     --recurse-submodules \
     https://github.com/SuperCollider/SuperCollider.git && \
     cd SuperCollider && \
