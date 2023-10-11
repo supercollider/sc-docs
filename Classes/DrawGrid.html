@@ -1,0 +1,234 @@
+<!doctype html><html lang='en'><head><title>DrawGrid | SuperCollider 3.13.0 Help</title>
+<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<link rel='stylesheet' href='./../frontend.css' type='text/css' />
+<link rel='stylesheet' href='./../custom.css' type='text/css' />
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+<script src='./../lib/jquery.min.js'></script>
+<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script>
+var helpRoot = './..';
+var scdoc_title = 'DrawGrid';
+var scdoc_sc_version = '3.13.0';
+</script>
+<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../docmap.js' type='text/javascript'></script>
+<script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
+</head>
+<body onload='fixTOC()'>
+<div id='toc'>
+<div id='toctitle'>DrawGrid:</div>
+<span class='toc_search'>Filter: <input id='toc_search'></span><ul class='toc'><li class='toc1'><a href='#description'>Description</a></li>
+<ul class='toc'></ul><li class='toc1'><a href='#classmethods'>Class methods</a></li>
+<ul class='toc'><li class='toc3'><a href='#*new'>new</a> </li>
+<li class='toc2'><a href='#Inherited%20class%20methods'>Inherited class methods</a></li>
+</ul><li class='toc1'><a href='#instancemethods'>Instance methods</a></li>
+<ul class='toc'><li class='toc3'><a href='#-draw'>draw</a> </li>
+<li class='toc3'><a href='#-horzGrid'>horzGrid</a> </li>
+<li class='toc3'><a href='#-vertGrid'>vertGrid</a> </li>
+<li class='toc3'><a href='#-bounds'>bounds</a> </li>
+<li class='toc3'><a href='#-font'>font</a> </li>
+<li class='toc3'><a href='#-fontColor'>fontColor</a> </li>
+<li class='toc3'><a href='#-gridColors'>gridColors</a> </li>
+<li class='toc3'><a href='#-opacity'>opacity</a> </li>
+<li class='toc3'><a href='#-smoothing'>smoothing</a> </li>
+<li class='toc3'><a href='#-linePattern'>linePattern</a> </li>
+<li class='toc3'><a href='#-x'>x</a> </li>
+<li class='toc3'><a href='#-y'>y</a> </li>
+<li class='toc3'><a href='#-numTicks'>numTicks</a> </li>
+<li class='toc3'><a href='#-tickSpacing'>tickSpacing</a> </li>
+<li class='toc3'><a href='#-preview'>preview</a> </li>
+<li class='toc3'><a href='#-copy'>copy</a> </li>
+<li class='toc2'><a href='#Inherited%20instance%20methods'>Inherited instance methods</a></li>
+</ul><li class='toc1'><a href='#examples'>Examples</a></li>
+<ul class='toc'><li class='toc2'><a href='#Basic%20use%20in%20a%20UserView'>Basic use in a UserView</a></li>
+<ul class='toc'></ul><li class='toc2'><a href='#Testing%20and%20modifying'>Testing and modifying</a></li>
+<ul class='toc'></ul></ul></ul></div><div id='menubar'></div>
+<div class='contents'>
+<div class='header'>
+<div id='label'>
+<span id='folder'>Classes</span>
+ | <span id='categories'><a href='./../Browse.html#GUI'>GUI</a>&#8201;&gt;&#8201;<a href='./../Browse.html#GUI>Accessories'>Accessories</a></span>
+</div><h1>DrawGrid</h1>
+<div id='summary'>Draws grid lines on a UserView for plotting</div>
+</div>
+<div class='subheader'>
+<div id='filename'>Location: <b>NOT INSTALLED!</b></div>
+<div id='related'>See also: <a href="./../Reference/plot.html">plot</a>, <a href="./../Classes/AbstractGridLines.html">AbstractGridLines</a>, <a href="./../Classes/GridLines.html">GridLines</a>, <a href="./../Classes/Plotter.html">Plotter</a>, <a href="./../Classes/UserView.html">UserView</a></div>
+</div>
+<h2><a class='anchor' name='description'>Description</a></h2>
+
+<p><code>DrawGrid</code> is used to draw <a href="./../Classes/GridLines.html">GridLines</a> and its labels on a <a href="./../Classes/UserView.html">UserView</a>. It is notably used by <a href="./../Classes/Plotter.html">Plotter</a> to draw the grid lines on a plot but can also be used to add grid lines to any <code>UserView</code>, e.g. behind sliders or another GUI element.
+<p>See the example below for its <a href="#Basic%20use%20in%20a%20UserView">basic use in a UserView</a>.
+<p>Note that <code>DrawGrid</code> does not hold any reference to the <code>UserView</code> but is meant to have its <code>-draw</code> method called inside of the <code>-drawFunc</code> of the <code>UserView</code>. It only needs to know what bounds to draw the grid lines in and what the horizontal and vertical <code>GridLines</code> are.<h2><a class='anchor' name='classmethods'>Class Methods</a></h2>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='*new' href='./../Overviews/Methods.html#new'>new</a></h3>
+<div class='method'>
+<p><h4>Arguments:</h4>
+<table class='arguments'>
+<tr><td class='argumentname'>bounds<td class='argumentdesc'>
+<p>A <a href="./../Classes/Point.html">Point</a> or <a href="./../Classes/Rect.html">Rect</a> describing the size and position of the grid within the parent view (not including any labels).<tr><td class='argumentname'>horzGrid<td class='argumentdesc'>
+<p>A grid lines object for the x-axis, instantiated via <a href="./../Classes/GridLines.html">GridLines</a>, or <a href="./../Classes/ControlSpec.html#-grid">ControlSpec: -grid</a> method, or <code>nil</code> (resulting in no grid lines).<tr><td class='argumentname'>vertGrid<td class='argumentdesc'>
+<p>A grid lines object for the y-axis, see <strong>horzGrid</strong>.</table><h4>Returns:</h4>
+<div class='returnvalue'>
+<p>A <code>DrawGrid</code>.</div><h4>Discussion:</h4>
+
+<p>The warp behavior of the <strong>horizGrid</strong> and <strong>vertGrid</strong> is based on the warp behavior of the <code>ControlSpec</code> used by the grid lines object assigned to each axis.
+<p>Multiple <code>DrawGrid</code> may be used to draw grids on a single <a href="./../Classes/UserView.html">UserView</a>.
+<p>See <a href="#-preview">-preview</a> if you'd like to preview modifications of this <code>DrawGrid</code>. See <a href="#Testing%20and%20modifying">Examples</a> below.</div><h3><a class='anchor' name='Inherited%20class%20methods'>Inherited class methods</a></h3>
+<div id='inheritedclassmets'></div><h2><a class='anchor' name='instancemethods'>Instance Methods</a></h2>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-draw' href='./../Overviews/Methods.html#draw'>draw</a></h3>
+<div class='method'>
+<p>This draws to the currently active <a href="./../Classes/UserView.html">UserView</a>. This method is meant to be called from inside the <a href="./../Classes/UserView.html#-drawFunc">-drawFunc</a> of a <code>UserView</code>.<h4>Returns:</h4>
+<div class='returnvalue'>
+<p><code>nil</code></div><h4>Discussion:</h4>
+
+<p>See the example below for its <a href="#Basic%20use%20in%20a%20UserView">basic use in a UserView</a>, including how to manage its bounds when the enclosing view resizes.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-horzGrid' href='./../Overviews/Methods.html#horzGrid'>horzGrid</a></h3>
+<div class='method'>
+<p>Set the x-axis grid lines.<h4>Arguments:</h4>
+<table class='arguments'>
+<tr><td class='argumentname'>g<td class='argumentdesc'>
+<p>An <a href="./../Classes/AbstractGridLines.html">AbstractGridLines</a> subclass, instantiated via <a href="./../Classes/GridLines.html">GridLines</a>, or <a href="./../Classes/ControlSpec.html#-grid">ControlSpec: -grid</a> method, or <code>nil</code> (resulting in no grid lines).</table><h4>Returns:</h4>
+<div class='returnvalue'>
+<p>Self.</div></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-vertGrid' href='./../Overviews/Methods.html#vertGrid'>vertGrid</a></h3>
+<div class='method'>
+<p>Set the y-axis grid lines.<h4>Arguments:</h4>
+<table class='arguments'>
+<tr><td class='argumentname'>g<td class='argumentdesc'>
+<p>An <a href="./../Classes/AbstractGridLines.html">AbstractGridLines</a> subclass, instantiated via <a href="./../Classes/GridLines.html">GridLines</a>, or <a href="./../Classes/ControlSpec.html#-grid">ControlSpec: -grid</a> method, or <code>nil</code> (resulting in no grid lines).</table><h4>Returns:</h4>
+<div class='returnvalue'>
+<p>Self.</div></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-bounds' href='./../Overviews/Methods.html#bounds'>bounds</a></h3>
+<div class='method'>
+<p>Get/set bounds describing the extents of the grid (not including any labels).<h4>Arguments:</h4>
+<table class='arguments'>
+<tr><td class='argumentname'>b<td class='argumentdesc'>
+<p>A <a href="./../Classes/Rect.html">Rect</a>.</table><h4>Returns:</h4>
+<div class='returnvalue'>
+<p>A <a href="./../Classes/Rect.html">Rect</a>.</div></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-font' href='./../Overviews/Methods.html#font'>font</a></h3>
+<div class='method'>
+<p>Get/set the font used by the grid lines labels.<h4>Arguments:</h4>
+<table class='arguments'>
+<tr><td class='argumentname'>f<td class='argumentdesc'>
+<p>A <a href="./../Classes/Font.html">Font</a>.</table><h4>Returns:</h4>
+<div class='returnvalue'>
+<p>A <a href="./../Classes/Font.html">Font</a>.</div></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-fontColor' href='./../Overviews/Methods.html#fontColor'>fontColor</a></h3>
+<div class='method'>
+<p>Get/set the font color.<h4>Arguments:</h4>
+<table class='arguments'>
+<tr><td class='argumentname'>c<td class='argumentdesc'>
+<p>A <a href="./../Classes/Color.html">Color</a>.</table><h4>Returns:</h4>
+<div class='returnvalue'>
+<p>A <a href="./../Classes/Color.html">Color</a>.</div></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-gridColors' href='./../Overviews/Methods.html#gridColors'>gridColors</a></h3>
+<div class='method'>
+<p>Set the colors of the grid lines for each axis.<h4>Arguments:</h4>
+<table class='arguments'>
+<tr><td class='argumentname'>colors<td class='argumentdesc'>
+<p>An <a href="./../Classes/Array.html">Array</a> of two colors for the x and y grid lines, respectively.</table><h4>Returns:</h4>
+<div class='returnvalue'>
+<p>Self.</div></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-opacity' href='./../Overviews/Methods.html#opacity'>opacity</a></h3>
+<div class='method'>
+<p>Get/set opacity.<h4>Returns:</h4>
+<div class='returnvalue'>
+<p>A <code>Float</code>.</div></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-smoothing' href='./../Overviews/Methods.html#smoothing'>smoothing</a></h3>
+<div class='method'>
+<p>A <code>Boolean</code> which turns on/off anti-aliasing. See <a href="./../Classes/Pen.html#*smoothing">Pen: *smoothing</a>.<h4>Returns:</h4>
+<div class='returnvalue'>
+<p>A <code>Boolean</code>.</div></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-linePattern' href='./../Overviews/Methods.html#linePattern'>linePattern</a></h3>
+<div class='method'>
+<p>Set the line dash pattern. The <strong>value</strong> should be a <a href="./../Classes/FloatArray.html">FloatArray</a> of values that specify the lengths of the alternating dashes and spaces. For example, <code>FloatArray[10.0, 3.0, 5.0, 3.0]</code>, for dashes of lengths <code>10.0</code> and <code>5.0</code> pixels, separated by spaces of <code>3.0</code> pixels. See <a href="./../Classes/Pen.html#*lineDash">Pen: *lineDash</a>.<h4>Returns:</h4>
+<div class='returnvalue'>
+<p>Self.</div></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-x' href='./../Overviews/Methods.html#x'>x</a></h3>
+<div class='method'>
+<p>A <code>DrawGridX</code> object that draws the x (horizontal) axis. In general you shouldn't need to set this.<h4>Returns:</h4>
+<div class='returnvalue'>
+<p>A <code>DrawGridX</code>.</div></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-y' href='./../Overviews/Methods.html#y'>y</a></h3>
+<div class='method'>
+<p>A <code>DrawGridY</code> object that draws the y (vertical) axis. In general you shouldn't need to set this.<h4>Returns:</h4>
+<div class='returnvalue'>
+<p>A <code>DrawGridY</code>.</div></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-numTicks' href='./../Overviews/Methods.html#numTicks'>numTicks</a></h3>
+<div class='method'>
+<p>Set the <em>approximate</em> number of grid lines ("ticks") for each axis. If set, the number of ticks is fixed and <code>numTicks</code> takes precedence over <a href="#-tickSpacing">-tickSpacing</a>. If <code>nil</code>, the number of grid lines change with the view size, constrained by the <code>tickSpacing</code>. Default: <code>nil</code>.
+<p>See <a href="#Testing%20and%20modifying">Examples</a> below.<h4>Arguments:</h4>
+<table class='arguments'>
+<tr><td class='argumentname'>x<td class='argumentdesc'>
+<p><em>Approximate</em> number of grid lines ("ticks") for the x-axis.<tr><td class='argumentname'>y<td class='argumentdesc'>
+<p><em>Approximate</em> number of grid lines for the y-axis.</table><h4>Discussion:</h4>
+
+<p>The resulting number of ticks is approximate because of the underlying algorithm in <a href="./../Classes/AbstractGridLines.html#-niceNum">AbstractGridLines: -niceNum</a>, which tries to find suitable values for the grid lines based on the data range and your requested <code>numTicks</code>. You can observe the behavior of <code>GridLines:-niceNum</code> with this snippet:<textarea class='editor'>(
+g = GridLines([0, 200].asSpec);
+"requested / returned".postln;
+(0, 3 .. 21).do({ |ntck|
+  "% / %\n".postf(ntck, g.niceNum(ntck, true))
+})
+)</textarea>
+</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-tickSpacing' href='./../Overviews/Methods.html#tickSpacing'>tickSpacing</a></h3>
+<div class='method'>
+<p>Set the <em>minimum</em> spacing between grid lines ("ticks") for each axis. The number of grid lines will change with the view size, but won't be spaced less than this <code>tickSpacing</code>, allowing you to control the density of grid lines. However if <a href="#-numTicks">-numTicks</a> is not <code>nil</code>, it takes precedence over <code>tickSpacing</code>.
+<p>See <a href="#Testing%20and%20modifying">Examples</a> below.<h4>Arguments:</h4>
+<table class='arguments'>
+<tr><td class='argumentname'>x<td class='argumentdesc'>
+<p><em>Minimum</em> spacing between grid lines ("ticks") on the x-axis (pixels, default: 64).<tr><td class='argumentname'>y<td class='argumentdesc'>
+<p><em>Minimum</em> spacing between grid lines on the y-axis (pixels, default: 64).</table></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-preview' href='./../Overviews/Methods.html#preview'>preview</a></h3>
+<div class='method'>
+<p>Preview this <code>DrawGrid</code> object by creating a window with a view showing the <code>DrawGrid</code> in its current state.<textarea class='editor'>d = DrawGrid(nil, \freq.asSpec.grid, \amp.asSpec.grid);
+d.linePattern_(FloatArray[10.0, 5.0, 2.0, 5.0]);
+d.preview;</textarea>
+
+<p>If the <code>DrawGrid</code> is modified, you can <code>-refresh</code> the returned <code>UserView</code> to see its updated state, or simply call <code>-preview</code> again to update the view (or create the preview again if the <code>Window</code> was closed). See <a href="#Testing%20and%20modifying">Examples</a> below.<h4>Returns:</h4>
+<div class='returnvalue'>
+<p>A <a href="./../Classes/UserView.html">UserView</a> which draws this <code>DrawGrid</code>.</div></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-copy' href='./../Overviews/Methods.html#copy'>copy</a></h3>
+<div class='method'>
+<p>Safely make a copy of this object and its working members.<h4>Returns:</h4>
+<div class='returnvalue'>
+<p>A new <code>DrawGrid</code>.</div></div><h3><a class='anchor' name='Inherited%20instance%20methods'>Inherited instance methods</a></h3>
+<div id='inheritedinstmets'></div><h2><a class='anchor' name='examples'>Examples</a></h2>
+<h3><a class='anchor' name='Basic%20use%20in%20a%20UserView'>Basic use in a UserView</a></h3>
+<textarea class='editor'>(
+w = Window.new.front;
+u = UserView(w,w.bounds.size.asRect);
+
+// The spec defines its preferred grid system
+x = \lofreq.asSpec.grid; // x grid lines
+y = \amp.asSpec.grid;    // y grid lines
+i = 40;                  // grid inset
+
+d = DrawGrid(u.bounds.size.asRect.insetBy(i), x, y);
+
+u.drawFunc = { d.draw };
+u.resize_(5);
+u.onResize = { |u|
+    d.bounds = u.bounds.size.asRect.insetBy(i)
+};
+)</textarea>
+<h3><a class='anchor' name='Testing%20and%20modifying'>Testing and modifying</a></h3>
+
+<p>For previewing the look and feel of your <code>GridLines</code>, you can render your <code>DrawGrid</code> using the <a href="#-preview">-preview</a> method:<textarea class='editor'>(
+x = [0, 10].asSpec.units_("sec");
+y = [0, 1].asSpec.units_("amp");
+d = DrawGrid((500@250).asRect, x.grid, y.grid);
+
+// set its properties before testing
+d.x.tickSpacing_(25);
+d.linePattern_(FloatArray[10.0, 5.0, 2.0, 5.0]);
+
+// generate a preview
+~testView = d.preview;
+)</textarea>
+
+<p>Use <code>DrawGrid</code>'s convenience methods to set the grids' properties, then refresh the view:<textarea class='editor'>d.tickSpacing_(50, 25).linePattern_(FloatArray[1.0]);
+~testView.refresh;</textarea>
+
+<p>Or just call <code>.preview</code> again and it will refresh the existing view:<textarea class='editor'>d.linePattern_(FloatArray[10.0, 5.0, 2.0, 5.0]).preview;</textarea>
+
+<p>Proterties of the individual x- and y-grids can also be accessed and changed separately:<textarea class='editor'>// Modify the number of grid lines on each axis separately
+d.x.tickSpacing_(18); // fixed (max) *density* of x ticks
+d.y.numTicks_(8);     // fixed *number* of y ticks (approximate)
+d.preview;            // refresh the test view
+
+d.y.numTicks_(nil);   // numTicks = nil: auto, follows -tickSpacing
+d.preview;</textarea>
+
+<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/develop/HelpSource/Classes/DrawGrid.schelp'>https://github.com/supercollider/supercollider/tree/develop/HelpSource/Classes/DrawGrid.schelp</a><br>link::Classes/DrawGrid::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+</body></html>

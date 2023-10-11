@@ -1,0 +1,180 @@
+<!doctype html><html lang='en'><head><title>FunctionDef | SuperCollider 3.13.0 Help</title>
+<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<link rel='stylesheet' href='./../frontend.css' type='text/css' />
+<link rel='stylesheet' href='./../custom.css' type='text/css' />
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+<script src='./../lib/jquery.min.js'></script>
+<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script>
+var helpRoot = './..';
+var scdoc_title = 'FunctionDef';
+var scdoc_sc_version = '3.13.0';
+</script>
+<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../docmap.js' type='text/javascript'></script>
+<script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
+</head>
+<body onload='fixTOC()'>
+<div id='toc'>
+<div id='toctitle'>FunctionDef:</div>
+<span class='toc_search'>Filter: <input id='toc_search'></span><ul class='toc'><li class='toc1'><a href='#description'>Description</a></li>
+<ul class='toc'><li class='toc2'><a href='#Related%20Keywords'>Related Keywords</a></li>
+<ul class='toc'><li class='toc3'><a href='#.thisFunctionDef'>thisFunctionDef</a> </li>
+</ul></ul><li class='toc1'><a href='#classmethods'>Class methods</a></li>
+<ul class='toc'><li class='toc2'><a href='#Inherited%20class%20methods'>Inherited class methods</a></li>
+</ul><li class='toc1'><a href='#instancemethods'>Instance methods</a></li>
+<ul class='toc'><li class='toc2'><a href='#Accessing'>Accessing</a></li>
+<ul class='toc'><li class='toc3'><a href='#-code'>code</a> </li>
+<li class='toc3'><a href='#-sourceCode'>sourceCode</a> </li>
+<li class='toc3'><a href='#-context'>context</a> </li>
+<li class='toc3'><a href='#-findReferences'>findReferences</a> </li>
+<li class='toc3'><a href='#-argNames'>argNames</a> </li>
+<li class='toc3'><a href='#-prototypeFrame'>prototypeFrame</a> </li>
+<li class='toc3'><a href='#-varNames'>varNames</a> </li>
+<li class='toc3'><a href='#-argumentString'>argumentString</a> </li>
+<li class='toc3'><a href='#-makeEnvirFromArgs'>makeEnvirFromArgs</a> </li>
+</ul><li class='toc2'><a href='#Generating%20Strings'>Generating Strings</a></li>
+<ul class='toc'><li class='toc3'><a href='#-makeFuncArgModifierString'>makeFuncArgModifierString</a> </li>
+</ul><li class='toc2'><a href='#Utilities'>Utilities</a></li>
+<ul class='toc'><li class='toc3'><a href='#-dumpByteCodes'>dumpByteCodes</a> </li>
+</ul><li class='toc2'><a href='#Inherited%20instance%20methods'>Inherited instance methods</a></li>
+<li class='toc2'><a href='#Undocumented%20instance%20methods'>Undocumented instance methods</a></li>
+<ul class='toc'><li class='toc3'><a href='#-archiveAsCompileString'>archiveAsCompileString</a> </li>
+<li class='toc3'><a href='#-asFunction'>asFunction</a> </li>
+<li class='toc3'><a href='#-checkCanArchive'>checkCanArchive</a> </li>
+<li class='toc3'><a href='#-constants'>constants</a> </li>
+<li class='toc3'><a href='#-dumpContexts'>dumpContexts</a> </li>
+<li class='toc3'><a href='#-hasPartialApplication'>hasPartialApplication</a> </li>
+<li class='toc3'><a href='#-inspectorClass'>inspectorClass</a> </li>
+<li class='toc3'><a href='#-keyValuePairsFromArgs'>keyValuePairsFromArgs</a> </li>
+<li class='toc3'><a href='#-makeFuncModifierString'>makeFuncModifierString</a> </li>
+<li class='toc3'><a href='#-numArgs'>numArgs</a> </li>
+<li class='toc3'><a href='#-numVars'>numVars</a> </li>
+<li class='toc3'><a href='#-selectors'>selectors</a> </li>
+<li class='toc3'><a href='#-shallowCopy'>shallowCopy</a> </li>
+<li class='toc3'><a href='#-varArgs'>varArgs</a> </li>
+</ul></ul></ul></div><div id='menubar'></div>
+<div class='contents'>
+<div class='header'>
+<div id='label'>
+<span id='folder'>Classes</span>
+ | <span id='categories'><a href='./../Browse.html#Core'>Core</a>&#8201;&gt;&#8201;<a href='./../Browse.html#Core>Kernel'>Kernel</a></span>
+</div><h1>FunctionDef<span id='superclasses'> : <a href="../Classes/Object.html">Object</a></span>
+</h1>
+<div id='summary'>FunctionDefs contain code which can be executed from a Function.</div>
+</div>
+<div class='subheader'>
+<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/develop/SCClassLibrary/Common/Core/Kernel.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Core/Kernel.sc'>Kernel.sc</a></div><div id='subclasses'>Subclasses: <a href="../Classes/Method.html">Method</a></div>
+<div id='related'>See also: <a href="./../Classes/Function.html">Function</a></div>
+</div>
+<h2><a class='anchor' name='description'>Description</a></h2>
+<h3><a class='anchor' name='Related%20Keywords'>Related Keywords</a></h3>
+<h3 class='method-code'><span class='method-prefix'></span><a class='method-name' name='thisFunctionDef' href='./../Overviews/Methods.html#thisFunctionDef'>thisFunctionDef</a></h3>
+<div class='method'>
+<p>The global pseudo-variable <code>thisFunctionDef</code> always evaluates to the current enclosing FunctionDef.
+<p>See also: <a href="./../Classes/Function.html#.thisFunction">thisFunction</a></div><h2><a class='anchor' name='classmethods'>Class Methods</a></h2>
+<h3><a class='anchor' name='Inherited%20class%20methods'>Inherited class methods</a></h3>
+<div id='inheritedclassmets'></div><h2><a class='anchor' name='instancemethods'>Instance Methods</a></h2>
+<h3><a class='anchor' name='Accessing'>Accessing</a></h3>
+
+<p>Even though it is possible to change the values in the various arrays that define the FunctionDef, you should not do it, unless you like to crash.<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-code' href='./../Overviews/Methods.html#code'>code</a></h3>
+<div class='method'>
+<p>Get the byte code array.<textarea class='editor'>{ |a = 9, b = 10, c| a + b }.def.code;</textarea>
+</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-sourceCode' href='./../Overviews/Methods.html#sourceCode'>sourceCode</a></h3>
+<div class='method'>
+<p>Get the source code string.<textarea class='editor'>{ |a = 9, b = 10, c| a + b }.def.sourceCode.postcs;</textarea>
+</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-context' href='./../Overviews/Methods.html#context'>context</a></h3>
+<div class='method'>
+<p>Get the enclosing FunctionDef or Method.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-findReferences' href='./../Overviews/Methods.html#findReferences'>findReferences</a>(<span class='argstr'>aSymbol</span>, <span class='argstr'>references</span>)</h3>
+<div class='method'>
+<p>return a list of all references to a given symbol.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-argNames' href='./../Overviews/Methods.html#argNames'>argNames</a></h3>
+<div class='method'>
+<p>Get the Array of Symbols of the argument names.<textarea class='editor'>{ |a = 9, b = 10, c| a + b }.def.argNames;</textarea>
+
+<p></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-prototypeFrame' href='./../Overviews/Methods.html#prototypeFrame'>prototypeFrame</a></h3>
+<div class='method'>
+<p>Get the array of default values for argument and temporary variables.<textarea class='editor'>{ |a = 9, b = 10, c| a + b }.def.prototypeFrame;</textarea>
+
+<p></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-varNames' href='./../Overviews/Methods.html#varNames'>varNames</a></h3>
+<div class='method'>
+<p>Get the Array of Symbols of the local variable names.<textarea class='editor'>{ |a = 9, b = 10, c| var x = 9; a + b + x }.def.varNames;</textarea>
+
+<p></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-argumentString' href='./../Overviews/Methods.html#argumentString'>argumentString</a>(<span class='argstr'>withDefaultValues: true</span>, <span class='argstr'>withEllipsis: false</span>, <span class='argstr'>asArray: false</span>)</h3>
+<div class='method'>
+<p>Return a string that contains all argument names and their default values for embedding in a string. If there are no arguments, it returns nil.<textarea class='editor'>{ |a = 9, b = 10, c| a + b }.def.argumentString; // "a = 9, b = 10, c"
+{ "nothing to see here" }.def.argumentString; // nil</textarea>
+<h4>Arguments:</h4>
+<table class='arguments'>
+<tr><td class='argumentname'>withDefaultValues<td class='argumentdesc'>
+<p>If set to false, no default values are appended<textarea class='editor'> // "a, b, c"
+{ |a = 9, b = 10, c| a + b }.def.argumentString(withDefaultValues: false);</textarea>
+<tr><td class='argumentname'>withEllipsis<td class='argumentdesc'>
+<p>If set to true, ellipsis characters (<code>" ... "</code>) are appended<textarea class='editor'>// "a = 9, b = 10 ... c"
+{ |a = 9, b = 10 ... c| a + b }.def.argumentString(withEllipsis: true);
+// "a = 9, b = 10, c"
+{ |a = 9, b = 10 ... c| a + b }.def.argumentString(withEllipsis: false);</textarea>
+<tr><td class='argumentname'>asArray<td class='argumentdesc'>
+<p>If set to true, return the string for an array that represents all arguments. The other arguments are set to false.<textarea class='editor'>// "[a, b] ++ c"
+{ |a = 9, b = 10 ... c| a + b }.def.argumentString(asArray: true);</textarea>
+</table></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-makeEnvirFromArgs' href='./../Overviews/Methods.html#makeEnvirFromArgs'>makeEnvirFromArgs</a></h3>
+<div class='method'>
+<p>Get the Array of Symbols of the local variable names.<textarea class='editor'>{ |a = 9, b = 10, c| a + b }.def.makeEnvirFromArgs;</textarea>
+</div><h3><a class='anchor' name='Generating%20Strings'>Generating Strings</a></h3>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-makeFuncArgModifierString' href='./../Overviews/Methods.html#makeFuncArgModifierString'>makeFuncArgModifierString</a>: METHOD NOT FOUND!</h3>
+<div class='method'>
+<p>Return a string that can be interpreted as code for a new function which extracts the arguments from the receiver. This can be used to build a hygienic macro which returns a function with valid keyword arguments, instead of just anonymously forwarding the arguments, like in <code>{ |...args| func.valueArray(args) }</code>.
+<p>For an implementation example <a href="./../Classes/Function.html#flop">Function: flop</a> (as below).<h4>Arguments:</h4>
+<table class='arguments'>
+<tr><td class='argumentname'>modifier<td class='argumentdesc'>
+<p>A function to which a string is passed that represents the array of all arguments. It should return a string that can be interpreted.<textarea class='editor'>// basic usage
+f = { |x, y| x.squared + y.squared }; // a function
+a = f.def.makeFuncModifierString({ |argString| "%.scramble".format(argString) });
+a.interpret.value(4, 5)
+
+// use as a macro: multichannel expansion like in flop
+f = { |x, y = 1| if(x &gt; 0) { 1 } { 0 } * y }; // some function
+// generate the body of a function that has a free and yet undefined variable "func"
+// -&gt; "{ arg x, y = 1; ([x, y]).flop.collect { |x| func.valueArray(x) } }"
+a = f.def.makeFuncModifierString({ |str| str ++ ".flop.collect { |x| func.valueArray(x) }" });
+// wrap that body into a function that takes "func" as argument and returns the function above
+// now we have a valid code for a function:
+// -&gt; "{ |func| { arg x, y = 1; [x, y].flop.collect { |x| func.valueArray(x) } } }"
+b = "{ |func| % }".format(a);
+// interpret the code to a function
+g = b.interpret;
+// pass the function f to g, which returns a function from a where "func" is bound to f
+h = g.value(f);
+// we can now use h in place of f, but all arguments are multichannel expanded:
+f.([1, 0], [6, 7]); // does not work
+h.([1, 0], [6, 7]); // [6, 0]
+// and the new function supports the same keywords arguments:
+h.(x:(-2..2), y:(-2..2));
+
+// this functionality is implemented for function in the method "flop"
+h = f.flop;
+h.([1, 0], [6, 7]); // [6, 0]</textarea>
+</table></div><h3><a class='anchor' name='Utilities'>Utilities</a></h3>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-dumpByteCodes' href='./../Overviews/Methods.html#dumpByteCodes'>dumpByteCodes</a></h3>
+<div class='method'>
+<p>"Disassemble" and post the FunctionDef's byte code instructions to the text window.</div><h3><a class='anchor' name='Inherited%20instance%20methods'>Inherited instance methods</a></h3>
+<div id='inheritedinstmets'></div><h3><a class='anchor' name='Undocumented%20instance%20methods'>Undocumented instance methods</a></h3>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-archiveAsCompileString' href='./../Overviews/Methods.html#archiveAsCompileString'>archiveAsCompileString</a></h3>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-asFunction' href='./../Overviews/Methods.html#asFunction'>asFunction</a></h3>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-checkCanArchive' href='./../Overviews/Methods.html#checkCanArchive'>checkCanArchive</a></h3>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-constants' href='./../Overviews/Methods.html#constants'>constants</a></h3>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-dumpContexts' href='./../Overviews/Methods.html#dumpContexts'>dumpContexts</a></h3>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-hasPartialApplication' href='./../Overviews/Methods.html#hasPartialApplication'>hasPartialApplication</a></h3>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-inspectorClass' href='./../Overviews/Methods.html#inspectorClass'>inspectorClass</a></h3>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-keyValuePairsFromArgs' href='./../Overviews/Methods.html#keyValuePairsFromArgs'>keyValuePairsFromArgs</a></h3>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-makeFuncModifierString' href='./../Overviews/Methods.html#makeFuncModifierString'>makeFuncModifierString</a>(<span class='argstr'>modifier</span>)</h3>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-numArgs' href='./../Overviews/Methods.html#numArgs'>numArgs</a></h3>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-numVars' href='./../Overviews/Methods.html#numVars'>numVars</a></h3>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-selectors' href='./../Overviews/Methods.html#selectors'>selectors</a></h3>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-shallowCopy' href='./../Overviews/Methods.html#shallowCopy'>shallowCopy</a></h3>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-varArgs' href='./../Overviews/Methods.html#varArgs'>varArgs</a></h3>
+<div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/develop/HelpSource/Classes/FunctionDef.schelp'>https://github.com/supercollider/supercollider/tree/develop/HelpSource/Classes/FunctionDef.schelp</a><br>link::Classes/FunctionDef::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+</body></html>

@@ -1,0 +1,170 @@
+<!doctype html><html lang='en'><head><title>News in 3.13 | SuperCollider 3.13.0 Help</title>
+<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<link rel='stylesheet' href='./../frontend.css' type='text/css' />
+<link rel='stylesheet' href='./../custom.css' type='text/css' />
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+<script src='./../lib/jquery.min.js'></script>
+<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script>
+var helpRoot = './..';
+var scdoc_title = 'News in 3.13';
+var scdoc_sc_version = '3.13.0';
+</script>
+<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../docmap.js' type='text/javascript'></script>
+<script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
+</head>
+<body onload='fixTOC()'>
+<div id='toc'>
+<div id='toctitle'>News in 3.13:</div>
+<span class='toc_search'>Filter: <input id='toc_search'></span><ul class='toc'><li class='toc1'><a href='#General'>General</a></li>
+<ul class='toc'></ul><li class='toc1'><a href='#General:%20Added'>General: Added</a></li>
+<ul class='toc'></ul><li class='toc1'><a href='#General:%20Changed'>General: Changed</a></li>
+<ul class='toc'></ul><li class='toc1'><a href='#General:%20Fixed'>General: Fixed</a></li>
+<ul class='toc'></ul><li class='toc1'><a href='#sclang:%20Added'>sclang: Added</a></li>
+<ul class='toc'></ul><li class='toc1'><a href='#sclang:%20Changed'>sclang: Changed</a></li>
+<ul class='toc'></ul><li class='toc1'><a href='#sclang:%20Fixed'>sclang: Fixed</a></li>
+<ul class='toc'></ul><li class='toc1'><a href='#Class%20library:%20Added'>Class library: Added</a></li>
+<ul class='toc'></ul><li class='toc1'><a href='#Class%20library:%20Changed'>Class library: Changed</a></li>
+<ul class='toc'></ul><li class='toc1'><a href='#Class%20library:%20Deprecated'>Class library: Deprecated</a></li>
+<ul class='toc'></ul><li class='toc1'><a href='#Class%20library:%20Fixed'>Class library: Fixed</a></li>
+<ul class='toc'></ul><li class='toc1'><a href='#scsynth%20and%20supernova:%20Added'>scsynth and supernova: Added</a></li>
+<ul class='toc'></ul><li class='toc1'><a href='#scsynth%20and%20supernova:%20Fixed'>scsynth and supernova: Fixed</a></li>
+<ul class='toc'></ul><li class='toc1'><a href='#UGens:%20Added'>UGens: Added</a></li>
+<ul class='toc'></ul><li class='toc1'><a href='#UGens:%20Changed'>UGens: Changed</a></li>
+<ul class='toc'></ul><li class='toc1'><a href='#UGens:%20Fixed'>UGens: Fixed</a></li>
+<ul class='toc'></ul></ul></div><div id='menubar'></div>
+<div class='contents'>
+<div class='header'>
+<div id='label'>
+<span id='folder'>Guides</span>
+ | <span id='categories'><a href='./../Browse.html#News'>News</a></span>
+</div><h1>News in 3.13</h1>
+<div id='summary'>A summary of news in SC 3.13</div>
+</div>
+<div class='subheader'>
+</div>
+
+<p>Welcome to the SuperCollider 3.13 release! <div class='note'><span class='notelabel'>NOTE:</span> In this version numerous UGens have been fixes so that they calculate their initial value as originally intended. In some cases this may create a different result than previously. See below for details</div>
+<p>We now also provide a universal build for both x86_64 and arm64 Apple machines.
+<p>Below you can find a more complete list of changes in this version. A big thank you to all developers for your contributions!<h2><a class='anchor' name='General'>General</a></h2>
+
+<p>Countless improvements to help files and documentation (@elifieldsteel, @JaimeClover, @DoHITB, @jamshark70, @heretogo, @capital-G, @alexhughk, @chris75vie, @forrcaho, @paum3, @avdrd, @wolfgangschaltung, @telephon, @redFrik, @madskjeldgaard, @mxw, @dyfer, @tdug, @mtmccrea, @prko, @mjsyts, @grirgz, @chkworks, @balzss, @hectorgonzalezo, @michelestew, @mttvn, @pearcemerritt, @mlang)
+<p>Updates and fixes for the test suite: @telephon in <a href="https://github.com/supercollider/supercollider/pull/5304">https://github.com/supercollider/supercollider/pull/5304</a>,  @telephon in <a href="https://github.com/supercollider/supercollider/pull/5676">https://github.com/supercollider/supercollider/pull/5676</a>,  @jamshark70 in <a href="https://github.com/supercollider/supercollider/pull/5666">https://github.com/supercollider/supercollider/pull/5666</a>,  @elgiano in <a href="https://github.com/supercollider/supercollider/pull/5717">https://github.com/supercollider/supercollider/pull/5717</a>,  @dyfer in <a href="https://github.com/supercollider/supercollider/pull/5702">https://github.com/supercollider/supercollider/pull/5702</a>,  @dyfer in <a href="https://github.com/supercollider/supercollider/pull/5738">https://github.com/supercollider/supercollider/pull/5738</a>,  @dyfer in <a href="https://github.com/supercollider/supercollider/pull/5792">https://github.com/supercollider/supercollider/pull/5792</a>,  @telephon in <a href="https://github.com/supercollider/supercollider/pull/5801">https://github.com/supercollider/supercollider/pull/5801</a>,  @dyfer in <a href="https://github.com/supercollider/supercollider/pull/5867">https://github.com/supercollider/supercollider/pull/5867</a>,  @telephon in <a href="https://github.com/supercollider/supercollider/pull/5677">https://github.com/supercollider/supercollider/pull/5677</a>,  @nuss in <a href="https://github.com/supercollider/supercollider/pull/5687">https://github.com/supercollider/supercollider/pull/5687</a>  @elgiano in <a href="https://github.com/supercollider/supercollider/pull/5716.">https://github.com/supercollider/supercollider/pull/5716.</a>
+<p>Updates and fixes for the automated build system (GitHub Actions): @dyfer in <a href="https://github.com/supercollider/supercollider/pull/5845">https://github.com/supercollider/supercollider/pull/5845</a>,  @dyfer in <a href="https://github.com/supercollider/supercollider/pull/5783">https://github.com/supercollider/supercollider/pull/5783</a>,  @dyfer in <a href="https://github.com/supercollider/supercollider/pull/5847">https://github.com/supercollider/supercollider/pull/5847</a>,  @dyfer in <a href="https://github.com/supercollider/supercollider/pull/5875">https://github.com/supercollider/supercollider/pull/5875</a>,  @dyfer in <a href="https://github.com/supercollider/supercollider/pull/5889">https://github.com/supercollider/supercollider/pull/5889</a>,  @dyfer in <a href="https://github.com/supercollider/supercollider/pull/5776.">https://github.com/supercollider/supercollider/pull/5776.</a><h2><a class='anchor' name='General:%20Added'>General: Added</a></h2>
+
+<p>Universal macOS build for both Intel x86_64 and Apple arm64 CPUs by @dyfer in <a href="https://github.com/supercollider/supercollider/pull/5953">https://github.com/supercollider/supercollider/pull/5953</a>
+<p>Better description in the about dialog for tagged builds by @dyfer in <a href="https://github.com/supercollider/supercollider/pull/5697">https://github.com/supercollider/supercollider/pull/5697</a> and <a href="https://github.com/supercollider/supercollider/pull/5739">https://github.com/supercollider/supercollider/pull/5739</a><h2><a class='anchor' name='General:%20Changed'>General: Changed</a></h2>
+
+<p>Update sc-el submodule to latest version by @jxa in <a href="https://github.com/supercollider/supercollider/pull/5600">https://github.com/supercollider/supercollider/pull/5600</a>
+<p>The regular release macOS build now supports macOS 10.14 and up (previously supported 10.13). The legacy build is still provided supporting macOS 10.10 and up.<h2><a class='anchor' name='General:%20Fixed'>General: Fixed</a></h2>
+
+<p>Remove spurious Qt dependencies by @marcan in <a href="https://github.com/supercollider/supercollider/pull/4991">https://github.com/supercollider/supercollider/pull/4991</a>
+<p>Update urls in git submodules to use https by @dyfer in <a href="https://github.com/supercollider/supercollider/pull/5694">https://github.com/supercollider/supercollider/pull/5694</a>
+<p>Fix building on Apple M1 by adding ad hoc code signing by @dyfer in <a href="https://github.com/supercollider/supercollider/pull/5650">https://github.com/supercollider/supercollider/pull/5650</a>
+<p>Build on OpenBSD by @ibz in <a href="https://github.com/supercollider/supercollider/pull/5822">https://github.com/supercollider/supercollider/pull/5822</a>
+<p>Find JACK using cmake's FindPkgConfig by @dvzrv in <a href="https://github.com/supercollider/supercollider/pull/5680">https://github.com/supercollider/supercollider/pull/5680</a><h2><a class='anchor' name='sclang:%20Added'>sclang: Added</a></h2>
+
+<p>Ability to set scrollPosition of QWebView by @paum3 in <a href="https://github.com/supercollider/supercollider/pull/5483">https://github.com/supercollider/supercollider/pull/5483</a>
+<p>Interactive Command line interface on Windows using Readline by @dyfer in <a href="https://github.com/supercollider/supercollider/pull/5712">https://github.com/supercollider/supercollider/pull/5712</a>
+<p>Support for MPEG formats by @dyfer in <a href="https://github.com/supercollider/supercollider/pull/5786">https://github.com/supercollider/supercollider/pull/5786</a><h2><a class='anchor' name='sclang:%20Changed'>sclang: Changed</a></h2>
+
+<p><code>Signal -thresh</code> by @elgiano in <a href="https://github.com/supercollider/supercollider/pull/5432">https://github.com/supercollider/supercollider/pull/5432</a><h2><a class='anchor' name='sclang:%20Fixed'>sclang: Fixed</a></h2>
+
+<p>Stretch behaviour in QcRangeSlider by @miriamvoth in <a href="https://github.com/supercollider/supercollider/pull/5595">https://github.com/supercollider/supercollider/pull/5595</a>
+<p><code>Symbol -isPrefix</code> by @Brandon-Yip2 in <a href="https://github.com/supercollider/supercollider/pull/5708">https://github.com/supercollider/supercollider/pull/5708</a>
+<p>MIDI realtime message type codes on Linux by @jamshark70 in <a href="https://github.com/supercollider/supercollider/pull/5846">https://github.com/supercollider/supercollider/pull/5846</a>
+<p>RF64 and W64 format recognition by @dyfer in <a href="https://github.com/supercollider/supercollider/pull/5877">https://github.com/supercollider/supercollider/pull/5877</a>
+<p>UdpInPort error reporting by @jamshark70 in <a href="https://github.com/supercollider/supercollider/pull/5850">https://github.com/supercollider/supercollider/pull/5850</a>
+<p>Parsing block arguments by @nilninull in <a href="https://github.com/supercollider/supercollider/pull/5522">https://github.com/supercollider/supercollider/pull/5522</a><h2><a class='anchor' name='Class%20library:%20Added'>Class library: Added</a></h2>
+
+<p>Support for <code>kitty</code> and <code>alacritty</code> Linux terminals by @madskjeldgaard in <a href="https://github.com/supercollider/supercollider/pull/5548">https://github.com/supercollider/supercollider/pull/5548</a>
+<p><code>NodeProxy -seti</code> by @nuss in <a href="https://github.com/supercollider/supercollider/pull/5640">https://github.com/supercollider/supercollider/pull/5640</a>
+<p>Converting mixed outputs in <code>NodeProxy</code> instead of failing by @telephon in <a href="https://github.com/supercollider/supercollider/pull/5699">https://github.com/supercollider/supercollider/pull/5699</a>
+<p>Posthook <code>\synthDefReady</code> after synthdef is built by @avdrd in <a href="https://github.com/supercollider/supercollider/pull/5657">https://github.com/supercollider/supercollider/pull/5657</a>
+<p>Setting the number of decimal places to <code>SimpleNumber -asTimeString</code> by @dyfer in <a href="https://github.com/supercollider/supercollider/pull/4709">https://github.com/supercollider/supercollider/pull/4709</a>
+<p>Make it possible to reschedule a Routine, Task or EventStreamPlayer transparently by @jamshark70 in <a href="https://github.com/supercollider/supercollider/pull/5038">https://github.com/supercollider/supercollider/pull/5038</a>
+<p>Handle <code>langPort</code> startup error descriptively by @jamshark70 in <a href="https://github.com/supercollider/supercollider/pull/5158">https://github.com/supercollider/supercollider/pull/5158</a>
+<p><code>AppClock -schedAbs</code> by @telephon in <a href="https://github.com/supercollider/supercollider/pull/5851">https://github.com/supercollider/supercollider/pull/5851</a>
+<p>Vim-like keyshortcuts in HelpBrowser by @paum3 in <a href="https://github.com/supercollider/supercollider/pull/5742">https://github.com/supercollider/supercollider/pull/5742</a>
+<p>Add hooks to the <code>Quark</code> class by @capital-G and @telephon in <a href="https://github.com/supercollider/supercollider/pull/5907">https://github.com/supercollider/supercollider/pull/5907</a><h2><a class='anchor' name='Class%20library:%20Changed'>Class library: Changed</a></h2>
+
+<p>Refactor functionality: <code>connectToServerAddr</code> by @telephon in <a href="https://github.com/supercollider/supercollider/pull/5569">https://github.com/supercollider/supercollider/pull/5569</a>
+<p>Improve efficiency of calling <code>List -order</code> by @telephon in <a href="https://github.com/supercollider/supercollider/pull/5561">https://github.com/supercollider/supercollider/pull/5561</a>
+<p>Allow any type of text stream in the FileReader hierarchy by @jamshark70 in <a href="https://github.com/supercollider/supercollider/pull/5611">https://github.com/supercollider/supercollider/pull/5611</a>
+<p>Improve behaviour of error in <code>loadRelative</code> by @telephon in <a href="https://github.com/supercollider/supercollider/pull/5744">https://github.com/supercollider/supercollider/pull/5744</a>
+<p>The argument name for <code>Spawner -seq</code> was changed to <code>pattern</code> by @tdug in <a href="https://github.com/supercollider/supercollider/pull/5767">https://github.com/supercollider/supercollider/pull/5767</a>
+<p>Replace <code>aiff</code> with <code>wav</code> as the default value for <code>recHeaderFormat</code> by @RhnSharma in <a href="https://github.com/supercollider/supercollider/pull/5559">https://github.com/supercollider/supercollider/pull/5559</a>
+<p>Guarantee that <code>SetBuf</code> gets an array by @telephon in <a href="https://github.com/supercollider/supercollider/pull/5743">https://github.com/supercollider/supercollider/pull/5743</a>
+<p>Delete unused method <code>*findMethod</code> from ScIDE class by @jamshark70 in <a href="https://github.com/supercollider/supercollider/pull/5840">https://github.com/supercollider/supercollider/pull/5840</a>
+<p>HistoryGui: improve display readability by @adcxyz in <a href="https://github.com/supercollider/supercollider/pull/5861">https://github.com/supercollider/supercollider/pull/5861</a>
+<p>Create only a single server meter by default by @telephon in <a href="https://github.com/supercollider/supercollider/pull/5908">https://github.com/supercollider/supercollider/pull/5908</a><h2><a class='anchor' name='Class%20library:%20Deprecated'>Class library: Deprecated</a></h2>
+
+<p>QuartzComposerView by @dyfer in <a href="https://github.com/supercollider/supercollider/pull/5710">https://github.com/supercollider/supercollider/pull/5710</a><h2><a class='anchor' name='Class%20library:%20Fixed'>Class library: Fixed</a></h2>
+
+<p>Prevent possible infinite recursion in <code>*initClassTree</code> by @jamshark70 in <a href="https://github.com/supercollider/supercollider/pull/5575">https://github.com/supercollider/supercollider/pull/5575</a>
+<p>Use named controls in node proxy by @telephon in <a href="https://github.com/supercollider/supercollider/pull/5675">https://github.com/supercollider/supercollider/pull/5675</a>
+<p>Fix implicit specs in synth functions by @adcxyz in <a href="https://github.com/supercollider/supercollider/pull/5681">https://github.com/supercollider/supercollider/pull/5681</a>
+<p>Put <code>protect</code> in PauseStreams by @jamshark70 in <a href="https://github.com/supercollider/supercollider/pull/5626">https://github.com/supercollider/supercollider/pull/5626</a>
+<p>Fix some filters with node proxy by @telephon in <a href="https://github.com/supercollider/supercollider/pull/5679">https://github.com/supercollider/supercollider/pull/5679</a>
+<p>Handle buffer instance of <code>NdefGui</code> as argument by @redFrik in <a href="https://github.com/supercollider/supercollider/pull/5692">https://github.com/supercollider/supercollider/pull/5692</a>
+<p>Defer GUI updates in <code>ServerPlusGUI</code> by @dyfer in <a href="https://github.com/supercollider/supercollider/pull/5491">https://github.com/supercollider/supercollider/pull/5491</a>
+<p>Make envelopes behave like patterns in a pattern proxy by @telephon in <a href="https://github.com/supercollider/supercollider/pull/5287">https://github.com/supercollider/supercollider/pull/5287</a>
+<p>Fix <code>Server.remote</code> <code>-startAliveThread</code> by @elgiano in <a href="https://github.com/supercollider/supercollider/pull/5715">https://github.com/supercollider/supercollider/pull/5715</a>
+<p>Exclude QQuartzComposer from headless builds by @elgiano in <a href="https://github.com/supercollider/supercollider/pull/5733">https://github.com/supercollider/supercollider/pull/5733</a>
+<p>Prevent double-firing of cleanup functions in <code>EventStreamCleanup</code> by @jamshark70 in <a href="https://github.com/supercollider/supercollider/pull/5386">https://github.com/supercollider/supercollider/pull/5386</a>
+<p>Fix cleanup setup for Pmono and PmonoArtic by @eleses in <a href="https://github.com/supercollider/supercollider/pull/5027">https://github.com/supercollider/supercollider/pull/5027</a>
+<p>Escaping of <code>String:openOS</code> by @elgiano in <a href="https://github.com/supercollider/supercollider/pull/5322">https://github.com/supercollider/supercollider/pull/5322</a>
+<p>Recording in <code>Pbind</code> by @madredeuz in <a href="https://github.com/supercollider/supercollider/pull/5793">https://github.com/supercollider/supercollider/pull/5793</a>
+<p>Cast sampleRate to Integer in <code>SoundFileView -setData</code> by @redFrik in <a href="https://github.com/supercollider/supercollider/pull/5812">https://github.com/supercollider/supercollider/pull/5812</a>
+<p>Use embedded specs in Ndef for guis by @adcxyz in <a href="https://github.com/supercollider/supercollider/pull/5686">https://github.com/supercollider/supercollider/pull/5686</a>
+<p>Plotter: update colors, fix grid and axis labels, remove <code>Plotter -gui</code> method by @mtmccrea in <a href="https://github.com/supercollider/supercollider/pull/4511">https://github.com/supercollider/supercollider/pull/4511</a>, <a href="https://github.com/supercollider/supercollider/pull/5827">https://github.com/supercollider/supercollider/pull/5827</a>, <a href="https://github.com/supercollider/supercollider/pull/5858.">https://github.com/supercollider/supercollider/pull/5858.</a> Grid lines and their labels are improved, along with axis labels, which are now settable by their own methods <code>labelX_</code> and <code>labelY_</code>. The x-axis label inherits the units of a <code>domainSpec</code> if it is explicitly set and labelX hasn't already been set
+<p>Make sure <code>Plot</code> color is not converted to array by @telephon in <a href="https://github.com/supercollider/supercollider/pull/5849">https://github.com/supercollider/supercollider/pull/5849</a>
+<p><code>BinaryOpUGen</code> optimization for <code>a === b</code> cases by @smrg-lm in <a href="https://github.com/supercollider/supercollider/pull/5427">https://github.com/supercollider/supercollider/pull/5427</a>
+<p>Remove inline warnings in the class library by @telephon in <a href="https://github.com/supercollider/supercollider/pull/5856">https://github.com/supercollider/supercollider/pull/5856</a>
+<p>Make maxLogins not to exceed 32 in <code>ServerOptions</code> by @jamshark70 in <a href="https://github.com/supercollider/supercollider/pull/5149">https://github.com/supercollider/supercollider/pull/5149</a>
+<p>Sample alignment with grid lines in <code>Function -plot</code> by @mtmccrea in <a href="https://github.com/supercollider/supercollider/pull/5855">https://github.com/supercollider/supercollider/pull/5855</a>
+<p>Make <code>subBus</code> use the same server as receiver by @telephon in <a href="https://github.com/supercollider/supercollider/pull/5887">https://github.com/supercollider/supercollider/pull/5887</a>
+<p>GridLines improvements: fix exponential grids and add spacing control by @dyfer in <a href="https://github.com/supercollider/supercollider/pull/5161">https://github.com/supercollider/supercollider/pull/5161</a> and @mtmccrea in <a href="https://github.com/supercollider/supercollider/pull/5895">https://github.com/supercollider/supercollider/pull/5895</a>, <a href="https://github.com/supercollider/supercollider/pull/5942">https://github.com/supercollider/supercollider/pull/5942</a>
+<p>Expand tilde to users home directory on Windows by @miriamvoth in <a href="https://github.com/supercollider/supercollider/pull/5431">https://github.com/supercollider/supercollider/pull/5431</a>
+<p>Improve <code>Function -flop</code> implementation that works with string ellipsis and keyword arguments by @telephon in <a href="https://github.com/supercollider/supercollider/pull/5499">https://github.com/supercollider/supercollider/pull/5499</a>, <a href="https://github.com/supercollider/supercollider/pull/5900">https://github.com/supercollider/supercollider/pull/5900</a>
+<p>Time precision issues with Psync and EventStreamPlayer by @totalgee in <a href="https://github.com/supercollider/supercollider/pull/5891">https://github.com/supercollider/supercollider/pull/5891</a>
+<p><code>Pattern -record</code> by @jamiehodge in <a href="https://github.com/supercollider/supercollider/pull/5883">https://github.com/supercollider/supercollider/pull/5883</a>
+<p>Make <code>Rest</code> accepted by Patterns by @olafklingt in <a href="https://github.com/supercollider/supercollider/pull/5882">https://github.com/supercollider/supercollider/pull/5882</a>
+<p><code>Buffer *cueSoundFile</code>: keep <code>path</code> value by @telephon in <a href="https://github.com/supercollider/supercollider/pull/5937">https://github.com/supercollider/supercollider/pull/5937</a><h2><a class='anchor' name='scsynth%20and%20supernova:%20Added'>scsynth and supernova: Added</a></h2>
+
+<p>Support for MPEG formats by @dyfer in <a href="https://github.com/supercollider/supercollider/pull/5786">https://github.com/supercollider/supercollider/pull/5786</a>
+<p>Option for LIB_SUFFIX in the CMake build system by @tdug in <a href="https://github.com/supercollider/supercollider/pull/5644">https://github.com/supercollider/supercollider/pull/5644</a> and @elgiano in <a href="https://github.com/supercollider/supercollider/pull/5728">https://github.com/supercollider/supercollider/pull/5728</a>
+<p>Error warnings and /fail replies to /d_load and /d_loadDir (scsynth) by @muellmusik in <a href="https://github.com/supercollider/supercollider/pull/5244">https://github.com/supercollider/supercollider/pull/5244</a><h2><a class='anchor' name='scsynth%20and%20supernova:%20Fixed'>scsynth and supernova: Fixed</a></h2>
+
+<p>Make <code>/g_head</code> always fire an <code>/n_move</code> reply (scsynth) by @Sciss in <a href="https://github.com/supercollider/supercollider/pull/5580">https://github.com/supercollider/supercollider/pull/5580</a>
+<p>Non-real-time mode in supernova by @Spacechild1 in <a href="https://github.com/supercollider/supercollider/pull/5616">https://github.com/supercollider/supercollider/pull/5616</a>
+<p>Crash when passing audio/control bus mapping to arrayed Group control in supernova by @Spacechild1 in <a href="https://github.com/supercollider/supercollider/pull/5617">https://github.com/supercollider/supercollider/pull/5617</a>
+<p>Possible crash with unit commands by @Spacechild1 in <a href="https://github.com/supercollider/supercollider/pull/5610">https://github.com/supercollider/supercollider/pull/5610</a>
+<p>Use the <code>/error</code> messages to turn on / off the console printing in supernova by @vitreo12 in <a href="https://github.com/supercollider/supercollider/pull/5820">https://github.com/supercollider/supercollider/pull/5820</a>
+<p>Support for <code>libsndfile</code> version &gt;= 1.1.0 by @dyfer in <a href="https://github.com/supercollider/supercollider/pull/5761">https://github.com/supercollider/supercollider/pull/5761</a>
+<p>Print plugin API method in supernova by @Spacechild1 in <a href="https://github.com/supercollider/supercollider/pull/5874">https://github.com/supercollider/supercollider/pull/5874</a>
+<p>UdpInPort error reporting by @jamshark70 in <a href="https://github.com/supercollider/supercollider/pull/5850">https://github.com/supercollider/supercollider/pull/5850</a>
+<p>Behavior of .sqrt and .reciprocal operations on the server on Apple M1 CPUs by @dyfer in <a href="https://github.com/supercollider/supercollider/pull/5901">https://github.com/supercollider/supercollider/pull/5901</a>
+<p>OffsetOut_Ctor error in supernova on Windows by @Spacechild1 in <a href="https://github.com/supercollider/supercollider/pull/5902">https://github.com/supercollider/supercollider/pull/5902</a><h2><a class='anchor' name='UGens:%20Added'>UGens: Added</a></h2>
+
+<p>Argument <code>binout</code> to <code>SpecPcile</code> by @woolgathering in <a href="https://github.com/supercollider/supercollider/pull/5097">https://github.com/supercollider/supercollider/pull/5097</a><h2><a class='anchor' name='UGens:%20Changed'>UGens: Changed</a></h2>
+
+<p><code>Impulse</code> is now initialized correctly such that:<ul>
+<li>it will fire on the first sample, given the default phase of 0 (or multiple of 1).<li>a frequency of 0 fires once and only once on the first sample (unless the frequency subsequently changes).<li>negative frequencies and phases are now supported and phase of any value is wrapped into range.</ul>
+
+<p>These are intended and documented behaviors, but which failed previously in certain UGen configurations. Therefore, users may observe changes to the initial state of synth graphs that use Impulse. (Especially triggered UGens.) For details, a list of resolved/changed behavior can be found here.
+<p>For more details see <a href="https://github.com/supercollider/supercollider/pull/4150">https://github.com/supercollider/supercollider/pull/4150</a> by @mtmccrea
+<p>Numerous UGens have been updated so that their initialization sample is set correctly by @mtmccrea:  <code>OscUGens</code> in <a href="https://github.com/supercollider/supercollider/pull/5787">https://github.com/supercollider/supercollider/pull/5787</a>,  <code>Klang</code> and <code>Klank</code> in <a href="https://github.com/supercollider/supercollider/pull/5817">https://github.com/supercollider/supercollider/pull/5817</a>,  <code>TWindex</code> in <a href="https://github.com/supercollider/supercollider/pull/5815">https://github.com/supercollider/supercollider/pull/5815</a>, <code>Free</code> and <code>PauseSelf</code> in <a href="https://github.com/supercollider/supercollider/pull/5914">https://github.com/supercollider/supercollider/pull/5914</a>, <code>Poll</code> in <a href="https://github.com/supercollider/supercollider/pull/5965">https://github.com/supercollider/supercollider/pull/5965</a>.
+<p><code>Integrator</code> Ctor passes through the first sample only by @jamshark70 in <a href="https://github.com/supercollider/supercollider/pull/5352.">https://github.com/supercollider/supercollider/pull/5352.</a> Prior to v3.13, there was a bug that caused the Integrator to double-count the initial value: the integral of a single 1 followed by endless 0s ends up being 2. Starting with v.3.13, it's 1 as expected.
+<p><code>PanAz</code>, due to fixing leaks and imprecisions by @elgiano in <a href="https://github.com/supercollider/supercollider/pull/4971">https://github.com/supercollider/supercollider/pull/4971</a><h2><a class='anchor' name='UGens:%20Fixed'>UGens: Fixed</a></h2>
+
+<p><code>Tap</code> samplerate compensation by @morfant in <a href="https://github.com/supercollider/supercollider/pull/5606">https://github.com/supercollider/supercollider/pull/5606</a>
+<p>Audio rate versions of triggered random ugens by @telephon in <a href="https://github.com/supercollider/supercollider/pull/5344">https://github.com/supercollider/supercollider/pull/5344</a>
+<p><code>AudioControl</code> and <code>InFeedback</code> processing for an extra cycle by @vitreo12 in <a href="https://github.com/supercollider/supercollider/pull/5601">https://github.com/supercollider/supercollider/pull/5601</a>
+<p>Remove RTAlloc exceptions, and review all plugins' RTAlloc/RTFree by @elgiano in <a href="https://github.com/supercollider/supercollider/pull/5713">https://github.com/supercollider/supercollider/pull/5713</a><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/develop/HelpSource/Guides/News-3_13.schelp'>https://github.com/supercollider/supercollider/tree/develop/HelpSource/Guides/News-3_13.schelp</a><br>link::Guides/News-3_13::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+</body></html>

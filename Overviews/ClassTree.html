@@ -1,0 +1,1365 @@
+<!doctype html><html lang='en'><head><title>Class Tree | SuperCollider 3.13.0 Help</title>
+<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<link rel='stylesheet' href='./../frontend.css' type='text/css' />
+<link rel='stylesheet' href='./../custom.css' type='text/css' />
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+<script src='./../lib/jquery.min.js'></script>
+<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script>
+var helpRoot = './..';
+var scdoc_title = 'Class Tree';
+var scdoc_sc_version = '3.13.0';
+</script>
+<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../docmap.js' type='text/javascript'></script>
+<script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
+</head>
+<body onload='fixTOC()'>
+<div id='toc'>
+<div id='toctitle'>Class Tree:</div>
+<span class='toc_search'>Filter: <input id='toc_search'></span><ul class='toc'></ul></div><div id='menubar'></div>
+<div class='contents'>
+<div class='header'>
+<div id='label'>
+<span id='folder'>Overviews</span>
+ | <span id='categories'><a href='./../Browse.html#Language'>Language</a>&#8201;&gt;&#8201;<a href='./../Browse.html#Language>OOP'>OOP</a></span>
+</div><h1>Class Tree</h1>
+<div id='summary'>The whole class inheritance tree</div>
+</div>
+<div class='subheader'>
+<div id='related'>See also: <a href="./../Overviews/Classes.html">Classes</a></div>
+</div>
+<ul class='tree'><li> <a href='./../Classes/Object.html'>Object</a> - abstract superclass of all objects
+<ul class='tree'>
+<li> <a href='./../Classes/AbstractDispatcher.html'>AbstractDispatcher</a> - Dispatches incoming messages to Functions
+<ul class='tree'>
+<li> <a href='./../Classes/AbstractWrappingDispatcher.html'>AbstractWrappingDispatcher</a> - A dispatcher which wraps functions to support multiple paramter matching
+<ul class='tree'>
+<li> <a href='./../Classes/HIDElementProtoDispatcher.html'>HIDElementProtoDispatcher</a> - (Undocumented class)
+<li> <a href='./../Classes/HIDUsageDispatcher.html'>HIDUsageDispatcher</a> - (Undocumented class)
+<ul class='tree'>
+<li> <a href='./../Classes/HIDDeviceDispatcher.html'>HIDDeviceDispatcher</a> - (Undocumented class)
+<li> <a href='./../Classes/HIDElementDispatcher.html'>HIDElementDispatcher</a> - (Undocumented class)
+</ul>
+<li> <a href='./../Classes/MIDIMessageDispatcher.html'>MIDIMessageDispatcher</a> - The default dispatcher for MIDIFunc's and MIDIdef's set to respond to noteOn, noteOff, control, and polytouch messages.
+<ul class='tree'>
+<li> <a href='./../Classes/MIDIMessageDispatcherNV.html'>MIDIMessageDispatcherNV</a> - The default dispatcher for MIDIFunc's and MIDIdef's set to respond to touch, program, and bend messages.
+<li> <a href='./../Classes/MIDISysDataDispatcher.html'>MIDISysDataDispatcher</a> - (Undocumented class)
+<ul class='tree'>
+<li> <a href='./../Classes/MIDISysDataDropIndDispatcher.html'>MIDISysDataDropIndDispatcher</a> - (Undocumented class)
+<li> <a href='./../Classes/MIDISysNoDataDispatcher.html'>MIDISysNoDataDispatcher</a> - (Undocumented class)
+</ul>
+<li> <a href='./../Classes/MIDISysexDispatcher.html'>MIDISysexDispatcher</a> - (Undocumented class)
+<ul class='tree'>
+<li> <a href='./../Classes/MIDIMTCtoSMPTEDispatcher.html'>MIDIMTCtoSMPTEDispatcher</a> - (Undocumented class)
+</ul>
+</ul>
+<li> <a href='./../Classes/OSCMessageDispatcher.html'>OSCMessageDispatcher</a> - The default dispatcher class for OSCFunc and OSCdef.
+<ul class='tree'>
+<li> <a href='./../Classes/OSCMessagePatternDispatcher.html'>OSCMessagePatternDispatcher</a> - The default pattern matching dispatcher for OSCFunc and OSCdef.
+</ul>
+</ul>
+</ul>
+<li> <a href='./../Classes/AbstractFunction.html'>AbstractFunction</a> - An object which responds to a set of messages that represent mathematical functions
+<ul class='tree'>
+<li> <a href='./../Classes/AbstractOpPlug.html'>AbstractOpPlug</a> - (Undocumented class)
+<ul class='tree'>
+<li> <a href='./../Classes/BinaryOpPlug.html'>BinaryOpPlug</a> - (Undocumented class)
+<li> <a href='./../Classes/UnaryOpPlug.html'>UnaryOpPlug</a> - (Undocumented class)
+</ul>
+<li> <a href='./../Classes/BinaryOpFunction.html'>BinaryOpFunction</a> - represent a binary operation on a function
+<ul class='tree'>
+<li> <a href='./../Classes/BinaryOpFunctionProxy.html'>BinaryOpFunctionProxy</a> - (Undocumented class)
+</ul>
+<li> <a href='./../Classes/BusPlug.html'>BusPlug</a> - a listener on a bus
+<ul class='tree'>
+<li> <a href='./../Classes/NodeProxy.html'>NodeProxy</a> - a reference on a server
+<ul class='tree'>
+<li> <a href='./../Classes/Ndef.html'>Ndef</a> - node proxy definition
+</ul>
+</ul>
+<li> <a href='./../Classes/Function.html'>Function</a> - Implements a function
+<li> <a href='./../Classes/FunctionList.html'>FunctionList</a> - A function that composes multiple functions into one
+<li> <a href='./../Classes/NAryOpFunction.html'>NAryOpFunction</a> - represent a n-ary operation on a function
+<ul class='tree'>
+<li> <a href='./../Classes/NAryOpFunctionProxy.html'>NAryOpFunctionProxy</a> - (Undocumented class)
+<ul class='tree'>
+<li> <a href='./../Classes/NAryValueProxy.html'>NAryValueProxy</a> - (Undocumented class)
+</ul>
+</ul>
+<li> <a href='./../Classes/Operand.html'>Operand</a> - Idempotent wrapper around math operations
+<ul class='tree'>
+<li> <a href='./../Classes/Rest.html'>Rest</a> - Represents a rest in event patterns
+</ul>
+<li> <a href='./../Classes/Pattern.html'>Pattern</a> - abstract class that holds a list
+<ul class='tree'>
+<li> <a href='./../Classes/FilterPattern.html'>FilterPattern</a> - abstract class that holds a pattern to be modified
+<ul class='tree'>
+<li> <a href='./../Classes/FuncFilterPattern.html'>FuncFilterPattern</a> - Abstract class that filters a pattern using a function
+<ul class='tree'>
+<li> <a href='./../Classes/Pcollect.html'>Pcollect</a> - Apply a function to a pattern
+<li> <a href='./../Classes/Pfset.html'>Pfset</a> - Insert an environment into the event prototype before evaluating the supplied pattern
+<li> <a href='./../Classes/Preject.html'>Preject</a> - Filters a source pattern by rejecting particular values.
+<li> <a href='./../Classes/Pselect.html'>Pselect</a> - Filters values returned by a source pattern.
+<li> <a href='./../Classes/Pwhile.html'>Pwhile</a> - While a condition holds, repeatedly embed stream
+</ul>
+<li> <a href='./../Classes/PAbstractGroup.html'>PAbstractGroup</a> - (Undocumented class)
+<ul class='tree'>
+<li> <a href='./../Classes/Pgroup.html'>Pgroup</a> - Starts a new Group and plays the pattern in this group
+<li> <a href='./../Classes/PparGroup.html'>PparGroup</a> - Starts a new ParGroup and plays the pattern in this group
+</ul>
+<li> <a href='./../Classes/Pavaroh.html'>Pavaroh</a> - applying ascending and descending scales to event stream
+<li> <a href='./../Classes/Pbindf.html'>Pbindf</a> - bind several value patterns to one existing event stream by binding keys to values
+<li> <a href='./../Classes/Pbus.html'>Pbus</a> - isolate a pattern by restricting it to a bus
+<li> <a href='./../Classes/Pclump.html'>Pclump</a> - A pattern that takes another pattern and groups its values into arrays.
+<ul class='tree'>
+<li> <a href='./../Classes/Pflatten.html'>Pflatten</a> - (Undocumented class)
+</ul>
+<li> <a href='./../Classes/Pclutch.html'>Pclutch</a> - sample and hold a pattern
+<li> <a href='./../Classes/Pconst.html'>Pconst</a> - constrain the sum of a value pattern
+<li> <a href='./../Classes/Pdiff.html'>Pdiff</a> - returns the difference between the current and previous values of an enclosed pattern
+<li> <a href='./../Classes/Pdrop.html'>Pdrop</a> - skips (drops) the first n events from a pattern
+<li> <a href='./../Classes/Pdup.html'>Pdup</a> - repeat input stream values
+<ul class='tree'>
+<li> <a href='./../Classes/PdurStutter.html'>PdurStutter</a> - partition a value into n equal subdivisions
+<li> <a href='./../Classes/Psubdivide.html'>Psubdivide</a> - partition a value into n equal subdivisions
+</ul>
+<li> <a href='./../Classes/PfadeIn.html'>PfadeIn</a> - Fade an event pattern in
+<ul class='tree'>
+<li> <a href='./../Classes/PfadeOut.html'>PfadeOut</a> - Fade an event pattern out
+</ul>
+<li> <a href='./../Classes/Pfin.html'>Pfin</a> - limit number of events embedded in a stream
+<ul class='tree'>
+<li> <a href='./../Classes/Pfinval.html'>Pfinval</a> - limit number of items embedded in a stream
+</ul>
+<li> <a href='./../Classes/PfinQuant.html'>PfinQuant</a> - (Undocumented class)
+<li> <a href='./../Classes/Pfindur.html'>Pfindur</a> - limit total duration of events embedded in a stream
+<li> <a href='./../Classes/Pfx.html'>Pfx</a> - add an effect synth to the synths of a given event stream
+<ul class='tree'>
+<li> <a href='./../Classes/Pfxb.html'>Pfxb</a> - add an effect synth to the synths of a given event stream
+</ul>
+<li> <a href='./../Classes/Plag.html'>Plag</a> - (Undocumented class)
+<li> <a href='./../Classes/Plambda.html'>Plambda</a> - create a scope (namespace) for enclosed streams
+<li> <a href='./../Classes/Pn.html'>Pn</a> - repeatedly embed a pattern
+<ul class='tree'>
+<li> <a href='./../Classes/Pgate.html'>Pgate</a> - A gated stream that only advances when a particular event key is true.
+</ul>
+<li> <a href='./../Classes/Pplayer.html'>Pplayer</a> - (Undocumented class)
+<li> <a href='./../Classes/Pprotect.html'>Pprotect</a> - evaluate a function when an error occured in the thread
+<li> <a href='./../Classes/Prewrite.html'>Prewrite</a> - L-system pattern for selfsimilar structures
+<li> <a href='./../Classes/Prorate.html'>Prorate</a> - divide stream proportionally
+<li> <a href='./../Classes/Pseed.html'>Pseed</a> - set the random seed in subpattern
+<li> <a href='./../Classes/Pset.html'>Pset</a> - event pattern that sets values of one key
+<ul class='tree'>
+<li> <a href='./../Classes/Padd.html'>Padd</a> - add to value of a key in event stream
+<li> <a href='./../Classes/Pmul.html'>Pmul</a> - multiply with value of a key in event stream
+<li> <a href='./../Classes/Psetp.html'>Psetp</a> - event pattern that sets values of one key
+<ul class='tree'>
+<li> <a href='./../Classes/Paddp.html'>Paddp</a> - add each value of a pattern to the value at a key in event stream
+<li> <a href='./../Classes/Pmulp.html'>Pmulp</a> - multiply with each value of a pattern to value of a key in event stream
+</ul>
+</ul>
+<li> <a href='./../Classes/Psetpre.html'>Psetpre</a> - set values of one key in an event before it is passed up
+<ul class='tree'>
+<li> <a href='./../Classes/Paddpre.html'>Paddpre</a> - event pattern that adds to existing value of one key
+<li> <a href='./../Classes/Pmulpre.html'>Pmulpre</a> - multiplies with value of a key in event stream, before it is passed up
+</ul>
+<li> <a href='./../Classes/Pspawn.html'>Pspawn</a> - Spawns sub-patterns based on parameters in an event pattern
+<li> <a href='./../Classes/Pstretch.html'>Pstretch</a> - (Undocumented class)
+<ul class='tree'>
+<li> <a href='./../Classes/Pstretchp.html'>Pstretchp</a> - (Undocumented class)
+</ul>
+<li> <a href='./../Classes/Pstutter.html'>Pstutter</a> - repeat input stream values
+<li> <a href='./../Classes/Psym.html'>Psym</a> - use a pattern of symbols to embed Pdefs
+<ul class='tree'>
+<li> <a href='./../Classes/Pnsym.html'>Pnsym</a> - use a pattern of symbols to embed Pdefns
+<ul class='tree'>
+<li> <a href='./../Classes/Pnsym1.html'>Pnsym1</a> - (Undocumented class)
+</ul>
+<li> <a href='./../Classes/Psym1.html'>Psym1</a> - (Undocumented class)
+<li> <a href='./../Classes/Ptsym.html'>Ptsym</a> - (Undocumented class)
+</ul>
+<li> <a href='./../Classes/Psync.html'>Psync</a> - synchronise and limit pattern duration
+<li> <a href='./../Classes/Ptrace.html'>Ptrace</a> - Print out the results of a stream
+<li> <a href='./../Classes/Pwrap.html'>Pwrap</a> - constrain the range of output values by wrapping
+</ul>
+<li> <a href='./../Classes/ListPattern.html'>ListPattern</a> - abstract class that holds a list
+<ul class='tree'>
+<li> <a href='./../Classes/Pdfsm.html'>Pdfsm</a> - deterministic finite state machine
+<li> <a href='./../Classes/Pfpar.html'>Pfpar</a> - (Undocumented class)
+<li> <a href='./../Classes/Pfsm.html'>Pfsm</a> - Finite State Machine
+<li> <a href='./../Classes/Ppar.html'>Ppar</a> - embed event streams in parallel
+<ul class='tree'>
+<li> <a href='./../Classes/Pgpar.html'>Pgpar</a> - embed event streams in parallel and put each in its own group
+<ul class='tree'>
+<li> <a href='./../Classes/Pgtpar.html'>Pgtpar</a> - embed event streams in parallel and put each in its own group, with time offset
+</ul>
+<li> <a href='./../Classes/Ptpar.html'>Ptpar</a> - embed event streams in parallel, with time offset
+</ul>
+<li> <a href='./../Classes/Prand.html'>Prand</a> - embed values randomly chosen from a list
+<li> <a href='./../Classes/Pseq.html'>Pseq</a> - sequentially embed values in a list
+<ul class='tree'>
+<li> <a href='./../Classes/Place.html'>Place</a> - interlaced embedding of subarrays
+<li> <a href='./../Classes/Ppatlace.html'>Ppatlace</a> - interlace streams
+<li> <a href='./../Classes/Pser.html'>Pser</a> - sequentially embed values in a list
+</ul>
+<li> <a href='./../Classes/Pshuf.html'>Pshuf</a> - sequentially embed values in a list in constant, but random order
+<li> <a href='./../Classes/Pslide.html'>Pslide</a> - slide over a list of values and embed them
+<li> <a href='./../Classes/Ptuple.html'>Ptuple</a> - combine a list of streams to a stream of lists
+<li> <a href='./../Classes/Pwalk.html'>Pwalk</a> - A one-dimensional random walk over a list of values that are embedded
+<li> <a href='./../Classes/Pwrand.html'>Pwrand</a> - embed values randomly chosen from a list
+<li> <a href='./../Classes/Pxrand.html'>Pxrand</a> - embed values randomly chosen from a list
+</ul>
+<li> <a href='./../Classes/PatternProxy.html'>PatternProxy</a> - stream reference
+<ul class='tree'>
+<li> <a href='./../Classes/Pdefn.html'>Pdefn</a> - non event stream reference definition
+<li> <a href='./../Classes/TaskProxy.html'>TaskProxy</a> - event stream reference
+<ul class='tree'>
+<li> <a href='./../Classes/EventPatternProxy.html'>EventPatternProxy</a> - event stream reference
+<ul class='tree'>
+<li> <a href='./../Classes/Pdef.html'>Pdef</a> - stream reference definition
+<ul class='tree'>
+<li> <a href='./../Classes/Pbindef.html'>Pbindef</a> - incremental event pattern reference definition
+</ul>
+</ul>
+<li> <a href='./../Classes/Tdef.html'>Tdef</a> - task reference definition
+</ul>
+</ul>
+<li> <a href='./../Classes/Pbeta.html'>Pbeta</a> - random values that follow a Eulerian Beta Distribution
+<li> <a href='./../Classes/Pbind.html'>Pbind</a> - combine several value patterns to one event stream by binding keys to values
+<li> <a href='./../Classes/PbindProxy.html'>PbindProxy</a> - incremental event pattern reference
+<li> <a href='./../Classes/Pbinop.html'>Pbinop</a> - binary operator pattern
+<li> <a href='./../Classes/Pbrown.html'>Pbrown</a> - brownian motion pattern
+<ul class='tree'>
+<li> <a href='./../Classes/Pgbrown.html'>Pgbrown</a> - geometric brownian motion pattern
+</ul>
+<li> <a href='./../Classes/Pcauchy.html'>Pcauchy</a> - random values that follow a Cauchy Distribution
+<li> <a href='./../Classes/Pchain.html'>Pchain</a> - pass values from stream to stream
+<li> <a href='./../Classes/Pdict.html'>Pdict</a> - pattern that embeds patterns from a dictionary
+<li> <a href='./../Classes/Penvir.html'>Penvir</a> - use an environment when embedding the pattern in a stream
+<li> <a href='./../Classes/Pevent.html'>Pevent</a> - Provide an inval for an event stream.
+<li> <a href='./../Classes/Peventmod.html'>Peventmod</a> - (Undocumented class)
+<li> <a href='./../Classes/Pfunc.html'>Pfunc</a> - Function pattern
+<li> <a href='./../Classes/Pfuncn.html'>Pfuncn</a> - Function pattern of given length
+<li> <a href='./../Classes/Pgauss.html'>Pgauss</a> - random values that follow a Gaussian Distribution
+<li> <a href='./../Classes/Pgeom.html'>Pgeom</a> - geometric series pattern
+<li> <a href='./../Classes/Pget.html'>Pget</a> - Retrieve a value within the scope (namespace) of a Plambda
+<li> <a href='./../Classes/Pif.html'>Pif</a> - Pattern-based conditional expression
+<li> <a href='./../Classes/Pindex.html'>Pindex</a> - pattern that indexes into an array
+<li> <a href='./../Classes/Pkey.html'>Pkey</a> - access a key in an event stream
+<li> <a href='./../Classes/Plazy.html'>Plazy</a> - instantiate new patterns from a function
+<ul class='tree'>
+<li> <a href='./../Classes/PlazyEnvir.html'>PlazyEnvir</a> - instantiate new patterns from a function
+<ul class='tree'>
+<li> <a href='./../Classes/PlazyEnvirN.html'>PlazyEnvirN</a> - instantiate new patterns from a function and multichannel expand them
+</ul>
+</ul>
+<li> <a href='./../Classes/Plet.html'>Plet</a> - Define a value within the scope (namespace) of a Plambda
+<li> <a href='./../Classes/Pmono.html'>Pmono</a> - monophonic event stream
+<ul class='tree'>
+<li> <a href='./../Classes/PmonoArtic.html'>PmonoArtic</a> - partly monophonic event stream
+</ul>
+<li> <a href='./../Classes/Pnaryop.html'>Pnaryop</a> - n-ary operator pattern
+<ul class='tree'>
+<li> <a href='./../Classes/PdegreeToKey.html'>PdegreeToKey</a> - index into a scale
+</ul>
+<li> <a href='./../Classes/Ppatmod.html'>Ppatmod</a> - modify a given pattern before passing it into the stream
+<li> <a href='./../Classes/Ppoisson.html'>Ppoisson</a> - random values that follow a Poisson Distribution (positive integer values)
+<li> <a href='./../Classes/Pprob.html'>Pprob</a> - random values with arbitrary probability distribution
+<li> <a href='./../Classes/Pproto.html'>Pproto</a> - provide a proto event for an event stream
+<li> <a href='./../Classes/Prout.html'>Prout</a> - routine pattern
+<ul class='tree'>
+<li> <a href='./../Classes/Pspawner.html'>Pspawner</a> - dynamic control of multiple event streams from a Routine
+</ul>
+<li> <a href='./../Classes/Pseries.html'>Pseries</a> - arithmetic series pattern
+<li> <a href='./../Classes/Pstep.html'>Pstep</a> - timed, sample-and-hold embedding of values
+<ul class='tree'>
+<li> <a href='./../Classes/Pseg.html'>Pseg</a> - timed embedding of values
+</ul>
+<li> <a href='./../Classes/Pstep2add.html'>Pstep2add</a> - (Undocumented class)
+<li> <a href='./../Classes/Pstep3add.html'>Pstep3add</a> - (Undocumented class)
+<li> <a href='./../Classes/PstepNfunc.html'>PstepNfunc</a> - combinatoric pattern
+<ul class='tree'>
+<li> <a href='./../Classes/PstepNadd.html'>PstepNadd</a> - pattern that returns combinatoric sums
+</ul>
+<li> <a href='./../Classes/Pswitch.html'>Pswitch</a> - embed values in a list according to a pattern of indices
+<ul class='tree'>
+<li> <a href='./../Classes/Pswitch1.html'>Pswitch1</a> - embed values in a list according to a pattern of indices
+</ul>
+<li> <a href='./../Classes/Ptime.html'>Ptime</a> - returns time in beats from moment of embedding in stream
+<li> <a href='./../Classes/Punop.html'>Punop</a> - unary operator pattern
+<li> <a href='./../Classes/Pwhite.html'>Pwhite</a> - random values with uniform distribution
+<ul class='tree'>
+<li> <a href='./../Classes/Pexprand.html'>Pexprand</a> - random values that follow a Exponential Distribution
+<li> <a href='./../Classes/Phprand.html'>Phprand</a> - random values that tend toward hi
+<li> <a href='./../Classes/Plprand.html'>Plprand</a> - random values that tend toward lo
+<li> <a href='./../Classes/Pmeanrand.html'>Pmeanrand</a> - random values that tend toward ((lo + hi) / 2)
+</ul>
+<li> <a href='./../Classes/Spawner.html'>Spawner</a> - A Spawner
+</ul>
+<li> <a href='./../Classes/Ref.html'>Ref</a> - a reference to a value
+<ul class='tree'>
+<li> <a href='./../Classes/Maybe.html'>Maybe</a> - referentially transparent proxy object
+<ul class='tree'>
+<li> <a href='./../Classes/Fdef.html'>Fdef</a> - lazy function proxy
+</ul>
+<li> <a href='./../Classes/RefCopy.html'>RefCopy</a> - a reference to the copy of a value
+</ul>
+<li> <a href='./../Classes/Stream.html'>Stream</a> - Stream is the base class for classes that define streams
+<ul class='tree'>
+<li> <a href='./../Classes/BinaryOpStream.html'>BinaryOpStream</a> - two streams combined by a binary operator
+<li> <a href='./../Classes/BinaryOpXStream.html'>BinaryOpXStream</a> - (Undocumented class)
+<li> <a href='./../Classes/CleanupStream.html'>CleanupStream</a> - (Undocumented class)
+<li> <a href='./../Classes/EmbedOnce.html'>EmbedOnce</a> - (Undocumented class)
+<li> <a href='./../Classes/FileReader.html'>FileReader</a> - file reader for space-delimited text files
+<ul class='tree'>
+<li> <a href='./../Classes/CSVFileReader.html'>CSVFileReader</a> - file reader for comma separated data
+<li> <a href='./../Classes/SemiColonFileReader.html'>SemiColonFileReader</a> - file reader for semi-colon separated data
+<li> <a href='./../Classes/TabFileReader.html'>TabFileReader</a> - file reader for tab separated data
+</ul>
+<li> <a href='./../Classes/FuncStream.html'>FuncStream</a> - Stream of a function
+<li> <a href='./../Classes/IOStream.html'>IOStream</a> - (Undocumented class)
+<ul class='tree'>
+<li> <a href='./../Classes/CollStream.html'>CollStream</a> - (Undocumented class)
+<ul class='tree'>
+<li> <a href='./../Classes/LimitedWriteStream.html'>LimitedWriteStream</a> - (Undocumented class)
+</ul>
+<li> <a href='./../Classes/Pretty.html'>Pretty</a> - (Undocumented class)
+<li> <a href='./../Classes/UnixFILE.html'>UnixFILE</a> - An abstract class
+<ul class='tree'>
+<li> <a href='./../Classes/File.html'>File</a> - A class for reading and writing files
+<li> <a href='./../Classes/Pipe.html'>Pipe</a> - pipe stdin to, or stdout from, a UNIX shell command
+</ul>
+</ul>
+<li> <a href='./../Classes/NAryOpStream.html'>NAryOpStream</a> - several streams combined by an n-ary operator
+<li> <a href='./../Classes/OneShotStream.html'>OneShotStream</a> - (Undocumented class)
+<li> <a href='./../Classes/PauseStream.html'>PauseStream</a> - (Undocumented class)
+<ul class='tree'>
+<li> <a href='./../Classes/EventStreamPlayer.html'>EventStreamPlayer</a> - two streams combined by a binary operator
+<li> <a href='./../Classes/Task.html'>Task</a> - a pauseable process
+</ul>
+<li> <a href='./../Classes/PmonoStream.html'>PmonoStream</a> - (Undocumented class)
+<ul class='tree'>
+<li> <a href='./../Classes/PmonoArticStream.html'>PmonoArticStream</a> - (Undocumented class)
+</ul>
+<li> <a href='./../Classes/StreamClutch.html'>StreamClutch</a> - buffers a streamed value
+<li> <a href='./../Classes/Thread.html'>Thread</a> - The context of code evaluation
+<ul class='tree'>
+<li> <a href='./../Classes/Routine.html'>Routine</a> - Functions that can return in the middle and then resume where they left off
+<ul class='tree'>
+<li> <a href='./../Classes/FuncStreamAsRoutine.html'>FuncStreamAsRoutine</a> - (Undocumented class)
+</ul>
+</ul>
+<li> <a href='./../Classes/UnaryOpStream.html'>UnaryOpStream</a> - stream modified by a unary operator
+</ul>
+<li> <a href='./../Classes/Thunk.html'>Thunk</a> - unevaluated value
+<ul class='tree'>
+<li> <a href='./../Classes/CallOnce.html'>CallOnce</a> - execute a function (at most) once
+<li> <a href='./../Classes/UGenThunk.html'>UGenThunk</a> - (Undocumented class)
+</ul>
+<li> <a href='./../Classes/UGen.html'>UGen</a> - Abstract superclass of all unit generators
+<ul class='tree'>
+<li> <a href='./../Classes/AbstractOut.html'>AbstractOut</a> - Abstract class for out ugens
+<ul class='tree'>
+<li> <a href='./../Classes/BelaScopeOut.html'>BelaScopeOut</a> - Bela's Oscilloscope interface
+<li> <a href='./../Classes/LocalOut.html'>LocalOut</a> - Write to buses local to a synth.
+<li> <a href='./../Classes/Out.html'>Out</a> - Write a signal to a bus.
+<ul class='tree'>
+<li> <a href='./../Classes/OffsetOut.html'>OffsetOut</a> - Write a signal to a bus with sample accurate timing.
+<li> <a href='./../Classes/ReplaceOut.html'>ReplaceOut</a> - Send signal to a bus, overwriting previous contents.
+</ul>
+<li> <a href='./../Classes/SharedOut.html'>SharedOut</a> - Write to a shared control bus.
+<li> <a href='./../Classes/XOut.html'>XOut</a> - Send signal to a bus, crossfading with previous contents.
+</ul>
+<li> <a href='./../Classes/Amplitude.html'>Amplitude</a> - Amplitude follower
+<li> <a href='./../Classes/AnalogIn.html'>AnalogIn</a> - Read data from an analog input
+<li> <a href='./../Classes/AnalogOut.html'>AnalogOut</a> - Write data to an analog output
+<li> <a href='./../Classes/Ball.html'>Ball</a> - physical model of bouncing object
+<li> <a href='./../Classes/BasicOpUGen.html'>BasicOpUGen</a> - Common superclass to operations on UGen
+<ul class='tree'>
+<li> <a href='./../Classes/BinaryOpUGen.html'>BinaryOpUGen</a> - Apply a binary operation to the values of an input UGen
+<li> <a href='./../Classes/UnaryOpUGen.html'>UnaryOpUGen</a> - Apply a unary operation to the values of an input ugen
+</ul>
+<li> <a href='./../Classes/Blip.html'>Blip</a> - Band limited impulse oscillator.
+<li> <a href='./../Classes/BufCombN.html'>BufCombN</a> - Buffer based comb delay line with no interpolation.
+<ul class='tree'>
+<li> <a href='./../Classes/BufAllpassC.html'>BufAllpassC</a> - Buffer based all pass delay line with cubic interpolation.
+<li> <a href='./../Classes/BufAllpassL.html'>BufAllpassL</a> - Buffer based all pass delay line with linear interpolation.
+<li> <a href='./../Classes/BufAllpassN.html'>BufAllpassN</a> - Buffer based all pass delay line with no interpolation.
+<li> <a href='./../Classes/BufCombC.html'>BufCombC</a> - Buffer based comb delay line with cubic interpolation.
+<li> <a href='./../Classes/BufCombL.html'>BufCombL</a> - Buffer based comb delay line with linear interpolation.
+</ul>
+<li> <a href='./../Classes/BufDelayN.html'>BufDelayN</a> - Buffer based simple delay line with no interpolation.
+<ul class='tree'>
+<li> <a href='./../Classes/BufDelayC.html'>BufDelayC</a> - Buffer based simple delay line with cubic interpolation.
+<li> <a href='./../Classes/BufDelayL.html'>BufDelayL</a> - Buffer based simple delay line with linear interpolation.
+</ul>
+<li> <a href='./../Classes/BufInfoUGenBase.html'>BufInfoUGenBase</a> - Base class for buffer info ugens
+<ul class='tree'>
+<li> <a href='./../Classes/BufChannels.html'>BufChannels</a> - Current number of channels of soundfile in buffer.
+<li> <a href='./../Classes/BufDur.html'>BufDur</a> - Current duration of soundfile in buffer.
+<li> <a href='./../Classes/BufFrames.html'>BufFrames</a> - Current number of frames allocated in the buffer.
+<li> <a href='./../Classes/BufRateScale.html'>BufRateScale</a> - Buffer rate scaling in respect to server samplerate.
+<li> <a href='./../Classes/BufSampleRate.html'>BufSampleRate</a> - Buffer sample rate.
+<li> <a href='./../Classes/BufSamples.html'>BufSamples</a> - Current number of samples in buffer.
+</ul>
+<li> <a href='./../Classes/BufWr.html'>BufWr</a> - Buffer writing oscillator.
+<li> <a href='./../Classes/ChaosGen.html'>ChaosGen</a> - UGens that cause chaos
+<ul class='tree'>
+<li> <a href='./../Classes/CuspN.html'>CuspN</a> - Cusp map chaotic generator
+<ul class='tree'>
+<li> <a href='./../Classes/CuspL.html'>CuspL</a> - Cusp map chaotic generator
+</ul>
+<li> <a href='./../Classes/FBSineN.html'>FBSineN</a> - Feedback sine with chaotic phase indexing
+<ul class='tree'>
+<li> <a href='./../Classes/FBSineC.html'>FBSineC</a> - Feedback sine with chaotic phase indexing
+<li> <a href='./../Classes/FBSineL.html'>FBSineL</a> - Feedback sine with chaotic phase indexing
+</ul>
+<li> <a href='./../Classes/GbmanN.html'>GbmanN</a> - Gingerbreadman map chaotic generator
+<ul class='tree'>
+<li> <a href='./../Classes/GbmanL.html'>GbmanL</a> - Gingerbreadman map chaotic generator
+</ul>
+<li> <a href='./../Classes/HenonN.html'>HenonN</a> - Henon map chaotic generator
+<ul class='tree'>
+<li> <a href='./../Classes/HenonC.html'>HenonC</a> - Henon map chaotic generator
+<li> <a href='./../Classes/HenonL.html'>HenonL</a> - Henon map chaotic generator
+</ul>
+<li> <a href='./../Classes/LatoocarfianN.html'>LatoocarfianN</a> - Latoocarfian chaotic generator
+<ul class='tree'>
+<li> <a href='./../Classes/LatoocarfianC.html'>LatoocarfianC</a> - Latoocarfian chaotic generator
+<li> <a href='./../Classes/LatoocarfianL.html'>LatoocarfianL</a> - Latoocarfian chaotic generator
+</ul>
+<li> <a href='./../Classes/LinCongN.html'>LinCongN</a> - Linear congruential chaotic generator
+<ul class='tree'>
+<li> <a href='./../Classes/LinCongC.html'>LinCongC</a> - Linear congruential chaotic generator
+<li> <a href='./../Classes/LinCongL.html'>LinCongL</a> - Linear congruential chaotic generator
+</ul>
+<li> <a href='./../Classes/LorenzL.html'>LorenzL</a> - Lorenz chaotic generator
+<li> <a href='./../Classes/QuadN.html'>QuadN</a> - General quadratic map chaotic generator
+<ul class='tree'>
+<li> <a href='./../Classes/QuadC.html'>QuadC</a> - General quadratic map chaotic generator
+<li> <a href='./../Classes/QuadL.html'>QuadL</a> - General quadratic map chaotic generator
+</ul>
+<li> <a href='./../Classes/StandardN.html'>StandardN</a> - Standard map chaotic generator
+<ul class='tree'>
+<li> <a href='./../Classes/StandardL.html'>StandardL</a> - Standard map chaotic generator
+</ul>
+</ul>
+<li> <a href='./../Classes/CheckBadValues.html'>CheckBadValues</a> - Test for infinity, not-a-number, and denormals
+<li> <a href='./../Classes/CoinGate.html'>CoinGate</a> - Statistical gate.
+<li> <a href='./../Classes/Compander.html'>Compander</a> - Compressor, expander, limiter, gate, ducker
+<li> <a href='./../Classes/CompanderD.html'>CompanderD</a> - Compressor, expander, limiter, gate, ducker.
+<li> <a href='./../Classes/Convolution.html'>Convolution</a> - Real-time convolver.
+<li> <a href='./../Classes/Convolution2.html'>Convolution2</a> - Real-time fixed kernel convolver.
+<li> <a href='./../Classes/Convolution2L.html'>Convolution2L</a> - Real-time convolver with linear interpolation
+<li> <a href='./../Classes/Convolution3.html'>Convolution3</a> - Time based convolver.
+<li> <a href='./../Classes/Crackle.html'>Crackle</a> - Chaotic noise function.
+<li> <a href='./../Classes/DUGen.html'>DUGen</a> - (Undocumented class)
+<ul class='tree'>
+<li> <a href='./../Classes/Dbrown.html'>Dbrown</a> - Demand rate brownian movement generator.
+<ul class='tree'>
+<li> <a href='./../Classes/Dibrown.html'>Dibrown</a> - Demand rate brownian movement generator.
+</ul>
+<li> <a href='./../Classes/Dbufrd.html'>Dbufrd</a> - Buffer read demand ugen
+<li> <a href='./../Classes/Dbufwr.html'>Dbufwr</a> - Buffer write demand ugen
+<li> <a href='./../Classes/Dconst.html'>Dconst</a> - Constrain a demand-rate stream to a given sum
+<li> <a href='./../Classes/Ddup.html'>Ddup</a> - Demand rate input replicator
+<li> <a href='./../Classes/Dgeom.html'>Dgeom</a> - Demand rate geometric series UGen.
+<li> <a href='./../Classes/Dpoll.html'>Dpoll</a> - Print the current output value of a demand rate UGen
+<li> <a href='./../Classes/Dreset.html'>Dreset</a> - demand rate reset
+<li> <a href='./../Classes/Dseries.html'>Dseries</a> - Demand rate arithmetic series UGen.
+<li> <a href='./../Classes/Dstutter.html'>Dstutter</a> - Demand rate input replicator
+<li> <a href='./../Classes/Dswitch1.html'>Dswitch1</a> - Demand rate generator for switching between inputs.
+<ul class='tree'>
+<li> <a href='./../Classes/Dswitch.html'>Dswitch</a> - Demand rate generator for embedding different inputs
+</ul>
+<li> <a href='./../Classes/Dwhite.html'>Dwhite</a> - Demand rate white noise random generator.
+<ul class='tree'>
+<li> <a href='./../Classes/Diwhite.html'>Diwhite</a> - Demand rate white noise random generator.
+</ul>
+<li> <a href='./../Classes/Dwrand.html'>Dwrand</a> - Demand rate weighted random sequence generator
+<li> <a href='./../Classes/ListDUGen.html'>ListDUGen</a> - (Undocumented class)
+<ul class='tree'>
+<li> <a href='./../Classes/Drand.html'>Drand</a> - Demand rate random sequence generator.
+<li> <a href='./../Classes/Dseq.html'>Dseq</a> - Demand rate sequence generator.
+<li> <a href='./../Classes/Dser.html'>Dser</a> - Demand rate sequence generator.
+<li> <a href='./../Classes/Dshuf.html'>Dshuf</a> - Demand rate random sequence generator
+<li> <a href='./../Classes/Dxrand.html'>Dxrand</a> - Demand rate random sequence generator.
+</ul>
+</ul>
+<li> <a href='./../Classes/DelTapRd.html'>DelTapRd</a> - Tap a delay line from a DelTapWr UGen
+<li> <a href='./../Classes/DelTapWr.html'>DelTapWr</a> - Write to a buffer for a DelTapRd UGen
+<li> <a href='./../Classes/DemandEnvGen.html'>DemandEnvGen</a> - Demand rate envelope generator
+<li> <a href='./../Classes/DigitalIO.html'>DigitalIO</a> - Read or write data to a digital pin
+<li> <a href='./../Classes/DigitalIn.html'>DigitalIn</a> - Read data from a digital input
+<li> <a href='./../Classes/DigitalOut.html'>DigitalOut</a> - Write data to a digital output
+<li> <a href='./../Classes/DiskOut.html'>DiskOut</a> - Record to a soundfile to disk.
+<li> <a href='./../Classes/Done.html'>Done</a> - Monitors another UGen to see when it is finished
+<li> <a href='./../Classes/Dunique.html'>Dunique</a> - Return the same unique series of values for several demand streams
+<li> <a href='./../Classes/Dust.html'>Dust</a> - Random impulses.
+<li> <a href='./../Classes/Dust2.html'>Dust2</a> - Random impulses.
+<li> <a href='./../Classes/Duty.html'>Duty</a> - Demand results from demand rate UGens.
+<ul class='tree'>
+<li> <a href='./../Classes/TDuty.html'>TDuty</a> - Demand results as trigger from demand rate UGens.
+</ul>
+<li> <a href='./../Classes/DynKlang.html'>DynKlang</a> - Dynamic sine oscillator bank
+<li> <a href='./../Classes/DynKlank.html'>DynKlank</a> - Bank of resonators.
+<li> <a href='./../Classes/EnvGen.html'>EnvGen</a> - Envelope generator
+<li> <a href='./../Classes/ExpRand.html'>ExpRand</a> - Exponential single random number generator.
+<li> <a href='./../Classes/FSinOsc.html'>FSinOsc</a> - Fast sine oscillator.
+<li> <a href='./../Classes/Free.html'>Free</a> - When triggered, frees a node.
+<li> <a href='./../Classes/FreeSelf.html'>FreeSelf</a> - When triggered, free enclosing synth.
+<li> <a href='./../Classes/FreeSelfWhenDone.html'>FreeSelfWhenDone</a> - Free the enclosing synth when a UGen is finished
+<li> <a href='./../Classes/FreqShift.html'>FreqShift</a> - Frequency Shifter.
+<li> <a href='./../Classes/Gendy1.html'>Gendy1</a> - Dynamic stochastic synthesis generator.
+<li> <a href='./../Classes/Gendy2.html'>Gendy2</a> - Dynamic stochastic synthesis generator.
+<li> <a href='./../Classes/Gendy3.html'>Gendy3</a> - Dynamic stochastic synthesis generator.
+<li> <a href='./../Classes/Hasher.html'>Hasher</a> - Scrambled value with a hash function.
+<li> <a href='./../Classes/HilbertFIR.html'>HilbertFIR</a> - Applies the Hilbert transform to an input signal.
+<li> <a href='./../Classes/IEnvGen.html'>IEnvGen</a> - Envelope generator for polling values from an Env
+<li> <a href='./../Classes/IRand.html'>IRand</a> - Single integer random number generator.
+<li> <a href='./../Classes/InBus.html'>InBus</a> - Return a range of channels from a bus, irrespective of node order
+<li> <a href='./../Classes/InRange.html'>InRange</a> - Tests if a signal is within a given range.
+<ul class='tree'>
+<li> <a href='./../Classes/Clip.html'>Clip</a> - Clip a signal outside given thresholds.
+<li> <a href='./../Classes/Fold.html'>Fold</a> - Fold a signal outside given thresholds.
+<li> <a href='./../Classes/Schmidt.html'>Schmidt</a> - Schmidt trigger.
+<li> <a href='./../Classes/Wrap.html'>Wrap</a> - Wrap a signal outside given thresholds.
+</ul>
+<li> <a href='./../Classes/InRect.html'>InRect</a> - Test if a point is within a given rectangle.
+<li> <a href='./../Classes/InfoUGenBase.html'>InfoUGenBase</a> - Base class for info ugens
+<ul class='tree'>
+<li> <a href='./../Classes/BlockSize.html'>BlockSize</a> - (Undocumented class)
+<li> <a href='./../Classes/ControlDur.html'>ControlDur</a> - Duration of one block
+<li> <a href='./../Classes/ControlRate.html'>ControlRate</a> - Server control rate.
+<li> <a href='./../Classes/NodeID.html'>NodeID</a> - (Undocumented class)
+<li> <a href='./../Classes/NumAudioBuses.html'>NumAudioBuses</a> - Number of audio busses.
+<li> <a href='./../Classes/NumBuffers.html'>NumBuffers</a> - Number of open buffers.
+<li> <a href='./../Classes/NumControlBuses.html'>NumControlBuses</a> - Number of control busses.
+<li> <a href='./../Classes/NumInputBuses.html'>NumInputBuses</a> - Number of input busses.
+<li> <a href='./../Classes/NumOutputBuses.html'>NumOutputBuses</a> - Number of output busses.
+<li> <a href='./../Classes/NumRunningSynths.html'>NumRunningSynths</a> - Number of currently running synths.
+<li> <a href='./../Classes/RadiansPerSample.html'>RadiansPerSample</a> - Number of radians per sample.
+<li> <a href='./../Classes/SampleDur.html'>SampleDur</a> - Duration of one sample.
+<li> <a href='./../Classes/SampleRate.html'>SampleRate</a> - Server sample rate.
+<li> <a href='./../Classes/SubsampleOffset.html'>SubsampleOffset</a> - Offset from synth start within one sample.
+</ul>
+<li> <a href='./../Classes/KeyState.html'>KeyState</a> - Respond to the state of a key
+<li> <a href='./../Classes/KeyTrack.html'>KeyTrack</a> - Key tracker
+<li> <a href='./../Classes/Klang.html'>Klang</a> - Sine oscillator bank
+<li> <a href='./../Classes/Klank.html'>Klank</a> - Bank of resonators
+<li> <a href='./../Classes/LFGauss.html'>LFGauss</a> - Gaussian function oscillator
+<li> <a href='./../Classes/LFNoise0.html'>LFNoise0</a> - Step noise
+<ul class='tree'>
+<li> <a href='./../Classes/LFClipNoise.html'>LFClipNoise</a> - Clipped noise
+<li> <a href='./../Classes/LFDClipNoise.html'>LFDClipNoise</a> - Dynamic clipped noise
+<li> <a href='./../Classes/LFDNoise0.html'>LFDNoise0</a> - Dynamic step noise
+<li> <a href='./../Classes/LFDNoise1.html'>LFDNoise1</a> - Dynamic ramp noise
+<li> <a href='./../Classes/LFDNoise3.html'>LFDNoise3</a> - Dynamic cubic noise
+<li> <a href='./../Classes/LFNoise1.html'>LFNoise1</a> - Ramp noise
+<li> <a href='./../Classes/LFNoise2.html'>LFNoise2</a> - Quadratic noise.
+</ul>
+<li> <a href='./../Classes/LastValue.html'>LastValue</a> - Output the last value before the input changed
+<li> <a href='./../Classes/Latch.html'>Latch</a> - Sample and hold
+<ul class='tree'>
+<li> <a href='./../Classes/Gate.html'>Gate</a> - Gate or hold.
+</ul>
+<li> <a href='./../Classes/LinRand.html'>LinRand</a> - Skewed random number generator.
+<li> <a href='./../Classes/LinXFade2.html'>LinXFade2</a> - Two channel linear crossfade.
+<li> <a href='./../Classes/Line.html'>Line</a> - Line generator.
+<li> <a href='./../Classes/Linen.html'>Linen</a> - Simple linear envelope generator.
+<li> <a href='./../Classes/Logistic.html'>Logistic</a> - Chaotic noise function
+<li> <a href='./../Classes/Loudness.html'>Loudness</a> - Extraction of instantaneous loudness in sones
+<li> <a href='./../Classes/MantissaMask.html'>MantissaMask</a> - Reduce precision.
+<li> <a href='./../Classes/MaxLocalBufs.html'>MaxLocalBufs</a> - Set the maximum number of local buffers in a synth
+<li> <a href='./../Classes/ModDif.html'>ModDif</a> - Minimum difference of two values in modulo arithmetics
+<li> <a href='./../Classes/MostChange.html'>MostChange</a> - Output most changed.
+<ul class='tree'>
+<li> <a href='./../Classes/LeastChange.html'>LeastChange</a> - Output least changed
+</ul>
+<li> <a href='./../Classes/MouseButton.html'>MouseButton</a> - Mouse button UGen.
+<li> <a href='./../Classes/MouseX.html'>MouseX</a> - Cursor tracking UGen.
+<ul class='tree'>
+<li> <a href='./../Classes/MouseY.html'>MouseY</a> - Cursor tracking UGen.
+</ul>
+<li> <a href='./../Classes/MulAdd.html'>MulAdd</a> - Multiply and add to a signal
+<li> <a href='./../Classes/MultiOutUGen.html'>MultiOutUGen</a> - Superclass for all UGens with multiple outputs
+<ul class='tree'>
+<li> <a href='./../Classes/AbstractIn.html'>AbstractIn</a> - Abstract class for in ugens
+<ul class='tree'>
+<li> <a href='./../Classes/In.html'>In</a> - Read a signal from a bus.
+<li> <a href='./../Classes/InFeedback.html'>InFeedback</a> - Read signal from a bus with a current or one cycle old timestamp.
+<li> <a href='./../Classes/InTrig.html'>InTrig</a> - Generate a trigger anytime a bus is set.
+<li> <a href='./../Classes/LagIn.html'>LagIn</a> - Read a control signal from a bus with a lag
+<li> <a href='./../Classes/LocalIn.html'>LocalIn</a> - Define and read from buses local to a synth.
+<li> <a href='./../Classes/SharedIn.html'>SharedIn</a> - Read from a shared control bus.
+</ul>
+<li> <a href='./../Classes/AudioControl.html'>AudioControl</a> - (Undocumented class)
+<li> <a href='./../Classes/Balance2.html'>Balance2</a> - Stereo signal balancer
+<li> <a href='./../Classes/BeatTrack.html'>BeatTrack</a> - Autocorrelation beat tracker
+<li> <a href='./../Classes/BeatTrack2.html'>BeatTrack2</a> - Template matching beat tracker
+<li> <a href='./../Classes/BiPanB2.html'>BiPanB2</a> - 2D Ambisonic B-format panner.
+<li> <a href='./../Classes/BufRd.html'>BufRd</a> - Buffer reading oscillator.
+<li> <a href='./../Classes/Control.html'>Control</a> - Bring signals and floats into the ugenGraph function of a SynthDef.
+<ul class='tree'>
+<li> <a href='./../Classes/LagControl.html'>LagControl</a> - Lagged control input
+<li> <a href='./../Classes/TrigControl.html'>TrigControl</a> - FIXME: TrigControl purpose.
+</ul>
+<li> <a href='./../Classes/DecodeB2.html'>DecodeB2</a> - 2D Ambisonic B-format decoder.
+<li> <a href='./../Classes/Demand.html'>Demand</a> - Demand results from demand rate UGens.
+<li> <a href='./../Classes/DiskIn.html'>DiskIn</a> - Stream in audio from a file.
+<li> <a href='./../Classes/FreeVerb2.html'>FreeVerb2</a> - A two-channel reverb
+<li> <a href='./../Classes/GVerb.html'>GVerb</a> - A two-channel reverb
+<li> <a href='./../Classes/GrainBuf.html'>GrainBuf</a> - Granular synthesis with sound stored in a buffer
+<li> <a href='./../Classes/GrainFM.html'>GrainFM</a> - Granular synthesis with frequency modulated sine tones
+<li> <a href='./../Classes/GrainIn.html'>GrainIn</a> - Granulate an input signal
+<li> <a href='./../Classes/GrainSin.html'>GrainSin</a> - Granular synthesis with sine tones
+<li> <a href='./../Classes/Hilbert.html'>Hilbert</a> - Applies the Hilbert transform to an input signal.
+<li> <a href='./../Classes/MFCC.html'>MFCC</a> - Mel frequency cepstral coefficients
+<li> <a href='./../Classes/Pan2.html'>Pan2</a> - Two channel equal power pan.
+<ul class='tree'>
+<li> <a href='./../Classes/LinPan2.html'>LinPan2</a> - Two channel linear pan.
+</ul>
+<li> <a href='./../Classes/Pan4.html'>Pan4</a> - Four channel equal power pan.
+<li> <a href='./../Classes/PanAz.html'>PanAz</a> - Azimuth panner
+<li> <a href='./../Classes/PanB.html'>PanB</a> - Ambisonic B-format panner.
+<li> <a href='./../Classes/PanB2.html'>PanB2</a> - 2D Ambisonic B-format panner.
+<li> <a href='./../Classes/Pitch.html'>Pitch</a> - Autocorrelation pitch follower
+<li> <a href='./../Classes/PlayBuf.html'>PlayBuf</a> - Sample playback oscillator.
+<li> <a href='./../Classes/PureMultiOutUGen.html'>PureMultiOutUGen</a> - (Undocumented class)
+<ul class='tree'>
+<li> <a href='./../Classes/DC.html'>DC</a> - Create a constant amplitude signal
+</ul>
+<li> <a href='./../Classes/Rotate2.html'>Rotate2</a> - Rotate a sound field.
+<li> <a href='./../Classes/StereoConvolution2L.html'>StereoConvolution2L</a> - Stereo real-time convolver with linear interpolation
+<li> <a href='./../Classes/TGrains.html'>TGrains</a> - Buffer granulator.
+<li> <a href='./../Classes/UnpackFFT.html'>UnpackFFT</a> - Unpack an FFT chain into separate demand-rate FFT bin streams
+<li> <a href='./../Classes/VDiskIn.html'>VDiskIn</a> - Stream in audio from a file, with variable rate
+<li> <a href='./../Classes/Warp1.html'>Warp1</a> - Warp a buffer with a time pointer
+</ul>
+<li> <a href='./../Classes/MultiplexAnalogIn.html'>MultiplexAnalogIn</a> - Read data from an analog input of the Bela board
+<li> <a href='./../Classes/NRand.html'>NRand</a> - Sum of uniform distributions.
+<li> <a href='./../Classes/Normalizer.html'>Normalizer</a> - Flattens dynamics.
+<ul class='tree'>
+<li> <a href='./../Classes/Limiter.html'>Limiter</a> - Peak limiter
+</ul>
+<li> <a href='./../Classes/Onsets.html'>Onsets</a> - Onset detector
+<li> <a href='./../Classes/OutputProxy.html'>OutputProxy</a> - Place holder for multiple outputs
+<li> <a href='./../Classes/PSinGrain.html'>PSinGrain</a> - Very fast sine grain with a parabolic envelope
+<li> <a href='./../Classes/PartConv.html'>PartConv</a> - Real-time partitioned convolution
+<li> <a href='./../Classes/Pause.html'>Pause</a> - When triggered, pauses a node.
+<li> <a href='./../Classes/PauseSelf.html'>PauseSelf</a> - When triggered, pause enclosing synth.
+<li> <a href='./../Classes/PauseSelfWhenDone.html'>PauseSelfWhenDone</a> - FIXME: PauseSelfWhenDone purpose.
+<li> <a href='./../Classes/Peak.html'>Peak</a> - Track peak signal amplitude.
+<ul class='tree'>
+<li> <a href='./../Classes/RunningMax.html'>RunningMax</a> - Track maximum level.
+<li> <a href='./../Classes/RunningMin.html'>RunningMin</a> - Track minimum level.
+</ul>
+<li> <a href='./../Classes/PeakFollower.html'>PeakFollower</a> - Track peak signal amplitude.
+<li> <a href='./../Classes/Phasor.html'>Phasor</a> - A resettable linear ramp between two levels.
+<li> <a href='./../Classes/PitchShift.html'>PitchShift</a> - Time domain pitch shifter.
+<li> <a href='./../Classes/Pluck.html'>Pluck</a> - A Karplus-Strong UGen
+<li> <a href='./../Classes/Poll.html'>Poll</a> - Print the current output value of a UGen
+<li> <a href='./../Classes/Pulse.html'>Pulse</a> - Band limited pulse wave.
+<li> <a href='./../Classes/PulseCount.html'>PulseCount</a> - Pulse counter.
+<ul class='tree'>
+<li> <a href='./../Classes/SetResetFF.html'>SetResetFF</a> - Set-reset flip flop.
+</ul>
+<li> <a href='./../Classes/PulseDivider.html'>PulseDivider</a> - Pulse divider.
+<li> <a href='./../Classes/PureUGen.html'>PureUGen</a> - Pure UGen
+<ul class='tree'>
+<li> <a href='./../Classes/A2K.html'>A2K</a> - Audio to control rate converter.
+<ul class='tree'>
+<li> <a href='./../Classes/T2K.html'>T2K</a> - Audio rate trigger to control rate trigger converter
+</ul>
+<li> <a href='./../Classes/AmpComp.html'>AmpComp</a> - Basic psychoacoustic amplitude compensation.
+<ul class='tree'>
+<li> <a href='./../Classes/AmpCompA.html'>AmpCompA</a> - Basic psychoacoustic amplitude compensation (ANSI A-weighting curve).
+</ul>
+<li> <a href='./../Classes/COsc.html'>COsc</a> - Chorusing wavetable oscillator.
+<li> <a href='./../Classes/CombN.html'>CombN</a> - Comb delay line with no interpolation.
+<ul class='tree'>
+<li> <a href='./../Classes/AllpassC.html'>AllpassC</a> - Schroeder allpass delay line with cubic interpolation.
+<li> <a href='./../Classes/AllpassL.html'>AllpassL</a> - Schroeder allpass delay line with linear interpolation.
+<li> <a href='./../Classes/AllpassN.html'>AllpassN</a> - Schroeder allpass delay line with no interpolation.
+<li> <a href='./../Classes/CombC.html'>CombC</a> - Comb delay line with cubic interpolation.
+<li> <a href='./../Classes/CombL.html'>CombL</a> - Comb delay line with linear interpolation.
+</ul>
+<li> <a href='./../Classes/DegreeToKey.html'>DegreeToKey</a> - Convert signal to modal pitch.
+<li> <a href='./../Classes/Delay1.html'>Delay1</a> - Single sample delay.
+<ul class='tree'>
+<li> <a href='./../Classes/Delay2.html'>Delay2</a> - Two sample delay.
+</ul>
+<li> <a href='./../Classes/DelayN.html'>DelayN</a> - Simple delay line with no interpolation.
+<ul class='tree'>
+<li> <a href='./../Classes/DelayC.html'>DelayC</a> - Simple delay line with cubic interpolation.
+<li> <a href='./../Classes/DelayL.html'>DelayL</a> - Simple delay line with linear interpolation.
+</ul>
+<li> <a href='./../Classes/Filter.html'>Filter</a> - Base class for filter UGens
+<ul class='tree'>
+<li> <a href='./../Classes/BEQSuite.html'>BEQSuite</a> - Base class for B Equalization Suite
+<ul class='tree'>
+<li> <a href='./../Classes/BAllPass.html'>BAllPass</a> - All Pass Filter
+<li> <a href='./../Classes/BBandPass.html'>BBandPass</a> - Band Pass Filter
+<li> <a href='./../Classes/BBandStop.html'>BBandStop</a> - Band reject filter
+<li> <a href='./../Classes/BHiPass.html'>BHiPass</a> - 12db/oct rolloff - 2nd order resonant  Hi Pass Filter
+<li> <a href='./../Classes/BHiShelf.html'>BHiShelf</a> - Hi Shelf
+<li> <a href='./../Classes/BLowPass.html'>BLowPass</a> - 12db/oct rolloff - 2nd order resonant Low Pass Filter
+<li> <a href='./../Classes/BLowShelf.html'>BLowShelf</a> - Low Shelf
+<li> <a href='./../Classes/BPeakEQ.html'>BPeakEQ</a> - Parametric equalizer
+</ul>
+<li> <a href='./../Classes/BPF.html'>BPF</a> - 2nd order Butterworth bandpass filter.
+<ul class='tree'>
+<li> <a href='./../Classes/BRF.html'>BRF</a> - 2nd order Butterworth band reject filter.
+</ul>
+<li> <a href='./../Classes/Changed.html'>Changed</a> - Triggers when a value changes
+<li> <a href='./../Classes/Decay.html'>Decay</a> - Exponential decay
+<li> <a href='./../Classes/Decay2.html'>Decay2</a> - Exponential decay
+<li> <a href='./../Classes/DetectSilence.html'>DetectSilence</a> - Detect when input falls below an amplitude threshold
+<li> <a href='./../Classes/FOS.html'>FOS</a> - First order filter section.
+<li> <a href='./../Classes/Formlet.html'>Formlet</a> - FOF-like filter.
+<li> <a href='./../Classes/FreeVerb.html'>FreeVerb</a> - A reverb
+<li> <a href='./../Classes/Integrator.html'>Integrator</a> - A leaky integrator.
+<li> <a href='./../Classes/LPF.html'>LPF</a> - 2nd order Butterworth lowpass filter
+<ul class='tree'>
+<li> <a href='./../Classes/HPF.html'>HPF</a> - 2nd order Butterworth highpass filter.
+</ul>
+<li> <a href='./../Classes/LPZ1.html'>LPZ1</a> - Two point average filter
+<ul class='tree'>
+<li> <a href='./../Classes/HPZ1.html'>HPZ1</a> - Two point difference filter
+</ul>
+<li> <a href='./../Classes/LPZ2.html'>LPZ2</a> - Two zero fixed lowpass
+<ul class='tree'>
+<li> <a href='./../Classes/BPZ2.html'>BPZ2</a> - Two zero fixed midpass.
+<li> <a href='./../Classes/BRZ2.html'>BRZ2</a> - Two zero fixed midcut.
+<li> <a href='./../Classes/HPZ2.html'>HPZ2</a> - Two zero fixed midcut.
+</ul>
+<li> <a href='./../Classes/Lag.html'>Lag</a> - Exponential lag
+<ul class='tree'>
+<li> <a href='./../Classes/Lag2.html'>Lag2</a> - Exponential lag
+<li> <a href='./../Classes/Lag3.html'>Lag3</a> - Exponential lag
+<li> <a href='./../Classes/Ramp.html'>Ramp</a> - Break a continuous signal into line segments
+</ul>
+<li> <a href='./../Classes/LagUD.html'>LagUD</a> - Exponential lag
+<ul class='tree'>
+<li> <a href='./../Classes/Lag2UD.html'>Lag2UD</a> - Exponential lag
+<li> <a href='./../Classes/Lag3UD.html'>Lag3UD</a> - Exponential lag
+</ul>
+<li> <a href='./../Classes/LeakDC.html'>LeakDC</a> - Remove DC
+<li> <a href='./../Classes/Median.html'>Median</a> - Median filter.
+<li> <a href='./../Classes/MidEQ.html'>MidEQ</a> - Parametric filter.
+<li> <a href='./../Classes/MoogFF.html'>MoogFF</a> - Moog VCF implementation, designed by Federico Fontana
+<li> <a href='./../Classes/OnePole.html'>OnePole</a> - One pole filter.
+<ul class='tree'>
+<li> <a href='./../Classes/OneZero.html'>OneZero</a> - One zero filter.
+</ul>
+<li> <a href='./../Classes/RLPF.html'>RLPF</a> - A resonant low pass filter.
+<ul class='tree'>
+<li> <a href='./../Classes/RHPF.html'>RHPF</a> - A resonant high pass filter.
+</ul>
+<li> <a href='./../Classes/Resonz.html'>Resonz</a> - Resonant filter.
+<li> <a href='./../Classes/Ringz.html'>Ringz</a> - Ringing filter.
+<li> <a href='./../Classes/SOS.html'>SOS</a> - Second order filter section (biquad).
+<li> <a href='./../Classes/Slew.html'>Slew</a> - Slew rate limiter.
+<li> <a href='./../Classes/Slope.html'>Slope</a> - Slope of signal
+<li> <a href='./../Classes/TwoPole.html'>TwoPole</a> - Two pole filter.
+<ul class='tree'>
+<li> <a href='./../Classes/APF.html'>APF</a> - FIXME: APF purpose.
+<li> <a href='./../Classes/TwoZero.html'>TwoZero</a> - Two zero filter.
+</ul>
+<li> <a href='./../Classes/VarLag.html'>VarLag</a> - Variable shaped lag
+</ul>
+<li> <a href='./../Classes/Formant.html'>Formant</a> - Formant oscillator
+<li> <a href='./../Classes/Impulse.html'>Impulse</a> - Impulse oscillator.
+<li> <a href='./../Classes/Index.html'>Index</a> - Index into a table with a signal
+<ul class='tree'>
+<li> <a href='./../Classes/DetectIndex.html'>DetectIndex</a> - Search a buffer for a value
+<li> <a href='./../Classes/FoldIndex.html'>FoldIndex</a> - Index into a table with a signal.
+<li> <a href='./../Classes/IndexInBetween.html'>IndexInBetween</a> - Finds the (lowest) point in the Buffer at which the input signal lies in-between the two values
+<li> <a href='./../Classes/IndexL.html'>IndexL</a> - Index into a table with a signal, linear interpolated
+<li> <a href='./../Classes/Shaper.html'>Shaper</a> - Wave shaper.
+<li> <a href='./../Classes/WrapIndex.html'>WrapIndex</a> - Index into a table with a signal.
+</ul>
+<li> <a href='./../Classes/K2A.html'>K2A</a> - Control to audio rate converter.
+<ul class='tree'>
+<li> <a href='./../Classes/T2A.html'>T2A</a> - Control rate trigger to audio rate trigger converter
+</ul>
+<li> <a href='./../Classes/LFPulse.html'>LFPulse</a> - pulse oscillator
+<li> <a href='./../Classes/LFSaw.html'>LFSaw</a> - Sawtooth oscillator
+<ul class='tree'>
+<li> <a href='./../Classes/LFCub.html'>LFCub</a> - A sine like shape made of two cubic pieces
+<li> <a href='./../Classes/LFPar.html'>LFPar</a> - Parabolic oscillator
+<li> <a href='./../Classes/LFTri.html'>LFTri</a> - Triangle oscillator
+</ul>
+<li> <a href='./../Classes/LinExp.html'>LinExp</a> - Map a linear range to an exponential range
+<li> <a href='./../Classes/Osc.html'>Osc</a> - Interpolating wavetable oscillator.
+<li> <a href='./../Classes/OscN.html'>OscN</a> - Noninterpolating wavetable oscillator.
+<li> <a href='./../Classes/Select.html'>Select</a> - Select output from an array of inputs.
+<li> <a href='./../Classes/SinOsc.html'>SinOsc</a> - Interpolating sine wavetable oscillator.
+<li> <a href='./../Classes/SinOscFB.html'>SinOscFB</a> - Feedback FM oscillator
+<li> <a href='./../Classes/SyncSaw.html'>SyncSaw</a> - Hard sync sawtooth wave.
+<li> <a href='./../Classes/VOsc.html'>VOsc</a> - Variable wavetable oscillator.
+<li> <a href='./../Classes/VOsc3.html'>VOsc3</a> - Three variable wavetable oscillators.
+<li> <a href='./../Classes/VarSaw.html'>VarSaw</a> - Variable duty saw
+<li> <a href='./../Classes/Vibrato.html'>Vibrato</a> - The Vibrato oscillator models a slow frequency modulation.
+</ul>
+<li> <a href='./../Classes/Rand.html'>Rand</a> - Single random number generator.
+<li> <a href='./../Classes/RecordBuf.html'>RecordBuf</a> - Record or overdub into a Buffer.
+<li> <a href='./../Classes/RunningSum.html'>RunningSum</a> - Running sum over n frames
+<li> <a href='./../Classes/Sanitize.html'>Sanitize</a> - Remove infinity, NaN, and denormals
+<li> <a href='./../Classes/Saw.html'>Saw</a> - Band limited sawtooth.
+<li> <a href='./../Classes/ScopeOut.html'>ScopeOut</a> - FIXME: ScopeOut purpose.
+<li> <a href='./../Classes/ScopeOut2.html'>ScopeOut2</a> - (Undocumented class)
+<li> <a href='./../Classes/SendPeakRMS.html'>SendPeakRMS</a> - Track peak and power of a signal for GUI applications.
+<li> <a href='./../Classes/SendTrig.html'>SendTrig</a> - Send a trigger message from the server back to the client.
+<ul class='tree'>
+<li> <a href='./../Classes/SendReply.html'>SendReply</a> - Send an array of values from the server to all notified clients
+</ul>
+<li> <a href='./../Classes/SpecCentroid.html'>SpecCentroid</a> - Spectral centroid
+<li> <a href='./../Classes/SpecFlatness.html'>SpecFlatness</a> - Spectral Flatness measure
+<li> <a href='./../Classes/SpecPcile.html'>SpecPcile</a> - Find a percentile of FFT magnitude spectrum
+<li> <a href='./../Classes/Splay.html'>Splay</a> - Splay spreads an array of channels across the stereo field
+<li> <a href='./../Classes/SplayAz.html'>SplayAz</a> - Spreads an array of channels across a ring of channels
+<li> <a href='./../Classes/Spring.html'>Spring</a> - physical model of resonating spring
+<li> <a href='./../Classes/Stepper.html'>Stepper</a> - Pulse counter.
+<li> <a href='./../Classes/Sum3.html'>Sum3</a> - Sum three signals
+<li> <a href='./../Classes/Sum4.html'>Sum4</a> - Sum four signals
+<li> <a href='./../Classes/Sweep.html'>Sweep</a> - Triggered linear ramp
+<li> <a href='./../Classes/TBall.html'>TBall</a> - physical model of bouncing object
+<li> <a href='./../Classes/TExpRand.html'>TExpRand</a> - Triggered exponential random number generator.
+<li> <a href='./../Classes/TIRand.html'>TIRand</a> - Triggered integer random number generator.
+<li> <a href='./../Classes/TRand.html'>TRand</a> - Triggered random number generator.
+<li> <a href='./../Classes/TWindex.html'>TWindex</a> - Triggered windex.
+<li> <a href='./../Classes/Tap.html'>Tap</a> - Single tap into a delay line
+<li> <a href='./../Classes/Timer.html'>Timer</a> - Returns time since last triggered.
+<li> <a href='./../Classes/ToggleFF.html'>ToggleFF</a> - Toggle flip flop.
+<li> <a href='./../Classes/Trig1.html'>Trig1</a> - Timed trigger.
+<ul class='tree'>
+<li> <a href='./../Classes/TDelay.html'>TDelay</a> - Trigger delay.
+<li> <a href='./../Classes/Trig.html'>Trig</a> - Timed trigger.
+</ul>
+<li> <a href='./../Classes/Unpack1FFT.html'>Unpack1FFT</a> - Unpack a single value (magnitude or phase) from an FFT chain
+<li> <a href='./../Classes/WhiteNoise.html'>WhiteNoise</a> - White noise.
+<ul class='tree'>
+<li> <a href='./../Classes/BrownNoise.html'>BrownNoise</a> - Brown Noise.
+<li> <a href='./../Classes/ClipNoise.html'>ClipNoise</a> - Clip Noise.
+<li> <a href='./../Classes/GrayNoise.html'>GrayNoise</a> - Gray Noise.
+<li> <a href='./../Classes/PinkNoise.html'>PinkNoise</a> - Pink Noise.
+</ul>
+<li> <a href='./../Classes/WidthFirstUGen.html'>WidthFirstUGen</a> - (Undocumented class)
+<ul class='tree'>
+<li> <a href='./../Classes/ClearBuf.html'>ClearBuf</a> - (Undocumented class)
+<li> <a href='./../Classes/IFFT.html'>IFFT</a> - Inverse Fast Fourier Transform
+<li> <a href='./../Classes/LocalBuf.html'>LocalBuf</a> - Allocate a buffer local to the synth
+<li> <a href='./../Classes/PV_ChainUGen.html'>PV_ChainUGen</a> - Base class for UGens that operate on FFT chains
+<ul class='tree'>
+<li> <a href='./../Classes/FFT.html'>FFT</a> - Fast Fourier Transform
+<li> <a href='./../Classes/FFTTrigger.html'>FFTTrigger</a> - Outputs the necessary signal for FFT chains, without doing an FFT on a signal
+<li> <a href='./../Classes/PV_BinScramble.html'>PV_BinScramble</a> - Scramble bins.
+<li> <a href='./../Classes/PV_BinShift.html'>PV_BinShift</a> - Shift and stretch bin position.
+<li> <a href='./../Classes/PV_BinWipe.html'>PV_BinWipe</a> - Combine low and high bins from two inputs.
+<li> <a href='./../Classes/PV_BrickWall.html'>PV_BrickWall</a> - Zero bins.
+<li> <a href='./../Classes/PV_ConformalMap.html'>PV_ConformalMap</a> - Complex plane attack.
+<li> <a href='./../Classes/PV_Diffuser.html'>PV_Diffuser</a> - Random phase shifting.
+<li> <a href='./../Classes/PV_HainsworthFoote.html'>PV_HainsworthFoote</a> - FFT onset detector.
+<li> <a href='./../Classes/PV_JensenAndersen.html'>PV_JensenAndersen</a> - FFT feature detector for onset detection.
+<li> <a href='./../Classes/PV_MagAbove.html'>PV_MagAbove</a> - Pass bins above a threshold.
+<ul class='tree'>
+<li> <a href='./../Classes/PV_LocalMax.html'>PV_LocalMax</a> - Pass bins which are a local maximum.
+<li> <a href='./../Classes/PV_MagBelow.html'>PV_MagBelow</a> - Pass bins below a threshold.
+<li> <a href='./../Classes/PV_MagClip.html'>PV_MagClip</a> - Clip bins to a threshold.
+</ul>
+<li> <a href='./../Classes/PV_MagDiv.html'>PV_MagDiv</a> - Division of magnitudes
+<li> <a href='./../Classes/PV_MagFreeze.html'>PV_MagFreeze</a> - Freeze magnitudes.
+<li> <a href='./../Classes/PV_MagMul.html'>PV_MagMul</a> - Multiply magnitudes.
+<ul class='tree'>
+<li> <a href='./../Classes/PV_Add.html'>PV_Add</a> - Complex addition.
+<li> <a href='./../Classes/PV_Copy.html'>PV_Copy</a> - Copy an FFT buffer
+<li> <a href='./../Classes/PV_CopyPhase.html'>PV_CopyPhase</a> - Copy magnitudes and phases.
+<li> <a href='./../Classes/PV_Div.html'>PV_Div</a> - Complex division
+<li> <a href='./../Classes/PV_Max.html'>PV_Max</a> - Maximum magnitude.
+<li> <a href='./../Classes/PV_Min.html'>PV_Min</a> - Minimum magnitude.
+<li> <a href='./../Classes/PV_Mul.html'>PV_Mul</a> - Complex multiply.
+</ul>
+<li> <a href='./../Classes/PV_MagShift.html'>PV_MagShift</a> - shift and stretch magnitude bin position.
+<li> <a href='./../Classes/PV_MagSmear.html'>PV_MagSmear</a> - Average magnitudes across bins.
+<li> <a href='./../Classes/PV_MagSquared.html'>PV_MagSquared</a> - Square magnitudes.
+<ul class='tree'>
+<li> <a href='./../Classes/PV_Conj.html'>PV_Conj</a> - Complex conjugate
+<li> <a href='./../Classes/PV_MagNoise.html'>PV_MagNoise</a> - Multiply magnitudes by noise.
+<li> <a href='./../Classes/PV_PhaseShift270.html'>PV_PhaseShift270</a> - Shift phase by 270 degrees.
+<li> <a href='./../Classes/PV_PhaseShift90.html'>PV_PhaseShift90</a> - Shift phase by 90 degrees.
+</ul>
+<li> <a href='./../Classes/PV_PhaseShift.html'>PV_PhaseShift</a> - Shift phase.
+<li> <a href='./../Classes/PV_RandComb.html'>PV_RandComb</a> - Pass random bins.
+<li> <a href='./../Classes/PV_RandWipe.html'>PV_RandWipe</a> - Crossfade in random bin order.
+<li> <a href='./../Classes/PV_RectComb.html'>PV_RectComb</a> - Make gaps in spectrum.
+<li> <a href='./../Classes/PV_RectComb2.html'>PV_RectComb2</a> - Make gaps in spectrum.
+<li> <a href='./../Classes/PackFFT.html'>PackFFT</a> - Pack separate demand-rate FFT bin streams into an FFT chain buffer
+</ul>
+<li> <a href='./../Classes/RandID.html'>RandID</a> - Set the synth's random generator ID.
+<li> <a href='./../Classes/RandSeed.html'>RandSeed</a> - Sets the synth's random generator seed.
+<li> <a href='./../Classes/SetBuf.html'>SetBuf</a> - (Undocumented class)
+</ul>
+<li> <a href='./../Classes/XFade2.html'>XFade2</a> - Equal power two channel cross fade.
+<li> <a href='./../Classes/XLine.html'>XLine</a> - Exponential line generator.
+<li> <a href='./../Classes/ZeroCrossing.html'>ZeroCrossing</a> - Zero crossing frequency follower
+</ul>
+<li> <a href='./../Classes/UnaryOpFunction.html'>UnaryOpFunction</a> - represent a unary operation on a function
+<ul class='tree'>
+<li> <a href='./../Classes/UnaryOpFunctionProxy.html'>UnaryOpFunctionProxy</a> - (Undocumented class)
+</ul>
+</ul>
+<li> <a href='./../Classes/AbstractMDPlugin.html'>AbstractMDPlugin</a> - (Undocumented class)
+<ul class='tree'>
+<li> <a href='./../Classes/TextArchiveMDPlugin.html'>TextArchiveMDPlugin</a> - (Undocumented class)
+</ul>
+<li> <a href='./../Classes/AbstractMessageMatcher.html'>AbstractMessageMatcher</a> - Matches incoming messages to Functions
+<ul class='tree'>
+<li> <a href='./../Classes/HIDFuncDeviceProtoMatcher.html'>HIDFuncDeviceProtoMatcher</a> - (Undocumented class)
+<li> <a href='./../Classes/HIDFuncElementProtoMatcher.html'>HIDFuncElementProtoMatcher</a> - (Undocumented class)
+<li> <a href='./../Classes/HIDRawValueMatcher.html'>HIDRawValueMatcher</a> - (Undocumented class)
+<li> <a href='./../Classes/HIDValueMatcher.html'>HIDValueMatcher</a> - (Undocumented class)
+<li> <a href='./../Classes/MIDIFuncBothCAMessageMatcher.html'>MIDIFuncBothCAMessageMatcher</a> - Matches incoming MIDI messages to responder funcs based on message channel and source
+<li> <a href='./../Classes/MIDIFuncBothMessageMatcher.html'>MIDIFuncBothMessageMatcher</a> - Matches incoming MIDI messages to responder funcs based on message channel and source
+<li> <a href='./../Classes/MIDIFuncChanArrayMessageMatcher.html'>MIDIFuncChanArrayMessageMatcher</a> - Matches incoming MIDI messages to responder funcs based on message channel
+<li> <a href='./../Classes/MIDIFuncChanMessageMatcher.html'>MIDIFuncChanMessageMatcher</a> - Matches incoming MIDI messages to responder funcs based on message channel
+<li> <a href='./../Classes/MIDIFuncSrcMessageMatcher.html'>MIDIFuncSrcMessageMatcher</a> - Matches incoming MIDI messages to responder funcs based on message source
+<ul class='tree'>
+<li> <a href='./../Classes/MIDIFuncSrcMessageMatcherNV.html'>MIDIFuncSrcMessageMatcherNV</a> - Matches incoming MIDI messages to responder funcs based on message source
+<li> <a href='./../Classes/MIDIFuncSrcSysMessageMatcher.html'>MIDIFuncSrcSysMessageMatcher</a> - (Undocumented class)
+<li> <a href='./../Classes/MIDIFuncSrcSysMessageMatcherND.html'>MIDIFuncSrcSysMessageMatcherND</a> - (Undocumented class)
+</ul>
+<li> <a href='./../Classes/MIDISMPTEAssembler.html'>MIDISMPTEAssembler</a> - (Undocumented class)
+<li> <a href='./../Classes/MIDIValueMatcher.html'>MIDIValueMatcher</a> - (Undocumented class)
+<li> <a href='./../Classes/OSCArgsMatcher.html'>OSCArgsMatcher</a> - Test for specific OSC arguments before evaluating a Function
+<li> <a href='./../Classes/OSCFuncAddrMessageMatcher.html'>OSCFuncAddrMessageMatcher</a> - Matches incoming messages to responder funcs based on sender address
+<li> <a href='./../Classes/OSCFuncBothMessageMatcher.html'>OSCFuncBothMessageMatcher</a> - Matches incoming messages to responder funcs based on receive port and sender address
+<li> <a href='./../Classes/OSCFuncRecvPortMessageMatcher.html'>OSCFuncRecvPortMessageMatcher</a> - Matches incoming messages to responder funcs based on receive port
+</ul>
+<li> <a href='./../Classes/AbstractNodeWatcher.html'>AbstractNodeWatcher</a> - (Undocumented class)
+<ul class='tree'>
+<li> <a href='./../Classes/BasicNodeWatcher.html'>BasicNodeWatcher</a> - (Undocumented class)
+<ul class='tree'>
+<li> <a href='./../Classes/DebugNodeWatcher.html'>DebugNodeWatcher</a> - watches a server address for debug-related messages
+<li> <a href='./../Classes/NodeWatcher.html'>NodeWatcher</a> - notify sc-lang side node objects of their server sided state
+</ul>
+</ul>
+<li> <a href='./../Classes/AbstractPlayControl.html'>AbstractPlayControl</a> - (Undocumented class)
+<ul class='tree'>
+<li> <a href='./../Classes/StreamControl.html'>StreamControl</a> - (Undocumented class)
+<ul class='tree'>
+<li> <a href='./../Classes/PatternControl.html'>PatternControl</a> - (Undocumented class)
+</ul>
+<li> <a href='./../Classes/SynthControl.html'>SynthControl</a> - (Undocumented class)
+<ul class='tree'>
+<li> <a href='./../Classes/SynthDefControl.html'>SynthDefControl</a> - (Undocumented class)
+</ul>
+</ul>
+<li> <a href='./../Classes/AbstractResponderFunc.html'>AbstractResponderFunc</a> - Abstract superclass of responder func objects
+<ul class='tree'>
+<li> <a href='./../Classes/HIDFunc.html'>HIDFunc</a> - Fast responder for incoming data from human input devices (HID)
+<ul class='tree'>
+<li> <a href='./../Classes/HIDdef.html'>HIDdef</a> - HID response reference definition
+</ul>
+<li> <a href='./../Classes/MIDIFunc.html'>MIDIFunc</a> - Fast Responder for incoming MIDI Messages
+<ul class='tree'>
+<li> <a href='./../Classes/MIDIdef.html'>MIDIdef</a> - MIDI response reference definition
+</ul>
+<li> <a href='./../Classes/OSCFunc.html'>OSCFunc</a> - Fast Responder for incoming Open Sound Control Messages
+<ul class='tree'>
+<li> <a href='./../Classes/OSCdef.html'>OSCdef</a> - OSC response reference definition
+</ul>
+</ul>
+<li> <a href='./../Classes/AbstractSystemAction.html'>AbstractSystemAction</a> - register actions to be taken for system events
+<ul class='tree'>
+<li> <a href='./../Classes/AbstractServerAction.html'>AbstractServerAction</a> - register actions to be taken for a server
+<ul class='tree'>
+<li> <a href='./../Classes/ServerBoot.html'>ServerBoot</a> - register actions to be taken when a server has booted
+<li> <a href='./../Classes/ServerQuit.html'>ServerQuit</a> - register actions to be taken when a server quits
+<li> <a href='./../Classes/ServerTree.html'>ServerTree</a> - register actions to be taken to initialise a basic tree of groups on the server
+</ul>
+<li> <a href='./../Classes/CmdPeriod.html'>CmdPeriod</a> - register objects to be cleared when Cmd-. is pressed
+<li> <a href='./../Classes/OnError.html'>OnError</a> - register functions to be evaluated when an error occurs
+<li> <a href='./../Classes/ShutDown.html'>ShutDown</a> - register functions to be evaluated before system shuts down
+<li> <a href='./../Classes/StartUp.html'>StartUp</a> - register functions to be evaluated after the startup is finished
+</ul>
+<li> <a href='./../Classes/BHiPass4.html'>BHiPass4</a> - 24db/oct rolloff - 4th order resonant  Hi Pass Filter [1]
+<li> <a href='./../Classes/BLowPass4.html'>BLowPass4</a> - 24db/oct rolloff - 4th order resonant Low Pass Filter [1]
+<li> <a href='./../Classes/BelaScope.html'>BelaScope</a> - Bela's Oscilloscope interface
+<li> <a href='./../Classes/Boolean.html'>Boolean</a> - abstract class whose instances represent a logical value
+<ul class='tree'>
+<li> <a href='./../Classes/False.html'>False</a> - false logical value
+<li> <a href='./../Classes/True.html'>True</a> - true logical value
+</ul>
+<li> <a href='./../Classes/Buffer.html'>Buffer</a> - Client-side representation of a buffer on a server
+<li> <a href='./../Classes/Bus.html'>Bus</a> - Representation of a bus on the server
+<li> <a href='./../Classes/Class.html'>Class</a> - A Class describes the structure and implementation of a set objects which are its instances.
+<ul class='tree'>
+</ul>
+<li> <a href='./../Classes/Clock.html'>Clock</a> - abstract superclass for clocks
+<ul class='tree'>
+<li> <a href='./../Classes/AppClock.html'>AppClock</a> - Clock running on main application thread
+<li> <a href='./../Classes/SystemClock.html'>SystemClock</a> - Clock running on separate accurately timed thread
+<li> <a href='./../Classes/TempoClock.html'>TempoClock</a> - tempo based scheduler
+<ul class='tree'>
+<li> <a href='./../Classes/TempoBusClock.html'>TempoBusClock</a> - a clock that synchronizes its tempo with the server
+</ul>
+</ul>
+<li> <a href='./../Classes/Collection.html'>Collection</a> - Abstract superclass of all collections
+<ul class='tree'>
+<li> <a href='./../Classes/Array2D.html'>Array2D</a> - two-dimensional array
+<li> <a href='./../Classes/Bag.html'>Bag</a> - Unordered collection of objects
+<ul class='tree'>
+<li> <a href='./../Classes/IdentityBag.html'>IdentityBag</a> - A Bag according to identity
+</ul>
+<li> <a href='./../Classes/Interval.html'>Interval</a> - range of integers
+<li> <a href='./../Classes/MultiLevelIdentityDictionary.html'>MultiLevelIdentityDictionary</a> - tree of dictionaries
+<ul class='tree'>
+<li> <a href='./../Classes/LibraryBase.html'>LibraryBase</a> - Abstract global storage class
+<ul class='tree'>
+<li> <a href='./../Classes/Archive.html'>Archive</a> - storing objects to file
+<li> <a href='./../Classes/Library.html'>Library</a> - keeping objects in a central place
+</ul>
+</ul>
+<li> <a href='./../Classes/Pair.html'>Pair</a> - LISP-like two element cells
+<li> <a href='./../Classes/Range.html'>Range</a> - (Undocumented class)
+<li> <a href='./../Classes/SequenceableCollection.html'>SequenceableCollection</a> - Abstract superclass of integer indexable collections
+<ul class='tree'>
+<li> <a href='./../Classes/ArrayedCollection.html'>ArrayedCollection</a> - Abstract superclass of Collections of fixed maximum size
+<ul class='tree'>
+<li> <a href='./../Classes/Array.html'>Array</a> - fixed size collection
+<li> <a href='./../Classes/RawArray.html'>RawArray</a> - Abstract superclass for arrays holding raw data values
+<ul class='tree'>
+<li> <a href='./../Classes/DoubleArray.html'>DoubleArray</a> - an array of 64-bit double precision floating-point numbers
+<li> <a href='./../Classes/FloatArray.html'>FloatArray</a> - an array of 32-bit single precision floating point numbers
+<ul class='tree'>
+<li> <a href='./../Classes/Signal.html'>Signal</a> - Sampled audio buffer
+<li> <a href='./../Classes/Wavetable.html'>Wavetable</a> - sampled audio buffer in wavetable format
+</ul>
+<li> <a href='./../Classes/Int16Array.html'>Int16Array</a> - an array whose indexed slots are all of the same type
+<li> <a href='./../Classes/Int32Array.html'>Int32Array</a> - an array whose indexed slots are all of the same type
+<li> <a href='./../Classes/Int8Array.html'>Int8Array</a> - an array whose indexed slots are all of the same type
+<li> <a href='./../Classes/String.html'>String</a> - array of Chars
+<li> <a href='./../Classes/SymbolArray.html'>SymbolArray</a> - an array whose indexed slots are all of the same type
+</ul>
+</ul>
+<li> <a href='./../Classes/LinkedList.html'>LinkedList</a> - doubly linked list
+<li> <a href='./../Classes/List.html'>List</a> - list of items of variable size
+<ul class='tree'>
+<li> <a href='./../Classes/SortedList.html'>SortedList</a> - a Collection whose items are kept in a sorted order.
+</ul>
+<li> <a href='./../Classes/Order.html'>Order</a> - an order of elements with a numerical index
+<ul class='tree'>
+<li> <a href='./../Classes/SparseArray.html'>SparseArray</a> - Array that stores duplicated values more efficiently
+</ul>
+<li> <a href='./../Classes/RingBuffer.html'>RingBuffer</a> - (Undocumented class)
+</ul>
+<li> <a href='./../Classes/Set.html'>Set</a> - a set according to equality
+<ul class='tree'>
+<li> <a href='./../Classes/Dictionary.html'>Dictionary</a> - associative collection mapping keys to values
+<ul class='tree'>
+<li> <a href='./../Classes/IdentityDictionary.html'>IdentityDictionary</a> - associative collection mapping keys to values
+<ul class='tree'>
+<li> <a href='./../Classes/Environment.html'>Environment</a> - A dictionary which can serve as a 'name space' for functions
+<ul class='tree'>
+<li> <a href='./../Classes/Event.html'>Event</a> - an environment that represents an action
+</ul>
+<li> <a href='./../Classes/NodeMap.html'>NodeMap</a> - store control values and bus mappings
+<ul class='tree'>
+<li> <a href='./../Classes/ProxyNodeMap.html'>ProxyNodeMap</a> - store control values and bus mappings for NodeProxy
+</ul>
+</ul>
+</ul>
+<li> <a href='./../Classes/IdentitySet.html'>IdentitySet</a> - a set according to identity
+<ul class='tree'>
+<li> <a href='./../Classes/OrderedIdentitySet.html'>OrderedIdentitySet</a> - a set according to identity
+</ul>
+</ul>
+<li> <a href='./../Classes/TwoWayIdentityDictionary.html'>TwoWayIdentityDictionary</a> - associative collection mapping keys to values and back
+<ul class='tree'>
+<li> <a href='./../Classes/ObjectTable.html'>ObjectTable</a> - associate objects with IDs
+</ul>
+</ul>
+<li> <a href='./../Classes/Color.html'>Color</a> - An object which stores color values
+<li> <a href='./../Classes/CondVar.html'>CondVar</a> - Condition variable: block one or more threads until some condition is true
+<li> <a href='./../Classes/Condition.html'>Condition</a> - Block the execution of a thread
+<li> <a href='./../Classes/ContiguousBlock.html'>ContiguousBlock</a> - (Undocumented class)
+<li> <a href='./../Classes/ContiguousBlockAllocator.html'>ContiguousBlockAllocator</a> - for better handling of dynamic allocation
+<li> <a href='./../Classes/ControlName.html'>ControlName</a> - Object to store control information of SynthDef (used internally)
+<li> <a href='./../Classes/Date.html'>Date</a> - an object describing a point in time
+<li> <a href='./../Classes/DebugFrame.html'>DebugFrame</a> - (Undocumented class)
+<li> <a href='./../Classes/Env.html'>Env</a> - Specification for a segmented envelope
+<ul class='tree'>
+<li> <a href='./../Classes/Penv.html'>Penv</a> - (Undocumented class)
+</ul>
+<li> <a href='./../Classes/EnvGate.html'>EnvGate</a> - singleton fade envelope
+<li> <a href='./../Classes/EnvironmentRedirect.html'>EnvironmentRedirect</a> - base class for environment redirects
+<ul class='tree'>
+<li> <a href='./../Classes/LazyEnvir.html'>LazyEnvir</a> - lazy environment
+<ul class='tree'>
+<li> <a href='./../Classes/ProxySpace.html'>ProxySpace</a> - an environment of references on a server
+</ul>
+</ul>
+<li> <a href='./../Classes/EventStreamCleanup.html'>EventStreamCleanup</a> - Helper class that collects information about internal state of streams that needs to be released
+<li> <a href='./../Classes/EventTypesWithCleanup.html'>EventTypesWithCleanup</a> - (Undocumented class)
+<li> <a href='./../Classes/Exception.html'>Exception</a> - root error class
+<ul class='tree'>
+<li> <a href='./../Classes/Error.html'>Error</a> - superclass of all Errors
+<ul class='tree'>
+<li> <a href='./../Classes/MethodError.html'>MethodError</a> - (Undocumented class)
+<ul class='tree'>
+<li> <a href='./../Classes/DeprecatedError.html'>DeprecatedError</a> - (Undocumented class)
+<li> <a href='./../Classes/DoesNotUnderstandError.html'>DoesNotUnderstandError</a> - Error thrown when calling an unknown method name
+<ul class='tree'>
+<li> <a href='./../Classes/BinaryOpFailureError.html'>BinaryOpFailureError</a> - (Undocumented class)
+</ul>
+<li> <a href='./../Classes/ImmutableError.html'>ImmutableError</a> - (Undocumented class)
+<li> <a href='./../Classes/MustBeBooleanError.html'>MustBeBooleanError</a> - (Undocumented class)
+<li> <a href='./../Classes/NotYetImplementedError.html'>NotYetImplementedError</a> - (Undocumented class)
+<li> <a href='./../Classes/OutOfContextReturnError.html'>OutOfContextReturnError</a> - (Undocumented class)
+<li> <a href='./../Classes/PrimitiveFailedError.html'>PrimitiveFailedError</a> - (Undocumented class)
+<li> <a href='./../Classes/ShouldNotImplementError.html'>ShouldNotImplementError</a> - (Undocumented class)
+<li> <a href='./../Classes/SubclassResponsibilityError.html'>SubclassResponsibilityError</a> - (Undocumented class)
+</ul>
+</ul>
+</ul>
+<li> <a href='./../Classes/Finalizer.html'>Finalizer</a> - (Undocumented class)
+<li> <a href='./../Classes/FlowVar.html'>FlowVar</a> - A place holder, which when accessed pauses a thread until the place holder has a value
+<li> <a href='./../Classes/Frame.html'>Frame</a> - Stack Frame
+<li> <a href='./../Classes/FunctionDef.html'>FunctionDef</a> - FunctionDefs contain code which can be executed from a Function.
+<ul class='tree'>
+<li> <a href='./../Classes/Method.html'>Method</a> - Code that implements an operation upon instances of a Class.
+</ul>
+<li> <a href='./../Classes/Git.html'>Git</a> - git interface
+<li> <a href='./../Classes/GraphBuilder.html'>GraphBuilder</a> - (Undocumented class)
+<li> <a href='./../Classes/HID.html'>HID</a> - This class provides access to human input devices, or in short HID, such as joysticks, gamepads, mice, keyboard, and so on.
+<li> <a href='./../Classes/HIDCollection.html'>HIDCollection</a> - A class describing a group of elements of an HID device
+<li> <a href='./../Classes/HIDElement.html'>HIDElement</a> - A class describing an element of an HID device
+<li> <a href='./../Classes/HIDElementProto.html'>HIDElementProto</a> - Prototype HID element to match with HIDFunc
+<li> <a href='./../Classes/HIDInfo.html'>HIDInfo</a> - This class contains the basic information about an HID device to access and open it.
+<li> <a href='./../Classes/HIDProto.html'>HIDProto</a> - Prototype HID device to match with HIDFunc
+<li> <a href='./../Classes/HIDUsage.html'>HIDUsage</a> - Helper class to read usage information from HID usage tables
+<li> <a href='./../Classes/Harmonics.html'>Harmonics</a> - Convenient factory for filling buffers with harmonics on the server
+<li> <a href='./../Classes/Help.html'>Help</a> - (Undocumented class)
+<li> <a href='./../Classes/History.html'>History</a> - keeps a history of interpreted lines of code
+<li> <a href='./../Classes/IODesc.html'>IODesc</a> - Description of SynthDesc input or output
+<li> <a href='./../Classes/Interpreter.html'>Interpreter</a> - The interpreter defines a context in which interactive commands are compiled and executed.
+<li> <a href='./../Classes/LID.html'>LID</a> - Linux Input Device
+<li> <a href='./../Classes/LIDAbsInfo.html'>LIDAbsInfo</a> - (Undocumented class)
+<li> <a href='./../Classes/LIDInfo.html'>LIDInfo</a> - Helper class for LID to hold the information about an LID device.
+<li> <a href='./../Classes/LIDSlot.html'>LIDSlot</a> - Handles incoming LID data.
+<ul class='tree'>
+<li> <a href='./../Classes/LIDAbsSlot.html'>LIDAbsSlot</a> - (Undocumented class)
+<li> <a href='./../Classes/LIDKeySlot.html'>LIDKeySlot</a> - (Undocumented class)
+<li> <a href='./../Classes/LIDLedSlot.html'>LIDLedSlot</a> - (Undocumented class)
+<li> <a href='./../Classes/LIDMscSlot.html'>LIDMscSlot</a> - (Undocumented class)
+<li> <a href='./../Classes/LIDRelSlot.html'>LIDRelSlot</a> - (Undocumented class)
+</ul>
+<li> <a href='./../Classes/LRUNumberAllocator.html'>LRUNumberAllocator</a> - (Undocumented class)
+<li> <a href='./../Classes/LanguageConfig.html'>LanguageConfig</a> - Access and modify interpreter configuration
+<li> <a href='./../Classes/LinLin.html'>LinLin</a> - Map a linear range to another linear range
+<li> <a href='./../Classes/LinkedListNode.html'>LinkedListNode</a> - Internally used class for LinkedList nodes
+<li> <a href='./../Classes/MIDIClient.html'>MIDIClient</a> - Basic access to MIDI on your computer
+<li> <a href='./../Classes/MIDIEndPoint.html'>MIDIEndPoint</a> - (Undocumented class)
+<li> <a href='./../Classes/MIDIEvent.html'>MIDIEvent</a> - (Undocumented class)
+<li> <a href='./../Classes/MIDIIn.html'>MIDIIn</a> - receive MIDI messages
+<li> <a href='./../Classes/MIDIOut.html'>MIDIOut</a> - send MIDI messages
+<li> <a href='./../Classes/MIDIResponder.html'>MIDIResponder</a> - Register multiple functions to be evaluated when MIDI events occur
+<ul class='tree'>
+<li> <a href='./../Classes/CCResponder.html'>CCResponder</a> - allow functions to be registered to respond to MIDI control change events
+<li> <a href='./../Classes/NoteOnResponder.html'>NoteOnResponder</a> - allow functions to be registered to respond to MIDI noteOn events
+<ul class='tree'>
+<li> <a href='./../Classes/NoteOffResponder.html'>NoteOffResponder</a> - allow functions to be registered to respond to MIDI noteOff events
+</ul>
+<li> <a href='./../Classes/ProgramChangeResponder.html'>ProgramChangeResponder</a> - allow functions to be registered to respond to MIDI program change events
+<li> <a href='./../Classes/TouchResponder.html'>TouchResponder</a> - allow functions to be registered to respond to MIDI aftertouch events
+<ul class='tree'>
+<li> <a href='./../Classes/BendResponder.html'>BendResponder</a> - allow functions to be registered to respond to MIDI pitchbend events
+</ul>
+</ul>
+<li> <a href='./../Classes/Magnitude.html'>Magnitude</a> - Comparable value in a linear continuum
+<ul class='tree'>
+<li> <a href='./../Classes/Association.html'>Association</a> - relate two objects
+<li> <a href='./../Classes/Char.html'>Char</a> - ASCII character
+<li> <a href='./../Classes/Number.html'>Number</a> - Mathematical quantity
+<ul class='tree'>
+<li> <a href='./../Classes/Complex.html'>Complex</a> - complex number
+<li> <a href='./../Classes/Polar.html'>Polar</a> - Polar coordinates
+<li> <a href='./../Classes/SimpleNumber.html'>SimpleNumber</a> - one-dimensional value
+<ul class='tree'>
+<li> <a href='./../Classes/Float.html'>Float</a> - 64-bit Floating point number
+<li> <a href='./../Classes/Integer.html'>Integer</a> - Integer number
+</ul>
+</ul>
+</ul>
+<li> <a href='./../Classes/Message.html'>Message</a> - A message to an object
+<li> <a href='./../Classes/MeterSync.html'>MeterSync</a> - Synchronize barlines of SuperCollider LinkClock peers
+<li> <a href='./../Classes/MethodOverride.html'>MethodOverride</a> - (Undocumented class)
+<li> <a href='./../Classes/MethodQuote.html'>MethodQuote</a> - (Undocumented class)
+<li> <a href='./../Classes/Mix.html'>Mix</a> - Sum an array of channels.
+<li> <a href='./../Classes/Monitor.html'>Monitor</a> - link between busses
+<li> <a href='./../Classes/MultiTap.html'>MultiTap</a> - Multiple tap delay.
+<li> <a href='./../Classes/NamedControl.html'>NamedControl</a> - Named reference to a control
+<li> <a href='./../Classes/NetAddr.html'>NetAddr</a> - network address
+<ul class='tree'>
+<li> <a href='./../Classes/BundleNetAddr.html'>BundleNetAddr</a> - (Undocumented class)
+</ul>
+<li> <a href='./../Classes/Nil.html'>Nil</a> - Represents uninitialized data
+<li> <a href='./../Classes/Node.html'>Node</a> - Abstract superclass of Synth and Group
+<ul class='tree'>
+<li> <a href='./../Classes/AbstractGroup.html'>AbstractGroup</a> - (Undocumented class)
+<ul class='tree'>
+<li> <a href='./../Classes/Group.html'>Group</a> - Client-side representation of a group node on the server
+<ul class='tree'>
+<li> <a href='./../Classes/RootNode.html'>RootNode</a> - The persistent root group on the server
+</ul>
+<li> <a href='./../Classes/ParGroup.html'>ParGroup</a> - Client-side representation of a parallel group node on the server
+</ul>
+<li> <a href='./../Classes/Synth.html'>Synth</a> - Client-side representation of a synth node on the server
+</ul>
+<li> <a href='./../Classes/NodeControl.html'>NodeControl</a> - Encapsulates in an object a node and an index.
+<li> <a href='./../Classes/NodeIDAllocator.html'>NodeIDAllocator</a> - (Undocumented class)
+<li> <a href='./../Classes/NotificationCenter.html'>NotificationCenter</a> - let an object emit notifications
+<li> <a href='./../Classes/NotificationRegistration.html'>NotificationRegistration</a> - (Undocumented class)
+<li> <a href='./../Classes/NumChannels.html'>NumChannels</a> - Ensures the number of output channels
+<li> <a href='./../Classes/OSCBundle.html'>OSCBundle</a> - network bundle object
+<ul class='tree'>
+<li> <a href='./../Classes/MixedBundle.html'>MixedBundle</a> - (Undocumented class)
+<ul class='tree'>
+<li> <a href='./../Classes/MixedBundleTester.html'>MixedBundleTester</a> - (Undocumented class)
+</ul>
+</ul>
+<li> <a href='./../Classes/OSCresponder.html'>OSCresponder</a> - client side network responder
+<ul class='tree'>
+<li> <a href='./../Classes/OSCMultiResponder.html'>OSCMultiResponder</a> - (Undocumented class)
+<ul class='tree'>
+<li> <a href='./../Classes/OSCpathDispatcher.html'>OSCpathDispatcher</a> - (Undocumented class)
+</ul>
+<li> <a href='./../Classes/OSCpathResponder.html'>OSCpathResponder</a> - client side network responder
+<li> <a href='./../Classes/OSCresponderNode.html'>OSCresponderNode</a> - client side network responder
+</ul>
+<li> <a href='./../Classes/PMOsc.html'>PMOsc</a> - Phase modulation oscillator pair.
+<li> <a href='./../Classes/PathName.html'>PathName</a> - file and directory path utilities
+<li> <a href='./../Classes/PatternConductor.html'>PatternConductor</a> - Simple interactive control for playing patterns
+<li> <a href='./../Classes/PingPong.html'>PingPong</a> - Stereo ping-pong delay.
+<li> <a href='./../Classes/Platform.html'>Platform</a> - handle cross-platform differencies
+<ul class='tree'>
+<li> <a href='./../Classes/UnixPlatform.html'>UnixPlatform</a> - (Undocumented class)
+<ul class='tree'>
+<li> <a href='./../Classes/LinuxPlatform.html'>LinuxPlatform</a> - Linux platform-specific methods
+</ul>
+</ul>
+<li> <a href='./../Classes/Point.html'>Point</a> - Cartesian point
+<ul class='tree'>
+<li> <a href='./../Classes/PointArray.html'>PointArray</a> - (Undocumented class)
+</ul>
+<li> <a href='./../Classes/Post.html'>Post</a> - posts text to the post window
+<li> <a href='./../Classes/PowerOfTwoAllocator.html'>PowerOfTwoAllocator</a> - (Undocumented class)
+<li> <a href='./../Classes/PowerOfTwoBlock.html'>PowerOfTwoBlock</a> - (Undocumented class)
+<li> <a href='./../Classes/PrettyState.html'>PrettyState</a> - (Undocumented class)
+<ul class='tree'>
+<li> <a href='./../Classes/PrettyEat.html'>PrettyEat</a> - (Undocumented class)
+<li> <a href='./../Classes/PrettyEcho.html'>PrettyEcho</a> - (Undocumented class)
+</ul>
+<li> <a href='./../Classes/PriorityQueue.html'>PriorityQueue</a> - Priority queue data structure
+<li> <a href='./../Classes/Process.html'>Process</a> - Runtime environment for the virtual machine and interpreter.
+<ul class='tree'>
+<li> <a href='./../Classes/Main.html'>Main</a> - The concrete instance of Process
+</ul>
+<li> <a href='./../Classes/Quant.html'>Quant</a> - encapsulate quantization issues associated with EventStreamPlayer and TempoClock
+<li> <a href='./../Classes/Quark.html'>Quark</a> - Object for managing a Quark - a package of source code
+<li> <a href='./../Classes/Quarks.html'>Quarks</a> - Package manager
+<li> <a href='./../Classes/RawPointer.html'>RawPointer</a> - Hold raw pointers from the host environment
+<li> <a href='./../Classes/ReadableNodeIDAllocator.html'>ReadableNodeIDAllocator</a> - an allocator for nodeIDs with human-readable ownership
+<li> <a href='./../Classes/Recorder.html'>Recorder</a> - Write Audio to Harddisk
+<li> <a href='./../Classes/Rect.html'>Rect</a> - Rectangle
+<li> <a href='./../Classes/RingNumberAllocator.html'>RingNumberAllocator</a> - (Undocumented class)
+<li> <a href='./../Classes/SCDoc.html'>SCDoc</a> - Help system main class
+<li> <a href='./../Classes/SCDocEntry.html'>SCDocEntry</a> - An SCDoc document index entry
+<li> <a href='./../Classes/SCDocHTMLRenderer.html'>SCDocHTMLRenderer</a> - Render SCDoc markup text to HTML
+<li> <a href='./../Classes/SCDocNode.html'>SCDocNode</a> - An SCDoc parsed document node
+<li> <a href='./../Classes/Scale.html'>Scale</a> - represents a musical scale
+<ul class='tree'>
+<li> <a href='./../Classes/ScaleAD.html'>ScaleAD</a> - (Undocumented class)
+</ul>
+<li> <a href='./../Classes/ScaleStream.html'>ScaleStream</a> - (Undocumented class)
+<li> <a href='./../Classes/Scheduler.html'>Scheduler</a> - schedules functions to be evaluated in the future
+<li> <a href='./../Classes/ScopeBuffer.html'>ScopeBuffer</a> - (Undocumented class)
+<li> <a href='./../Classes/Score.html'>Score</a> - score of timed OSC commands
+<li> <a href='./../Classes/SelectX.html'>SelectX</a> - Mix one output from many sources
+<ul class='tree'>
+<li> <a href='./../Classes/LinSelectX.html'>LinSelectX</a> - Mix one output from many sources
+</ul>
+<li> <a href='./../Classes/SelectXFocus.html'>SelectXFocus</a> - Mix one output from many sources
+<li> <a href='./../Classes/Semaphore.html'>Semaphore</a> - control parallel execution of threads
+<li> <a href='./../Classes/SerialPort.html'>SerialPort</a> - serial port interface
+<li> <a href='./../Classes/Server.html'>Server</a> - Object representing a server application
+<ul class='tree'>
+<li> <a href='./../Classes/ScoreStreamPlayer.html'>ScoreStreamPlayer</a> - (Undocumented class)
+</ul>
+<li> <a href='./../Classes/ServerOptions.html'>ServerOptions</a> - Encapsulates commandline and other options for a Server
+<ul class='tree'>
+<li> <a href='./../Classes/BelaServerOptions.html'>BelaServerOptions</a> - (Undocumented class)
+</ul>
+<li> <a href='./../Classes/ServerShmInterface.html'>ServerShmInterface</a> - (Undocumented class)
+<li> <a href='./../Classes/ServerStatusWatcher.html'>ServerStatusWatcher</a> - Observes and updates Server status
+<li> <a href='./../Classes/Silent.html'>Silent</a> - Output silence.
+<li> <a href='./../Classes/SimpleController.html'>SimpleController</a> - Controller according to the model-view-controller (M-V-C) paradigm
+<li> <a href='./../Classes/Size.html'>Size</a> - (Undocumented class)
+<li> <a href='./../Classes/SkipJack.html'>SkipJack</a> - A utility for background tasks that survive cmd-period
+<li> <a href='./../Classes/SoundFile.html'>SoundFile</a> - sclang soundfile data
+<li> <a href='./../Classes/SoundIn.html'>SoundIn</a> - Read audio from hardware inputs
+<ul class='tree'>
+<li> <a href='./../Classes/AudioIn.html'>AudioIn</a> - Read audio input.
+</ul>
+<li> <a href='./../Classes/Spec.html'>Spec</a> - input datatype specification
+<ul class='tree'>
+<li> <a href='./../Classes/ControlSpec.html'>ControlSpec</a> - numerical input specification
+</ul>
+<li> <a href='./../Classes/SplayZ.html'>SplayZ</a> - Spreads an array of channels across a ring of channels
+<li> <a href='./../Classes/StackNumberAllocator.html'>StackNumberAllocator</a> - (Undocumented class)
+<li> <a href='./../Classes/Symbol.html'>Symbol</a> - a unique name for something
+<li> <a href='./../Classes/SynthDef.html'>SynthDef</a> - Client-side representation of a synth definition
+<ul class='tree'>
+<li> <a href='./../Classes/ProxySynthDef.html'>ProxySynthDef</a> - synth def that wraps ugen graph
+<li> <a href='./../Classes/SynthDefOld.html'>SynthDefOld</a> - (Undocumented class)
+</ul>
+<li> <a href='./../Classes/SynthDesc.html'>SynthDesc</a> - Description of a synth definition
+<li> <a href='./../Classes/SynthDescLib.html'>SynthDescLib</a> - SynthDesc library
+<li> <a href='./../Classes/SystemSynthDefs.html'>SystemSynthDefs</a> - (Undocumented class)
+<li> <a href='./../Classes/TChoose.html'>TChoose</a> - Randomly select one of several inputs
+<li> <a href='./../Classes/TWChoose.html'>TWChoose</a> - Randomly select one of several inputs
+<li> <a href='./../Classes/TestDependant.html'>TestDependant</a> - (Undocumented class)
+<li> <a href='./../Classes/Tuning.html'>Tuning</a> - represents a musical tuning
+<li> <a href='./../Classes/URI.html'>URI</a> - (Undocumented class)
+<li> <a href='./../Classes/UniqueID.html'>UniqueID</a> - source for unique numbers
+<li> <a href='./../Classes/UnitTest.html'>UnitTest</a> - a class for programmatic testing of classes
+<ul class='tree'>
+<li> <a href='./../Classes/UnitTestScript.html'>UnitTestScript</a> - run test scripts
+</ul>
+<li> <a href='./../Classes/UnitTestResult.html'>UnitTestResult</a> - (Undocumented class)
+<li> <a href='./../Classes/Unix.html'>Unix</a> - (Undocumented class)
+<li> <a href='./../Classes/Volume.html'>Volume</a> - Model for the global volume of the synthesis server
+<li> <a href='./../Classes/VolumeGui.html'>VolumeGui</a> - (Undocumented class)
+<li> <a href='./../Classes/Warp.html'>Warp</a> - specification of a shape for a mapping of numerical input
+<ul class='tree'>
+<li> <a href='./../Classes/CurveWarp.html'>CurveWarp</a> - (Undocumented class)
+<li> <a href='./../Classes/DbFaderWarp.html'>DbFaderWarp</a> - (Undocumented class)
+<li> <a href='./../Classes/ExponentialWarp.html'>ExponentialWarp</a> - (Undocumented class)
+<li> <a href='./../Classes/FaderWarp.html'>FaderWarp</a> - (Undocumented class)
+<li> <a href='./../Classes/LinearWarp.html'>LinearWarp</a> - (Undocumented class)
+<ul class='tree'>
+<li> <a href='./../Classes/CosineWarp.html'>CosineWarp</a> - (Undocumented class)
+<li> <a href='./../Classes/SineWarp.html'>SineWarp</a> - (Undocumented class)
+</ul>
+</ul>
+<li> <a href='./../Classes/XIn.html'>XIn</a> - Helper class used by InBus.
+<li> <a href='./../Classes/XInFeedback.html'>XInFeedback</a> - Helper class used by InBus.
+</ul>
+</ul><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/develop/HelpSource/Overviews/ClassTree.schelp'>https://github.com/supercollider/supercollider/tree/develop/HelpSource/Overviews/ClassTree.schelp</a><br>link::Overviews/ClassTree::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+</body></html>

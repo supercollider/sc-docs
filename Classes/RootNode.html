@@ -1,0 +1,68 @@
+<!doctype html><html lang='en'><head><title>RootNode | SuperCollider 3.13.0 Help</title>
+<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<link rel='stylesheet' href='./../frontend.css' type='text/css' />
+<link rel='stylesheet' href='./../custom.css' type='text/css' />
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+<script src='./../lib/jquery.min.js'></script>
+<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script>
+var helpRoot = './..';
+var scdoc_title = 'RootNode';
+var scdoc_sc_version = '3.13.0';
+</script>
+<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../docmap.js' type='text/javascript'></script>
+<script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
+</head>
+<body onload='fixTOC()'>
+<div id='toc'>
+<div id='toctitle'>RootNode:</div>
+<span class='toc_search'>Filter: <input id='toc_search'></span><ul class='toc'><li class='toc1'><a href='#description'>Description</a></li>
+<ul class='toc'></ul><li class='toc1'><a href='#classmethods'>Class methods</a></li>
+<ul class='toc'><li class='toc2'><a href='#Inherited%20class%20methods'>Inherited class methods</a></li>
+<li class='toc2'><a href='#Undocumented%20class%20methods'>Undocumented class methods</a></li>
+<ul class='toc'><li class='toc3'><a href='#*freeAll'>freeAll</a> </li>
+<li class='toc3'><a href='#*new'>new</a> </li>
+<li class='toc3'><a href='#*roots'>roots</a> </li>
+</ul></ul><li class='toc1'><a href='#instancemethods'>Instance methods</a></li>
+<ul class='toc'><li class='toc2'><a href='#Inherited%20instance%20methods'>Inherited instance methods</a></li>
+</ul></ul></div><div id='menubar'></div>
+<div class='contents'>
+<div class='header'>
+<div id='label'>
+<span id='folder'>Classes</span>
+ | <span id='categories'><a href='./../Browse.html#Server'>Server</a>&#8201;&gt;&#8201;<a href='./../Browse.html#Server>Nodes'>Nodes</a></span>
+</div><h1>RootNode<span id='superclasses'> : <a href="../Classes/Group.html">Group</a> : <a href="../Classes/AbstractGroup.html">AbstractGroup</a> : <a href="../Classes/Node.html">Node</a> : <a href="../Classes/Object.html">Object</a></span>
+</h1>
+<div id='summary'>The persistent root group on the server</div>
+</div>
+<div class='subheader'>
+<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/develop/SCClassLibrary/Common/Control/Node.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Control/Node.sc'>Node.sc</a></div><div id='related'>See also: <a href="./../Classes/Group.html">Group</a>, <a href="./../Reference/default_group.html">Default Group</a></div>
+</div>
+<h2><a class='anchor' name='description'>Description</a></h2>
+
+<p>A RootNode is the Group with the nodeID of 0 which is always present on each Server and represents the root of that server's node tree.
+<p>It is always playing, and always running, cannot be freed, or moved anywhere.
+<p>Caching is used so that there is always one RootNode per <a href="./../Classes/Server.html">Server</a>.<textarea class='editor'>s = Server.local;
+
+a = RootNode(s);
+b = RootNode(s);
+
+a === b; // identical object</textarea>
+
+<p>sending <code>"/s_new"</code> messages to the server, the target 0 is what is represented by this object.<textarea class='editor'>s.sendMsg("/s_new", "default", -1, 0, 0);//the last argument is the target id</textarea>
+
+<p>IMPORTANT: In general one should <strong>not</strong> add nodes to the RootNode unless one has a specific reason to do so. Instead one should add nodes to the default_group. This provides a known basic node order and protects functionality like Server.record, Server.scope, etc. The default group is the default target for all new nodes, so when using object style nodes will normally not be added to the RootNode unless that is explicitly specified. See <a href="./../Reference/default_group.html">Default Group</a> for more information.<h2><a class='anchor' name='classmethods'>Class Methods</a></h2>
+<h3><a class='anchor' name='Inherited%20class%20methods'>Inherited class methods</a></h3>
+<div id='inheritedclassmets'></div><h3><a class='anchor' name='Undocumented%20class%20methods'>Undocumented class methods</a></h3>
+<h3 class='method-code'><span class='method-prefix'>RootNode.</span><a class='method-name' name='*freeAll' href='./../Overviews/Methods.html#freeAll'>freeAll</a></h3>
+<h3 class='method-code'><span class='method-prefix'>RootNode.</span><a class='method-name' name='*new' href='./../Overviews/Methods.html#new'>new</a>(<span class='argstr'>server</span>)</h3>
+<h3 class='method-code'><span class='method-prefix'>RootNode.</span><a class='method-name' name='*roots' href='./../Overviews/Methods.html#roots'>roots</a></h3>
+<h2><a class='anchor' name='instancemethods'>Instance Methods</a></h2>
+<h3><a class='anchor' name='Inherited%20instance%20methods'>Inherited instance methods</a></h3>
+<div id='inheritedinstmets'></div><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/develop/HelpSource/Classes/RootNode.schelp'>https://github.com/supercollider/supercollider/tree/develop/HelpSource/Classes/RootNode.schelp</a><br>link::Classes/RootNode::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+</body></html>

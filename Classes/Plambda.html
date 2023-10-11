@@ -1,0 +1,127 @@
+<!doctype html><html lang='en'><head><title>Plambda | SuperCollider 3.13.0 Help</title>
+<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<link rel='stylesheet' href='./../frontend.css' type='text/css' />
+<link rel='stylesheet' href='./../custom.css' type='text/css' />
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+<script src='./../lib/jquery.min.js'></script>
+<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script>
+var helpRoot = './..';
+var scdoc_title = 'Plambda';
+var scdoc_sc_version = '3.13.0';
+</script>
+<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../docmap.js' type='text/javascript'></script>
+<script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
+</head>
+<body onload='fixTOC()'>
+<div id='toc'>
+<div id='toctitle'>Plambda:</div>
+<span class='toc_search'>Filter: <input id='toc_search'></span><ul class='toc'><li class='toc1'><a href='#classmethods'>Class methods</a></li>
+<ul class='toc'><li class='toc3'><a href='#*new'>new</a> </li>
+<li class='toc2'><a href='#Inherited%20class%20methods'>Inherited class methods</a></li>
+</ul><li class='toc1'><a href='#instancemethods'>Instance methods</a></li>
+<ul class='toc'><li class='toc2'><a href='#Inherited%20instance%20methods'>Inherited instance methods</a></li>
+<li class='toc2'><a href='#Undocumented%20instance%20methods'>Undocumented instance methods</a></li>
+<ul class='toc'><li class='toc3'><a href='#-embedInStream'>embedInStream</a> </li>
+<li class='toc3'><a href='#-scope'>scope</a> </li>
+</ul></ul><li class='toc1'><a href='#examples'>Examples</a></li>
+<ul class='toc'></ul></ul></div><div id='menubar'></div>
+<div class='contents'>
+<div class='header'>
+<div id='label'>
+<span id='folder'>Classes</span>
+ | <span id='categories'><a href='./../Browse.html#Streams-Patterns-Events'>Streams-Patterns-Events</a>&#8201;&gt;&#8201;<a href='./../Browse.html#Streams-Patterns-Events>Patterns'>Patterns</a>&#8201;&gt;&#8201;<a href='./../Browse.html#Streams-Patterns-Events>Patterns>Data Sharing'>Data Sharing</a></span>
+</div><h1>Plambda<span id='superclasses'> : <a href="../Classes/FilterPattern.html">FilterPattern</a> : <a href="../Classes/Pattern.html">Pattern</a> : <a href="../Classes/AbstractFunction.html">AbstractFunction</a> : <a href="../Classes/Object.html">Object</a></span>
+</h1>
+<div id='summary'>create a scope (namespace) for enclosed streams</div>
+</div>
+<div class='subheader'>
+<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/develop/SCClassLibrary/Common/Streams/Plambda.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Streams/Plambda.sc'>Plambda.sc</a></div><div id='related'>See also: <a href="./../Classes/Penvir.html">Penvir</a>, <a href="./../Classes/Pkey.html">Pkey</a></div>
+</div>
+
+<p>Plambda is used to create a namespace for patterns to share data among each other.
+<p>Used in combination with <a href="./../Classes/Plet.html">Plet</a> and <a href="./../Classes/Pget.html">Pget</a>, it allows you to get the output of a pattern from one stream and use it in another stream and as such create a dataspace for your patterns.<h2><a class='anchor' name='classmethods'>Class Methods</a></h2>
+<h3 class='method-code'><span class='method-prefix'>Plambda.</span><a class='method-name' name='*new' href='./../Overviews/Methods.html#new'>new</a>(<span class='argstr'>pattern</span>, <span class='argstr'>scope</span>)</h3>
+<div class='method'>
+<p><h4>Arguments:</h4>
+<table class='arguments'>
+<tr><td class='argumentname'>pattern<td class='argumentdesc'>
+<p>an event stream.<tr><td class='argumentname'>scope<td class='argumentdesc'>
+<p>an event with default bindings (can be nil).</table></div><h3><a class='anchor' name='Inherited%20class%20methods'>Inherited class methods</a></h3>
+<div id='inheritedclassmets'></div><h2><a class='anchor' name='instancemethods'>Instance Methods</a></h2>
+<h3><a class='anchor' name='Inherited%20instance%20methods'>Inherited instance methods</a></h3>
+<div id='inheritedinstmets'></div><h3><a class='anchor' name='Undocumented%20instance%20methods'>Undocumented instance methods</a></h3>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-embedInStream' href='./../Overviews/Methods.html#embedInStream'>embedInStream</a>(<span class='argstr'>inval</span>)</h3>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-scope' href='./../Overviews/Methods.html#scope'>scope</a></h3>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-scope' href='./../Overviews/Methods.html#scope'>scope</a> = value</h3>
+<h2><a class='anchor' name='examples'>Examples</a></h2>
+<textarea class='editor'>/*
+
+A simple example:
+Two patterns playing in parallel,
+sharing data between eachother
+
+*/
+(
+    // a melody playing random scale degrees
+    a = Pbind(
+        \dur, 0.125,
+        \octave, 4,
+        \degree, Plet(\melody, pattern: Pwhite(0,7))
+    );
+
+    // the bass, scale degrees sampled from the \melody variable defined above
+    b = Pbind(
+        \dur, 0.5,
+        \octave, 3,
+        \degree, Pget(\melody, default: 1, repeats: inf).trace
+    );
+
+    // Play the patterns in parallel
+    Plambda(
+        Ppar([a, b], inf)
+    ).play;
+)
+/*
+
+A more complex example:
+Three patterns running in parallel
+
+*/
+(
+SynthDef(\sine,
+    { arg out=0, freq=440, sustain=0.05, pan=0, amp=0.1;
+        var env;
+        env = EnvGen.kr(Env.perc(Rand(0.001, 0.02), sustain, AmpCompA.kr(freq)*amp), doneAction: Done.freeSelf);
+        Out.ar(out, Pan2.ar(SinOsc.ar(freq), pan, env))
+    }).add;
+)
+
+(
+a = Plambda(
+    Pseq([
+    Pfindur(5,
+        Ppar([
+            Pbind(\note, Plet(\x, Prand([1, 5, 1, [10, 14]], inf)), \dur, 8/3, \pan, -1),
+            Pbind(\note, Plet(\y, Pseq([5, 3, 2, 0, [0, 5, 6, 9]], inf)), \dur, 0.5, \pan,1),
+            Pbind(\note, Pseq([Pget(\x), Pget(\y)], inf) + 12, \pan, 0, \dur, 2/3)
+        ])
+    ),
+    Pbind(\note, Pget(\x, 0, 6) + [0, 5], \dur, Pdup(inf, Prand([2/3, 1/6])))
+    ], inf).trace(\eventScope) // internally, the values are shared via \eventScope
+);
+
+b = Pbindf(a, \instrument, \sine, \legato, 0.1);
+b.play
+)
+
+// Play two copies of the complex pattern above in parallel, one of them transposed and playing with shorter durations
+Ppar([b, Pbindf(b, \ctranspose, 24, \dur, Pkey(\dur) * 0.25)]).play;</textarea>
+
+<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/develop/HelpSource/Classes/Plambda.schelp'>https://github.com/supercollider/supercollider/tree/develop/HelpSource/Classes/Plambda.schelp</a><br>link::Classes/Plambda::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+</body></html>

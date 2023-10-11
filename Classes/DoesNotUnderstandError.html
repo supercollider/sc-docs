@@ -1,0 +1,84 @@
+<!doctype html><html lang='en'><head><title>DoesNotUnderstandError | SuperCollider 3.13.0 Help</title>
+<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<link rel='stylesheet' href='./../frontend.css' type='text/css' />
+<link rel='stylesheet' href='./../custom.css' type='text/css' />
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+<script src='./../lib/jquery.min.js'></script>
+<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script>
+var helpRoot = './..';
+var scdoc_title = 'DoesNotUnderstandError';
+var scdoc_sc_version = '3.13.0';
+</script>
+<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../docmap.js' type='text/javascript'></script>
+<script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
+</head>
+<body onload='fixTOC()'>
+<div id='toc'>
+<div id='toctitle'>DoesNotUnderstandError:</div>
+<span class='toc_search'>Filter: <input id='toc_search'></span><ul class='toc'><li class='toc1'><a href='#description'>Description</a></li>
+<ul class='toc'></ul><li class='toc1'><a href='#classmethods'>Class methods</a></li>
+<ul class='toc'><li class='toc3'><a href='#*new'>new</a> </li>
+<li class='toc2'><a href='#Inherited%20class%20methods'>Inherited class methods</a></li>
+</ul><li class='toc1'><a href='#instancemethods'>Instance methods</a></li>
+<ul class='toc'><li class='toc3'><a href='#-selector'>selector</a> </li>
+<li class='toc3'><a href='#-args'>args</a> </li>
+<li class='toc3'><a href='#-suggestedCorrection'>suggestedCorrection</a> </li>
+<li class='toc3'><a href='#-errorString'>errorString</a> </li>
+<li class='toc3'><a href='#-reportError'>reportError</a> </li>
+<li class='toc2'><a href='#Inherited%20instance%20methods'>Inherited instance methods</a></li>
+<li class='toc2'><a href='#Undocumented%20instance%20methods'>Undocumented instance methods</a></li>
+<ul class='toc'><li class='toc3'><a href='#-adviceLinkPage'>adviceLinkPage</a> </li>
+</ul></ul></ul></div><div id='menubar'></div>
+<div class='contents'>
+<div class='header'>
+<div id='label'>
+<span id='folder'>Classes</span>
+ | <span id='categories'><a href='./../Browse.html#Core'>Core</a></span>
+</div><h1>DoesNotUnderstandError<span id='superclasses'> : <a href="../Classes/MethodError.html">MethodError</a> : <a href="../Classes/Error.html">Error</a> : <a href="../Classes/Exception.html">Exception</a> : <a href="../Classes/Object.html">Object</a></span>
+</h1>
+<div id='summary'>Error thrown when calling an unknown method name</div>
+</div>
+<div class='subheader'>
+<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/develop/SCClassLibrary/Common/Core/Error.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Core/Error.sc'>Error.sc</a></div><div id='subclasses'>Subclasses: <a href="../Classes/BinaryOpFailureError.html">BinaryOpFailureError</a></div>
+<div id='related'>See also: <a href="./../Classes/Error.html">Error</a></div>
+</div>
+<h2><a class='anchor' name='description'>Description</a></h2>
+
+<p>This error is typically generated when a method that doesn't exist on the receiver is called. Users typically do not construct this object themselves. The object has a few getters to learn more about the call that caused the error.
+<p>This method reports a backtrace as well as a best-guess suggested replacement based on edit distance.<h2><a class='anchor' name='classmethods'>Class Methods</a></h2>
+<h3 class='method-code'><span class='method-prefix'>DoesNotUnderstandError.</span><a class='method-name' name='*new' href='./../Overviews/Methods.html#new'>new</a>(<span class='argstr'>receiver</span>, <span class='argstr'>selector</span>, <span class='argstr'>args</span>)</h3>
+<div class='method'>
+<p>Construct a new DoesNotUnderstandError, and choose a possible suggested replacement based on the class of the receiver and contents of the selector.<h4>Arguments:</h4>
+<table class='arguments'>
+<tr><td class='argumentname'>receiver<td class='argumentdesc'>
+<p>The object on which the method was called.<tr><td class='argumentname'>selector<td class='argumentdesc'>
+<p>The method name that was not understood.<tr><td class='argumentname'>args<td class='argumentdesc'>
+<p>Arguments passed to the unknown method.</table></div><h3><a class='anchor' name='Inherited%20class%20methods'>Inherited class methods</a></h3>
+<div id='inheritedclassmets'></div><h2><a class='anchor' name='instancemethods'>Instance Methods</a></h2>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-selector' href='./../Overviews/Methods.html#selector'>selector</a></h3>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-selector' href='./../Overviews/Methods.html#selector'>selector</a> = value</h3>
+<div class='method'><h4>Returns:</h4>
+<div class='returnvalue'>
+<p>The selector passed to new. Typically, the method name that was not understood.</div></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-args' href='./../Overviews/Methods.html#args'>args</a></h3>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-args' href='./../Overviews/Methods.html#args'>args</a> = value</h3>
+<div class='method'><h4>Returns:</h4>
+<div class='returnvalue'>
+<p>The args passed to new. Typically, an array of arguments passed to the unknown method.</div></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-suggestedCorrection' href='./../Overviews/Methods.html#suggestedCorrection'>suggestedCorrection</a></h3>
+<div class='method'><h4>Returns:</h4>
+<div class='returnvalue'>
+<p>If there is a method that the receiver would understand that looks similar to the unknown method name, the the <a href="./../Classes/Method.html">Method</a> object that corresponds to it. Otherwise, <code>nil</code>.</div></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-errorString' href='./../Overviews/Methods.html#errorString'>errorString</a></h3>
+<div class='method'><h4>Returns:</h4>
+<div class='returnvalue'>
+<p>Short-form representation of the error as a <a href="./../Classes/String.html">String</a>, with a suggested replacement if one was found.</div></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-reportError' href='./../Overviews/Methods.html#reportError'>reportError</a></h3>
+<div class='method'>
+<p>Print a long-form explanation of the error including backtrace and suggested replacement if one was found.</div><h3><a class='anchor' name='Inherited%20instance%20methods'>Inherited instance methods</a></h3>
+<div id='inheritedinstmets'></div><h3><a class='anchor' name='Undocumented%20instance%20methods'>Undocumented instance methods</a></h3>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-adviceLinkPage' href='./../Overviews/Methods.html#adviceLinkPage'>adviceLinkPage</a></h3>
+<div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/develop/HelpSource/Classes/DoesNotUnderstandError.schelp'>https://github.com/supercollider/supercollider/tree/develop/HelpSource/Classes/DoesNotUnderstandError.schelp</a><br>link::Classes/DoesNotUnderstandError::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+</body></html>

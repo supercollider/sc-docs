@@ -1,0 +1,563 @@
+<!doctype html><html lang='en'><head><title>Document | SuperCollider 3.13.0 Help</title>
+<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<link rel='stylesheet' href='./../frontend.css' type='text/css' />
+<link rel='stylesheet' href='./../custom.css' type='text/css' />
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+<script src='./../lib/jquery.min.js'></script>
+<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script>
+var helpRoot = './..';
+var scdoc_title = 'Document';
+var scdoc_sc_version = '3.13.0';
+</script>
+<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../docmap.js' type='text/javascript'></script>
+<script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
+</head>
+<body onload='fixTOC()'>
+<div id='toc'>
+<div id='toctitle'>Document:</div>
+<span class='toc_search'>Filter: <input id='toc_search'></span><ul class='toc'><li class='toc1'><a href='#description'>Description</a></li>
+<ul class='toc'><li class='toc2'><a href='#Setting%20the%20Environment'>Setting the Environment</a></li>
+<ul class='toc'></ul></ul><li class='toc1'><a href='#classmethods'>Class methods</a></li>
+<ul class='toc'><li class='toc3'><a href='#*new'>new</a> </li>
+<li class='toc3'><a href='#*open'>open</a> </li>
+<li class='toc3'><a href='#*openDocuments'>openDocuments</a> </li>
+<li class='toc3'><a href='#*hasEditedDocuments'>hasEditedDocuments</a> </li>
+<li class='toc3'><a href='#*closeAll'>closeAll</a> </li>
+<li class='toc3'><a href='#*closeAllUnedited'>closeAllUnedited</a> </li>
+<li class='toc3'><a href='#*current'>current</a> </li>
+<li class='toc3'><a href='#*allDocuments'>allDocuments</a> </li>
+<li class='toc3'><a href='#*globalKeyDownAction'>globalKeyDownAction</a> </li>
+<li class='toc3'><a href='#*globalKeyUpAction'>globalKeyUpAction</a> </li>
+<li class='toc3'><a href='#*initAction'>initAction</a> </li>
+<li class='toc3'><a href='#*autoRun'>autoRun</a> </li>
+<li class='toc3'><a href='#*implementationClass'>implementationClass</a> </li>
+<li class='toc2'><a href='#Path%20Utilities'>Path Utilities</a></li>
+<ul class='toc'><li class='toc3'><a href='#*dir'>dir</a> </li>
+<li class='toc3'><a href='#*standardizePath'>standardizePath</a> </li>
+<li class='toc3'><a href='#*abrevPath'>abrevPath</a> </li>
+</ul><li class='toc2'><a href='#Inherited%20class%20methods'>Inherited class methods</a></li>
+</ul><li class='toc1'><a href='#instancemethods'>Instance methods</a></li>
+<ul class='toc'><li class='toc2'><a href='#General%20Document%20Properties'>General Document Properties</a></li>
+<ul class='toc'><li class='toc3'><a href='#-path'>path</a> </li>
+<li class='toc3'><a href='#-dir'>dir</a> </li>
+<li class='toc3'><a href='#-=='>==</a> </li>
+<li class='toc3'><a href='#-editable'>editable</a> </li>
+<li class='toc3'><a href='#-name'>name</a> </li>
+<li class='toc3'><a href='#-title'>title</a> </li>
+<li class='toc3'><a href='#-promptToSave'>promptToSave</a> </li>
+<li class='toc3'><a href='#-closed'>closed</a> </li>
+<li class='toc3'><a href='#-isEdited'>isEdited</a> </li>
+<li class='toc3'><a href='#-isFront'>isFront</a> </li>
+<li class='toc3'><a href='#-didBecomeKey'>didBecomeKey</a> </li>
+<li class='toc3'><a href='#-didResignKey'>didResignKey</a> </li>
+</ul><li class='toc2'><a href='#Controlling%20Document'>Controlling Document</a></li>
+<ul class='toc'><li class='toc3'><a href='#-close'>close</a> </li>
+<li class='toc3'><a href='#-front'>front</a> </li>
+<li class='toc3'><a href='#-onClose'>onClose</a> </li>
+<li class='toc3'><a href='#-endFrontAction'>endFrontAction</a> </li>
+<li class='toc3'><a href='#-toFrontAction'>toFrontAction</a> </li>
+<li class='toc3'><a href='#-mouseDownAction'>mouseDownAction</a> </li>
+<li class='toc3'><a href='#-mouseUpAction'>mouseUpAction</a> </li>
+<li class='toc3'><a href='#-keyDownAction'>keyDownAction</a> </li>
+<li class='toc3'><a href='#-keyUpAction'>keyUpAction</a> </li>
+</ul><li class='toc2'><a href='#Accessing%20and%20Editing%20Content'>Accessing and Editing Content</a></li>
+<ul class='toc'><li class='toc3'><a href='#-selectLine'>selectLine</a> </li>
+<li class='toc3'><a href='#-selectRange'>selectRange</a> </li>
+<li class='toc3'><a href='#-selectionStart'>selectionStart</a> </li>
+<li class='toc3'><a href='#-selectionSize'>selectionSize</a> </li>
+<li class='toc3'><a href='#-selectedString'>selectedString</a> </li>
+<li class='toc3'><a href='#-currentLine'>currentLine</a> </li>
+<li class='toc3'><a href='#-getSelectedLines'>getSelectedLines</a> </li>
+<li class='toc3'><a href='#-string'>string</a> </li>
+<li class='toc3'><a href='#-getText'>getText</a> </li>
+<li class='toc3'><a href='#-getTextAsync'>getTextAsync</a> </li>
+</ul><li class='toc2'><a href='#Subclassing%20and%20Internal%20Methods'>Subclassing and Internal Methods</a></li>
+<ul class='toc'></ul><li class='toc2'><a href='#Inherited%20instance%20methods'>Inherited instance methods</a></li>
+</ul><li class='toc1'><a href='#examples'>Examples</a></li>
+<ul class='toc'></ul></ul></div><div id='menubar'></div>
+<div class='contents'>
+<div class='header'>
+<div id='label'>
+<span id='folder'>Classes</span>
+ | <span id='categories'><a href='./../Browse.html#Frontends'>Frontends</a></span>
+</div><h1>Document</h1>
+<div id='summary'>Editor-specific text document editing</div>
+</div>
+<div class='subheader'>
+<div id='filename'>Location: <b>NOT INSTALLED!</b></div>
+<div id='related'>See also: <a href="./../Classes/EmacsDocument.html">EmacsDocument</a>, <a href="./../Classes/ScelDocument.html">ScelDocument</a></div>
+</div>
+<h2><a class='anchor' name='description'>Description</a></h2>
+
+<p>The Document class represents a text document within the context of your text editing environment. You can use the class to programmatically create, modify, and query these documents.
+<p>Document used to be an abstract class, meaning it didn't provide all the functionality itself, but instead relied on subclasses to complete the functionality. One such subclass was CocoaDocument. Although CocoaDocument was available only to macOS and had an ad hoc interface, it possessed many additional features like code animation and rich text.
+<p>In SuperCollider 3.6, Document changed a bit and now the "abstract class" descriptor is only partially true. The SuperCollider IDE provides its own version of the Document class. The Emacs editor still supplies <a href="./../Classes/ScelDocument.html">ScelDocument</a> (which links to <a href="./../Classes/EmacsDocument.html">EmacsDocument</a>) as a subclass of Document. As an unfortunate byproduct of the history of Document, there are inconsistencies in the APIs of SCIDE's Document and Emacs' ScelDocument. This help file describes that of SCIDE.
+<p>Future versions of SuperCollider will aim to fix these API inconsistencies and restore the functionality of CocoaDocument.<h3><a class='anchor' name='Setting%20the%20Environment'>Setting the Environment</a></h3>
+
+<p>By default <code>envir</code> it is set to the current <a href="./../Classes/Environment.html">Environment</a>. However, you can make it use its own <a href="./../Classes/Environment.html">Environment</a> also. Thus, e.g., if you were to set the <a href="./../Classes/Environment.html">Environment</a> variable <code>~myVar = 12</code> in the current <a href="./../Classes/Environment.html">Environment</a>, you can create a new Document window in which that <a href="./../Classes/Environment.html">Environment</a> variable is not set.<h2><a class='anchor' name='classmethods'>Class Methods</a></h2>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='*new' href='./../Overviews/Methods.html#new'>new</a></h3>
+<div class='method'><h4>Arguments:</h4>
+<table class='arguments'>
+<tr><td class='argumentname'>title<td class='argumentdesc'>
+<p>An instance of <a href="./../Classes/String.html">String</a> or <a href="./../Classes/Symbol.html">Symbol</a>.<tr><td class='argumentname'>string<td class='argumentdesc'>
+<p>An instance of <a href="./../Classes/String.html">String</a>. The contents of the document.<tr><td class='argumentname'>envir<td class='argumentdesc'>
+<p>An instance of <a href="./../Classes/Environment.html">Environment</a>. The <a href="./../Classes/Environment.html">Environment</a> to be used by the interpreter of the document window. By default, it is set to the current <a href="./../Classes/Environment.html">Environment</a>.</table><h4>Discussion:</h4>
+<textarea class='editor'>Document.new("this is the title", "this is the text");</textarea>
+</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='*open' href='./../Overviews/Methods.html#open'>open</a></h3>
+<div class='method'>
+<p>Open a document from a path.<h4>Arguments:</h4>
+<table class='arguments'>
+<tr><td class='argumentname'>path<td class='argumentdesc'>
+<p>The file system path to the document. An instance of <a href="./../Classes/String.html">String</a>.<tr><td class='argumentname'>selectionStart<td class='argumentdesc'>
+<p>The beginning of the cursor selection of the file content.<tr><td class='argumentname'>selectionLength<td class='argumentdesc'>
+<p>The length of the cursor selection of the file content.<tr><td class='argumentname'>envir<td class='argumentdesc'>
+<p>An instance of <a href="./../Classes/Environment.html">Environment</a>. The Environment to be used by the interpreter of the document window. By default, it is set to the current <a href="./../Classes/Environment.html">Environment</a>.</table><h4>Discussion:</h4>
+<textarea class='editor'>Document.open("README", 292,253); // notice the selected text in the open document</textarea>
+</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='*openDocuments' href='./../Overviews/Methods.html#openDocuments'>openDocuments</a></h3>
+<div class='method'>
+<p>Returns an Array of all open documents.<textarea class='editor'>d = Document.openDocuments.do{ |doc| doc.name.postln };</textarea>
+</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='*hasEditedDocuments' href='./../Overviews/Methods.html#hasEditedDocuments'>hasEditedDocuments</a></h3>
+<div class='method'>
+<p>Returns true if there are edited Documents.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='*closeAll' href='./../Overviews/Methods.html#closeAll'>closeAll</a></h3>
+<div class='method'><div class='warning'><span class='warninglabel'>WARNING:</span> Closes all open Documents, whether edited or not.</div>
+<p><h4>Arguments:</h4>
+<table class='arguments'>
+<tr><td class='argumentname'>leavePostWindowOpen<td class='argumentdesc'>
+<p>An instance of <a href="./../Classes/Boolean.html">Boolean</a>.</table></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='*closeAllUnedited' href='./../Overviews/Methods.html#closeAllUnedited'>closeAllUnedited</a></h3>
+<div class='method'>
+<p>Closes all unedited Documents.<h4>Arguments:</h4>
+<table class='arguments'>
+<tr><td class='argumentname'>leavePostWindowOpen<td class='argumentdesc'>
+<p>An instance of <a href="./../Classes/Boolean.html">Boolean</a>.</table></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='*current' href='./../Overviews/Methods.html#current'>current</a></h3>
+<div class='method'>
+<p>Gets/sets the current Document.<h4>Arguments:</h4>
+<table class='arguments'>
+<tr><td class='argumentname'>value<td class='argumentdesc'>
+<p>A Document.</table><h4>Discussion:</h4>
+<textarea class='editor'>Document.current.name.postln; // Prints "Document.html"</textarea>
+</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='*allDocuments' href='./../Overviews/Methods.html#allDocuments'>allDocuments</a></h3>
+<div class='method'>
+<p>Returns all documents.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='*globalKeyDownAction' href='./../Overviews/Methods.html#globalKeyDownAction'>globalKeyDownAction</a></h3>
+<div class='method'>
+<p>Get/set A global action to be performed when a key is pressed.<h4>Arguments:</h4>
+<table class='arguments'>
+<tr><td class='argumentname'>action<td class='argumentdesc'>
+<p>An instance of <a href="./../Classes/Function.html">Function</a> or <a href="./../Classes/FunctionList.html">FunctionList</a>.</table></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='*globalKeyUpAction' href='./../Overviews/Methods.html#globalKeyUpAction'>globalKeyUpAction</a></h3>
+<div class='method'>
+<p>Get/set A global action to be performed when a key is released.<h4>Arguments:</h4>
+<table class='arguments'>
+<tr><td class='argumentname'>action<td class='argumentdesc'>
+<p>An instance of <a href="./../Classes/Function.html">Function</a> or <a href="./../Classes/FunctionList.html">FunctionList</a>.</table></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='*initAction' href='./../Overviews/Methods.html#initAction'>initAction</a></h3>
+<div class='method'>
+<p>Get/set A an action to be performed up opening or creating a Document.<h4>Arguments:</h4>
+<table class='arguments'>
+<tr><td class='argumentname'>action<td class='argumentdesc'>
+<p>An instance of <a href="./../Classes/Function.html">Function</a> or <a href="./../Classes/FunctionList.html">FunctionList</a>.</table></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='*autoRun' href='./../Overviews/Methods.html#autoRun'>autoRun</a></h3>
+<div class='method'>
+<p>If autoRun is set to true, documents beginning with the comment <code>/*RUN*/</code> will be executed immediately after being opened, and also when the class library is recompiled with the document already open in the IDE.<h4>Arguments:</h4>
+<table class='arguments'>
+<tr><td class='argumentname'>value<td class='argumentdesc'>
+<p>An instance of <a href="./../Classes/Boolean.html">Boolean</a>. Default value is <code>true</code>.</table></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='*implementationClass' href='./../Overviews/Methods.html#implementationClass'>implementationClass</a></h3>
+<div class='method'>
+<p>The editor implementation specific class which will handle Documents.<h4>Arguments:</h4>
+<table class='arguments'>
+<tr><td class='argumentname'>value<td class='argumentdesc'>
+<p>A class for implementing Document.</table></div><h3><a class='anchor' name='Path%20Utilities'>Path Utilities</a></h3>
+
+<p>Utilities and settings for dealing with documents such as SuperCollider code files. By default the document directory is SuperCollider's application directory.<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='*dir' href='./../Overviews/Methods.html#dir'>dir</a></h3>
+<div class='method'>
+<p>Get/set the default document directory. The default is dependent on <a href="#*implementationClass">*implementationClass</a>.<h4>Arguments:</h4>
+<table class='arguments'>
+<tr><td class='argumentname'>path<td class='argumentdesc'>
+<p>The file system path to the directory. An instance of <a href="./../Classes/String.html">String</a>.</table><h4>Discussion:</h4>
+
+<p>In Main-startUp you can set this to a more practical directory:<textarea class='editor'>Document.dir = "~/Documents/SuperCollider";</textarea>
+</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='*standardizePath' href='./../Overviews/Methods.html#standardizePath'>standardizePath</a></h3>
+<div class='method'><h4>Arguments:</h4>
+<table class='arguments'>
+<tr><td class='argumentname'>p<td class='argumentdesc'>
+<p>The file system path to the directory. An instance of <a href="./../Classes/String.html">String</a>.</table><h4>Discussion:</h4>
+
+<p>If it is a relative path, expand it to an absolute path relative to your document directory. Expand tildes in path (your home directory), resolve symbolic links (but not aliases). Also converts from Mac OS 9 path format. See PathName for more complex needs.<textarea class='editor'>Document.standardizePath("~/"); // This will print your home directory
+
+Document.standardizePath(":Patches:newfoots:fastRuckAndTuck");
+// Returns: /Volumes/Macintosh HD/Users/cruxxial/Documents/SC3docs/Patches/newfoots/fastRuckAndTuck
+
+Document.standardizePath("~/Documents/SC3docs/Patches/newfoots/fastRuckAndTuck");
+// Returns: Patches/newfoots/fastRuckAndTuck
+
+Document.standardizePath("Patches/newfoots/fastRuckAndTuck")
+// Returns: Patches/newfoots/fastRuckAndTuck</textarea>
+</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='*abrevPath' href='./../Overviews/Methods.html#abrevPath'>abrevPath</a></h3>
+<div class='method'>
+<p>Returns a path relative to Document.dir, if the path is inside Document.dir.<h4>Arguments:</h4>
+<table class='arguments'>
+<tr><td class='argumentname'>path<td class='argumentdesc'>
+<p>The file system path to the directory. An instance of <a href="./../Classes/String.html">String</a>.</table></div><h3><a class='anchor' name='Inherited%20class%20methods'>Inherited class methods</a></h3>
+<div id='inheritedclassmets'></div><h2><a class='anchor' name='instancemethods'>Instance Methods</a></h2>
+<h3><a class='anchor' name='General%20Document%20Properties'>General Document Properties</a></h3>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-path' href='./../Overviews/Methods.html#path'>path</a></h3>
+<div class='method'>
+<p>Get / set the Document's path.<h4>Arguments:</h4>
+<table class='arguments'>
+<tr><td class='argumentname'>apath<td class='argumentdesc'>
+<p>An instance of <a href="./../Classes/String.html">String</a>. A files system path.</table><h4>Discussion:</h4>
+<textarea class='editor'>Document.current.path.postln;</textarea>
+</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-dir' href='./../Overviews/Methods.html#dir'>dir</a></h3>
+<div class='method'>
+<p>Returns the directory of a Document.<h4>Discussion:</h4>
+<textarea class='editor'>Document.current.dir.postln;</textarea>
+</div><h3 class='method-code'><span class='method-prefix'></span><a class='method-name' name='-==' href='./../Overviews/Methods.html#=='>==</a></h3>
+<div class='method'>
+<p>A binary operator.<h4>Arguments:</h4>
+<table class='arguments'>
+<tr><td class='argumentname'>that<td class='argumentdesc'>
+<p>An instance of Document.</table><h4>Discussion:</h4>
+<textarea class='editor'>Document.current == Document.listener; // presumably returns false</textarea>
+</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-editable' href='./../Overviews/Methods.html#editable'>editable</a></h3>
+<div class='method'>
+<p>Get / set the document is editable.<h4>Arguments:</h4>
+<table class='arguments'>
+<tr><td class='argumentname'>bool<td class='argumentdesc'>
+<p>An instance of <a href="./../Classes/Boolean.html">Boolean</a>.</table></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-name' href='./../Overviews/Methods.html#name'>name</a></h3>
+<div class='method'>
+<p>Get / set the title (same as <a href="#-title">-title</a>).<h4>Arguments:</h4>
+<table class='arguments'>
+<tr><td class='argumentname'>aname<td class='argumentdesc'>
+<p>An instance of <a href="./../Classes/String.html">String</a>.</table><h4>Discussion:</h4>
+<textarea class='editor'>Document.current.name.postln;</textarea>
+</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-title' href='./../Overviews/Methods.html#title'>title</a></h3>
+<div class='method'>
+<p>Get / set the title (same as <a href="#-name">-name</a>).<h4>Arguments:</h4>
+<table class='arguments'>
+<tr><td class='argumentname'>newTitle<td class='argumentdesc'>
+<p>An instance of <a href="./../Classes/String.html">String</a>.</table></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-promptToSave' href='./../Overviews/Methods.html#promptToSave'>promptToSave</a></h3>
+<div class='method'>
+<p>Get/set whether a document is prompts to save if it has been changed. Use this with caution.<h4>Arguments:</h4>
+<table class='arguments'>
+<tr><td class='argumentname'>bool<td class='argumentdesc'>
+<p>An instance of <a href="./../Classes/Boolean.html">Boolean</a>.</table></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-closed' href='./../Overviews/Methods.html#closed'>closed</a></h3>
+<div class='method'>
+<p>Returns <code>true</code> if the document has been closed.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-isEdited' href='./../Overviews/Methods.html#isEdited'>isEdited</a></h3>
+<div class='method'>
+<p>Returns <code>true</code> if the document has been edited.<textarea class='editor'>Document.current.isEdited.postln;</textarea>
+</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-isFront' href='./../Overviews/Methods.html#isFront'>isFront</a></h3>
+<div class='method'>
+<p>Returns <code>true</code> if the document is in front.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-didBecomeKey' href='./../Overviews/Methods.html#didBecomeKey'>didBecomeKey</a></h3>
+<div class='method'>
+<p>Saves the current <a href="./../Classes/Environment.html">Environment</a>, makes the document current, and performs its <a href="#-toFrontAction">-toFrontAction</a>.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-didResignKey' href='./../Overviews/Methods.html#didResignKey'>didResignKey</a></h3>
+<div class='method'>
+<p>Performs the Document's <a href="#-endFrontAction">-endFrontAction</a> and restores the current <a href="./../Classes/Environment.html">Environment</a>.</div><h3><a class='anchor' name='Controlling%20Document'>Controlling Document</a></h3>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-close' href='./../Overviews/Methods.html#close'>close</a></h3>
+<div class='method'>
+<p>Close a document.<textarea class='editor'>(
+Task({
+    var doc;
+    doc = Document("background", "closing in 2 seconds");
+    doc.stringColor_(Color.blue);
+    1.wait;
+    doc.background_(Color.blue(alpha:0.8));
+    1.wait;
+    doc.close;
+}).play(AppClock);
+)</textarea>
+</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-front' href='./../Overviews/Methods.html#front'>front</a></h3>
+<div class='method'>
+<p>Bring a document to the front.<textarea class='editor'>Document.listener.front;</textarea>
+</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-onClose' href='./../Overviews/Methods.html#onClose'>onClose</a></h3>
+<div class='method'>
+<p>Get/set the action to be performed on closing the document.<h4>Arguments:</h4>
+<table class='arguments'>
+<tr><td class='argumentname'>value<td class='argumentdesc'>
+<p>An instance of <a href="./../Classes/Function.html">Function</a> or <a href="./../Classes/FunctionList.html">FunctionList</a>.</table></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-endFrontAction' href='./../Overviews/Methods.html#endFrontAction'>endFrontAction</a></h3>
+<div class='method'>
+<p>Get/set the action to be performed when the document becomes no longer the front document.<h4>Arguments:</h4>
+<table class='arguments'>
+<tr><td class='argumentname'>value<td class='argumentdesc'>
+<p>An instance of <a href="./../Classes/Function.html">Function</a> or <a href="./../Classes/FunctionList.html">FunctionList</a>.</table></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-toFrontAction' href='./../Overviews/Methods.html#toFrontAction'>toFrontAction</a></h3>
+<div class='method'>
+<p>Get / set the action to be performed when the document become the front document.<h4>Arguments:</h4>
+<table class='arguments'>
+<tr><td class='argumentname'>value<td class='argumentdesc'>
+<p>An instance of <a href="./../Classes/Function.html">Function</a> or <a href="./../Classes/FunctionList.html">FunctionList</a>.</table></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-mouseDownAction' href='./../Overviews/Methods.html#mouseDownAction'>mouseDownAction</a></h3>
+<div class='method'>
+<p>Get/set the action to be performed on <a href="#-mouseDown">-mouseDown</a>.<h4>Arguments:</h4>
+<table class='arguments'>
+<tr><td class='argumentname'>action<td class='argumentdesc'>
+<p>An instance of <a href="./../Classes/Function.html">Function</a> or <a href="./../Classes/FunctionList.html">FunctionList</a>. The arguments passed to the function are: <code>document</code>, <code>x</code>, <code>y</code>, <code>modifiers</code>, <code>buttonNumber</code>, <code>clickCount</code>.</table></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-mouseUpAction' href='./../Overviews/Methods.html#mouseUpAction'>mouseUpAction</a></h3>
+<div class='method'>
+<p>Get/set the action to be performed on <a href="#-mouseUp">-mouseUp</a>.<h4>Arguments:</h4>
+<table class='arguments'>
+<tr><td class='argumentname'>action<td class='argumentdesc'>
+<p>An instance of <a href="./../Classes/Function.html">Function</a> or <a href="./../Classes/FunctionList.html">FunctionList</a>. The arguments passed to the function are: <code>document</code>, <code>x</code>, <code>y</code>, <code>modifiers</code>, <code>buttonNumber</code>.</table><h4>Discussion:</h4>
+<textarea class='editor'>(
+
+//add a mouse action to this document:
+//example: easy button:
+//when you click in front of a 17 a SinOsc will start up;
+s.waitForBoot({
+    Document.current.mouseUpAction_({arg doc;
+        var char;
+        char = doc.rangeText(doc.selectionStart, 2);
+        if(char == "17",{
+            {EnvGen.kr(Env.perc, doneAction: Done.freeSelf) * SinOsc.ar([600,720,300].choose, 0, 0.5)}.play;
+        });
+        if(char == "23",{
+            {EnvGen.kr(Env.perc, doneAction: Done.freeSelf) * PinkNoise.ar(0.2)}.play;
+        });
+    })
+});
+)</textarea>
+
+<p>Test here and click in front of the numbers: 17 and 23.<textarea class='editor'>Document.current.mouseUpAction = nil; // clear mouseUpAction</textarea>
+</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-keyDownAction' href='./../Overviews/Methods.html#keyDownAction'>keyDownAction</a></h3>
+<div class='method'>
+<p>Get/set the action to be performed on <a href="#-keyDown">-keyDown</a>.<h4>Arguments:</h4>
+<table class='arguments'>
+<tr><td class='argumentname'>action<td class='argumentdesc'>
+<p>An instance of <a href="./../Classes/Function.html">Function</a> or <a href="./../Classes/FunctionList.html">FunctionList</a>. The arguments passed to the function are: <code>document</code>, <code>char</code>, <code>modifiers</code>, <code>unicode</code>, <code>keycode</code>. See <a href="./../Classes/View.html#Key%20actions">View: Key actions</a> for details on these arguments.</table><h4>Discussion:</h4>
+<textarea class='editor'>Document.current.keyDownAction = { arg ...args; args.postln };
+// now type some text
+Document.current.keyDownAction = nil;</textarea>
+</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-keyUpAction' href='./../Overviews/Methods.html#keyUpAction'>keyUpAction</a></h3>
+<div class='method'>
+<p>Get/set the action to be performed on <a href="#-keyUp">-keyUp</a>.<h4>Arguments:</h4>
+<table class='arguments'>
+<tr><td class='argumentname'>action<td class='argumentdesc'>
+<p>An instance of <a href="./../Classes/Function.html">Function</a> or <a href="./../Classes/FunctionList.html">FunctionList</a>. The arguments passed to the function are: <code>document</code>, <code>char</code>, <code>modifiers</code>, <code>unicode</code>, <code>keycode</code>. See <a href="./../Classes/View.html#Key%20actions">View: Key actions</a> for details on these arguments.</table><h4>Discussion:</h4>
+<textarea class='editor'>Document.current.keyUpAction = { arg ...args; args.postln };
+// now type some text
+Document.current.keyUpAction = nil;</textarea>
+</div><h3><a class='anchor' name='Accessing%20and%20Editing%20Content'>Accessing and Editing Content</a></h3>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-selectLine' href='./../Overviews/Methods.html#selectLine'>selectLine</a></h3>
+<div class='method'>
+<p>Select a line of the document by number.<h4>Arguments:</h4>
+<table class='arguments'>
+<tr><td class='argumentname'>line<td class='argumentdesc'>
+<p>An <a href="./../Classes/Integer.html">Integer</a>.</table><h4>Discussion:</h4>
+<textarea class='editor'>Document.current.selectLine(390);</textarea>
+</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-selectRange' href='./../Overviews/Methods.html#selectRange'>selectRange</a></h3>
+<div class='method'>
+<p>Select a text range in the string of the document.<h4>Arguments:</h4>
+<table class='arguments'>
+<tr><td class='argumentname'>start<td class='argumentdesc'>
+<p>The start index.<tr><td class='argumentname'>length<td class='argumentdesc'>
+<p>The length of the selection.</table><h4>Discussion:</h4>
+<textarea class='editor'>(
+Document.current.selectRange(Document.current.selectedRangeLocation + 3, 150);
+)</textarea>
+</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-selectionStart' href='./../Overviews/Methods.html#selectionStart'>selectionStart</a></h3>
+<div class='method'>
+<p>Returns the start of a current selection.<textarea class='editor'>Document.current.selectionStart.postln;</textarea>
+</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-selectionSize' href='./../Overviews/Methods.html#selectionSize'>selectionSize</a></h3>
+<div class='method'>
+<p>Returns the size of a current selection.<textarea class='editor'>(
+var doc;
+doc = Document.current;
+doc.selectRange(doc.selectionStart - 40, 10);
+doc.selectionSize.postln;
+)</textarea>
+</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-selectedString' href='./../Overviews/Methods.html#selectedString'>selectedString</a></h3>
+<div class='method'>
+<p>Gets/sets the selected string.<h4>Arguments:</h4>
+<table class='arguments'>
+<tr><td class='argumentname'>txt<td class='argumentdesc'>
+<p>An instance of <a href="./../Classes/String.html">String</a>.</table><h4>Discussion:</h4>
+<textarea class='editor'>(
+var doc;
+doc = Document.current;
+doc.selectRange(doc.selectionStart - 40, 10);
+doc.selectedString.postln;
+)</textarea>
+</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-currentLine' href='./../Overviews/Methods.html#currentLine'>currentLine</a></h3>
+<div class='method'>
+<p>Returns the current line as a <a href="./../Classes/String.html">String</a>.<textarea class='editor'>(
+var doc;
+doc = Document.current;
+doc.selectRange(doc.selectionStart - 40, 10);
+doc.currentLine.postln;
+)</textarea>
+</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-getSelectedLines' href='./../Overviews/Methods.html#getSelectedLines'>getSelectedLines</a></h3>
+<div class='method'>
+<p>Returns all full lines from before <code>rangestart</code> to after <code>rangestart + rangesize</code> as a <a href="./../Classes/String.html">String</a>.<h4>Discussion:</h4>
+<textarea class='editor'>(
+var doc;
+doc = Document.current;
+doc.selectRange(doc.selectionStart - 40, 10);
+doc.getSelectedLines(doc.selectionStart - 40, 130).postln;
+)</textarea>
+</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-string' href='./../Overviews/Methods.html#string'>string</a></h3>
+<div class='method'>
+<p>Gets or sets the string within a certain range.<h4>Arguments:</h4>
+<table class='arguments'>
+<tr><td class='argumentname'>string<td class='argumentdesc'>
+<p>A <a href="./../Classes/String.html">String</a>.<tr><td class='argumentname'>rangestart<td class='argumentdesc'>
+<p>An <a href="./../Classes/Integer.html">Integer</a>.<tr><td class='argumentname'>rangesize<td class='argumentdesc'>
+<p>An <a href="./../Classes/Integer.html">Integer</a>.</table><h4>Discussion:</h4>
+<textarea class='editor'>// Select the following code in parentheses and execute it
+(
+Document.current.string_(": test test test test test ",
+    Document.current.selectedRangeLocation + 12,
+    18);
+)
+// Watch me change content</textarea>
+</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-getText' href='./../Overviews/Methods.html#getText'>getText</a></h3>
+<div class='method'>
+<p>Get a range of text from the document. Synchronous. The text is directly returned.<h4>Arguments:</h4>
+<table class='arguments'>
+<tr><td class='argumentname'>start<td class='argumentdesc'>
+<p>An <a href="./../Classes/Integer.html">Integer</a> for the starting position to access.<tr><td class='argumentname'>range<td class='argumentdesc'>
+<p>An <a href="./../Classes/Integer.html">Integer</a> for the number of characters to retrieve. -1 retrieves to the end of the document.</table></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-getTextAsync' href='./../Overviews/Methods.html#getTextAsync'>getTextAsync</a></h3>
+<div class='method'>
+<p>Get a range of text from the document. Asynchronous. The text is passed to the <code>action</code> function as an argument.<div class='note'><span class='notelabel'>NOTE:</span> Currently, in Windows, <a href="#-getText">-getText</a> and <a href="#-string">-string</a> may be unreliable. Windows users are recommended to use <a href="#-getTextAsync">-getTextAsync</a> for the time being.</div><h4>Arguments:</h4>
+<table class='arguments'>
+<tr><td class='argumentname'>action<td class='argumentdesc'>
+<p>A function to evaluate after the request is complete. It is passed one argument, a <a href="./../Classes/String.html">String</a>, for the retrieved contents.<tr><td class='argumentname'>start<td class='argumentdesc'>
+<p>An <a href="./../Classes/Integer.html">Integer</a> for the starting position to access.<tr><td class='argumentname'>range<td class='argumentdesc'>
+<p>An <a href="./../Classes/Integer.html">Integer</a> for the number of characters to retrieve. -1 retrieves to the end of the document.</table></div><h3><a class='anchor' name='Subclassing%20and%20Internal%20Methods'>Subclassing and Internal Methods</a></h3>
+
+<p>The following methods are usually not used directly or are called by a primitive. Programmers can still call or override these as needed.<textarea class='editor'>    *startup
+    *numberOfOpen
+    mouseUp (x, y, modifiers, buttonNumber, clickCount, clickPos)
+    keyDown (character, modifiers, unicode, keycode)
+    keyUp (character, modifiers, unicode, keycode)
+    getIdentifierCoordFromEnd (endPos)
+    dataptr
+
+    Private. Used only internally:
+    *newFromIndex (idx)
+    *prnumberOfOpen
+    *prGetLast
+    *prGetIndexOfListener
+    *prBasicNew
+    prAdd
+    prGetLastIndex
+    setFont (font, rangeStart, rangeSize)
+    setTextColor (color, rangeStart, rangeSize)
+    propen (path, selectionStart, selectionLength)
+    rangeText (rangestart, rangesize)
+    insertTextRange (string, rangestart, rangesize)
+    prinitByString (title, str, makeListener)
+    prSetBackgroundColor (color)
+    prGetBackgroundColor (color)
+    prSelectLine (line)
+    prIsEditable_ (editable)
+    prSetTitle (argName)
+    prGetTitle
+    prGetFileName
+    prSetFileName (apath)
+    prGetBounds (argBounds)
+    prSetBounds (argBounds)
+    prclose
+    prinsertText (dataPtr, txt)
+    prinitByIndex (idx)
+    envir
+    envir_ (ev)
+    text
+    removeUndo
+    selectedText
+    selectUnderlinedText (clickPos)
+    linkAtClickPos (clickPos)
+    selectedRangeLocation
+    selectedRangeSize
+    restoreCurrentEnvironment
+    saveCurrentEnvironment
+    initByIndex (idx)
+    initLast
+    initFromPath (path, selectionStart, selectionLength)
+    initByString (argTitle, str, makeListener)</textarea>
+<h3><a class='anchor' name='Inherited%20instance%20methods'>Inherited instance methods</a></h3>
+<div id='inheritedinstmets'></div><h2><a class='anchor' name='examples'>Examples</a></h2>
+<textarea class='editor'>//unfocusedFront_
+(
+Document.allDocuments.at(0).unfocusedFront
+)
+
+
+(
+var doc;
+doc = Document("", "||");
+doc.background_(Color.blue(alpha: 1.0.rand));
+
+Task({
+    1000.do({
+        doc.setFont(rangeSize: [7, 8, 9, 24].choose);
+        0.08.wait;
+    })
+}).play(AppClock);
+
+Task({
+    100.do({
+        1.01.wait;
+        doc.stringColor_([Color.red(alpha: 1.0.rand), Color.green(alpha: 1.0.rand)].choose);
+    })
+}).play(AppClock);
+
+Task({
+    100.do({
+        1.01.wait;
+        doc.selectedString_(["\"\n#", "||", "-", "--"].choose);
+    })
+}).play(AppClock);
+
+Task({
+    var co, mul;
+    co = 0.1;
+    mul = 1.02;
+    100.do({
+        0.16.wait;
+        co = co * mul;
+        if(co &gt; 0.99, { co = 0.1 });
+        doc.background_(Color.blue(alpha: co));
+    });
+    doc.close;
+}).play(AppClock)
+)</textarea>
+
+<p>A simple implementation of TBT (time based text) <a href="http://tbt.dyne.org/?info=download">http://tbt.dyne.org/?info=download</a><textarea class='editor'>// record: type some text
+(
+var time = Main.elapsedTime;
+a = List.new;
+r = Routine { |char|
+loop {
+    a = a.add([char, Main.elapsedTime - time]);
+    char = 0.yield;
+}
+};
+
+Document.new("type some text")
+    .bounds_(Rect(100,SCWindow.screenBounds.height - 250, 400, 200))
+    .keyDownAction = { |doc, key| r.value(key) ; time = Main.elapsedTime};
+)
+
+// play back text in time
+(
+d = Document.new("type some text")
+    .bounds_(Rect(550,SCWindow.screenBounds.height-250,400,200));
+fork({
+    a.do { |pair|
+        d.string = d.string ++ pair[0];
+        pair[1].wait;
+    }
+}, AppClock)
+)</textarea>
+
+<p>Changing the default look of documents can be done with the help of the <a href="#*initAction">*initAction</a> method. Run the following example once. Afterwards all newly created documents will have a dark grey background. To make this change happen every time you start SuperCollider, put the code inside your startup.scd file (and optionally wrap it in a <code>{}.defer(0.1)</code> ).<textarea class='editor'>(
+Document.listener.background = Color.red;    //a special color for post document
+Document.listener.bounds = Rect(1, 461, 620, 567);    //move and resize post document
+Document.initAction = {|doc|            //function to run for every new document
+    doc.background = Color.grey(0.1, 0.9);
+    doc.bounds = Rect(0, 119, 1280, 659);
+    doc.selectedBackground = Color(0.4, 0.05, 0.18);
+    doc.stringColor = Color.grey(0.9);
+};
+)</textarea>
+
+<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/develop/HelpSource/Classes/Document.schelp'>https://github.com/supercollider/supercollider/tree/develop/HelpSource/Classes/Document.schelp</a><br>link::Classes/Document::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+</body></html>

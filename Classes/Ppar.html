@@ -1,0 +1,84 @@
+<!doctype html><html lang='en'><head><title>Ppar | SuperCollider 3.13.0 Help</title>
+<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<link rel='stylesheet' href='./../frontend.css' type='text/css' />
+<link rel='stylesheet' href='./../custom.css' type='text/css' />
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+<script src='./../lib/jquery.min.js'></script>
+<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script>
+var helpRoot = './..';
+var scdoc_title = 'Ppar';
+var scdoc_sc_version = '3.13.0';
+</script>
+<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../docmap.js' type='text/javascript'></script>
+<script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
+</head>
+<body onload='fixTOC()'>
+<div id='toc'>
+<div id='toctitle'>Ppar:</div>
+<span class='toc_search'>Filter: <input id='toc_search'></span><ul class='toc'><li class='toc1'><a href='#description'>Description</a></li>
+<ul class='toc'></ul><li class='toc1'><a href='#classmethods'>Class methods</a></li>
+<ul class='toc'><li class='toc3'><a href='#*new'>new</a> </li>
+<li class='toc2'><a href='#Inherited%20class%20methods'>Inherited class methods</a></li>
+</ul><li class='toc1'><a href='#instancemethods'>Instance methods</a></li>
+<ul class='toc'><li class='toc2'><a href='#Inherited%20instance%20methods'>Inherited instance methods</a></li>
+<li class='toc2'><a href='#Undocumented%20instance%20methods'>Undocumented instance methods</a></li>
+<ul class='toc'><li class='toc3'><a href='#-embedInStream'>embedInStream</a> </li>
+<li class='toc3'><a href='#-initStreams'>initStreams</a> </li>
+</ul></ul><li class='toc1'><a href='#examples'>Examples</a></li>
+<ul class='toc'></ul></ul></div><div id='menubar'></div>
+<div class='contents'>
+<div class='header'>
+<div id='label'>
+<span id='folder'>Classes</span>
+ | <span id='categories'><a href='./../Browse.html#Streams-Patterns-Events'>Streams-Patterns-Events</a>&#8201;&gt;&#8201;<a href='./../Browse.html#Streams-Patterns-Events>Patterns'>Patterns</a>&#8201;&gt;&#8201;<a href='./../Browse.html#Streams-Patterns-Events>Patterns>Parallel'>Parallel</a></span>
+</div><h1>Ppar<span id='superclasses'> : <a href="../Classes/ListPattern.html">ListPattern</a> : <a href="../Classes/Pattern.html">Pattern</a> : <a href="../Classes/AbstractFunction.html">AbstractFunction</a> : <a href="../Classes/Object.html">Object</a></span>
+</h1>
+<div id='summary'>embed event streams in parallel</div>
+</div>
+<div class='subheader'>
+<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/develop/SCClassLibrary/Common/Streams/Ppar.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Streams/Ppar.sc'>Ppar.sc</a></div><div id='subclasses'>Subclasses: <a href="../Classes/Pgpar.html">Pgpar</a>, <a href="../Classes/Ptpar.html">Ptpar</a></div>
+<div id='related'>See also: <a href="./../Classes/Ptpar.html">Ptpar</a>, <a href="./../Classes/Pgpar.html">Pgpar</a>, <a href="./../Classes/Pbus.html">Pbus</a>, <a href="./../Classes/Pgroup.html">Pgroup</a></div>
+</div>
+<h2><a class='anchor' name='description'>Description</a></h2>
+
+<p>Embeds several event streams so that they form a single output stream with all their events in temporal order. When one stream ends, the other streams are further embedded until all have ended.<h2><a class='anchor' name='classmethods'>Class Methods</a></h2>
+<h3 class='method-code'><span class='method-prefix'>Ppar.</span><a class='method-name' name='*new' href='./../Overviews/Methods.html#new'>new</a>(<span class='argstr'>list</span>, <span class='argstr'>repeats: 1</span>)</h3>
+<div class='supmethod'>From superclass: <a href='./../Classes/ListPattern.html'>ListPattern</a></div>
+<div class='method'>
+<p><h4>Arguments:</h4>
+<table class='arguments'>
+<tr><td class='argumentname'>list<td class='argumentdesc'>
+<p>list of patterns or streams.<tr><td class='argumentname'>repeats<td class='argumentdesc'>
+<p>repeat the whole pattern n times.</table></div><h3><a class='anchor' name='Inherited%20class%20methods'>Inherited class methods</a></h3>
+<div id='inheritedclassmets'></div><h2><a class='anchor' name='instancemethods'>Instance Methods</a></h2>
+<h3><a class='anchor' name='Inherited%20instance%20methods'>Inherited instance methods</a></h3>
+<div id='inheritedinstmets'></div><h3><a class='anchor' name='Undocumented%20instance%20methods'>Undocumented instance methods</a></h3>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-embedInStream' href='./../Overviews/Methods.html#embedInStream'>embedInStream</a>(<span class='argstr'>inval</span>)</h3>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-initStreams' href='./../Overviews/Methods.html#initStreams'>initStreams</a>(<span class='argstr'>priorityQ</span>)</h3>
+<h2><a class='anchor' name='examples'>Examples</a></h2>
+<textarea class='editor'>// see the delta values in the resulting events
+(
+var a, b, c, t;
+a = Pbind(\x, Pseq([1, 2, 3, 4]), \dur, 1);
+b = Pbind(\x, Pseq([10, 20, 30, 40]), \dur, 0.4);
+c = Ppar([a, b]);
+t = c.asStream;
+20.do({ t.next(Event.default).postln; });
+)
+
+// sound example
+(
+var a, b;
+a = Pbind(\note, Pseq([7, 4, 0], 4), \dur, Pseq([1, 0.5, 1.5], inf));
+b = Pbind(\note, Pseq([5, 10, 12], 4), \dur, 1);
+Ppar([ a, b ]).play;
+)</textarea>
+
+<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/develop/HelpSource/Classes/Ppar.schelp'>https://github.com/supercollider/supercollider/tree/develop/HelpSource/Classes/Ppar.schelp</a><br>link::Classes/Ppar::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+</body></html>

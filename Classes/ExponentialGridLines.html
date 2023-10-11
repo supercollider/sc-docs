@@ -1,0 +1,129 @@
+<!doctype html><html lang='en'><head><title>ExponentialGridLines | SuperCollider 3.13.0 Help</title>
+<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<link rel='stylesheet' href='./../frontend.css' type='text/css' />
+<link rel='stylesheet' href='./../custom.css' type='text/css' />
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+<script src='./../lib/jquery.min.js'></script>
+<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script>
+var helpRoot = './..';
+var scdoc_title = 'ExponentialGridLines';
+var scdoc_sc_version = '3.13.0';
+</script>
+<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../docmap.js' type='text/javascript'></script>
+<script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
+</head>
+<body onload='fixTOC()'>
+<div id='toc'>
+<div id='toctitle'>ExponentialGridLines:</div>
+<span class='toc_search'>Filter: <input id='toc_search'></span><ul class='toc'><li class='toc1'><a href='#description'>Description</a></li>
+<ul class='toc'></ul><li class='toc1'><a href='#classmethods'>Class methods</a></li>
+<ul class='toc'><li class='toc3'><a href='#*new'>new</a> </li>
+<li class='toc2'><a href='#Inherited%20class%20methods'>Inherited class methods</a></li>
+</ul><li class='toc1'><a href='#instancemethods'>Instance methods</a></li>
+<ul class='toc'><li class='toc3'><a href='#-spec'>spec</a> </li>
+<li class='toc3'><a href='#-asGrid'>asGrid</a> </li>
+<li class='toc3'><a href='#-niceNum'>niceNum</a> </li>
+<li class='toc3'><a href='#-looseRange'>looseRange</a> </li>
+<li class='toc3'><a href='#-getParams'>getParams</a> </li>
+<li class='toc3'><a href='#-formatLabel'>formatLabel</a> </li>
+<li class='toc2'><a href='#Inherited%20instance%20methods'>Inherited instance methods</a></li>
+</ul></ul></div><div id='menubar'></div>
+<div class='contents'>
+<div class='header'>
+<div id='label'>
+<span id='folder'>Classes</span>
+ | <span id='categories'><a href='./../Browse.html#GUI'>GUI</a>&#8201;&gt;&#8201;<a href='./../Browse.html#GUI>Accessories'>Accessories</a></span>
+</div><h1>ExponentialGridLines</h1>
+<div id='summary'>Calculates the numerical values suitable for exponentially-spaced grid lines to be used for plotting or other UI elements.</div>
+</div>
+<div class='subheader'>
+<div id='filename'>Location: <b>NOT INSTALLED!</b></div>
+<div id='related'>See also: <a href="./../Classes/GridLines.html">GridLines</a>, <a href="./../Classes/AbstractGridLines.html">AbstractGridLines</a>, <a href="./../Classes/LinearGridLines.html">LinearGridLines</a>, <a href="./../Classes/DrawGrid.html">DrawGrid</a>, <a href="./../Classes/ControlSpec.html">ControlSpec</a>, <a href="./../Classes/Plotter.html">Plotter</a>, <a href="./../Reference/plot.html">plot</a></div>
+</div>
+<h2><a class='anchor' name='description'>Description</a></h2>
+
+<p><code>ExponentialGridLines</code> is a strategy object that finds suitable intervals for plotting grid lines and labels. The values span the range defined by a corresponding <a href="./../Classes/ControlSpec.html">ControlSpec</a>. Most of the functionality of <code>ExponentialGridLines</code> is inherited from its superclass, <a href="./../Classes/AbstractGridLines.html">AbstractGridLines</a>. The instance methods are used by <a href="./../Classes/DrawGrid.html">DrawGrid</a> (which is in turn used by <a href="./../Classes/Plotter.html">Plotter</a>) which handles the drawing of the lines and labels.
+<p><code>ExponentialGridLines</code> isn't usually instantiated directly, but rather by the <a href="./../Classes/GridLines.html">GridLines</a> factory class or the <a href="./../Classes/ControlSpec.html#-grid">ControlSpec: -grid</a> method which return the appropriate <code>AbstractGridLines</code> subclass for the given spec.<textarea class='editor'>(
+// LinearGridLines
+var linGrid = ControlSpec(0, 100, \lin, units: "Time").grid;
+// ExponentialGridLines
+var expGrid = \freq.asSpec.grid;
+
+DrawGrid.test(linGrid, expGrid);
+)</textarea>
+<h2><a class='anchor' name='classmethods'>Class Methods</a></h2>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='*new' href='./../Overviews/Methods.html#new'>new</a></h3>
+<div class='method'>
+<p><h4>Arguments:</h4>
+<table class='arguments'>
+<tr><td class='argumentname'>spec<td class='argumentdesc'>
+<p>A <a href="./../Classes/ControlSpec.html">ControlSpec</a> that defines the numerical range, warp, and step.</table><h4>Returns:</h4>
+<div class='returnvalue'>
+<p>An instance of this class.<div class='note'><span class='notelabel'>NOTE:</span> <code>AbstractGridLines</code> shouldn't be instantiated directly. Instead, the <a href="./../Classes/GridLines.html">GridLines</a> factory class or the <a href="./../Classes/ControlSpec.html#-grid">ControlSpec: -grid</a> method should be used to return the appropriate <code>AbstractGridLines</code> subclass.</div></div></div><h3><a class='anchor' name='Inherited%20class%20methods'>Inherited class methods</a></h3>
+<div id='inheritedclassmets'></div><h2><a class='anchor' name='instancemethods'>Instance Methods</a></h2>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-spec' href='./../Overviews/Methods.html#spec'>spec</a></h3>
+<div class='method'>
+<p>Get/set the <code>ControlSpec</code> that defines the numerical range, warp, and step.<h4>Returns:</h4>
+<div class='returnvalue'>
+<p>A <a href="./../Classes/ControlSpec.html">ControlSpec</a>.</div></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-asGrid' href='./../Overviews/Methods.html#asGrid'>asGrid</a></h3>
+<div class='method'>
+<p>Return this object.<h4>Discussion:</h4>
+
+<p><code>nil.asGrid</code> returns a <code>BlankGridLines</code> (a subclass of <code>AbstractGridLines</code>) which produces no drawn lines. So if <code>nil</code> is passed to the <strong>grid</strong> argument of <code>DrawGrid</code>, no lines are drawn on the corresponding axis.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-niceNum' href='./../Overviews/Methods.html#niceNum'>niceNum</a></h3>
+<div class='method'>
+<p>Rounds a value to a logical "nice number" that is within the same order of magnitude. See the discussion below for details.<h4>Arguments:</h4>
+<table class='arguments'>
+<tr><td class='argumentname'>val<td class='argumentdesc'>
+<p>The value you'd like to make nicer.<tr><td class='argumentname'>round<td class='argumentdesc'>
+<p>A boolean. Roughly speaking, rounding will allow the returned number to be above or below the input <strong>val</strong> (similar to a <code>round</code> operation), while when <code>false</code> the returned number will tend to be higher than <strong>val</strong> (similar to <code>ceil</code>).</table><h4>Returns:</h4>
+<div class='returnvalue'>
+<p>The nice number.</div><h4>Discussion:</h4>
+
+<p>This method is used to support internal calculations for determining grid line values, though it may be useful for other applications.
+<p>Observe the rounding behavior:<textarea class='editor'>(
+var g = GridLines([0, 10000].asSpec);
+"in val / rounded / not rounded".postln;
+10.collect{ 10000.rand }.sort.do({ |x|
+    postf("% / % / %\n", x, g.niceNum(x, true), g.niceNum(x, false))
+})
+)</textarea>
+
+<p>The implementation is based on: <a href="https://www.sciencedirect.com/book/9780080507538/graphics-gems">A. S. Glassner, Ed., Graphics Gems. San Diego: Morgan Kaufmann, 1990</a>.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-looseRange' href='./../Overviews/Methods.html#looseRange'>looseRange</a></h3>
+<div class='method'>
+<p>Returns the logical minimum and maximum that will contain the <strong>min</strong> and <strong>max</strong>, determed internally using <a href="#-niceNum">-niceNum</a>.<h4>Arguments:</h4>
+<table class='arguments'>
+<tr><td class='argumentname'>min<td class='argumentdesc'>
+<p>Minimum value to include in the returned range.<tr><td class='argumentname'>max<td class='argumentdesc'>
+<p>Maximum value to include in the returned range.<tr><td class='argumentname'>ntick<td class='argumentdesc'>
+<p>The number of lines ("ticks") you would like within the range of <code>[min, max]</code>, default: <code>5</code>.</table><h4>Returns:</h4>
+<div class='returnvalue'>
+<p>An <a href="./../Classes/Array.html">Array</a> with the lower and upper bounds of the range containing your <strong>min</strong> and <strong>max</strong>, i.e. <code>[rangeMin, rangeMax]</code>.</div></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-getParams' href='./../Overviews/Methods.html#getParams'>getParams</a></h3>
+<div class='method'>
+<p>Specifically for use by <a href="./../Classes/DrawGrid.html">DrawGrid</a>. This returns a <a href="./../Classes/Dictionary.html">Dictionary</a> with keys: <code>'lines'</code>, an array of values where lines should be drawn, and <code>'labels'</code>, an array of 2-element arrays <code>[value, "formatted label"]</code> for each line.
+<p>Note that the highest and lowest values returned don't necessarily contain your <strong>valueMin</strong> and <strong>valueMax</strong>, but rather represent the values where grid lines will be drawn by <code>DrawGrid</code> (endcap lines are subsequently drawn at the data/grid bounds).<h4>Arguments:</h4>
+<table class='arguments'>
+<tr><td class='argumentname'>valueMin<td class='argumentdesc'>
+<p>Minimum value of the data to be plotted. The lowest grid line value returned may be higher than this value.<tr><td class='argumentname'>valueMax<td class='argumentdesc'>
+<p>Maximum value of the data to be plotted. The highest grid line value returned may be lower than this value.<tr><td class='argumentname'>pixelMin<td class='argumentdesc'>
+<p>Lower bound of the grid's range, in pixels. Used to calculate the size of the available grid space when determining grid values based on <strong>tickSpacing</strong> (if <strong>numTicks</strong> is <code>nil</code>).<tr><td class='argumentname'>pixelMax<td class='argumentdesc'>
+<p>Upper bound of the grid's range, in pixels. Used to calculate the size of the available grid space when determining grid values based on <strong>tickSpacing</strong> (if <strong>numTicks</strong> is <code>nil</code>).<tr><td class='argumentname'>numTicks<td class='argumentdesc'>
+<p>Explicit number of ticks you would like to see on the graph (though the result is approximate). Set to <code>nil</code> if you'd like the number of ticks to be found automatically, based on <strong>pixelMin</strong>, <strong>pixelMax</strong>, and <strong>tickSpacing</strong>.<tr><td class='argumentname'>tickSpacing<td class='argumentdesc'>
+<p>Minimum distance between ticks (in pixels). This value is only used when <strong>numTicks</strong> is <code>nil</code>.</table><h4>Returns:</h4>
+<div class='returnvalue'>
+<p>A <a href="./../Classes/Dictionary.html">Dictionary</a>.</div></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-formatLabel' href='./../Overviews/Methods.html#formatLabel'>formatLabel</a></h3>
+<div class='method'>
+<p>Format a numerical value for display as text, rounded to a desired precision.<h4>Arguments:</h4>
+<table class='arguments'>
+<tr><td class='argumentname'>val<td class='argumentdesc'>
+<p>The value to round and convert to a text label.<tr><td class='argumentname'>numDecimalPlaces<td class='argumentdesc'>
+<p>Number of decimal places to represent in the returned <code>String</code>.</table><h4>Returns:</h4>
+<div class='returnvalue'>
+<p>A <a href="./../Classes/String.html">String</a>.</div></div><h3><a class='anchor' name='Inherited%20instance%20methods'>Inherited instance methods</a></h3>
+<div id='inheritedinstmets'></div><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/develop/HelpSource/Classes/ExponentialGridLines.schelp'>https://github.com/supercollider/supercollider/tree/develop/HelpSource/Classes/ExponentialGridLines.schelp</a><br>link::Classes/ExponentialGridLines::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+</body></html>

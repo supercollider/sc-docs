@@ -1,0 +1,106 @@
+<!doctype html><html lang='en'><head><title>Boolean | SuperCollider 3.13.0 Help</title>
+<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<link rel='stylesheet' href='./../frontend.css' type='text/css' />
+<link rel='stylesheet' href='./../custom.css' type='text/css' />
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+<script src='./../lib/jquery.min.js'></script>
+<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script>
+var helpRoot = './..';
+var scdoc_title = 'Boolean';
+var scdoc_sc_version = '3.13.0';
+</script>
+<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../docmap.js' type='text/javascript'></script>
+<script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
+</head>
+<body onload='fixTOC()'>
+<div id='toc'>
+<div id='toctitle'>Boolean:</div>
+<span class='toc_search'>Filter: <input id='toc_search'></span><ul class='toc'><li class='toc1'><a href='#description'>Description</a></li>
+<ul class='toc'></ul><li class='toc1'><a href='#classmethods'>Class methods</a></li>
+<ul class='toc'><li class='toc2'><a href='#Inherited%20class%20methods'>Inherited class methods</a></li>
+<li class='toc2'><a href='#Undocumented%20class%20methods'>Undocumented class methods</a></li>
+<ul class='toc'><li class='toc3'><a href='#*new'>new</a> </li>
+<li class='toc3'><a href='#*newCopyArgs'>newCopyArgs</a> </li>
+</ul></ul><li class='toc1'><a href='#instancemethods'>Instance methods</a></li>
+<ul class='toc'><li class='toc3'><a href='#-xor'>xor</a> </li>
+<li class='toc3'><a href='#-and'>and</a> </li>
+<li class='toc3'><a href='#-or'>or</a> </li>
+<li class='toc3'><a href='#-&&'>&amp;&amp;</a> </li>
+<li class='toc3'><a href='#-||'>||</a> </li>
+<li class='toc3'><a href='#-nand'>nand</a> </li>
+<li class='toc3'><a href='#-not'>not</a> </li>
+<li class='toc3'><a href='#-if'>if</a> </li>
+<li class='toc3'><a href='#-asInteger'>asInteger</a> </li>
+<li class='toc3'><a href='#-binaryValue'>binaryValue</a> </li>
+<li class='toc3'><a href='#-asBoolean'>asBoolean</a> </li>
+<li class='toc3'><a href='#-booleanValue'>booleanValue</a> </li>
+<li class='toc3'><a href='#-keywordWarnings'>keywordWarnings</a> </li>
+<li class='toc2'><a href='#Inherited%20instance%20methods'>Inherited instance methods</a></li>
+</ul></ul></div><div id='menubar'></div>
+<div class='contents'>
+<div class='header'>
+<div id='label'>
+<span id='folder'>Classes</span>
+ | <span id='categories'><a href='./../Browse.html#Core'>Core</a></span>
+</div><h1>Boolean<span id='superclasses'> : <a href="../Classes/Object.html">Object</a></span>
+</h1>
+<div id='summary'>abstract class whose instances represent a logical value</div>
+</div>
+<div class='subheader'>
+<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/develop/SCClassLibrary/Common/Core/Boolean.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Core/Boolean.sc'>Boolean.sc</a></div><div id='subclasses'>Subclasses: <a href="../Classes/False.html">False</a>, <a href="../Classes/True.html">True</a></div>
+<div id='related'>See also: <a href="./../Reference/Control-Structures.html">Control Structures</a></div>
+</div>
+<h2><a class='anchor' name='description'>Description</a></h2>
+
+<p>Boolean is the superclass of <a href="./../Classes/True.html">True</a> and <a href="./../Classes/False.html">False</a> which are the concrete realizations. In code True and False are represented by the literal values <code>true</code> and <code>false</code>.<h2><a class='anchor' name='classmethods'>Class Methods</a></h2>
+<h3><a class='anchor' name='Inherited%20class%20methods'>Inherited class methods</a></h3>
+<div id='inheritedclassmets'></div><h3><a class='anchor' name='Undocumented%20class%20methods'>Undocumented class methods</a></h3>
+<h3 class='method-code'><span class='method-prefix'>Boolean.</span><a class='method-name' name='*new' href='./../Overviews/Methods.html#new'>new</a></h3>
+<h3 class='method-code'><span class='method-prefix'>Boolean.</span><a class='method-name' name='*newCopyArgs' href='./../Overviews/Methods.html#newCopyArgs'>newCopyArgs</a></h3>
+<h2><a class='anchor' name='instancemethods'>Instance Methods</a></h2>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-xor' href='./../Overviews/Methods.html#xor'>xor</a>(<span class='argstr'>bool</span>)</h3>
+<div class='method'>
+<p><h4>Returns:</h4>
+<div class='returnvalue'>
+<p>the exclusive or of the receiver and another Boolean.</div></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-and' href='./../Overviews/Methods.html#and'>and</a></h3>
+<div class='method'>
+<p>If the receiver is true then answer the evaluation of function. If the receiver is false then function is not evaluated and the message answers false.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-or' href='./../Overviews/Methods.html#or'>or</a></h3>
+<div class='method'>
+<p>If the receiver is false then answer the evaluation of function. If the receiver is true then function is not evaluated and the message answers true.</div><h3 class='method-code'><span class='method-prefix'></span><a class='method-name' name='-&&' href='./../Overviews/Methods.html#&amp;&amp;'>&amp;&amp;</a></h3>
+<div class='method'>
+<p><h4>Returns:</h4>
+<div class='returnvalue'>
+<p>true if the receiver is true and aBoolean is true.</div></div><h3 class='method-code'><span class='method-prefix'></span><a class='method-name' name='-||' href='./../Overviews/Methods.html#||'>||</a></h3>
+<div class='method'>
+<p><h4>Returns:</h4>
+<div class='returnvalue'>
+<p>true if either the receiver is true or aBoolean is true.</div></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-nand' href='./../Overviews/Methods.html#nand'>nand</a></h3>
+<div class='method'>
+<p><h4>Returns:</h4>
+<div class='returnvalue'>
+<p>true unless both the operands are true (Sheffer stroke)</div></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-not' href='./../Overviews/Methods.html#not'>not</a></h3>
+<div class='method'>
+<p><h4>Returns:</h4>
+<div class='returnvalue'>
+<p>true if the receiver is false, and false if the receiver is true.</div></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-if' href='./../Overviews/Methods.html#if'>if</a></h3>
+<div class='method'>
+<p>If the receiver is true, answer the evaluation of the trueFunc. If the receiver is false, answer the evaluation of the falseFunc.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-asInteger' href='./../Overviews/Methods.html#asInteger'>asInteger</a></h3>
+<div class='method'></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-binaryValue' href='./../Overviews/Methods.html#binaryValue'>binaryValue</a></h3>
+<div class='method'>
+<p><h4>Returns:</h4>
+<div class='returnvalue'>
+<p>1 if the receiver is true, and 0 if the receiver is false.</div></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-asBoolean' href='./../Overviews/Methods.html#asBoolean'>asBoolean</a></h3>
+<div class='method'></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-booleanValue' href='./../Overviews/Methods.html#booleanValue'>booleanValue</a></h3>
+<div class='method'><h4>Returns:</h4>
+<div class='returnvalue'>
+<p>The receiver. The same message is understood by <a href="./../Classes/SimpleNumber.html">SimpleNumber</a> and can be used to convert it to boolean.</div></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-keywordWarnings' href='./../Overviews/Methods.html#keywordWarnings'>keywordWarnings</a></h3>
+<div class='method'>
+<p>turn on/off warnings if a keyword argument is not found</div><h3><a class='anchor' name='Inherited%20instance%20methods'>Inherited instance methods</a></h3>
+<div id='inheritedinstmets'></div><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/develop/HelpSource/Classes/Boolean.schelp'>https://github.com/supercollider/supercollider/tree/develop/HelpSource/Classes/Boolean.schelp</a><br>link::Classes/Boolean::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+</body></html>

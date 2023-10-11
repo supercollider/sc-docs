@@ -1,0 +1,77 @@
+<!doctype html><html lang='en'><head><title>ServerMeter | SuperCollider 3.13.0 Help</title>
+<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<link rel='stylesheet' href='./../frontend.css' type='text/css' />
+<link rel='stylesheet' href='./../custom.css' type='text/css' />
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+<script src='./../lib/jquery.min.js'></script>
+<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script>
+var helpRoot = './..';
+var scdoc_title = 'ServerMeter';
+var scdoc_sc_version = '3.13.0';
+</script>
+<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../docmap.js' type='text/javascript'></script>
+<script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
+</head>
+<body onload='fixTOC()'>
+<div id='toc'>
+<div id='toctitle'>ServerMeter:</div>
+<span class='toc_search'>Filter: <input id='toc_search'></span><ul class='toc'><li class='toc1'><a href='#description'>Description</a></li>
+<ul class='toc'></ul><li class='toc1'><a href='#classmethods'>Class methods</a></li>
+<ul class='toc'><li class='toc3'><a href='#*new'>new</a> </li>
+<li class='toc2'><a href='#Inherited%20class%20methods'>Inherited class methods</a></li>
+</ul><li class='toc1'><a href='#instancemethods'>Instance methods</a></li>
+<ul class='toc'><li class='toc3'><a href='#-window'>window</a> </li>
+<li class='toc3'><a href='#-meterView'>meterView</a> </li>
+<li class='toc2'><a href='#Inherited%20instance%20methods'>Inherited instance methods</a></li>
+</ul><li class='toc1'><a href='#examples'>Examples</a></li>
+<ul class='toc'></ul></ul></div><div id='menubar'></div>
+<div class='contents'>
+<div class='header'>
+<div id='label'>
+<span id='folder'>Classes</span>
+ | <span id='categories'><a href='./../Browse.html#GUI'>GUI</a>&#8201;&gt;&#8201;<a href='./../Browse.html#GUI>Interfaces'>Interfaces</a></span>
+</div><h1>ServerMeter</h1>
+<div id='summary'>Graphical feedback window showing input/output levels</div>
+</div>
+<div class='subheader'>
+<div id='filename'>Location: <b>NOT INSTALLED!</b></div>
+<div id='related'>See also: <a href="./../Classes/Stethoscope.html">Stethoscope</a>, <a href="./../Classes/FreqScope.html">FreqScope</a>, <a href="./../Classes/ServerMeterView.html">ServerMeterView</a></div>
+</div>
+<h2><a class='anchor' name='description'>Description</a></h2>
+
+<p>A ServerMeter is a simple graphical display showing the volume levels of inputs and outputs on the server.
+<p>Also see: <a href="./../Classes/Server.html#-meter">Server: -meter</a><h2><a class='anchor' name='classmethods'>Class Methods</a></h2>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='*new' href='./../Overviews/Methods.html#new'>new</a></h3>
+<div class='method'>
+<p>Create a new ServerMeter.<h4>Arguments:</h4>
+<table class='arguments'>
+<tr><td class='argumentname'>server<td class='argumentdesc'>
+<p>The <a href="./../Classes/Server.html">Server</a> whose inputs and outputs you wish to visualize.<tr><td class='argumentname'>numIns<td class='argumentdesc'>
+<p>The number of inputs you want to display (starts counting at the first input bus, similar to <a href="./../Classes/SoundIn.html">SoundIn</a>)<tr><td class='argumentname'>numOuts<td class='argumentdesc'>
+<p>The number of outputs you want to display (starts counting at bus 0)</table><h4>Returns:</h4>
+<div class='returnvalue'>
+<p>A reference to the newly created ServerMeter</div></div><h3><a class='anchor' name='Inherited%20class%20methods'>Inherited class methods</a></h3>
+<div id='inheritedclassmets'></div><h2><a class='anchor' name='instancemethods'>Instance Methods</a></h2>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-window' href='./../Overviews/Methods.html#window'>window</a></h3>
+<div class='method'>
+<p>Get a reference to the <a href="./../Classes/Window.html">Window</a> of this ServerView<h4>Returns:</h4>
+<div class='returnvalue'>
+<p>a <a href="./../Classes/Window.html">Window</a> reference</div></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-meterView' href='./../Overviews/Methods.html#meterView'>meterView</a></h3>
+<div class='method'>
+<p>Get a reference to the <a href="./../Classes/ServerMeterView.html">ServerMeterView</a> of this ServerView<h4>Returns:</h4>
+<div class='returnvalue'>
+<p>a <a href="./../Classes/ServerMeterView.html">ServerMeterView</a> reference<div class='note'><span class='notelabel'>NOTE:</span> A ServerMeter encapsulates both a <a href="./../Classes/Window.html">Window</a> and a <a href="./../Classes/ServerMeterView.html">ServerMeterView</a> within that Window. For more information about Windows and views see <a href="./../Guides/GUI-Introduction.html#Basic%20elements:%20Windows,%20views%20and%20containers">Introduction to GUI: Basic elements: Windows, views and containers</a></div></div></div><h3><a class='anchor' name='Inherited%20instance%20methods'>Inherited instance methods</a></h3>
+<div id='inheritedinstmets'></div><h2><a class='anchor' name='examples'>Examples</a></h2>
+<textarea class='editor'>s = Server.internal; // use the internal server
+s.boot;
+// display 4 input channels &amp; main stereo output
+m = ServerMeter.new(s, 4, 2);</textarea>
+
+<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/develop/HelpSource/Classes/ServerMeter.schelp'>https://github.com/supercollider/supercollider/tree/develop/HelpSource/Classes/ServerMeter.schelp</a><br>link::Classes/ServerMeter::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+</body></html>

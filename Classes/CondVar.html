@@ -1,0 +1,354 @@
+<!doctype html><html lang='en'><head><title>CondVar | SuperCollider 3.13.0 Help</title>
+<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<link rel='stylesheet' href='./../frontend.css' type='text/css' />
+<link rel='stylesheet' href='./../custom.css' type='text/css' />
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+<script src='./../lib/jquery.min.js'></script>
+<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script>
+var helpRoot = './..';
+var scdoc_title = 'CondVar';
+var scdoc_sc_version = '3.13.0';
+</script>
+<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../docmap.js' type='text/javascript'></script>
+<script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
+</head>
+<body onload='fixTOC()'>
+<div id='toc'>
+<div id='toctitle'>CondVar:</div>
+<span class='toc_search'>Filter: <input id='toc_search'></span><ul class='toc'><li class='toc1'><a href='#classmethods'>Class methods</a></li>
+<ul class='toc'><li class='toc3'><a href='#*new'>new</a> </li>
+<li class='toc2'><a href='#Inherited%20class%20methods'>Inherited class methods</a></li>
+</ul><li class='toc1'><a href='#instancemethods'>Instance methods</a></li>
+<ul class='toc'><li class='toc3'><a href='#-wait'>wait</a> </li>
+<li class='toc3'><a href='#-waitFor'>waitFor</a> </li>
+<li class='toc3'><a href='#-signalOne'>signalOne</a> </li>
+<li class='toc3'><a href='#-signalAll'>signalAll</a> </li>
+<li class='toc3'><a href='#-shallowCopy'>shallowCopy</a>  <a href='#-copy'>copy</a>  <a href='#-deepCopy'>deepCopy</a> </li>
+<li class='toc2'><a href='#Inherited%20instance%20methods'>Inherited instance methods</a></li>
+</ul><li class='toc1'><a href='#examples'>Examples</a></li>
+<ul class='toc'><li class='toc2'><a href='#Simple%20interactive%20example'>Simple interactive example</a></li>
+<ul class='toc'></ul><li class='toc2'><a href='#Producer-consumer%20queue:%20single%20producer,%20single%20consumer'>Producer-consumer queue: single producer, single consumer</a></li>
+<ul class='toc'></ul><li class='toc2'><a href='#Producer-consumer%20queue:%20multiple%20producers,%20multiple%20consumers'>Producer-consumer queue: multiple producers, multiple consumers</a></li>
+<ul class='toc'></ul><li class='toc2'><a href='#Using%20timeouts'>Using timeouts</a></li>
+<ul class='toc'></ul></ul></ul></div><div id='menubar'></div>
+<div class='contents'>
+<div class='header'>
+<div id='label'>
+<span id='folder'>Classes</span>
+ | <span id='categories'><a href='./../Browse.html#Scheduling'>Scheduling</a></span>
+</div><h1>CondVar<span id='superclasses'> : <a href="../Classes/Object.html">Object</a></span>
+</h1>
+<div id='summary'>Condition variable: block one or more threads until some condition is true</div>
+</div>
+<div class='subheader'>
+<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/develop/SCClassLibrary/Common/Core/CondVar.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Core/CondVar.sc'>CondVar.sc</a></div></div>
+
+<p>CondVar is a <strong>condition variable</strong>, a low-level synchronization tool which allows one or more threads to wait until some condition becomes true. Although it has "variable" in the name, a condition variable doesn't wrap a variable like, for example, <a href="./../Classes/FlowVar.html">FlowVar</a> does. The condition referred to here is totally external to the CondVar object, and can be any arbitrary state in your code. CondVar supports two fundamental operations: waiting and signalling. Waiting means suspending execution of the current thread until the relevant condition becomes true at some point in the future. Signalling means indicating to other threads that the condition is now true, and that they should continue executing.
+<p>When waiting on a CondVar, you may optionally pass a predicate (an object, usually a Function, that returns a Boolean when evaluated with <code>value</code>) as an argument. This leads to two general ways of using CondVar:<ul>
+<li>Manually checking your condition<ol>
+<li>First, check the condition in case it is already true.<li>If the condition is false, call wait or waitFor without a predicate. This suspends execution of the current thread.<li>When the CondVar is signalled or a timeout expires, the thread continues execution. You should then check the  condition again, and continue waiting if it is not satisfied.</ol>
+
+<p>This usually takes the form of a while loop of the form: <code>while { /* condition is false */ } { /* wait on condition */ }</code>.<li>Have CondVar check your condition for you: call wait or waitFor with a predicate, which takes care of the three steps above.</ul>
+
+<p>The following code illustrates these two approaches:<textarea class='editor'>// Version 1: `wait` without predicate -- while loop required
+(
+var c = CondVar();
+// Our resource here will be a "message", which is set to some string
+// when available, and set to empty when unavailable. This resource is
+// initially unavailable.
+var message = "";
+
+// We add these delays to be clear about which thread runs first. Try
+// changing these values to see what happens!
+var waitThreadDelay = 1;
+var signalThreadDelay = 2;
+
+// These two forked threads will share the condition variable, `c`,
+// and the condition state, `message`.
+fork {
+    waitThreadDelay.wait;
+    while { message.isEmpty } {
+        "Resource is unavailable, waiting now".postln;
+        c.wait;
+    };
+    "Resource is available, message is: '%'\n".postf(message);
+};
+
+fork {
+    signalThreadDelay.wait;
+    message = "meow, world!";
+    c.signalOne;
+    "Resource was made available and waiting thread was signaled".postln;
+};
+)
+
+// Version 2: `wait` with predicate -- no while loop required
+(
+var c = CondVar(), message = "";
+var waitThreadDelay = 1;
+var signalThreadDelay = 2;
+
+fork {
+    waitThreadDelay.wait;
+    c.wait({ message.notEmpty });
+    "Resource is available, message is: '%'\n".postf(message);
+};
+
+fork {
+    signalThreadDelay.wait;
+    message = "meow, world!";
+    c.signalOne;
+    "Resource was made available and waiting thread was signaled".postln;
+};
+)</textarea>
+
+<p>Internally, CondVar is little more than a queue of threads which are waiting for the condition to become true. When signaling, you have the choice of waking only the next waiting thread on the queue, if one exists (<code>signalOne</code>), or waking all waiting threads in the queue (<code>signalAll</code>).
+<p>Note that threads in the queue do not resume immediately upon a signal. They are scheduled to resume immediately after the signalling thread relinquishes control, either by <code>yield</code> or <code>wait</code>, or by reaching the end of a playing Routine. In the examples above, the <code>signalOne</code> Routine simply ends, so there is no need to <code>yield</code> anything.
+<p>In other languages, you may see that condition variables also use a mutex for synchronization. This is typically necessary to protect shared access to the condition state. However, since SuperCollider's interpreter is single-threaded, each running thread implicitly holds the global interpreter mutex and more fine-grained mutexes are unnecessary.<h2><a class='anchor' name='classmethods'>Class Methods</a></h2>
+<h3 class='method-code'><span class='method-prefix'>CondVar.</span><a class='method-name' name='*new' href='./../Overviews/Methods.html#new'>new</a></h3>
+<div class='method'>
+<p>Create a new instance.</div><h3><a class='anchor' name='Inherited%20class%20methods'>Inherited class methods</a></h3>
+<div id='inheritedclassmets'></div><h2><a class='anchor' name='instancemethods'>Instance Methods</a></h2>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-wait' href='./../Overviews/Methods.html#wait'>wait</a>(<span class='argstr'>predicate</span>)</h3>
+<div class='method'>
+<p>The behavior depends on whether a <code>predicate</code> is given. If no <code>predicate</code> is given, this method simply blocks the current thread until it is woken by <code>signalOne</code> or <code>signalAll</code>. Otherwise, this method is equivalent to <code>while { predicate.value.not } { cond.wait }</code>. In other words, the thread only blocks if the predicate is false, otherwise it blocks and only resumes once the thread has been signalled and the predicate is true.
+<p>This method must only be called within a <a href="./../Classes/Routine.html">Routine</a> or Routine wrapper (for example, <a href="./../Classes/Task.html">Task</a>or <a href="./../Classes/Tdef.html">Tdef</a>).<h4>Arguments:</h4>
+<table class='arguments'>
+<tr><td class='argumentname'>predicate<td class='argumentdesc'>
+<p>A condition to be checked before blocking, and before resuming after being woken by <code>signalOne</code> or <code>signalAll</code>. If <code>predicate.value.not</code> is <code>true</code>, execution resumes. Typically, this is a Function that returns a Boolean.
+<p><code>predicate</code> is always executed on the thread which called <code>wait</code>. If evaluating the predicate throws an exception, the exception will propagate up on the thread which called <code>wait</code>, and the thread will no longer be waiting on this CondVar.
+<p>When <code>wait</code> returns, the predicate was true. It may not be true later, for instance if it depends on external factors such as the system time or the state of the server.</table><h4>Returns:</h4>
+<div class='returnvalue'>
+<p>this object</div></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-waitFor' href='./../Overviews/Methods.html#waitFor'>waitFor</a>(<span class='argstr'>timeoutBeats</span>, <span class='argstr'>predicate</span>)</h3>
+<div class='method'>
+<p>Similar to <code>wait</code>, but the thread will also be unblocked if the relative timeout <code>timeoutBeats</code> expires.
+<p>If <code>predicate</code> is <code>nil</code>, this method blocks the current thread until it is woken by <code>signalOne</code> or <code>signalAll</code>, or the timeout expires. If <code>predicate</code> is not <code>nil</code>, this method returns immediately if <code>predicate.value</code> is true, and otherwise blocks either until the timeout expires, or until the thread is woken by <code>signalOne</code> or <code>signalAll</code> and <code>predicate.value</code> is true.
+<p>Because the interpreter's thread scheduler is not preemptive, an expiring timeout will only wake the thread if other threads are idle. You are not guaranteed that the thread will be woken close to the timeout duration expiring, or even that it will be woken at all. This could happen, for example, if some other thread enters an infinite loop and never yields.
+<p>This method must only be called within a <a href="./../Classes/Routine.html">Routine</a> or Routine wrapper (for example, <a href="./../Classes/Task.html">Task</a> or <a href="./../Classes/Tdef.html">Tdef</a>).<h4>Arguments:</h4>
+<table class='arguments'>
+<tr><td class='argumentname'>timeoutBeats<td class='argumentdesc'>
+<p>A duration in beats to wait before timing out. This value is converted according to the following rules: if its class is Integer or Float, it remainds unchanged; otherwise, if it responds to <code>asInteger</code>, this method is called; otherwise, if it responds to <code>asFloat</code>, this method is called. After this, if the resulting value is not an Integer or a Float, an error is thrown. An error is also thrown if the resulting value is <code>inf</code> or not a number (NaN). If the resulting value is less than or equal to 0, <code>waitFor</code> returns the result of <code>predicate.value</code>immediately if <code>predicate</code> is not nil and <code>false</code> otherwise.
+<p>These strict checks are made to protect the thread which handles timeouts.<tr><td class='argumentname'>predicate<td class='argumentdesc'>
+<p>A condition to be checked before blocking, and before resuming after being woken by <code>signalOne</code> or <code>signalAll</code> or a timeout. Typically, this is a Function that returns a Boolean.
+<p><code>predicate</code> is always executed on the thread which called <code>wait</code>. If evaluating the predicate throws an exception, the exception will propagate up on the thread which called <code>wait</code>, and the thread will no longer be waiting on this CondVar.</table><h4>Returns:</h4>
+<div class='returnvalue'>
+<p>If the thread was woken because the timeout expired, then returns <code>predicate.value</code> if one was given and <code>false</code> if <code>predicate</code> was <code>nil</code>. Otherwise, returns <code>true</code>.
+<p>In other words, if <code>predicate</code> is non-nil, a return value of <code>true</code> means that <code>predicate.value</code> was true when the thread resumed.</div></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-signalOne' href='./../Overviews/Methods.html#signalOne'>signalOne</a></h3>
+<div class='method'>
+<p>Wakes one thread waiting on this Condition. Threads are woken in the order in which they called <code>wait</code> or <code>waitFor</code>. If a thread is woken and was waiting with a predicate, and that predicate is still <code>false</code>, it will <code>wait</code> again and be placed at the end of the queue of threads waiting on this CondVar. Another thread will not be woken in that case.<h4>Returns:</h4>
+<div class='returnvalue'>
+<p>this object</div></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-signalAll' href='./../Overviews/Methods.html#signalAll'>signalAll</a></h3>
+<div class='method'>
+<p>Wakes all threads waiting on this Condition. Threads are woken in the order in which they called <code>wait</code> or <code>waitFor</code>. If threads were waiting with predicates and their predicates are still <code>false</code> after being woken, they will block again in the same order as before this method was called.<h4>Returns:</h4>
+<div class='returnvalue'>
+<p>this object</div></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-shallowCopy' href='./../Overviews/Methods.html#shallowCopy'>shallowCopy</a></h3>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-copy' href='./../Overviews/Methods.html#copy'>copy</a></h3>
+<div class='supmethod'>From superclass: <a href='./../Classes/Object.html'>Object</a></div>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-deepCopy' href='./../Overviews/Methods.html#deepCopy'>deepCopy</a></h3>
+<div class='method'>
+<p>Throws a <code>ShouldNotImplementError</code>; CondVars cannot be copied, shallow copied, or deep copied.</div><h3><a class='anchor' name='Inherited%20instance%20methods'>Inherited instance methods</a></h3>
+<div id='inheritedinstmets'></div><h2><a class='anchor' name='examples'>Examples</a></h2>
+<h3><a class='anchor' name='Simple%20interactive%20example'>Simple interactive example</a></h3>
+<textarea class='editor'>(
+c = CondVar();
+
+Routine {
+    1.wait;
+    "waited for 1 second".postln;
+    1.wait;
+    "waited for another second, now waiting for you to run 'c.signalOne'...".postln;
+    c.wait;
+    "the condition is no longer waiting".postln;
+    1.wait;
+    "waited for another second, now waiting for you...".postln;
+    c.wait;
+    "the condition is no longer waiting".postln;
+    1.wait;
+    "the end".postln;
+}.play;
+)
+
+// Run this line to unblock the routine
+c.signalOne;</textarea>
+<h3><a class='anchor' name='Producer-consumer%20queue:%20single%20producer,%20single%20consumer'>Producer-consumer queue: single producer, single consumer</a></h3>
+
+<p>The following example shows a CondVar used to manage a simple producer-consumer queue with one consumer and one producer.
+<p>The producer thread adds "tasks" to the queue, while the consumer thread removes and "processes" them. When there is no work to do, the consumer has to wait until work is available. When there is too much work to do, the producer thread should avoid creating more tasks. Try playing with the wait times for each thread to see what happens.<textarea class='editor'>(
+var full = CondVar(), empty = CondVar();
+var queue = Array();
+var maxQueueSize = 5;
+// The producer and consumer will wait between tasks for a duration
+// somewhere in these ranges.  Over time, you'll see the queue grow
+// and shrink between 0 and maxQueueSize, but CondVar keeps everything
+// synchronized.
+var producerWaitTimeRange = [0.1, 1];
+var consumerWaitTimeRange = [0.1, 1];
+
+// The "wait"s in each thread simulate doing some task asynchronously,
+// during which time other tasks might be created. If our tasks were
+// always created and/or executed synchronously, there would be no
+// need for a queue shared between two threads.
+
+// producer thread
+fork {
+    var counter = 0; // Our "task" is just an increasing number for now
+    var task;
+    loop {
+        // This guarantees that when we return from `wait`, there is
+        // enough room in the queue to add another task. To get past
+        // this, we have to wait until the consumer calls
+        // signalOne.
+        full.wait({ queue.size &lt; maxQueueSize });
+
+        task = counter;
+        counter = counter + 1;
+        queue = queue.add(task);
+        postf("Producer created a task: %. Current queue size: %\n",
+            task, queue.size);
+
+        // Now that we've added a task to the queue, we have to let
+        // the consumer thread know in case it was waiting on us.
+        empty.signalOne;
+
+        wait(rrand(producerWaitTimeRange[0], producerWaitTimeRange[1]));
+    }
+};
+
+// consumer thread
+fork {
+    var task;
+    loop {
+        // As in the producer thread, this blocks us until both the
+        // queue has something in it, and we've been signaled by the
+        // producer.
+        empty.wait({ queue.notEmpty });
+
+        task = queue.removeAt(0);
+        postf("Consumer processed a task: %. Current queue size: %\n",
+            task, queue.size);
+
+        // We need to signal to the producer, in case it was waiting
+        // on us to insert something into the queue.
+        full.signalOne;
+
+        wait(rrand(consumerWaitTimeRange[0], consumerWaitTimeRange[1]));
+    }
+};
+)</textarea>
+<h3><a class='anchor' name='Producer-consumer%20queue:%20multiple%20producers,%20multiple%20consumers'>Producer-consumer queue: multiple producers, multiple consumers</a></h3>
+
+<p>Here is another producer-consumer example with multiple producers and multiple consumers. Note how easily the code above can be generalized.<textarea class='editor'>(
+var full = CondVar(), empty = CondVar();
+var queue = Array();
+var counter = 0; // The task counter is shared among all producers this time
+
+// Try experimenting with these parameters
+var maxQueueSize = 10;
+var numProducers = 3;
+var numConsumers = 3;
+var producerWaitTimeRange = [0.3, 1.5];
+var consumerWaitTimeRange = [0.3, 1.5];
+
+// producer threads
+numProducers.do { |index|
+    fork {
+        var task;
+        loop {
+            full.wait({ queue.size &lt; maxQueueSize });
+
+            task = counter;
+            counter = counter + 1;
+            queue = queue.add(task);
+            postf("Producer % created a task: %. Current queue size: %\n",
+                index, task, queue.size);
+
+            // Even though there might be multiple consumers waiting
+            // on this condition, only one of them can possibly make
+            // use of the new task we just created.  So we use
+            // signalOne instead of signalAll.
+            empty.signalOne;
+
+            wait(rrand(producerWaitTimeRange[0], producerWaitTimeRange[1]));
+        }
+    }
+};
+
+// consumer thread
+numConsumers.do { |index|
+    fork {
+        var task;
+        loop {
+            empty.wait({ queue.notEmpty });
+
+            task = queue.removeAt(0);
+            postf("Consumer % processed a task: %. Current queue size: %\n",
+                index, task, queue.size);
+
+            full.signalOne;
+
+            wait(rrand(consumerWaitTimeRange[0], consumerWaitTimeRange[1]));
+        }
+    }
+}
+)</textarea>
+<h3><a class='anchor' name='Using%20timeouts'>Using timeouts</a></h3>
+
+<p>Sometimes, you want to wait on an external condition that may never come true, or you want to do something else in case you've been waiting for a long time. This is a good place to use <code>waitFor</code>. In our example, we're using a Routine that sometimes fails to set the desired condition to simulate this "unreliable" task. Some practical examples of this might be a long asynchronous task on the server or in a call to unixCmd that doesn't finish in time, or doesn't produce the result we were looking for.<textarea class='editor'>(
+var condition = CondVar();
+
+// Our "unreliable" task will half the time signal us that it's done,
+// but half the time it will fail to do so.
+fork {
+    var coinFlip;
+    1.wait;
+    coinFlip = 0.5.coin;
+    postf("Flip gave us: % ; %signalling the condition\n", coinFlip,
+        if(coinFlip, "not ", ""));
+    if(coinFlip) { condition.signalOne };
+};
+
+fork {
+    // In this case, the random coin flip succeeding is our entire
+    // condition, so we don't pass any predicate to waitFor.
+    if(condition.waitFor(2)) {
+        "Coin flip succeeded!".postln
+    } {
+        "Coin flip failed, and we timed out".postln
+    };
+};
+)</textarea>
+
+<p>We can also rewrite this example so that we get signalled no matter what, but the condition might still not come true.<textarea class='editor'>(
+var condition = CondVar();
+var coinFlip = false;
+
+fork {
+    // The coin flip now has multiple chances to succeed, but it still
+    // might not do so within our 2-second window.
+    5.do { |i|
+        0.2.wait;
+        coinFlip = 0.25.coin;
+        "Flip number %: got %\n".postf(i + 1, coinFlip);
+        condition.signalOne;
+    }
+};
+
+fork {
+    // We don't exit `waitFor` unless we timeout, or we get signalled
+    // *and* the predicate is true.
+    if(condition.waitFor(2, { coinFlip })) {
+        "Coin flip succeeded!".postln
+    } {
+        "Coin flip failed, and we timed out".postln
+    };
+};
+)</textarea>
+
+<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/develop/HelpSource/Classes/CondVar.schelp'>https://github.com/supercollider/supercollider/tree/develop/HelpSource/Classes/CondVar.schelp</a><br>link::Classes/CondVar::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+</body></html>

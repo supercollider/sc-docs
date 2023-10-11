@@ -1,0 +1,77 @@
+<!doctype html><html lang='en'><head><title>SCDocNode | SuperCollider 3.13.0 Help</title>
+<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<link rel='stylesheet' href='./../frontend.css' type='text/css' />
+<link rel='stylesheet' href='./../custom.css' type='text/css' />
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+<script src='./../lib/jquery.min.js'></script>
+<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script>
+var helpRoot = './..';
+var scdoc_title = 'SCDocNode';
+var scdoc_sc_version = '3.13.0';
+</script>
+<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../docmap.js' type='text/javascript'></script>
+<script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
+</head>
+<body onload='fixTOC()'>
+<div id='toc'>
+<div id='toctitle'>SCDocNode:</div>
+<span class='toc_search'>Filter: <input id='toc_search'></span><ul class='toc'><li class='toc1'><a href='#description'>Description</a></li>
+<ul class='toc'></ul><li class='toc1'><a href='#classmethods'>Class methods</a></li>
+<ul class='toc'><li class='toc3'><a href='#*new'>new</a> </li>
+<li class='toc2'><a href='#Inherited%20class%20methods'>Inherited class methods</a></li>
+</ul><li class='toc1'><a href='#instancemethods'>Instance methods</a></li>
+<ul class='toc'><li class='toc3'><a href='#-id'>id</a> </li>
+<li class='toc3'><a href='#-text'>text</a> </li>
+<li class='toc3'><a href='#-children'>children</a> </li>
+<li class='toc3'><a href='#-merge'>merge</a> </li>
+<li class='toc3'><a href='#-findChild'>findChild</a> </li>
+<li class='toc2'><a href='#Inherited%20instance%20methods'>Inherited instance methods</a></li>
+</ul></ul></div><div id='menubar'></div>
+<div class='contents'>
+<div class='header'>
+<div id='label'>
+<span id='folder'>Classes</span>
+ | <span id='categories'><a href='./../Browse.html#HelpSystem'>HelpSystem</a></span>
+</div><h1>SCDocNode<span id='superclasses'> : <a href="../Classes/Object.html">Object</a></span>
+</h1>
+<div id='summary'>An SCDoc parsed document node</div>
+</div>
+<div class='subheader'>
+<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/develop/SCClassLibrary/SCDoc/SCDoc.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/SCDoc/SCDoc.sc'>SCDoc.sc</a></div><div id='related'>See also: <a href="./../Classes/SCDoc.html">SCDoc</a></div>
+</div>
+<h2><a class='anchor' name='description'>Description</a></h2>
+
+<p>This class is used internally by <a href="./../Classes/SCDoc.html">SCDoc</a> to represent a node in the parsed document tree returned by the parser. It has an id symbol, optional text and optional children.<h2><a class='anchor' name='classmethods'>Class Methods</a></h2>
+<h3 class='method-code'><span class='method-prefix'>SCDocNode.</span><a class='method-name' name='*new' href='./../Overviews/Methods.html#new'>new</a>(<span class='argstr'>maxSize: 0</span>)</h3>
+<div class='supmethod'>From superclass: <a href='./../Classes/Object.html'>Object</a></div>
+<div class='method'>
+<p>Create a new node</div><h3><a class='anchor' name='Inherited%20class%20methods'>Inherited class methods</a></h3>
+<div id='inheritedclassmets'></div><h2><a class='anchor' name='instancemethods'>Instance Methods</a></h2>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-id' href='./../Overviews/Methods.html#id'>id</a></h3>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-id' href='./../Overviews/Methods.html#id'>id</a> = value</h3>
+<div class='method'>
+<p>The node ID. A <a href="./../Classes/Symbol.html">Symbol</a></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-text' href='./../Overviews/Methods.html#text'>text</a></h3>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-text' href='./../Overviews/Methods.html#text'>text</a> = value</h3>
+<div class='method'>
+<p>Text associated with this node. A <a href="./../Classes/String.html">String</a> or nil.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-children' href='./../Overviews/Methods.html#children'>children</a></h3>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-children' href='./../Overviews/Methods.html#children'>children</a> = value</h3>
+<div class='method'>
+<p>Children of this node. A <a href="./../Classes/Array.html">Array</a> or nil.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-merge' href='./../Overviews/Methods.html#merge'>merge</a>(<span class='argstr'>root2</span>)</h3>
+<div class='method'>
+<p>Merge another document node tree with this one. Used by document additions (*.ext.schelp)<h4>Arguments:</h4>
+<table class='arguments'>
+<tr><td class='argumentname'>root2<td class='argumentdesc'>
+<p>Another SCDocNode instance.</table></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-findChild' href='./../Overviews/Methods.html#findChild'>findChild</a>(<span class='argstr'>id</span>)</h3>
+<div class='method'>
+<p>Find the first child of this node with specified id.<h4>Arguments:</h4>
+<table class='arguments'>
+<tr><td class='argumentname'>id<td class='argumentdesc'>
+<p>A <a href="./../Classes/Symbol.html">Symbol</a></table></div><h3><a class='anchor' name='Inherited%20instance%20methods'>Inherited instance methods</a></h3>
+<div id='inheritedinstmets'></div><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/develop/HelpSource/Classes/SCDocNode.schelp'>https://github.com/supercollider/supercollider/tree/develop/HelpSource/Classes/SCDocNode.schelp</a><br>link::Classes/SCDocNode::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+</body></html>

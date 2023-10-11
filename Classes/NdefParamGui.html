@@ -1,0 +1,115 @@
+<!doctype html><html lang='en'><head><title>NdefParamGui | SuperCollider 3.13.0 Help</title>
+<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<link rel='stylesheet' href='./../frontend.css' type='text/css' />
+<link rel='stylesheet' href='./../custom.css' type='text/css' />
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+<script src='./../lib/jquery.min.js'></script>
+<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script>
+var helpRoot = './..';
+var scdoc_title = 'NdefParamGui';
+var scdoc_sc_version = '3.13.0';
+</script>
+<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../docmap.js' type='text/javascript'></script>
+<script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
+</head>
+<body onload='fixTOC()'>
+<div id='toc'>
+<div id='toctitle'>NdefParamGui:</div>
+<span class='toc_search'>Filter: <input id='toc_search'></span><ul class='toc'><li class='toc1'><a href='#description'>Description</a></li>
+<ul class='toc'></ul><li class='toc1'><a href='#classmethods'>Class methods</a></li>
+<ul class='toc'><li class='toc2'><a href='#Creation'>Creation</a></li>
+<ul class='toc'><li class='toc3'><a href='#*new'>new</a> </li>
+</ul><li class='toc2'><a href='#Inherited%20class%20methods'>Inherited class methods</a></li>
+</ul><li class='toc1'><a href='#instancemethods'>Instance methods</a></li>
+<ul class='toc'><li class='toc3'><a href='#-name'>name</a> </li>
+<li class='toc2'><a href='#Inherited%20instance%20methods'>Inherited instance methods</a></li>
+</ul><li class='toc1'><a href='#examples'>Examples</a></li>
+<ul class='toc'></ul></ul></div><div id='menubar'></div>
+<div class='contents'>
+<div class='header'>
+<div id='label'>
+<span id='folder'>Classes</span>
+ | <span id='categories'><a href='./../Browse.html#JITLib'>JITLib</a>&#8201;&gt;&#8201;<a href='./../Browse.html#JITLib>GUI'>GUI</a> | <a href='./../Browse.html#Live Coding'>Live Coding</a></span>
+</div><h1>NdefParamGui</h1>
+<div id='summary'>display the settings of a nodeproxy</div>
+</div>
+<div class='subheader'>
+<div id='filename'>Location: <b>NOT INSTALLED!</b></div>
+<div id='related'>See also: <a href="./../Classes/EZText.html">EZText</a>, <a href="./../Classes/NdefGui.html">NdefGui</a>, <a href="./../Classes/EnvirGui.html">EnvirGui</a></div>
+</div>
+<h2><a class='anchor' name='description'>Description</a></h2>
+
+<p>NdefParamGui displays all settings and mappings of a nodeproxy, so one can change them flexibly. Single number get displayed with an <a href="./../Classes/EZSlider.html">EZSlider</a>, and anything else is shown as an <a href="./../Classes/EZText.html">EZText</a> (a text field). Its main use is within <a href="./../Classes/NdefGui.html">NdefGui</a>.
+<p>It inherits some useful methods from <a href="./../Classes/EnvirGui.html">EnvirGui</a>.<h2><a class='anchor' name='classmethods'>Class Methods</a></h2>
+<h3><a class='anchor' name='Creation'>Creation</a></h3>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='*new' href='./../Overviews/Methods.html#new'>new</a></h3>
+<div class='method'>
+<p>create a new NdefParamGui<textarea class='editor'>// simple example - see also NdefGui!
+
+g = NdefParamGui.new(nil, 5);    // empty with 5 slots
+g.parent.alwaysOnTop_(true);
+g.object_(Ndef(\a));        // put in a nodeproxy
+Ndef(\a, { |freq = 300, amp = 0.2| SinOsc.ar(freq) * amp ! 2 }).play;
+Ndef(\a).set(\freq, 200);    // add a setting
+Ndef(\a);
+g.object_(nil);            // put in nothing
+
+g.object_(Ndef(\a));         // put in a nodeproxy
+Ndef(\a).set(\amp, 0.125);    // add a setting
+Ndef(\a, { |freq = 300, amp = 0.2| SinOsc.ar(freq) * amp });
+Ndef(\a).set(\freq, 234);    // add a setting
+
+Ndef(\a).play
+Ndef(\lfo, { LFNoise0.kr([12, 8], 200).sum + 500 });
+Ndef(\a).map(\freq, Ndef(\lfo));// mapped proxies are shown
+
+g.useRanger = false;
+
+//Multichannel controls are shown in EZText
+g.putSpec(\freqs, \freq);
+Ndef(\a, { |freqs = #[300, 303], pan, amp = 0.2| SinOsc.ar(freqs).sum * amp });
+Ndef(\a).play
+Ndef(\a).setn(\freqs, [300, 350])
+Ndef(\a).setn(\freqs, [330, 350])
+Ndef(\a).set(\harm, 123)
+
+Ndef(\a).nodeMap.clear
+
+Ndef(\lfos, { LFNoise0.kr([12, 8], 200) + 500 });
+Ndef(\a).map(\freqs, Ndef(\lfos))
+
+g.parent.close</textarea>
+<h4>Arguments:</h4>
+<table class='arguments'>
+<tr><td class='argumentname'>object<td class='argumentdesc'>
+<p>the nodeproxy whose settings are to be displayed.<tr><td class='argumentname'>numItems<td class='argumentdesc'>
+<p>the number of items to display. If an envir is given, and no num, num is envir.size.<tr><td class='argumentname'>parent<td class='argumentdesc'>
+<p>the parent view to display in; if none is given, a new window is created.<tr><td class='argumentname'>bounds<td class='argumentdesc'>
+<p>the bounds within which to display; if none is given, bounds are calculated.<tr><td class='argumentname'>makeSkip<td class='argumentdesc'>
+<p>flag whether to make a skipjack to manage updates of the envirgui. default is true.<tr><td class='argumentname'>options<td class='argumentdesc'>
+<p>a list of additional information, e.g. flags about optional buttons.</table></div><h3><a class='anchor' name='Inherited%20class%20methods'>Inherited class methods</a></h3>
+<div id='inheritedclassmets'></div><h2><a class='anchor' name='instancemethods'>Instance Methods</a></h2>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-name' href='./../Overviews/Methods.html#name'>name</a></h3>
+<div class='method'>
+<p>if in its own window, set the window's name<textarea class='editor'>g.name = "Yoohoo";</textarea>
+</div><h3><a class='anchor' name='Inherited%20instance%20methods'>Inherited instance methods</a></h3>
+<div id='inheritedinstmets'></div><h2><a class='anchor' name='examples'>Examples</a></h2>
+<textarea class='editor'>    // put an NdefParamGui in an existing window - margin becomes 0@0
+(
+w = Window().front;
+w.addFlowLayout;
+g = NdefParamGui(Ndef(\a), 3, w);
+NdefParamGui(Ndef(\c), 15, w);
+)
+    // even
+Ndef(\c).set(\otto, 123, \mops, [1,2,3], \kotzt, [0, 6, 0, 6]);
+Ndef(\c).nodeMap.clear;</textarea>
+
+<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/develop/HelpSource/Classes/NdefParamGui.schelp'>https://github.com/supercollider/supercollider/tree/develop/HelpSource/Classes/NdefParamGui.schelp</a><br>link::Classes/NdefParamGui::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+</body></html>

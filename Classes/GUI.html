@@ -1,0 +1,138 @@
+<!doctype html><html lang='en'><head><title>GUI | SuperCollider 3.13.0 Help</title>
+<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<link rel='stylesheet' href='./../frontend.css' type='text/css' />
+<link rel='stylesheet' href='./../custom.css' type='text/css' />
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+<script src='./../lib/jquery.min.js'></script>
+<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script>
+var helpRoot = './..';
+var scdoc_title = 'GUI';
+var scdoc_sc_version = '3.13.0';
+</script>
+<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../docmap.js' type='text/javascript'></script>
+<script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
+</head>
+<body onload='fixTOC()'>
+<div id='toc'>
+<div id='toctitle'>GUI:</div>
+<span class='toc_search'>Filter: <input id='toc_search'></span><ul class='toc'><li class='toc1'><a href='#description'>Description</a></li>
+<ul class='toc'></ul><li class='toc1'><a href='#classmethods'>Class methods</a></li>
+<ul class='toc'><li class='toc3'><a href='#*new'>new</a> </li>
+<li class='toc3'><a href='#*makeGUI'>makeGUI</a> </li>
+<li class='toc3'><a href='#*initClass'>initClass</a> </li>
+<li class='toc3'><a href='#*add'>add</a> </li>
+<li class='toc3'><a href='#*qt'>qt</a> </li>
+<li class='toc3'><a href='#*fromID'>fromID</a> </li>
+<li class='toc3'><a href='#*current'>current</a> </li>
+<li class='toc3'><a href='#*get'>get</a> </li>
+<li class='toc3'><a href='#*set'>set</a> </li>
+<li class='toc3'><a href='#*use'>use</a> </li>
+<li class='toc3'><a href='#*useID'>useID</a> </li>
+<li class='toc3'><a href='#*add'>add</a> </li>
+<li class='toc3'><a href='#*doesNotUnderstand'>doesNotUnderstand</a> </li>
+<li class='toc3'><a href='#*setSkin'>setSkin</a> </li>
+<li class='toc3'><a href='#*scheme'>scheme</a> </li>
+<li class='toc3'><a href='#*schemes'>schemes</a> </li>
+<li class='toc3'><a href='#*skin'>skin</a> </li>
+<li class='toc3'><a href='#*skins'>skins</a> </li>
+<li class='toc2'><a href='#Inherited%20class%20methods'>Inherited class methods</a></li>
+</ul><li class='toc1'><a href='#instancemethods'>Instance methods</a></li>
+<ul class='toc'><li class='toc2'><a href='#Inherited%20instance%20methods'>Inherited instance methods</a></li>
+</ul></ul></div><div id='menubar'></div>
+<div class='contents'>
+<div class='header'>
+<div id='label'>
+<span id='folder'>Classes</span>
+ | <span id='categories'><a href='./../Browse.html#GUI'>GUI</a>&#8201;&gt;&#8201;<a href='./../Browse.html#GUI>Kits'>Kits</a></span>
+</div><h1>GUI</h1>
+<div id='summary'>Factory abstraction for all GUI related core classes</div>
+</div>
+<div class='subheader'>
+<div id='filename'>Location: <b>NOT INSTALLED!</b></div>
+<div id='related'>See also: <a href="./../Overviews/GUI-Classes.html">List of GUI classes</a>, <a href="./../Guides/GUI-Introduction.html">Introduction to GUI</a></div>
+</div>
+<h2><a class='anchor' name='description'>Description</a></h2>
+
+<p>SuperCollider currently supports three operating system platforms: macOS, UNIX (Linux and FreeBSD) and Windows (with some limitations).<div class='warning'><span class='warninglabel'>WARNING:</span> The redirect system has been deprecated, please use the view classes directly. If you find old code that uses prefixes for the old GUI Kits (e.g. SCWindow for CocoaGUI), try dropping the prefixes to Window, Button etc. The Qt prefix Q, as e.g. in QWindow, is converted to Window automatically; still it is better style to simply write Window.</div>
+<p>Switching between GUI schemes is not needed anymore, as Qt runs well on all platforms. Still, you can get the available schemes with:<textarea class='editor'>GUI.schemes;</textarea>
+
+<p>For a complete list of historical gui classes and their redirects, see <a href="./../Overviews/GUI-Classes.html">List of GUI classes</a>.<h2><a class='anchor' name='classmethods'>Class Methods</a></h2>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='*new' href='./../Overviews/Methods.html#new'>new</a></h3>
+<div class='method'>
+<p></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='*makeGUI' href='./../Overviews/Methods.html#makeGUI'>makeGUI</a></h3>
+<div class='method'>
+<p></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='*initClass' href='./../Overviews/Methods.html#initClass'>initClass</a></h3>
+<div class='method'>
+<p>Sets the <code>skin</code> to default values on compile.<textarea class='editor'>fontSpecs: ["Helvetica", 10],
+fontColor: Color.black,
+background: Color(0.8, 0.85, 0.7, 0.5),
+foreground: Color.grey(0.95),
+onColor: Color(0.5, 1, 0.5),
+offColor: Color.clear,
+gap: 0@0,
+margin: 2@2,
+buttonHeight: 16</textarea>
+</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='*add' href='./../Overviews/Methods.html#add'>add</a></h3>
+<div class='method'>
+<p></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='*qt' href='./../Overviews/Methods.html#qt'>qt</a></h3>
+<div class='method'>
+<p>Makes QtGUI the current scheme and returns it. Subsequent GUI object calls to GUI are delegated to Qt. Returns the current (Qt) scheme.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='*fromID' href='./../Overviews/Methods.html#fromID'>fromID</a></h3>
+<div class='method'>
+<p>Changes the current scheme and returns the new scheme.<h4>Arguments:</h4>
+<table class='arguments'>
+<tr><td class='argumentname'>id<td class='argumentdesc'>
+<p>A <a href="./../Classes/Symbol.html">Symbol</a>. The identifier of the scheme to use.</table></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='*current' href='./../Overviews/Methods.html#current'>current</a></h3>
+<div class='method'>
+<p>Returns the current scheme. This is useful for objects that, upon instantiation, wish to store the then-current scheme, so as to be able to consistently use the same scheme in future method calls.<div class='note'><span class='notelabel'>NOTE:</span> the caller shouldn't make any assumptions about the nature (the class) of the returned object, so that the actual implementation (an Event) may change in the future.</div></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='*get' href='./../Overviews/Methods.html#get'>get</a></h3>
+<div class='method'>
+<p>Returns the scheme for a given identifier. Does not switch the current scheme.<h4>Arguments:</h4>
+<table class='arguments'>
+<tr><td class='argumentname'>id<td class='argumentdesc'>
+<p>A <a href="./../Classes/Symbol.html">Symbol</a>. The identifier of the scheme to retrieve, such as returned by calling <code>aScheme.id</code>.</table></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='*set' href='./../Overviews/Methods.html#set'>set</a></h3>
+<div class='method'>
+<p>Changes the current scheme.<h4>Arguments:</h4>
+<table class='arguments'>
+<tr><td class='argumentname'>aScheme<td class='argumentdesc'>
+<p>An instance of <a href="./../Classes/Symbol.html">Symbol</a>. The scheme to use as current scheme.</table></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='*use' href='./../Overviews/Methods.html#use'>use</a></h3>
+<div class='method'>
+<p>Executes a function body, temporarily setting the current GUI scheme. This is useful inside view's action functions in order to make this function use the GUI scheme that was originally used for the view of the action, even if the scheme has been switched meanwhile.<h4>Arguments:</h4>
+<table class='arguments'>
+<tr><td class='argumentname'>aScheme<td class='argumentdesc'>
+<p>The scheme to use during the function execution.<tr><td class='argumentname'>func<td class='argumentdesc'>
+<p>An Instance of <a href="./../Classes/Function.html">Function</a>.</table></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='*useID' href='./../Overviews/Methods.html#useID'>useID</a></h3>
+<div class='method'>
+<p>Same as <code>use</code> but using a scheme's id as first argument.<h4>Arguments:</h4>
+<table class='arguments'>
+<tr><td class='argumentname'>id<td class='argumentdesc'>
+<p>The id of the scheme to use during the function execution.<tr><td class='argumentname'>func<td class='argumentdesc'>
+<p>A body to execute.</table></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='*add' href='./../Overviews/Methods.html#add'>add</a></h3>
+<div class='method'>
+<p>Registers a new scheme. This is typically called by external libraries in their startup procedure. If a scheme with the same identifier (<code>scheme.id</code>) exists, it is overwritten.<h4>Arguments:</h4>
+<table class='arguments'>
+<tr><td class='argumentname'>aScheme<td class='argumentdesc'>
+<p>The scheme to add.</table></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='*doesNotUnderstand' href='./../Overviews/Methods.html#doesNotUnderstand'>doesNotUnderstand</a></h3>
+<div class='method'>
+<p>All method calls are mapped to the current scheme, so that for example <code>GUI.button</code> can be used and is delegated to the button association of the current scheme.<h4>Arguments:</h4>
+<table class='arguments'>
+<tr><td class='argumentname'>selector<td class='argumentdesc'><tr><td class='argumentname'>... args<td class='argumentdesc'></table></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='*setSkin' href='./../Overviews/Methods.html#setSkin'>setSkin</a></h3>
+<div class='method'><h4>Arguments:</h4>
+<table class='arguments'>
+<tr><td class='argumentname'>skinName<td class='argumentdesc'></table></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='*scheme' href='./../Overviews/Methods.html#scheme'>scheme</a></h3>
+<div class='method'>
+<p>A class variable. Returns the current scheme.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='*schemes' href='./../Overviews/Methods.html#schemes'>schemes</a></h3>
+<div class='method'>
+<p>A class variable. Returns an <a href="./../Classes/IdentityDictionary.html">IdentityDictionary</a> of registered schemes.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='*skin' href='./../Overviews/Methods.html#skin'>skin</a></h3>
+<div class='method'>
+<p>A class variable. Returns the current skin.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='*skins' href='./../Overviews/Methods.html#skins'>skins</a></h3>
+<div class='method'>
+<p>A class variable. Returns an <a href="./../Classes/IdentityDictionary.html">IdentityDictionary</a> of registered skins.</div><h3><a class='anchor' name='Inherited%20class%20methods'>Inherited class methods</a></h3>
+<div id='inheritedclassmets'></div><h2><a class='anchor' name='instancemethods'>Instance Methods</a></h2>
+<h3><a class='anchor' name='Inherited%20instance%20methods'>Inherited instance methods</a></h3>
+<div id='inheritedinstmets'></div><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/develop/HelpSource/Classes/GUI.schelp'>https://github.com/supercollider/supercollider/tree/develop/HelpSource/Classes/GUI.schelp</a><br>link::Classes/GUI::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+</body></html>

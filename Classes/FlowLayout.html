@@ -1,0 +1,231 @@
+<!doctype html><html lang='en'><head><title>FlowLayout | SuperCollider 3.13.0 Help</title>
+<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<link rel='stylesheet' href='./../frontend.css' type='text/css' />
+<link rel='stylesheet' href='./../custom.css' type='text/css' />
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+<script src='./../lib/jquery.min.js'></script>
+<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script>
+var helpRoot = './..';
+var scdoc_title = 'FlowLayout';
+var scdoc_sc_version = '3.13.0';
+</script>
+<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../docmap.js' type='text/javascript'></script>
+<script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
+</head>
+<body onload='fixTOC()'>
+<div id='toc'>
+<div id='toctitle'>FlowLayout:</div>
+<span class='toc_search'>Filter: <input id='toc_search'></span><ul class='toc'><li class='toc1'><a href='#description'>Description</a></li>
+<ul class='toc'></ul><li class='toc1'><a href='#classmethods'>Class methods</a></li>
+<ul class='toc'><li class='toc3'><a href='#*new'>new</a> </li>
+<li class='toc2'><a href='#Inherited%20class%20methods'>Inherited class methods</a></li>
+</ul><li class='toc1'><a href='#instancemethods'>Instance methods</a></li>
+<ul class='toc'><li class='toc2'><a href='#Accessing%20Instance%20Variables'>Accessing Instance Variables</a></li>
+<ul class='toc'><li class='toc3'><a href='#-nextLine'>nextLine</a> </li>
+<li class='toc3'><a href='#-indentedRemaining'>indentedRemaining</a> </li>
+<li class='toc3'><a href='#-bounds'>bounds</a> </li>
+<li class='toc3'><a href='#-innerBounds'>innerBounds</a> </li>
+<li class='toc3'><a href='#-gap'>gap</a> </li>
+<li class='toc3'><a href='#-margin'>margin</a> </li>
+</ul><li class='toc2'><a href='#Subclassing%20and%20Internal%20Methods'>Subclassing and Internal Methods</a></li>
+<ul class='toc'><li class='toc3'><a href='#-left'>left</a> </li>
+<li class='toc3'><a href='#-top'>top</a> </li>
+<li class='toc3'><a href='#-shift'>shift</a> </li>
+<li class='toc3'><a href='#-maxHeight'>maxHeight</a> </li>
+<li class='toc3'><a href='#-maxRight'>maxRight</a> </li>
+<li class='toc3'><a href='#-currentBounds'>currentBounds</a> </li>
+<li class='toc3'><a href='#-used'>used</a> </li>
+<li class='toc3'><a href='#-reset'>reset</a> </li>
+</ul><li class='toc2'><a href='#Inherited%20instance%20methods'>Inherited instance methods</a></li>
+</ul></ul></div><div id='menubar'></div>
+<div class='contents'>
+<div class='header'>
+<div id='label'>
+<span id='folder'>Classes</span>
+ | <span id='categories'><a href='./../Browse.html#GUI'>GUI</a>&#8201;&gt;&#8201;<a href='./../Browse.html#GUI>Layout'>Layout</a></span>
+</div><h1>FlowLayout</h1>
+<div id='summary'>A view decorator which autowraps the view contents</div>
+</div>
+<div class='subheader'>
+<div id='filename'>Location: <b>NOT INSTALLED!</b></div>
+<div id='related'>See also: <a href="./../Classes/SCContainerView.html">SCContainerView</a>, <a href="./../Classes/CompositeView.html">CompositeView</a></div>
+</div>
+<h2><a class='anchor' name='description'>Description</a></h2>
+
+<p>FlowLayout is a decorator which automatically arranges views inside a container view in a row, and starts a new row if there is not enough space left for the next view. <a href="./../Classes/Window.html">Window</a> and <a href="./../Classes/CompositeView.html">CompositeView</a> both have <code>addFlowLayout</code> methods which assign FlowLayout to their view decorators and return the decorator.<h2><a class='anchor' name='classmethods'>Class Methods</a></h2>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='*new' href='./../Overviews/Methods.html#new'>new</a></h3>
+<div class='method'><h4>Arguments:</h4>
+<table class='arguments'>
+<tr><td class='argumentname'>bounds<td class='argumentdesc'>
+<p>An instance of <a href="./../Classes/Rect.html">Rect</a>. Normally set to the <code>parent.bounds</code>.<tr><td class='argumentname'>margin<td class='argumentdesc'>
+<p>An instance of <a href="./../Classes/Point.html">Point</a>. The horizontal and vertical inner margins, within which the parent's subviews are placed.<tr><td class='argumentname'>gap<td class='argumentdesc'>
+<p>An instance of <a href="./../Classes/Point.html">Point</a>. The horizontal and vertical layout gap between the subviews.</table><h4>Discussion:</h4>
+
+<p>Example:<textarea class='editor'>(
+w = Window.new.front;
+//change the gaps and margins to see how they work
+w.view.decorator = FlowLayout( w.view.bounds, 10@10, 20@5 );
+16.do{ Slider2D( w.view,80@80 ).background_( Color.rand ) };
+)</textarea>
+
+<p>You can also write:<textarea class='editor'>(
+w = Window.new.front;
+w.addFlowLayout( 10@10, 20@5 ); // a shortcut method, see SCContainerView
+16.do{ Slider2D( w.view,80@80 ).background_( Color.rand ) };
+)</textarea>
+</div><h3><a class='anchor' name='Inherited%20class%20methods'>Inherited class methods</a></h3>
+<div id='inheritedclassmets'></div><h2><a class='anchor' name='instancemethods'>Instance Methods</a></h2>
+<h3><a class='anchor' name='Accessing%20Instance%20Variables'>Accessing Instance Variables</a></h3>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-nextLine' href='./../Overviews/Methods.html#nextLine'>nextLine</a></h3>
+<div class='method'>
+<p>Forces the decorator to start a new line:<textarea class='editor'>(
+w = Window.new;
+q = w.addFlowLayout( 10@10, 20@5 );
+Slider2D( w.view,140@140 ).background_( Color.rand );
+q.nextLine;
+Slider2D( w.view,140@140 ).background_( Color.rand );
+w.front;
+)</textarea>
+</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-indentedRemaining' href='./../Overviews/Methods.html#indentedRemaining'>indentedRemaining</a></h3>
+<div class='method'>
+<p>Returns and instance of <a href="./../Classes/Rect.html">Rect</a>. This is a very useful method which tells you how much space is left in a row, before the next row starts. The height of <code>indentedRemaining</code>, is the full height remaining in the FlowLayout.<textarea class='editor'>(
+//normally you will only use the width of indentedRemaining
+w = Window.new;
+w.view.decorator = d = FlowLayout.new( w.view.bounds, 10@10, 20@5 );
+Slider2D( w.view,150@150 ).background_( Color.rand );
+Slider2D( w.view,150@150 ).background_( Color.rand );
+Slider( w.view, d.indentedRemaining.width@150) //fits this view perfectly to the right innerBounds
+    .background_( Color.rand );
+w.front;
+)</textarea>
+
+<p>Compare this with:<textarea class='editor'>( //here the third view is fit to both the right and bottom innerBounds
+w = Window.new;
+w.view.decorator = d = FlowLayout.new( w.view.bounds, 10@10, 20@5 );
+Slider2D( w.view,140@140 ).background_( Color.rand );
+Slider2D( w.view,140@140 ).background_( Color.rand );
+d.nextLine;
+Slider2D( w.view, d.indentedRemaining ).background_( Color.rand );
+w.front;
+)</textarea>
+</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-bounds' href='./../Overviews/Methods.html#bounds'>bounds</a></h3>
+<div class='method'>
+<p>The outer bounds in which the decorator places the subviews in the parent view.<h4>Arguments:</h4>
+<table class='arguments'>
+<tr><td class='argumentname'>b<td class='argumentdesc'>
+<p>An instance of <a href="./../Classes/Rect.html">Rect</a>.</table></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-innerBounds' href='./../Overviews/Methods.html#innerBounds'>innerBounds</a></h3>
+<div class='method'>
+<p>Returns the bounds inset by margin.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-gap' href='./../Overviews/Methods.html#gap'>gap</a></h3>
+<div class='method'>
+<p>The horizontal and vertical layout gap between the subviews.<h4>Arguments:</h4>
+<table class='arguments'>
+<tr><td class='argumentname'>arg1<td class='argumentdesc'>
+<p>An instance of <a href="./../Classes/Point.html">Point</a>.</table></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-margin' href='./../Overviews/Methods.html#margin'>margin</a></h3>
+<div class='method'>
+<p>The horizontal and vertical inner margins, within which the parent's subviews are placed.<h4>Arguments:</h4>
+<table class='arguments'>
+<tr><td class='argumentname'>arg1<td class='argumentdesc'>
+<p>An instance of <a href="./../Classes/Point.html">Point</a>.</table></div><h3><a class='anchor' name='Subclassing%20and%20Internal%20Methods'>Subclassing and Internal Methods</a></h3>
+
+<p>The following methods are usually not used directly or are called by a primitive. Programmers can still call or override these as needed.<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-left' href='./../Overviews/Methods.html#left'>left</a></h3>
+<div class='method'>
+<p>Get the current left indentation or manually set it.<h4>Arguments:</h4>
+<table class='arguments'>
+<tr><td class='argumentname'>arg1<td class='argumentdesc'>
+<p>A number.</table><h4>Discussion:</h4>
+<textarea class='editor'>(
+w = Window.new;
+w.view.decorator = d = FlowLayout.new( w.view.bounds, 10@10, 20@5 );
+Slider2D( w.view,150@150 ).background_( Color.rand );
+d.left_(220); //manually set the new indentation
+Slider2D( w.view,150@150 ).background_( Color.rand );
+w.front;
+)</textarea>
+</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-top' href='./../Overviews/Methods.html#top'>top</a></h3>
+<div class='method'>
+<p>Get the current top indentation or manually set it.<h4>Arguments:</h4>
+<table class='arguments'>
+<tr><td class='argumentname'>arg1<td class='argumentdesc'>
+<p>A number.</table><h4>Discussion:</h4>
+<textarea class='editor'>(
+w = Window.new;
+w.view.decorator = d = FlowLayout.new( w.view.bounds, 10@10, 20@5 );
+Slider2D( w.view,150@150 ).background_( Color.rand );
+d.top_(50); //manually set the new indentation
+Slider2D( w.view,150@150 ).background_( Color.rand );
+Slider2D( w.view,150@150 ).background_( Color.rand );
+w.front;
+)</textarea>
+</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-shift' href='./../Overviews/Methods.html#shift'>shift</a></h3>
+<div class='method'>
+<p>Set the current left and top indentation (see above).</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-maxHeight' href='./../Overviews/Methods.html#maxHeight'>maxHeight</a></h3>
+<div class='method'>
+<p>Get/set maximium height of the subviews in the current position.<h4>Arguments:</h4>
+<table class='arguments'>
+<tr><td class='argumentname'>arg1<td class='argumentdesc'>
+<p>A number.</table><h4>Discussion:</h4>
+<textarea class='editor'>(
+w = Window.new;
+w.view.decorator = d = FlowLayout.new( w.view.bounds, 10@10, 20@5 );
+Slider2D( w.view,100@160 ).background_( Color.rand );
+Slider2D( w.view,150@150 ).background_( Color.rand );
+"first row maxHeight: " ++ d.maxHeight.postln;
+Slider2D( w.view,150@150 ).background_( Color.rand );
+"second row maxHeight: " ++ d.maxHeight.postln;
+w.front;
+)</textarea>
+</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-maxRight' href='./../Overviews/Methods.html#maxRight'>maxRight</a></h3>
+<div class='method'>
+<p>Get/set maximium right of the subviews in the current position.<h4>Arguments:</h4>
+<table class='arguments'>
+<tr><td class='argumentname'>arg1<td class='argumentdesc'>
+<p>A number.</table><h4>Discussion:</h4>
+<textarea class='editor'>(
+w = Window.new;
+w.view.decorator = d = FlowLayout.new( w.view.bounds, 10@10, 20@5 );
+Slider2D( w.view,100@160 ).background_( Color.rand );
+"first row maxRight: " ++ d.maxRight.postln;
+Slider2D( w.view,150@150 ).background_( Color.rand );
+Slider2D( w.view,150@150 ).background_( Color.rand );
+"second row maxRight: " ++ d.maxRight.postln;
+w.front;
+)</textarea>
+</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-currentBounds' href='./../Overviews/Methods.html#currentBounds'>currentBounds</a></h3>
+<div class='method'>
+<p>Gets a <a href="./../Classes/Rect.html">Rect</a> with <code>bounds.width</code> and <code>height = top + maxHeight</code>.<h4>Discussion:</h4>
+<textarea class='editor'>(
+w = Window.new;
+w.view.decorator = d = FlowLayout.new( w.view.bounds, 10@10, 10@5 );
+Slider2D( w.view,100@160 ).background_( Color.rand );
+d.currentBounds.postln;
+Slider2D( w.view,150@150 ).background_( Color.rand );
+d.currentBounds.postln;
+Slider2D( w.view,150@150 ).background_( Color.rand );
+d.currentBounds.postln;
+w.front;
+)</textarea>
+</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-used' href='./../Overviews/Methods.html#used'>used</a></h3>
+<div class='method'>
+<p>Gets a <a href="./../Classes/Rect.html">Rect</a> with the space actually used.<h4>Discussion:</h4>
+<textarea class='editor'>(
+w = Window.new;
+w.view.decorator = d = FlowLayout.new( w.view.bounds, 10@10, 20@5 );
+Slider2D( w.view,100@160 ).background_( Color.rand );
+d.used.postln;
+Slider2D( w.view,150@150 ).background_( Color.rand );
+d.used.postln;
+Slider2D( w.view,150@150 ).background_( Color.rand );
+d.used.postln;
+w.front;
+)</textarea>
+</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-reset' href='./../Overviews/Methods.html#reset'>reset</a></h3>
+<div class='method'>
+<p>Resets the layout mechanism to 0,0.</div><h3><a class='anchor' name='Inherited%20instance%20methods'>Inherited instance methods</a></h3>
+<div id='inheritedinstmets'></div><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/develop/HelpSource/Classes/FlowLayout.schelp'>https://github.com/supercollider/supercollider/tree/develop/HelpSource/Classes/FlowLayout.schelp</a><br>link::Classes/FlowLayout::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+</body></html>

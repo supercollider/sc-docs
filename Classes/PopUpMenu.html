@@ -1,0 +1,179 @@
+<!doctype html><html lang='en'><head><title>PopUpMenu | SuperCollider 3.13.0 Help</title>
+<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<link rel='stylesheet' href='./../frontend.css' type='text/css' />
+<link rel='stylesheet' href='./../custom.css' type='text/css' />
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+<script src='./../lib/jquery.min.js'></script>
+<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script>
+var helpRoot = './..';
+var scdoc_title = 'PopUpMenu';
+var scdoc_sc_version = '3.13.0';
+</script>
+<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../docmap.js' type='text/javascript'></script>
+<script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
+</head>
+<body onload='fixTOC()'>
+<div id='toc'>
+<div id='toctitle'>PopUpMenu:</div>
+<span class='toc_search'>Filter: <input id='toc_search'></span><ul class='toc'><li class='toc1'><a href='#description'>Description</a></li>
+<ul class='toc'></ul><li class='toc1'><a href='#classmethods'>Class methods</a></li>
+<ul class='toc'><li class='toc2'><a href='#Inherited%20class%20methods'>Inherited class methods</a></li>
+</ul><li class='toc1'><a href='#instancemethods'>Instance methods</a></li>
+<ul class='toc'><li class='toc2'><a href='#Data'>Data</a></li>
+<ul class='toc'><li class='toc3'><a href='#-items'>items</a> </li>
+<li class='toc3'><a href='#-clear'>clear</a> </li>
+<li class='toc3'><a href='#-item'>item</a> </li>
+<li class='toc3'><a href='#-value'>value</a> </li>
+<li class='toc3'><a href='#-valueAction'>valueAction</a> </li>
+</ul><li class='toc2'><a href='#Appearance'>Appearance</a></li>
+<ul class='toc'><li class='toc3'><a href='#-stringColor'>stringColor</a> </li>
+<li class='toc3'><a href='#-background'>background</a> </li>
+</ul><li class='toc2'><a href='#Interaction'>Interaction</a></li>
+<ul class='toc'><li class='toc3'><a href='#-allowsReselection'>allowsReselection</a> </li>
+</ul><li class='toc2'><a href='#Actions'>Actions</a></li>
+<ul class='toc'><li class='toc3'><a href='#-action'>action</a> </li>
+</ul><li class='toc2'><a href='#Drag%20and%20drop'>Drag and drop</a></li>
+<ul class='toc'><li class='toc3'><a href='#-defaultGetDrag'>defaultGetDrag</a> </li>
+<li class='toc3'><a href='#-defaultCanReceiveDrag'>defaultCanReceiveDrag</a> </li>
+<li class='toc3'><a href='#-defaultReceiveDrag'>defaultReceiveDrag</a> </li>
+</ul><li class='toc2'><a href='#Inherited%20instance%20methods'>Inherited instance methods</a></li>
+</ul><li class='toc1'><a href='#examples'>Examples</a></li>
+<ul class='toc'><li class='toc2'><a href='#Basic%20Example'>Basic Example</a></li>
+<ul class='toc'></ul><li class='toc2'><a href='#Sound%20Example'>Sound Example</a></li>
+<ul class='toc'></ul></ul></ul></div><div id='menubar'></div>
+<div class='contents'>
+<div class='header'>
+<div id='label'>
+<span id='folder'>Classes</span>
+ | <span id='categories'><a href='./../Browse.html#GUI'>GUI</a>&#8201;&gt;&#8201;<a href='./../Browse.html#GUI>Views'>Views</a></span>
+</div><h1>PopUpMenu</h1>
+<div id='summary'>A view displaying a text item selectable from a drop-down menu.</div>
+</div>
+<div class='subheader'>
+<div id='filename'>Location: <b>NOT INSTALLED!</b></div>
+</div>
+<h2><a class='anchor' name='description'>Description</a></h2>
+
+<p>When clicked, this view opens a menu containing several text items, then closes the menu and displays one of the items after it is selected.<h2><a class='anchor' name='classmethods'>Class Methods</a></h2>
+<h3><a class='anchor' name='Inherited%20class%20methods'>Inherited class methods</a></h3>
+<div id='inheritedclassmets'></div><h2><a class='anchor' name='instancemethods'>Instance Methods</a></h2>
+<h3><a class='anchor' name='Data'>Data</a></h3>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-items' href='./../Overviews/Methods.html#items'>items</a></h3>
+<div class='method'>
+<p> The list of items displayed in a menu when the view is clicked.<h4>Arguments:</h4>
+<table class='arguments'>
+<tr><td class='argumentname'><td class='argumentdesc'>
+<p> An Array of Strings or Symbols.</table></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-clear' href='./../Overviews/Methods.html#clear'>clear</a></h3>
+<div class='method'>
+<p> Removes all items.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-item' href='./../Overviews/Methods.html#item'>item</a></h3>
+<div class='method'>
+<p> The currently selected item.<h4>Returns:</h4>
+<div class='returnvalue'>
+<p>A String.</div></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-value' href='./../Overviews/Methods.html#value'>value</a></h3>
+<div class='method'>
+<p> The index of the currently selected item.<h4>Arguments:</h4>
+<table class='arguments'>
+<tr><td class='argumentname'><td class='argumentdesc'>
+<p> An integer, or nil meaning no selected item.</table></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-valueAction' href='./../Overviews/Methods.html#valueAction'>valueAction</a></h3>
+<div class='method'>
+<p> Sets <a href="#-value">-value</a> and triggers <a href="#-action">-action</a>.<h4>Arguments:</h4>
+<table class='arguments'>
+<tr><td class='argumentname'><td class='argumentdesc'>
+<p> An integer, or nil meaning no selected item.</table></div><h3><a class='anchor' name='Appearance'>Appearance</a></h3>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-stringColor' href='./../Overviews/Methods.html#stringColor'>stringColor</a></h3>
+<div class='method'>
+<p> The color used to display text.<h4>Arguments:</h4>
+<table class='arguments'>
+<tr><td class='argumentname'><td class='argumentdesc'>
+<p> A Color.</table></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-background' href='./../Overviews/Methods.html#background'>background</a></h3>
+<div class='method'>
+<p> Setting this variable colors the area of the view under the text with the given color.<h4>Arguments:</h4>
+<table class='arguments'>
+<tr><td class='argumentname'><td class='argumentdesc'>
+<p> A Color.</table></div><h3><a class='anchor' name='Interaction'>Interaction</a></h3>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-allowsReselection' href='./../Overviews/Methods.html#allowsReselection'>allowsReselection</a></h3>
+<div class='method'>
+<p> Determines whether the action is triggered when selecting already selected item. Defaults to false.<h4>Arguments:</h4>
+<table class='arguments'>
+<tr><td class='argumentname'><td class='argumentdesc'>
+<p> A Boolean.</table></div><h3><a class='anchor' name='Actions'>Actions</a></h3>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-action' href='./../Overviews/Methods.html#action'>action</a></h3>
+<div class='method'>
+<p> The action object evaluated whenever the user changes the selected item from the menu. See <a href="#-allowsReselection">-allowsReselection</a> for customization.</div><h3><a class='anchor' name='Drag%20and%20drop'>Drag and drop</a></h3>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-defaultGetDrag' href='./../Overviews/Methods.html#defaultGetDrag'>defaultGetDrag</a></h3>
+<div class='method'><h4>Returns:</h4>
+<div class='returnvalue'>
+<p>The <a href="#-value">-value</a>.</div></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-defaultCanReceiveDrag' href='./../Overviews/Methods.html#defaultCanReceiveDrag'>defaultCanReceiveDrag</a></h3>
+<div class='method'><h4>Returns:</h4>
+<div class='returnvalue'>
+<p>True if the current drag data is a number.</div></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-defaultReceiveDrag' href='./../Overviews/Methods.html#defaultReceiveDrag'>defaultReceiveDrag</a></h3>
+<div class='method'>
+<p> Sets <a href="#-valueAction">-valueAction</a> to the current drag data.</div><h3><a class='anchor' name='Inherited%20instance%20methods'>Inherited instance methods</a></h3>
+<div id='inheritedinstmets'></div><h2><a class='anchor' name='examples'>Examples</a></h2>
+<h3><a class='anchor' name='Basic%20Example'>Basic Example</a></h3>
+<textarea class='editor'>(
+w = Window.new("The Eightfold Path").front;
+m = PopUpMenu(w, Rect(10, 10, 180, 20));
+
+m.items = [
+ "right view", "right thinking", "right mindfulness", "right speech",
+ "right action", "right diligence", "right concentration", "right livelihood"
+];
+
+m.background_(Color.green(0.7));  // only changes the look of displayed item
+m.stringColor_(Color.white);   // only changes the look of displayed item
+m.font_(Font("Courier", 13));   // only changes the look of displayed item
+m.action = { arg menu;
+ [menu.value, menu.item].postln;
+};
+)
+
+m.value;   // returns the index of the current item;
+m.item;    // returns the String or Symbol of the current item
+
+m.value_(2);  // changes the displayed item, but does not evaluate the action
+m.valueAction_(3); // evaluates the action.</textarea>
+<h3><a class='anchor' name='Sound%20Example'>Sound Example</a></h3>
+
+<p>Play different functions:<textarea class='editor'>(
+s.waitForBoot({
+
+ var w, menu, snd, funcs, b;
+
+ w = Window.new.front;
+
+ menu = PopUpMenu(w, Rect(10, 10, 90, 20))
+  .items_(["Sine", "Saw" , "Noise" , "Pulse"]);
+
+ funcs = [
+  { SinOsc.ar(440, 0, 0.3) },
+  { Saw.ar(440, 0.3) },
+  { WhiteNoise.ar(0.3) },
+  { Pulse.ar(440, 0.2, 0.3) }
+ ];
+
+ b = Button(w, Rect(110, 10, 180, 20))
+  .states_([["play", Color.black, Color.green]])
+  .mouseDownAction_({
+    snd = funcs.at(menu.value).play;
+   })
+  .action_({ arg butt, mod;
+    snd.release;
+   });
+
+ w.front;
+
+ p = CmdPeriod.add({ b.value_(0) }); // set button to 0 on hitting Cmd-period
+ w.onClose_{ snd.release; CmdPeriod.removeAll }; // clean up when window is closed
+
+})
+)</textarea>
+
+<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/develop/HelpSource/Classes/PopUpMenu.schelp'>https://github.com/supercollider/supercollider/tree/develop/HelpSource/Classes/PopUpMenu.schelp</a><br>link::Classes/PopUpMenu::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+</body></html>

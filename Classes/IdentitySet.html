@@ -1,0 +1,127 @@
+<!doctype html><html lang='en'><head><title>IdentitySet | SuperCollider 3.13.0 Help</title>
+<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<link rel='stylesheet' href='./../frontend.css' type='text/css' />
+<link rel='stylesheet' href='./../custom.css' type='text/css' />
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+<script src='./../lib/jquery.min.js'></script>
+<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script>
+var helpRoot = './..';
+var scdoc_title = 'IdentitySet';
+var scdoc_sc_version = '3.13.0';
+</script>
+<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../docmap.js' type='text/javascript'></script>
+<script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
+</head>
+<body onload='fixTOC()'>
+<div id='toc'>
+<div id='toctitle'>IdentitySet:</div>
+<span class='toc_search'>Filter: <input id='toc_search'></span><ul class='toc'><li class='toc1'><a href='#description'>Description</a></li>
+<ul class='toc'></ul><li class='toc1'><a href='#classmethods'>Class methods</a></li>
+<ul class='toc'><li class='toc2'><a href='#Inherited%20class%20methods'>Inherited class methods</a></li>
+</ul><li class='toc1'><a href='#instancemethods'>Instance methods</a></li>
+<ul class='toc'><li class='toc2'><a href='#Adding%20and%20Removing'>Adding and Removing</a></li>
+<ul class='toc'><li class='toc3'><a href='#-add'>add</a> </li>
+<li class='toc3'><a href='#-remove'>remove</a> </li>
+</ul><li class='toc2'><a href='#Iteration'>Iteration</a></li>
+<ul class='toc'><li class='toc3'><a href='#-do'>do</a> </li>
+</ul><li class='toc2'><a href='#Finding%20an%20element'>Finding an element</a></li>
+<ul class='toc'><li class='toc3'><a href='#-findMatch'>findMatch</a> </li>
+</ul><li class='toc2'><a href='#Inherited%20instance%20methods'>Inherited instance methods</a></li>
+<li class='toc2'><a href='#Undocumented%20instance%20methods'>Undocumented instance methods</a></li>
+<ul class='toc'><li class='toc3'><a href='#-scanFor'>scanFor</a> </li>
+</ul></ul><li class='toc1'><a href='#examples'>Examples</a></li>
+<ul class='toc'></ul></ul></div><div id='menubar'></div>
+<div class='contents'>
+<div class='header'>
+<div id='label'>
+<span id='folder'>Classes</span>
+ | <span id='categories'><a href='./../Browse.html#Collections'>Collections</a>&#8201;&gt;&#8201;<a href='./../Browse.html#Collections>Unordered'>Unordered</a></span>
+</div><h1>IdentitySet<span id='superclasses'> : <a href="../Classes/Set.html">Set</a> : <a href="../Classes/Collection.html">Collection</a> : <a href="../Classes/Object.html">Object</a></span>
+</h1>
+<div id='summary'>a set according to identity</div>
+</div>
+<div class='subheader'>
+<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/develop/SCClassLibrary/Common/Collections/Set.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Collections/Set.sc'>Set.sc</a></div><div id='subclasses'>Subclasses: <a href="../Classes/OrderedIdentitySet.html">OrderedIdentitySet</a></div>
+<div id='related'>See also: <a href="./../Classes/List.html">List</a>, <a href="./../Classes/Dictionary.html">Dictionary</a></div>
+</div>
+<h2><a class='anchor' name='description'>Description</a></h2>
+
+<p>An IdentitySet is a collection of objects, no two of which are the same object (aka. "identical"). Most of its methods are inherited (see <a href="./../Classes/Collection.html">Collection</a> and <a href="./../Classes/Set.html">Set</a> classes). The contents of an IdentitySet are unordered. You must not depend on the order of items in an IdentitySet. For an ordered set, see <a href="./../Classes/OrderedIdentitySet.html">OrderedIdentitySet</a>.
+<p>IdentitySets are faster than Sets because testing for identity is much faster than testing for equality. Different classes may implement equality in different ways, but identity can be determined just by comparing the object addresses. This allows some methods of IdentitySet to be implemented by fast primitives.<h2><a class='anchor' name='classmethods'>Class Methods</a></h2>
+<h3><a class='anchor' name='Inherited%20class%20methods'>Inherited class methods</a></h3>
+<div id='inheritedclassmets'></div><h2><a class='anchor' name='instancemethods'>Instance Methods</a></h2>
+<h3><a class='anchor' name='Adding%20and%20Removing'>Adding and Removing</a></h3>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-add' href='./../Overviews/Methods.html#add'>add</a>(<span class='argstr'>item</span>)</h3>
+<div class='supmethod'>From superclass: <a href='./../Classes/Set.html'>Set</a></div>
+<div class='method'>
+<p>Add anObject to the IdentitySet. An object which is equal to an object already in the IdentitySet will not be added.<textarea class='editor'>IdentitySet[1, 2, 3].add(4);
+IdentitySet[1, 2, 3].add(3);
+// the two strings are equal but not identical
+IdentitySet["abc", "def", "ghi"].add("def");
+// symbols are guaranteed to be identical if they are equal
+IdentitySet['abc', 'def', 'ghi'].add('def');
+IdentitySet['abc', 'def', 'ghi'].add('jkl');</textarea>
+</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-remove' href='./../Overviews/Methods.html#remove'>remove</a>(<span class='argstr'>item</span>)</h3>
+<div class='supmethod'>From superclass: <a href='./../Classes/Set.html'>Set</a></div>
+<div class='method'>
+<p>Remove anObject from the IdentitySet.<textarea class='editor'>IdentitySet[1, 2, 3].remove(3);</textarea>
+</div><h3><a class='anchor' name='Iteration'>Iteration</a></h3>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-do' href='./../Overviews/Methods.html#do'>do</a>(<span class='argstr'>function</span>)</h3>
+<div class='supmethod'>From superclass: <a href='./../Classes/Set.html'>Set</a></div>
+<div class='method'>
+<p>Evaluates function for each item in the IdentitySet. You must not depend on the order of items. The function is passed two arguments, the item and an integer index.<textarea class='editor'>IdentitySet[1, 2, 3, 300].do { |item, i| item.postln };</textarea>
+</div><h3><a class='anchor' name='Finding%20an%20element'>Finding an element</a></h3>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-findMatch' href='./../Overviews/Methods.html#findMatch'>findMatch</a>(<span class='argstr'>item</span>)</h3>
+<div class='supmethod'>From superclass: <a href='./../Classes/Set.html'>Set</a></div>
+<div class='method'>
+<p>Returns item if it is in the collection, otherwise returns nil.<textarea class='editor'>a = IdentitySet[1, 2, 3, 300];
+a.findMatch(1);
+a.findMatch(1.5);</textarea>
+</div><h3><a class='anchor' name='Inherited%20instance%20methods'>Inherited instance methods</a></h3>
+<div id='inheritedinstmets'></div><h3><a class='anchor' name='Undocumented%20instance%20methods'>Undocumented instance methods</a></h3>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-scanFor' href='./../Overviews/Methods.html#scanFor'>scanFor</a>(<span class='argstr'>argKey</span>)</h3>
+<h2><a class='anchor' name='examples'>Examples</a></h2>
+<textarea class='editor'>// scanFor is fairly efficient. compare the following benchmarks:
+
+// comparison of array indexing and identity set lookup
+(
+f = { |n=4|
+    var x, y, i;
+    x = (0..n);
+    y = x.as(IdentitySet);
+    i = x.choose;
+    bench { 100.do { x[i] } };
+    bench { 100.do { y.scanFor(i) } };
+}
+);
+
+f.(4)
+f.(8)
+f.(100)
+f.(10000)</textarea>
+<textarea class='editor'>// you can use IdentitySet to efficiently remove identical duplicates from an array:
+
+(
+var e, f, g, h;
+e = "such"; f = "fallacy"; g = "is"; h = "common";
+a = [e, e, f, g, e, h, e];
+);
+a.as(IdentitySet);    // convert to set
+a.as(Set).as(Array);    // and convert back
+
+// note that the following behaves differently:
+a = [ "such", "such", "fallacy", "is", "such", "common", "such" ]
+a.as(IdentitySet);    // convert to set. All elements are still here.
+            // Different strings may look the same, but be different objects.
+
+// To remove equals in stead of identicals, use Set:
+a.as(Set);</textarea>
+
+<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/develop/HelpSource/Classes/IdentitySet.schelp'>https://github.com/supercollider/supercollider/tree/develop/HelpSource/Classes/IdentitySet.schelp</a><br>link::Classes/IdentitySet::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+</body></html>

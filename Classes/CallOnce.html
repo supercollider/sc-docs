@@ -1,0 +1,135 @@
+<!doctype html><html lang='en'><head><title>CallOnce | SuperCollider 3.13.0 Help</title>
+<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<link rel='stylesheet' href='./../frontend.css' type='text/css' />
+<link rel='stylesheet' href='./../custom.css' type='text/css' />
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+<script src='./../lib/jquery.min.js'></script>
+<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script>
+var helpRoot = './..';
+var scdoc_title = 'CallOnce';
+var scdoc_sc_version = '3.13.0';
+</script>
+<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../docmap.js' type='text/javascript'></script>
+<script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
+</head>
+<body onload='fixTOC()'>
+<div id='toc'>
+<div id='toctitle'>CallOnce:</div>
+<span class='toc_search'>Filter: <input id='toc_search'></span><ul class='toc'><li class='toc1'><a href='#description'>Description</a></li>
+<ul class='toc'></ul><li class='toc1'><a href='#classmethods'>Class methods</a></li>
+<ul class='toc'><li class='toc3'><a href='#*new'>new</a> </li>
+<li class='toc2'><a href='#Inherited%20class%20methods'>Inherited class methods</a></li>
+</ul><li class='toc1'><a href='#instancemethods'>Instance methods</a></li>
+<ul class='toc'><li class='toc3'><a href='#-clear'>clear</a> </li>
+<li class='toc3'><a href='#-didEvaluate'>didEvaluate</a> </li>
+<li class='toc3'><a href='#-value'>value</a> </li>
+<li class='toc2'><a href='#Inherited%20instance%20methods'>Inherited instance methods</a></li>
+<li class='toc2'><a href='#Undocumented%20instance%20methods'>Undocumented instance methods</a></li>
+<ul class='toc'><li class='toc3'><a href='#-prEvaluate'>prEvaluate</a> </li>
+<li class='toc3'><a href='#-valueArray'>valueArray</a> </li>
+<li class='toc3'><a href='#-valueArrayEnvir'>valueArrayEnvir</a> </li>
+<li class='toc3'><a href='#-valueEnvir'>valueEnvir</a> </li>
+</ul></ul><li class='toc1'><a href='#examples'>Examples</a></li>
+<ul class='toc'></ul></ul></div><div id='menubar'></div>
+<div class='contents'>
+<div class='header'>
+<div id='label'>
+<span id='folder'>Classes</span>
+ | <span id='categories'><a href='./../Browse.html#Streams-Patterns-Events'>Streams-Patterns-Events</a></span>
+</div><h1>CallOnce<span id='superclasses'> : <a href="../Classes/Thunk.html">Thunk</a> : <a href="../Classes/AbstractFunction.html">AbstractFunction</a> : <a href="../Classes/Object.html">Object</a></span>
+</h1>
+<div id='summary'>execute a function (at most) once</div>
+</div>
+<div class='subheader'>
+<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/develop/SCClassLibrary/Common/Streams/EventStreamCleanup.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Streams/EventStreamCleanup.sc'>EventStreamCleanup.sc</a></div><div id='related'>See also: <a href="./../Classes/EventStreamCleanup.html">EventStreamCleanup</a></div>
+</div>
+<h2><a class='anchor' name='description'>Description</a></h2>
+
+<p>Unlike a <a href="./../Classes/Thunk.html">Thunk</a>, which takes no arguments, a CallOnce does allow arguments to be passed to the function it wraps, but the function is executed at most once. A CallOnce can also be "cancelled" with a <code>clear</code> call, without ever executing the wrapped function, even if CallOnce's <code>value</code> is called later.
+<p>The general contract for CallOnce is that any calls into the function after the first would do the same or less (cleanup) work as the first call did. Thus, subsequent calls are completely redundant and can be answered with the result from the first call, even if the arguments change on subsequent calls. Prototypical use case: if a cleanup is called with a <code>releaseResource: false</code> argument, e.g. because the resource was already released by <a href="./../Classes/CmdPeriod.html">CmdPeriod</a>, it is assumed that the cleanup will not be called later with a <code>releaseResource: true</code> argument.
+<p>Since it executes its function (at most) once, CallOnce is not a general-purpose function memoization facility for functions with arguments.
+<p>Basic example (see end of page for more):<textarea class='editor'>c = CallOnce { |flag| if(flag) { "woking...".postln; "done:" + flag } };
+c.value(true);  // -&gt; done: true (and posts "woking...")
+c.value(false); // -&gt; done: true (nothing posted)</textarea>
+<h2><a class='anchor' name='classmethods'>Class Methods</a></h2>
+<h3 class='method-code'><span class='method-prefix'>CallOnce.</span><a class='method-name' name='*new' href='./../Overviews/Methods.html#new'>new</a>(<span class='argstr'>function</span>)</h3>
+<div class='supmethod'>From superclass: <a href='./../Classes/Thunk.html'>Thunk</a></div>
+<div class='method'>
+<p><h4>Arguments:</h4>
+<table class='arguments'>
+<tr><td class='argumentname'>function<td class='argumentdesc'>
+<p>a function that typically executes some cleanup and may return a desired value. The function is wrapped in the CallOnce for later execution.</table></div><h3><a class='anchor' name='Inherited%20class%20methods'>Inherited class methods</a></h3>
+<div id='inheritedclassmets'></div><h2><a class='anchor' name='instancemethods'>Instance Methods</a></h2>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-clear' href='./../Overviews/Methods.html#clear'>clear</a></h3>
+<div class='supmethod'>From superclass: <a href='./../Classes/Thunk.html'>Thunk</a></div>
+<div class='method'>
+<p>Cancels the CallOnce, meaning that subsequent calls to <code>value</code> will not execute the wrapped function at all.<h4>Returns:</h4>
+<div class='returnvalue'>
+<p>the CallOnce.</div></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-didEvaluate' href='./../Overviews/Methods.html#didEvaluate'>didEvaluate</a></h3>
+<div class='supmethod'>From superclass: <a href='./../Classes/Thunk.html'>Thunk</a></div>
+<div class='method'>
+<p>Report if the CallOnce is considered already evaluated.<h4>Returns:</h4>
+<div class='returnvalue'>
+<p><code>false</code> if neither <code>clear</code> nor <code>value</code> were called previously; <code>true</code> otherwise.</div></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-value' href='./../Overviews/Methods.html#value'>value</a>( <span class='argstr'>... args</span>)</h3>
+<div class='method'>
+<p>If <code>clear</code> was called previously, the <code>value</code> call has no side-effect. Otherwise, on the first call to <code>value</code> the function wrapped by the CallOnce is evaluated with the arguments provided to <code>value</code> and the result of this evaluation is stored as the CallOnce's result, used to answer all subsequent calls to <code>value</code>.<h4>Arguments:</h4>
+<table class='arguments'>
+<tr><td class='argumentname'>... args<td class='argumentdesc'>
+<p>Arguments to use in the call to the wrapped function, if the call happens. If <code>didEvaluate</code> already returns <code>true</code> (before the current call to <code>value</code>) then the current <code>args</code> are irrelevant because the wrapped function is not called anymore.</table><h4>Returns:</h4>
+<div class='returnvalue'><ul>
+<li><code>nil</code> if <code>clear</code> was called on the CallOnce before any calls to <code>value</code>, otherwise<li>the value that was computed by the function (wrapped by the CallOnce) on the first call to CallOnce's <code>value</code></ul>
+
+<p></div></div><h3><a class='anchor' name='Inherited%20instance%20methods'>Inherited instance methods</a></h3>
+<div id='inheritedinstmets'></div><h3><a class='anchor' name='Undocumented%20instance%20methods'>Undocumented instance methods</a></h3>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-prEvaluate' href='./../Overviews/Methods.html#prEvaluate'>prEvaluate</a>(<span class='argstr'>selector</span>, <span class='argstr'>args</span>)</h3>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-valueArray' href='./../Overviews/Methods.html#valueArray'>valueArray</a>( <span class='argstr'>... args</span>)</h3>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-valueArrayEnvir' href='./../Overviews/Methods.html#valueArrayEnvir'>valueArrayEnvir</a>( <span class='argstr'>... args</span>)</h3>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-valueEnvir' href='./../Overviews/Methods.html#valueEnvir'>valueEnvir</a>( <span class='argstr'>... args</span>)</h3>
+<h2><a class='anchor' name='examples'>Examples</a></h2>
+<textarea class='editor'>r = 1; // some resource
+c = CallOnce {  r = r - 1; postln("Resource is now released:" + r); r };
+c.didEvaluate; // -&gt; false
+c.value;       // -&gt; 0 (and posts "Resource is now released: 0")
+c.didEvaluate; // -&gt; true
+c.value;       // -&gt; 0 (but posts nothing)
+c.clear;       // even if is "cancelled" now
+c.value;       // -&gt; 0; the computed value is preserved
+
+c = CallOnce { "not called".postln }
+c.didEvaluate; // -&gt; false
+c.clear;       // "cancels" the cleanup
+c.didEvaluate; // -&gt; true
+c.value;       // -&gt; nil
+
+// use with an argument
+(
+r = 1; // some resource
+c = CallOnce { |releaseResource|
+    if(releaseResource) {
+        r = r - 1; "Resource is now released:" + r
+    } {
+        "nothing to do"
+    }
+};
+)
+d = c.copy // saved for later, separate execution state
+
+// correct use sequence (non-increasing cleanup-work sequence):
+c.value(true);
+c.value(true);
+c.value(false);
+r; // -&gt; 0
+
+d.didEvaluate; // -&gt; false (copy didn't evaluate yet)
+
+// semantically incorrect (contract breaking) use sequence
+d.value(false) // -&gt; nothing to do
+d.value(true)  // -&gt; nothing to do</textarea>
+<div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/develop/HelpSource/Classes/CallOnce.schelp'>https://github.com/supercollider/supercollider/tree/develop/HelpSource/Classes/CallOnce.schelp</a><br>link::Classes/CallOnce::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+</body></html>

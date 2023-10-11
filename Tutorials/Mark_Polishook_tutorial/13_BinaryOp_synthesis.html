@@ -1,0 +1,234 @@
+<!doctype html><html lang='en'><head><title>13_BinaryOp_synthesis | SuperCollider 3.13.0 Help</title>
+<link rel='stylesheet' href='./../../scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../../codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../../editor.css' type='text/css' />
+<link rel='stylesheet' href='./../../frontend.css' type='text/css' />
+<link rel='stylesheet' href='./../../custom.css' type='text/css' />
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+<script src='./../../lib/jquery.min.js'></script>
+<script src='./../../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script>
+var helpRoot = './../..';
+var scdoc_title = '13_BinaryOp_synthesis';
+var scdoc_sc_version = '3.13.0';
+</script>
+<script src='./../../scdoc.js' type='text/javascript'></script>
+<script src='./../../docmap.js' type='text/javascript'></script>
+<script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
+</head>
+<body onload='fixTOC()'>
+<div id='toc'>
+<div id='toctitle'>13_BinaryOp_synthesis:</div>
+<span class='toc_search'>Filter: <input id='toc_search'></span><ul class='toc'><li class='toc1'><a href='#Binary%20messages'>Binary messages</a></li>
+<ul class='toc'></ul><li class='toc1'><a href='#Mixing%20=%20addition'>Mixing = addition</a></li>
+<ul class='toc'></ul><li class='toc1'><a href='#Scaling%20=%20multiplication'>Scaling = multiplication</a></li>
+<ul class='toc'></ul><li class='toc1'><a href='#Envelopes'>Envelopes</a></li>
+<ul class='toc'></ul><li class='toc1'><a href='#Keyword%20arguments'>Keyword arguments</a></li>
+<ul class='toc'></ul><li class='toc1'><a href='#Additive%20Synthesis'>Additive Synthesis</a></li>
+<ul class='toc'></ul><li class='toc1'><a href='#Envelopes'>Envelopes</a></li>
+<ul class='toc'></ul><li class='toc1'><a href='#Ring%20modulation'>Ring modulation</a></li>
+<ul class='toc'></ul><li class='toc1'><a href='#Amplitude%20modulation'>Amplitude modulation</a></li>
+<ul class='toc'></ul></ul></div><div id='menubar'></div>
+<div class='contents'>
+<div class='header'>
+<div id='label'>
+<span id='folder'>Tutorials/Mark_Polishook_tutorial</span>
+ | <span id='categories'><a href='./../../Browse.html#Tutorials'>Tutorials</a>&#8201;&gt;&#8201;<a href='./../../Browse.html#Tutorials>Mark_Polishook_tutorial'>Mark_Polishook_tutorial</a></span>
+</div><h1>13_BinaryOp_synthesis</h1>
+<div id='summary'>Mark Polishook tutorial</div>
+</div>
+<div class='subheader'>
+<div id='related'>See also: <a href="./../../Tutorials/Mark_Polishook_tutorial/00_Introductory_tutorial.html">00_Introductory tutorial</a></div>
+</div>
+<h2><a class='anchor' name='Binary%20messages'>Binary messages</a></h2>
+
+<p>The pattern for a binary message is<table>
+<tr><td>RECEIVER<td>OPERATOR<td>OPERAND</table>
+
+<p>For example<textarea class='editor'>2 * 3</textarea>
+
+<p>is a receiver (the object to which a message is sent), a binary operator, and an operand.<h2><a class='anchor' name='Mixing%20=%20addition'>Mixing = addition</a></h2>
+
+<p>Use addition (a binary operation) to mix two or more ugens.<textarea class='editor'>(
+    // mix 2 sawtooth waves
+    {
+        Saw.ar(500, 0.05)    // receiver
+        +            // operator
+        Saw.ar(600, 0.06)    // operand
+    }.scope;
+)
+
+
+(
+// mix 3 unit generators.
+    {
+        Saw.ar(500, 0.05)    // receiver
+        +            // operator
+        Saw.ar(600, 0.06)    // operand
+                        // when evaluated produce
+                        // a BinaryOpUGen
+                        // this BinaryOpUGen is then a receiver for an
+        +                // addition operator followed by
+        Saw.ar(700, 0.07)        // an operand
+    }.scope;
+)</textarea>
+
+<p>////////////////////////////////////////////////////////////////////////////////////////////////////
+<p>Rewrite the previous example with the Mix ugen.<textarea class='editor'>(
+{
+    Mix.ar(
+        // the ugens that will be mixed go into an array
+        [
+            Saw.ar(500, 0.05),
+            Saw.ar(600, 0.06),
+            Saw.ar(700, 0.06)
+        ]
+    )
+}.scope
+)</textarea>
+
+<p>Or use Mix.arFill to create the same result.<textarea class='editor'>{ Mix.arFill(3, { arg i; Saw.ar(500 + (i * 100), 0.05) }) }.scope;</textarea>
+
+<p>Every time the function is evaluated, the argument i is incremented. So i equals 0 the first time the function is evaluated, i equals 1 the second time, i equals 2, the third time, and so on.<h2><a class='anchor' name='Scaling%20=%20multiplication'>Scaling = multiplication</a></h2>
+
+<p>Apply an envelope, in the form of a low-frequency sine wave, to a WhiteNoise generator.<textarea class='editor'>{ WhiteNoise.ar(0.1) * SinOsc.kr(1, 1) }.scope;
+
+(
+    // scaling and mixing
+    // ... imitates a train?
+    {
+        (WhiteNoise.ar(0.1) * SinOsc.kr(1, 1))
+        +
+        (BrownNoise.ar(0.1) * SinOsc.kr(2, 1))
+
+    }.scope;
+)</textarea>
+<h2><a class='anchor' name='Envelopes'>Envelopes</a></h2>
+
+<p>Dynamically modulate any parameter in a ugen (such as frequency, phase, or amplitude) with an envelope.<textarea class='editor'>// modulate amplitude
+{ SinOsc.ar(440, 0, 0.1) * EnvGen.kr(Env.sine(1), doneAction: Done.freeSelf) }.scope;</textarea>
+
+<p>Setting the doneAction argument (control) to 2 insures that after the envelope reaches its endpoint, SuperCollider will release the memory it used for the instances of the SinOsc and the EnvGen.<h2><a class='anchor' name='Keyword%20arguments'>Keyword arguments</a></h2>
+
+<p>Keywords make code easier to read and they allow arguments to be presented in any order. Here, the doneAction and the timeScale arguments are expressed in keyword style.<textarea class='editor'>(
+SynthDef("timeScale", { arg ts = 1;
+    Out.ar(
+        0,
+        SinOsc.ar(440, 0, 0.4)
+        *
+        EnvGen.kr(
+            Env.sine(1),
+            doneAction: Done.freeSelf,
+            timeScale: ts    // scale the duration of an envelope
+        )
+    )
+}).add;
+)
+
+Synth("timeScale", [\ts, 0.1]); // timeScale controls the duration of the envelope</textarea>
+
+<p>////////////////////////////////////////////////////////////////////////////////////////////////////<textarea class='editor'>// scale the duration of the envelope for every new synth
+(
+r = Routine({
+    loop({
+        Synth("timeScale", [\ts, 0.01.rrand(0.3)]);
+        0.5.wait;
+    })
+});
+)
+r.play</textarea>
+<h2><a class='anchor' name='Additive%20Synthesis'>Additive Synthesis</a></h2>
+
+<p>Additive synthesis is as its name says. Components are added (mixed) together.<textarea class='editor'>(
+{    // evaluate the function 12 times
+    var n = 12;
+    Mix.arFill(
+        n,
+        {
+            SinOsc.ar(
+                [67.0.rrand(2000), 67.0.rrand(2000)],
+                0,
+                n.reciprocal * 0.75
+            )
+        }
+    )
+    *
+    EnvGen.kr(Env.perc(11, 6), doneAction: Done.freeSelf)
+}.scope
+)</textarea>
+<h2><a class='anchor' name='Envelopes'>Envelopes</a></h2>
+
+<p>The promise of additive synthesis is that one can add sine waves to create any sound that can be imagined.
+<p>The problem of additive synthesis is that each and every sine wave and their envelopes have to be specified explicitly.
+<p>Create nuanced textures by scaling sine waves with envelopes and then mixing the result.<textarea class='editor'>(
+{    var n = 12;
+
+    Mix.arFill(
+            n,                        // generate n sine waves
+            {
+            SinOsc.ar(                    // each with a possible frequency between
+                [67.0.rrand(2000), 67.0.rrand(2000)],    // low.rrand(high) ... floating point values
+                0,
+                n.reciprocal                // scale the amplitude of each sine wave
+                                    // according to the value of n
+            )
+            *
+            EnvGen.kr(                    // put an envelope on each of the sine waves
+                Env.sine(2.0.rrand(17)),
+                doneAction: Done.none                 // deallocate envelopes only when the
+                                    // entire sound is complete (why?)
+            )
+        }
+    )
+    *                                // put an envelope over the whole patch
+    EnvGen.kr(
+        Env.perc(11, 6),
+        doneAction: Done.freeSelf,
+        levelScale: 0.75
+    )
+
+}.scope
+)</textarea>
+
+<p>(Or use the <a href="./../../Classes/Klang.html">Klang</a> ugen to produce a similar effect).<h2><a class='anchor' name='Ring%20modulation'>Ring modulation</a></h2>
+
+<p>Multiply two UGens.<textarea class='editor'>{ SinOsc.ar(440, 0, 0.571) * SinOsc.kr(880) }.scope
+
+// use an lfo to modulate the amplitude of the modulator
+(
+    {
+        SinOsc.ar(440, 0, 0.571)
+        *
+        (SinOsc.kr(880)                // wrap the modulator and the lfo in parenthese
+        *                     // why ... ?
+        SinOsc.kr([6.99, 8.01].reciprocal)
+        )
+    }.scope
+)</textarea>
+<h2><a class='anchor' name='Amplitude%20modulation'>Amplitude modulation</a></h2>
+
+<p>Multiply two UGens and restrict the value of the modulator to positive values (use the .abs message to calculate 'absolute' value) to create what Charles Dodge calls "classic" amplitude modulation.<textarea class='editor'>// use an lfo to modulate the amplitude of the modulator
+(
+    {
+        SinOsc.ar(440, 0, 0.571)
+        *
+        (SinOsc.kr(880).abs            // wrap the modulator and the lfo in parenthese
+        *                     // why ... ?
+        SinOsc.kr([6.99, 8.01].reciprocal)
+        )
+    }.scope
+)</textarea>
+
+<p>////////////////////////////////////////////////////////////////////////////////////////////////////
+<p>Compare "classic" amplitude modulation and ring modulation<textarea class='editor'>// "classic"
+{ SinOsc.ar(440, 0, 0.571) * SinOsc.kr(880).abs }.scope
+
+// "ring"
+// ... what's the difference?
+{ SinOsc.ar(440, 0, 0.571) * SinOsc.kr(880) }.scope</textarea>
+
+<p>////////////////////////////////////////////////////////////////////////////////////////////////////
+<p>go to <a href="./../../Tutorials/Mark_Polishook_tutorial/14_Subtractive_synthesis.html">14_Subtractive_synthesis</a><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/develop/HelpSource/Tutorials/Mark_Polishook_tutorial/13_BinaryOp_synthesis.schelp'>https://github.com/supercollider/supercollider/tree/develop/HelpSource/Tutorials/Mark_Polishook_tutorial/13_BinaryOp_synthesis.schelp</a><br>link::Tutorials/Mark_Polishook_tutorial/13_BinaryOp_synthesis::<br></div></div><script src='./../../editor.js' type='text/javascript'></script>
+</body></html>

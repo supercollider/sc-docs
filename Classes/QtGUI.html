@@ -1,0 +1,78 @@
+<!doctype html><html lang='en'><head><title>QtGUI | SuperCollider 3.13.0 Help</title>
+<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<link rel='stylesheet' href='./../frontend.css' type='text/css' />
+<link rel='stylesheet' href='./../custom.css' type='text/css' />
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+<script src='./../lib/jquery.min.js'></script>
+<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script>
+var helpRoot = './..';
+var scdoc_title = 'QtGUI';
+var scdoc_sc_version = '3.13.0';
+</script>
+<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../docmap.js' type='text/javascript'></script>
+<script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
+</head>
+<body onload='fixTOC()'>
+<div id='toc'>
+<div id='toctitle'>QtGUI:</div>
+<span class='toc_search'>Filter: <input id='toc_search'></span><ul class='toc'><li class='toc1'><a href='#description'>Description</a></li>
+<ul class='toc'></ul><li class='toc1'><a href='#classmethods'>Class methods</a></li>
+<ul class='toc'><li class='toc3'><a href='#*availableStyles'>availableStyles</a> </li>
+<li class='toc3'><a href='#*cursorPosition'>cursorPosition</a> </li>
+<li class='toc3'><a href='#*debugLevel'>debugLevel</a> </li>
+<li class='toc3'><a href='#*focusView'>focusView</a> </li>
+<li class='toc3'><a href='#*palette'>palette</a> </li>
+<li class='toc3'><a href='#*selectedText'>selectedText</a> </li>
+<li class='toc3'><a href='#*stringBounds'>stringBounds</a> </li>
+<li class='toc3'><a href='#*style'>style</a> </li>
+<li class='toc2'><a href='#Inherited%20class%20methods'>Inherited class methods</a></li>
+</ul><li class='toc1'><a href='#instancemethods'>Instance methods</a></li>
+<ul class='toc'><li class='toc2'><a href='#Inherited%20instance%20methods'>Inherited instance methods</a></li>
+</ul></ul></div><div id='menubar'></div>
+<div class='contents'>
+<div class='header'>
+<div id='label'>
+<span id='folder'>Classes</span>
+ | <span id='categories'><a href='./../Browse.html#GUI'>GUI</a></span>
+</div><h1>QtGUI</h1>
+<div id='summary'>Top-level controls for Qt GUI</div>
+</div>
+<div class='subheader'>
+<div id='filename'>Location: <b>NOT INSTALLED!</b></div>
+</div>
+<h2><a class='anchor' name='description'>Description</a></h2>
+
+<p>QtGUI provides top-level control for the Qt GUI bindings and some platform-level functionality.<h2><a class='anchor' name='classmethods'>Class Methods</a></h2>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='*availableStyles' href='./../Overviews/Methods.html#availableStyles'>availableStyles</a></h3>
+<div class='method'>
+<p>Returns an array of all available styles on this platform. For use with <a href="#-style">-style</a>.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='*cursorPosition' href='./../Overviews/Methods.html#cursorPosition'>cursorPosition</a></h3>
+<div class='method'>
+<p>Gets the current position of the cursor as a <a href="./../Classes/Point.html">Point</a>.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='*debugLevel' href='./../Overviews/Methods.html#debugLevel'>debugLevel</a></h3>
+<div class='method'>
+<p>Gets or sets the verbosity level for debug output from "QtCollider" code. SuperCollider must have been built in debug mode for messages to appear. Valid values are -1 (none), 0 (warnings only, default), 1 (most messages), and 2 (verbose). Values outside this range are effectively clipped.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='*focusView' href='./../Overviews/Methods.html#focusView'>focusView</a></h3>
+<div class='method'>
+<p>Gets the currently focused view.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='*palette' href='./../Overviews/Methods.html#palette'>palette</a></h3>
+<div class='method'>
+<p>Gets or sets the <a href="./../Classes/QPalette.html">QPalette</a> used for GUI display.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='*selectedText' href='./../Overviews/Methods.html#selectedText'>selectedText</a></h3>
+<div class='method'>
+<p>Gets the selected text in the currently focused view. If there is no such string then return empty string.
+<p>Internally, first calls <code>selectedText</code> if that method is available; otherwise, calls <code>selectedString</code> if that method is available. Otherwise, returns empty string.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='*stringBounds' href='./../Overviews/Methods.html#stringBounds'>stringBounds</a></h3>
+<div class='method'>
+<p>Returns a <a href="./../Classes/Rect.html">Rect</a> representing the size of the smallest rectangle that could contain a given string rendered with the given font.<textarea class='editor'>QtGUI.stringBounds("hellooo", Font(Font.defaultSansFace, 100))</textarea>
+<h4>Arguments:</h4>
+<table class='arguments'>
+<tr><td class='argumentname'>aString<td class='argumentdesc'>
+<p>A <a href="./../Classes/String.html">String</a> to render.<tr><td class='argumentname'>aFont<td class='argumentdesc'>
+<p>An instance of <a href="./../Classes/Font.html">Font</a>.</table></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='*style' href='./../Overviews/Methods.html#style'>style</a></h3>
+<div class='method'>
+<p>Gets or sets the current GUI style. The given style must be a <a href="./../Classes/String.html">String</a> or <a href="./../Classes/Symbol.html">Symbol</a> that names one of the styles returned by <a href="#-availableStyles">-availableStyles</a>.</div><h3><a class='anchor' name='Inherited%20class%20methods'>Inherited class methods</a></h3>
+<div id='inheritedclassmets'></div><h2><a class='anchor' name='instancemethods'>Instance Methods</a></h2>
+<h3><a class='anchor' name='Inherited%20instance%20methods'>Inherited instance methods</a></h3>
+<div id='inheritedinstmets'></div><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/develop/HelpSource/Classes/QtGUI.schelp'>https://github.com/supercollider/supercollider/tree/develop/HelpSource/Classes/QtGUI.schelp</a><br>link::Classes/QtGUI::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+</body></html>

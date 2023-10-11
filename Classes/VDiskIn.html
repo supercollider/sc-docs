@@ -1,0 +1,143 @@
+<!doctype html><html lang='en'><head><title>VDiskIn | SuperCollider 3.13.0 Help</title>
+<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<link rel='stylesheet' href='./../frontend.css' type='text/css' />
+<link rel='stylesheet' href='./../custom.css' type='text/css' />
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+<script src='./../lib/jquery.min.js'></script>
+<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script>
+var helpRoot = './..';
+var scdoc_title = 'VDiskIn';
+var scdoc_sc_version = '3.13.0';
+</script>
+<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../docmap.js' type='text/javascript'></script>
+<script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
+</head>
+<body onload='fixTOC()'>
+<div id='toc'>
+<div id='toctitle'>VDiskIn:</div>
+<span class='toc_search'>Filter: <input id='toc_search'></span><ul class='toc'><li class='toc1'><a href='#description'>Description</a></li>
+<ul class='toc'></ul><li class='toc1'><a href='#classmethods'>Class methods</a></li>
+<ul class='toc'><li class='toc3'><a href='#*ar'>ar</a> </li>
+<li class='toc2'><a href='#Inherited%20class%20methods'>Inherited class methods</a></li>
+</ul><li class='toc1'><a href='#instancemethods'>Instance methods</a></li>
+<ul class='toc'><li class='toc2'><a href='#Inherited%20instance%20methods'>Inherited instance methods</a></li>
+</ul><li class='toc1'><a href='#examples'>Examples</a></li>
+<ul class='toc'></ul></ul></div><div id='menubar'></div>
+<div class='contents'>
+<div class='header'>
+<div id='label'>
+<span id='folder'>Classes</span>
+ | <span id='categories'><a href='./../Browse.html#UGens'>UGens</a>&#8201;&gt;&#8201;<a href='./../Browse.html#UGens>InOut'>InOut</a> | <a href='./../Browse.html#UGens'>UGens</a>&#8201;&gt;&#8201;<a href='./../Browse.html#UGens>Buffer'>Buffer</a></span>
+</div><h1>VDiskIn<span id='superclasses'> : <a href="../Classes/MultiOutUGen.html">MultiOutUGen</a> : <a href="../Classes/UGen.html">UGen</a> : <a href="../Classes/AbstractFunction.html">AbstractFunction</a> : <a href="../Classes/Object.html">Object</a></span>
+</h1>
+<div id='summary'>Stream in audio from a file, with variable rate</div>
+</div>
+<div class='subheader'>
+<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/develop/SCClassLibrary/Common/Audio/DiskIO.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Audio/DiskIO.sc'>DiskIO.sc</a></div><div id='related'>See also: <a href="./../Classes/PlayBuf.html">PlayBuf</a>, <a href="./../Classes/BufRd.html">BufRd</a>, <a href="./../Classes/DiskIn.html">DiskIn</a></div>
+</div>
+<h2><a class='anchor' name='description'>Description</a></h2>
+
+<p>Continuously play a longer soundfile from disk. This requires a buffer to be preloaded with one buffer size of sound.<h2><a class='anchor' name='classmethods'>Class Methods</a></h2>
+<h3 class='method-code'><span class='method-prefix'>VDiskIn.</span><a class='method-name' name='*ar' href='./../Overviews/Methods.html#ar'>ar</a>(<span class='argstr'>numChannels</span>, <span class='argstr'>bufnum</span>, <span class='argstr'>rate: 1</span>, <span class='argstr'>loop: 0</span>, <span class='argstr'>sendID: 0</span>)</h3>
+<div class='method'>
+<p><h4>Arguments:</h4>
+<table class='arguments'>
+<tr><td class='argumentname'>numChannels<td class='argumentdesc'>
+<p>number of channels<tr><td class='argumentname'>bufnum<td class='argumentdesc'>
+<p>buffer number<div class='note'><span class='notelabel'>NOTE:</span> The Buffer's numFrames must be a power of two and is recommended to be at least 65536 -- preferably 131072 or 262144. Smaller buffer sizes mean more frequent disk access, which can cause glitches.</div><tr><td class='argumentname'>rate<td class='argumentdesc'>
+<p>controls the rate of playback. Values below 4 are probably fine, but the higher the value, the more disk activity there is, and the more likelihood there will be a problem.<div class='warning'><span class='warninglabel'>WARNING:</span> the rate does have a practical limit. The following must be true: rate &lt; Buffer's size / ( 2 * s.options.blockSize) e.g with typical default values, this will be 32768 / (2 * 64) = 256.</div>
+<p>If the rate is too high, the UGen will not execute, posting a warning.<tr><td class='argumentname'>loop<td class='argumentdesc'>
+<p>If loop is set to 1, the soundfile will loop.<tr><td class='argumentname'>sendID<td class='argumentdesc'>
+<p>If a sendID is given, the UGen sends an OSC message with this ID and the frame index <em>relative to the onset of the Synth</em> each time it reloads the buffer: <code>['/diskin', nodeID, sendID, frame]</code>. The true frame index into the file is determined by the <code>startFrame</code> given when reading the initial buffer's worth of data, using <a href="./../Classes/Buffer.html#-cueSoundFile">Buffer: -cueSoundFile</a> or <a href="./../Classes/Buffer.html#-read">Buffer: -read</a>. VDiskIn does not have access to the frame index used to cue the buffer. So, the frame index sent by OSC is always 0 at the start of the synth node. The user is responsible for adding the cue point: <code>cueStartFrame + msg[3]</code>.</table><h4>Discussion:</h4>
+
+<p>This UGen will set the <a href="./../Classes/Done.html">'done' flag</a> when finished playing.</div><h3><a class='anchor' name='Inherited%20class%20methods'>Inherited class methods</a></h3>
+<div id='inheritedclassmets'></div><h2><a class='anchor' name='instancemethods'>Instance Methods</a></h2>
+<h3><a class='anchor' name='Inherited%20instance%20methods'>Inherited instance methods</a></h3>
+<div id='inheritedinstmets'></div><h2><a class='anchor' name='examples'>Examples</a></h2>
+<textarea class='editor'>b = Buffer.cueSoundFile(s, Platform.resourceDir +/+ "sounds/a11wlk01-44_1.aiff", 0, 1);
+
+x = { VDiskIn.ar(1, b, LFNoise2.kr(0.2).range(0.5, 2), 1, loop:1) }.play;
+
+b.close;
+
+// again
+// note the like named instance method, but different arguments
+b.cueSoundFile(Platform.resourceDir +/+ "sounds/a11wlk01-44_1.aiff", 0);
+
+x.free; b.close; b.free;
+
+
+// cue and play right away
+(
+SynthDef("help-VDiskin", { |out, bufnum = 0|
+    Out.ar(out, VDiskIn.ar(1, bufnum, MouseX.kr(0.5, 2.0)));
+}).add;
+)
+(
+x = Synth.basicNew("help-VDiskin");
+m = { arg buf; x.addToHeadMsg(nil, [\bufnum, buf])};
+
+b = Buffer.cueSoundFile(s,Platform.resourceDir +/+ "sounds/a11wlk01-44_1.aiff",0,1, completionMessage: m);
+)
+
+x.free; b.close; b.free;    // clean up
+
+
+
+// sending back the file position.
+// note:
+// the ugen knows nothing of the loop (apply a modulo).
+// if you load another file, you need to free the buffer and re-allocate it (see below)
+
+b = Buffer.cueSoundFile(s, Platform.resourceDir +/+ "sounds/a11wlk01-44_1.aiff", 0, 1, bufferSize: 4096);
+c = SoundFile(Platform.resourceDir +/+ "sounds/a11wlk01-44_1.aiff").info;
+x = { VDiskIn.ar(1, b, LFNoise2.kr(0.2).range(0.2, 0.9), 1, sendID: 14) }.play;
+
+// register to receive this message
+
+(
+o = OSCFunc({ arg msg;
+    var sendID = msg[2];
+    var index = msg[3];
+    msg.postln;
+    "id: % pos: % frames (% sec)\n"
+        .postf(sendID, index % c.numFrames, (index % c.numFrames / c.sampleRate));
+},'/diskin', s.addr)
+);
+
+b.close; b.free;
+
+b.alloc; b.cueSoundFile(Platform.resourceDir +/+ "sounds/a11wlk01-44_1.aiff", 0); c = SoundFile(Platform.resourceDir +/+ "sounds/a11wlk01-44_1.aiff").info;
+
+x.free; b.close; b.free; o.free; // clean up eventually</textarea>
+
+<p>The same example in OSC Messaging style, see <a href="./../Guides/NodeMessaging.html">Node Messaging</a><textarea class='editor'>// allocate a disk i/o buffer
+s.sendMsg("/b_alloc", 0, 65536, 1);
+
+// open an input file for this buffer, leave it open
+s.sendMsg("/b_read", 0, Platform.resourceDir +/+ "sounds/a11wlk01-44_1.aiff", 0, 65536, 0, 1);
+
+// create a diskin node
+s.sendMsg("/s_new", "help-VDiskin", x = s.nextNodeID, 1, 1);
+
+s.sendMsg("/b_close", 0); // close the file (very important!)
+
+
+// again
+// don't need to reallocate and Synth is still reading
+s.sendMsg("/b_read", 0, Platform.resourceDir +/+ "sounds/a11wlk01-44_1.aiff", 0, 0, 0, 1);
+
+s.sendMsg("/n_free", x); // stop reading
+
+s.sendMsg("/b_close", 0); // close the file.
+
+s.sendMsg("/b_free", 0); // frees the buffer</textarea>
+
+<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/develop/HelpSource/Classes/VDiskIn.schelp'>https://github.com/supercollider/supercollider/tree/develop/HelpSource/Classes/VDiskIn.schelp</a><br>link::Classes/VDiskIn::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+</body></html>

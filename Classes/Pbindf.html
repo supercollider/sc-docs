@@ -1,0 +1,96 @@
+<!doctype html><html lang='en'><head><title>Pbindf | SuperCollider 3.13.0 Help</title>
+<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<link rel='stylesheet' href='./../frontend.css' type='text/css' />
+<link rel='stylesheet' href='./../custom.css' type='text/css' />
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+<script src='./../lib/jquery.min.js'></script>
+<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script>
+var helpRoot = './..';
+var scdoc_title = 'Pbindf';
+var scdoc_sc_version = '3.13.0';
+</script>
+<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../docmap.js' type='text/javascript'></script>
+<script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
+</head>
+<body onload='fixTOC()'>
+<div id='toc'>
+<div id='toctitle'>Pbindf:</div>
+<span class='toc_search'>Filter: <input id='toc_search'></span><ul class='toc'><li class='toc1'><a href='#description'>Description</a></li>
+<ul class='toc'></ul><li class='toc1'><a href='#classmethods'>Class methods</a></li>
+<ul class='toc'><li class='toc3'><a href='#*new'>new</a> </li>
+<li class='toc2'><a href='#Inherited%20class%20methods'>Inherited class methods</a></li>
+</ul><li class='toc1'><a href='#instancemethods'>Instance methods</a></li>
+<ul class='toc'><li class='toc2'><a href='#Inherited%20instance%20methods'>Inherited instance methods</a></li>
+<li class='toc2'><a href='#Undocumented%20instance%20methods'>Undocumented instance methods</a></li>
+<ul class='toc'><li class='toc3'><a href='#-embedInStream'>embedInStream</a> </li>
+<li class='toc3'><a href='#-patternpairs'>patternpairs</a> </li>
+</ul></ul><li class='toc1'><a href='#examples'>Examples</a></li>
+<ul class='toc'></ul></ul></div><div id='menubar'></div>
+<div class='contents'>
+<div class='header'>
+<div id='label'>
+<span id='folder'>Classes</span>
+ | <span id='categories'><a href='./../Browse.html#Streams-Patterns-Events'>Streams-Patterns-Events</a>&#8201;&gt;&#8201;<a href='./../Browse.html#Streams-Patterns-Events>Patterns'>Patterns</a>&#8201;&gt;&#8201;<a href='./../Browse.html#Streams-Patterns-Events>Patterns>Composition'>Composition</a></span>
+</div><h1>Pbindf<span id='superclasses'> : <a href="../Classes/FilterPattern.html">FilterPattern</a> : <a href="../Classes/Pattern.html">Pattern</a> : <a href="../Classes/AbstractFunction.html">AbstractFunction</a> : <a href="../Classes/Object.html">Object</a></span>
+</h1>
+<div id='summary'>bind several value patterns to one existing event stream by binding keys to values</div>
+</div>
+<div class='subheader'>
+<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/develop/SCClassLibrary/Common/Streams/FilterPatterns.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Streams/FilterPatterns.sc'>FilterPatterns.sc</a></div><div id='related'>See also: <a href="./../Classes/Pattern.html">Pattern</a>, <a href="./../Classes/Event.html">Event</a>, <a href="./../Classes/Pbind.html">Pbind</a>, <a href="./../Classes/Pchain.html">Pchain</a></div>
+</div>
+<h2><a class='anchor' name='description'>Description</a></h2>
+
+<p>Pbindf adds several value streams into one existing event stream. Each value stream is assigned to one or more keys in the resulting event stream, overriding any values from the input stream.
+<p>The patterns bound to keys are referred to as value patterns and the Pbindf itself is termed an <em>event pattern</em>.<h2><a class='anchor' name='classmethods'>Class Methods</a></h2>
+<h3 class='method-code'><span class='method-prefix'>Pbindf.</span><a class='method-name' name='*new' href='./../Overviews/Methods.html#new'>new</a>(<span class='argstr'>pattern</span> <span class='argstr'>... pairs</span>)</h3>
+<div class='method'>
+<p>The arguments to Pbindf is the initial pattern followed by an alternating sequence of keys and patterns. A pattern can also be bound to an array of keys. In this case, the pattern must specify a sequence whose elements are arrays with at least as many elements as there are keys.</div><h3><a class='anchor' name='Inherited%20class%20methods'>Inherited class methods</a></h3>
+<div id='inheritedclassmets'></div><h2><a class='anchor' name='instancemethods'>Instance Methods</a></h2>
+<h3><a class='anchor' name='Inherited%20instance%20methods'>Inherited instance methods</a></h3>
+<div id='inheritedinstmets'></div><h3><a class='anchor' name='Undocumented%20instance%20methods'>Undocumented instance methods</a></h3>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-embedInStream' href='./../Overviews/Methods.html#embedInStream'>embedInStream</a>(<span class='argstr'>event</span>)</h3>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-patternpairs' href='./../Overviews/Methods.html#patternpairs'>patternpairs</a></h3>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-patternpairs' href='./../Overviews/Methods.html#patternpairs'>patternpairs</a> = value</h3>
+<h2><a class='anchor' name='examples'>Examples</a></h2>
+<textarea class='editor'>(
+a = Pbind(\x, Pseq([1, 2, 3]), \zzz, 9000); // input stream
+b = Pbindf(a, \y, Prand([100, 300, 200], inf), \zzz, 99);
+x = b.asStream;
+)
+
+x.next(()); // pass in an event ()
+x.next(());
+x.next(());
+x.next(()); // end: nil
+
+
+
+// sound examples
+
+// using the default synth def
+a = Pbind(\dur, 0.1);
+Pbindf(a, \freq, Prand([300, 500, 231.2, 399.2], inf)).play;
+Pbindf(a, \freq, Prand([1, 1.2, 2, 2.5, 3, 4], inf) * 200).play;
+
+
+(
+// a SynthDef
+SynthDef(\test, { | out, freq = 440, amp = 0.1, nharms = 10, pan = 0, gate = 1 |
+    var audio = Blip.ar(freq, nharms, amp);
+    var env = Linen.kr(gate, doneAction: Done.freeSelf);
+    OffsetOut.ar(out, Pan2.ar(audio, pan, env) );
+}).add;
+)
+
+a = Pbind(\instrument, \test, \dur, 0.1);
+
+Pbindf(a, \freq, Prand([1, 1.2, 2, 2.5, 3, 4], inf) * 200).play;</textarea>
+
+<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/develop/HelpSource/Classes/Pbindf.schelp'>https://github.com/supercollider/supercollider/tree/develop/HelpSource/Classes/Pbindf.schelp</a><br>link::Classes/Pbindf::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+</body></html>

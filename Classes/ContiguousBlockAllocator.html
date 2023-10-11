@@ -1,0 +1,111 @@
+<!doctype html><html lang='en'><head><title>ContiguousBlockAllocator | SuperCollider 3.13.0 Help</title>
+<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<link rel='stylesheet' href='./../frontend.css' type='text/css' />
+<link rel='stylesheet' href='./../custom.css' type='text/css' />
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+<script src='./../lib/jquery.min.js'></script>
+<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script>
+var helpRoot = './..';
+var scdoc_title = 'ContiguousBlockAllocator';
+var scdoc_sc_version = '3.13.0';
+</script>
+<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../docmap.js' type='text/javascript'></script>
+<script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
+</head>
+<body onload='fixTOC()'>
+<div id='toc'>
+<div id='toctitle'>ContiguousBlockAllocator:</div>
+<span class='toc_search'>Filter: <input id='toc_search'></span><ul class='toc'><li class='toc1'><a href='#description'>Description</a></li>
+<ul class='toc'></ul><li class='toc1'><a href='#classmethods'>Class methods</a></li>
+<ul class='toc'><li class='toc3'><a href='#*new'>new</a> </li>
+<li class='toc2'><a href='#Inherited%20class%20methods'>Inherited class methods</a></li>
+</ul><li class='toc1'><a href='#instancemethods'>Instance methods</a></li>
+<ul class='toc'><li class='toc2'><a href='#Public%20interface'>Public interface</a></li>
+<ul class='toc'><li class='toc3'><a href='#-alloc'>alloc</a> </li>
+<li class='toc3'><a href='#-free'>free</a> </li>
+<li class='toc3'><a href='#-reserve'>reserve</a> </li>
+<li class='toc3'><a href='#-findAvailable'>findAvailable</a> </li>
+</ul><li class='toc2'><a href='#Status%20and%20debugging'>Status and debugging</a></li>
+<ul class='toc'><li class='toc3'><a href='#-debug'>debug</a> </li>
+<li class='toc3'><a href='#-size'>size</a> </li>
+<li class='toc3'><a href='#-pos'>pos</a> </li>
+<li class='toc3'><a href='#-addrOffset'>addrOffset</a> </li>
+<li class='toc3'><a href='#-top'>top</a> </li>
+</ul><li class='toc2'><a href='#Inherited%20instance%20methods'>Inherited instance methods</a></li>
+</ul><li class='toc1'><a href='#examples'>Examples</a></li>
+<ul class='toc'></ul></ul></div><div id='menubar'></div>
+<div class='contents'>
+<div class='header'>
+<div id='label'>
+<span id='folder'>Classes</span>
+ | <span id='categories'><a href='./../Browse.html#Control'>Control</a></span>
+</div><h1>ContiguousBlockAllocator<span id='superclasses'> : <a href="../Classes/Object.html">Object</a></span>
+</h1>
+<div id='summary'>for better handling of dynamic allocation</div>
+</div>
+<div class='subheader'>
+<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/develop/SCClassLibrary/Common/Control/Engine.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Control/Engine.sc'>Engine.sc</a></div><div id='related'>See also: <a href="./../Classes/Server.html">Server</a>, <a href="./../Classes/PowerOfTwoAllocator.html">PowerOfTwoAllocator</a>, <a href="./../Guides/MultiClient_Setups.html">Multi-client Setups</a></div>
+</div>
+<h2><a class='anchor' name='description'>Description</a></h2>
+
+<p>The default allocator used in servers to allocate bus numbers and buffer numbers. Compared to its predecessor, <a href="./../Classes/PowerOfTwoAllocator.html">PowerOfTwoAllocator</a>, it can reserve a block of numbers at the beginning of its range, and it can offset its entire range of numbers to support multiple clientIDs.<h2><a class='anchor' name='classmethods'>Class Methods</a></h2>
+<h3 class='method-code'><span class='method-prefix'>ContiguousBlockAllocator.</span><a class='method-name' name='*new' href='./../Overviews/Methods.html#new'>new</a>(<span class='argstr'>size</span>, <span class='argstr'>pos: 0</span>, <span class='argstr'>addrOffset: 0</span>)</h3>
+<div class='method'>
+<p>Create a new allocator with <em>size</em> slots. You may block off the first <em>pos</em> slots (the server's audioBusAllocator does this to reserve the hardware input and output buses).</div><h3><a class='anchor' name='Inherited%20class%20methods'>Inherited class methods</a></h3>
+<div id='inheritedclassmets'></div><h2><a class='anchor' name='instancemethods'>Instance Methods</a></h2>
+<h3><a class='anchor' name='Public%20interface'>Public interface</a></h3>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-alloc' href='./../Overviews/Methods.html#alloc'>alloc</a>(<span class='argstr'>n: 1</span>)</h3>
+<div class='method'>
+<p>Return the starting index of a free block that is <em>n</em> slots wide. The default is 1 slot.
+<p>Note that the returned address is not guaranteed to be the lowest possible address that can satisfy the requested size. It should be adjacent to a previously allocated block, however (to minimize fragmentation of the address space).</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-free' href='./../Overviews/Methods.html#free'>free</a>(<span class='argstr'>address</span>)</h3>
+<div class='method'>
+<p>Free a previously allocated block starting at <em>address</em>.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-reserve' href='./../Overviews/Methods.html#reserve'>reserve</a>(<span class='argstr'>address</span>, <span class='argstr'>size: 1</span>, <span class='argstr'>warn: true</span>)</h3>
+<div class='method'>
+<p>Mark a specific range of addresses as used so that the alloc method will not return any addresses within that range. </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-findAvailable' href='./../Overviews/Methods.html#findAvailable'>findAvailable</a>(<span class='argstr'>n</span>)</h3>
+<div class='method'>
+<p>Given an integer width of a desired block, find and return a <code>ContiguousBlock</code> object whose <code>start</code> is the beginning address of the block and whose <code>size</code> is the width. This method only queries the allocator; it does not change the state. If you obtain an address using <code>findAvailable</code>, there is no guarantee that a later call will not return the same address. So, in general, use <a href="#-alloc">-alloc</a> to request an address. (<code>alloc</code> calls <code>findAvailable</code> and then <code>reserve</code>.)
+<p>This method could be considered "half-private": It may be useful for queries, but in general, you can get everything you need from <a href="#-alloc">-alloc</a>, <a href="#-free">-free</a> and <a href="#-reserve">-reserve</a>.</div><h3><a class='anchor' name='Status%20and%20debugging'>Status and debugging</a></h3>
+
+<p>You may query these state variables, but it is not recommended to change them outside of the public interface.<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-debug' href='./../Overviews/Methods.html#debug'>debug</a>(<span class='argstr'>text</span>)</h3>
+<div class='method'>
+<p> Post internal state of allocator for debugging.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-size' href='./../Overviews/Methods.html#size'>size</a></h3>
+<div class='method'>
+<p> The number of id numbers it can allocate.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-pos' href='./../Overviews/Methods.html#pos'>pos</a></h3>
+<div class='method'>
+<p> The allocator's offset for a reserved block (e.g. for hardware input and output buses).</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-addrOffset' href='./../Overviews/Methods.html#addrOffset'>addrOffset</a></h3>
+<div class='method'>
+<p> The offset of the allocator's address range, which is used to accomodate multiple clientIDs.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-top' href='./../Overviews/Methods.html#top'>top</a></h3>
+<div class='method'>
+<p> The address of the last empty block.</div><h3><a class='anchor' name='Inherited%20instance%20methods'>Inherited instance methods</a></h3>
+<div id='inheritedinstmets'></div><h2><a class='anchor' name='examples'>Examples</a></h2>
+<textarea class='editor'>c = ContiguousBlockAllocator(10);
+c.alloc(5);  // 0 = first available
+c.alloc(2);  // 5
+c.alloc(4);  // nil -- no block of 4 available
+
+c.free(1);  // no-op: nothing at 1 to free
+
+c.free(0);
+
+c.alloc(3);  // 0: tries to reuse previously-freed space first
+
+c.alloc(3);  // 7
+
+
+// Adjacency
+c = ContiguousBlockAllocator(24);
+
+// reserve every 4th
+(0, 4 .. 23).do { |i| c.reserve(i) };
+
+10.do { c.findAvailable(1).postln };</textarea>
+
+<p>In the last line of the second example, <code>findAvailable</code> may locate any of indices 1, 5, 9, 13, or 17. (21 would not be used until a suitable block could not be found in the other empty spaces.) If you were to allocate a single address, then the empty block of three would always be reduced to an empty block of two (instead of dividing the empty space in half and having two empty single-address blocks).
+<p>It may be surprising that the algorithm does not favor lower-index blocks, but if two addresses A and B have been previously used and freed, there is no inherent reason to prefer A if A &lt; B.<div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/develop/HelpSource/Classes/ContiguousBlockAllocator.schelp'>https://github.com/supercollider/supercollider/tree/develop/HelpSource/Classes/ContiguousBlockAllocator.schelp</a><br>link::Classes/ContiguousBlockAllocator::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+</body></html>

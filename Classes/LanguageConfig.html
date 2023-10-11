@@ -1,0 +1,98 @@
+<!doctype html><html lang='en'><head><title>LanguageConfig | SuperCollider 3.13.0 Help</title>
+<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<link rel='stylesheet' href='./../frontend.css' type='text/css' />
+<link rel='stylesheet' href='./../custom.css' type='text/css' />
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+<script src='./../lib/jquery.min.js'></script>
+<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script>
+var helpRoot = './..';
+var scdoc_title = 'LanguageConfig';
+var scdoc_sc_version = '3.13.0';
+</script>
+<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../docmap.js' type='text/javascript'></script>
+<script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
+</head>
+<body onload='fixTOC()'>
+<div id='toc'>
+<div id='toctitle'>LanguageConfig:</div>
+<span class='toc_search'>Filter: <input id='toc_search'></span><ul class='toc'><li class='toc1'><a href='#description'>Description</a></li>
+<ul class='toc'></ul><li class='toc1'><a href='#classmethods'>Class methods</a></li>
+<ul class='toc'><li class='toc3'><a href='#*store'>store</a> </li>
+<li class='toc2'><a href='#Library%20Path%20Handling'>Library Path Handling</a></li>
+<ul class='toc'><li class='toc3'><a href='#*includePaths'>includePaths</a> </li>
+<li class='toc3'><a href='#*addIncludePath'>addIncludePath</a> </li>
+<li class='toc3'><a href='#*removeIncludePath'>removeIncludePath</a> </li>
+<li class='toc3'><a href='#*excludePaths'>excludePaths</a> </li>
+<li class='toc3'><a href='#*addExcludePath'>addExcludePath</a> </li>
+<li class='toc3'><a href='#*removeExcludePath'>removeExcludePath</a> </li>
+<li class='toc3'><a href='#*currentPath'>currentPath</a> </li>
+<li class='toc3'><a href='#*excludeDefaultPaths'>excludeDefaultPaths</a> </li>
+</ul><li class='toc2'><a href='#Compiler%20Warnings'>Compiler Warnings</a></li>
+<ul class='toc'><li class='toc3'><a href='#*postInlineWarnings'>postInlineWarnings</a> </li>
+</ul><li class='toc2'><a href='#Inherited%20class%20methods'>Inherited class methods</a></li>
+</ul><li class='toc1'><a href='#instancemethods'>Instance methods</a></li>
+<ul class='toc'><li class='toc2'><a href='#Inherited%20instance%20methods'>Inherited instance methods</a></li>
+</ul><li class='toc1'><a href='#Configuration%20File%20Format'>Configuration File Format</a></li>
+<ul class='toc'></ul></ul></div><div id='menubar'></div>
+<div class='contents'>
+<div class='header'>
+<div id='label'>
+<span id='folder'>Classes</span>
+ | <span id='categories'><a href='./../Browse.html#Language'>Language</a></span>
+</div><h1>LanguageConfig<span id='superclasses'> : <a href="../Classes/Object.html">Object</a></span>
+</h1>
+<div id='summary'>Access and modify interpreter configuration</div>
+</div>
+<div class='subheader'>
+<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/develop/SCClassLibrary/Common/Core/LanguageConfig.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Core/LanguageConfig.sc'>LanguageConfig.sc</a></div></div>
+<h2><a class='anchor' name='description'>Description</a></h2>
+
+<p>The LanguageConfig class provides access to the interpreter configuration.<h2><a class='anchor' name='classmethods'>Class Methods</a></h2>
+<h3 class='method-code'><span class='method-prefix'>LanguageConfig.</span><a class='method-name' name='*store' href='./../Overviews/Methods.html#store'>store</a>(<span class='argstr'>file</span>)</h3>
+<div class='method'>
+<p>Store the current configuration to file. Throws an error if the config file cannot be opened or if writing fails.<h4>Arguments:</h4>
+<table class='arguments'>
+<tr><td class='argumentname'>file<td class='argumentdesc'>
+<p>Path to the configuration file to store. If the value is <code>nil</code> it defaults to currently used configuration file, as specified in the IDE preferences, or by the <code>sclang -l "/path/to/sclang_conf.yaml"</code> argument. By default this is <code>Platform.userConfigDir +/+ "sclang_conf.yaml"</code></table></div><h3><a class='anchor' name='Library%20Path%20Handling'>Library Path Handling</a></h3>
+
+<p>The language configuration mechanism provides a way to add or exclude specific paths for the class library.<div class='note'><span class='notelabel'>NOTE:</span> Changes to the class library paths won't have any effect before the configuration file is stored and the class library is recompiled.</div><h3 class='method-code'><span class='method-prefix'>LanguageConfig.</span><a class='method-name' name='*includePaths' href='./../Overviews/Methods.html#includePaths'>includePaths</a></h3>
+<div class='method'>
+<p>Return the class library include paths.</div><h3 class='method-code'><span class='method-prefix'>LanguageConfig.</span><a class='method-name' name='*addIncludePath' href='./../Overviews/Methods.html#addIncludePath'>addIncludePath</a>(<span class='argstr'>aPath</span>)</h3>
+<div class='method'>
+<p>Add new class library include path.</div><h3 class='method-code'><span class='method-prefix'>LanguageConfig.</span><a class='method-name' name='*removeIncludePath' href='./../Overviews/Methods.html#removeIncludePath'>removeIncludePath</a>(<span class='argstr'>aPath</span>)</h3>
+<div class='method'>
+<p>Remove path from class library include paths.</div><h3 class='method-code'><span class='method-prefix'>LanguageConfig.</span><a class='method-name' name='*excludePaths' href='./../Overviews/Methods.html#excludePaths'>excludePaths</a></h3>
+<div class='method'>
+<p>Return the class library exclude paths.</div><h3 class='method-code'><span class='method-prefix'>LanguageConfig.</span><a class='method-name' name='*addExcludePath' href='./../Overviews/Methods.html#addExcludePath'>addExcludePath</a>(<span class='argstr'>aPath</span>)</h3>
+<div class='method'>
+<p>Add new class library exclude path.</div><h3 class='method-code'><span class='method-prefix'>LanguageConfig.</span><a class='method-name' name='*removeExcludePath' href='./../Overviews/Methods.html#removeExcludePath'>removeExcludePath</a>(<span class='argstr'>aPath</span>)</h3>
+<div class='method'>
+<p>Remove path from class library exclude paths.</div><h3 class='method-code'><span class='method-prefix'>LanguageConfig.</span><a class='method-name' name='*currentPath' href='./../Overviews/Methods.html#currentPath'>currentPath</a></h3>
+<div class='method'>
+<p>Return the current config file path.</div><h3 class='method-code'><span class='method-prefix'>LanguageConfig.</span><a class='method-name' name='*excludeDefaultPaths' href='./../Overviews/Methods.html#excludeDefaultPaths'>excludeDefaultPaths</a></h3>
+<h3 class='method-code'><span class='method-prefix'>LanguageConfig.</span><a class='method-name' name='*excludeDefaultPaths' href='./../Overviews/Methods.html#excludeDefaultPaths'>excludeDefaultPaths</a> = <span class='argstr'>aBoolean</span></h3>
+<div class='method'>
+<p>Get or set whether default class library paths are included.<div class='note'><span class='notelabel'>NOTE:</span> If sclang is started with -a the class library paths are excluded and this value is ignored. The default class library paths are Platform.classLibraryDir, and the system and user extensions directories.</div></div><h3><a class='anchor' name='Compiler%20Warnings'>Compiler Warnings</a></h3>
+<h3 class='method-code'><span class='method-prefix'>LanguageConfig.</span><a class='method-name' name='*postInlineWarnings' href='./../Overviews/Methods.html#postInlineWarnings'>postInlineWarnings</a></h3>
+<h3 class='method-code'><span class='method-prefix'>LanguageConfig.</span><a class='method-name' name='*postInlineWarnings' href='./../Overviews/Methods.html#postInlineWarnings'>postInlineWarnings</a> = <span class='argstr'>aBoolean</span></h3>
+<div class='method'>
+<p>Get or set the compiler flag, whether warnings should be posted if a FunctionDef cannot be inlined.<textarea class='editor'>LanguageConfig.postInlineWarnings_(true) // warn
+if(0.5.coin) { var x; x = 10.rand; x + 1 } { 10 };
+LanguageConfig.postInlineWarnings_(false) // ignore it.
+if(0.5.coin) { var x; x = 10.rand; x + 1 } { 10 };</textarea>
+
+<p></div><h3><a class='anchor' name='Inherited%20class%20methods'>Inherited class methods</a></h3>
+<div id='inheritedclassmets'></div><h2><a class='anchor' name='instancemethods'>Instance Methods</a></h2>
+<h3><a class='anchor' name='Inherited%20instance%20methods'>Inherited instance methods</a></h3>
+<div id='inheritedinstmets'></div><h2><a class='anchor' name='Configuration%20File%20Format'>Configuration File Format</a></h2>
+
+<p>The configuration file is stored in YAML format, which contains one dictionary. The semantics of the dictionary is listed in the following table:<dl>
+<dt><code>includePaths</code><dd>List of class library paths.<dt><code>excludePaths</code><dd>List of paths to exclude from the class library files (overrides <code>includePaths</code>).<dt><code>postInlineWarnings</code><dd>Boolean flag to post warnings about missing inline opportunities.</dl>
+<div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/develop/HelpSource/Classes/LanguageConfig.schelp'>https://github.com/supercollider/supercollider/tree/develop/HelpSource/Classes/LanguageConfig.schelp</a><br>link::Classes/LanguageConfig::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+</body></html>

@@ -1,0 +1,70 @@
+<!doctype html><html lang='en'><head><title>SortedList | SuperCollider 3.13.0 Help</title>
+<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<link rel='stylesheet' href='./../frontend.css' type='text/css' />
+<link rel='stylesheet' href='./../custom.css' type='text/css' />
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+<script src='./../lib/jquery.min.js'></script>
+<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script>
+var helpRoot = './..';
+var scdoc_title = 'SortedList';
+var scdoc_sc_version = '3.13.0';
+</script>
+<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../docmap.js' type='text/javascript'></script>
+<script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
+</head>
+<body onload='fixTOC()'>
+<div id='toc'>
+<div id='toctitle'>SortedList:</div>
+<span class='toc_search'>Filter: <input id='toc_search'></span><ul class='toc'><li class='toc1'><a href='#classmethods'>Class methods</a></li>
+<ul class='toc'><li class='toc3'><a href='#*new'>new</a> </li>
+<li class='toc2'><a href='#Inherited%20class%20methods'>Inherited class methods</a></li>
+</ul><li class='toc1'><a href='#instancemethods'>Instance methods</a></li>
+<ul class='toc'><li class='toc3'><a href='#-add'>add</a> </li>
+<li class='toc3'><a href='#-addAll'>addAll</a> </li>
+<li class='toc2'><a href='#Inherited%20instance%20methods'>Inherited instance methods</a></li>
+<li class='toc2'><a href='#Undocumented%20instance%20methods'>Undocumented instance methods</a></li>
+<ul class='toc'><li class='toc3'><a href='#-copyRange'>copyRange</a> </li>
+<li class='toc3'><a href='#-copySeries'>copySeries</a> </li>
+<li class='toc3'><a href='#-function'>function</a> </li>
+<li class='toc3'><a href='#-sort'>sort</a> </li>
+<li class='toc3'><a href='#-sortRange'>sortRange</a> </li>
+</ul></ul></ul></div><div id='menubar'></div>
+<div class='contents'>
+<div class='header'>
+<div id='label'>
+<span id='folder'>Classes</span>
+ | <span id='categories'><a href='./../Browse.html#Collections'>Collections</a>&#8201;&gt;&#8201;<a href='./../Browse.html#Collections>Ordered'>Ordered</a></span>
+</div><h1>SortedList<span id='superclasses'> : <a href="../Classes/List.html">List</a> : <a href="../Classes/SequenceableCollection.html">SequenceableCollection</a> : <a href="../Classes/Collection.html">Collection</a> : <a href="../Classes/Object.html">Object</a></span>
+</h1>
+<div id='summary'>a Collection whose items are kept in a sorted order.</div>
+</div>
+<div class='subheader'>
+<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/develop/SCClassLibrary/Common/Collections/SortedList.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Collections/SortedList.sc'>SortedList.sc</a></div></div>
+<h2><a class='anchor' name='classmethods'>Class Methods</a></h2>
+<h3 class='method-code'><span class='method-prefix'>SortedList.</span><a class='method-name' name='*new' href='./../Overviews/Methods.html#new'>new</a>(<span class='argstr'>size: 8</span>, <span class='argstr'>function</span>)</h3>
+<div class='method'>
+<p>Creates a SortedList with the initial capacity given by <strong>size</strong> and a comparison <strong>function</strong>. The SortedList can contain equal / identical elements more than once.</div><h3><a class='anchor' name='Inherited%20class%20methods'>Inherited class methods</a></h3>
+<div id='inheritedclassmets'></div><h2><a class='anchor' name='instancemethods'>Instance Methods</a></h2>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-add' href='./../Overviews/Methods.html#add'>add</a>(<span class='argstr'>item</span>)</h3>
+<div class='method'>
+<p>Adds an item in the SortedList at the correct position.<textarea class='editor'>SortedList[1, 2, 5, 6].add(4).postln;</textarea>
+</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-addAll' href='./../Overviews/Methods.html#addAll'>addAll</a>(<span class='argstr'>aCollection</span>)</h3>
+<div class='method'>
+<p>Adds all the items in the collection into the SortedList.<textarea class='editor'>SortedList[1, 2, 5, 6].addAll([0, 3, 4, 7]).postln;</textarea>
+
+<p></div><h3><a class='anchor' name='Inherited%20instance%20methods'>Inherited instance methods</a></h3>
+<div id='inheritedinstmets'></div><h3><a class='anchor' name='Undocumented%20instance%20methods'>Undocumented instance methods</a></h3>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-copyRange' href='./../Overviews/Methods.html#copyRange'>copyRange</a>(<span class='argstr'>start</span>, <span class='argstr'>end</span>)</h3>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-copySeries' href='./../Overviews/Methods.html#copySeries'>copySeries</a>(<span class='argstr'>first</span>, <span class='argstr'>second</span>, <span class='argstr'>last</span>)</h3>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-function' href='./../Overviews/Methods.html#function'>function</a></h3>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-function' href='./../Overviews/Methods.html#function'>function</a> = value</h3>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-sort' href='./../Overviews/Methods.html#sort'>sort</a></h3>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-sortRange' href='./../Overviews/Methods.html#sortRange'>sortRange</a>(<span class='argstr'>i</span>, <span class='argstr'>j</span>)</h3>
+<div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/develop/HelpSource/Classes/SortedList.schelp'>https://github.com/supercollider/supercollider/tree/develop/HelpSource/Classes/SortedList.schelp</a><br>link::Classes/SortedList::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+</body></html>
