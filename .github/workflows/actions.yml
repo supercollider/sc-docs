@@ -1,6 +1,7 @@
 name: CI
 
 on:
+  pull_requests:
   push:
     branches:
     - main
@@ -25,6 +26,7 @@ jobs:
 
       - name: upload HTML documentation as gh-pages branch
         uses: peaceiris/actions-gh-pages@v3.6.1
+        if: success() && github.ref == 'refs/heads/main' # only deploy main
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: build
