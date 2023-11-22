@@ -13,6 +13,7 @@ find /root/scdocs_build/ -type f -exec sed -i -e "s_/usr/local/share/SuperCollid
 find /root/scdocs_build/ -type f -exec sed -i -e "s_/usr/local/share/SuperCollider/HelpSource_https://github.com/supercollider/supercollider/tree/$SC_BRANCH/HelpSource_g" {} \; 
 echo "Copy CSS patch"
 cp /root/custom.css /root/scdocs_build/custom.css
+cp /root/robots.txt /root/scdocs_build/robots.txt
 
 echo "Move from the intermediate folder to the host build folder"
 cp -r /root/scdocs_build/* /root/scdocs
