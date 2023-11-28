@@ -44,5 +44,6 @@ RUN git clone \
     rm -rf /root/SuperCollider
 
 COPY custom.css .
+COPY robots.txt .
 COPY build_docs.scd .
 COPY build_docs.sh .
