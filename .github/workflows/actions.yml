@@ -25,7 +25,7 @@ jobs:
         run: docker run -v ${PWD}/build:/root/scdocs scdocs /root/build_docs.sh
 
       - name: upload HTML documentation as gh-pages branch
-        uses: peaceiris/actions-gh-pages@v3.6.1
+        uses: peaceiris/actions-gh-pages@v4.0.0
         if: success() && github.ref == 'refs/heads/main' # only deploy main
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
