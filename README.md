@@ -1,13 +1,20 @@
 # SuperCollider documentation
 
-The aim of this repository is to provide a transparent and semi-official way of deploying the documentation of SuperCollider into the web.
+This repository builds the official documentation of SuperCollider on the web which is located at [docs.supercollider.online](https://docs.supercollider.online).
+It is built and deployed every week based on the source files of the latest major version of SuperCollider.
 
-* [x] Changes source code links to the hosted files on GitHub
-* [x] Stays automatically up-to-date and makes the build process transparent
-* [x] Allows for CSS patches which creates a better UX on bigger screens (see `custom.css`)
+The following enhancements and adjustments have been made to the documentation:
 
-Currently this only includes the documentation of the sclang core and not any Extensions.
-Feel free to create a Pull Request to include any 
+* [x] Links to source files are heading to the source files on GitHub instead of a local copy.
+* [x] A CSS patch that limits the screen-width which improves readability on wider screens (see `custom.css`)
+
+The documentation is limited to a vanilla installation of SuperCollider, i.e. without any plugins or Quarks.
+The documentation for each Quark can be found at [baryon.supercollider.online](https://baryon.supercollider.online).
+
+This repository contains all the necessary build steps for the documentation and uses [GitHub Pages](https://pages.github.com/) for hosting of the static HTML files.
+This could be replaced with any other static file hosting mechanism in the future.
+
+> In case of a new major release update the branch in `Dockerfile`
 
 ## Build
 
@@ -32,7 +39,7 @@ docker run -v ${PWD}/build:/root/scdocs scdocs /root/build_docs.sh
 
 To access the docs in a webserver way it is possible to use a lightweight development web server via Python
 
-```
+```shell
 cd build && python3 -m http.server
 ```
 
