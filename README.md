@@ -11,6 +11,8 @@ The following enhancements and adjustments have been made to the documentation:
 The documentation is limited to a vanilla installation of SuperCollider, i.e. without any plugins or Quarks.
 The documentation for each Quark can be found at [baryon.supercollider.online](https://baryon.supercollider.online).
 
+A development version of the docs is available at [dev.docs.supercollider.online](https://dev.docs.supercollider.online/), reflecting the latest additions to the documentation in the `develop` branch.
+
 This repository contains all the necessary build steps for the documentation and uses [GitHub Pages](https://pages.github.com/) for hosting of the static HTML files.
 This could be replaced with any other static file hosting mechanism in the future.
 
