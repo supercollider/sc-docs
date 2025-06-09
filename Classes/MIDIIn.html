@@ -1,21 +1,25 @@
-<!doctype html><html lang='en'><head><title>MIDIIn | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>MIDIIn | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../lib/jquery.min.js'></script>
-<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/jquery.min.js'></script>
+<script src='./../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './..';
 var scdoc_title = 'MIDIIn';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../static/scdoc.js' type='text/javascript'></script>
 <script src='./../docmap.js' type='text/javascript'></script>
+<script src='./../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
@@ -93,7 +97,7 @@ var scdoc_sc_version = '3.13.1';
 <div id='summary'>receive MIDI messages</div>
 </div>
 <div class='subheader'>
-<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/Common/Control/MIDIOut.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Control/MIDIOut.sc'>MIDIOut.sc</a></div><div id='related'>See also: <a href="./../Classes/MIDIClient.html">MIDIClient</a>, <a href="./../Classes/MIDIOut.html">MIDIOut</a>, <a href="./../Classes/MIDIFunc.html">MIDIFunc</a>, <a href="./../Classes/MIDIdef.html">MIDIdef</a>, <a href="./../Guides/MIDI.html">MIDI</a>, <a href="./../Guides/UsingMIDI.html">Using MIDI</a></div>
+<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/Common/Control/MIDIOut.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Control/MIDIOut.sc'>MIDIOut.sc</a></div><div id='related'>See also: <a href="./../Classes/MIDIClient.html">MIDIClient</a>, <a href="./../Classes/MIDIOut.html">MIDIOut</a>, <a href="./../Classes/MIDIFunc.html">MIDIFunc</a>, <a href="./../Classes/MIDIdef.html">MIDIdef</a>, <a href="./../Guides/MIDI.html">MIDI</a>, <a href="./../Guides/UsingMIDI.html">Using MIDI</a></div>
 </div>
 <h2><a class='anchor' name='description'>Description</a></h2>
 
@@ -107,9 +111,10 @@ var scdoc_sc_version = '3.13.1';
 <p>The first argument these functions receive is an unique identifier that specifies the source of the data.<h2><a class='anchor' name='classmethods'>Class Methods</a></h2>
 <h3 class='method-code'><span class='method-prefix'>MIDIIn.</span><a class='method-name' name='*findPort' href='./../Overviews/Methods.html#findPort'>findPort</a>(<span class='argstr'>deviceName</span>, <span class='argstr'>portName</span>)</h3>
 <div class='method'>
-<p>searches for a connected <a href="./../Classes/MIDIEndPoint.html">MIDIEndPoint</a> by name.<textarea class='editor'>//list connected ins:
+<p>searches for a connected <a href="./../Classes/MIDIEndPoint.html">MIDIEndPoint</a> by name.<div class='codeMirrorContainer'><textarea class='editor'>// list connected ins:
 MIDIClient.init;
 MIDIClient.sources;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>MIDIIn.</span><a class='method-name' name='*addFuncTo' href='./../Overviews/Methods.html#addFuncTo'>addFuncTo</a>(<span class='argstr'>what</span>, <span class='argstr'>func</span>)</h3>
 <div class='method'>
 <p>Add a <a href="./../Classes/Function.html">Function</a> or similar object to be evaluated whenever a particular MIDI message is received. This method is preferable to the setters below, since it will not overwrite any existing functions.<h4>Arguments:</h4>
@@ -133,7 +138,7 @@ MIDIClient.sources;</textarea>
 <h3 class='method-code'><span class='method-prefix'>MIDIIn.</span><a class='method-name' name='*noteOnZeroAsNoteOff' href='./../Overviews/Methods.html#noteOnZeroAsNoteOff'>noteOnZeroAsNoteOff</a> = value</h3>
 <div class='method'>
 <p>By default this flag is <code>true</code> and SuperCollider interprets incoming MIDI noteOn message with velocity 0 as noteOff messages. In case you do not want this automatic translation, you can set this flag to <code>false</code></div><h3 class='method-code'><span class='method-prefix'>MIDIIn.</span><a class='method-name' name='*connectAll' href='./../Overviews/Methods.html#connectAll'>connectAll</a>(<span class='argstr'>verbose: true</span>)</h3>
-<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/Platform/linux/SystemOverwrites/extMIDIOut.sc'>/usr/local/share/SuperCollider/SCClassLibrary/Platform/linux/SystemOverwrites/extMIDIOut.sc</a></div>
+<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/Platform/linux/SystemOverwrites/extMIDIOut.sc'>/usr/local/share/SuperCollider/SCClassLibrary/Platform/linux/SystemOverwrites/extMIDIOut.sc</a></div>
 <div class='method'>
 <p>Connect to all possible MIDI inputs.<h4>Arguments:</h4>
 <table class='arguments'>
@@ -266,19 +271,19 @@ MIDIClient.sources;</textarea>
 <h3><a class='anchor' name='Inherited%20instance%20methods'>Inherited instance methods</a></h3>
 <div id='inheritedinstmets'></div><h2><a class='anchor' name='examples'>Examples</a></h2>
 <h3><a class='anchor' name='Quick%20start%20for%201%20port'>Quick start for 1 port</a></h3>
-<textarea class='editor'>(
+<div class='codeMirrorContainer'><textarea class='editor'>(
 MIDIIn.connect;    // init for one port midi interface
 // register functions:
-~noteOff = { arg src, chan, num, vel;    [chan,num,vel / 127].postln; };
-~noteOn = { arg src, chan, num, vel;    [chan,num,vel / 127].postln; };
-~polytouch = { arg src, chan, num, vel;    [chan,num,vel / 127].postln; };
-~control = { arg src, chan, num, val;    [chan,num,val].postln; };
-~program = { arg src, chan, prog;        [chan,prog].postln; };
-~touch = { arg src, chan, pressure;    [chan,pressure].postln; };
-~bend = { arg src, chan, bend;        [chan,bend - 8192].postln; };
-~sysex = { arg src, sysex;        sysex.postln; };
-~sysrt = { arg src, chan, val;        [chan,val].postln; };
-~smpte = { arg src, chan, val;        [chan,val].postln; };
+~noteOff =     { |src, chan, num, vel|    [chan, num, vel / 127].postln };
+~noteOn =     { |src, chan, num, vel|    [chan, num, vel / 127].postln };
+~polytouch = { |src, chan, num, vel| [chan, num, vel / 127].postln };
+~control =     { |src, chan, num, val|    [chan, num, val].postln };
+~program =     { |src, chan, prog|        [chan, prog].postln };
+~touch =     { |src, chan, pressure|    [chan, pressure].postln };
+~bend =     { |src, chan, bend|        [chan, bend - 8192].postln };
+~sysex =     { |src, sysex|            sysex.postln };
+~sysrt =     { |src, chan, val|        [chan, val].postln };
+~smpte =     { |src, chan, val|        [chan, val].postln };
 MIDIIn.addFuncTo(\noteOn, ~noteOn);
 MIDIIn.addFuncTo(\noteOff, ~noteOff);
 MIDIIn.addFuncTo(\polytouch, ~polytouch);
@@ -291,7 +296,7 @@ MIDIIn.addFuncTo(\sysrt, ~sysrt);
 MIDIIn.addFuncTo(\smpte, ~smpte);
 )
 
-//cleanup
+// cleanup
 (
 MIDIIn.removeFuncFrom(\noteOn, ~noteOn);
 MIDIIn.removeFuncFrom(\noteOff, ~noteOff);
@@ -304,17 +309,19 @@ MIDIIn.removeFuncFrom(\sysex, ~sysex);
 MIDIIn.removeFuncFrom(\sysrt, ~sysrt);
 MIDIIn.removeFuncFrom(\smpte, ~smpte);
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h3><a class='anchor' name='Quick%20start%20for%202%20or%20more%20ports'>Quick start for 2 or more ports</a></h3>
-<textarea class='editor'>(
+<div class='codeMirrorContainer'><textarea class='editor'>(
     var inPorts = 2;
     var outPorts = 2;
-    MIDIClient.init(inPorts,outPorts);    // explicitly intialize the client
-    inPorts.do({ arg i;
+    MIDIClient.init(inPorts, outPorts);    // explicitly intialize the client
+    inPorts.do({ |i|
         MIDIIn.connect(i, MIDIClient.sources.at(i));
     });
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h3><a class='anchor' name='example%20with%20sound'>example with sound</a></h3>
-<textarea class='editor'>MIDIIn.connect;
+<div class='codeMirrorContainer'><textarea class='editor'>MIDIIn.connect;
 s.boot;
 
 (
@@ -332,37 +339,38 @@ SynthDef("sik-goo", { |out, freq = 440, formfreq = 100, gate = 0.0, bwfreq = 800
 
 x = Synth("sik-goo");
 
-//set the action:
+// set the action:
 (
-~noteOn = {arg src, chan, num, vel;
+~noteOn = { |src, chan, num, vel|
     x.set(\freq, num.midicps / 4.0);
-    x.set(\gate, vel / 200 );
+    x.set(\gate, vel / 200);
     x.set(\formfreq, vel / 127 * 1000);
 };
 MIDIIn.addFuncTo(\noteOn, ~noteOn);
 
-~noteOff = { arg src,chan,num,vel;
+~noteOff = { |src, chan, num, vel|
     x.set(\gate, 0.0);
 };
 MIDIIn.addFuncTo(\noteOff, ~noteOff);
 
-~bend = { arg src,chan,val;
-    //(val * 0.048828125).postln;
-    x.set(\bwfreq, val * 0.048828125 );
+~bend = { |src, chan, val|
+    // (val * 0.048828125).postln;
+    x.set(\bwfreq, val * 0.048828125);
 };
 MIDIIn.addFuncTo(\bend, ~bend);
 )
 
-//cleanup
+// cleanup
 MIDIIn.removeFuncFrom(\noteOn, ~noteOn);
 MIDIIn.removeFuncFrom(\noteOff, ~noteOff);
 MIDIIn.removeFuncFrom(\bend, ~bend);</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h3><a class='anchor' name='writing%20to%20the%20bus%20rather%20than%20directly%20to%20the%20synth'>writing to the bus rather than directly to the synth</a></h3>
-<textarea class='editor'>//i used this and got acceptable latency for triggering synths live.
-//The latency might actually be less than sc2, but i haven't used it enough
-//to tell for sure yet.
-//Powerbook G4, 512mb ram.
-//- matrix6k@somahq.com
+<div class='codeMirrorContainer'><textarea class='editor'>// i used this and got acceptable latency for triggering synths live.
+// The latency might actually be less than sc2, but i haven't used it enough
+// to tell for sure yet.
+// Powerbook G4, 512mb ram.
+// - matrix6k@somahq.com
 
 s.boot;
 
@@ -391,19 +399,19 @@ x.map(0, b);
 
 
 MIDIIn.connect;
-//set the action:
+// set the action:
 (
-~noteOn = {arg src, chan, num, vel;
+~noteOn = { |src, chan, num, vel|
     b.value = num.midicps.postln;
 };
 MIDIIn.addFuncTo(\noteOn, ~noteOn);
 
-~control = {arg src, chan, num, val;
-    [chan,num,val].postln;
+~control = { |src, chan, num, val|
+    [chan, num, val].postln;
 };
 MIDIIn.addFuncTo(\control, ~control);
 
-~bend = {arg src, chan, val;
+~bend = { |src, chan, val|
     val.postln;
 };
 MIDIIn.addFuncTo(\bend, ~bend);
@@ -415,23 +423,24 @@ b.free;
 MIDIIn.removeFuncFrom(\noteOn, ~noteOn);
 MIDIIn.removeFuncFrom(\control, ~control);
 MIDIIn.removeFuncFrom(\bend, ~bend);</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h3><a class='anchor' name='Keyboard%20Split%20for%20two%20voices'>Keyboard Split for two voices</a></h3>
-<textarea class='editor'>//pbend to cutoff, mod to rez, 7 to amp
-//- matrix6k@somahq.com
+<div class='codeMirrorContainer'><textarea class='editor'>// pbend to cutoff, mod to rez, 7 to amp
+// - matrix6k@somahq.com
 
 s.boot;
 (
-SynthDef("funk",{ | out, freq = 700, amp = 0.2, gate = 1, cutoff = 20000, rez = 1, lfospeed = 0 |
+SynthDef("funk", { |out, freq = 700, amp = 0.2, gate = 1, cutoff = 20000, rez = 1, lfospeed = 0|
     var e, x, env, range, filterfreq;
     e = Env.new([0, 0.1, 0.1, 0], [0, 0.1, 0.1], 'linear', 2);
-    env = Env.adsr(0.3,1,1,1);
+    env = Env.adsr(0.3, 1, 1, 1);
     range = cutoff -1;
-    filterfreq = SinOsc.kr(lfospeed,0, range, cutoff).abs;
+    filterfreq = SinOsc.kr(lfospeed, 0, range, cutoff).abs;
     x = RLPF.ar(Mix.ar([
-            Mix.arFill(2, {Saw.ar(freq *2 + 0.2.rand2, amp)}),
-            Mix.arFill(2, {Saw.ar(freq *4+ 0.2.rand2, amp)})
+            Mix.arFill(2, { Saw.ar(freq *2 + 0.2.rand2, amp) }),
+            Mix.arFill(2, { Saw.ar(freq *4+ 0.2.rand2, amp) })
         ]),
-        EnvGen.kr(env,gate)*filterfreq,
+        EnvGen.kr(env, gate)*filterfreq,
         rez);
     Out.ar(out, x * EnvGen.kr(e, gate, doneAction: Done.freeSelf))
 }).add;
@@ -440,10 +449,10 @@ SynthDef("strings", { |out, freq = 700, amp = 0.2, gate = 1|
     var x, enve;
     enve = Env.new([0, 0.1, 0.1, 0], [2, 0.1, 1], 'linear', 2);
     x = RLPF.ar(Mix.ar([
-            Mix.arFill(2, {Saw.ar(freq +2.rand2,0.6)}),
-            Mix.arFill(2, {Saw.ar(freq *0.5 + 2.rand2,0.6)})
+            Mix.arFill(2, { Saw.ar(freq +2.rand2, 0.6) }),
+            Mix.arFill(2, { Saw.ar(freq *0.5 + 2.rand2, 0.6) })
         ]),
-        6000,1);
+        6000, 1);
     Out.ar(out, x * EnvGen.kr(enve, gate, doneAction: Done.freeSelf))
 }).add;
 )
@@ -457,51 +466,51 @@ MIDIIn.connect(0, MIDIClient.sources.at(0));
 
 g = Group.new;
 
-cutspec = ControlSpec(100,10000,\linear,0.001);
-cutbus = Bus.new(\control,1,1,s);
+cutspec = ControlSpec(100, 10000, \linear, 0.001);
+cutbus = Bus.new(\control, 1, 1, s);
 cutbus.value = 10000;
 
-rezspec = ControlSpec(1,0,\linear,0.001);
-rezbus = Bus.new(\control,2,1,s);
+rezspec = ControlSpec(1, 0, \linear, 0.001);
+rezbus = Bus.new(\control, 2, 1, s);
 rezbus.value = 1.0;
 
-lfospec = ControlSpec(0,50,\linear,0.001);
-lfobus = Bus.new(\control,3,1,s);
+lfospec = ControlSpec(0, 50, \linear, 0.001);
+lfobus = Bus.new(\control, 3, 1, s);
 
-~control = {arg src, chan, num, val;
-    if(num == 1,{
+~control = { |src, chan, num, val|
+    if(num == 1, {
         rezbus.value = rezspec.map(val/127.0);
     });
-    if(num == 7,{
+    if(num == 7, {
         lfobus.value = lfospec.map(val/127.0).postln;
     });
 };
 MIDIIn.addFuncTo(\control, ~control);
 
-~bend = {arg src, chan, val;
+~bend = { |src, chan, val|
     cutbus.value = cutspec.map(val/16383.0);
 };
 MIDIIn.addFuncTo(\bend, ~bend);
 
-~noteOn = {arg src, chan, num, vel;
+~noteOn = { |src, chan, num, vel|
     var node;
     if(num &lt; 60, {
         node = Synth.tail(g, "funk", [\freq, num.midicps, \amp, vel/255]);
-        node.map("cutoff",1,"rez",2,"lfospeed",3);
-//        node = Synth.basicNew("funk",s);
+        node.map("cutoff", 1, "rez", 2, "lfospeed", 3);
+//        node = Synth.basicNew("funk", s);
 //        s.sendBundle(nil,
-//            node.addToTailMsg(g,[\freq, num.midicps, \amp, vel/255]),
-//            node.mapMsg("cutoff",1,"rez",2,"lfospeed",3)
+//            node.addToTailMsg(g, [\freq, num.midicps, \amp, vel/255]),
+//            node.mapMsg("cutoff", 1, "rez", 2, "lfospeed", 3)
 //        );
         keys.put(num, node)
-    },{
+    }, {
         node = Synth.tail(g, "strings", [\freq, num.midicps, \amp, vel/255]);
         keys.put(num, node)
     });
 };
 MIDIIn.addFuncTo(\noteOn, ~noteOn);
 
-~noteOff = {arg src, chan, num, vel;
+~noteOff = { |src, chan, num, vel|
     var node;
     node = keys.at(num);
     if (node.notNil, {
@@ -514,10 +523,11 @@ MIDIIn.addFuncTo(\noteOn, ~noteOn);
 MIDIIn.addFuncTo(\noteOff, ~noteOff);
 )
 
-//cleanup
+// cleanup
 MIDIIn.removeFuncFrom(\noteOn, ~noteOn);
 MIDIIn.removeFuncFrom(\control, ~control);
 MIDIIn.removeFuncFrom(\bend, ~bend);</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/MIDIIn.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/MIDIIn.schelp</a><br>link::Classes/MIDIIn::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/MIDIIn.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/MIDIIn.schelp</a><br>link::Classes/MIDIIn::<br></div></div><script src='./../static/editor.js' type='text/javascript'></script>
 </body></html>

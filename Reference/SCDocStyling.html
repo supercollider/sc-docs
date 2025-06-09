@@ -1,0 +1,66 @@
+<!doctype html><html lang='en'><head><title>SCDoc Styling | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../static/themes/default.css' type='text/css' />
+<link rel='stylesheet' href='./../frontend.css' type='text/css' />
+<link rel='stylesheet' href='./../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../static/lib/katex/katex.min.css' />
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+<script src='./../static/lib/jquery.min.js'></script>
+<script src='./../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../static/lib/katex/katex.min.js' type='text/javascript'></script>
+<script>
+var helpRoot = './..';
+var scdoc_title = 'SCDoc Styling';
+var scdoc_sc_version = '3.14.0-rc1';
+</script>
+<script src='./../static/scdoc.js' type='text/javascript'></script>
+<script src='./../docmap.js' type='text/javascript'></script>
+<script src='./../frontend.js' type='text/javascript'></script>
+<script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
+</head>
+<body onload='fixTOC()'>
+<div id='toc'>
+<div id='toctitle'>SCDoc Styling:</div>
+<span class='toc_search'>Filter: <input id='toc_search'></span><ul class='toc'><li class='toc1'><a href='#Colors'>Colors</a></li>
+<ul class='toc'><li class='toc2'><a href='#Themes'>Themes</a></li>
+<ul class='toc'></ul></ul></ul></div><div id='menubar'></div>
+<div class='contents'>
+<div class='header'>
+<div id='label'>
+<span id='folder'>Reference</span>
+ | <span id='categories'><a href='./../Browse.html#HelpSystem'>HelpSystem</a></span>
+</div><h1>SCDoc Styling</h1>
+<div id='summary'>Help system CSS styles customization and themes</div>
+</div>
+<div class='subheader'>
+<div id='related'>See also: <a href="./../Guides/WritingHelp.html">Writing Help</a>, <a href="./../Classes/SCDoc.html">SCDoc</a>, <a href="./../Classes/SCDocHTMLRenderer.html">SCDocHTMLRenderer</a></div>
+</div>
+
+<p>Documentation rendered HTML reads the global style from <code>scdoc.css</code>, but also reads <code>frontend.css</code> and <code>custom.css</code> (in that order) if available. This is to enable specific frontends and allow users to override the CSS.
+<p>So to customise the CSS, the user can create a <code>custom.css</code> in their <a href="./../Classes/SCDoc.html#*helpTargetDir">SCDoc: *helpTargetDir</a> or at the root of any HelpSource directory (for example in <code>YourExtension/HelpSource/custom.css</code>).<div class='codeMirrorContainer'><textarea class='editor'>// open HelpTargetDir to see these css files
+SCDoc.helpTargetDir.openOS</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+<h2><a class='anchor' name='Colors'>Colors</a></h2>
+
+<p>Colors are defined as CSS variables, so that to change any color, it's sufficient for a user to override the relevant variable in their <code>custom.css</code>. These variables are then used to set any color in all other css files of the documentation.
+<p>Specific variables are not reported here, please refer to the default CSS theme for all their names and default values.<div class='codeMirrorContainer'><textarea class='editor'>// open default theme
+(SCDoc.helpTargetDir +/+ "themes" +/+ "default.css").openDocument
+
+// copy default theme to 'custom.css' as a starting point
+File.copy(
+    SCDoc.helpTargetDir +/+ "themes" +/+ "default.css",
+    SCDoc.helpTargetDir +/+ "custom.css"
+)
+
+// open directory with all themes
+(SCDoc.helpTargetDir +/+ "themes").openOS;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+
+<p>The <code>themes</code> directory also contains a <code>README.md</code> which goes more into detail about how a theme gets applied and stored for a client and how a theme can be developed.<h3><a class='anchor' name='Themes'>Themes</a></h3>
+
+<p>CSS themes distributed in <code>HelpTargetDir/themes</code> are provided only to match ScIDE's UI themes. There is currently no implementation for modifying CSS themes dynamically or to add custom ones, so for any customization it's recommended to write a <code>custom.css</code> file as explained above<div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Reference/SCDocStyling.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Reference/SCDocStyling.schelp</a><br>link::Reference/SCDocStyling::<br></div></div><script src='./../static/editor.js' type='text/javascript'></script>
+</body></html>

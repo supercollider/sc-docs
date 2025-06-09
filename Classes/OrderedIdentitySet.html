@@ -1,21 +1,25 @@
-<!doctype html><html lang='en'><head><title>OrderedIdentitySet | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>OrderedIdentitySet | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../lib/jquery.min.js'></script>
-<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/jquery.min.js'></script>
+<script src='./../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './..';
 var scdoc_title = 'OrderedIdentitySet';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../static/scdoc.js' type='text/javascript'></script>
 <script src='./../docmap.js' type='text/javascript'></script>
+<script src='./../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
@@ -44,7 +48,7 @@ var scdoc_sc_version = '3.13.1';
 <div id='summary'>a set according to identity</div>
 </div>
 <div class='subheader'>
-<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/Common/Collections/Set.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Collections/Set.sc'>Set.sc</a></div><div id='related'>See also: <a href="./../Classes/IdentitySet.html">IdentitySet</a>, <a href="./../Classes/List.html">List</a>, <a href="./../Classes/Dictionary.html">Dictionary</a></div>
+<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/Common/Collections/Set.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Collections/Set.sc'>Set.sc</a></div><div id='related'>See also: <a href="./../Classes/IdentitySet.html">IdentitySet</a>, <a href="./../Classes/List.html">List</a>, <a href="./../Classes/Dictionary.html">Dictionary</a></div>
 </div>
 <h2><a class='anchor' name='description'>Description</a></h2>
 
@@ -53,7 +57,8 @@ var scdoc_sc_version = '3.13.1';
 <div id='inheritedclassmets'></div><h2><a class='anchor' name='instancemethods'>Instance Methods</a></h2>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-do' href='./../Overviews/Methods.html#do'>do</a>(<span class='argstr'>function</span>)</h3>
 <div class='method'>
-<p>Evaluates <strong>function</strong> for each item in the OrderedIdentitySet. You may depend on the order of items. The function is passed two arguments, the item and an integer index.<textarea class='editor'>OrderedIdentitySet[1, 2, 3, 300].do { |item, i| item.postln };</textarea>
+<p>Evaluates <strong>function</strong> for each item in the OrderedIdentitySet. You may depend on the order of items. The function is passed two arguments, the item and an integer index.<div class='codeMirrorContainer'><textarea class='editor'>OrderedIdentitySet[1, 2, 3, 300].do { |item, i| item.postln };</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p></div><h3><a class='anchor' name='Inherited%20instance%20methods'>Inherited instance methods</a></h3>
 <div id='inheritedinstmets'></div><h3><a class='anchor' name='Undocumented%20instance%20methods'>Undocumented instance methods</a></h3>
@@ -63,5 +68,5 @@ var scdoc_sc_version = '3.13.1';
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-items' href='./../Overviews/Methods.html#items'>items</a> = value</h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-remove' href='./../Overviews/Methods.html#remove'>remove</a>(<span class='argstr'>item</span>)</h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-sort' href='./../Overviews/Methods.html#sort'>sort</a>(<span class='argstr'>func</span>)</h3>
-<div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/OrderedIdentitySet.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/OrderedIdentitySet.schelp</a><br>link::Classes/OrderedIdentitySet::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+<div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/OrderedIdentitySet.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/OrderedIdentitySet.schelp</a><br>link::Classes/OrderedIdentitySet::<br></div></div><script src='./../static/editor.js' type='text/javascript'></script>
 </body></html>

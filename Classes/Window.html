@@ -1,21 +1,25 @@
-<!doctype html><html lang='en'><head><title>Window | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>Window | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../lib/jquery.min.js'></script>
-<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/jquery.min.js'></script>
+<script src='./../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './..';
 var scdoc_title = 'Window';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../static/scdoc.js' type='text/javascript'></script>
 <script src='./../docmap.js' type='text/javascript'></script>
+<script src='./../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
@@ -243,48 +247,52 @@ var scdoc_sc_version = '3.13.1';
 <p> Removes an object from <a href="#-onClose">-onClose</a>, if the latter is an Array.</div><h3><a class='anchor' name='Inherited%20instance%20methods'>Inherited instance methods</a></h3>
 <div id='inheritedinstmets'></div><h2><a class='anchor' name='examples'>Examples</a></h2>
 <h3><a class='anchor' name='Adding%20Views'>Adding Views</a></h3>
-<textarea class='editor'>(
+<div class='codeMirrorContainer'><textarea class='editor'>(
 var w;
 w = Window("my name is... panel", Rect(128, 64, 340, 360));
 
-32.do({ arg i;
-    b = Button(w, Rect(rrand(20,300),rrand(20,300), 75, 24));
+32.do({ |i|
+    b = Button(w, Rect(rrand(20, 300), rrand(20, 300), 75, 24));
     b.states = [["Start "++i, Color.black, Color.rand],
         ["Stop "++i, Color.white, Color.red]];
 });
 w.front;
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h3><a class='anchor' name='Using%20Decorator'>Using Decorator</a></h3>
-<textarea class='editor'>(
+<div class='codeMirrorContainer'><textarea class='editor'>(
 var w;
 w = Window("my name is... panel", Rect(128, 64, 340, 360));
 
 w.view.decorator = FlowLayout(w.view.bounds);
 // w.addFlowLayout; // you can als write this instead of the line above
 
-w.view.background = Color(0.6,0.8,0.8);
-32.do({ arg i;
-    b = Button(w, Rect(rrand(20,300),rrand(20,300), 75, 24));
+w.view.background = Color(0.6, 0.8, 0.8);
+32.do({ |i|
+    b = Button(w, Rect(rrand(20, 300), rrand(20, 300), 75, 24));
     b.states = [["Start "++i, Color.black, Color.rand],
         ["Stop "++i, Color.white, Color.red]];
 });
 
 w.front;
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h3><a class='anchor' name='Setting%20Bounds'>Setting Bounds</a></h3>
-<textarea class='editor'>// use screenbounds for precise placement from the top
+<div class='codeMirrorContainer'><textarea class='editor'>// use screenbounds for precise placement from the top
 (
-x = Window.new("test", Rect(100,Window.screenBounds.height-180,300,100));x.front;
+x = Window.new("test", Rect(100, Window.screenBounds.height-180, 300, 100)); x.front;
 )
 
 // bounds.top refers to the bottom edge of the window,
 // measured from the bottom of the screen. Different than in View.
-x.bounds_(Rect(100,400,300,300));</textarea>
+x.bounds_(Rect(100, 400, 300, 300));</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h3><a class='anchor' name='Borderless%20Window'>Borderless Window</a></h3>
-<textarea class='editor'>w = Window.new(border:false).front; // can't be manually closed
+<div class='codeMirrorContainer'><textarea class='editor'>w = Window.new(border: false).front; // can't be manually closed
 w.close; // so close it in code</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h3><a class='anchor' name='Window%20with%20Scrollers'>Window with Scrollers</a></h3>
-<textarea class='editor'>(
+<div class='codeMirrorContainer'><textarea class='editor'>(
 w = Window(scroll: true); // you must set this when the window is created
 c = Slider2D(w, Rect(0, 0, 1500, 300));
 d = Slider(w, Rect(0, 310, 20, 300));
@@ -292,19 +300,21 @@ c.background = Color.grey.alpha = 0.6;
 d.background = Color.grey.alpha = 0.6;
 w.front;
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h3><a class='anchor' name='onClose'>onClose</a></h3>
-<textarea class='editor'>(
+<div class='codeMirrorContainer'><textarea class='editor'>(
 x = Window.new.front;
 x.alpha = 0.8;
-x.onClose_({ y = Synth.new(\default) }); //close the window and the synth plays
+x.onClose_({ y = Synth.new(\default) }); // close the window and the synth plays
 )
 x.close;
 y.free;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h3><a class='anchor' name='Using%20Layouts'>Using Layouts</a></h3>
 
-<p>Layouts are used to organize view sizes automatically. See: <a href="./../Guides/GUI-Layout-Management.html">Layout Management</a>.<div class='note'><span class='notelabel'>NOTE:</span> Only in Cocoa GUI</div><textarea class='editor'>// make a window and a layout
+<p>Layouts are used to organize view sizes automatically. See: <a href="./../Guides/GUI-Layout-Management.html">Layout Management</a>.<div class='note'><span class='notelabel'>NOTE:</span> Only in Cocoa GUI</div><div class='codeMirrorContainer'><textarea class='editor'>// make a window and a layout
 (
-w = Window(bounds:Rect(700,200,200,200));
+w = Window(bounds: Rect(700, 200, 200, 200));
 h = HLayout();
 v = VLayout(h);
 w.layout =  v;
@@ -336,8 +346,9 @@ v.margins = [1, 1, 1, 1] * 5;
 h.add(g = VLayout(), 1, \left);
 g.add(g = HLayout(), 1, \left);
 5.do { g.add(Slider().orientation_(\vertical)) };</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h3><a class='anchor' name='Drawing%20on%20Window%20with%20Pen'>Drawing on Window with Pen</a></h3>
-<textarea class='editor'>(
+<div class='codeMirrorContainer'><textarea class='editor'>(
 var w, much = 0.02, string, synth;
 
 w = Window.new("gui", Rect(100, 100, 300, 500)).front;
@@ -365,14 +376,15 @@ w.drawFunc = Routine {
             );
         };
         0.yield // stop here, return something unimportant
-    }
+   }
 };
 
-{ while { w.isClosed.not } { w.refresh; 0.04.wait; } }.fork(AppClock);
+{ while { w.isClosed.not } { w.refresh; 0.04.wait } }.fork(AppClock);
 
 w.front;
 
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/Window.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/Window.schelp</a><br>link::Classes/Window::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/Window.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/Window.schelp</a><br>link::Classes/Window::<br></div></div><script src='./../static/editor.js' type='text/javascript'></script>
 </body></html>

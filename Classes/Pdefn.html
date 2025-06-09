@@ -1,21 +1,25 @@
-<!doctype html><html lang='en'><head><title>Pdefn | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>Pdefn | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../lib/jquery.min.js'></script>
-<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/jquery.min.js'></script>
+<script src='./../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './..';
 var scdoc_title = 'Pdefn';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../static/scdoc.js' type='text/javascript'></script>
 <script src='./../docmap.js' type='text/javascript'></script>
+<script src='./../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
@@ -60,17 +64,18 @@ var scdoc_sc_version = '3.13.1';
 <div id='summary'>non event stream reference definition</div>
 </div>
 <div class='subheader'>
-<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/JITLib/Patterns/Pdef.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/JITLib/Patterns/Pdef.sc'>Pdef.sc</a></div><div id='related'>See also: <a href="./../Classes/Pdef.html">Pdef</a></div>
+<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/JITLib/Patterns/Pdef.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/JITLib/Patterns/Pdef.sc'>Pdef.sc</a></div><div id='related'>See also: <a href="./../Classes/Pdef.html">Pdef</a></div>
 </div>
 <h2><a class='anchor' name='description'>Description</a></h2>
 
 <p>Pdefn provides an interface to its superclass <a href="./../Classes/PatternProxy.html">PatternProxy</a>, keeping a reference to a stream that can be replaced while playing. One pattern may be used in many streams in different places. A change in the pattern definition propagates through all streams.
-<p>Pdef and Pdefn use separate global collections.<textarea class='editor'>Pdefn(key)    //returns the instance
-Pdefn(key, pat)    //defines the pattern and returns the instance, like Pdef, Tdef and Ndef.</textarea>
+<p>Pdef and Pdefn use separate global collections.<div class='codeMirrorContainer'><textarea class='editor'>Pdefn(key)    // returns the instance
+Pdefn(key, pat)    // defines the pattern and returns the instance, like Pdef, Tdef and Ndef.</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p>It is very similar to <a href="./../Classes/PatternProxy.html">PatternProxy</a>.
 <p>Pdefn can be used to store value patterns globally (for <strong>event patterns</strong>, see <a href="./../Classes/Pdef.html">Pdef</a>). Overview: <a href="./../Overviews/JITLib.html">JITLib</a><h3><a class='anchor' name='First%20Example'>First Example</a></h3>
-<textarea class='editor'>s.boot;
+<div class='codeMirrorContainer'><textarea class='editor'>s.boot;
 
 Pdefn(\x, Pbrown(0, 6, 0.1, inf));
 Pbind(\note, Pdefn(\x), \dur, 0.3).play;
@@ -78,6 +83,7 @@ Pbind(\note, Pdefn(\x), \dur, 0.1, \ctranspose, 15).play;
 // now change the definition
 Pdefn(\x, Pseq([0, 3, 5, 7, 9, 11], inf));
 Pdefn(\x, Pseq([0, 3, 3, 7], inf) + Pseq([0, [0, 3], [0, 5, 7]], inf));</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h2><a class='anchor' name='classmethods'>Class Methods</a></h2>
 <h3 class='method-code'><span class='method-prefix'>Pdefn.</span><a class='method-name' name='*all' href='./../Overviews/Methods.html#all'>all</a></h3>
 <h3 class='method-code'><span class='method-prefix'>Pdefn.</span><a class='method-name' name='*all' href='./../Overviews/Methods.html#all'>all</a> = value</h3>
@@ -90,7 +96,7 @@ Pdefn(\x, Pseq([0, 3, 3, 7], inf) + Pseq([0, [0, 3], [0, 5, 7]], inf));</textare
 <table class='arguments'>
 <tr><td class='argumentname'>key<td class='argumentdesc'>
 <p>An identifier for the proxy. Usually, it is a <a href="./../Classes/Symbol.html">Symbol</a>. The key transparently accesses the global <a href="./../Classes/IdentityDictionary.html">IdentityDictionary</a>.<tr><td class='argumentname'>item<td class='argumentdesc'>
-<p>An object for (re)defining the source of the proxy. If <code>nil</code>, the proxy is returned unmodified.<textarea class='editor'>// pattern as an argument
+<p>An object for (re)defining the source of the proxy. If <code>nil</code>, the proxy is returned unmodified.<div class='codeMirrorContainer'><textarea class='editor'>// pattern as an argument
 Pdefn(\x, Pseq([1, 2, 5, 6, 7], inf));
 Pdefn(\x); // omitting the second argument, we can access the proxy
 Pdefn(\x).asStream.nextN(20); // ... play one event stream
@@ -104,19 +110,20 @@ Pn(Pdefn(\x)).asStream.nextN(16);
 // the function is called in the incoming event as current environment, so parameters can be passed:
 Pdef(\stut, { Pdup(~dup ? 1, ~pattern) }); // we use here a Pdef (not a Pdefn!)
 Pdefn(\y, Pdef(\stut) &lt;&gt; (pattern: Pdefn(\x), dup: Pseq([2, 2, 4, 3], inf))).asStream.nextN(16);</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </table></div><h3 class='method-code'><span class='method-prefix'>Pdefn.</span><a class='method-name' name='*default' href='./../Overviews/Methods.html#default'>default</a></h3>
 <div class='supmethod'>From superclass: <a href='./../Classes/PatternProxy.html'>PatternProxy</a></div>
 <div class='method'>
 <p>Default source, if none is given. The default is a Pattern that returns 1.0 (This is 1 and not 0 to avoid deadlocks when used as a duration pattern. In a sense, 1 is just as generic as 0).</div><h3 class='method-code'><span class='method-prefix'>Pdefn.</span><a class='method-name' name='*removeAll' href='./../Overviews/Methods.html#removeAll'>removeAll</a></h3>
 <div class='supmethod'>From superclass: <a href='./../Classes/PatternProxy.html'>PatternProxy</a></div>
 <div class='method'>
-<p>Remove all proxies from the global dictionary ( <a href="#*all">*all</a>)</div><h3 class='method-code'><span class='method-prefix'>Pdefn.</span><a class='method-name' name='*clear' href='./../Overviews/Methods.html#clear'>clear</a></h3>
+<p>Remove all proxies from the global dictionary (<a href="#*all">*all</a>)</div><h3 class='method-code'><span class='method-prefix'>Pdefn.</span><a class='method-name' name='*clear' href='./../Overviews/Methods.html#clear'>clear</a></h3>
 <div class='supmethod'>From superclass: <a href='./../Classes/PatternProxy.html'>PatternProxy</a></div>
 <div class='method'>
 <p>Clear all proxies, setting their source to silence.</div><h3 class='method-code'><span class='method-prefix'>Pdefn.</span><a class='method-name' name='*all' href='./../Overviews/Methods.html#all'>all</a></h3>
 <h3 class='method-code'><span class='method-prefix'>Pdefn.</span><a class='method-name' name='*all' href='./../Overviews/Methods.html#all'>all</a> = value</h3>
 <div class='method'>
-<p>Set or return the environment ( <a href="./../Classes/IdentityDictionary.html">IdentityDictionary</a> ) that stores all Pdefns.</div><h3><a class='anchor' name='Inherited%20class%20methods'>Inherited class methods</a></h3>
+<p>Set or return the environment (<a href="./../Classes/IdentityDictionary.html">IdentityDictionary</a>) that stores all Pdefns.</div><h3><a class='anchor' name='Inherited%20class%20methods'>Inherited class methods</a></h3>
 <div id='inheritedclassmets'></div><h3><a class='anchor' name='Undocumented%20class%20methods'>Undocumented class methods</a></h3>
 <h3 class='method-code'><span class='method-prefix'>Pdefn.</span><a class='method-name' name='*hasGlobalDictionary' href='./../Overviews/Methods.html#hasGlobalDictionary'>hasGlobalDictionary</a></h3>
 <h2><a class='anchor' name='instancemethods'>Instance Methods</a></h2>
@@ -128,7 +135,7 @@ Pdefn(\y, Pdef(\stut) &lt;&gt; (pattern: Pdefn(\x), dup: Pseq([2, 2, 4, 3], inf)
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-map' href='./../Overviews/Methods.html#map'>map</a>( <span class='argstr'>... args</span>)</h3>
 <h2><a class='anchor' name='examples'>Examples</a></h2>
 <h3><a class='anchor' name='Pdefn%20in%20expressions'>Pdefn in expressions</a></h3>
-<textarea class='editor'>Pdefn(\c, Pdefn(\a) + Pdefn(\b));
+<div class='codeMirrorContainer'><textarea class='editor'>Pdefn(\c, Pdefn(\a) + Pdefn(\b));
 
 t = Pdefn(\c).asStream; // create a stream from Pdefn(\c)
 
@@ -147,16 +154,17 @@ Pdefn(\c, Pdefn(\a) * Pdefn(\b) - Pdefn(\a)); // (re)define Pdefn(\c)
 8.do { t.value.postln };
 
 Pdefn(\a, Prand([1, 4, 2], inf)); // (re)define Pdefn(\a)</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h3><a class='anchor' name='Embedding%20Pdefn%20in%20other%20patterns'>Embedding Pdefn in other patterns</a></h3>
-<textarea class='editor'>Pdefn(\x, Pseq([1, 2, 3], inf));
+<div class='codeMirrorContainer'><textarea class='editor'>Pdefn(\x, Pseq([1, 2, 3], inf));
 
 x = Pseq([0, 0, Pdefn(\x)], inf).asStream;
 
 t = Task({ loop({ x.next.postln; 0.3.wait }) }).play;
 
 
-Pdefn(\x, Pseq([55, 66, 77],inf));
-Pdefn(\x, Pseq([55, 66, 77],1));
+Pdefn(\x, Pseq([55, 66, 77], inf));
+Pdefn(\x, Pseq([55, 66, 77], 1));
 
 t.stop;
 
@@ -165,10 +173,10 @@ t.stop;
 // Pdefn can be accessed in multiple streams
 
 (
-SynthDef("Pdefhelp", { arg out, freq, sustain=1, amp=1, pan;
-    var env, u=1;
+SynthDef("Pdefhelp", { |out, freq, sustain = 1, amp = 1, pan|
+    var env, u = 1;
     env = EnvGen.kr(Env.perc(0.03, sustain), 1, doneAction: Done.freeSelf);
-    5.do { var d; d = exprand(0.01, 1); u = SinOsc.ar(d * 300, u, rrand(0.1,1.2) * d, 1) };
+    5.do { var d; d = exprand(0.01, 1); u = SinOsc.ar(d * 300, u, rrand(0.1, 1.2) * d, 1) };
     Out.ar(out, Pan2.ar(SinOsc.ar(u + 1 * freq, 0, amp * env), pan));
 
 }).add;
@@ -176,7 +184,7 @@ s.boot;
 )
 
 (
-Pdefn(\deg, Pseq([0, 3, 2],inf));
+Pdefn(\deg, Pseq([0, 3, 2], inf));
 
 Pset(\instrument, \Pdefhelp,
     Ppar([
@@ -186,21 +194,22 @@ Pset(\instrument, \Pdefhelp,
 ).play;
 )
 
-Pdefn(\deg, Prand([0, 3, [1s, 4]],inf));
+Pdefn(\deg, Prand([0, 3, [1s, 4]], inf));
 
-Pdefn(\deg, Pn(Pshuf([0, 3, 2, 7, 6],2),inf));
+Pdefn(\deg, Pn(Pshuf([0, 3, 2, 7, 6], 2), inf));
 
 (
 Pdefn(\deg, Plazy { var pat;
-    pat = [Pshuf([0, 3, 2, 7, 6],2), Pseries(0, 1, 11), Pseries(11, -1, 11)].choose;
+    pat = [Pshuf([0, 3, 2, 7, 6], 2), Pseries(0, 1, 11), Pseries(11, -1, 11)].choose;
     Pn(pat, inf)
 });
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h3><a class='anchor' name='Timing'>Timing</a></h3>
 
 <p>When does the definition change?
-<p>If quant is set, the update is done at the next beat or whatever is specified:<textarea class='editor'>Pdefn(\deg).quant = 4;
-Pdefn(\deg, Pn(Pseries(0, 1, 8),inf));
+<p>If quant is set, the update is done at the next beat or whatever is specified:<div class='codeMirrorContainer'><textarea class='editor'>Pdefn(\deg).quant = 4;
+Pdefn(\deg, Pn(Pseries(0, 1, 8), inf));
 
 Pdefn(\deg).quant = nil; // activate immediately again
 
@@ -215,31 +224,35 @@ Pdefn(\deg, {
     }
 })
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h3><a class='anchor' name='update%20condition'>update condition</a></h3>
 
 <p>In order to be able to switch to a new pattern under a certain condition, the instance variable <strong>condition</strong> can be set to a function that returns a boolean. Value and a count index are passed to the function. The condition is always valid for the <strong>next pattern</strong> inserted. For stuck conditions, the <strong>reset</strong> message can be used.
-<p>As counting up (such as <em>"every nth event, a swap can happen"</em>) is a common task, there is a method for this, called <strong>count(n)</strong>.<textarea class='editor'>z = Pbind(\degree, Pdefn(\x, \), \dur, 0.25).play;
+<p>As counting up (such as <em>"every nth event, a swap can happen"</em>) is a common task, there is a method for this, called <strong>count(n)</strong>.<div class='codeMirrorContainer'><textarea class='editor'>z = Pbind(\degree, Pdefn(\x, \), \dur, 0.25).play;
 Pdefn(\x, Pseq((0..5), inf)).condition_({ |val, i| i.postln % 6 == 0 });
 Pdefn(\x, Pseq((7..0), inf)).condition_({ |val, i| i.postln % 8 == 0 });
 
 
 // the above is equvalent to:
 Pdefn(\x, Pseq((7..0), inf)).count(8);</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h3><a class='anchor' name='Reset'>Reset</a></h3>
-<textarea class='editor'>// reset to change immediately:
+<div class='codeMirrorContainer'><textarea class='editor'>// reset to change immediately:
 Pdefn(\x).reset;
 
 Pdefn(\x).stop;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h3><a class='anchor' name='Functions%20as%20arguments%20to%20Pdefn'>Functions as arguments to Pdefn</a></h3>
-<textarea class='editor'>Pdefn(\deg, { loop { yield(0.1.rand.round(0.01) + [2, 3, 9].choose) } });
+<div class='codeMirrorContainer'><textarea class='editor'>Pdefn(\deg, { loop { yield(0.1.rand.round(0.01) + [2, 3, 9].choose) } });
 
 // equivalent to:
 
 Pdefn(\deg, Prout { loop { yield(0.1.rand.round(0.01) + [2, 3, 9].choose) } });
 
 // this is not exactly true, see below..</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h3><a class='anchor' name='The%20(inner)%20environment'>The (inner) environment</a></h3>
-<textarea class='editor'>// set() creates a local environment that overrides the outer currentEnvironment
+<div class='codeMirrorContainer'><textarea class='editor'>// set() creates a local environment that overrides the outer currentEnvironment
 
 Pdefn(\z).set(\a, 1, \b, 5);
 (
@@ -254,7 +267,7 @@ t.nextN(3);
 
 (
 Pdefn(\z, { |e|
-    //(e.a + e.b) + 0.1.rand.round(0.01) 1
+    // (e.a + e.b) + 0.1.rand.round(0.01) 1
     Pseq([1, 2, e.a], 1)
 })
 );
@@ -286,6 +299,7 @@ Pdefn(\z).envir.parent = currentEnvironment;
 ~b = 10;
 
 t.nextN(3);</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/Pdefn.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/Pdefn.schelp</a><br>link::Classes/Pdefn::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/Pdefn.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/Pdefn.schelp</a><br>link::Classes/Pdefn::<br></div></div><script src='./../static/editor.js' type='text/javascript'></script>
 </body></html>

@@ -1,21 +1,25 @@
-<!doctype html><html lang='en'><head><title>Int8Array | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>Int8Array | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../lib/jquery.min.js'></script>
-<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/jquery.min.js'></script>
+<script src='./../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './..';
 var scdoc_title = 'Int8Array';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../static/scdoc.js' type='text/javascript'></script>
 <script src='./../docmap.js' type='text/javascript'></script>
+<script src='./../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
@@ -26,6 +30,7 @@ var scdoc_sc_version = '3.13.1';
 <ul class='toc'><li class='toc2'><a href='#Inherited%20class%20methods'>Inherited class methods</a></li>
 </ul><li class='toc1'><a href='#instancemethods'>Instance methods</a></li>
 <ul class='toc'><li class='toc3'><a href='#-readFromStream'>readFromStream</a> </li>
+<li class='toc3'><a href='#-parseOSC'>parseOSC</a> </li>
 <li class='toc2'><a href='#Inherited%20instance%20methods'>Inherited instance methods</a></li>
 <li class='toc2'><a href='#Undocumented%20instance%20methods'>Undocumented instance methods</a></li>
 <ul class='toc'><li class='toc3'><a href='#-unarchive'>unarchive</a> </li>
@@ -40,18 +45,29 @@ var scdoc_sc_version = '3.13.1';
 <div id='summary'>an array whose indexed slots are all of the same type</div>
 </div>
 <div class='subheader'>
-<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/Common/Collections/ArrayedCollection.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Collections/ArrayedCollection.sc'>ArrayedCollection.sc</a></div><div id='related'>See also: <a href="./../Classes/FloatArray.html">FloatArray</a>, <a href="./../Classes/Int16Array.html">Int16Array</a>, <a href="./../Classes/Int32Array.html">Int32Array</a>, <a href="./../Classes/DoubleArray.html">DoubleArray</a>, <a href="./../Classes/SymbolArray.html">SymbolArray</a></div>
+<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/Common/Collections/ArrayedCollection.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Collections/ArrayedCollection.sc'>ArrayedCollection.sc</a></div><div id='related'>See also: <a href="./../Classes/FloatArray.html">FloatArray</a>, <a href="./../Classes/Int16Array.html">Int16Array</a>, <a href="./../Classes/Int32Array.html">Int32Array</a>, <a href="./../Classes/DoubleArray.html">DoubleArray</a>, <a href="./../Classes/SymbolArray.html">SymbolArray</a></div>
 </div>
 <h2><a class='anchor' name='description'>Description</a></h2>
 
 <p>These classes implement arrays whose indexed slots are all of the same type.<ul>
 <li>Int8Array - 8 bit integer<li>Int16Array - 16 bit integer<li>Int32Array - 32 bit integer<li>FloatArray - 32 bit floating point<li>DoubleArray - 64 bit floating point<li>SymbolArray - symbols</ul>
-<h2><a class='anchor' name='classmethods'>Class Methods</a></h2>
+<div class='note'><span class='notelabel'>NOTE:</span> The overflow behavior of an element in an Int8Array is undefined. This occurs whenever the result of an operation does not fit in the range of values supported by the return type, in this case, an 8-bit signed integer.</div><h2><a class='anchor' name='classmethods'>Class Methods</a></h2>
 <h3><a class='anchor' name='Inherited%20class%20methods'>Inherited class methods</a></h3>
 <div id='inheritedclassmets'></div><h2><a class='anchor' name='instancemethods'>Instance Methods</a></h2>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-readFromStream' href='./../Overviews/Methods.html#readFromStream'>readFromStream</a>(<span class='argstr'>stream</span>)</h3>
-<div class='method'></div><h3><a class='anchor' name='Inherited%20instance%20methods'>Inherited instance methods</a></h3>
+<div class='method'>
+<p></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-parseOSC' href='./../Overviews/Methods.html#parseOSC'>parseOSC</a></h3>
+<div class='method'>
+<p>Tries to interpret the bytes as an OSC message or OSC bundle. Throws an exception on failure. See also <a href="./../Classes/Array.html#-asRawOSC">Array: -asRawOSC</a>.<div class='codeMirrorContainer'><textarea class='editor'>// OSC message:
+Int8Array[ 47, 115, 95, 110, 101, 119, 0, 0, 44, 115, 105, 105, 105, 115, 105, 0, 100, 101, 102, 97, 117, 108, 116, 0, -1, -1, -1, -1, 0, 0, 0, 1, 0, 0, 0, 1, 102, 114, 101, 113, 0, 0, 0, 0, 0, 0, 7, -87 ].parseOSC;
+// OSC bundle:
+Int8Array[ 35, 98, 117, 110, 100, 108, 101, 0, 0, 0, 0, 0, 25, -103, -103, -103, 0, 0, 0, 48, 47, 115, 95, 110, 101, 119, 0, 0, 44, 115, 105, 105, 105, 115, 105, 0, 100, 101, 102, 97, 117, 108, 116, 0, -1, -1, -1, -1, 0, 0, 0, 1, 0, 0, 0, 1, 102, 114, 101, 113, 0, 0, 0, 0, 0, 0, 7, -87 ].parseOSC;
+// not an OSC message or bundle:
+Int8Array[ 98, 111, 103, 117, 115 ].parseOSC;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+
+<p></div><h3><a class='anchor' name='Inherited%20instance%20methods'>Inherited instance methods</a></h3>
 <div id='inheritedinstmets'></div><h3><a class='anchor' name='Undocumented%20instance%20methods'>Undocumented instance methods</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-unarchive' href='./../Overviews/Methods.html#unarchive'>unarchive</a></h3>
-<div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/Int8Array.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/Int8Array.schelp</a><br>link::Classes/Int8Array::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+<div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/Int8Array.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/Int8Array.schelp</a><br>link::Classes/Int8Array::<br></div></div><script src='./../static/editor.js' type='text/javascript'></script>
 </body></html>

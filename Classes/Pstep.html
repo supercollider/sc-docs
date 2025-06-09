@@ -1,21 +1,25 @@
-<!doctype html><html lang='en'><head><title>Pstep | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>Pstep | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../lib/jquery.min.js'></script>
-<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/jquery.min.js'></script>
+<script src='./../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './..';
 var scdoc_title = 'Pstep';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../static/scdoc.js' type='text/javascript'></script>
 <script src='./../docmap.js' type='text/javascript'></script>
+<script src='./../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
@@ -44,7 +48,7 @@ var scdoc_sc_version = '3.13.1';
 <div id='summary'>timed, sample-and-hold embedding of values</div>
 </div>
 <div class='subheader'>
-<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/Common/Streams/TimePatterns.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Streams/TimePatterns.sc'>TimePatterns.sc</a></div><div id='subclasses'>Subclasses: <a href="../Classes/Pseg.html">Pseg</a></div>
+<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/Common/Streams/TimePatterns.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Streams/TimePatterns.sc'>TimePatterns.sc</a></div><div id='subclasses'>Subclasses: <a href="../Classes/Pseg.html">Pseg</a></div>
 <div id='related'>See also: <a href="./../Classes/Pseg.html">Pseg</a></div>
 </div>
 <h2><a class='anchor' name='description'>Description</a></h2>
@@ -71,7 +75,7 @@ var scdoc_sc_version = '3.13.1';
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-repeats' href='./../Overviews/Methods.html#repeats'>repeats</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-repeats' href='./../Overviews/Methods.html#repeats'>repeats</a> = value</h3>
 <h2><a class='anchor' name='examples'>Examples</a></h2>
-<textarea class='editor'>(
+<div class='codeMirrorContainer'><textarea class='editor'>(
 // select a chord and duration and repeat it for a random time interval
 p = Pstep(
     Pbind(
@@ -90,15 +94,15 @@ Pchain(
     Ppar([
         Pbind(
             \degree, Pbrown(0, 12, 1),
-            \dur, Pstep( Pseq([0.1, 0.2, 0.4, 0.8, 1.6], inf), 3.2)
+            \dur, Pstep(Pseq([0.1, 0.2, 0.4, 0.8, 1.6], inf), 3.2)
         ),
         Pbind(
             \degree, Pbrown(0, 20, 1),
-            \dur, Pstep( Pseq([0.1, 0.2, 0.4, 0.8, 1.6], inf), 4.5)
+            \dur, Pstep(Pseq([0.1, 0.2, 0.4, 0.8, 1.6], inf), 4.5)
         )
     ]),
     Pbind(
-        \scale, Pstep(Pseq([ [0, 2, 4, 5, 7, 9, 11], [0, 1, 2, 3, 4, 5, 6]], inf), 5),
+        \scale, Pstep(Pseq([[0, 2, 4, 5, 7, 9, 11], [0, 1, 2, 3, 4, 5, 6]], inf), 5),
         \db, Pstep(Pseq([2, -2, 0, -2], inf), 0.25) - 10
     )
 ).play;
@@ -110,13 +114,13 @@ Pchain(
     Ppar([
         Pbind(
             \octave, [5, 6] + Prand([0, 0, \r], inf),
-            \degree, Prout({ | ev | loop { ev = Pseq(ev[\degree]).embedInStream } }),
+            \degree, Prout({ |ev| loop { ev = Pseq(ev[\degree]).embedInStream } }),
             \dur,    Prout({ loop { Pseq([0.2, 0.2, 0.2, 0.2, 0.3].scramble).embedInStream } })
         ),
         Pbind(
             \octave, 4,
             \legato, 1.2,
-            \dur, Prout({ loop { Pseq([0.2, 0.2, 0.2, 0.2, 0.3].scramble * 5).embedInStream }})
+            \dur, Prout({ loop { Pseq([0.2, 0.2, 0.2, 0.2, 0.3].scramble * 5).embedInStream } })
         ),
     ]),
     Pstep(Pbind(
@@ -124,8 +128,8 @@ Pchain(
     ), 0.2),
     Pstep(
         Pbind(
-            \degree,     Pfunc({ {10.rand}.dup(10) }),
-            \scale,    Pfunc({ {rrand(1, 2)}.dup(7).integrate })
+            \degree,     Pfunc({ { 10.rand }.dup(10) }),
+            \scale,    Pfunc({ { rrand(1, 2) }.dup(7).integrate })
         ),
         5
     )
@@ -194,7 +198,7 @@ var a, b, x;
 var times, levels;
 
 SynthDef(\pgrain,
-    { arg out = 0, freq=800, sustain=0.001, amp=0.5, pan = 0;
+    { |out = 0, freq = 800, sustain = 0.001, amp = 0.5, pan = 0|
         var window;
         window = Env.sine(sustain, amp);
         Out.ar(out,
@@ -213,7 +217,7 @@ a = Pstep(levels, times);
 b = Pbind(\instrument, \pgrain, \octave, 7, \dur, 0.12, \degree, a);
 x = times;
 
-Ppar([b, Pset(\mtranspose, 2, b) ]).play;
+Ppar([b, Pset(\mtranspose, 2, b)]).play;
 
 b.play;
 r {
@@ -225,8 +229,9 @@ r {
             Synth(\pgrain, [\freq, 3000, \sustain, 0.01]); // signal tone
         })
     }
-}.play(quant:1)
+}.play(quant: 1)
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/Pstep.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/Pstep.schelp</a><br>link::Classes/Pstep::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/Pstep.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/Pstep.schelp</a><br>link::Classes/Pstep::<br></div></div><script src='./../static/editor.js' type='text/javascript'></script>
 </body></html>

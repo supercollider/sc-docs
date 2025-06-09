@@ -1,21 +1,25 @@
-<!doctype html><html lang='en'><head><title>Duty | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>Duty | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../lib/jquery.min.js'></script>
-<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/jquery.min.js'></script>
+<script src='./../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './..';
 var scdoc_title = 'Duty';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../static/scdoc.js' type='text/javascript'></script>
 <script src='./../docmap.js' type='text/javascript'></script>
+<script src='./../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
@@ -41,7 +45,7 @@ var scdoc_sc_version = '3.13.1';
 <div id='summary'>Demand results from demand rate UGens.</div>
 </div>
 <div class='subheader'>
-<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/Common/Audio/Demand.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Audio/Demand.sc'>Demand.sc</a></div><div id='subclasses'>Subclasses: <a href="../Classes/TDuty.html">TDuty</a></div>
+<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/Common/Audio/Demand.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Audio/Demand.sc'>Demand.sc</a></div><div id='subclasses'>Subclasses: <a href="../Classes/TDuty.html">TDuty</a></div>
 <div id='related'>See also: <a href="./../Classes/Demand.html">Demand</a>, <a href="./../Classes/TDuty.html">TDuty</a></div>
 </div>
 <h2><a class='anchor' name='description'>Description</a></h2>
@@ -63,9 +67,9 @@ var scdoc_sc_version = '3.13.1';
 <h3><a class='anchor' name='Inherited%20instance%20methods'>Inherited instance methods</a></h3>
 <div id='inheritedinstmets'></div><h3><a class='anchor' name='Undocumented%20instance%20methods'>Undocumented instance methods</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-canFreeSynth' href='./../Overviews/Methods.html#canFreeSynth'>canFreeSynth</a></h3>
-<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/Common/Audio/canFreeSynth.sc'>/usr/local/share/SuperCollider/SCClassLibrary/Common/Audio/canFreeSynth.sc</a></div>
+<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/Common/Audio/canFreeSynth.sc'>/usr/local/share/SuperCollider/SCClassLibrary/Common/Audio/canFreeSynth.sc</a></div>
 <h2><a class='anchor' name='examples'>Examples</a></h2>
-<textarea class='editor'>(
+<div class='codeMirrorContainer'><textarea class='editor'>(
     {
         var freq;
         freq = Duty.kr(
@@ -90,8 +94,9 @@ var scdoc_sc_version = '3.13.1';
 
     }.play;
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>Resetting the demand ugens:<textarea class='editor'>(
+<p>Resetting the demand ugens:<div class='codeMirrorContainer'><textarea class='editor'>(
     {
         var freq;
         freq = Duty.kr(
@@ -116,10 +121,11 @@ var scdoc_sc_version = '3.13.1';
 
     }.play;
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>Demand ugen as audio oscillator:<textarea class='editor'>(
+<p>Demand ugen as audio oscillator:<div class='codeMirrorContainer'><textarea class='editor'>(
     {
-        var a, n=5, m=64;
+        var a, n = 5, m = 64;
         a = {
             var x;
             x = { 0.2.rand2 } ! m;
@@ -134,8 +140,9 @@ var scdoc_sc_version = '3.13.1';
 
     }.play;
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>single sample feedback: a lin cong algorithm:<textarea class='editor'>(
+<p>single sample feedback: a lin cong algorithm:<div class='codeMirrorContainer'><textarea class='editor'>(
 b = Buffer.alloc(s, 1);
 {
 var x, y, rate, a, c, m;
@@ -149,5 +156,7 @@ var x, y, rate, a, c, m;
     Duty.ar(1 / rate, 0, y) * 0.1;
 }.play;
 )</textarea>
-<div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/Duty.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/Duty.schelp</a><br>link::Classes/Duty::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+
+<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/Duty.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/Duty.schelp</a><br>link::Classes/Duty::<br></div></div><script src='./../static/editor.js' type='text/javascript'></script>
 </body></html>

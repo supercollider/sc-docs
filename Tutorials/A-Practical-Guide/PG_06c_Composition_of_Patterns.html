@@ -1,21 +1,25 @@
-<!doctype html><html lang='en'><head><title>Pattern Guide 06c: Composition of Patterns | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>Pattern Guide 06c: Composition of Patterns | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../../lib/jquery.min.js'></script>
-<script src='./../../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../../static/lib/jquery.min.js'></script>
+<script src='./../../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './../..';
 var scdoc_title = 'Pattern Guide 06c: Composition of Patterns';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../../scdoc.js' type='text/javascript'></script>
+<script src='./../../static/scdoc.js' type='text/javascript'></script>
 <script src='./../../docmap.js' type='text/javascript'></script>
+<script src='./../../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
@@ -28,7 +32,7 @@ var scdoc_sc_version = '3.13.1';
 <div class='header'>
 <div id='label'>
 <span id='folder'>Tutorials/A-Practical-Guide</span>
- | <span id='categories'><a href='./../../Browse.html#Streams-Patterns-Events'>Streams-Patterns-Events</a>&#8201;&gt;&#8201;<a href='./../../Browse.html#Streams-Patterns-Events>A-Practical-Guide'>A-Practical-Guide</a></span>
+ | <span id='categories'><a href='./../../Browse.html#Streams-Patterns-Events'>Streams-Patterns-Events</a>&#8201;&gt;&#8201;<a href='./../../Browse.html#Streams-Patterns-Events>A-Practical-Guide'>A-Practical-Guide</a> | <a href='./../../Browse.html#Tutorials'>Tutorials</a>&#8201;&gt;&#8201;<a href='./../../Browse.html#Tutorials>Pattern-Guide'>Pattern-Guide</a></span>
 </div><h1>Pattern Guide 06c: Composition of Patterns</h1>
 <div id='summary'>Making multiple event patterns act as one</div>
 </div>
@@ -39,12 +43,13 @@ var scdoc_sc_version = '3.13.1';
 
 <p>One way to use patterns is to write everything into the pattern up front. This has the advantage of clarity and ease of understanding. Another way is to modularize the behavior by creating smaller, simpler patterns and combining their results into single events that have keys and values from all the component patterns.
 <p>This is related to the computer science concept of "function composition," in which a complex calculation can be written not as a single large function, but as several smaller functions that are then chained together into a single function. Since Functions are normal objects in SuperCollider, it's easy to do an operation on a function that returns a composite function (which may then be used like any other function). <a href="http://en.wikipedia.org/wiki/Function_composition_(computer_science)">http://en.wikipedia.org/wiki/Function_composition_(computer_science)</a>
-<p>In mathematics, the <code>·</code> operator represents function composition.<textarea class='editor'>f(x) = x + 1
+<p>In mathematics, the <code>·</code> operator represents function composition.<div class='codeMirrorContainer'><textarea class='editor'>f(x) = x + 1
 g(x) = x * 2
 
 g · f = g(f(x)) = (x + 1) * 2</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p><code>g · f</code> means to evaluate <code>f</code> first, then pass its result to <code>g</code>. The <code>·</code> operator is written as <code>&lt;&gt;</code> in SuperCollider.<textarea class='editor'>f = { |x| x + 1 };
+<p><code>g · f</code> means to evaluate <code>f</code> first, then pass its result to <code>g</code>. The <code>·</code> operator is written as <code>&lt;&gt;</code> in SuperCollider.<div class='codeMirrorContainer'><textarea class='editor'>f = { |x| x + 1 };
 g = { |x| x * 2 };
 
 h = (g &lt;&gt; f);
@@ -59,10 +64,11 @@ h.value(1);
 // g · f == g(f(x)) -- f is evaluated first, and its result is passed to g
 g.value(f.value(1));
 --&gt; 4</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p>Event patterns can be similarly composed.<dl>
 <dt><code>Pbindf(pattern, pairs)</code><dd>Adds new key-value pairs onto a pre-existing Pbind-style pattern. <code>Pbindf(Pbind(\a, patternA), \b, patternB, \c, patternC)</code> gets the same result as <code>Pbind(\a, patternA, \b, patternB, \c, patternC)</code> .<dt><code>Pchain(patterns)</code><dd>Chains separate Pbind-style patterns together, so that all their key-value pairs go into the same event. For example, if one part of your code creates a Pbind instance <code>a = Pbind(\a, patternA)</code> and another part creates <code>b = Pbind(\b, patternB, \c, patternC)</code>, you could append <code>\b</code> and <code>\c</code> into the <code>\a</code> result using <code>Pchain(b, a)</code> . The subpatterns evaluate in reverse order, in keeping with function composition notation.
-<p>For musical purposes, you could have one part of your code create a pattern defining rhythm and another part defining pitch material, then combine them with <a href="./../../Classes/Pchain.html">Pchain</a>.<textarea class='editor'>~rhythm = Pbind(
+<p>For musical purposes, you could have one part of your code create a pattern defining rhythm and another part defining pitch material, then combine them with <a href="./../../Classes/Pchain.html">Pchain</a>.<div class='codeMirrorContainer'><textarea class='editor'>~rhythm = Pbind(
     \dur, Pwrand(#[0.125, 0.25, 0.5], #[0.3, 0.5, 0.2], inf),
     \legato, Pwrand(#[0.1, 0.6, 1.01], #[0.1, 0.3, 0.6], inf)
 );
@@ -72,8 +78,9 @@ g.value(f.value(1));
 
 p = Pchain(~melody, ~rhythm).play;
 p.stop;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>That in itself has some good potential for algorithmic composition. Introducing <a href="./../../Classes/EventPatternProxy.html">EventPatternProxy</a> into the mix makes it possible to swap different melody and rhythm components in and out on the fly, with no interruption. We can even change the type of pattern ( <a href="./../../Classes/Pbind.html">Pbind</a>, <a href="./../../Classes/Pmono.html">Pmono</a>, <a href="./../../Classes/PmonoArtic.html">PmonoArtic</a> ) with no ill effect.<textarea class='editor'>~rhythm = EventPatternProxy(Pbind(
+<p>That in itself has some good potential for algorithmic composition. Introducing <a href="./../../Classes/EventPatternProxy.html">EventPatternProxy</a> into the mix makes it possible to swap different melody and rhythm components in and out on the fly, with no interruption. We can even change the type of pattern ( <a href="./../../Classes/Pbind.html">Pbind</a>, <a href="./../../Classes/Pmono.html">Pmono</a>, <a href="./../../Classes/PmonoArtic.html">PmonoArtic</a> ) with no ill effect.<div class='codeMirrorContainer'><textarea class='editor'>~rhythm = EventPatternProxy(Pbind(
     \dur, Pwrand(#[0.125, 0.25, 0.5], #[0.3, 0.5, 0.2], inf),
     \legato, Pwrand(#[0.1, 0.6, 1.01], #[0.1, 0.3, 0.6], inf)
 ));
@@ -89,6 +96,7 @@ p = Pchain(~melody, ~rhythm).play;
 ~melody.source = Pbind(\degree, Pseries(4, Pwrand(#[-2, -1, 1, 2], #[0.3, 0.2, 0.2, 0.3], inf), inf).fold(-4, 11));
 
 p.stop;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </dl>
 <h3><a class='anchor' name='Pset%20and%20cousins'>Pset and cousins</a></h3>
 
@@ -106,5 +114,5 @@ p.stop;</textarea>
 <p>Similar for <code>Pmulpre</code>.
 <p>A third group -- <a href="./../../Classes/Psetp.html">Psetp</a>, <a href="./../../Classes/Paddp.html">Paddp</a>, <a href="./../../Classes/Pmulp.html">Pmulp</a> -- behave slightly differently, nesting pattern evaluation.
 <p>Previous: <a href="./../../Tutorials/A-Practical-Guide/PG_06b_Time_Based_Patterns.html">Pattern Guide 06b: Time Based Patterns</a>
-<p>Next: <a href="./../../Tutorials/A-Practical-Guide/PG_06d_Parallel_Patterns.html">Pattern Guide 06d: Parallel Patterns</a><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Tutorials/A-Practical-Guide/PG_06c_Composition_of_Patterns.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Tutorials/A-Practical-Guide/PG_06c_Composition_of_Patterns.schelp</a><br>link::Tutorials/A-Practical-Guide/PG_06c_Composition_of_Patterns::<br></div></div><script src='./../../editor.js' type='text/javascript'></script>
+<p>Next: <a href="./../../Tutorials/A-Practical-Guide/PG_06d_Parallel_Patterns.html">Pattern Guide 06d: Parallel Patterns</a><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Tutorials/A-Practical-Guide/PG_06c_Composition_of_Patterns.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Tutorials/A-Practical-Guide/PG_06c_Composition_of_Patterns.schelp</a><br>link::Tutorials/A-Practical-Guide/PG_06c_Composition_of_Patterns::<br></div></div><script src='./../../static/editor.js' type='text/javascript'></script>
 </body></html>

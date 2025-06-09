@@ -1,21 +1,25 @@
-<!doctype html><html lang='en'><head><title>Pattern Guide 06d: Parallel Patterns | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>Pattern Guide 06d: Parallel Patterns | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../../lib/jquery.min.js'></script>
-<script src='./../../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../../static/lib/jquery.min.js'></script>
+<script src='./../../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './../..';
 var scdoc_title = 'Pattern Guide 06d: Parallel Patterns';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../../scdoc.js' type='text/javascript'></script>
+<script src='./../../static/scdoc.js' type='text/javascript'></script>
 <script src='./../../docmap.js' type='text/javascript'></script>
+<script src='./../../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
@@ -28,7 +32,7 @@ var scdoc_sc_version = '3.13.1';
 <div class='header'>
 <div id='label'>
 <span id='folder'>Tutorials/A-Practical-Guide</span>
- | <span id='categories'><a href='./../../Browse.html#Streams-Patterns-Events'>Streams-Patterns-Events</a>&#8201;&gt;&#8201;<a href='./../../Browse.html#Streams-Patterns-Events>A-Practical-Guide'>A-Practical-Guide</a></span>
+ | <span id='categories'><a href='./../../Browse.html#Streams-Patterns-Events'>Streams-Patterns-Events</a>&#8201;&gt;&#8201;<a href='./../../Browse.html#Streams-Patterns-Events>A-Practical-Guide'>A-Practical-Guide</a> | <a href='./../../Browse.html#Tutorials'>Tutorials</a>&#8201;&gt;&#8201;<a href='./../../Browse.html#Tutorials>Pattern-Guide'>Pattern-Guide</a></span>
 </div><h1>Pattern Guide 06d: Parallel Patterns</h1>
 <div id='summary'>Running multiple event patterns simultaneously</div>
 </div>
@@ -45,7 +49,7 @@ var scdoc_sc_version = '3.13.1';
 
 <p>Ppar and its cousins are good for a fixed set of parallel patterns -- that is, you need to know in advance how many patterns will be parallelized. Once the parallel pattern starts, there is no way to add more streams to it. To keep adding streams, use <a href="./../../Classes/Pspawner.html">Pspawner</a> and <a href="./../../Classes/Pspawn.html">Pspawn</a>. For the purpose of this overview, some basic features will be illustrated in a couple of simple examples. These classes have more capabilities; refer to their help files for specifics.<dl>
 <dt><code>Pspawner(routineFunc)</code><dd>The function is run in a Routine. A Spawner object gets passed into this Routine, and this object is used to add or remove streams to/from the parallel stream. New patterns can be added in sequence or in parallel.<dt><code>Pspawn(pattern, spawnProtoEvent)</code><dd>Supports most of the features of Pspawner, but uses a pattern to control the Spawner object instead of a Routine function.
-<p>This example uses <a href="./../../Classes/Pspawner.html">Pspawner</a> to trigger overlapping scale segments at different speeds. Unlike Ppar, which could handle a fixed number before stopping, Pspawner can keep going indefinitely.<textarea class='editor'>(
+<p>This example uses <a href="./../../Classes/Pspawner.html">Pspawner</a> to trigger overlapping scale segments at different speeds. Unlike Ppar, which could handle a fixed number before stopping, Pspawner can keep going indefinitely.<div class='codeMirrorContainer'><textarea class='editor'>(
 p = Pspawner({ |sp|    // sp = the Spawner object
     loop {
             // run a new pattern in parallel
@@ -65,8 +69,9 @@ p = Pspawner({ |sp|    // sp = the Spawner object
 )
 
 p.stop;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>The same, written using <a href="./../../Classes/Pspawn.html">Pspawn</a> :<textarea class='editor'>(
+<p>The same, written using <a href="./../../Classes/Pspawn.html">Pspawn</a> :<div class='codeMirrorContainer'><textarea class='editor'>(
 p = Pspawn(Pbind(
     \method, \par,        // embed patterns in parallel
         // generate the subpattern in a Pfunc (so there's a new pattern each time)
@@ -86,8 +91,9 @@ p = Pspawn(Pbind(
 )
 
 p.stop;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </dl>
 
 <p>Previous: <a href="./../../Tutorials/A-Practical-Guide/PG_06c_Composition_of_Patterns.html">Pattern Guide 06c: Composition of Patterns</a>
-<p>Next: <a href="./../../Tutorials/A-Practical-Guide/PG_06e_Language_Control.html">Pattern Guide 06e: Language Control</a><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Tutorials/A-Practical-Guide/PG_06d_Parallel_Patterns.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Tutorials/A-Practical-Guide/PG_06d_Parallel_Patterns.schelp</a><br>link::Tutorials/A-Practical-Guide/PG_06d_Parallel_Patterns::<br></div></div><script src='./../../editor.js' type='text/javascript'></script>
+<p>Next: <a href="./../../Tutorials/A-Practical-Guide/PG_06e_Language_Control.html">Pattern Guide 06e: Language Control</a><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Tutorials/A-Practical-Guide/PG_06d_Parallel_Patterns.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Tutorials/A-Practical-Guide/PG_06d_Parallel_Patterns.schelp</a><br>link::Tutorials/A-Practical-Guide/PG_06d_Parallel_Patterns::<br></div></div><script src='./../../static/editor.js' type='text/javascript'></script>
 </body></html>

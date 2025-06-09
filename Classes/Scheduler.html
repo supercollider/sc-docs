@@ -1,21 +1,25 @@
-<!doctype html><html lang='en'><head><title>Scheduler | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>Scheduler | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../lib/jquery.min.js'></script>
-<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/jquery.min.js'></script>
+<script src='./../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './..';
 var scdoc_title = 'Scheduler';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../static/scdoc.js' type='text/javascript'></script>
 <script src='./../docmap.js' type='text/javascript'></script>
+<script src='./../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
@@ -48,7 +52,7 @@ var scdoc_sc_version = '3.13.1';
 <div id='summary'>schedules functions to be evaluated in the future</div>
 </div>
 <div class='subheader'>
-<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/Common/Core/Clock.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Core/Clock.sc'>Clock.sc</a></div></div>
+<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/Common/Core/Clock.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Core/Clock.sc'>Clock.sc</a></div></div>
 <h2><a class='anchor' name='description'>Description</a></h2>
 
 <p>A Scheduler can be used to schedule and reschedule functions to be evaluated at a specific time-point. The Scheduler's time needs to be advanced manually. In most cases you will probably want to use a Clock (e.g. <a href="./../Classes/TempoClock.html">TempoClock</a>, <a href="./../Classes/SystemClock.html">SystemClock</a>, <a href="./../Classes/AppClock.html">AppClock</a>) instead, in which the march of time is handled for you.<h2><a class='anchor' name='classmethods'>Class Methods</a></h2>
@@ -57,7 +61,7 @@ var scdoc_sc_version = '3.13.1';
 <table class='arguments'>
 <tr><td class='argumentname'>clock<td class='argumentdesc'>
 <p>A clock, like SystemClock.<tr><td class='argumentname'>drift<td class='argumentdesc'>
-<p>If <code>true</code>, <a href="#-sched">-sched</a> will schedule tasks relative to the current absolute time ( <a href="./../Classes/Process.html#*elapsedTime">Main.elapsedTime</a> ), otherwise to the current logical time of the scheduler ( <a href="#-seconds">-seconds</a> ).<tr><td class='argumentname'>recursive<td class='argumentdesc'>
+<p>If <code>true</code>, <a href="#-sched">-sched</a> will schedule tasks relative to the current absolute time (<a href="./../Classes/Process.html#*elapsedTime">Main.elapsedTime</a>), otherwise to the current logical time of the scheduler (<a href="#-seconds">-seconds</a>).<tr><td class='argumentname'>recursive<td class='argumentdesc'>
 <p>Sets <a href="#-recursive">-recursive</a>.</table></div><h3><a class='anchor' name='Inherited%20class%20methods'>Inherited class methods</a></h3>
 <div id='inheritedclassmets'></div><h2><a class='anchor' name='instancemethods'>Instance Methods</a></h2>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-play' href='./../Overviews/Methods.html#play'>play</a>(<span class='argstr'>task</span>)</h3>
@@ -85,7 +89,7 @@ var scdoc_sc_version = '3.13.1';
 <div class='method'>
 <p>If waking up items results in new items being scheduled, but some of them are already expired (scheduled at current time or earlier), this variable determines whether those items will be awaken as well in the same call to -seconds.</div><h3><a class='anchor' name='Inherited%20instance%20methods'>Inherited instance methods</a></h3>
 <div id='inheritedinstmets'></div><h2><a class='anchor' name='examples'>Examples</a></h2>
-<textarea class='editor'>a = Scheduler(SystemClock);
+<div class='codeMirrorContainer'><textarea class='editor'>a = Scheduler(SystemClock);
 
 a.sched(3, { "now it is 3 seconds.".postln; nil });
 a.sched(5, { "now it is 5 seconds.".postln; nil });
@@ -97,7 +101,7 @@ a.advance(2);
 a.advance(2);
 
 // the beats, seconds and clock are passed into the task function:
-a.sched(1, { arg beats, secs, clock; [beats, secs, clock].postln });
+a.sched(1, { |beats, secs, clock| [beats, secs, clock].postln });
 a.advance(1);
 
 // the scheduling is relative to "now":
@@ -111,9 +115,10 @@ a.advance(2);
 a.advance(2);
 
 // play a Routine or a task:
-a.play(Routine { 5.do { arg i; i.postln; 1.yield } });
+a.play(Routine { 5.do { |i| i.postln; 1.yield } });
 a.advance(0.9);</textarea>
-<textarea class='editor'>// scheduling tasks
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+<div class='codeMirrorContainer'><textarea class='editor'>// scheduling tasks
 (
 x = Scheduler(TempoClock.default);
 
@@ -155,6 +160,7 @@ Task { 5.do {
     }
 }.play;
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/Scheduler.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/Scheduler.schelp</a><br>link::Classes/Scheduler::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/Scheduler.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/Scheduler.schelp</a><br>link::Classes/Scheduler::<br></div></div><script src='./../static/editor.js' type='text/javascript'></script>
 </body></html>

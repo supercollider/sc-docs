@@ -1,21 +1,25 @@
-<!doctype html><html lang='en'><head><title>Float | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>Float | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../lib/jquery.min.js'></script>
-<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/jquery.min.js'></script>
+<script src='./../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './..';
 var scdoc_title = 'Float';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../static/scdoc.js' type='text/javascript'></script>
 <script src='./../docmap.js' type='text/javascript'></script>
+<script src='./../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
@@ -34,6 +38,7 @@ var scdoc_sc_version = '3.13.1';
 <li class='toc3'><a href='#-wrap'>wrap</a> </li>
 <li class='toc3'><a href='#-coin'>coin</a> </li>
 <li class='toc3'><a href='#-xrand2'>xrand2</a> </li>
+<li class='toc3'><a href='#-modSeaside'>modSeaside</a> </li>
 <li class='toc3'><a href='#-isFloat'>isFloat</a> </li>
 <li class='toc3'><a href='#-asFloat'>asFloat</a> </li>
 <li class='toc3'><a href='#-as32Bits'>as32Bits</a> </li>
@@ -41,6 +46,7 @@ var scdoc_sc_version = '3.13.1';
 <li class='toc3'><a href='#-low32Bits'>low32Bits</a> </li>
 <li class='toc3'><a href='#-asCompileString'>asCompileString</a> </li>
 <li class='toc3'><a href='#-asStringPrec'>asStringPrec</a> </li>
+<li class='toc3'><a href='#-dump'>dump</a> </li>
 <li class='toc2'><a href='#Using%20Floats%20as%20replacement%20for%20Integers'>Using Floats as replacement for Integers</a></li>
 <ul class='toc'></ul><li class='toc2'><a href='#Inherited%20instance%20methods'>Inherited instance methods</a></li>
 <li class='toc2'><a href='#Undocumented%20instance%20methods'>Undocumented instance methods</a></li>
@@ -61,10 +67,10 @@ var scdoc_sc_version = '3.13.1';
 <div id='summary'>64-bit Floating point number</div>
 </div>
 <div class='subheader'>
-<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/Common/Math/Float.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Math/Float.sc'>Float.sc</a></div></div>
+<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/Common/Math/Float.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Math/Float.sc'>Float.sc</a></div></div>
 <h2><a class='anchor' name='description'>Description</a></h2>
 
-<p>A 64-bit double precision floating point number. Float inherits most of its behaviour from its superclass.<textarea class='editor'>// generate 10 random floats between 0 and 1
+<p>A 64-bit double precision floating point number. Float inherits most of its behaviour from its superclass, <a href="./../Classes/SimpleNumber.html">SimpleNumber</a>.<div class='codeMirrorContainer'><textarea class='editor'>// generate 10 random floats between 0 and 1
 { 1.0.rand }.dup(10)
 
 // Pythagorean comma
@@ -75,8 +81,9 @@ var limma =   (2 ** 8) / (3 ** 5);
 
 apotome / limma
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>Note that despite its name, <a href="./../Classes/FloatArray.html">FloatArray</a> only holds 32-bit (single precision) floats. For a raw array of 64-bit floats, use <a href="./../Classes/DoubleArray.html">DoubleArray</a>.<h2><a class='anchor' name='classmethods'>Class Methods</a></h2>
+<p>Note that despite its name, <a href="./../Classes/FloatArray.html">FloatArray</a> only holds 32-bit (single precision) floats. For a raw array of 64-bit floats, use <a href="./../Classes/DoubleArray.html">DoubleArray</a>.<div class='note'><span class='notelabel'>NOTE:</span> The overflow/underflow behavior of a Float is undefined but usually <code>inf</code>/<code>-inf</code>, respectively, since most CPUs comply well enough IEEE-754 floating point. However, the overflow/underflow behavior is still usually handed to the hardware and thus can vary per system. This (overflow/underflow) occurs whenever the result of an operation does not fit in the range of values supported by the return type, in this case, a 64-bit floating point number.</div><h2><a class='anchor' name='classmethods'>Class Methods</a></h2>
 <h3 class='method-code'><span class='method-prefix'>Float.</span><a class='method-name' name='*from32Bits' href='./../Overviews/Methods.html#from32Bits'>from32Bits</a>(<span class='argstr'>word</span>)</h3>
 <div class='method'><h4>Returns:</h4>
 <div class='returnvalue'>
@@ -87,12 +94,12 @@ apotome / limma
 <div id='inheritedclassmets'></div><h2><a class='anchor' name='instancemethods'>Instance Methods</a></h2>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-do' href='./../Overviews/Methods.html#do'>do</a>(<span class='argstr'>function</span>)</h3>
 <div class='method'>
-<p>iterates a <a href="./../Classes/Function.html">Function</a> from <code>0</code> to <code>this-1</code>. See also: <a href="./../Classes/Integer.html#-do">Integer: -do</a>, <a href="./../Classes/Collection.html#-do">Collection: -do</a><h4>Arguments:</h4>
+<p>iterates a <a href="./../Classes/Function.html">Function</a> from <code>0</code> to <code>this - 1</code>. See also: <a href="./../Classes/Integer.html#-do">Integer: -do</a>, <a href="./../Classes/Collection.html#-do">Collection: -do</a><h4>Arguments:</h4>
 <table class='arguments'>
 <tr><td class='argumentname'>function<td class='argumentdesc'>
 <p>The function to iterate.</table></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-reverseDo' href='./../Overviews/Methods.html#reverseDo'>reverseDo</a>(<span class='argstr'>function</span>)</h3>
 <div class='method'>
-<p>iterates function from this-1 to 0<h4>Arguments:</h4>
+<p>iterates function from <code>this - 1</code> to 0<h4>Arguments:</h4>
 <table class='arguments'>
 <tr><td class='argumentname'>function<td class='argumentdesc'>
 <p>The function to iterate.</table></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-clip' href='./../Overviews/Methods.html#clip'>clip</a>(<span class='argstr'>lo</span>, <span class='argstr'>hi</span>)</h3>
@@ -118,12 +125,16 @@ apotome / limma
 <p>Let <em>x</em> be the receiver clipped to the range [0, 1]. With probability <em>x</em>, return true. With probability 1 - <em>x</em>, return false.<h4>Returns:</h4>
 <div class='returnvalue'>
 <p>a <a href="./../Classes/Boolean.html">Boolean</a></div><h4>Discussion:</h4>
-<textarea class='editor'>0.2.coin; // 20 % chance for true.</textarea>
+<div class='codeMirrorContainer'><textarea class='editor'>0.2.coin; // 20 % chance for true.</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p>See also: <a href="./../Guides/Randomness.html">Randomness</a></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-xrand2' href='./../Overviews/Methods.html#xrand2'>xrand2</a></h3>
 <div class='method'><h4>Returns:</h4>
 <div class='returnvalue'>
-<p>a random float from this.neg to this, excluding the value exclude.</div></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-isFloat' href='./../Overviews/Methods.html#isFloat'>isFloat</a></h3>
+<p>a random float from this.neg to this, excluding the value exclude.</div></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-modSeaside' href='./../Overviews/Methods.html#modSeaside'>modSeaside</a>(<span class='argstr'>aNumber</span>, <span class='argstr'>adverb</span>)</h3>
+<div class='method'><h4>Returns:</h4>
+<div class='returnvalue'>
+<p>the same result as <code>this.mod(aNumber, adverb)</code>; provided for compatibility with <a href="./../Classes/Integer.html#-modSeaside">Integer: -modSeaside</a>.</div></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-isFloat' href='./../Overviews/Methods.html#isFloat'>isFloat</a></h3>
 <div class='method'><h4>Returns:</h4>
 <div class='returnvalue'>
 <p><code>true</code> since this is a Float.</div></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-asFloat' href='./../Overviews/Methods.html#asFloat'>asFloat</a></h3>
@@ -141,22 +152,38 @@ apotome / limma
 <p>an Integer which is the bit pattern of high 32-bits of the 64-bit double precision floating point value</div></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-asCompileString' href='./../Overviews/Methods.html#asCompileString'>asCompileString</a></h3>
 <div class='method'><h4>Returns:</h4>
 <div class='returnvalue'>
-<p>a string that when interpreted matches the receiver, if the number is within the range given in <code>storeOn</code>.<textarea class='editor'>a = 2.81882773638;
+<p>a string that when interpreted matches the receiver, if the number is within the range given in <code>storeOn</code>.<div class='codeMirrorContainer'><textarea class='editor'>a = 2.81882773638;
 a.asCompileString.interpret == a;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-asStringPrec' href='./../Overviews/Methods.html#asStringPrec'>asStringPrec</a>(<span class='argstr'>precision</span>)</h3>
 <div class='method'>
 <p>Returns a string representation of the number, with the desired precision (i.e. number of significant figures).<h4>Discussion:</h4>
-<textarea class='editor'>// example:
+<div class='codeMirrorContainer'><textarea class='editor'>// example:
 pi
 pi.asStringPrec(3)
 pi.asStringPrec(6)
 (pi * 0.0001).asStringPrec(3)
 7.4.asStringPrec(5)
 7.4.asStringPrec(50)</textarea>
-</div><h3><a class='anchor' name='Using%20Floats%20as%20replacement%20for%20Integers'>Using Floats as replacement for Integers</a></h3>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-dump' href='./../Overviews/Methods.html#dump'>dump</a></h3>
+<div class='supmethod'>From superclass: <a href='./../Classes/Object.html'>Object</a></div>
+<div class='method'>
+<p><div class='codeMirrorContainer'><textarea class='editor'>-1.0.dump</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>In SuperCollider, Floats are 64-bit wide. Because an <a href="./../Classes/Integer.html">Integer</a> is 32-bit, it can only capture integers in the range <code>-2147483648 .. +2147483647</code>, or about <code>2 x 10^9</code>.
-<p>Therefore, in some situations it can be useful to calculate with floats also when only whole numbers are needed. You can use 64-bit floats for integer calculations up to <code>± 9007199254740992</code> (<code>2^53</code>, or about <code>9 x 10^15</code>). Sometimes one can go even further (see example below).<textarea class='editor'>// compare factorial:
+<p>returns<pre>   Float -1.000000   00000000 BFF00000
+-&gt; -1.0</pre>
+<p>The last two groups of an 8-digit integer are the raw hexadecimal representation of the 64-bit double value according to <a href="https://ieeexplore.ieee.org/document/8766229">IEEE 754 Floating Point</a> (<a href="https://ieeexplore.ieee.org/document/8766229">https://ieeexplore.ieee.org/document/8766229</a>). Each part is represented as follows:<pre>                         raw hexadecimal representation
+                           of the 64-bit double value
+                         ––––––––––––––––––––––––––––––
+Float   -1.000000        00000000              3FF00000
+|       |                |                     |
+class   decmial          significant part      exponent part
+        representation   (mantissa)            with sign bit</pre></div><h3><a class='anchor' name='Using%20Floats%20as%20replacement%20for%20Integers'>Using Floats as replacement for Integers</a></h3>
+
+<p>In SuperCollider, Floats are 64 bits wide. Because an <a href="./../Classes/Integer.html">Integer</a> is 32-bit, it can only capture integers in the range -2147483648 (<code>-2^31</code>) to 2147483647 (<code>2^31 - 1</code>).
+<p>Therefore, in some situations it can be useful to calculate with floats also when only whole numbers are needed. You can use 64-bit floats for integer calculations in the range <code>± 9007199254740992</code>, or about <code>±2^53</code>. Sometimes one can go even further (see example below).<div class='codeMirrorContainer'><textarea class='editor'>// compare factorial:
 f = { |x| if(x &lt; 2) { x } { x * f.(x - 1) } };
 f.(14); // integer
 f.(18) // integer overflow: -898433024
@@ -164,9 +191,10 @@ f.(18.0) // float is ok.
 // check the ratio between adjacent factorials:
 f.(18.0) / f.(17.0) == 18 // true
 // 18 is already the largest possible factorial representable in 64-bit float (&lt; 2^53)
-{:x, x&lt;-(1.0..40), f.(x) &lt; (2 ** 53) }.all.last</textarea>
+{ :x, x&lt;-(1.0..40), f.(x) &lt; (2 ** 53) }.all.last</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>Here is a classical example for an algorithm:<textarea class='editor'>// euclidean algorithm
+<p>Here is a classical example for an algorithm:<div class='codeMirrorContainer'><textarea class='editor'>// euclidean algorithm
 (
 g = { |a, b|
     if(b == 0) {
@@ -188,8 +216,9 @@ x = 2007199254740992.0 * 3;
 g.(x, 3); // correct, returns 3
 x = 9007199254740992.0 * 3;
 g.(x, 3); // still happens to be correct, but better not count on it …</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>Testing the limits of 64-bit float (2^53)<textarea class='editor'>a = 2 ** 53 - 1
+<p>Testing the limits of 64-bit float (2^53)<div class='codeMirrorContainer'><textarea class='editor'>a = 2 ** 53 - 1
 b = a + 1;
 c = a + 2;
 b - a // correct (1)
@@ -200,7 +229,8 @@ c - a // incorrect (also 1)
 // here we divide two numbers that follow each other
 // and it is correct up to f.(170), about 7.25e+306.
 f = { |x| if(x &lt; 2) { x } { x * f.(x - 1) } };
-{:x, x&lt;-(1.0..180), f.(x) / f.(x - 1) == x }.all.last</textarea>
+{ :x, x&lt;-(1.0..180), f.(x) / f.(x - 1) == x }.all.last</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p><h3><a class='anchor' name='Inherited%20instance%20methods'>Inherited instance methods</a></h3>
 <div id='inheritedinstmets'></div><h3><a class='anchor' name='Undocumented%20instance%20methods'>Undocumented instance methods</a></h3>
@@ -209,7 +239,7 @@ f = { |x| if(x &lt; 2) { x } { x * f.(x - 1) } };
 <h3 class='method-code'><span class='method-prefix'></span><a class='method-name' name='--' href='./../Overviews/Methods.html#-'>-</a>(<span class='argstr'>aNumber</span>, <span class='argstr'>adverb</span>)</h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-archiveAsCompileString' href='./../Overviews/Methods.html#archiveAsCompileString'>archiveAsCompileString</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-schedBundle' href='./../Overviews/Methods.html#schedBundle'>schedBundle</a>(<span class='argstr'>bundle</span>, <span class='argstr'>server</span>, <span class='argstr'>timeOfRequest</span>)</h3>
-<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/Common/Control/schedBundle.sc'>/usr/local/share/SuperCollider/SCClassLibrary/Common/Control/schedBundle.sc</a></div>
+<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/Common/Control/schedBundle.sc'>/usr/local/share/SuperCollider/SCClassLibrary/Common/Control/schedBundle.sc</a></div>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-switch' href='./../Overviews/Methods.html#switch'>switch</a>( <span class='argstr'>... cases</span>)</h3>
-<div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/Float.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/Float.schelp</a><br>link::Classes/Float::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+<div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/Float.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/Float.schelp</a><br>link::Classes/Float::<br></div></div><script src='./../static/editor.js' type='text/javascript'></script>
 </body></html>

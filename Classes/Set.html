@@ -1,21 +1,25 @@
-<!doctype html><html lang='en'><head><title>Set | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>Set | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../lib/jquery.min.js'></script>
-<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/jquery.min.js'></script>
+<script src='./../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './..';
 var scdoc_title = 'Set';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../static/scdoc.js' type='text/javascript'></script>
 <script src='./../docmap.js' type='text/javascript'></script>
+<script src='./../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
@@ -68,7 +72,7 @@ var scdoc_sc_version = '3.13.1';
 <div id='summary'>a set according to equality</div>
 </div>
 <div class='subheader'>
-<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/Common/Collections/Set.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Collections/Set.sc'>Set.sc</a></div><div id='subclasses'>Subclasses: <a href="../Classes/Dictionary.html">Dictionary</a>, <a href="../Classes/IdentitySet.html">IdentitySet</a></div>
+<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/Common/Collections/Set.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Collections/Set.sc'>Set.sc</a></div><div id='subclasses'>Subclasses: <a href="../Classes/Dictionary.html">Dictionary</a>, <a href="../Classes/IdentitySet.html">IdentitySet</a></div>
 <div id='related'>See also: <a href="./../Classes/IdentitySet.html">IdentitySet</a>, <a href="./../Classes/List.html">List</a>, <a href="./../Classes/Dictionary.html">Dictionary</a></div>
 </div>
 <h2><a class='anchor' name='description'>Description</a></h2>
@@ -81,56 +85,66 @@ var scdoc_sc_version = '3.13.1';
 <h3><a class='anchor' name='Adding%20and%20Removing'>Adding and Removing</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-add' href='./../Overviews/Methods.html#add'>add</a>(<span class='argstr'>item</span>)</h3>
 <div class='method'>
-<p>Add an Object to the Set. An object which is equal to an object already in the Set will not be added.<textarea class='editor'>Set[1, 2, 3].add(4).postln;
+<p>Add an Object to the Set. An object which is equal to an object already in the Set will not be added.<div class='codeMirrorContainer'><textarea class='editor'>Set[1, 2, 3].add(4).postln;
 Set[1, 2, 3].add(3).postln;
 Set["abc", "def", "ghi"].add("jkl").postln;
 Set["abc", "def", "ghi"].add("def").postln;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-remove' href='./../Overviews/Methods.html#remove'>remove</a>(<span class='argstr'>item</span>)</h3>
 <div class='method'>
-<p>Remove an Object from the Set. Element is checked for equality (not for identity).<textarea class='editor'>Set[1, 2, 3].remove(3).postln;</textarea>
+<p>Remove an Object from the Set. Element is checked for equality (not for identity).<div class='codeMirrorContainer'><textarea class='editor'>Set[1, 2, 3].remove(3).postln;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3><a class='anchor' name='Testing'>Testing</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-includes' href='./../Overviews/Methods.html#includes'>includes</a>(<span class='argstr'>item</span>)</h3>
 <div class='method'>
-<p>Returns true if the specified item is present in the Set. Elements are checked for equality (not for identity).<textarea class='editor'>Set[1, 2, 3].includes(2).postln;</textarea>
+<p>Returns true if the specified item is present in the Set. Elements are checked for equality (not for identity).<div class='codeMirrorContainer'><textarea class='editor'>Set[1, 2, 3].includes(2).postln;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-findMatch' href='./../Overviews/Methods.html#findMatch'>findMatch</a>(<span class='argstr'>item</span>)</h3>
 <div class='method'>
-<p>Returns the item, if it is present in the set. Otherwise returns nil. Element is checked for equality (not for identity).<textarea class='editor'>Set[1, 2, 3].findMatch(3).postln;</textarea>
+<p>Returns the item, if it is present in the set. Otherwise returns nil. Element is checked for equality (not for identity).<div class='codeMirrorContainer'><textarea class='editor'>Set[1, 2, 3].findMatch(3).postln;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3><a class='anchor' name='Iteration'>Iteration</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-do' href='./../Overviews/Methods.html#do'>do</a>(<span class='argstr'>function</span>)</h3>
 <div class='method'>
-<p>Evaluates function for each item in the Set. The function is passed two arguments, the item and an integer index.<textarea class='editor'>Set[1, 2, 3, 300].do({ arg item, i; item.postln });</textarea>
+<p>Evaluates function for each item in the Set. The function is passed two arguments, the item and an integer index.<div class='codeMirrorContainer'><textarea class='editor'>Set[1, 2, 3, 300].do({ |item, i| item.postln });</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-keyAt' href='./../Overviews/Methods.html#keyAt'>keyAt</a>(<span class='argstr'>index</span>)</h3>
 <div class='method'>
 <p>Returns the object at the internal <strong>index</strong>. This index is not deterministic.</div><h3><a class='anchor' name='Set%20specific%20operations'>Set specific operations</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-sect' href='./../Overviews/Methods.html#sect'>sect</a>(<span class='argstr'>that</span>)</h3>
 <h3 class='method-code'><span class='method-prefix'></span><a class='method-name' name='-&' href='./../Overviews/Methods.html#&amp;'>&amp;</a>(<span class='argstr'>that</span>)</h3>
 <div class='method'>
-<p>Return the set theoretical intersection of this and <strong>that</strong>. The function will search for objects occurring in both sets and return a new set containing those. Elements are checked for equality (not for identity).<textarea class='editor'>a = Set[1, 2, 3]; b = Set[2, 3, 4, 5];
+<p>Return the set theoretical intersection of this and <strong>that</strong>. The function will search for objects occurring in both sets and return a new set containing those. Elements are checked for equality (not for identity).<div class='codeMirrorContainer'><textarea class='editor'>a = Set[1, 2, 3]; b = Set[2, 3, 4, 5];
 sect(a, b);
 a &amp; b // shorter syntax</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-union' href='./../Overviews/Methods.html#union'>union</a>(<span class='argstr'>that</span>)</h3>
 <h3 class='method-code'><span class='method-prefix'></span><a class='method-name' name='-|' href='./../Overviews/Methods.html#|'>|</a>(<span class='argstr'>that</span>)</h3>
 <div class='method'>
-<p>Return the set theoretical union of this and <strong>that</strong>. The function combines the two sets into one without duplicates. Elements are checked for equality (not for identity).<textarea class='editor'>a = Set[1, 2, 3]; b = Set[2, 3, 4, 5];
+<p>Return the set theoretical union of this and <strong>that</strong>. The function combines the two sets into one without duplicates. Elements are checked for equality (not for identity).<div class='codeMirrorContainer'><textarea class='editor'>a = Set[1, 2, 3]; b = Set[2, 3, 4, 5];
 union(a, b);
 a | b // shorter syntax</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-difference' href='./../Overviews/Methods.html#difference'>difference</a>(<span class='argstr'>that</span>)</h3>
 <h3 class='method-code'><span class='method-prefix'></span><a class='method-name' name='--' href='./../Overviews/Methods.html#-'>-</a>(<span class='argstr'>that</span>)</h3>
 <div class='method'>
-<p>Return the set of all items which are elements of this, but not of <strong>that</strong>. Elements are checked for equality (not for identity).<textarea class='editor'>a = Set[1, 2, 3]; b = Set[2, 3, 4, 5];
+<p>Return the set of all items which are elements of this, but not of <strong>that</strong>. Elements are checked for equality (not for identity).<div class='codeMirrorContainer'><textarea class='editor'>a = Set[1, 2, 3]; b = Set[2, 3, 4, 5];
 difference(a, b);
 a - b // shorter syntax</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-symmetricDifference' href='./../Overviews/Methods.html#symmetricDifference'>symmetricDifference</a>(<span class='argstr'>that</span>)</h3>
 <h3 class='method-code'><span class='method-prefix'></span><a class='method-name' name='---' href='./../Overviews/Methods.html#--'>--</a>(<span class='argstr'>that</span>)</h3>
 <div class='method'>
-<p>Return the set of all items which are not elements of both this and <strong>that</strong>. Elements are checked for equality (not for identity).<textarea class='editor'>a = Set[1, 2, 3]; b = Set[2, 3, 4, 5];
+<p>Return the set of all items which are not elements of both this and <strong>that</strong>. Elements are checked for equality (not for identity).<div class='codeMirrorContainer'><textarea class='editor'>a = Set[1, 2, 3]; b = Set[2, 3, 4, 5];
 symmetricDifference(a, b);
 a -- b // shorter syntax</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-isSubsetOf' href='./../Overviews/Methods.html#isSubsetOf'>isSubsetOf</a>(<span class='argstr'>that</span>)</h3>
 <div class='method'>
-<p>Returns true if all elements of this are also elements of <strong>that</strong>. Elements are checked for equality (not for identity). Since Set is an unordered collection, order doesn't matter in this comparison.<textarea class='editor'>a = Set[1, 2, 3, 4];
+<p>Returns true if all elements of this are also elements of <strong>that</strong>. Elements are checked for equality (not for identity). Since Set is an unordered collection, order doesn't matter in this comparison.<div class='codeMirrorContainer'><textarea class='editor'>a = Set[1, 2, 3, 4];
 Set[1, 2].isSubsetOf(a); // true
 Set[1, 5].isSubsetOf(a); // false</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3><a class='anchor' name='Inherited%20instance%20methods'>Inherited instance methods</a></h3>
 <div id='inheritedinstmets'></div><h3><a class='anchor' name='Undocumented%20instance%20methods'>Undocumented instance methods</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-array' href='./../Overviews/Methods.html#array'>array</a></h3>
@@ -147,16 +161,18 @@ Set[1, 5].isSubsetOf(a); // false</textarea>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-species' href='./../Overviews/Methods.html#species'>species</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-unify' href='./../Overviews/Methods.html#unify'>unify</a></h3>
 <h2><a class='anchor' name='examples'>Examples</a></h2>
-<textarea class='editor'>a = Set[1, 2, 3, 4];
+<div class='codeMirrorContainer'><textarea class='editor'>a = Set[1, 2, 3, 4];
 b = a.powerset; // set of all parts
 a.isSubsetOf(b); // false: no set is ever part of itself.
 b.asArray.reduce(\union) == a; // true parts may not contain other elements that original
 b.asArray.reduce(\difference).isEmpty; // true.</textarea>
-<textarea class='editor'>// you can use Set to efficiently remove duplicates from an array:
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+<div class='codeMirrorContainer'><textarea class='editor'>// you can use Set to efficiently remove duplicates from an array:
 
 a = [1, 2, 3, 4, 3, 5, 5, 2, 2, 1];
 a.as(Set);        // convert to set
 a.as(Set).as(Array);    // and convert back</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/Set.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/Set.schelp</a><br>link::Classes/Set::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/Set.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/Set.schelp</a><br>link::Classes/Set::<br></div></div><script src='./../static/editor.js' type='text/javascript'></script>
 </body></html>

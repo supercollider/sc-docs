@@ -1,21 +1,25 @@
-<!doctype html><html lang='en'><head><title>LFGauss | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>LFGauss | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../lib/jquery.min.js'></script>
-<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/jquery.min.js'></script>
+<script src='./../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './..';
 var scdoc_title = 'LFGauss';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../static/scdoc.js' type='text/javascript'></script>
 <script src='./../docmap.js' type='text/javascript'></script>
+<script src='./../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
@@ -30,8 +34,8 @@ var scdoc_sc_version = '3.13.1';
 <li class='toc3'><a href='#-range'>range</a> </li>
 <li class='toc2'><a href='#Inherited%20instance%20methods'>Inherited instance methods</a></li>
 </ul><li class='toc1'><a href='#examples'>Examples</a></li>
-<ul class='toc'><li class='toc2'><a href='#Some%20plots'>Some plots</a></li>
-<ul class='toc'></ul><li class='toc2'><a href='#Some%20calculations'>Some calculations</a></li>
+<ul class='toc'><li class='toc2'><a href='#Example%20plots'>Example plots</a></li>
+<ul class='toc'></ul><li class='toc2'><a href='#Min%20and%20max%20values,%20curve%20width'>Min and max values, curve width</a></li>
 <ul class='toc'></ul><li class='toc2'><a href='#Sound%20examples'>Sound examples</a></li>
 <ul class='toc'></ul><li class='toc2'><a href='#Gabor%20Grain'>Gabor Grain</a></li>
 <ul class='toc'></ul></ul></ul></div><div id='menubar'></div>
@@ -45,40 +49,49 @@ var scdoc_sc_version = '3.13.1';
 <div id='summary'>Gaussian function oscillator</div>
 </div>
 <div class='subheader'>
-<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/Common/Audio/Osc.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Audio/Osc.sc'>Osc.sc</a></div></div>
+<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/Common/Audio/Osc.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Audio/Osc.sc'>Osc.sc</a></div></div>
 <h2><a class='anchor' name='description'>Description</a></h2>
 
-<p>A non-band-limited gaussian function oscillator. Output ranges from <strong>minval</strong> to 1.
-<p>LFGauss implements the formula:<textarea class='editor'>f(x) = exp(squared(x - iphase) / (-2.0 * squared(width)))</textarea>
-
-<p>where x is to vary in the range -1 to 1 over the period dur. <strong>minval</strong> is the initial value at -1.<h2><a class='anchor' name='classmethods'>Class Methods</a></h2>
+<p>A non-band-limited gaussian function oscillator.
+<p><code>LFGauss</code> implements the formula:<pre>f(x) = exp((x - iphase)^2 / (-2.0 * width^2))</pre>
+<p>where <code>x</code> in this context is the phase, which cycles in a range <code>-1</code> to <code>1</code> over the period <strong>duration</strong>. The Gaussian function in this form is a bell-shaped <a href="https://mathworld.wolfram.com/ApodizationFunction.html">apodization function</a>, making it convenient for use as an envelope.
+<p>Its minimum value occurs when the phase <code>x = -1</code> and <code>x = 1</code>, and its maximum occurs when <code>x = 0</code>.<h2><a class='anchor' name='classmethods'>Class Methods</a></h2>
 <h3 class='method-code'><span class='method-prefix'>LFGauss.</span><a class='method-name' name='*ar' href='./../Overviews/Methods.html#ar'>ar</a>(<span class='argstr'>duration: 1</span>, <span class='argstr'>width: 0.1</span>, <span class='argstr'>iphase: 0.0</span>, <span class='argstr'>loop: 1</span>, <span class='argstr'>doneAction: 0</span>)</h3>
 <h3 class='method-code'><span class='method-prefix'>LFGauss.</span><a class='method-name' name='*kr' href='./../Overviews/Methods.html#kr'>kr</a>(<span class='argstr'>duration: 1</span>, <span class='argstr'>width: 0.1</span>, <span class='argstr'>iphase: 0.0</span>, <span class='argstr'>loop: 1</span>, <span class='argstr'>doneAction: 0</span>)</h3>
 <div class='method'>
 <p><h4>Arguments:</h4>
 <table class='arguments'>
 <tr><td class='argumentname'>duration<td class='argumentdesc'>
-<p>duration of one full cycle ( for <strong>freq</strong> input: <strong>dur = 1 / freq</strong> )<tr><td class='argumentname'>width<td class='argumentdesc'>
-<p>relative width of the bell. Best to keep below 0.25 when used as envelope. (default: 0.1)<tr><td class='argumentname'>iphase<td class='argumentdesc'>
-<p>initial offset (default: 0)<tr><td class='argumentname'>loop<td class='argumentdesc'>
-<p>if loop is &gt; 0, UGen oscillates. Otherwise it calls doneAction after one cycle (default: 1)<tr><td class='argumentname'>doneAction<td class='argumentdesc'>
-<p>doneAction, which is evaluated after cycle completes (2 frees the synth, default: 0). See <a href="./../Classes/Done.html">Done</a> for more detail.</table></div><h3><a class='anchor' name='Inherited%20class%20methods'>Inherited class methods</a></h3>
+<p>Duration of one cycle, in seconds. (Hint: <strong>duration</strong> <code>= 1/frequency</code>). Default: <code>1</code><tr><td class='argumentname'>width<td class='argumentdesc'>
+<p>The width of the bell curve (its standard deviation).
+<p>Practically speaking, a <strong>width</strong> <code>&lt;= 0.25</code> will give minimum values near, but not equal to, zero.
+<p>The bell curve becomes broader with increasing <strong>width</strong>. Beyond roughly <code>&gt;= 0.25</code> the function has the appearance of being truncated, or, when <strong>loop</strong> <code>= 1</code>, the cycles begin to "overlap". Default: <code>0.1</code><tr><td class='argumentname'>iphase<td class='argumentdesc'>
+<p>Initial offset phase offset in the range <code>[-1, 1]</code>. Default: 0<tr><td class='argumentname'>loop<td class='argumentdesc'>
+<p>If <strong>loop</strong> <code>&gt; 0</code>, the function repeats. Otherwise, it calls <strong>doneAction</strong> after one cycle. Default: 1<tr><td class='argumentname'>doneAction<td class='argumentdesc'>
+<p>A <code>doneAction</code> value, which is evaluated at the end of a cycle (if <strong>loop</strong> <code>= 0</code>). <code>2</code> frees the synth. Default: <code>0</code> (continues running). See <a href="./../Classes/Done.html#Actions">Done: Actions</a> for more options.</table><h4>Discussion:</h4>
+
+<p>By default, the maximum value of <code>LFGauss</code> is <code>1</code>. The minimum value will depend on the <strong>width</strong>, and can by inspected with <a href="#-minval">-minval</a>.
+<p>The function can be mapped to a specified range with <a href="#-range">-range</a>, which can be useful when using <code>LFGauss</code> as an envelope that may need to span a range of, e.g., <code>[0, 1]</code>.
+<p>See the examples below for understanding and manipulating the <a href="#Min%20and%20max%20values,%20curve%20width">Min and max values, curve width</a>.</div><h3><a class='anchor' name='Inherited%20class%20methods'>Inherited class methods</a></h3>
 <div id='inheritedclassmets'></div><h2><a class='anchor' name='instancemethods'>Instance Methods</a></h2>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-minval' href='./../Overviews/Methods.html#minval'>minval</a></h3>
 <div class='method'>
-<p>Returns the lowest value for the given parameters, which is <code>exp(1.0 / (-2.0 * squared(width)))</code></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-range' href='./../Overviews/Methods.html#range'>range</a>(<span class='argstr'>min: 0</span>, <span class='argstr'>max: 1</span>)</h3>
+<p>Returns the function's lowest value for the given <strong>width</strong> parameter, which is <code>exp(1.0 / (-2.0 * width^2))</code>.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-range' href='./../Overviews/Methods.html#range'>range</a>(<span class='argstr'>min: 0</span>, <span class='argstr'>max: 1</span>)</h3>
 <div class='method'>
-<p>Scales the output to the given range. This can be convenient when using LFGauss as an envelope (see example below).<textarea class='editor'>{ LFGauss.ar(0.01, 0.6).range }.plot;
-{ LFGauss.ar(0.01, 0.6) }.plot; // starts at about 0.25</textarea>
+<p>Scales the output to the given range. This can be convenient when using <code>LFGauss</code> as an envelope (see <a href="#examples">examples</a> below).<div class='codeMirrorContainer'><textarea class='editor'>// high width, curve minimum around is 0.25
+{ LFGauss.ar(0.01, 0.6) }.plot;
+// use .range to map the same function to a specified range
+{ LFGauss.ar(0.01, 0.6).range(0, 2) }.plot;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3><a class='anchor' name='Inherited%20instance%20methods'>Inherited instance methods</a></h3>
 <div id='inheritedinstmets'></div><h2><a class='anchor' name='examples'>Examples</a></h2>
-<h3><a class='anchor' name='Some%20plots'>Some plots</a></h3>
-<textarea class='editor'>s.boot ;
+<h3><a class='anchor' name='Example%20plots'>Example plots</a></h3>
+<div class='codeMirrorContainer'><textarea class='editor'>s.boot;
 
 // a 0.1 second grain
 { LFGauss.ar(0.1, 0.12) }.plot(0.1);
 
-// shifting left
+// shift a half-cycle left
 { LFGauss.ar(0.1, 0.12, -1, loop: 0) }.plot(0.1);
 
 // moving further away from the center
@@ -86,17 +99,20 @@ var scdoc_sc_version = '3.13.1';
 
 // several grains
 { LFGauss.ar(0.065, 0.12, 0, loop: 1) }.plot(0.3);</textarea>
-<h3><a class='anchor' name='Some%20calculations'>Some calculations</a></h3>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+<h3><a class='anchor' name='Min%20and%20max%20values,%20curve%20width'>Min and max values, curve width</a></h3>
 
-<p>assuming iphase = 0:
-<p><strong>minval</strong> for a given width: <code>minval = exp(-1.0 / (2.0 * squared(width)))</code>
-<p><strong>width</strong> for a given minval: <code>width = sqrt(-1.0 / log(minval))</code>
-<p><strong>width at half maximum (0.5)</strong>: <code>(2 * sqrt(2 * log(2)) * width) = ca. 2.355 * width</code><textarea class='editor'>// minval for a width of 0.1:
+<p><a href="#-minval">-minval</a> for a given <strong>width</strong> (assuming <strong>iphase</strong> <code>= 0</code>) is:
+<p><code>minval = exp(-1.0 / (2.0 * squared(width)))</code>
+<p><strong>width</strong> for a given <a href="#-minval">-minval</a> is:
+<p><code>width = sqrt(-1.0 / log(minval))</code>
+<p><strong>width</strong> at half of the maximum value(<code>0.5</code>) is:
+<p><code>(2 * sqrt(2 * log(2)) * width) = ca. 2.355 * width</code><div class='codeMirrorContainer'><textarea class='editor'>// minval for a width of 0.1:
 (exp(1 / (-2.0 * squared(0.1)))) // 2e-22
 
 // maximum width for a beginning at -60dB:
 // we want the beginning small enough to avoid clicks
-sqrt(-1 / ( 2 * log(-60.dbamp))) // 0.269
+sqrt(-1 / (2 * log(-60.dbamp))) // 0.269
 
 // minval for width of 0.25
 (exp(1 / (-2.0 * squared(0.25)))).ampdb // -70dB
@@ -104,9 +120,8 @@ sqrt(-1 / ( 2 * log(-60.dbamp))) // 0.269
 // maximum is always 1:
 { LFGauss.ar(0.1, XLine.kr(1, 0.03, 1), 0, loop: 1) }.plot(1);
 
-// a gauss curve in sclang:
+// a gaussian curve in sclang:
 (0..1000).normalize(-1, 1).collect(_.gaussCurve(1, 0, 0.1)).plot;
-
 
 // rescale the function to the range 0..1
 (
@@ -125,8 +140,9 @@ sqrt(-1 / ( 2 * log(-60.dbamp))) // 0.269
     LFGauss.ar(0.1, width, loop: 1).range(0, 1);
 }.plot(1)
 );</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h3><a class='anchor' name='Sound%20examples'>Sound examples</a></h3>
-<textarea class='editor'>// modulating duration
+<div class='codeMirrorContainer'><textarea class='editor'>// modulating duration
 { LFGauss.ar(XLine.kr(0.1, 0.001, 10), 0.03) * 0.2 }.play;
 
 // modulating width, freq 60 Hz
@@ -145,52 +161,49 @@ sqrt(-1 / ( 2 * log(-60.dbamp))) // 0.269
 // for very small width we are "approaching" a dirac function
 { LFGauss.ar(0.01, SampleDur.ir * MouseX.kr(10, 3000, 1)) * 0.2 }.play;
 
-// dur and width can be modulated at audio rate
-(
-{     var dur = SinOsc.ar(MouseX.kr(2, 1000, 1) * [1, 1.1]).range(0.0006, 0.01);
+( // dur and width can be modulated at audio rate
+{
+    var dur = SinOsc.ar(MouseX.kr(2, 1000, 1) * [1, 1.1]).range(0.0006, 0.01);
     var width = SinOsc.ar(0.5 * [1, 1.1]).range(0.01, 0.3);
     LFGauss.ar(dur, width) * 0.2
 }.play
-);
+)
 
-
-// several frequencies and widths combined
-(
+( // several frequencies and widths combined
 {
     var mod = LFGauss.ar(MouseX.kr(1, 0.07, 1), 1 * (MouseY.kr(1, 3) ** (-1..-6)));
     var carr = SinOsc.ar(200 * (1.3 ** (0..5)));
     (carr * mod).sum * 0.1
-}.play;
+}.play
 )
 
-// test spectrum
-(
+( // test spectrum
 {
     var son = LeakDC.ar(LFGauss.ar(0.005, 0.2));
     BPF.ar(son * 3, MouseX.kr(60, 2000, 1), 0.05)
-}.play;
+}.play
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h3><a class='anchor' name='Gabor%20Grain'>Gabor Grain</a></h3>
-<div class='note'><span class='notelabel'>NOTE:</span> The gaussian function doesn't start with 0 – it asymptotically approaches it at <code>-inf</code> and <code>inf</code>. When using it as an envelope, it has to start at some smaller value, and it has an offset for this value. You can remove this offset by explicitly setting the <strong>range</strong>, e.g. to <code>0..1</code> (this is the default).</div><textarea class='editor'>(
+<div class='note'><span class='notelabel'>NOTE:</span> The gaussian function doesn't start with <code>0</code> – it asymptotically approaches it at <code>-inf</code> and <code>inf</code>. When using it as an envelope, it has to start at some smaller value, and it has an offset for this value. You can remove this offset by explicitly setting the <a href="#-range">-range</a>, e.g. to <code>[0, 1]</code> (this is the default).</div><div class='codeMirrorContainer'><textarea class='editor'>// first, visualize LFGauss as a granular envelope on a sine oscillator
+(
 var freq = 1000;
 var ncycles = 10;
 var width = 0.25;
 var dur = ncycles / freq;
 {
-
     var env = LFGauss.ar(dur, width, loop: 0, doneAction: Done.freeSelf).range;
     var son = FSinOsc.ar(freq, 0.5pi, env);
     son
 }.plot(dur);
 )
 
-
+// ... now as a SynthDef
 (
-SynthDef(\gabor, { |out, i_freq = 440, i_sustain = 1, i_pan = 1, i_amp = 0.1, i_width = 0.25 |
+SynthDef(\gabor, { |out, i_freq = 440, i_sustain = 1, i_pan = 1, i_amp = 0.1, i_width = 0.25|
     var env = LFGauss.ar(i_sustain, i_width, loop: 0, doneAction: Done.freeSelf).range;
     var son = FSinOsc.ar(i_freq, 0.5pi, env);
     OffsetOut.ar(out, Pan2.ar(son, i_pan, i_amp));
-
 }).add;
 )
 
@@ -199,7 +212,7 @@ SynthDef(\gabor, { |out, i_freq = 440, i_sustain = 1, i_pan = 1, i_amp = 0.1, i_
 Pdef(\x,
     Pbind(
         \instrument, \gabor,
-        \freq, Pbrown(step:0.01).linexp(0, 1, 100, 14000),
+        \freq, Pbrown(step: 0.01).linexp(0, 1, 100, 14000),
         \dur, Pbrown().linexp(0, 1, 0.004, 0.02),
         \legato, Pbrown(1, 3, 0.1, inf),
         \pan, Pwhite() * Pbrown()
@@ -220,15 +233,16 @@ Pdef(\x,
 ).play
 )
 
-// compare with sine grain.
+// compare with sine grain:
+// evaluate this SynthDef and re-run the above Pdefs
 (
-SynthDef(\gabor, { |out, i_freq = 440, i_sustain = 1, i_pan = 1, i_amp = 0.1, i_width=0.25 |
+SynthDef(\gabor, { |out, i_freq = 440, i_sustain = 1, i_pan = 1, i_amp = 0.1, i_width = 0.25|
     var env = EnvGen.ar(Env.sine(i_sustain * i_width), doneAction: Done.freeSelf);
     var son = FSinOsc.ar(i_freq, 0.5pi, env);
     OffsetOut.ar(out, Pan2.ar(son, i_pan, i_amp));
-
 }).add;
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/LFGauss.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/LFGauss.schelp</a><br>link::Classes/LFGauss::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/LFGauss.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/LFGauss.schelp</a><br>link::Classes/LFGauss::<br></div></div><script src='./../static/editor.js' type='text/javascript'></script>
 </body></html>

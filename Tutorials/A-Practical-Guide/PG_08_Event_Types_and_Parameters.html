@@ -1,21 +1,25 @@
-<!doctype html><html lang='en'><head><title>Pattern Guide 08: Event Types and Parameters | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>Pattern Guide 08: Event Types and Parameters | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../../lib/jquery.min.js'></script>
-<script src='./../../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../../static/lib/jquery.min.js'></script>
+<script src='./../../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './../..';
 var scdoc_title = 'Pattern Guide 08: Event Types and Parameters';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../../scdoc.js' type='text/javascript'></script>
+<script src='./../../static/scdoc.js' type='text/javascript'></script>
 <script src='./../../docmap.js' type='text/javascript'></script>
+<script src='./../../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
@@ -38,7 +42,7 @@ var scdoc_sc_version = '3.13.1';
 <div class='header'>
 <div id='label'>
 <span id='folder'>Tutorials/A-Practical-Guide</span>
- | <span id='categories'><a href='./../../Browse.html#Streams-Patterns-Events'>Streams-Patterns-Events</a>&#8201;&gt;&#8201;<a href='./../../Browse.html#Streams-Patterns-Events>A-Practical-Guide'>A-Practical-Guide</a></span>
+ | <span id='categories'><a href='./../../Browse.html#Streams-Patterns-Events'>Streams-Patterns-Events</a>&#8201;&gt;&#8201;<a href='./../../Browse.html#Streams-Patterns-Events>A-Practical-Guide'>A-Practical-Guide</a> | <a href='./../../Browse.html#Tutorials'>Tutorials</a>&#8201;&gt;&#8201;<a href='./../../Browse.html#Tutorials>Pattern-Guide'>Pattern-Guide</a></span>
 </div><h1>Pattern Guide 08: Event Types and Parameters</h1>
 <div id='summary'>Describes the event types defined in the default event, and the parameters they expect</div>
 </div>
@@ -55,12 +59,13 @@ var scdoc_sc_version = '3.13.1';
 <h3><a class='anchor' name='Timing%20control'>Timing control</a></h3>
 <dl>
 <dt>\delta<dd>Number of <strong>beats</strong> until the next event. Calculated from <code>~dur * ~stretch</code>, if <code>\delta</code> is not given explicitly.<dt>\lag<dd>Number of <strong>seconds</strong> to delay the event's server message(s).<dt>\timingOffset<dd>Number of <strong>beats</strong> to delay the event's server message(s). In conjunction with <a href="./../../Classes/Quant.html">Quant</a>, this allows control over the order of event preparation between different patterns in the client, without desynchronizing sonic events that should play together. <a href="./../../Tutorials/A-Practical-Guide/PG_06g_Data_Sharing.html">Pattern Guide 06g: Data Sharing</a> has an example of its use to pass data from a bass pattern to a chord pattern.<dt>\sustain<dd>Number of beats to wait before releasing a Synth node on the server. The SynthDef must have a <code>gate</code> argument for the explicit release to be sent; otherwise, the pattern assumes the note will release itself using a timed envelope. <code>\sustain</code> is calculated from <code>~dur * ~legato * ~stretch</code> if not given directly.<dt>\sendGate<dd>The default behavior for releasing a note is to look in the <a href="./../../Classes/SynthDesc.html">SynthDesc</a> for an argument called \gate. If it's present, the event will send a <code>node.set(\gate, 0)</code> message to the server. If not, no release will be sent; it's assumed that the SynthDef will release itself after a given length of time. <code>\sendGate</code> overrides this behavior: <code>true</code> means to force the release message to be sent, whether or not the argument exists, while <code>false</code> means to suppress the release message.
-<p>It isn't typical use to override; nonetheless, for some special cases, it may be useful.<dt>\tempo<dd>Optional. If a value is given (in beats per second), it will change the tempo of the TempoClock playing the pattern. Here, the note duration is constant but the clock's speed changes.<div class='note'><span class='notelabel'>NOTE:</span> Changing the tempo will affect all patterns playing on the same clock.</div><textarea class='editor'>Pbind(
+<p>It isn't typical use to override; nonetheless, for some special cases, it may be useful.<dt>\tempo<dd>Optional. If a value is given (in beats per second), it will change the tempo of the TempoClock playing the pattern. Here, the note duration is constant but the clock's speed changes.<div class='note'><span class='notelabel'>NOTE:</span> Changing the tempo will affect all patterns playing on the same clock.</div><div class='codeMirrorContainer'><textarea class='editor'>Pbind(
     \curve, Pseg(Pseq([0, 1, 0], 1), 15),
     \degree, Pwhite(-7, 0, inf) + Pkey(\curve).linlin(0, 1, 0, 14).asInteger,
     \dur, 0.5,
     \tempo, Pkey(\curve).linlin(0, 1, 1, 10)
 ).play;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </dl>
 <h3><a class='anchor' name='Node%20control'>Node control</a></h3>
 <dl>
@@ -72,7 +77,7 @@ var scdoc_sc_version = '3.13.1';
 <h3><a class='anchor' name='Node%20control'>Node control</a></h3>
 <dl>
 <dt>rest<dd>As one would expect, a <code>\rest</code> does nothing except wait the required amount of time until the next event.<dt>note<dd>This is the default event type, used when <code>\type</code> is not specified. It plays one or more Synth nodes on the server, with an automatic release after <code>\sustain</code> beats if the SynthDef has a <code>gate</code> argument.<dl>
-<dt>Standard Timing and Node control arguments<dd><dt>sendGate<dd>Override SynthDef behavior for the <code>gate</code> argument. If the SynthDef as <code>gate</code>, setting <code>sendGate = false</code> prevents the release message from being sent. Rarely used.<dt>strum<dd>If multiple notes are produced (usually a chord, given by providing an array to one of the pitch parameters), <code>\strum</code> is the number of beats to delay each successive note onset. When using <code>\strum</code>, another key is active, <code>\strumEndsTogether</code>. If false (the default), each strummed node will play for its full duration and the releases will be staggered. If true, the releases will occur at the same time.<textarea class='editor'>p = Pbind(
+<dt>Standard Timing and Node control arguments<dd><dt>sendGate<dd>Override SynthDef behavior for the <code>gate</code> argument. If the SynthDef as <code>gate</code>, setting <code>sendGate = false</code> prevents the release message from being sent. Rarely used.<dt>strum<dd>If multiple notes are produced (usually a chord, given by providing an array to one of the pitch parameters), <code>\strum</code> is the number of beats to delay each successive note onset. When using <code>\strum</code>, another key is active, <code>\strumEndsTogether</code>. If false (the default), each strummed node will play for its full duration and the releases will be staggered. If true, the releases will occur at the same time.<div class='codeMirrorContainer'><textarea class='editor'>p = Pbind(
         // array is "multichannel expanded" into one Synth each
     \degree, #[2, 5, 8, 11, 13, 16],
     \octave, 3,
@@ -83,6 +88,7 @@ var scdoc_sc_version = '3.13.1';
 ).play(quant: 2);
 
 p.stop;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </dl>
 <dt>on<dd>Start a Synth node (or nodes) without releasing. The node ID(s) are in the event's <code>~id</code> variable. Those IDs can be used with the off, set and kill event types.<dl>
 <dt>Standard Timing and Node control arguments<dd><dt>(sendGate and strum parameters are not used)<dd></dl>
@@ -96,7 +102,7 @@ p.stop;</textarea>
 
 <p>There are two ways to specify argument names: by <em>instrument</em> and by <em>argument array</em>.
 <p>- <em>By instrument</em> :<dl>
-<dt>instrument<dd>The SynthDef name should be given again, so that the event knows which event values are relevant for the nodes.<dt>args<dd>By default, the <code>\args</code> key contains the control names for the default synthdef. To take argument names from the instrument name, you must override this default with an empty array (or any non-collection object).<textarea class='editor'>(
+<dt>instrument<dd>The SynthDef name should be given again, so that the event knows which event values are relevant for the nodes.<dt>args<dd>By default, the <code>\args</code> key contains the control names for the default synthdef. To take argument names from the instrument name, you must override this default with an empty array (or any non-collection object).<div class='codeMirrorContainer'><textarea class='editor'>(
 SynthDef(\event_set, { |freq = 440, gate = 1, amp = 0.1, lagTime = 0.1,
         ffreq = 2000, detune = 1.005, out = 0|
     var    sig = Saw.ar(Lag.kr(freq, lagTime) * [1, detune]).sum * amp
@@ -120,10 +126,11 @@ p = Pbind(
 
 p.stop;
 a.free;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </dl>
 
 <p>- <em>By argument names</em> :<dl>
-<dt>args<dd>Provide a list of the Synth argument names as an array here, e.g. <code>[\freq, \amp, \pan]</code>. There is no need to provide the instrument name this way.<textarea class='editor'>a = Synth(\event_set);
+<dt>args<dd>Provide a list of the Synth argument names as an array here, e.g. <code>[\freq, \amp, \pan]</code>. There is no need to provide the instrument name this way.<div class='codeMirrorContainer'><textarea class='editor'>a = Synth(\event_set);
 
 (
 p = Pbind(
@@ -137,6 +144,7 @@ p = Pbind(
 
 p.stop;
 a.free;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </dl>
 <dl>
 <dt>monoNote<dd><dt>monoOff<dd><dt>monoSet<dd>These event types are used internally by Pmono and PmonoArtic. They should not be used directly.</dl>
@@ -163,13 +171,14 @@ a.free;</textarea>
 </dl>
 <h3><a class='anchor' name='Event%20types%20with%20cleanup'>Event types with cleanup</a></h3>
 
-<p>These event types uniquely have automatic cleanup event types associated with them. Playing one of these event types allocates a server resource. Later, the resource may be freed by changing the event type to the corresponding cleanup type and playing the event again. While the resource is active, the event can be used as a reference to the resource in other events or Synth messaging.<textarea class='editor'>// create a buffer
-b = (type: \allocRead, path: Platform.resourceDir +/+ "sounds/a11wlk01.wav").play;
+<p>These event types uniquely have automatic cleanup event types associated with them. Playing one of these event types allocates a server resource. Later, the resource may be freed by changing the event type to the corresponding cleanup type and playing the event again. While the resource is active, the event can be used as a reference to the resource in other events or Synth messaging.<div class='codeMirrorContainer'><textarea class='editor'>// create a buffer
+b = (type: \allocRead, path: ExampleFiles.child).play;
 
 a = { PlayBuf.ar(1, b, doneAction: Done.freeSelf) }.play;
 
 // remove buffer
 EventTypesWithCleanup.cleanup(b);</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p>See the Pproto example in <a href="./../../Tutorials/A-Practical-Guide/PG_06f_Server_Control.html">Pattern Guide 06f: Server Control</a>, showing how these can be used to clean up server objects at the end of a pattern.<dl>
 <dt>audioBus<dd>Allocate an audio bus index from the server.<dl>
@@ -228,14 +237,15 @@ EventTypesWithCleanup.cleanup(b);</textarea>
 <dl>
 <dt>composite<dd>Perform any number of event types, given as ~types. You should ensure that parameters are compatible. It is possible, using <code>\composite</code>, to play a synth and send MIDI for the same pitches. It is not possible to use one frequency for the synth and a different one for MIDI, in the same event (you would need two different events for that case).<dl>
 <dt>types<dd>An array of Symbols, listing the Event types to be performed.</dl>
-<textarea class='editor'>MIDIClient.init;
+<div class='codeMirrorContainer'><textarea class='editor'>MIDIClient.init;
 m = MIDIOut(0);
 
 // should play a synth *and* an external MIDI note simultaneously
 (type: \composite, types: [\note, \midi], midiout: m, degree: 0, dur: 3).play;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <dt>phrase<dd>See <a href="./../../Tutorials/JITLib/recursive_phrasing.html">recursive_phrasing</a>.<dt>setProperties<dd>Set variables belonging to a given object. One possible use is to control a GUI using a pattern.<dl>
 <dt>receiver<dd>The object to be modified.<dt>args<dd>The list of variable names to set in the receiver. The receiver should have a setter method -- variableName_ -- for each of these. New values will be looked up in the event.</dl>
-<textarea class='editor'>// Visualize Brownian motion
+<div class='codeMirrorContainer'><textarea class='editor'>// Visualize Brownian motion
 w = Window("Brownian motion", Rect(10, 100, 500, 50));
 x = Slider(w, Rect(10, 15, 480, 20));
 w.front;
@@ -251,8 +261,9 @@ p = Pbind(
 ).play;
 
 p.stop;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </dl>
 
 <p>Previous: <a href="./../../Tutorials/A-Practical-Guide/PG_07_Value_Conversions.html">Pattern Guide 07: Value Conversions</a>
-<p>Next: <a href="./../../Tutorials/A-Practical-Guide/PG_Cookbook01_Basic_Sequencing.html">Pattern Guide Cookbook 01: Basic Sequencing</a><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Tutorials/A-Practical-Guide/PG_08_Event_Types_and_Parameters.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Tutorials/A-Practical-Guide/PG_08_Event_Types_and_Parameters.schelp</a><br>link::Tutorials/A-Practical-Guide/PG_08_Event_Types_and_Parameters::<br></div></div><script src='./../../editor.js' type='text/javascript'></script>
+<p>Next: <a href="./../../Tutorials/A-Practical-Guide/PG_Cookbook01_Basic_Sequencing.html">Pattern Guide Cookbook 01: Basic Sequencing</a><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Tutorials/A-Practical-Guide/PG_08_Event_Types_and_Parameters.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Tutorials/A-Practical-Guide/PG_08_Event_Types_and_Parameters.schelp</a><br>link::Tutorials/A-Practical-Guide/PG_08_Event_Types_and_Parameters::<br></div></div><script src='./../../static/editor.js' type='text/javascript'></script>
 </body></html>

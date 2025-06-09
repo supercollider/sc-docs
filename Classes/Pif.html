@@ -1,21 +1,25 @@
-<!doctype html><html lang='en'><head><title>Pif | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>Pif | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../lib/jquery.min.js'></script>
-<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/jquery.min.js'></script>
+<script src='./../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './..';
 var scdoc_title = 'Pif';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../static/scdoc.js' type='text/javascript'></script>
 <script src='./../docmap.js' type='text/javascript'></script>
+<script src='./../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
@@ -44,7 +48,7 @@ var scdoc_sc_version = '3.13.1';
 <div id='summary'>Pattern-based conditional expression</div>
 </div>
 <div class='subheader'>
-<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/Common/Streams/Patterns.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Streams/Patterns.sc'>Patterns.sc</a></div><div id='related'>See also: <a href="./../Classes/Pwhile.html">Pwhile</a></div>
+<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/Common/Streams/Patterns.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Streams/Patterns.sc'>Patterns.sc</a></div><div id='related'>See also: <a href="./../Classes/Pwhile.html">Pwhile</a></div>
 </div>
 <h2><a class='anchor' name='classmethods'>Class Methods</a></h2>
 <h3 class='method-code'><span class='method-prefix'>Pif.</span><a class='method-name' name='*new' href='./../Overviews/Methods.html#new'>new</a>(<span class='argstr'>condition</span>, <span class='argstr'>iftrue</span>, <span class='argstr'>iffalse</span>, <span class='argstr'>default</span>)</h3>
@@ -69,18 +73,18 @@ var scdoc_sc_version = '3.13.1';
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-iftrue' href='./../Overviews/Methods.html#iftrue'>iftrue</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-iftrue' href='./../Overviews/Methods.html#iftrue'>iftrue</a> = value</h3>
 <h2><a class='anchor' name='examples'>Examples</a></h2>
-<textarea class='editor'>p = Pif(Pfunc({ 0.3.coin }), Pwhite(0, 9, inf), Pwhite(100, 109, inf)).asStream;
+<div class='codeMirrorContainer'><textarea class='editor'>p = Pif(Pfunc({ 0.3.coin }), Pwhite(0, 9, inf), Pwhite(100, 109, inf)).asStream;
 p.nextN(20);
 
 // 7 of the 20 values, or roughly 30%, are in the 0-9 range:
 
-[ 105, 107, 107, 8, 100, 3, 105, 5, 107, 106, 1, 104, 8, 102, 102, 4, 108, 8, 109, 101 ]
+[105, 107, 107, 8, 100, 3, 105, 5, 107, 106, 1, 104, 8, 102, 102, 4, 108, 8, 109, 101]
 
 
 // sound example
 (
 SynthDef(\help_sinegrain,
-    { arg out=0, freq=440, sustain=0.05;
+    { |out = 0, freq = 440, sustain = 0.05|
         var env;
         env = EnvGen.kr(Env.perc(0.01, sustain, 0.2), doneAction: Done.freeSelf);
         Out.ar(out, SinOsc.ar(freq, 0, env))
@@ -98,6 +102,7 @@ a = Pif(Pfunc({ 0.3.coin }), Pn(Pseries(0.5, 0.1, 10)), Pn(Pseries(6, -0.1, 10))
     }
 }.fork;
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/Pif.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/Pif.schelp</a><br>link::Classes/Pif::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/Pif.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/Pif.schelp</a><br>link::Classes/Pif::<br></div></div><script src='./../static/editor.js' type='text/javascript'></script>
 </body></html>

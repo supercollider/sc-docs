@@ -1,21 +1,25 @@
-<!doctype html><html lang='en'><head><title>RangeSlider | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>RangeSlider | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../lib/jquery.min.js'></script>
-<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/jquery.min.js'></script>
+<script src='./../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './..';
 var scdoc_title = 'RangeSlider';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../static/scdoc.js' type='text/javascript'></script>
 <script src='./../docmap.js' type='text/javascript'></script>
+<script src='./../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
@@ -176,7 +180,7 @@ var scdoc_sc_version = '3.13.1';
 <p> Sets <a href="#-lo">-lo</a> and <a href="#-hi">-hi</a> to the two coordinates of the Point stored as the current drag data, respectively, and triggers the <a href="#-action">-action</a>.</div><h3><a class='anchor' name='Inherited%20instance%20methods'>Inherited instance methods</a></h3>
 <div id='inheritedinstmets'></div><h2><a class='anchor' name='examples'>Examples</a></h2>
 <h3><a class='anchor' name='Basic%20examples'>Basic examples</a></h3>
-<textarea class='editor'>(
+<div class='codeMirrorContainer'><textarea class='editor'>(
 w = Window.new.front;
 a = RangeSlider(w, Rect(20, 80, 120, 30))
     .lo_(0.2)
@@ -185,7 +189,8 @@ a = RangeSlider(w, Rect(20, 80, 120, 30))
         [\sliderLOW, slider.lo, \sliderHI, slider.hi].postln;
     });
 )</textarea>
-<textarea class='editor'>(
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+<div class='codeMirrorContainer'><textarea class='editor'>(
 w = Window.new.front;
 a = RangeSlider(w, Rect(20, 80, 120, 30))
     .lo_(0.2)
@@ -197,57 +202,57 @@ a = RangeSlider(w, Rect(20, 80, 120, 30))
 b = RangeSlider(w, Rect(220, 80, 20, 130))
     .lo_(0.2)
     .hi_(0.8)
-    .knobColor_(HiliteGradient(Color.grey, Color.white,\h))
+    .knobColor_(HiliteGradient(Color.grey, Color.white, \h))
     .action_({ |slider|
         [\sliderLOW, slider.lo, \sliderHI, slider.hi].postln;
     });
-
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h3><a class='anchor' name='Use%20of%20setDeviation'>Use of setDeviation</a></h3>
-<textarea class='editor'>(
-
+<div class='codeMirrorContainer'><textarea class='editor'>(
 w = Window("setDeviation", Rect(300, 300, 300, 150));
 a = RangeSlider(w, Rect(10, 10, 200, 30))
     .lo_(0)
     .hi_(1);
 b = Slider(w, Rect(10, 50, 200, 30))
     .action_(
-        {   arg me;
+        { |me|
             a.setDeviation(c.value, b.value);
         });
 c = Slider(w, Rect(10, 100, 200, 30))
     .action_(
-        {   arg me;
+        { |me|
             a.setDeviation(c.value, b.value);
         }
     );
 c.valueAction = 0.2;
 w.front;
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h3><a class='anchor' name='Sound%20example'>Sound example</a></h3>
 
 <p>Shape a bandpass filter.
-<p>In Cocoa GUI, hold down the Ctrl key to move the whole range; in other GUI kits you can simply click within the range and drag it.<textarea class='editor'>(
+<p>In Cocoa GUI, hold down the Ctrl key to move the whole range; in other GUI kits you can simply click within the range and drag it.<div class='codeMirrorContainer'><textarea class='editor'>(
 s.waitForBoot({
-    a={arg freq=1800, bw=0.2;
-            var r;
-            BBandPass.ar(WhiteNoise.ar(0.3), freq, bw);
+    a = { |freq = 1800, bw = 0.2|
+        var r;
+        BBandPass.ar(WhiteNoise.ar(0.3), freq, bw);
+    }.play;
 
-            }.play;
-
-    w = Window("2DSlider", Rect(100,Window.screenBounds.height-400, 400 ,50));
+    w = Window("2DSlider", Rect(100, Window.screenBounds.height-400, 400, 50));
     t = RangeSlider(w, Rect(10, 10, 380, 30))
             .lo_(0.4)
             .hi_(0.6)
-            .action_({|sl|
-                a.set(\freq,1800*(sl.lo+sl.lo)+10,\bw, (sl.hi-sl.lo).abs+0.01);
+            .action_({ |sl|
+                a.set(\freq, 1800*(sl.lo+sl.lo)+10, \bw, (sl.hi-sl.lo).abs+0.01);
             });
     t.doAction;
 
     w.front;
-    CmdPeriod.doOnce({w.close});
+    CmdPeriod.doOnce({ w.close });
 })
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/RangeSlider.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/RangeSlider.schelp</a><br>link::Classes/RangeSlider::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/RangeSlider.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/RangeSlider.schelp</a><br>link::Classes/RangeSlider::<br></div></div><script src='./../static/editor.js' type='text/javascript'></script>
 </body></html>

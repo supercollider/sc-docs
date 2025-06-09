@@ -1,21 +1,25 @@
-<!doctype html><html lang='en'><head><title>Pattern Guide 06b: Time Based Patterns | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>Pattern Guide 06b: Time Based Patterns | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../../lib/jquery.min.js'></script>
-<script src='./../../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../../static/lib/jquery.min.js'></script>
+<script src='./../../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './../..';
 var scdoc_title = 'Pattern Guide 06b: Time Based Patterns';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../../scdoc.js' type='text/javascript'></script>
+<script src='./../../static/scdoc.js' type='text/javascript'></script>
 <script src='./../../docmap.js' type='text/javascript'></script>
+<script src='./../../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
@@ -28,7 +32,7 @@ var scdoc_sc_version = '3.13.1';
 <div class='header'>
 <div id='label'>
 <span id='folder'>Tutorials/A-Practical-Guide</span>
- | <span id='categories'><a href='./../../Browse.html#Streams-Patterns-Events'>Streams-Patterns-Events</a>&#8201;&gt;&#8201;<a href='./../../Browse.html#Streams-Patterns-Events>A-Practical-Guide'>A-Practical-Guide</a></span>
+ | <span id='categories'><a href='./../../Browse.html#Streams-Patterns-Events'>Streams-Patterns-Events</a>&#8201;&gt;&#8201;<a href='./../../Browse.html#Streams-Patterns-Events>A-Practical-Guide'>A-Practical-Guide</a> | <a href='./../../Browse.html#Tutorials'>Tutorials</a>&#8201;&gt;&#8201;<a href='./../../Browse.html#Tutorials>Pattern-Guide'>Pattern-Guide</a></span>
 </div><h1>Pattern Guide 06b: Time Based Patterns</h1>
 <div id='summary'>Patterns using time as the basis for their evaluation</div>
 </div>
@@ -41,14 +45,15 @@ var scdoc_sc_version = '3.13.1';
 <p>Most of these patterns work by remembering the clock's current time at the moment the pattern is embedded into a value stream. The time value used for calculation is, then, the clock's time at the moment of evaluation minus the starting time -- that is, the number of beats elapsed since the patterns started embedding. If the pattern is embedded several times, the starting time is also reset so that the pattern begins again from the beginning.
 <p>There is nothing to prevent using these patterns outside of a scheduling context. In these documents, that context would be an event pattern played on a clock, but streams made from these patterns can be used in scheduled routines or functions as well. Only a scheduling context can ensure precise timing of requests for values.<dl>
 <dt><code>Ptime(repeats)</code><dd>Returns the amount of time elapsed since embedding. One nice trick with this pattern is to stop a value stream/pattern after a certain amount of time.
-<p>This <a href="./../../Classes/Pif.html">Pif</a> pattern uses Ptime to get values from the true branch for exactly 4 beats after the first value is requested. After that, the condition will be false and Pif reverts to the false branch, which is nil. That causes the stream to stop. (This is like <a href="./../../Classes/Pfindur.html">Pfindur</a> for event patterns, but Pif/Ptime works for value patterns as well.)<textarea class='editor'>// This is a really useful trick: like Pfindur but for value patterns
+<p>This <a href="./../../Classes/Pif.html">Pif</a> pattern uses Ptime to get values from the true branch for exactly 4 beats after the first value is requested. After that, the condition will be false and Pif reverts to the false branch, which is nil. That causes the stream to stop. (This is like <a href="./../../Classes/Pfindur.html">Pfindur</a> for event patterns, but Pif/Ptime works for value patterns as well.)<div class='codeMirrorContainer'><textarea class='editor'>// This is a really useful trick: like Pfindur but for value patterns
 (
 p = Pbind(
     \degree, Pif(Ptime(inf) &lt; 4.0, Pwhite(-4, 11, inf)),
     \dur, 0.25
 ).play;
 )</textarea>
-<dt><code>Pstep(levels, durs, repeats)</code><dd>Repeat a <code>level</code> value for its corresponding duration, then move to the next.<dt><code>Pseg(levels, durs, curves, repeats)</code><dd>Similar to Pstep, but interpolates to the next value instead of stepping abruptly at the end of the duration. Interpolation is linear by default, but any envelope segment curve can be used. <code>levels</code>, <code>durs</code> and <code>curves</code> should be patterns.<textarea class='editor'>// curve is 5 - here's what the curve looks like, ascending first then descending
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+<dt><code>Pstep(levels, durs, repeats)</code><dd>Repeat a <code>level</code> value for its corresponding duration, then move to the next.<dt><code>Pseg(levels, durs, curves, repeats)</code><dd>Similar to Pstep, but interpolates to the next value instead of stepping abruptly at the end of the duration. Interpolation is linear by default, but any envelope segment curve can be used. <code>levels</code>, <code>durs</code> and <code>curves</code> should be patterns.<div class='codeMirrorContainer'><textarea class='editor'>// curve is 5 - here's what the curve looks like, ascending first then descending
 Env(#[0, 1, 0], #[1, 1], 5).plot;
 
 (
@@ -67,10 +72,11 @@ p = Pbind(
 )
 
 p.stop;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </dl>
 <h3><a class='anchor' name='Using%20envelopes%20as%20patterns'>Using envelopes as patterns</a></h3>
 
-<p><a href="./../../Classes/Env.html">Env</a> supports the stream protocol: <code>asStream</code> turns an Env into a stream, and timed values can be obtained from it using <code>next</code>. The envelope stream returns the value the envelope would have at the elapsed time, in the same way <code>.at(time)</code> returns the envelope value at the specified time.<textarea class='editor'>e = Env.linen(1, 1, 1);
+<p><a href="./../../Classes/Env.html">Env</a> supports the stream protocol: <code>asStream</code> turns an Env into a stream, and timed values can be obtained from it using <code>next</code>. The envelope stream returns the value the envelope would have at the elapsed time, in the same way <code>.at(time)</code> returns the envelope value at the specified time.<div class='codeMirrorContainer'><textarea class='editor'>e = Env.linen(1, 1, 1);
 e.at(2);    // == 1
 e.at(2.5);    // == 0.5
 
@@ -91,9 +97,10 @@ p = Pbind(
 ).play;
 
 p.stop;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p>The <code>releaseNode</code> and <code>loopNode</code> envelope parameters do not take effect, because they are meaningful only when used in a Synth with a gated EnvGen.
-<p>When the envelope ends, the stream will hold the final level indefinitely. The <code>Pif(Ptime(inf) &lt; totalTime, Env(...))</code> trick can make it stop instead.<textarea class='editor'>// Use an envelope to pan notes from left to right and back
+<p>When the envelope ends, the stream will hold the final level indefinitely. The <code>Pif(Ptime(inf) &lt; totalTime, Env(...))</code> trick can make it stop instead.<div class='codeMirrorContainer'><textarea class='editor'>// Use an envelope to pan notes from left to right and back
 // Plays one cycle
 (
 p = Pbind(
@@ -116,7 +123,8 @@ p = Pbind(
 )
 
 p.stop;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p>Previous: <a href="./../../Tutorials/A-Practical-Guide/PG_06a_Repetition_Contraint_Patterns.html">Pattern Guide 06a: Repetition Constraint Patterns</a>
-<p>Next: <a href="./../../Tutorials/A-Practical-Guide/PG_06c_Composition_of_Patterns.html">Pattern Guide 06c: Composition of Patterns</a><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Tutorials/A-Practical-Guide/PG_06b_Time_Based_Patterns.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Tutorials/A-Practical-Guide/PG_06b_Time_Based_Patterns.schelp</a><br>link::Tutorials/A-Practical-Guide/PG_06b_Time_Based_Patterns::<br></div></div><script src='./../../editor.js' type='text/javascript'></script>
+<p>Next: <a href="./../../Tutorials/A-Practical-Guide/PG_06c_Composition_of_Patterns.html">Pattern Guide 06c: Composition of Patterns</a><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Tutorials/A-Practical-Guide/PG_06b_Time_Based_Patterns.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Tutorials/A-Practical-Guide/PG_06b_Time_Based_Patterns.schelp</a><br>link::Tutorials/A-Practical-Guide/PG_06b_Time_Based_Patterns::<br></div></div><script src='./../../static/editor.js' type='text/javascript'></script>
 </body></html>

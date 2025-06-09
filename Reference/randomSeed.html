@@ -1,21 +1,25 @@
-<!doctype html><html lang='en'><head><title>Random Seed | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>Random Seed | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../lib/jquery.min.js'></script>
-<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/jquery.min.js'></script>
+<script src='./../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './..';
 var scdoc_title = 'Random Seed';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../static/scdoc.js' type='text/javascript'></script>
 <script src='./../docmap.js' type='text/javascript'></script>
+<script src='./../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
@@ -40,9 +44,9 @@ var scdoc_sc_version = '3.13.1';
 <h2><a class='anchor' name='Introduction'>Introduction</a></h2>
 
 <p>Every <a href="./../Classes/Thread.html">Thread</a> in sclang has a (pseudo-) random number generator that is responsible for all randomization within this thread. Each random number generator has its own seed (starting point) from which the series of values is generated. This seed can be set and after that, the randgen (being strictly deterministic) produces exactly the same numbers again.
-<p>In order to save disk space, you can reproduce any sequence of randomized data just by one Integer number that you can write down in your notebook.<h3 class='method-code'><span class='method-prefix'></span><a class='method-name' name='randSeed' href='./../Overviews/Methods.html#randSeed'>randSeed</a></h3>
+<p>In order to save disk space, you can reproduce any sequence of randomized data just by one Integer number that you can write down in your notebook.<h3 class='method-code'><span class='method-prefix'></span><a class='method-name' name='.randSeed' href='./../Overviews/Methods.html#randSeed'>randSeed</a></h3>
 <div class='method'>
-<p><textarea class='editor'>// every thread, also a Routine, has a random generator seed:
+<p><div class='codeMirrorContainer'><textarea class='editor'>// every thread, also a Routine, has a random generator seed:
 (
 r = Routine({
     loop({#[1,2,3,4,5].choose.yield })
@@ -58,11 +62,12 @@ r.randSeed = 1923;
 
 // causes this array to be identical
 Array.fill(7, r);</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3><a class='anchor' name='Inheriting%20Seeds'>Inheriting Seeds</a></h3>
 
 <p>When a routine is created, it inherits its random number generator from the parent thread (<a href="./../Classes/Thread.html#.thisThread">thisThread</a>). If no particular randSeed is set (the normal case), then the same random number generator object provides numbers to both the parent and the child (one stream of random numbers, distributed between both).
 <p>The parent thread is whichever Routine is in force at the moment of creating a new Routine. If no Routine is evaluating at that moment, then the parent is the sclang process main <a href="./../Classes/Thread.html">Thread</a>. By default, all Routines inherit the random number generator from the main thread.
-<p>To set the main random seed for the entire application, then, evaluate <code>thisThread.randSeed = yourSeed</code> outside of the context of any Routine, as in the example below.<textarea class='editor'>thisThread.randSeed = 1923;
+<p>To set the main random seed for the entire application, then, evaluate <code>thisThread.randSeed = yourSeed</code> outside of the context of any Routine, as in the example below.<div class='codeMirrorContainer'><textarea class='editor'>thisThread.randSeed = 1923;
 
 // create a function that returns a Routine
 
@@ -76,8 +81,9 @@ Array.fill(7, r.value);
 thisThread.randSeed = 1923;
 
 Array.fill(7, r.value);</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>When you set <code>randSeed</code> on a Routine, the Routine switches to its own random number generator, independent of any other. Subsequently, Routines created within this Routine will inherit its unique random number generator.<textarea class='editor'>(
+<p>When you set <code>randSeed</code> on a Routine, the Routine switches to its own random number generator, independent of any other. Subsequently, Routines created within this Routine will inherit its unique random number generator.<div class='codeMirrorContainer'><textarea class='editor'>(
 thisThread.randSeed = 1000;
 TempoClock.sched(0, { 1000.rand.debug("main RNG"); 1 });
 
@@ -94,9 +100,10 @@ main RNG: 614
 routine RNG: 592 // sequence is 592, 876...
 main RNG: 236
 routine RNG: 876</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p>Note that this inheritance takes place only at the moment of creating a new Routine. Calling <code>next</code> or <code>play</code> on the child Routine does not override that Routine's random number generator.<h3><a class='anchor' name='Audio%20example'>Audio example</a></h3>
-<textarea class='editor'>// use the seed to completely reproduce a sound:
+<div class='codeMirrorContainer'><textarea class='editor'>// use the seed to completely reproduce a sound:
 (
 SynthDef(\help_randomSeed, { arg out=0, freq=440;
     Out.ar(out,
@@ -147,5 +154,7 @@ d = 1925;
 
 // sound is just like random again, not interested in anything.
 t.stop;</textarea>
-<div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Reference/randomSeed.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Reference/randomSeed.schelp</a><br>link::Reference/randomSeed::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+
+<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Reference/randomSeed.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Reference/randomSeed.schelp</a><br>link::Reference/randomSeed::<br></div></div><script src='./../static/editor.js' type='text/javascript'></script>
 </body></html>

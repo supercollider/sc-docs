@@ -1,21 +1,25 @@
-<!doctype html><html lang='en'><head><title>01 | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../../../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../../../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../../../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>01 | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../../../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../../../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../../../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../../../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../../../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../../../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../../../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../../../lib/jquery.min.js'></script>
-<script src='./../../../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../../../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../../../static/lib/jquery.min.js'></script>
+<script src='./../../../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../../../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../../../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './../../..';
 var scdoc_title = '01';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../../../scdoc.js' type='text/javascript'></script>
+<script src='./../../../static/scdoc.js' type='text/javascript'></script>
 <script src='./../../../docmap.js' type='text/javascript'></script>
+<script src='./../../../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
@@ -44,7 +48,7 @@ var scdoc_sc_version = '3.13.1';
 <p>ネットワーキングという考え方は、私のこの週末のレクチャーを通して何度も取り上げるテーマです。私の意見では、ローカル、リモート、そして離れたところとネットワークするためにコンピュータを使うということは、創造性と芸術性に新しいモデルを提供するものです。それは、メディアのアーティストであり科学者である私たちが、注意深く取り組まなければならないものです。
 <p>////////////////////////////////////////////////////////////////////////////////////////////////////
 <p>まとめると、SuperCollider 3はシンセシスのプロセスをクライアントで定義して、その定義をサーバーで動かすためのプログラムです。
-<p>////////////////////////////////////////////////////////////////////////////////////////////////////<textarea class='editor'>////////////
+<p>////////////////////////////////////////////////////////////////////////////////////////////////////<div class='codeMirrorContainer'><textarea class='editor'>////////////
 // 例1
 // define a simple synthesis process and schedule one synthesis event (on one machine)
 // シンプルなシンセシスのプロセスを定義して、一つのシンセシスのイベントをスケジューリングする（一台のマシン上で）
@@ -57,8 +61,9 @@ SynthDef("sine", { Out.ar(0, SinOsc.ar(440, 0, 0.2)) }).send(s);
 
 // 第3に、シンセシスをスケジューリング（実行）する
 s.sendMsg("s_new", "sine", 1000, 1, 0);</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>////////////////////////////////////////////////////////////////////////////////////////////////////<textarea class='editor'>////////////
+<p>////////////////////////////////////////////////////////////////////////////////////////////////////<div class='codeMirrorContainer'><textarea class='editor'>////////////
 // 例2
 // 例1と同じプロセスだが、ネットワークを通じて2台のコンピュータがコミュニケートするという点が異なる
 
@@ -74,9 +79,10 @@ SynthDef("sine", { Out.ar(0, SinOsc.ar(440, 0, 0.2)) }).send(s);
 
 // 第3に、シンセシスのプロセスをスケジュ−リングする .... 前の例の三番目のステップと全く同じ
 s.sendMsg("s_new", "sine", 1000, 1, 0);</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p>////////////////////////////////////////////////////////////////////////////////////////////////////
-<p>次のコードは、前の２つの例から持って来たものですが、唯一の違いはローカルとリモートのサーバーは異なるIPアドレスで、そのうちの１つはサーバー・オブジェクトのアーギュメントとして与えられているということです。<textarea class='editor'>// ローカル・サーバー
+<p>次のコードは、前の２つの例から持って来たものですが、唯一の違いはローカルとリモートのサーバーは異なるIPアドレスで、そのうちの１つはサーバー・オブジェクトのアーギュメントとして与えられているということです。<div class='codeMirrorContainer'><textarea class='editor'>// ローカル・サーバー
 s = Server("thisMachine", NetAddr("localhost", 57110));
 SynthDef("sine", { Out.ar(0, SinOsc.ar(440, 0, 0.2)) }).send(s);
 s.sendMsg("s_new", "sine", 1000, 1, 0);
@@ -88,7 +94,8 @@ s = Server("thisMachine", NetAddr("... an ip number ...", 57110));
 // この行を評価する前にリモート・マシンでサーバーが起動している様にする
 SynthDef("sine", { Out.ar(0, SinOsc.ar(440, 0, 0.2)) }).send(s);
 s.sendMsg("s_new", "sine", 1000, 1, 0);</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p>////////////////////////////////////////////////////////////////////////////////////////////////////
-<p>go to <a href="./../../../Tutorials/Mark_Polishook_tutorial/Japanese_version/02.html">02</a><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Tutorials/Mark_Polishook_tutorial/Japanese_version/01.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Tutorials/Mark_Polishook_tutorial/Japanese_version/01.schelp</a><br>link::Tutorials/Mark_Polishook_tutorial/Japanese_version/01::<br></div></div><script src='./../../../editor.js' type='text/javascript'></script>
+<p>go to <a href="./../../../Tutorials/Mark_Polishook_tutorial/Japanese_version/02.html">02</a><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Tutorials/Mark_Polishook_tutorial/Japanese_version/01.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Tutorials/Mark_Polishook_tutorial/Japanese_version/01.schelp</a><br>link::Tutorials/Mark_Polishook_tutorial/Japanese_version/01::<br></div></div><script src='./../../../static/editor.js' type='text/javascript'></script>
 </body></html>

@@ -1,21 +1,25 @@
-<!doctype html><html lang='en'><head><title>Bus | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>Bus | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../lib/jquery.min.js'></script>
-<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/jquery.min.js'></script>
+<script src='./../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './..';
 var scdoc_title = 'Bus';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../static/scdoc.js' type='text/javascript'></script>
 <script src='./../docmap.js' type='text/javascript'></script>
+<script src='./../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
@@ -62,6 +66,9 @@ var scdoc_sc_version = '3.13.1';
 <li class='toc3'><a href='#-fillMsg'>fillMsg</a> </li>
 </ul><li class='toc2'><a href='#Monitoring%20with%20an%20oscilloscope'>Monitoring with an oscilloscope</a></li>
 <ul class='toc'><li class='toc3'><a href='#-scope'>scope</a> </li>
+</ul><li class='toc2'><a href='#Plotting'>Plotting</a></li>
+<ul class='toc'><li class='toc3'><a href='#-plot'>plot</a> </li>
+<li class='toc3'><a href='#-plotAudio'>plotAudio</a> </li>
 </ul><li class='toc2'><a href='#Bela'>Bela</a></li>
 <ul class='toc'><li class='toc3'><a href='#-belaScope'>belaScope</a> </li>
 </ul><li class='toc2'><a href='#Inherited%20instance%20methods'>Inherited instance methods</a></li>
@@ -91,14 +98,15 @@ var scdoc_sc_version = '3.13.1';
 <div id='summary'>Representation of a bus on the server</div>
 </div>
 <div class='subheader'>
-<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/Common/Control/Bus.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Control/Bus.sc'>Bus.sc</a></div><div id='related'>See also: <a href="./../Classes/Server.html">Server</a></div>
+<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/Common/Control/Bus.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Control/Bus.sc'>Bus.sc</a></div><div id='related'>See also: <a href="./../Classes/Server.html">Server</a></div>
 </div>
 <h2><a class='anchor' name='description'>Description</a></h2>
 
 <p>The clientside representation of an audio or control bus on a server. Encapsulates all the <a href="./../Browse.html#OpenSoundControl">OSC</a> messages a Bus can receive. Manages allocation and deallocation of bus indices so that you don't need to worry about conflicts. The number of control busses, audio busses, and input and output busses is fixed and cannot be changed after the server has been booted.
 <p>For more information see <a href="./../Guides/ClientVsServer.html">Client vs Server</a> and <a href="./../Reference/Server-Architecture.html">Server Architecture</a>.
 <p>Note that using the Bus class to allocate a multichannel bus does not 'create' a multichannel bus, but rather simply reserves a series of adjacent bus indices with the bus' <a href="./../Classes/Server.html">Server</a> object's bus allocators. <code>abus.index</code> simply returns the first of those indices. When using a Bus with an <a href="./../Classes/In.html">In</a> or <a href="./../Classes/Out.html">Out</a> ugen there is nothing to stop you from reading to or writing from a larger range, or from hardcoding to a bus that has been allocated. You are responsible for making sure that the number of channels match and that there are no conflicts.
-<p>Bus objects should not be created or modified within a <a href="./../Classes/SynthDef.html">SynthDef</a>.<div class='note'><span class='notelabel'>NOTE:</span> The lowest <code>n</code> bus indices are reserved for hardware output and input, where<textarea class='editor'>n = server.options.numOutputBusChannels + server.options.numInputBusChannels</textarea>
+<p>Bus objects should not be created or modified within a <a href="./../Classes/SynthDef.html">SynthDef</a>.<div class='note'><span class='notelabel'>NOTE:</span> The lowest <code>n</code> bus indices are reserved for hardware output and input, where <a class='anchor' name='note'>&nbsp;</a><div class='codeMirrorContainer'><textarea class='editor'>n = server.options.numOutputBusChannels + server.options.numInputBusChannels</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p><dl>
 <dt>Hardware output buses<dd><code>0 .. (numOutputBusChannels - 1)</code><dt>Hardware input buses<dd><code>numOutputBusChannels .. (numOutputBusChannels + numInputBusChannels - 1)</code><dt>First private bus index<dd><code>numOutputBusChannels + numInputBusChannels</code></dl>
@@ -112,7 +120,7 @@ var scdoc_sc_version = '3.13.1';
 <p>The <a href="./../Classes/Server.html">Server</a>. Defaults to Server.default.<tr><td class='argumentname'>numChannels<td class='argumentdesc'>
 <p>Number of channels to allocate</table></div><h3 class='method-code'><span class='method-prefix'>Bus.</span><a class='method-name' name='*audio' href='./../Overviews/Methods.html#audio'>audio</a>(<span class='argstr'>server</span>, <span class='argstr'>numChannels: 1</span>)</h3>
 <div class='method'>
-<p>Allocate an audio bus on the server.<h4>Arguments:</h4>
+<p>Allocate a private audio bus on the server.<h4>Arguments:</h4>
 <table class='arguments'>
 <tr><td class='argumentname'>server<td class='argumentdesc'>
 <p>The <a href="./../Classes/Server.html">Server</a>. Defaults to Server.default.<tr><td class='argumentname'>numChannels<td class='argumentdesc'>
@@ -125,7 +133,16 @@ var scdoc_sc_version = '3.13.1';
 <p>The <a href="./../Classes/Server.html">Server</a>. Defaults to Server.default.<tr><td class='argumentname'>numChannels<td class='argumentdesc'>
 <p>Number of channels to allocate</table></div><h3 class='method-code'><span class='method-prefix'>Bus.</span><a class='method-name' name='*new' href='./../Overviews/Methods.html#new'>new</a>(<span class='argstr'>rate: 'audio'</span>, <span class='argstr'>index: 0</span>, <span class='argstr'>numChannels: 2</span>, <span class='argstr'>server</span>)</h3>
 <div class='method'>
-<p>This method does not allocate a bus index, but assumes that you already have allocated the appropriate bus index and can supply it yourself.</div><h3 class='method-code'><span class='method-prefix'>Bus.</span><a class='method-name' name='*newFrom' href='./../Overviews/Methods.html#newFrom'>newFrom</a>(<span class='argstr'>bus</span>, <span class='argstr'>offset</span>, <span class='argstr'>numChannels: 1</span>)</h3>
+<p>This method does not allocate a bus index, but assumes that you already have allocated the appropriate bus index and can supply it yourself.<h4>Discussion:</h4>
+
+<p>The hardware I/O buses can be accessed via the lowest indices (see <a href="#note">Note</a> in the <a href="#description">Description</a> section):<ul>
+<li>The first two channels of the hardware output buses:<div class='codeMirrorContainer'><textarea class='editor'>a = Bus(\audio, 0, 2)</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+
+<p><li>The first channel of the hardware input bus, if hardware output channels are set to 2:<div class='codeMirrorContainer'><textarea class='editor'>b = Bus(\audio, 2, 1)</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+</ul>
+</div><h3 class='method-code'><span class='method-prefix'>Bus.</span><a class='method-name' name='*newFrom' href='./../Overviews/Methods.html#newFrom'>newFrom</a>(<span class='argstr'>bus</span>, <span class='argstr'>offset</span>, <span class='argstr'>numChannels: 1</span>)</h3>
 <div class='method'>
 <p>This method creates a new Bus that is a subset of the bus. The bus will be at the same rate as the input bus. offset is the index into the given bus. numChannels is the desired number of channels. If the combination of offset and numChannels is outside the input bus' range, an error will be thrown.</div><h3><a class='anchor' name='Inherited%20class%20methods'>Inherited class methods</a></h3>
 <div id='inheritedclassmets'></div><h2><a class='anchor' name='instancemethods'>Instance Methods</a></h2>
@@ -144,7 +161,7 @@ var scdoc_sc_version = '3.13.1';
 <div class='returnvalue'>
 <p>a symbol consisting of the letter 'c' or 'a' (for control or audio) followed by the bus's index. This may be used when setting a synth node's control inputs to map the input to the control bus.</div><h4>Discussion:</h4>
 
-<p>See the <a href="./../Classes/Node.html">Node</a> help file for more information on mapping controls to buses.<textarea class='editor'>(
+<p>See the <a href="./../Classes/Node.html">Node</a> help file for more information on mapping controls to buses.<div class='codeMirrorContainer'><textarea class='editor'>(
 a = Bus.control(s, 1).set(440);
 b = Bus.control(s, 1).set(0.01);
 )
@@ -153,6 +170,7 @@ SynthDef(\rlpf, { |out, ffreq, rq|
     Out.ar(out, RLPF.ar(WhiteNoise.ar(0.2), ffreq, rq))
 }).play(s, [\ffreq, a.asMap, \rq, b.asMap]);
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-subBus' href='./../Overviews/Methods.html#subBus'>subBus</a>(<span class='argstr'>offset</span>, <span class='argstr'>numChannels: 1</span>)</h3>
 <div class='method'>
 <p>Get a new Bus that is a subset of this bus (see <code>newFrom</code>).</div><h3><a class='anchor' name='Asynchronous%20Control%20Bus%20Methods'>Asynchronous Control Bus Methods</a></h3>
@@ -231,16 +249,35 @@ SynthDef(\rlpf, { |out, ffreq, rq|
 <p>the value to which this bus' channels will be set.</table></div><h3><a class='anchor' name='Monitoring%20with%20an%20oscilloscope'>Monitoring with an oscilloscope</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-scope' href='./../Overviews/Methods.html#scope'>scope</a>: METHOD NOT FOUND!</h3>
 <div class='method'>
-<p>Displays a bus in a <a href="./../Classes/Stethoscope.html">Stethoscope</a>, using the Bus' <a href="#-numChannels">-numChannels</a>, <a href="#-index">-index</a>, and <a href="#-rate">-rate</a> properties.<textarea class='editor'>s.boot
-b=Bus.audio(s, 2);
-a={SinOsc.ar([330,440], 0, 0.4)}.play(s, b) //you won't hear this if you only have two channels
+<p>Displays a bus in a <a href="./../Classes/Stethoscope.html">Stethoscope</a>, using the Bus' <a href="#-numChannels">-numChannels</a>, <a href="#-index">-index</a>, and <a href="#-rate">-rate</a> properties.<div class='codeMirrorContainer'><textarea class='editor'>s.boot
+b = Bus.audio(s, 2);
+a = { SinOsc.ar([330, 440], 0, 0.4) }.play(s, b) // you won't hear this if you only have two channels
 b.scope
 
 a.free;
 b.free;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+</div><h3><a class='anchor' name='Plotting'>Plotting</a></h3>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-plot' href='./../Overviews/Methods.html#plot'>plot</a>: METHOD NOT FOUND!</h3>
+<div class='method'>
+<p>See <a href="#-plotAudio">-plotAudio</a></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-plotAudio' href='./../Overviews/Methods.html#plotAudio'>plotAudio</a>: METHOD NOT FOUND!</h3>
+<div class='method'>
+<p>example:<div class='codeMirrorContainer'><textarea class='editor'>(
+b = Bus(\audio, 0, 2);
+s.bind {
+    SynthDef(\sinPerc, { |out = 0|
+        var signal = SinOsc.ar * Env.sine(0.1).ar(gate: Impulse.ar(2));
+        OffsetOut.ar(out, signal ! 2) }
+    ).add;
+    s.sync;
+    Synth(\sinPerc, [\out, b]);
+    b.plot(1);
+}
+)</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3><a class='anchor' name='Bela'>Bela</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-belaScope' href='./../Overviews/Methods.html#belaScope'>belaScope</a>(<span class='argstr'>scopeChannel</span>)</h3>
-<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/Common/Audio/Bela/BelaScope.sc'>/usr/local/share/SuperCollider/SCClassLibrary/Common/Audio/Bela/BelaScope.sc</a></div>
+<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/Common/Audio/Bela/BelaScope.sc'>/usr/local/share/SuperCollider/SCClassLibrary/Common/Audio/Bela/BelaScope.sc</a></div>
 <div class='method'>
 <p>Scope all channels from this Bus to Bela's Oscilloscope (see <a href="./../Classes/BelaScope.html">BelaScope</a> for required setup). It is required that this Bus is on Server running on a Bela, which is thus capable of using BelaScope.<h4>Arguments:</h4>
 <table class='arguments'>
@@ -252,7 +289,7 @@ b.free;</textarea>
 <h3 class='method-code'><span class='method-prefix'></span><a class='method-name' name='-==' href='./../Overviews/Methods.html#=='>==</a>(<span class='argstr'>aBus</span>)</h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-alloc' href='./../Overviews/Methods.html#alloc'>alloc</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-asBus' href='./../Overviews/Methods.html#asBus'>asBus</a></h3>
-<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/Common/Control/asBus.sc'>/usr/local/share/SuperCollider/SCClassLibrary/Common/Control/asBus.sc</a></div>
+<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/Common/Control/asBus.sc'>/usr/local/share/SuperCollider/SCClassLibrary/Common/Control/asBus.sc</a></div>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-asControlInput' href='./../Overviews/Methods.html#asControlInput'>asControlInput</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-asUGenInput' href='./../Overviews/Methods.html#asUGenInput'>asUGenInput</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-fill' href='./../Overviews/Methods.html#fill'>fill</a>(<span class='argstr'>value</span>, <span class='argstr'>numChans</span>)</h3>
@@ -261,17 +298,17 @@ b.free;</textarea>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-isSettable' href='./../Overviews/Methods.html#isSettable'>isSettable</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-play' href='./../Overviews/Methods.html#play'>play</a>(<span class='argstr'>target: 0</span>, <span class='argstr'>outbus</span>, <span class='argstr'>fadeTime</span>, <span class='argstr'>addAction: 'addToTail'</span>)</h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-prepareForProxySynthDef' href='./../Overviews/Methods.html#prepareForProxySynthDef'>prepareForProxySynthDef</a>(<span class='argstr'>proxy</span>)</h3>
-<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/JITLib/ProxySpace/wrapForNodeProxy.sc'>/usr/local/share/SuperCollider/SCClassLibrary/JITLib/ProxySpace/wrapForNodeProxy.sc</a></div>
+<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/JITLib/ProxySpace/wrapForNodeProxy.sc'>/usr/local/share/SuperCollider/SCClassLibrary/JITLib/ProxySpace/wrapForNodeProxy.sc</a></div>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-realloc' href='./../Overviews/Methods.html#realloc'>realloc</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-setAll' href='./../Overviews/Methods.html#setAll'>setAll</a>(<span class='argstr'>value</span>)</h3>
 <h2><a class='anchor' name='examples'>Examples</a></h2>
-<textarea class='editor'>s.boot;
+<div class='codeMirrorContainer'><textarea class='editor'>s.boot;
 
 (
 // something to play with
-SynthDef(\help_Bus, { arg out=0,ffreq=100;
+SynthDef(\help_Bus, { |out = 0, ffreq = 100|
     var x;
-    x = RLPF.ar(LFPulse.ar(SinOsc.kr(0.2, 0, 10, 21), [0,0.1], 0.1),
+    x = RLPF.ar(LFPulse.ar(SinOsc.kr(0.2, 0, 10, 21), [0, 0.1], 0.1),
             ffreq, 0.1)
             .clip2(0.4);
     Out.ar(out, x);
@@ -298,11 +335,11 @@ b.value = 30;
 b.set(300);
 b.numChannels.postln;
 
-// multi-channel:  b.set(300,350);
+// multi-channel:  b.set(300, 350);
 // Get the current value. This is asynchronous so you can't rely on it happening immediately.
 (
 a = "waiting";
-b.get({arg value; a = value; ("after the server responds a is set to:" + a).postln;});
+b.get({ |value| a = value; ("after the server responds a is set to:" + a).postln });
 ("a is now:" + a).postln;
 )
 
@@ -315,7 +352,7 @@ SynthDef(\help_Bus, { |out|
     var ffreq = b.kr;
     Out.ar(out,
         RLPF.ar(
-            LFPulse.ar(SinOsc.kr(0.2, 0, 10, 21), [0,0.1], 0.1),
+            LFPulse.ar(SinOsc.kr(0.2, 0, 10, 21), [0, 0.1], 0.1),
             ffreq, 0.1
         ).clip2(0.4)
     );
@@ -376,6 +413,7 @@ b.setAt(3, 2400);
 
 y.free;
 b.free;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/Bus.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/Bus.schelp</a><br>link::Classes/Bus::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/Bus.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/Bus.schelp</a><br>link::Classes/Bus::<br></div></div><script src='./../static/editor.js' type='text/javascript'></script>
 </body></html>

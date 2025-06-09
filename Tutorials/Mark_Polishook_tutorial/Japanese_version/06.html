@@ -1,21 +1,25 @@
-<!doctype html><html lang='en'><head><title>06 | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../../../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../../../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../../../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>06 | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../../../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../../../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../../../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../../../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../../../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../../../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../../../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../../../lib/jquery.min.js'></script>
-<script src='./../../../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../../../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../../../static/lib/jquery.min.js'></script>
+<script src='./../../../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../../../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../../../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './../../..';
 var scdoc_title = '06';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../../../scdoc.js' type='text/javascript'></script>
+<script src='./../../../static/scdoc.js' type='text/javascript'></script>
 <script src='./../../../docmap.js' type='text/javascript'></script>
+<script src='./../../../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
@@ -37,17 +41,18 @@ var scdoc_sc_version = '3.13.1';
 <div id='related'>See also: <a href="./../../../Tutorials/Mark_Polishook_tutorial/00_Introductory_tutorial.html">00_Introductory tutorial</a></div>
 </div>
 <h2><a class='anchor' name='SynthDefのプロパティに関する議論を続けるために、次を評価してみて下さい。'>SynthDefのプロパティに関する議論を続けるために、次を評価してみて下さい。</a></h2>
-<textarea class='editor'>(
+<div class='codeMirrorContainer'><textarea class='editor'>(
 SynthDescLib.global.read;
 SynthDescLib.global.browse;
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p>そして、それぞれのシンセのためのコントロールをリストと表示するボックスに注目して下さい。
 <p>////////////////////////////////////////////////////////////////////////////////////////////////////<h2><a class='anchor' name='コントロールは（大抵は）アーギュメントである'>コントロールは（大抵は）アーギュメントである</a></h2>
 
 <p>シンセが生成される時や、動作中に情報を与えたいと思う時には、SynthDefにコントロールをセットします。このための最も一般的な方法は、1つ、またはそれ以上のアーギュメントをSynthDefに含めるということです。
 <p>////////////////////////////////////////////////////////////////////////////////////////////////////
-<p>次の例では、それぞれのアーギュメントはデフォルト値を持ちます。そのような場合には、もし必要なところにアーギュメントを与えるのを忘れたとしても、SynthDefが自動的に供給します。加えて、シンセが生成される時に必要となるものを示すアーギュメントに対するデフォルト値は、コードがより読みやすくします。<textarea class='editor'>(
+<p>次の例では、それぞれのアーギュメントはデフォルト値を持ちます。そのような場合には、もし必要なところにアーギュメントを与えるのを忘れたとしても、SynthDefが自動的に供給します。加えて、シンセが生成される時に必要となるものを示すアーギュメントに対するデフォルト値は、コードがより読みやすくします。<div class='codeMirrorContainer'><textarea class='editor'>(
 // デフォルト値を持つ2つのアーギュメント
 SynthDef("withControls", { arg freq = 440, mul = 0.22;
     Out.ar(
@@ -58,12 +63,15 @@ SynthDef("withControls", { arg freq = 440, mul = 0.22;
 )
 
 Synth("withControls", [\freq, 440, \mul, 0.1]);</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p>配列の中のアイテムはSynthDefのコントロールに渡される値です。
 <p>////////////////////////////////////////////////////////////////////////////////////////////////////
-<p>配列の中にそれぞれのコントロールを書く場合には、次の様にシンボル（バックスラッシュの後に名前が続く）を用いることもできますし、<textarea class='editor'>Synth("withControls", [\freq, 440, \mul, 0.1]);</textarea>
+<p>配列の中にそれぞれのコントロールを書く場合には、次の様にシンボル（バックスラッシュの後に名前が続く）を用いることもできますし、<div class='codeMirrorContainer'><textarea class='editor'>Synth("withControls", [\freq, 440, \mul, 0.1]);</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>または、次の様に文字列（引用符の中に名前）を用いることもでき、<textarea class='editor'>Synth("withControls", ["freq", 440, "mul", 0.1]);</textarea>
+<p>または、次の様に文字列（引用符の中に名前）を用いることもでき、<div class='codeMirrorContainer'><textarea class='editor'>Synth("withControls", ["freq", 440, "mul", 0.1]);</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p>その後に値が続きます。
 <p>////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -71,14 +79,15 @@ Synth("withControls", [\freq, 440, \mul, 0.1]);</textarea>
 <p>[ controlName, value, controlName, value].
 <p>です。
 <p>////////////////////////////////////////////////////////////////////////////////////////////////////
-<p>シンセにコントロールを渡す第３の方法もあります。前の例のシンセは次の様に書くこともできます。<textarea class='editor'>Synth("withControls", [0, 440, 1, 0.1]);</textarea>
+<p>シンセにコントロールを渡す第３の方法もあります。前の例のシンセは次の様に書くこともできます。<div class='codeMirrorContainer'><textarea class='editor'>Synth("withControls", [0, 440, 1, 0.1]);</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p>このパターンは次の様になります。
 <p>[ controlIndex, value, controlIndex, value].
 <p>この手法のディスアドバンテージは、コントロールをインデックス番号として表現するのは説明的ではなく、それゆえに名前をシンボルまたは文字列として与えるよりも読みにくくなるでしょう。
 <p>////////////////////////////////////////////////////////////////////////////////////////////////////<h2><a class='anchor' name='コントロールはリセットすることもできる'>コントロールはリセットすることもできる</a></h2>
 
-<p>次の例は、シンセが生成された後に（動作中に）どのようにしてコントロールをリセットすることができるのかということを示しています。<textarea class='editor'>(
+<p>次の例は、シンセが生成された後に（動作中に）どのようにしてコントロールをリセットすることができるのかということを示しています。<div class='codeMirrorContainer'><textarea class='editor'>(
 SynthDef("resetMyControls", { arg freq = 440, mul = 0.22;
     Out.ar(
         0,
@@ -89,12 +98,14 @@ SynthDef("resetMyControls", { arg freq = 440, mul = 0.22;
 
 ~aSynth = Synth("resetMyControls", [\freq, 440, \mul, 0.06]);
 ~aSynth.set(\freq, 600, \mul, 0.25);</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>aSynthの前の~はグローバル変数を定義します。このようにすることの主なアドバンテージは、次の様に明示的に宣言する必要がないということです。<textarea class='editor'>var aSynth; // '~'のない変数はまず宣言しなければならない！！</textarea>
+<p>aSynthの前の~はグローバル変数を定義します。このようにすることの主なアドバンテージは、次の様に明示的に宣言する必要がないということです。<div class='codeMirrorContainer'><textarea class='editor'>var aSynth; // '~'のない変数はまず宣言しなければならない！！</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p>もっと正確に言えば、~という文字は「aSynth」という変数をcurrentEnvironmentという名前で知られるオブジェクトのインスタンスの中に配置します。詳しくは、SuperColliderのヘルプ・システムでEnvironmentというドキュメントを参照して下さい。
 <p>////////////////////////////////////////////////////////////////////////////////////////////////////
-<p>SynthDefはコントロールのそれぞれにラグ・タイムを定義することができます。ugenGraphFuncの後に配列として書くラグは、あるコントロール値から他のコントロール値にスムーズに変化する時間を指定します。<textarea class='editor'>(
+<p>SynthDefはコントロールのそれぞれにラグ・タイムを定義することができます。ugenGraphFuncの後に配列として書くラグは、あるコントロール値から他のコントロール値にスムーズに変化する時間を指定します。<div class='codeMirrorContainer'><textarea class='editor'>(
 SynthDef("controlsWithLags", { arg freq = 440, mul = 0.22;
     Out.ar(
         0,
@@ -105,9 +116,10 @@ SynthDef("controlsWithLags", { arg freq = 440, mul = 0.22;
 
 ~aSynth = Synth("controlsWithLags", [\freq, 550, \mul, 0.1]);
 ~aSynth.set(\freq, 600, \mul, 0.5);</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p>////////////////////////////////////////////////////////////////////////////////////////////////////
-<p>SynthDefの中にラグタイムの配列を含めるというオプションがあるということは、前に議論したSynthDefのテンプレートは再定義されなければならないということを意味します。<textarea class='editor'>// 前のSynthDefのためのテンプレート。ラグタイムの配列なし。
+<p>SynthDefの中にラグタイムの配列を含めるというオプションがあるということは、前に議論したSynthDefのテンプレートは再定義されなければならないということを意味します。<div class='codeMirrorContainer'><textarea class='editor'>// 前のSynthDefのためのテンプレート。ラグタイムの配列なし。
 SynthDef(
     "i am a synthdef",            // 第１アーギュメントは名前
     { .... i am a ugenGraphFunc ... }    // 第２アーギュメントはugenGraphFunc
@@ -120,8 +132,9 @@ SynthDef(
     { .... i am a ugenGraphFunc ... },    // ugenGraphFunc
     [ ... lagTimes ... ]            // rates
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p>どちらのテンプレートを用いるかという選択はユーザー次第です。もし、SynthDefにラグタイムを含める必要があるのであれば、第２のテンプレート、すなわち、レートの配列を含むもの、を使います。
 <p>////////////////////////////////////////////////////////////////////////////////////////////////////
-<p>go to <a href="./../../../Tutorials/Mark_Polishook_tutorial/Japanese_version/07.html">07</a><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Tutorials/Mark_Polishook_tutorial/Japanese_version/06.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Tutorials/Mark_Polishook_tutorial/Japanese_version/06.schelp</a><br>link::Tutorials/Mark_Polishook_tutorial/Japanese_version/06::<br></div></div><script src='./../../../editor.js' type='text/javascript'></script>
+<p>go to <a href="./../../../Tutorials/Mark_Polishook_tutorial/Japanese_version/07.html">07</a><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Tutorials/Mark_Polishook_tutorial/Japanese_version/06.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Tutorials/Mark_Polishook_tutorial/Japanese_version/06.schelp</a><br>link::Tutorials/Mark_Polishook_tutorial/Japanese_version/06::<br></div></div><script src='./../../../static/editor.js' type='text/javascript'></script>
 </body></html>

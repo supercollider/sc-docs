@@ -1,21 +1,25 @@
-<!doctype html><html lang='en'><head><title>User FAQ | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>User FAQ | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../lib/jquery.min.js'></script>
-<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/jquery.min.js'></script>
+<script src='./../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './..';
 var scdoc_title = 'User FAQ';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../static/scdoc.js' type='text/javascript'></script>
 <script src='./../docmap.js' type='text/javascript'></script>
+<script src='./../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
@@ -58,53 +62,63 @@ var scdoc_sc_version = '3.13.1';
 <p><a class='anchor' name='ERROR%20Primitive%20BasicNew%20failed%20Index%20not%20an%20Integer'>&nbsp;</a><h2><a class='anchor' name='ERROR:%20Primitive%20'BasicNew'%20failed.%20Index%20not%20an%20Integer'>ERROR: Primitive 'BasicNew' failed. Index not an Integer</a></h2>
 <h3><a class='anchor' name='If%20you're%20writing%20a%20SynthDef'>If you're writing a SynthDef</a></h3>
 
-<p>It's quite likely that the error means you're trying to dynamically change the number of channels inside a SynthDef, which is something you can't do - SynthDefs need to have a fixed layout. For example, this is a simple attempt to make pink noise over a variable number of channels:<textarea class='editor'>(
+<p>It's quite likely that the error means you're trying to dynamically change the number of channels inside a SynthDef, which is something you can't do - SynthDefs need to have a fixed layout. For example, this is a simple attempt to make pink noise over a variable number of channels:<div class='codeMirrorContainer'><textarea class='editor'>(
 SynthDef(\thiswillfail, { |out=0, numChannels=2|
     Out.ar(out, {PinkNoise.ar}.dup(numChannels))
 }).add
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p>It fails because we're trying to make the number of pink noise generators involved, actually changeable. You can't do that - when the SynthDef is compiled, the language needs to know <strong>exactly</strong> how many UGens will be involved and how they are connected. This is because a SynthDef represents an efficient fixed-layout synth that the server can instantiate.<h3><a class='anchor' name='So%20what%20to%20do%20instead?'>So what to do instead?</a></h3>
 
 <p>Think of SynthDefs as tiny fixed reusable components, and design your logic to reuse them in whatever combinations are needed.
-<p>To go back to the simple example above (the pink noise generator), you could simply do:<textarea class='editor'>(
+<p>To go back to the simple example above (the pink noise generator), you could simply do:<div class='codeMirrorContainer'><textarea class='editor'>(
 SynthDef(\simplepink, { |out=0|
     Out.ar(out, PinkNoise.ar)
 }).add
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>and create one <code>\simplepink</code> synth for each channel. Or you could create one SynthDef for each number of channels you expect to use. For example if you might use between 1 and 5 channels:<textarea class='editor'>(
+<p>and create one <code>\simplepink</code> synth for each channel. Or you could create one SynthDef for each number of channels you expect to use. For example if you might use between 1 and 5 channels:<div class='codeMirrorContainer'><textarea class='editor'>(
 (1..5).do{ |n|
 SynthDef("simplepink_%".format(n).asSymbol, { |out=0|
     Out.ar(out, {PinkNoise.ar}.dup(n))
 }).add
 }
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p>Then you'd need to invoke <code>\simplepink_4</code> or whatever, as appropriate.
 <p><a class='anchor' name='Language%20(client)%20Issues'>&nbsp;</a><h2><a class='anchor' name='Language%20(client)%20issues'>Language (client) issues</a></h2>
 <h3><a class='anchor' name='Calling%20gui%20primitives%20from%20a%20SystemClock%20routine'>Calling gui primitives from a SystemClock routine</a></h3>
 
-<p>When calling gui primitives from a SystemClock routine will cause an error:<textarea class='editor'>SystemClock.sched(0,{ Window.new.front })</textarea>
-<textarea class='editor'>ERROR: Qt: You can not use this Qt functionality in the current thread. Try scheduling on AppClock instead.
+<p>When calling gui primitives from a SystemClock routine will cause an error:<div class='codeMirrorContainer'><textarea class='editor'>SystemClock.sched(0,{ Window.new.front })</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+<div class='codeMirrorContainer'><textarea class='editor'>ERROR: Qt: You can not use this Qt functionality in the current thread. Try scheduling on AppClock instead.
 ERROR: Primitive '_QWindow_AvailableGeometry' failed.</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>To avoid this issue use the AppClock:<textarea class='editor'>AppClock.sched(0,{ Window.new.front })</textarea>
+<p>To avoid this issue use the AppClock:<div class='codeMirrorContainer'><textarea class='editor'>AppClock.sched(0,{ Window.new.front })</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>or the defer method:<textarea class='editor'>SystemClock.sched(0,{ { Window.new.front }.defer })</textarea>
+<p>or the defer method:<div class='codeMirrorContainer'><textarea class='editor'>SystemClock.sched(0,{ { Window.new.front }.defer })</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h3><a class='anchor' name='Binary%20operations%20order'>Binary operations order</a></h3>
 
-<p>Because of the way SuperCollider evaluates expressions, the usual order of execution of mathematical expressions is not respected. In SuperCollider everything is an object, and evaluation happens from left to right, so:<textarea class='editor'>5 + 3 * 2</textarea>
+<p>Because of the way SuperCollider evaluates expressions, the usual order of execution of mathematical expressions is not respected. In SuperCollider everything is an object, and evaluation happens from left to right, so:<div class='codeMirrorContainer'><textarea class='editor'>5 + 3 * 2</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p>will evaluate as (5 + 3 ) * 2.
-<p>This happens because the expression becomes:<textarea class='editor'>5.performBinaryOpOnSimpleNumber('+',3).performBinaryOpOnSimpleNumber('*',2)</textarea>
+<p>This happens because the expression becomes:<div class='codeMirrorContainer'><textarea class='editor'>5.performBinaryOpOnSimpleNumber('+',3).performBinaryOpOnSimpleNumber('*',2)</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>Therefore, in algebraic expressions parenthesis must be used when left to right orders is not what is desired:<textarea class='editor'>5 + (3 * 2)</textarea>
+<p>Therefore, in algebraic expressions parenthesis must be used when left to right orders is not what is desired:<div class='codeMirrorContainer'><textarea class='editor'>5 + (3 * 2)</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p><a class='anchor' name='SynthDef%20Issues'>&nbsp;</a><h2><a class='anchor' name='SynthDef%20Issues'>SynthDef Issues</a></h2>
 <h3><a class='anchor' name='"If"%20statements%20inside%20a%20SynthDef'>"If" statements inside a SynthDef</a></h3>
 
-<p>It's only a matter of time before a user tries to write something like this in a <code>SynthDef</code><textarea class='editor'>SynthDef(\kablooie, { |x = 0|
+<p>It's only a matter of time before a user tries to write something like this in a <code>SynthDef</code><div class='codeMirrorContainer'><textarea class='editor'>SynthDef(\kablooie, { |x = 0|
     var signal;
     if(x &gt; 0) {
         signal = SinOsc.ar
@@ -112,6 +126,7 @@ ERROR: Primitive '_QWindow_AvailableGeometry' failed.</textarea>
         signal = Saw.ar
     };
 });</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p>... with the disturbing result: <code>ERROR: Non Boolean in test.</code>
 <p>"Non Boolean in test"? But <strong>x &gt; 0</strong> is a comparison, and surely should produce a Boolean, right?
@@ -121,90 +136,106 @@ ERROR: Primitive '_QWindow_AvailableGeometry' failed.</textarea>
 <p>Since everything in the server is a number, the result of the comparison must also be a number. The server follows the same convention as other DSP environments (Max/MSP, pd etc.):
 <p>- <code>True</code> is represented by 1.0 - <code>False</code> is represented by 0.0<h3><a class='anchor' name='Why%20is%20x%20>%200%20"non-Boolean"%20in%20the%20"test"?'>Why is x &gt; 0 "non-Boolean" in the "test"?</a></h3>
 
-<p>This goes back to the general issue of handling operators in the server. Math operators in a SynthDef are not calculations to do <strong>right now</strong>. They <strong>describe</strong> calculations that will be done <strong>in the future</strong>, many thousands of times.<textarea class='editor'>var x = 1;
+<p>This goes back to the general issue of handling operators in the server. Math operators in a SynthDef are not calculations to do <strong>right now</strong>. They <strong>describe</strong> calculations that will be done <strong>in the future</strong>, many thousands of times.<div class='codeMirrorContainer'><textarea class='editor'>var x = 1;
 x &gt; 0;
 // -&gt; true</textarea>
-<textarea class='editor'>SynthDef(\kablooie, { |x = 0|
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+<div class='codeMirrorContainer'><textarea class='editor'>SynthDef(\kablooie, { |x = 0|
     "x: ".post; x.postln;
     "(x &gt; 0): ".post; (x &gt; 0).postln;
 });</textarea>
-<textarea class='editor'>x: an OutputProxy
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+<div class='codeMirrorContainer'><textarea class='editor'>x: an OutputProxy
 (x &gt; 0): a BinaryOpUGen</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p>The precise value of <strong>x</strong> is unknown at the time you execute the SynthDef code. <strong>x</strong> actually represents an unlimited number of values, which will be provided to Synths using argument lists. So, it's meaningless to determine, once and for all, whether <strong>x &gt; 0</strong> or not. <strong>x</strong> may be <strong>&gt; 0</strong> now and <strong>&lt; 1</strong> a split second later. So, instead of producing a Boolean, <strong>x &gt; 0</strong> produces a <strong>Binary Operator UGen</strong> that repeatedly executes the comparison.
-<p>Going back to this:<textarea class='editor'>if (aBinaryOpUGen) { ... } { ... };</textarea>
+<p>Going back to this:<div class='codeMirrorContainer'><textarea class='editor'>if (aBinaryOpUGen) { ... } { ... };</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p>To do this, the language must know which function (true or false) to execute. But there is no way to know which one the BinaryOpUGen will be. So, SuperCollider throws an error.<h3><a class='anchor' name='If%20you%20can't%20branch,%20what%20good%20is%20a%20comparison%20in%20the%20server?'>If you can't branch, what good is a comparison in the server?</a></h3>
 
 <p>Comparisons have a lot of uses, actually.
-<p>- <strong>Choosing one of two signals</strong>: This is the closest we can get to <strong>if-then-else</strong> in the server. Both <strong>then</strong> and <strong>else</strong> must be running continuously. That's a requirement of how the server works: the number and arrangement of unit generators within a single Synth cannot change. Instead, you can choose <strong>which of those signals makes it downstream</strong>. One will be used and the other ignored. Since true is 1 and false is 0, you can use a conditional to index into an array using Select.<textarea class='editor'>Select.kr(aKrSignal &gt; anotherKrSignal, [false_signal, true_signal]);</textarea>
+<p>- <strong>Choosing one of two signals</strong>: This is the closest we can get to <strong>if-then-else</strong> in the server. Both <strong>then</strong> and <strong>else</strong> must be running continuously. That's a requirement of how the server works: the number and arrangement of unit generators within a single Synth cannot change. Instead, you can choose <strong>which of those signals makes it downstream</strong>. One will be used and the other ignored. Since true is 1 and false is 0, you can use a conditional to index into an array using Select.<div class='codeMirrorContainer'><textarea class='editor'>Select.kr(aKrSignal &gt; anotherKrSignal, [false_signal, true_signal]);</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>- <strong>Generating triggers</strong>: A trigger occurs whenever a signal is &lt;= 0, and then becomes &gt; 0. Extending this to comparisons, it means that <strong>a trigger occurs when a comparison is false for a while, and then becomes true</strong>. Comparing a signal to a threshold may then be used anywhere that a trigger is valid. For a simple example, take the case of sending a message to the language when the microphone input's amplitude crosses a threshold.<textarea class='editor'>var mic = In.ar(8, 1), amplitude = Amplitude.kr(mic);
+<p>- <strong>Generating triggers</strong>: A trigger occurs whenever a signal is &lt;= 0, and then becomes &gt; 0. Extending this to comparisons, it means that <strong>a trigger occurs when a comparison is false for a while, and then becomes true</strong>. Comparing a signal to a threshold may then be used anywhere that a trigger is valid. For a simple example, take the case of sending a message to the language when the microphone input's amplitude crosses a threshold.<div class='codeMirrorContainer'><textarea class='editor'>var mic = In.ar(8, 1), amplitude = Amplitude.kr(mic);
 SendTrig.kr(amplitude &gt; 0.2, 0, amplitude);</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p>- <strong>Passing or suppressing triggers</strong>: You might need to generate triggers continuously, but permit the triggers to take effect only when a condition is met. Multiplication handles this nicely: <strong>condition * trigger</strong>. Since the condition evaluates as 0 when false, the trigger will be replaced by 0 and nothing happens, as desired.
-<p>For a simple case, let's refine the mic amplitude example by suppressing triggers that occur within 1/4 second after the previous.<textarea class='editor'>var mic = In.ar(8, 1),
+<p>For a simple case, let's refine the mic amplitude example by suppressing triggers that occur within 1/4 second after the previous.<div class='codeMirrorContainer'><textarea class='editor'>var mic = In.ar(8, 1),
     amplitude = Amplitude.kr(mic),
     trig = amplitude &gt; 0.2,
     timer = Timer.kr(trig), // how long since the last trigger?
     filteredTrig = (timer &gt; 0.25) * trig;
 
 SendTrig.kr(filteredTrig, 0, amplitude);</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h3><a class='anchor' name='Logical%20operators:%20And,%20Or,%20Not,%20Xor'>Logical operators: And, Or, Not, Xor</a></h3>
 
 <p>Logical operators have simple arithmetic equivalents.
 <p>- <strong>And = multiplication</strong>: <strong>(x &gt; 0) * (y &gt; 0)</strong> means both conditions must be true (nonzero) for the result to be nonzero.
 <p>- <strong>Or = addition</strong>: <strong>(x &gt; 0) + (y &gt; 0)</strong> means nonzero in either condition is enough to make the result nonzero.<div class='note'><span class='notelabel'>NOTE:</span> If both are true, then the result will be 2, not 1. In some cases, the 2 may not be acceptable. That can be fixed by wrapping the Or in another comparison -- <strong>((x &gt; 0) + (y &gt; 0)) &gt; 0</strong> -- because 2 &gt; 0 evaluates to 1!</div>
 <p>- <strong>Not</strong>: I prefer to negate a condition by comparing it to zero: <strong>condition &lt;= 0</strong>. 0 &lt;= 0 is 1 (i.e., not 0), and 1 &lt;= 0 is 0 (not 1). If you're certain the logical expression will only ever be 0 or 1 exactly, you can also negate by subtraction: <strong>1 - condition</strong>.
-<p>- <strong>Xor</strong>: Exclusive-or is true if one or the other condition is true, but not both. We can add the two conditions and compare it to 1. The syntax is a little bit tricky because <code>==</code> doesn't turn into a BinaryOpUGen automatically. We have to create the BinaryOpUGen by hand.<textarea class='editor'>BinaryOpUGen('==', (x &gt; 0) + (y &gt; 0), 1)</textarea>
+<p>- <strong>Xor</strong>: Exclusive-or is true if one or the other condition is true, but not both. We can add the two conditions and compare it to 1. The syntax is a little bit tricky because <code>==</code> doesn't turn into a BinaryOpUGen automatically. We have to create the BinaryOpUGen by hand.<div class='codeMirrorContainer'><textarea class='editor'>BinaryOpUGen('==', (x &gt; 0) + (y &gt; 0), 1)</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h3><a class='anchor' name='ERROR:%20SynthDef%20not%20found'>ERROR: SynthDef not found</a></h3>
 
 <p>Sending a SynthDef to the server requires a little bit of time, which means that running a block of code with both SynthDef definitions and instances of those SynthDefs won't be guaranteed to work unless this slight delay is accounted for. There are two main ways to do this:
-<p>First way: put the SynthDefs and the main code in a Task and put some kind of <code>.wait</code> time between them.<textarea class='editor'>Task({
+<p>First way: put the SynthDefs and the main code in a Task and put some kind of <code>.wait</code> time between them.<div class='codeMirrorContainer'><textarea class='editor'>Task({
     // put your SynthDefs here
     0.2.wait;
     // put the rest of your code here
 }).play;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>Second way: use <code>.sync</code>:<textarea class='editor'>Routine({
+<p>Second way: use <code>.sync</code>:<div class='codeMirrorContainer'><textarea class='editor'>Routine({
     // put your SynthDefs here
     s.sync; // assuming that 's' is the server
     // put the rest of your code here
 }).play</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h3><a class='anchor' name='FAILURE%20/s_new%20alloc%20failed,%20increase%20server's%20memory%20allocation'>FAILURE /s_new alloc failed, increase server's memory allocation</a></h3>
 
 <p><strong>What it means</strong>: While initializing the unit generators in a new Synth node, the server ran out of real-time memory.
-<p><strong>Solution</strong>: Increase the amount of real-time memory available to the server. This size is set, as the error message says, in the <code>ServerOptions</code> object associated with the server. It is a server startup option; you must quit the server and reboot it, or the new setting will not take effect.<textarea class='editor'>myServer.quit;
+<p><strong>Solution</strong>: Increase the amount of real-time memory available to the server. This size is set, as the error message says, in the <code>ServerOptions</code> object associated with the server. It is a server startup option; you must quit the server and reboot it, or the new setting will not take effect.<div class='codeMirrorContainer'><textarea class='editor'>myServer.quit;
 myServer.options.memSize = 65536;  // e.g., could be different for you
 myServer.boot;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p><code>myServer.options.memSize</code> is given in KB. The default is 8192KB, or 8MB.
 <p><strong>What it really means</strong>: Many unit generators require internal memory buffers, such as delay lines, comb filters, allpass delays, some FFT manipulators, reverb units etc. These internal buffers are not allocated directly from the operating system, but rather from a "real-time memory pool." This is because direct allocation from the OS, by functions such as <code>malloc()</code>, is not real-time safe. The OS may take too long to return the new block, causing glitches in the audio. To solve this problem, the server allocates a chunk of memory when it starts up and parcels it out to unit generators as needed.
 <p>If you use a large number of delays, the server may run out of real-time memory. The default <code>8192KB</code> setting can support 47.55 seconds of delay at a sampling rate of 44.1 kHz. This goes away quickly when using lots of synths with multiple channels of delay.
 <p><strong>Alternate solution</strong>: For delay units, you may use preallocated delay buffers -- <code>Buffer.alloc()</code> -- and the "Buf" delay units: <code>BufDelayN</code>, <code>BufDelayL</code>, <code>BufDelayC</code>, <code>BufCombL</code> etc. <code>Buffer.alloc()</code> does not use the real-time pool and is not subject to the memSize limitation. This approach will not help with FFT units.<h3><a class='anchor' name='Array%20arguments'>Array arguments</a></h3>
 
-<p>Sometimes, you need to send an array to a series of Control inputs in a SynthDef (often called "_array arguments_").<textarea class='editor'>Synth(\xyz, [freqs: [300, 400, 500]]);</textarea>
+<p>Sometimes, you need to send an array to a series of Control inputs in a SynthDef (often called "_array arguments_").<div class='codeMirrorContainer'><textarea class='editor'>Synth(\xyz, [freqs: [300, 400, 500]]);</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p>There are two primary ways to do this:
-<p>- Supply a literal array -- <code>\#[1, 2, 3]</code> -- as the default for the argument name in the function. This is discussed in <a href="./../Classes/SynthDef.html">SynthDef</a>'s help file.<textarea class='editor'>SynthDef(\xyz, { |freqs = #[1, 2, 3]|
+<p>- Supply a literal array -- <code>\#[1, 2, 3]</code> -- as the default for the argument name in the function. This is discussed in <a href="./../Classes/SynthDef.html">SynthDef</a>'s help file.<div class='codeMirrorContainer'><textarea class='editor'>SynthDef(\xyz, { |freqs = #[1, 2, 3]|
     // ...
 })</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>- Or, use <code>NamedControl</code>. This is the only way to do it if you want to construct the array's size dynamically, or based on a variable. See <a href="./../Classes/NamedControl.html">NamedControl</a>.<textarea class='editor'>SynthDef(\xyz, {
+<p>- Or, use <code>NamedControl</code>. This is the only way to do it if you want to construct the array's size dynamically, or based on a variable. See <a href="./../Classes/NamedControl.html">NamedControl</a>.<div class='codeMirrorContainer'><textarea class='editor'>SynthDef(\xyz, {
     var freqs = NamedControl.kr(\freqs, #[1, 2, 3]);
     // ...
 });</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h3><a class='anchor' name='Why%20does%20it%20have%20to%20be%20a%20literal%20array?'>Why does it have to be a literal array?</a></h3>
 
 <p>The reason comes from the process of building a SynthDef:
 <p>1. First, look at the function arguments to figure out what the Control inputs should be. 2. Then create Control units (usually just one, if they're all normal arguments without prefixes or special rates). Each channel is represented by an <code>OutputProxy</code>. 3. Then run the SynthDef function, passing the output proxies to the arguments. 4. Then sort the UGens into the right order, etc. etc.
-<p>To do steps \#1 and \#2, the SynthDef builder has to know the size of an array argument <strong>before</strong> running the function. That's possible only if it's a literal array: <code>\#[1, 2, 3, 4, 5]</code>. Any other array notation creates the array <strong>while running the function</strong> (step \#3). But then it's too late -- the SynthDef builder already created a non-array control channel for it!<textarea class='editor'>SynthDef(\notArray, { |a = (1..5)|
+<p>To do steps \#1 and \#2, the SynthDef builder has to know the size of an array argument <strong>before</strong> running the function. That's possible only if it's a literal array: <code>\#[1, 2, 3, 4, 5]</code>. Any other array notation creates the array <strong>while running the function</strong> (step \#3). But then it's too late -- the SynthDef builder already created a non-array control channel for it!<div class='codeMirrorContainer'><textarea class='editor'>SynthDef(\notArray, { |a = (1..5)|
     a.debug("a is");
 });</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p><code>a is: an OutputProxy</code><textarea class='editor'>SynthDef(\array, { |a = #[1, 2, 3, 4, 5]|
+<p><code>a is: an OutputProxy</code><div class='codeMirrorContainer'><textarea class='editor'>SynthDef(\array, { |a = #[1, 2, 3, 4, 5]|
    a.debug("a is");
 });</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p><code>a is: [ an OutputProxy, an OutputProxy, an OutputProxy, an OutputProxy, an OutputProxy ]</code>
 <p>(Note, if 'a' printed as [ 1, 2, 3, 4, 5 ], then you wouldn't be able to change the values in a Synth using <code>.set</code>!)
@@ -214,7 +245,7 @@ myServer.boot;</textarea>
 <p>The first and most important point: <strong>Functions are client-side only</strong>. The server doesn't know what functions are, doesn't understand them and has no way to execute them. <strong>Only the client can execute a function</strong>.
 <p>Therefore, if you want a function to execute when something happens in the server, the only way is for the server to tell the client to take the action.
 <p>The server can communicate messages back to the client using one of two unit generators: <code>SendTrig</code> and <code>SendReply</code>. <code>SendTrig</code> is simpler and less flexible (it can send only a <code>/tr</code> message, and only one data value). <code>SendReply</code> allows you to name the message anything you like, and can send arrays with the message. We'll use SendReply here because of its greater flexibility.
-<p>Within the language, you also need an object to receive the message and act on it. Usually this is <code>OSCFunc</code> or <code>OSCdef</code>. In this example, <code>OSCdef</code> filters messages not just on the name <code>/bleep</code> but also on the synth's ID. This way, you could have multiple triggering synths, with a different responder and a different action per synth.<textarea class='editor'>(
+<p>Within the language, you also need an object to receive the message and act on it. Usually this is <code>OSCFunc</code> or <code>OSCdef</code>. In this example, <code>OSCdef</code> filters messages not just on the name <code>/bleep</code> but also on the synth's ID. This way, you could have multiple triggering synths, with a different responder and a different action per synth.<div class='codeMirrorContainer'><textarea class='editor'>(
 a = {
     var trig = Dust.kr(8),
     decay = Decay2.kr(trig, 0.01, 0.1),
@@ -229,6 +260,7 @@ o = OSCdef(\bleepResponder, { |msg|
 )
 
 a.free; o.remove;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h3><a class='anchor' name='Helpfile%20references:'>Helpfile references:</a></h3>
 
 <p>- <a href="./../Classes/SendTrig.html">SendTrig</a>, <a href="./../Classes/SendReply.html">SendReply</a>
@@ -240,5 +272,5 @@ a.free; o.remove;</textarea>
 <h3><a class='anchor' name='Error%20while%20loading%20shared%20libraries:%20libsclang.so:%20cannot%20open%20shared%20object%20file'>Error while loading shared libraries: libsclang.so: cannot open shared object file</a></h3>
 
 <p>This usually happens after building on Linux and it means that your system is unaware of newly installed shared libraries. Running ldconfig (as root) solves the problem:
-<p><code>/sbin/ldconfig</code><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Guides/UserFAQ.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Guides/UserFAQ.schelp</a><br>link::Guides/UserFAQ::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+<p><code>/sbin/ldconfig</code><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Guides/UserFAQ.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Guides/UserFAQ.schelp</a><br>link::Guides/UserFAQ::<br></div></div><script src='./../static/editor.js' type='text/javascript'></script>
 </body></html>

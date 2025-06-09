@@ -1,21 +1,25 @@
-<!doctype html><html lang='en'><head><title>Routine | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>Routine | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../lib/jquery.min.js'></script>
-<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/jquery.min.js'></script>
+<script src='./../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './..';
 var scdoc_title = 'Routine';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../static/scdoc.js' type='text/javascript'></script>
 <script src='./../docmap.js' type='text/javascript'></script>
+<script src='./../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
@@ -59,7 +63,7 @@ var scdoc_sc_version = '3.13.1';
 <div id='summary'>Functions that can return in the middle and then resume where they left off</div>
 </div>
 <div class='subheader'>
-<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/Common/Core/Thread.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Core/Thread.sc'>Thread.sc</a></div><div id='subclasses'>Subclasses: <a href="../Classes/FuncStreamAsRoutine.html">FuncStreamAsRoutine</a></div>
+<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/Common/Core/Thread.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Core/Thread.sc'>Thread.sc</a></div><div id='subclasses'>Subclasses: <a href="../Classes/FuncStreamAsRoutine.html">FuncStreamAsRoutine</a></div>
 <div id='related'>See also: <a href="./../Classes/Stream.html">Stream</a></div>
 </div>
 <h2><a class='anchor' name='description'>Description</a></h2>
@@ -77,12 +81,14 @@ var scdoc_sc_version = '3.13.1';
 <tr><td class='argumentname'>func<td class='argumentdesc'>
 <p>A Function with code for the Thread to run.<tr><td class='argumentname'>stackSize<td class='argumentdesc'>
 <p>Call stack size (an Integer).</table><h4>Discussion:</h4>
-<textarea class='editor'>a = Routine.new({ 1.yield; 2.yield; });
+<div class='codeMirrorContainer'><textarea class='editor'>a = Routine.new({ 1.yield; 2.yield });
 a.next.postln;
 a.next.postln;
 a.next.postln;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>The Function class provides its own shortcut method <code>r</code> that calls <code>Routine.new</code>, thus one can also write:<textarea class='editor'>a = r { 1.yield; 2.yield };</textarea>
+<p>The Function class provides its own shortcut method <code>r</code> that calls <code>Routine.new</code>, thus one can also write:<div class='codeMirrorContainer'><textarea class='editor'>a = r { 1.yield; 2.yield };</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3><a class='anchor' name='Inherited%20class%20methods'>Inherited class methods</a></h3>
 <div id='inheritedclassmets'></div><h3><a class='anchor' name='Undocumented%20class%20methods'>Undocumented class methods</a></h3>
 <h3 class='method-code'><span class='method-prefix'>Routine.</span><a class='method-name' name='*run' href='./../Overviews/Methods.html#run'>run</a>(<span class='argstr'>func</span>, <span class='argstr'>stackSize</span>, <span class='argstr'>clock</span>, <span class='argstr'>quant</span>)</h3>
@@ -99,12 +105,13 @@ a.next.postln;</textarea>
 <li>Either the value that the Routine yields (the Object on which <a href="./../Classes/Object.html#-yield">yield</a> is called within the Routine Function),<li>...or <code>nil</code>, if the Routine has stopped.</ul>
 </div><h4>Discussion:</h4>
 
-<p>When a Routine is started by a call to this method (or one of its synonyms), the method's argument is passed on as the argument to the Routine Function:<textarea class='editor'>Routine { arg inval;
+<p>When a Routine is started by a call to this method (or one of its synonyms), the method's argument is passed on as the argument to the Routine Function:<div class='codeMirrorContainer'><textarea class='editor'>Routine { |inval|
     inval.postln;
 }.value("hello routine");</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>After the Routine has yielded (it has been suspended at the point in its Function where <code>yield</code> is called on an Object), a call to this method (or its synonyms) resumes executing the Function and the argument to this method becomes the return value of <code>yield</code>. To access that value within the Function, you have to assign it to a variable - typically, the argument of the Function is reused:<textarea class='editor'>(
-r = Routine { arg inval;
+<p>After the Routine has yielded (it has been suspended at the point in its Function where <code>yield</code> is called on an Object), a call to this method (or its synonyms) resumes executing the Function and the argument to this method becomes the return value of <code>yield</code>. To access that value within the Function, you have to assign it to a variable - typically, the argument of the Function is reused:<div class='codeMirrorContainer'><textarea class='editor'>(
+r = Routine { |inval|
     inval.postln;
     inval = 123.yield;
     inval.postln;
@@ -113,11 +120,12 @@ r = Routine { arg inval;
 
 r.value("hello routine");
 r.value("goodbye routine");</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>Typically, a Routine yields multiple times, and each time the result of the yield is reassigning to the argument of its Function.<textarea class='editor'>(
-r = Routine { arg inval;
+<p>Typically, a Routine yields multiple times, and each time the result of the yield is reassigning to the argument of its Function.<div class='codeMirrorContainer'><textarea class='editor'>(
+r = Routine { |inval|
     inval.postln; // Post the value passed in when started.
-    5.do { arg i;
+    5.do { |i|
         inval = (i + 10).yield;
         inval.postln; // Post the value passed in when resumed.
     }
@@ -128,6 +136,7 @@ r = Routine { arg inval;
     r.value("hello routine").postln; // Post the value that the Routine yields.
 }
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-value' href='./../Overviews/Methods.html#value'>value</a>(<span class='argstr'>inval</span>)</h3>
 <div class='method'>
 <p>Equivalent to <a href="#-next">-next</a>.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-resume' href='./../Overviews/Methods.html#resume'>resume</a>(<span class='argstr'>inval</span>)</h3>
@@ -149,7 +158,7 @@ r = Routine { arg inval;
 <p>a Clock, TempoClock by default<tr><td class='argumentname'>quant<td class='argumentdesc'>
 <p>see the <a href="./../Classes/Quant.html">Quant</a> helpfile</table><h4>Discussion:</h4>
 
-<p>using <a href="./../Classes/Object.html#-idle">Object: -idle</a> within a routine, return values until this time is over. Time is measured relative to the thread's clock.<textarea class='editor'>// for 6 seconds, return 200, then continue
+<p>using <a href="./../Classes/Object.html#-idle">Object: -idle</a> within a routine, return values until this time is over. Time is measured relative to the thread's clock.<div class='codeMirrorContainer'><textarea class='editor'>// for 6 seconds, return 200, then continue
 (
 r = Routine {
         199.yield;
@@ -184,6 +193,7 @@ fork {
     }
 }
 );</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-reschedule' href='./../Overviews/Methods.html#reschedule'>reschedule</a>(<span class='argstr'>argClock</span>, <span class='argstr'>quant</span>)</h3>
 <div class='method'>
 <p>If a Routine is currently scheduled on a clock, it will be expected to "awake" at a specific time, on a specific clock. <code>reschedule</code> allows you to change to a different clock or to a later time.<h4>Arguments:</h4>
@@ -194,7 +204,7 @@ fork {
 <ul>
 <li>Rescheduling to a different clock will be continuous in terms of seconds, but not necessarily continuous in terms of beats. Time-based patterns such as <a href="./../Classes/Pseg.html">Pseg</a>, or the use of <a href="./../Classes/Env.html">Env</a> as a stream, may not follow the envelope shape continuously. (Pseg and Env-as-stream measure time in beats on the clock that is playing. In normal use, the clock never changes, so time advances monotonically through the envelope's breakpoints. If a thread is rescheduled to a different clock, the beats values are very unlikely to be the same on the new clock. So the envelope would jump forward or backward in time.)
 <p>When switching the clock, <code>reschedule</code> will first calculate the new "awake" time, in beats, based on the given <code>quant</code>. Then it converts that <code>beats</code> value into the new clock's <code>beats</code> for the same instant in time. If the old clock's tempo is 1 and the Routine is waiting for 1 beat, the next "awake" should happen after one second. When rescheduling without a <code>quant</code>, the next "awake" will <em>still</em> happen after one second -- but the <code>beats</code> value will adjust for the new clock.<li>Currently <code>quant</code> will resolve to a time <em>later</em> than the Routine's current <code>nextBeat</code>. If you try to force it earlier, there is likely to be some discontinuity. This is because the Routine cannot reschedule until it wakes up normally. The workaround is to switch the Routine into a different <a href="./../Classes/Task.html">Task</a> wrapper.<li>Currently the routine must be playing (already scheduled on a clock). This is because the handoff to the new clock or time occurs during the thread's "awake" process. If the routine is not playing, then it will not awake, and nothing will happen.</ul>
-<textarea class='editor'>// Rescheduling to a different clock, same time
+<div class='codeMirrorContainer'><textarea class='editor'>// Rescheduling to a different clock, same time
 c = TempoClock.new;
 
 (
@@ -250,6 +260,7 @@ t.stop;
 )
 
 u.stop;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-awake' href='./../Overviews/Methods.html#awake'>awake</a>(<span class='argstr'>inBeats</span>, <span class='argstr'>inSeconds</span>, <span class='argstr'>inClock</span>)</h3>
 <div class='method'>
 <p>This method is called by a <a href="./../Classes/Clock.html">Clock</a> on which the Routine was scheduled when its scheduling time is up. It calls <a href="#-next">-next</a>, passing on the scheduling time in beats as an argument. The value returned by <code>next</code> (the value yielded by the Routine) will in turn be returned by this method, thus determining the time which the Routine will be rescheduled for.<h4>Arguments:</h4>
@@ -263,7 +274,7 @@ u.stop;</textarea>
 <div class='returnvalue'>
 <p>A <a href="./../Classes/Prout.html">Prout</a> that (in response to <code>asStream</code>) acts as a generator of independent copies of the original routine (the receiver of <code>p</code>).</div><h4>Discussion:</h4>
 
-<p>Any subclass of Pattern returns a Stream in response to <code>asStream</code>. However, the exact subclass of Stream returned depends on the class of the Pattern. In particular, a Prout returns a Routine in response to <code>asStream</code>. Thus, a way to make an independent copy of a Routine is to make a Prout from it with the method <code>p</code>, and then create a new Routine from this Prout. In the example immediately below, this second step is done explicitly by calling <code>asStream</code>, but in the context of passing arguments to other Patterns, this latter step usually happens automatically, as shown in later examples.<textarea class='editor'>(
+<p>Any subclass of Pattern returns a Stream in response to <code>asStream</code>. However, the exact subclass of Stream returned depends on the class of the Pattern. In particular, a Prout returns a Routine in response to <code>asStream</code>. Thus, a way to make an independent copy of a Routine is to make a Prout from it with the method <code>p</code>, and then create a new Routine from this Prout. In the example immediately below, this second step is done explicitly by calling <code>asStream</code>, but in the context of passing arguments to other Patterns, this latter step usually happens automatically, as shown in later examples.<div class='codeMirrorContainer'><textarea class='editor'>(
 r = Routine { "hi".yield; "bye".yield };
 r.next.postln;    // "hi" posted
 
@@ -272,38 +283,41 @@ q.next.postln;    // "hi" again
 
 r.next.postln;    // "bye" because r kept its own state, separate from q
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <div class='note'><span class='notelabel'>NOTE:</span> New routines produced by <code>.p.asStream</code> run the original routine's function from the beginning. There is no copy of the internal state of the original routine, only its function is copied. On a related note, <code>Routine.copy</code> (inherited from <code>Thread</code>) does not create a new, separate Routine; it just returns the receiver.</div>
-<p>The Routine method <code>p</code> is mostly useful in the context of using the result of Routine-returning expressions as arguments to Patterns, when the intent is to use the Routine's result as a pattern, i.e. multiple occurrences acting independently of each other.<textarea class='editor'>(
+<p>The Routine method <code>p</code> is mostly useful in the context of using the result of Routine-returning expressions as arguments to Patterns, when the intent is to use the Routine's result as a pattern, i.e. multiple occurrences acting independently of each other.<div class='codeMirrorContainer'><textarea class='editor'>(
 r = (:2..5); // a seriesIter Routine
-Ptuple([r, r]).asStream.all.postln; // posts [ [ 2, 3 ], [ 4, 5 ] ]
+Ptuple([r, r]).asStream.all.postln; // posts [[2, 3], [4, 5]]
 r.next.postln; // nil
 
 p = r.p; // make a Pattern from r; it doesn't matter that r has ended
 Ptuple([p, p]).asStream.all.postln;
-// posts [ [ 2, 2 ], [ 3, 3 ], [ 4, 4 ], [ 5, 5 ] ]
+// posts [[2, 2], [3, 3], [4, 4], [5, 5]]
 
 // Obviously, explicitly writing the same Routine-valued subexpression twice
 // also creates separate Routines.
 Ptuple([(:2..5), (:2..5)]).asStream.all.postln;
-// posts [ [ 2, 2 ], [ 3, 3 ], [ 4, 4 ], [ 5, 5 ] ]
+// posts [[2, 2], [3, 3], [4, 4], [5, 5]]
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>In the following example, directly reusing the same Routine object twice in a <code>Pseq</code> fails to duplicate its output, because the first embedding fully consumes the routine's (non-nil) output.<textarea class='editor'>(
+<p>In the following example, directly reusing the same Routine object twice in a <code>Pseq</code> fails to duplicate its output, because the first embedding fully consumes the routine's (non-nil) output.<div class='codeMirrorContainer'><textarea class='editor'>(
 r = (:2..6);
 Pseq([r, r]).asStream.all.postln;
-// [ 2, 3, 4, 5, 6 ]
+// [2, 3, 4, 5, 6]
 
 p = r.p;
 Pseq([p, p]).asStream.all.postln;
-// [ 2, 3, 4, 5, 6, 2, 3, 4, 5, 6 ]
+// [2, 3, 4, 5, 6, 2, 3, 4, 5, 6]
 
 Pseq([(:2..6), (:2..6)]).asStream.all.postln;
-// [ 2, 3, 4, 5, 6, 2, 3, 4, 5, 6 ]
+// [2, 3, 4, 5, 6, 2, 3, 4, 5, 6]
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3><a class='anchor' name='Accessible%20instance%20variables'>Accessible instance variables</a></h3>
 
-<p>Routine inherits from <a href="./../Classes/Thread.html">Thread</a>, which allows access to some of its state:<textarea class='editor'>(
-r = Routine { arg inval;
+<p>Routine inherits from <a href="./../Classes/Thread.html">Thread</a>, which allows access to some of its state:<div class='codeMirrorContainer'><textarea class='editor'>(
+r = Routine { |inval|
     loop {
         // thisThread refers to the routine.
         postf("beats: % seconds: % time: % \n",
@@ -319,6 +333,7 @@ r.stop;
 r.beats;
 r.seconds;
 r.clock;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-beats' href='./../Overviews/Methods.html#beats'>beats</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-beats' href='./../Overviews/Methods.html#beats'>beats</a> = <span class='argstr'>inBeats</span></h3>
 <div class='supmethod'>From superclass: <a href='./../Classes/Thread.html'>Thread</a></div>
@@ -344,9 +359,9 @@ r.clock;</textarea>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-run' href='./../Overviews/Methods.html#run'>run</a>(<span class='argstr'>inval</span>)</h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-valueArray' href='./../Overviews/Methods.html#valueArray'>valueArray</a>(<span class='argstr'>inval</span>)</h3>
 <h2><a class='anchor' name='examples'>Examples</a></h2>
-<textarea class='editor'>(
+<div class='codeMirrorContainer'><textarea class='editor'>(
 var r, outval;
-r = Routine.new({ arg inval;
+r = Routine.new({ |inval|
     ("-&gt;inval was " ++ inval).postln;
     inval = 1.yield;
     ("-&gt;inval was " ++ inval).postln;
@@ -369,12 +384,13 @@ outval = r.next('e');
 outval = r.next('f');
 ("&lt;-outval was " ++ outval).postln;
 )</textarea>
-<textarea class='editor'>// wait
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+<div class='codeMirrorContainer'><textarea class='editor'>// wait
 
 (
 var r;
 r = Routine {
-    10.do({ arg a;
+    10.do({ |a|
         a.postln;
         // Often you might see Wait being used to pause a routine
         // This waits for one second between each number
@@ -385,14 +401,15 @@ r = Routine {
     "done".postln;
 }.play;
 )</textarea>
-<textarea class='editor'>// waitUntil
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+<div class='codeMirrorContainer'><textarea class='editor'>// waitUntil
 
 (
 var r;
 r = Routine {
     var times = { rrand(1.0, 10.0) }.dup(10) + thisThread.beats;
     times = times.sort;
-    times.do({ arg a;
+    times.do({ |a|
         waitUntil(a);
         a.postln;
     });
@@ -401,10 +418,11 @@ r = Routine {
     "done".postln;
 }.play;
 )</textarea>
-<textarea class='editor'>// Using Routine to set button states on the fly.
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+<div class='codeMirrorContainer'><textarea class='editor'>// Using Routine to set button states on the fly.
 (
 var update, w, b;
-w = SCWindow.new("State Window", Rect(150,SCWindow.screenBounds.height-140,380,60));
+w = SCWindow.new("State Window", Rect(150, SCWindow.screenBounds.height-140, 380, 60));
 
 // a convenient way to set the button label
 update = {
@@ -412,7 +430,7 @@ update = {
     but.refresh;
 };
 
-b = SCButton(w, Rect(10,10,360,40));
+b = SCButton(w, Rect(10, 10, 360, 40));
 b.font_(Font("Impact", 24));
 
 update.value(b, "there is only one state");
@@ -431,7 +449,8 @@ b.action_(Routine { |butt|
 
 w.front;
 )</textarea>
-<textarea class='editor'>// drawing in a window dynamically with Pen
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+<div class='codeMirrorContainer'><textarea class='editor'>// drawing in a window dynamically with Pen
 (
 var w, much = 0.02, string, synth;
 
@@ -462,10 +481,12 @@ w.drawFunc = Routine {
     }
 };
 
-fork { while { w.isClosed.not } { defer { w.refresh }; 0.04.wait; } };
+fork { while { w.isClosed.not } { defer { w.refresh }; 0.04.wait } };
 
 w.front;
 
 )</textarea>
-<div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/Routine.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/Routine.schelp</a><br>link::Classes/Routine::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+
+<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/Routine.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/Routine.schelp</a><br>link::Classes/Routine::<br></div></div><script src='./../static/editor.js' type='text/javascript'></script>
 </body></html>

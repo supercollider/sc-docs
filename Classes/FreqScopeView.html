@@ -1,21 +1,25 @@
-<!doctype html><html lang='en'><head><title>FreqScopeView | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>FreqScopeView | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../lib/jquery.min.js'></script>
-<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/jquery.min.js'></script>
+<script src='./../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './..';
 var scdoc_title = 'FreqScopeView';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../static/scdoc.js' type='text/javascript'></script>
 <script src='./../docmap.js' type='text/javascript'></script>
+<script src='./../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
@@ -68,12 +72,13 @@ var scdoc_sc_version = '3.13.1';
 </div>
 <h2><a class='anchor' name='description'>Description</a></h2>
 
-<p>FreqScopeView shows the frequency spectrum of a specified audio bus.<div class='note'><span class='notelabel'>NOTE:</span> The scope will remain active after a command-period. To turn it off you must use the 'active' method. Very important: You must run <code>kill()</code> when the parent window is closed to avoid problems. It also frees the buffers that the scope allocated and stops the FFT analysis synth. So:<textarea class='editor'>(
+<p>FreqScopeView shows the frequency spectrum of a specified audio bus.<div class='note'><span class='notelabel'>NOTE:</span> The scope will remain active after a command-period. To turn it off you must use the 'active' method. Very important: You must run <code>kill()</code> when the parent window is closed to avoid problems. It also frees the buffers that the scope allocated and stops the FFT analysis synth. So:<div class='codeMirrorContainer'><textarea class='editor'>(
 w = Window("My Analyzer", Rect(0, 0, 511, 300));
 f = FreqScopeView(w, w.view.bounds);
 w.onClose_({ f.kill }); // YOU MUST HAVE THIS
 w.front;
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h2><a class='anchor' name='classmethods'>Class Methods</a></h2>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='*new' href='./../Overviews/Methods.html#new'>new</a></h3>
 <div class='method'><h4>Arguments:</h4>
@@ -83,7 +88,7 @@ w.front;
 <p>An instance of <a href="./../Classes/Rect.html">Rect</a>, or a <a href="./../Classes/Point.html">Point</a> indicating <code>width@height</code>.<tr><td class='argumentname'>server<td class='argumentdesc'>
 <p>The server to be shown in scope.</table><h4>Discussion:</h4>
 
-<p>Example:<textarea class='editor'>// Start server
+<p>Example:<div class='codeMirrorContainer'><textarea class='editor'>// Start server
 s.boot;
 
 // Create analyzer in a window
@@ -96,6 +101,7 @@ w.onClose_({ f.kill }); // you must have this
 w.front;
 { SinOsc.ar([500, 1000], 0, 0.25).mean.dup }.play(s); // start two sine waves
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='*response' href='./../Overviews/Methods.html#response'>response</a></h3>
 <div class='method'>
 <p>Create a scope in a special frequency-response mode. This uses FFT-based spectral division to estimate the frequency response of some effect, on the assumption that the signal to bus1 is transformed to the signal at bus2 by some linear time-invariant process.<h4>Arguments:</h4>
@@ -107,7 +113,7 @@ w.front;
 <p>The bus on which the "post" signal is found.<tr><td class='argumentname'>freqMode<td class='argumentdesc'>
 <p>Linear (0) or log(1) frequency mode. Defaults to 1.</table><h4>Discussion:</h4>
 
-<p>Example:<textarea class='editor'>s.boot
+<p>Example:<div class='codeMirrorContainer'><textarea class='editor'>s.boot
 
 // basic usage. try these. Each one will open a new window
 // move the mouse left and right to test response in different ranges
@@ -122,8 +128,9 @@ Integrator.scopeResponse
 Median.scopeResponse // nonlinear, and therefore interesting
 
 // customize the parameters for more informative scoping
-{|in| MoogFF.ar(in, freq: MouseX.kr(10, 10000, 1),
-gain:MouseY.kr(4, 0))}.scopeResponse</textarea>
+{ |in| MoogFF.ar(in, freq: MouseX.kr(10, 10000, 1),
+gain: MouseY.kr(4, 0)) }.scopeResponse</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3><a class='anchor' name='Subclassing%20and%20Internal%20Methods'>Subclassing and Internal Methods</a></h3>
 
 <p>The following methods are usually not used directly or are called by a primitive. Programmers can still call or override these as needed.<h3><a class='anchor' name='Inherited%20class%20methods'>Inherited class methods</a></h3>
@@ -182,7 +189,7 @@ gain:MouseY.kr(4, 0))}.scopeResponse</textarea>
 <div class='method'>
 <p></div><h3><a class='anchor' name='Inherited%20instance%20methods'>Inherited instance methods</a></h3>
 <div id='inheritedinstmets'></div><h2><a class='anchor' name='examples'>Examples</a></h2>
-<textarea class='editor'>// Start server
+<div class='codeMirrorContainer'><textarea class='editor'>// Start server
 s.boot;
 
 // Create analyzer in a window
@@ -207,6 +214,7 @@ f.active_(true); // turn it back on
 { Mix.ar(SinOsc.ar([500, 1200, 3000, 9000, 12000], 0, [0.2, 0.1, 0.05, 0.03, 0.01])) }.play(s); // restart some sines
 
 // Close window and scope is killed.</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/FreqScopeView.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/FreqScopeView.schelp</a><br>link::Classes/FreqScopeView::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/FreqScopeView.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/FreqScopeView.schelp</a><br>link::Classes/FreqScopeView::<br></div></div><script src='./../static/editor.js' type='text/javascript'></script>
 </body></html>

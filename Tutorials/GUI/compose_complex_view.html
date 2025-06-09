@@ -1,0 +1,411 @@
+<!doctype html><html lang='en'><head><title>GUI: Composing views with basic components | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../../static/themes/default.css' type='text/css' />
+<link rel='stylesheet' href='./../../frontend.css' type='text/css' />
+<link rel='stylesheet' href='./../../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../../static/lib/katex/katex.min.css' />
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+<script src='./../../static/lib/jquery.min.js'></script>
+<script src='./../../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../../static/lib/katex/katex.min.js' type='text/javascript'></script>
+<script>
+var helpRoot = './../..';
+var scdoc_title = 'GUI: Composing views with basic components';
+var scdoc_sc_version = '3.14.0-rc1';
+</script>
+<script src='./../../static/scdoc.js' type='text/javascript'></script>
+<script src='./../../docmap.js' type='text/javascript'></script>
+<script src='./../../frontend.js' type='text/javascript'></script>
+<script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
+</head>
+<body onload='fixTOC()'>
+<div id='toc'>
+<div id='toctitle'>GUI: Composing views with basic components:</div>
+<span class='toc_search'>Filter: <input id='toc_search'></span><ul class='toc'><li class='toc1'><a href='#GUI%20Tutorial'>GUI Tutorial</a></li>
+<ul class='toc'></ul><li class='toc1'><a href='#What%20is%20this%20tutorial%20about?'>What is this tutorial about?</a></li>
+<ul class='toc'></ul><li class='toc1'><a href='#Composing%20a%20Slider%20with%20a%20title%20and%20an%20editable%20text%20field'>Composing a Slider with a title and an editable text field</a></li>
+<ul class='toc'></ul><li class='toc1'><a href='#Centralizing%20Views%20actions%20with%20a%20single%20Function'>Centralizing Views actions with a single Function</a></li>
+<ul class='toc'></ul><li class='toc1'><a href='#Creating%20a%20Tab%20View'>Creating a Tab View</a></li>
+<ul class='toc'></ul><li class='toc1'><a href='#Implementing%20a%20view%20minimizer'>Implementing a view minimizer</a></li>
+<ul class='toc'></ul></ul></div><div id='menubar'></div>
+<div class='contents'>
+<div class='header'>
+<div id='label'>
+<span id='folder'>Tutorials/GUI</span>
+ | <span id='categories'><a href='./../../Browse.html#Tutorials'>Tutorials</a>&#8201;&gt;&#8201;<a href='./../../Browse.html#Tutorials>GUI'>GUI</a></span>
+</div><h1>GUI: Composing views with basic components</h1>
+<div id='summary'>General examples about composing views with basic GUI components.</div>
+</div>
+<div class='subheader'>
+<div id='related'>See also: <a href="./../../Tutorials/GUI/create_window.html">GUI: Create a Window</a>, <a href="./../../Tutorials/GUI/create_simple_instrument_view.html">GUI: Interfacing an instrument with a View</a></div>
+</div>
+<h2><a class='anchor' name='GUI%20Tutorial'>GUI Tutorial</a></h2>
+
+<p>This helpfile is part of a <a href="./../../Tutorials/GUI/tutorial_intro.html">GUI tutorial</a>.
+<p>It is the third part of a beginner's introduction to SuperCollider's GUI system. First part covers  <a href="./../../Tutorials/GUI/create_window.html">creating a window</a>, while second part talks about <a href="./../../Tutorials/GUI/create_simple_instrument_view.html">interfacing a synth with a GUI interface</a>.<h2><a class='anchor' name='What%20is%20this%20tutorial%20about?'>What is this tutorial about?</a></h2>
+
+<p>This tutorial presents <strong>different interfaces you might need to construct</strong> when working with SuperCollider's system, <strong>and discuss their particularities</strong>. If you need a more detailed tutorial about the basics of view composition, you should read <a href="./../../Tutorials/GUI/create_simple_instrument_view.html">GUI: Interfacing an instrument with a View</a> first.
+<p><strong>SuperCollider implements different GUI components that allow you to compose complex softwares interfaces.</strong>
+<p>The list of those components is available in the documentation, by selecting <strong>Browse &gt; GUI &gt; Views</strong>.
+<p>You can see those components as some base building blocks allowing you to construct a greater structure.<h2><a class='anchor' name='Composing%20a%20Slider%20with%20a%20title%20and%20an%20editable%20text%20field'>Composing a Slider with a title and an editable text field</a></h2>
+
+<p>This is the simplest example about view composition: a <a href="./../../Classes/Slider.html">Slider</a>, a <a href="./../../Classes/TextField.html">TextField</a> and a <a href="./../../Classes/StaticText.html">StaticText</a>. Not much to say here, the code mostly speaks for itself. The only thing to remember is to have the <a href="./../../Classes/Slider.html">Slider</a> and the <a href="./../../Classes/TextField.html">TextField</a> update each other accordingly when edited.
+<p><strong>Please note that this example is 'unsafe'</strong>: there is no mechanism preventing to enter high values inside the <a href="./../../Classes/TextField.html">TextField</a>: any float number is valid. You are still responsible to clip values to the correct range when using a <a href="./../../Classes/TextField.html">TextField</a>. Entering a non-valid number in the <a href="./../../Classes/TextField.html">TextField</a> will set the value to 0.0 (because converting a non-float <a href="./../../Classes/String.html">String</a> with <code>.asFloat</code> returns 0.0).<div class='codeMirrorContainer'><textarea class='editor'>(
+var value = 1;
+var displayValue = { |value|
+    value.postln;
+};
+
+var sliderView = UserView()
+.bounds_(Rect(0, 0, 400, 64));
+var slider;
+var text = StaticText()
+.align_(\center)
+.string_("Slider Name");
+var field;
+
+slider = Slider()
+.orientation_(\horizontal)
+.action_({
+    value = slider.value;
+    field.string_(
+        value.trunc(0.01).asString);
+    displayValue.value(value);
+});
+
+field = TextField()
+.align_(\center)
+.string_(value.asString)
+.maxWidth_(64)
+.action_({
+    value = field.string.asFloat;
+    slider.value_(value);
+    displayValue.value(value);
+});
+
+sliderView.layout_(
+    HLayout()
+    .add(
+        VLayout()
+        .add(text)
+        .add(slider),
+    )
+    .add(field)
+);
+
+sliderView.front;
+)</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+<h2><a class='anchor' name='Centralizing%20Views%20actions%20with%20a%20single%20Function'>Centralizing Views actions with a single Function</a></h2>
+
+<p>This example is the continuation of the previous one, and explains why <strong>UI components shouldn't be directly responsible for the action they ultimately perform</strong>. It also talks briefly about focus and keyboard input response.
+<p>One of the <strong>common mistake when starting using SuperCollider's GUI system is to use a View's action function as if it was effectively the function responsible for modifying the software</strong>. Even if it works reliably if there is only one View associated with the algorithm, this tends to decrease code readability. When several Views are tied to the same algorithm, this almost always introduces issues, as one can see in the previous example.
+<p>The next example shows <strong>how to centralize the algorithm in a single</strong> <a href="./../../Classes/Function.html">Function</a>, which is responsible for applying the modification to the software, then update the Views accordingly. In this context, <strong>View's action functions are only responsible to convert the data they provide to the right format, then to call the centralizing function</strong>.
+<p>Here, several views are using the <code>updateValue</code> function to modify the value. This function also updates every views at once. What's interesting is that the function clips the value if it was out of bounds: this is preventing users to specify a wrong value when using the <a href="./../../Classes/TextField.html">TextField</a>. This will clip any wrong value, regardless of its origin.
+<p>Both the <a href="./../../Classes/Slider.html">Slider</a> and the <a href="./../../Classes/TextField.html">TextField</a> have really small action functions: they only convert the value to the right format, then call <code>updateValue</code>. Beside readability, we only need to modify <code>updateValue</code> if we have to change the algorithm. View's <code>action</code> functions aren't concerned by any changes once set.
+<p>In this particular example, I also implement a switch statement which <strong>allows the window to respond to keyboard inputs</strong>. Since both <a href="./../../Classes/Slider.html">Slider</a> and <a href="./../../Classes/TextField.html">TextField</a> natively respond to keyboard inputs events, we have to manipulate Views focus to specify the context of the events.<div class='codeMirrorContainer'><textarea class='editor'>(
+// Specifying default value, and its range
+var valueDefault = 440;
+var valueMin = 440;
+var valueMax = 880;
+// Referencing value
+// for keyboard events
+var currentValue = valueDefault;
+
+var window = Window("", Rect(100, 100, 400, 400));
+
+var slider = Slider()
+.orientation_(\horizontal)
+.maxHeight_(64)
+.value_(
+    valueDefault.linlin(valueMin, valueMax, 0, 1)
+);
+
+var textField = TextField()
+.string_(valueDefault.asString)
+.align_(\center);
+
+// The centralizing function:
+var updateValue = { |value|
+    // Clip the value to the correct range
+    currentValue = value.clip(valueMin, valueMax);
+
+    // This is where you'd implement actual controls
+    // e.g.
+    // synth.set(\freq, value);
+
+    // Now we can update our interface
+
+    // Adapt the value back to the slider's range
+    slider.value_(
+        currentValue.linlin(valueMin, valueMax, 0, 1
+    ));
+
+    // Convert the value to string format for the textField
+    textField.string_(currentValue.trunc(0.01).asString);
+};
+
+// The slider needs to map its value to the correct
+// range before calling the function
+slider.action_({
+    updateValue.value(
+        slider.value.linlin(0, 1, valueMin, valueMax)
+    );
+});
+
+// The textField needs to convert its value
+// to float format before calling the function
+textField.action_({
+    updateValue.value(textField.string.asFloat);
+});
+
+// Clicking the background removes
+// slider and textField focus,
+// allowing to use arrow keys
+// to control the value directly
+window.view.mouseDownAction_({
+    slider.focus(false);
+    textField.focus(false);
+});
+
+// Setup the windows view
+// so it responds to arrow
+// keys events
+window.view.keyDownAction_({ |view, char, mod, unicode, keycode|
+    switch(keycode)
+    // Arrow LEFT detection
+    { 65361 } { updateValue.value(currentValue * 0.99); }
+    // Arrow RIGHT detection
+    { 65363 } { updateValue.value(currentValue * 1.01); }
+    // Arrow UP detection
+    { 65362 } { updateValue.value(currentValue * 1.1); }
+    // Arrow DOWN detection
+    { 65364 } { updateValue.value(currentValue * 0.9); };
+});
+
+window.layout_(
+    VLayout()
+    .add(slider)
+    .add(textField)
+);
+
+// Unfocus the slider,
+// which has focus by default
+window.view.focus(true);
+
+window.front;
+)</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+<div class='note'><span class='notelabel'>NOTE:</span> There are several other ways to interface algorithms with graphical user interfaces. One of the most widely spread is the <a href="https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller">Model-View-Controller design pattern</a>. For SuperCollider implementation of the Model-View-Controller paradigm, see <a href="./../../Classes/SimpleController.html">SimpleController</a>.</div><h2><a class='anchor' name='Creating%20a%20Tab%20View'>Creating a Tab View</a></h2>
+
+<p>An interface that provides a simple tab system, like one would find in a web browser, allowing to switch between several web pages.
+<p>To do this, we can <strong>combine two simple building blocks</strong>: some <a href="./../../Classes/Button.html">Button</a>s, and a <a href="./../../Classes/StackLayout.html">StackLayout</a>.
+<p>A <a href="./../../Classes/StackLayout.html">StackLayout</a> allows to <strong>insert several graphical contexts on top of each other</strong>, as you would pile some drawings on top of each other. You can chose to only display one of them, or all of them, in which case you can see a view under another view. This is similar to the layer system you can find in drawing softwares.<div class='codeMirrorContainer'><textarea class='editor'>(
+var tabView = UserView();
+var stackLayout = StackLayout();
+var buttonLayout = HLayout();
+
+var tabNames = [
+    "Tab One",
+    "Tab Two",
+    "Tab Three"
+];
+var tabs = List(0);
+
+tabNames.do({ |tabName, tabIndex|
+    var button = Button()
+    .string_(tabName)
+    // Map the button to the stackLayout index:
+    .action_({ stackLayout.index_(tabIndex); });
+
+    // Tabs are created here
+    // because it is only an example.
+    // In real code,
+    // your views have likely
+    // been created before.
+    var tab = UserView()
+    .background_(Color.rand);
+
+    buttonLayout.add(button);
+    stackLayout.add(tab);
+});
+
+// Allows to specify the starting tab
+stackLayout.index_(0);
+
+tabView.layout_(
+    VLayout()
+    .add(buttonLayout, 1)
+    .add(stackLayout, 9)
+);
+
+tabView.front;
+)</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+<h2><a class='anchor' name='Implementing%20a%20view%20minimizer'>Implementing a view minimizer</a></h2>
+
+<p>This example demonstrate how to <strong>toggle a views visibility as one would use a window minimize function</strong>.
+<p>This is possible because <strong>a layout redraws its children when their visibility is modified</strong>.
+<p>The window is first split vertically in two: a main view, and a small menu that 'contains' hidden views. This menu is only visible when it is non-empty.
+<p>For each of our subviews (in our example, a <a href="./../../Classes/MultiSliderView.html">MultiSliderView</a> and a <a href="./../../Classes/StaticText.html">StaticText</a>), we are creating two <a href="./../../Classes/Button.html">Button</a>s: one that hides the view, and is situated in the same layout as the view it is hiding, and one inside the menu, that displays it back. They control the views visibility, and they also control the visibility of the menu.<div class='codeMirrorContainer'><textarea class='editor'>(
+var window = Window(
+    "Visibility Toggle",
+    Rect(100, 100, 600, 400)
+);
+
+// Our main display
+var mainView = UserView()
+.layout_(HLayout());
+
+// Restricting max height
+// because it is only a menu
+var visibilityView = UserView()
+.maxHeight_(64)
+.layout_(HLayout());
+
+// We reference the
+// number of hidden views
+// to hide the 'visibility menu'
+// when no views are hidden
+var numberOfHiddenView = 0;
+
+// A multiSlider example
+var multiSliderView;
+var multiSliderHideButton;
+var multiSliderShowButton;
+var multiSlider;
+
+// A text example
+var textView;
+var textHideButton;
+var textShowButton;
+var text;
+
+// Setup the multiSlider view
+multiSliderView = UserView()
+.layout_(VLayout());
+
+multiSlider = MultiSliderView()
+.value_([1, 2, 3, 4, 5, 6, 7, 8].reciprocal)
+.drawLines_(true)
+.elasticMode_(1);
+
+multiSliderHideButton = Button()
+.string_("Hide MultiSlider")
+.maxHeight_(64);
+
+// Show button is not visible on startup
+multiSliderShowButton = Button()
+.visible_(false)
+.string_("Show MultiSlider")
+.maxHeight_(64);
+
+multiSliderView.layout.add(
+    multiSliderHideButton, 1);
+multiSliderView.layout.add(
+    multiSlider, 9);
+
+// Insert the subview into the main view
+mainView.layout.add(multiSliderView, 1);
+// Add the 'show' button to the visibility view
+visibilityView.layout.add(multiSliderShowButton);
+
+// Setup the text view
+textView = UserView()
+.layout_(VLayout());
+
+text = StaticText()
+.string_("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam.")
+.align_(\center);
+
+textHideButton = Button()
+.string_("Hide Text")
+.maxHeight_(64);
+
+// Show button is not visible on startup
+textShowButton = Button()
+.visible_(false)
+.string_("Show Text")
+.maxHeight_(64);
+
+textView.layout.add(
+    textHideButton, 1);
+textView.layout.add(
+    text, 9);
+
+// Insert the subview into the main view
+mainView.layout.add(textView, 1);
+// Add the 'show' button to the visibility view
+visibilityView.layout.add(textShowButton);
+
+// Constructing the top level
+window.layout_(
+    VLayout()
+    .add(mainView)
+    .add(visibilityView)
+);
+
+// Hide the visibility view,
+// because everything is visible at start
+visibilityView.visible_(false);
+
+
+// --- Here's the visibility logic: ---
+// When the hide button is pressed
+multiSliderHideButton.action_({
+    // Hide the view
+    multiSliderView.visible_(false);
+    // Set the show button visible
+    multiSliderShowButton.visible_(true);
+    // Increment the number of hidden views
+    numberOfHiddenView = numberOfHiddenView + 1;
+    // If exactly one item is hidden,
+    // this means we have to show the visibility view
+    // which was previously hidden
+    if(numberOfHiddenView == 1)
+    { visibilityView.visible_(true); };
+});
+
+// Now the inverse for the show button:
+// When the show button is pressed
+multiSliderShowButton.action_({
+    // Show the view
+    multiSliderView.visible_(true);
+    // Hide the show button
+    multiSliderShowButton.visible_(false);
+    // Decrement the number of hidden views
+    numberOfHiddenView = numberOfHiddenView - 1;
+    // If there is no hidden item,
+    // hide the visibility view
+    if(numberOfHiddenView == 0)
+    { visibilityView.visible_(false); };
+});
+
+// Same for the text view:
+textHideButton.action_({
+    textView.visible_(false);
+    textShowButton.visible_(true);
+    numberOfHiddenView = numberOfHiddenView + 1;
+    if(numberOfHiddenView == 1)
+    { visibilityView.visible_(true); };
+});
+
+textShowButton.action_({
+    textView.visible_(true);
+    textShowButton.visible_(false);
+    numberOfHiddenView = numberOfHiddenView - 1;
+    if(numberOfHiddenView == 0)
+    { visibilityView.visible_(false); };
+});
+
+// Done
+window.front;
+)</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+
+<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Tutorials/GUI/compose_complex_view.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Tutorials/GUI/compose_complex_view.schelp</a><br>link::Tutorials/GUI/compose_complex_view::<br></div></div><script src='./../../static/editor.js' type='text/javascript'></script>
+</body></html>

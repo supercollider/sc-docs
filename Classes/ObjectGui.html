@@ -1,21 +1,25 @@
-<!doctype html><html lang='en'><head><title>ObjectGui | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>ObjectGui | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../lib/jquery.min.js'></script>
-<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/jquery.min.js'></script>
+<script src='./../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './..';
 var scdoc_title = 'ObjectGui';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../static/scdoc.js' type='text/javascript'></script>
 <script src='./../docmap.js' type='text/javascript'></script>
+<script src='./../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
@@ -58,13 +62,14 @@ var scdoc_sc_version = '3.13.1';
 <p>The default guiClass for an Object is ObjectGui.  So if a class does not implement guiClass at all, then at least there is a default ObjectGui that will display the name.
 <p>Many subclasses override the guiClass method to specify a different class, one that subclasses ObjectGui.
 <p>It is the simplest display, it is just the object asString.
-<p>The .gui method is called on your model:<textarea class='editor'>// standard usage
-theModel.gui( parent, bounds )
+<p>The .gui method is called on your model:<div class='codeMirrorContainer'><textarea class='editor'>// standard usage
+theModel.gui(parent, bounds)
 
 // this results in these steps:
 guiClass = theModel.guiClass;
-gui = guiClass.new( theModel );
-gui.gui( parent, bounds );</textarea>
+gui = guiClass.new(theModel);
+gui.gui(parent, bounds);</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p>In addition to those steps the model/gui dependencies are managed, defaults (nil parent or nil bounds) are managed and when the window or parent view is closed then dependencies are safely managed.<h2><a class='anchor' name='classmethods'>Class Methods</a></h2>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='*new' href='./../Overviews/Methods.html#new'>new</a></h3>
@@ -93,12 +98,12 @@ gui.gui( parent, bounds );</textarea>
 <p>The model. Within your gui class the model is already in the instance variable 'model'.<tr><td class='argumentname'>theChanger<td class='argumentdesc'>
 <p>Depends on the conventions of how .changed was called. If an object called someModel.changed(this) then it is supplying itself as the changer and will be passed through here. Sometimes a flag is used: someModel.changed('points') and the gui may know of and participate in that convention. Sometimes no changer is passed in.</table></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-gui' href='./../Overviews/Methods.html#gui'>gui</a></h3>
 <div class='method'>
-<p>The standard method to create a view / window. Usually you call yourModel.gui(parent,bounds) and this creates the gui (of the related ObjectGui subclass) and then theObjectGui.gui(parent,bounds) is called, forwarding the arguments. So this method is what receives the forwarded (parent,bounds) from the initial call to theModel.gui(parent,bounds). Usually you do not call this manually and would avoid reimplementing it.<h4>Arguments:</h4>
+<p>The standard method to create a view / window. Usually you call yourModel.gui(parent, bounds) and this creates the gui (of the related ObjectGui subclass) and then theObjectGui.gui(parent, bounds) is called, forwarding the arguments. So this method is what receives the forwarded (parent, bounds) from the initial call to theModel.gui(parent, bounds). Usually you do not call this manually and would avoid reimplementing it.<h4>Arguments:</h4>
 <table class='arguments'>
 <tr><td class='argumentname'>parent<td class='argumentdesc'>
 <p>parent view : nil, a Window, a FlowView or any other usable container view.<tr><td class='argumentname'>bounds<td class='argumentdesc'>
 <p>nil or a Rect. The default of nil will offer the entire bounds to the guiBody method and then shrink the view size afterwards to the exact size of the contents that were actually added.<tr><td class='argumentname'>... args<td class='argumentdesc'>
-<p>More args may be passed into theModel.gui(parent,bounds,anArg,moreArg) and will be forwarded to guiBody.</table><h4>Returns:</h4>
+<p>More args may be passed into theModel.gui(parent, bounds, anArg, moreArg) and will be forwarded to guiBody.</table><h4>Returns:</h4>
 <div class='returnvalue'>
 <p>this</div></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-guify' href='./../Overviews/Methods.html#guify'>guify</a></h3>
 <div class='method'>
@@ -141,9 +146,9 @@ gui.gui( parent, bounds );</textarea>
 <p>the layout<tr><td class='argumentname'>name<td class='argumentdesc'>
 <p>the string to display</table></div><h3><a class='anchor' name='Inherited%20instance%20methods'>Inherited instance methods</a></h3>
 <div id='inheritedinstmets'></div><h2><a class='anchor' name='examples'>Examples</a></h2>
-<textarea class='editor'>YourSimpleGuiClass : ObjectGui {
+<div class='codeMirrorContainer'><textarea class='editor'>YourSimpleGuiClass : ObjectGui {
 
-    guiBody { arg layout;
+    guiBody { |layout|
     
         // we refer to the model and
         // access its variable howFast.
@@ -160,8 +165,8 @@ YourGuiClass : ObjectGui {
     
     var numberEditor;
     
-    //for example
-    guiBody { arg layout;
+    // for example
+    guiBody { |layout|
         var r;
         // the object you are making a gui for is referred to as the model
         
@@ -172,19 +177,19 @@ YourGuiClass : ObjectGui {
         model.someParam.gui(layout);
         
         // using non 'gui' objects
-        r = layout.layRight(300,300); // allocate yourself some space
-        Button(layout.win,r)
-            .action_({ arg butt;
+        r = layout.layRight(300, 300); // allocate yourself some space
+        Button(layout.win, r)
+            .action_({ |butt|
                 model.goApeShit;
             });
         
         // note: NumberEditor is a cruciallib class
         // which is itself a model (its an editor of a value)
         // and has its own gui class that creates and manages the NumberBox view
-        numberEditor = NumberEditor(model.howFast,[0,100])
-            .action_({ arg val; 
-                model.howFast = val; 
-                model.changed(this); 
+        numberEditor = NumberEditor(model.howFast, [0, 100])
+            .action_({ |val|
+                model.howFast = val;
+                model.changed(this);
                 // tell the model that this gui changed it
             });
         numberEditor.gui(layout);
@@ -192,9 +197,9 @@ YourGuiClass : ObjectGui {
     
     // your gui object will have update called any time the .changed message
     // is sent to your model
-    update { arg changed,changer;
+    update { |changed, changer|
     
-        if(changer !== this,{ 
+        if(changer !== this, {
             /* if it is this gui object that changed the value
                 using the numberEditor, then we already have a correct
                 display and don't need to waste cpu to update it.
@@ -215,6 +220,7 @@ YourGuiClass : ObjectGui {
     }
 
 }</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/ObjectGui.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/ObjectGui.schelp</a><br>link::Classes/ObjectGui::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/ObjectGui.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/ObjectGui.schelp</a><br>link::Classes/ObjectGui::<br></div></div><script src='./../static/editor.js' type='text/javascript'></script>
 </body></html>

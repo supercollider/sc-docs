@@ -1,21 +1,25 @@
-<!doctype html><html lang='en'><head><title>Multi-client Setups | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>Multi-client Setups | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../lib/jquery.min.js'></script>
-<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/jquery.min.js'></script>
+<script src='./../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './..';
 var scdoc_title = 'Multi-client Setups';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../static/scdoc.js' type='text/javascript'></script>
 <script src='./../docmap.js' type='text/javascript'></script>
+<script src='./../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
@@ -53,7 +57,7 @@ var scdoc_sc_version = '3.13.1';
 <li>On startup, scsynth (the server process) is started with a fixed limit of maxLogins.<li>When a local or remote server object/client has no user-specified clientID, scsynth sends back the next free clientID, and the client uses that clientID.<li>When a local or remote server object/client was created with specific clientID, scsynth sends back that number if it was free, or the next free clientID if not; the client should use the free number in any case, as the other may clash with a client already logged in.<li>In case the client was already registered and tries to register again (after a reboot or network problem), scsynth sends back a failed message AND the clientID this client had earlier, and the client will use that clientID.<li>[After pull request #3181] scsynth also sends back the maxLogins value it was started with, so clients can also adjust their internal allocator settings to it.</ul>
 <h3><a class='anchor' name='Code%20examples%20and%20tests'>Code examples and tests</a></h3>
 
-<p>Recommended usage for multiple clients on the same server is to use identical options settings for all clients, and logging into the scsynth process from different sclang instances, which are typically on different laptops.<textarea class='editor'>// on the machine where scsynth runs, it can be the default server.
+<p>Recommended usage for multiple clients on the same server is to use identical options settings for all clients, and logging into the scsynth process from different sclang instances, which are typically on different laptops.<div class='codeMirrorContainer'><textarea class='editor'>// on the machine where scsynth runs, it can be the default server.
 // set the maximum number of client logins expected:
 s.options.maxLogins = 8;
 // now reboot the server, so that it will have maxLogins
@@ -63,8 +67,9 @@ s.reboot;
 s.options.maxLogins = 8;
 // example NetAddr of the machine that runs scsynth on standard port
 s.addr = NetAddr("168.192.1.20", 57110);</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>When fixed clientIDs for multiclient setups are desired, the recommended usage is to set every clientID on creation.<textarea class='editor'>s.options.maxLogins = 8;
+<p>When fixed clientIDs for multiclient setups are desired, the recommended usage is to set every clientID on creation.<div class='codeMirrorContainer'><textarea class='editor'>s.options.maxLogins = 8;
 
 r = Server(
     \remote4,
@@ -79,6 +84,7 @@ r = Server(
 s.userSpecifiedClientID;
 // and z knows to keep its clientID
 r.userSpecifiedClientID;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h3><a class='anchor' name='Separate%20defaultGroups'>Separate defaultGroups</a></h3>
 
 <p>For info on what a default group is, see <a href="./../Reference/default_group.html">Default Group</a>.
@@ -86,7 +92,7 @@ r.userSpecifiedClientID;</textarea>
 <p>A client also knows the defaultGroups of all other clients that may login, so it can reason about other clients, and be as sharing-friendly as desired, see below in subsection CmdPeriod behavior.
 <p><code>s.defaultGroups;</code><h3><a class='anchor' name='Easy-to-trace%20nodeIDs'>Easy-to-trace nodeIDs</a></h3>
 
-<p>For details on node allocation, see NodeIDAllocator and ReadableNodeIDAllocator class and help files. The scheme from NodeIDAllocator is also followed by many non-sclang clients allocation ranges; in networks with these, NodeIDAllocator will be the safe choice.<textarea class='editor'>// NodeIDAllocator uses a fixed binary prefix of (2 ** 26) * clientID:
+<p>For details on node allocation, see NodeIDAllocator and ReadableNodeIDAllocator class and help files. The scheme from NodeIDAllocator is also followed by many non-sclang clients allocation ranges; in networks with these, NodeIDAllocator will be the safe choice.<div class='codeMirrorContainer'><textarea class='editor'>// NodeIDAllocator uses a fixed binary prefix of (2 ** 26) * clientID:
 Server.nodeAllocClass = NodeIDAllocator;
 s.newAllocators;
 r.newAllocators;  // remake allocators
@@ -162,9 +168,10 @@ Ndef(\x, { Dust.ar(10 ! 2) });
 Ndef(\x).play;
 Ndef(\x).filter(10, { |in| Ringz.ar(in, [600, 800], 0.03) }).play;
 Ndef(\x).end(3);</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h3><a class='anchor' name='Bus%20channel%20and%20buffer%20numbers'>Bus channel and buffer numbers</a></h3>
 
-<p>The allocators for audio and control busses and for buffers split the full number range of scsynth evenly for the number of clients expected.<textarea class='editor'>// default value for clientID is 0 and maxLogins is 1
+<p>The allocators for audio and control busses and for buffers split the full number range of scsynth evenly for the number of clients expected.<div class='codeMirrorContainer'><textarea class='editor'>// default value for clientID is 0 and maxLogins is 1
 Server.default = Server.local;
 s.clientID;   // 0
 s.options.maxLogins; // default 1
@@ -195,8 +202,9 @@ r.newBusAllocators;
 3.collect { Bus.audio(r, 2) }; // 512, 514, 516
 // control bus range starts at 8192 of 16384 total range
 3.collect { Bus.control(r, 2) };</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>Buffer allocation uses the same class, ContiguousBlockAllocator, and thus works the same way.<textarea class='editor'>// show buffer allocation
+<p>Buffer allocation uses the same class, ContiguousBlockAllocator, and thus works the same way.<div class='codeMirrorContainer'><textarea class='editor'>// show buffer allocation
 Server.default = Server.local;
 s.bufferAllocator.size;
 3.collect { Buffer(s) }; // starts at 0
@@ -205,11 +213,12 @@ r.bufferAllocator.size;
 3.collect { Buffer(r) }; // starts at 256
 
 // more buffer alloc examples desirable here?</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h3><a class='anchor' name='Configuring%20CmdPeriod%20behavior'>Configuring CmdPeriod behavior</a></h3>
 
 <p>In networked performances, it is useful that clients have well-chosen emergency access to 'their' sounds on a remote server; and it may make sense to give the local client more emergency power. Both can be configured easily.
 <p><strong>Default behavior</strong>
-<p>By default, the local client will kill all sounds, and only reconstruct its defaultGroup; on remote clients, CmdPeriod does not affect remoter servers at all.<textarea class='editor'>// default - single client:
+<p>By default, the local client will kill all sounds, and only reconstruct its defaultGroup; on remote clients, CmdPeriod does not affect remoter servers at all.<div class='codeMirrorContainer'><textarea class='editor'>// default - single client:
 s.options.maxLogins_(1);
 s.reboot;
 s.plotTree;        // watch to debug
@@ -239,18 +248,20 @@ s.sendDefaultGroups; // four groups in plotTree
 // make sure we have nothing in s.tree:
 s.tree = nil;
 s.freeAll; // &lt;- by default, frees other client's defaultGroups too.</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p><strong>Remote-friendly local parent setup</strong>
 <p>Now, all sounds on the server are gone, as desired. But the other clients cannot start new synths now, because their defaultGroups are gone too!
-<p>Thus, the local client should reconstruct them, so the other clients can pick up playing again:<textarea class='editor'>// - easiest option:
+<p>Thus, the local client should reconstruct them, so the other clients can pick up playing again:<div class='codeMirrorContainer'><textarea class='editor'>// - easiest option:
 s.tree = { s.sendDefaultGroups; };
 (dur: inf).play;  // test sound
 Group(0);   // make second group at root level
 CmdPeriod.run; // simulate CmdPeriod key action
 // -&gt; still stops all sounds, but then remakes all defaultGroups,
 // so the other clients can continue.</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p><strong>Give remote clients control of their sounds</strong><textarea class='editor'>// create a fake remote server
+<p><strong>Give remote clients control of their sounds</strong><div class='codeMirrorContainer'><textarea class='editor'>// create a fake remote server
 x = Server(\pseudoRem3, s.addr, s.options, 3);
 // method to
 ~freeMyGroupX = { x.freeMyGroup };
@@ -283,9 +294,10 @@ CmdPeriod.run; // simulate CmdPeriod key action
 
 CmdPeriod.remove(~freeMyGroupS); // cleanup
 s.freeAll;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p><strong>More power to all</strong>
-<p>In a less polite symmetrical setup, CmdPeriod stops all sounds on all clients, but keeps all defaultGroups running.<textarea class='editor'>~myserver = s; // s on home machine, remote client on others
+<p>In a less polite symmetrical setup, CmdPeriod stops all sounds on all clients, but keeps all defaultGroups running.<div class='codeMirrorContainer'><textarea class='editor'>~myserver = s; // s on home machine, remote client on others
 ~myserver.sendDefaultGroups;
 ~freeDefaultGroups = { ~myserver.freeDefaultGroups };
 CmdPeriod.add(~freeDefaultGroups);
@@ -295,6 +307,7 @@ CmdPeriod.add(~freeDefaultGroups);
 
 CmdPeriod.run; // simulate CmdPeriod key action
 // -&gt; all clients stop sound in all groups, groups remain.</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Guides/MultiClient_Setups.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Guides/MultiClient_Setups.schelp</a><br>link::Guides/MultiClient_Setups::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Guides/MultiClient_Setups.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Guides/MultiClient_Setups.schelp</a><br>link::Guides/MultiClient_Setups::<br></div></div><script src='./../static/editor.js' type='text/javascript'></script>
 </body></html>

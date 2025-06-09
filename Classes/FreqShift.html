@@ -1,21 +1,25 @@
-<!doctype html><html lang='en'><head><title>FreqShift | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>FreqShift | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../lib/jquery.min.js'></script>
-<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/jquery.min.js'></script>
+<script src='./../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './..';
 var scdoc_title = 'FreqShift';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../static/scdoc.js' type='text/javascript'></script>
 <script src='./../docmap.js' type='text/javascript'></script>
+<script src='./../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
@@ -40,7 +44,7 @@ var scdoc_sc_version = '3.13.1';
 <div id='summary'>Frequency Shifter.</div>
 </div>
 <div class='subheader'>
-<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/Common/Audio/Hilbert.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Audio/Hilbert.sc'>Hilbert.sc</a></div><div id='related'>See also: <a href="./../Classes/Hilbert.html">Hilbert</a>, <a href="./../Classes/HilbertFIR.html">HilbertFIR</a></div>
+<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/Common/Audio/Hilbert.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Audio/Hilbert.sc'>Hilbert.sc</a></div><div id='related'>See also: <a href="./../Classes/Hilbert.html">Hilbert</a>, <a href="./../Classes/HilbertFIR.html">HilbertFIR</a></div>
 </div>
 <h2><a class='anchor' name='description'>Description</a></h2>
 
@@ -56,42 +60,43 @@ var scdoc_sc_version = '3.13.1';
 <div id='inheritedclassmets'></div><h2><a class='anchor' name='instancemethods'>Instance Methods</a></h2>
 <h3><a class='anchor' name='Inherited%20instance%20methods'>Inherited instance methods</a></h3>
 <div id='inheritedinstmets'></div><h2><a class='anchor' name='examples'>Examples</a></h2>
-<textarea class='editor'>// shifting a 100Hz tone by 1 Hz rising to 500Hz
-{FreqShift.ar(SinOsc.ar(100),XLine.kr(1,500,5),0,[0.1,0.1])}.play(s);
+<div class='codeMirrorContainer'><textarea class='editor'>// shifting a 100Hz tone by 1 Hz rising to 500Hz
+{ FreqShift.ar(SinOsc.ar(100), XLine.kr(1, 500, 5), 0, [0.1, 0.1]) }.play(s);
 
 // shifting a complex tone by 1 Hz rising to 500Hz
-{FreqShift.ar(Klang.ar(`[[101,303,606,808]]),XLine.kr(1,500,10),0,[0.1,0.1])}.play(s);
+{ FreqShift.ar(Klang.ar(`[[101, 303, 606, 808]]), XLine.kr(1, 500, 10), 0, [0.1, 0.1]) }.play(s);
 
 // modulating shift and phase
-{FreqShift.ar(SinOsc.ar(10),LFNoise2.ar(0.3,1500),SinOsc.ar(500).range(0,2pi),[0.1,0.1])}.play(s);
+{ FreqShift.ar(SinOsc.ar(10), LFNoise2.ar(0.3, 1500), SinOsc.ar(500).range(0, 2pi), [0.1, 0.1]) }.play(s);
 
 // the ubiquitous houston example
 (
-b = Buffer.read(s, Platform.resourceDir +/+ "sounds/a11wlk01.wav");
-{FreqShift.ar(PlayBuf.ar(1,b.bufnum,BufRateScale.kr(b.bufnum),loop:1),LFNoise0.kr(0.45,1000),0,[1,1])}.play(s);
+b = Buffer.read(s, ExampleFiles.child);
+{ FreqShift.ar(PlayBuf.ar(1, b.bufnum, BufRateScale.kr(b.bufnum), loop: 1), LFNoise0.kr(0.45, 1000), 0, [1, 1]) }.play(s);
 )
 
 // shifting bandpassed noise
-{FreqShift.ar(BPF.ar(WhiteNoise.ar(0.2),1000,0.001),LFNoise0.kr(5.5,1000),0,[32,32])}.play(s);</textarea>
+{ FreqShift.ar(BPF.ar(WhiteNoise.ar(0.2), 1000, 0.001), LFNoise0.kr(5.5, 1000), 0, [32, 32]) }.play(s);</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h3><a class='anchor' name='More%20Examples'>More Examples</a></h3>
 
-<p>send a SynthDef, run the routine then send a different SynthDef<textarea class='editor'>// simple detune &amp; pitchmod via FreqShift
+<p>send a SynthDef, run the routine then send a different SynthDef<div class='codeMirrorContainer'><textarea class='editor'>// simple detune &amp; pitchmod via FreqShift
 (
-SynthDef(\frqShift1, { |out, freq, detune=1.5|
+SynthDef(\frqShift1, { |out, freq, detune = 1.5|
     var e1, left, right;
-    e1 = EnvGen.ar(Env.new([0, 0.1, 0], [1, 2.3]),1, doneAction: Done.freeSelf);
+    e1 = EnvGen.ar(Env.new([0, 0.1, 0], [1, 2.3]), 1, doneAction: Done.freeSelf);
     left = SinOsc.ar(freq, 0, e1); // original tone
     left = left + FreqShift.ar(left, freq * detune); // shift and add back to original
     right = FreqShift.ar(left, SinOsc.kr(3.23, 0, 5));
-    Out.ar(out, [left,right] * 0.1);
+    Out.ar(out, [left, right] * 0.1);
 }).add;
 )
 
 // the routine
 (
 r = Routine({
-    var table,pitch;
-    table = [0,2,4,5,7,9,11,12];
+    var table, pitch;
+    table = [0, 2, 4, 5, 7, 9, 11, 12];
     inf.do {
         pitch = (48+(12*2.rand) + table.choose).midicps;
         Synth.grain(\frqShift1, [\freq, pitch]);
@@ -102,12 +107,12 @@ r = Routine({
 
 // shift pulse wave in opposite directions
 (
-SynthDef(\frqShift1, { |out, freq, detune=0.15|
+SynthDef(\frqShift1, { |out, freq, detune = 0.15|
     var e1, snd, left, right;
-    e1 = EnvGen.ar(Env.new([0, 1, 0],[0.02, 3.2]), 1, doneAction: Done.freeSelf);
-    snd = Pulse.ar(freq, SinOsc.kr(2.3).range(0.2,0.8), e1); // original tone
-    left = FreqShift.ar(snd,XLine.kr(-0.1,-200,2)); // shift and add back to original
-    right = FreqShift.ar(snd,XLine.kr(0.1,200,2));
+    e1 = EnvGen.ar(Env.new([0, 1, 0], [0.02, 3.2]), 1, doneAction: Done.freeSelf);
+    right = FreqShift.ar(snd, XLine.kr(0.1, 200, 2));
+    snd = Pulse.ar(freq, SinOsc.kr(2.3).range(0.2, 0.8), e1); // original tone
+    left = FreqShift.ar(snd, XLine.kr(-0.1, -200, 2)); // shift and add back to original
     Out.ar(out, [left, right] * 0.1);
 }).add
 )
@@ -115,7 +120,7 @@ SynthDef(\frqShift1, { |out, freq, detune=0.15|
 // FreqShift &gt;&gt; feedback &gt;&gt;&gt; FreqShiftc
 (
 SynthDef("frqShift1", { |out, freq|
-    var e1,snd,snd2,in;
+    var e1, snd, snd2, in;
     in = FreqShift.ar(InFeedback.ar(0, 1) * 3.2, XLine.ar(0.01, freq * 1.5, 1)); // shift the feedback
     e1 = Env.new([0, 0.1, 0], [0.02, 2.98]);
     snd = SinOsc.ar(freq, 0, EnvGen.ar(e1, 1, doneAction: Done.freeSelf));
@@ -128,12 +133,12 @@ SynthDef("frqShift1", { |out, freq|
 // ssllooww columbia tuned shift detune
 (
 r.stop; // stop old routine
-Buffer.read(s, Platform.resourceDir +/+ "sounds/a11wlk01.wav", bufnum:99);
+Buffer.read(s, ExampleFiles.child, bufnum: 99);
 
 SynthDef(\frqShift1, { |out, freq, bufnum|
-    var e1,snd,left,right;
-    e1 = Env.new([0,1,0], [3,1], -4);
-    snd = PlayBuf.ar(1, bufnum, BufRateScale.kr(bufnum) * 0.01, loop:1);
+    var e1, snd, left, right;
+    e1 = Env.new([0, 1, 0], [3, 1], -4);
+    snd = PlayBuf.ar(1, bufnum, BufRateScale.kr(bufnum) * 0.01, loop: 1);
     // subtle shift of the output
     left = FreqShift.ar(snd, freq * 2, 0, EnvGen.ar(e1, 1, doneAction: Done.freeSelf));
     right = FreqShift.ar(snd, freq * 3, 0, EnvGen.ar(e1, 1, doneAction: Done.freeSelf));
@@ -145,7 +150,7 @@ SynthDef(\frqShift1, { |out, freq, bufnum|
 (
 r = Routine({
     var table, pitch;
-    table = [0,2,4,5,7,9,11,12];
+    table = [0, 2, 4, 5, 7, 9, 11, 12];
     inf.do{
         pitch = (48+(12*2.rand) + table.choose).midicps;
         s.sendMsg(\s_new, \frqShift1, -1, 1, 1, \freq, pitch, \bufnum, 99);
@@ -153,5 +158,7 @@ r = Routine({
         };
     }).play
 )</textarea>
-<div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/FreqShift.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/FreqShift.schelp</a><br>link::Classes/FreqShift::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+
+<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/FreqShift.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/FreqShift.schelp</a><br>link::Classes/FreqShift::<br></div></div><script src='./../static/editor.js' type='text/javascript'></script>
 </body></html>

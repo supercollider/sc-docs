@@ -1,21 +1,25 @@
-<!doctype html><html lang='en'><head><title>TempoBusClock | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>TempoBusClock | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../lib/jquery.min.js'></script>
-<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/jquery.min.js'></script>
+<script src='./../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './..';
 var scdoc_title = 'TempoBusClock';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../static/scdoc.js' type='text/javascript'></script>
 <script src='./../docmap.js' type='text/javascript'></script>
+<script src='./../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
@@ -44,7 +48,7 @@ var scdoc_sc_version = '3.13.1';
 <div id='summary'>a clock that synchronizes its tempo with the server</div>
 </div>
 <div class='subheader'>
-<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/JITLib/ProxySpace/TempoBusClock.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/JITLib/ProxySpace/TempoBusClock.sc'>TempoBusClock.sc</a></div><div id='related'>See also: <a href="./../Classes/TempoClock.html">TempoClock</a></div>
+<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/JITLib/ProxySpace/TempoBusClock.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/JITLib/ProxySpace/TempoBusClock.sc'>TempoBusClock.sc</a></div><div id='related'>See also: <a href="./../Classes/TempoClock.html">TempoClock</a></div>
 </div>
 <h2><a class='anchor' name='classmethods'>Class Methods</a></h2>
 <h3 class='method-code'><span class='method-prefix'>TempoBusClock.</span><a class='method-name' name='*new' href='./../Overviews/Methods.html#new'>new</a>(<span class='argstr'>control</span>, <span class='argstr'>tempo</span>, <span class='argstr'>beats</span>, <span class='argstr'>seconds</span>)</h3>
@@ -67,8 +71,8 @@ var scdoc_sc_version = '3.13.1';
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-setTempoAtBeat' href='./../Overviews/Methods.html#setTempoAtBeat'>setTempoAtBeat</a>(<span class='argstr'>newTempo</span>, <span class='argstr'>beats</span>)</h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-setTempoAtSec' href='./../Overviews/Methods.html#setTempoAtSec'>setTempoAtSec</a>(<span class='argstr'>newTempo</span>, <span class='argstr'>secs</span>)</h3>
 <h2><a class='anchor' name='examples'>Examples</a></h2>
-<textarea class='editor'>(
-a = { |tempo=1| Ringz.ar(Impulse.ar(tempo), [501, 500], 1/tempo) }.play;
+<div class='codeMirrorContainer'><textarea class='editor'>(
+a = { |tempo = 1| Ringz.ar(Impulse.ar(tempo), [501, 500], 1/tempo) }.play;
 t = TempoBusClock(a);
 Task { loop { "klink".postln; 1.wait } }.play(t);
 );
@@ -95,6 +99,7 @@ p.clock.tempo = 1.3;
 
 p.clock.tempo = 3;
 p.clock.tempo = 1;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/TempoBusClock.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/TempoBusClock.schelp</a><br>link::Classes/TempoBusClock::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/TempoBusClock.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/TempoBusClock.schelp</a><br>link::Classes/TempoBusClock::<br></div></div><script src='./../static/editor.js' type='text/javascript'></script>
 </body></html>

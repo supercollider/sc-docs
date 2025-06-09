@@ -1,21 +1,25 @@
-<!doctype html><html lang='en'><head><title>ContiguousBlock | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>ContiguousBlock | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../lib/jquery.min.js'></script>
-<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/jquery.min.js'></script>
+<script src='./../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './..';
 var scdoc_title = 'ContiguousBlock';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../static/scdoc.js' type='text/javascript'></script>
 <script src='./../docmap.js' type='text/javascript'></script>
+<script src='./../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
@@ -23,143 +27,124 @@ var scdoc_sc_version = '3.13.1';
 <div id='toctitle'>ContiguousBlock:</div>
 <span class='toc_search'>Filter: <input id='toc_search'></span><ul class='toc'><li class='toc1'><a href='#description'>Description</a></li>
 <ul class='toc'></ul><li class='toc1'><a href='#classmethods'>Class methods</a></li>
-<ul class='toc'><li class='toc2'><a href='#Inherited%20class%20methods'>Inherited class methods</a></li>
-<li class='toc2'><a href='#Undocumented%20class%20methods'>Undocumented class methods</a></li>
 <ul class='toc'><li class='toc3'><a href='#*new'>new</a> </li>
-</ul></ul><li class='toc1'><a href='#instancemethods'>Instance methods</a></li>
-<ul class='toc'><li class='toc2'><a href='#Inherited%20instance%20methods'>Inherited instance methods</a></li>
-<li class='toc2'><a href='#Undocumented%20instance%20methods'>Undocumented instance methods</a></li>
-<ul class='toc'><li class='toc3'><a href='#-address'>address</a> </li>
-<li class='toc3'><a href='#-adjoins'>adjoins</a> </li>
-<li class='toc3'><a href='#-join'>join</a> </li>
-<li class='toc3'><a href='#-printOn'>printOn</a> </li>
+<li class='toc2'><a href='#Inherited%20class%20methods'>Inherited class methods</a></li>
+</ul><li class='toc1'><a href='#instancemethods'>Instance methods</a></li>
+<ul class='toc'><li class='toc3'><a href='#-start'>start</a> </li>
 <li class='toc3'><a href='#-size'>size</a> </li>
-<li class='toc3'><a href='#-split'>split</a> </li>
-<li class='toc3'><a href='#-start'>start</a> </li>
-<li class='toc3'><a href='#-storeArgs'>storeArgs</a> </li>
+<li class='toc3'><a href='#-address'>address</a> </li>
+<li class='toc3'><a href='#-lastAddress'>lastAddress</a> </li>
+<li class='toc3'><a href='#-nextAddress'>nextAddress</a> </li>
 <li class='toc3'><a href='#-used'>used</a> </li>
-</ul></ul><li class='toc1'><a href='#Help%20template'>Help template</a></li>
+<li class='toc3'><a href='#-adjoins'>adjoins</a> </li>
+<li class='toc2'><a href='#Operations'>Operations</a></li>
+<ul class='toc'><li class='toc3'><a href='#-join'>join</a> </li>
+<li class='toc3'><a href='#-split'>split</a> </li>
+</ul><li class='toc2'><a href='#Inherited%20instance%20methods'>Inherited instance methods</a></li>
+</ul><li class='toc1'><a href='#examples'>Examples</a></li>
 <ul class='toc'></ul></ul></div><div id='menubar'></div>
 <div class='contents'>
 <div class='header'>
 <div id='label'>
 <span id='folder'>Classes</span>
- | <span id='categories'><a href='./../Browse.html#Undocumented classes'>Undocumented classes</a></span>
+ | <span id='categories'><a href='./../Browse.html#Control'>Control</a></span>
 </div><h1>ContiguousBlock<span id='superclasses'> : <a href="../Classes/Object.html">Object</a></span>
 </h1>
-<div id='summary'>(Undocumented class)</div>
+<div id='summary'>Represents a range of integer addresses</div>
 </div>
 <div class='subheader'>
-<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/Common/Control/Engine.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Control/Engine.sc'>Engine.sc</a></div></div>
+<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/Common/Control/Engine.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Control/Engine.sc'>Engine.sc</a></div><div id='related'>See also: <a href="./../Classes/ContiguousBlockAllocator.html">ContiguousBlockAllocator</a></div>
+</div>
 <h2><a class='anchor' name='description'>Description</a></h2>
 
-<p>This class is missing documentation.<h2><a class='anchor' name='classmethods'>Class Methods</a></h2>
-<h3><a class='anchor' name='Inherited%20class%20methods'>Inherited class methods</a></h3>
-<div id='inheritedclassmets'></div><h3><a class='anchor' name='Undocumented%20class%20methods'>Undocumented class methods</a></h3>
+<p>A ContiguousBlock is a range of addresses (generally integers &gt;= 0) used in a <a href="./../Classes/ContiguousBlockAllocator.html">ContiguousBlockAllocator</a>. ContiguousBlockAllocator is used in <a href="./../Classes/Server.html">Server</a> to manage buffer numbers and audio/control bus indices.
+<p><code>ContiguousBlock(10, 2)</code> spans address indices 10 and 11.
+<p>Additionally, a ContiguousBlock may be marked as in use or free. See <a href="#-used">-used</a>.<h2><a class='anchor' name='classmethods'>Class Methods</a></h2>
 <h3 class='method-code'><span class='method-prefix'>ContiguousBlock.</span><a class='method-name' name='*new' href='./../Overviews/Methods.html#new'>new</a>(<span class='argstr'>start</span>, <span class='argstr'>size</span>)</h3>
-<h2><a class='anchor' name='instancemethods'>Instance Methods</a></h2>
-<h3><a class='anchor' name='Inherited%20instance%20methods'>Inherited instance methods</a></h3>
-<div id='inheritedinstmets'></div><h3><a class='anchor' name='Undocumented%20instance%20methods'>Undocumented instance methods</a></h3>
-<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-address' href='./../Overviews/Methods.html#address'>address</a></h3>
-<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-adjoins' href='./../Overviews/Methods.html#adjoins'>adjoins</a>(<span class='argstr'>block</span>)</h3>
-<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-join' href='./../Overviews/Methods.html#join'>join</a>(<span class='argstr'>block</span>)</h3>
-<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-printOn' href='./../Overviews/Methods.html#printOn'>printOn</a>(<span class='argstr'>stream</span>)</h3>
-<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-size' href='./../Overviews/Methods.html#size'>size</a></h3>
-<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-split' href='./../Overviews/Methods.html#split'>split</a>(<span class='argstr'>span</span>)</h3>
+<div class='method'>
+<p>Returns a new instance.<h4>Arguments:</h4>
+<table class='arguments'>
+<tr><td class='argumentname'>start<td class='argumentdesc'>
+<p>The starting address of the block.<tr><td class='argumentname'>size<td class='argumentdesc'>
+<p>The number of addresses after <code>start</code> to cover. Should be at least 1.</table></div><h3><a class='anchor' name='Inherited%20class%20methods'>Inherited class methods</a></h3>
+<div id='inheritedclassmets'></div><h2><a class='anchor' name='instancemethods'>Instance Methods</a></h2>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-start' href='./../Overviews/Methods.html#start'>start</a></h3>
-<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-storeArgs' href='./../Overviews/Methods.html#storeArgs'>storeArgs</a></h3>
-<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-used' href='./../Overviews/Methods.html#used'>used</a></h3>
+<div class='method'>
+<p>The starting address of the block.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-size' href='./../Overviews/Methods.html#size'>size</a></h3>
+<div class='method'>
+<p>The number of addresses covered in the block.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-address' href='./../Overviews/Methods.html#address'>address</a></h3>
+<div class='method'>
+<p>A synonym for <code>start</code>.<h4>Returns:</h4>
+<div class='returnvalue'>
+<p>The starting address of the block.</div></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-lastAddress' href='./../Overviews/Methods.html#lastAddress'>lastAddress</a></h3>
+<div class='method'>
+<p>The last address covered within this block: <code>ContiguousBlock(10, 2).lastAddress</code> returns 11.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-nextAddress' href='./../Overviews/Methods.html#nextAddress'>nextAddress</a></h3>
+<div class='method'>
+<p>The starting address immediately following this block. <code>ContiguousBlock(10, 2).lastAddress</code> returns 12, because an adjoining block following this block must begin at address 12.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-used' href='./../Overviews/Methods.html#used'>used</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-used' href='./../Overviews/Methods.html#used'>used</a> = value</h3>
-<h2><a class='anchor' name='Help%20template'>Help template</a></h2>
-
-<p>Copy and paste the text below and save to HelpSource/Classes/ContiguousBlock.schelp<textarea class='editor'>TITLE:: ContiguousBlock
-summary:: (put short description here)
-categories:: Undocumented classes
-related:: Classes/SomeRelatedClass, Reference/SomeRelatedStuff, etc.
-
-DESCRIPTION::
-(put long description here)
-
-
-CLASSMETHODS::
-
-METHOD:: new
-(describe method here)
-
-ARGUMENT:: start
-(describe argument here)
-
-ARGUMENT:: size
-(describe argument here)
-
-returns:: (describe returnvalue here)
-
-
-INSTANCEMETHODS::
-
-METHOD:: address
-(describe method here)
-
-returns:: (describe returnvalue here)
-
-METHOD:: size
-(describe method here)
-
-returns:: (describe returnvalue here)
-
-METHOD:: used
-(describe method here)
-
-returns:: (describe returnvalue here)
-
-METHOD:: storeArgs
-(describe method here)
-
-returns:: (describe returnvalue here)
-
-METHOD:: split
-(describe method here)
-
-ARGUMENT:: span
-(describe argument here)
-
-returns:: (describe returnvalue here)
-
-METHOD:: start
-(describe method here)
-
-returns:: (describe returnvalue here)
-
-METHOD:: adjoins
-(describe method here)
-
-ARGUMENT:: block
-(describe argument here)
-
-returns:: (describe returnvalue here)
-
-METHOD:: join
-(describe method here)
-
-ARGUMENT:: block
-(describe argument here)
-
-returns:: (describe returnvalue here)
-
-METHOD:: printOn
-(describe method here)
-
-ARGUMENT:: stream
-(describe argument here)
-
-returns:: (describe returnvalue here)
+<div class='method'>
+<p>Boolean. <code>true</code> indicates that the block is in use, and <code>false</code> that it is available.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-adjoins' href='./../Overviews/Methods.html#adjoins'>adjoins</a>(<span class='argstr'>block</span>)</h3>
+<div class='method'>
+<p>Answers <code>true</code> if this block touches or overlaps with the argument, and <code>false</code> if there is a gap between the two blocks.<h4>Arguments:</h4>
+<table class='arguments'>
+<tr><td class='argumentname'>block<td class='argumentdesc'>
+<p>A second <code>ContiguousBlock</code>.</table><h4>Returns:</h4>
+<div class='returnvalue'>
+<p>Boolean.</div></div><h3><a class='anchor' name='Operations'>Operations</a></h3>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-join' href='./../Overviews/Methods.html#join'>join</a>(<span class='argstr'>block</span>)</h3>
+<div class='method'>
+<p>Given two adjoining blocks, combines them into a single block. If the blocks do not adjoin, the result is <code>nil</code>.<h4>Arguments:</h4>
+<table class='arguments'>
+<tr><td class='argumentname'>block<td class='argumentdesc'>
+<p>A second <code>ContiguousBlock</code>.</table><h4>Returns:</h4>
+<div class='returnvalue'>
+<p>A new ContiguousBlock, spanning the full range of both input blocks.</div></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-split' href='./../Overviews/Methods.html#split'>split</a>(<span class='argstr'>span</span>)</h3>
+<div class='method'>
+<p>Divides a ContiguousBlock into two new blocks.<h4>Arguments:</h4>
+<table class='arguments'>
+<tr><td class='argumentname'>span<td class='argumentdesc'>
+<p>The size of the first new block. The remainder of the receiver block's size will be allocated to the second block.</table><h4>Returns:</h4>
+<div class='returnvalue'>
+<p>There are three return cases:<dl>
+<dt>Receiver's size &gt; span<dd>Returns an array of two ContiguousBlocks, partitioning the original address space.<dt>Receiver's size == span<dd>Returns an array with the original (identical) block and nil for the second partition.<dt>Receiver's size &lt; span<dd>Returns nil, because the original address space cannot be partitioned to be larger than itself.</dl>
+</div></div><h3><a class='anchor' name='Inherited%20instance%20methods'>Inherited instance methods</a></h3>
+<div id='inheritedinstmets'></div><h2><a class='anchor' name='examples'>Examples</a></h2>
+<div class='codeMirrorContainer'><textarea class='editor'>c = ContiguousBlock(10, 2);
+d = ContiguousBlock(6, 3);
+e = ContiguousBlock(6, 4);
+f = ContiguousBlock(12, 1);
+g = ContiguousBlock(14, 5);
+h = ContiguousBlock(11, 4);
 
 
-EXAMPLES::
+// .adjoins
 
-code::
-(some example code)
-::
-</textarea>
-<div class='doclink'>link::Classes/ContiguousBlock::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+c.adjoins(d)  // false: 6-8 then 10-11
+c.adjoins(e)  // true: 6-9, 10-11
+c.adjoins(f)  // true: 10-11, 12
+c.adjoins(g)  // false: 10-11. 14-18
+c.adjoins(h)  // true: overlap (10-11, 11-14)
+
+
+// .join
+
+// join 10-11 to 6-9, new block is 6-11
+c.join(e)  // ContiguousBlock(6, 6, false)
+
+c.join(d)  // nil because they don't adjoin
+
+
+// .split
+
+// g spans 14-18
+// split(2) gives 14-15 for the first partition
+// and 16-18 for the second
+g.split(2)  // [ContiguousBlock(14, 2, false), ContiguousBlock(16, 3, false)]
+
+c.split(2)  // [ContiguousBlock(10, 2, false), nil]
+
+f.split(2)  // nil because 'f' isn't large enough</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+
+<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/ContiguousBlock.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/ContiguousBlock.schelp</a><br>link::Classes/ContiguousBlock::<br></div></div><script src='./../static/editor.js' type='text/javascript'></script>
 </body></html>

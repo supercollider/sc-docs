@@ -1,21 +1,25 @@
-<!doctype html><html lang='en'><head><title>Ringz | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>Ringz | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../lib/jquery.min.js'></script>
-<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/jquery.min.js'></script>
+<script src='./../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './..';
 var scdoc_title = 'Ringz';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../static/scdoc.js' type='text/javascript'></script>
 <script src='./../docmap.js' type='text/javascript'></script>
+<script src='./../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
@@ -40,11 +44,11 @@ var scdoc_sc_version = '3.13.1';
 <div id='summary'>Ringing filter.</div>
 </div>
 <div class='subheader'>
-<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/Common/Audio/Filter.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Audio/Filter.sc'>Filter.sc</a></div><div id='related'>See also: <a href="./../Classes/Formlet.html">Formlet</a>, <a href="./../Classes/RHPF.html">RHPF</a>, <a href="./../Classes/RLPF.html">RLPF</a>, <a href="./../Classes/Resonz.html">Resonz</a></div>
+<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/Common/Audio/Filter.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Audio/Filter.sc'>Filter.sc</a></div><div id='related'>See also: <a href="./../Classes/Formlet.html">Formlet</a>, <a href="./../Classes/RHPF.html">RHPF</a>, <a href="./../Classes/RLPF.html">RLPF</a>, <a href="./../Classes/Resonz.html">Resonz</a></div>
 </div>
 <h2><a class='anchor' name='description'>Description</a></h2>
 
-<p>This is the same as <a href="./../Classes/Resonz.html">Resonz</a> , except that it is a constant skirt gain filter, meaning that the peak gain depends on the value of Q. Also, instead of the resonance parameter in Resonz, the bandwidth is specified in a 60dB ring decay time. One Ringz is equivalent to one component of the <a href="./../Classes/Klank.html">Klank</a> UGen.<h2><a class='anchor' name='classmethods'>Class Methods</a></h2>
+<p>This is the same as <a href="./../Classes/Resonz.html">Resonz</a>, except that it is a constant skirt gain filter, meaning that the peak gain depends on the value of Q. Also, instead of the resonance parameter in Resonz, the bandwidth is specified in a 60dB ring decay time. One Ringz is equivalent to one component of the <a href="./../Classes/Klank.html">Klank</a> UGen.<h2><a class='anchor' name='classmethods'>Class Methods</a></h2>
 <h3 class='method-code'><span class='method-prefix'>Ringz.</span><a class='method-name' name='*ar' href='./../Overviews/Methods.html#ar'>ar</a>(<span class='argstr'>in: 0.0</span>, <span class='argstr'>freq: 440.0</span>, <span class='argstr'>decaytime: 1.0</span>, <span class='argstr'>mul: 1.0</span>, <span class='argstr'>add: 0.0</span>)</h3>
 <h3 class='method-code'><span class='method-prefix'>Ringz.</span><a class='method-name' name='*kr' href='./../Overviews/Methods.html#kr'>kr</a>(<span class='argstr'>in: 0.0</span>, <span class='argstr'>freq: 440.0</span>, <span class='argstr'>decaytime: 1.0</span>, <span class='argstr'>mul: 1.0</span>, <span class='argstr'>add: 0.0</span>)</h3>
 <div class='method'>
@@ -59,14 +63,14 @@ var scdoc_sc_version = '3.13.1';
 <div id='inheritedclassmets'></div><h2><a class='anchor' name='instancemethods'>Instance Methods</a></h2>
 <h3><a class='anchor' name='Inherited%20instance%20methods'>Inherited instance methods</a></h3>
 <div id='inheritedinstmets'></div><h2><a class='anchor' name='examples'>Examples</a></h2>
-<textarea class='editor'>{ Ringz.ar(Dust.ar(3, 0.3), 2000, 2) }.play
+<div class='codeMirrorContainer'><textarea class='editor'>{ Ringz.ar(Dust.ar(3, 0.3), 2000, 2) }.play
 
 { Ringz.ar(WhiteNoise.ar(0.005), 2000, 0.5) }.play
 
 // modulate frequency
-{ Ringz.ar(WhiteNoise.ar(0.005), XLine.kr(100,3000,10), 0.5) }.play
+{ Ringz.ar(WhiteNoise.ar(0.005), XLine.kr(100, 3000, 10), 0.5) }.play
 
-{ Ringz.ar(Impulse.ar(6, 0, 0.3), XLine.kr(100,3000,10), 0.5) }.play
+{ Ringz.ar(Impulse.ar(6, 0, 0.3), XLine.kr(100, 3000, 10), 0.5) }.play
 
 // modulate ring time
 { Ringz.ar(Impulse.ar(6, 0, 0.3), 2000, XLine.kr(4, 0.04, 8)) }.play
@@ -80,15 +84,16 @@ var scdoc_sc_version = '3.13.1';
     exciter = WhiteNoise.ar(0.001);
     Mix.arFill(10, {
         Ringz.ar(exciter,
-        XLine.kr(exprand(100.0,5000.0), exprand(100.0,5000.0), 20),
+        XLine.kr(exprand(100.0, 5000.0), exprand(100.0, 5000.0), 20),
         0.5)
     })
 }.play
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h2><a class='anchor' name='Interaction%20with%20sample%20rate'>Interaction with sample rate</a></h2>
 
 <p>Ringz (and UGens that are based on it: <a href="./../Classes/Klank.html">Klank</a>, <a href="./../Classes/DynKlank.html">DynKlank</a> and <a href="./../Classes/Formlet.html">Formlet</a>) are "sample-rate independent" with respect to <em>impulses</em> at the input. That is, given single-sample impulses, the output signal at different sample rates should be the same frequency and amplitude.
-<p>This design has a side effect: If the input is not made of impulses, the output amplitude is proportional to the sample rate.<textarea class='editor'>(
+<p>This design has a side effect: If the input is not made of impulses, the output amplitude is proportional to the sample rate.<div class='codeMirrorContainer'><textarea class='editor'>(
 a = {
     // rectangular pulse exciter (deterministic input)
     var exc = EnvGen.ar(Env([1, 1, 0], [0.01, 0], \lin)),
@@ -99,8 +104,9 @@ a = {
     Silent.ar(1)
 }.play;
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p>At 44.1 kHz, this prints a RMS amplitude of 1.0758. At 88.2 kHz, the amplitude doubles.
 <p>Modal synthesis (simulating the vibrating modes of a struck surface) feeds a short, decaying burst of noise into Ringz-style resonators. This is a common use case that <em>is</em> subject to this amplitude effect.
-<p>If you will need the results to be compatible at different sample rates, make sure to scale the volume appropriately: if <code>sig</code> is the Ringz, Klank or Formlet signal, use <code>sig * (originalSampleRate / SampleRate.ir)</code> and substitute the right value in place of <code>originalSampleRate</code>.<div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/Ringz.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/Ringz.schelp</a><br>link::Classes/Ringz::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+<p>If you will need the results to be compatible at different sample rates, make sure to scale the volume appropriately: if <code>sig</code> is the Ringz, Klank or Formlet signal, use <code>sig * (originalSampleRate / SampleRate.ir)</code> and substitute the right value in place of <code>originalSampleRate</code>.<div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/Ringz.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/Ringz.schelp</a><br>link::Classes/Ringz::<br></div></div><script src='./../static/editor.js' type='text/javascript'></script>
 </body></html>

@@ -1,51 +1,125 @@
-<!doctype html><html lang='en'><head><title>SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./frontend.css' type='text/css' />
 <link rel='stylesheet' href='./custom.css' type='text/css' />
+<link rel='stylesheet' href='./static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./lib/jquery.min.js'></script>
-<script src='./lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./static/lib/jquery.min.js'></script>
+<script src='./static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = '.';
 var scdoc_title = 'Help';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./scdoc.js' type='text/javascript'></script>
+<script src='./static/scdoc.js' type='text/javascript'></script>
 <script src='./docmap.js' type='text/javascript'></script>
+<script src='./frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
 <div id='toc'>
-<div id='toctitle'>SuperCollider 3.13.1:</div>
-<span class='toc_search'>Filter: <input id='toc_search'></span><ul class='toc'><li class='toc1'><a href='#Search%20and%20browse'>Search and browse</a></li>
+<div id='toctitle'>SuperCollider 3.14.0-rc1:</div>
+<span class='toc_search'>Filter: <input id='toc_search'></span><ul class='toc'><li class='toc1'><a href='#An%20introductory%20overview'>An introductory overview</a></li>
 <ul class='toc'></ul><li class='toc1'><a href='#Getting%20started'>Getting started</a></li>
-<ul class='toc'></ul><li class='toc1'><a href='#Documentation%20indexes'>Documentation indexes</a></li>
-<ul class='toc'></ul><li class='toc1'><a href='#Licensing'>Licensing</a></li>
+<ul class='toc'><li class='toc2'><a href='#Getting%20Sound'>Getting Sound</a></li>
+<ul class='toc'><li class='toc3'><a href='#Generating%20Sound%20from%20Scratch'>Generating Sound from Scratch</a></li>
+<ul class='toc'></ul><li class='toc3'><a href='#Defining%20and%20Instantiating%20Synths'>Defining and Instantiating Synths</a></li>
+<ul class='toc'></ul><li class='toc3'><a href='#Live%20Coding%20Essentials'>Live Coding Essentials</a></li>
+<ul class='toc'></ul><li class='toc3'><a href='#Building%20Musical%20Patterns'>Building Musical Patterns</a></li>
+<ul class='toc'></ul></ul></ul><li class='toc1'><a href='#Diving%20deeper'>Diving deeper</a></li>
+<ul class='toc'><li class='toc2'><a href='#Debugging'>Debugging</a></li>
+<ul class='toc'></ul><li class='toc2'><a href='#Language%20Reference'>Language Reference</a></li>
+<ul class='toc'></ul><li class='toc2'><a href='#Overviews'>Overviews</a></li>
+<ul class='toc'></ul><li class='toc2'><a href='#Architecture'>Architecture</a></li>
+<ul class='toc'></ul><li class='toc2'><a href='#Extending%20SC'>Extending SC</a></li>
+<ul class='toc'></ul><li class='toc2'><a href='#Sharing%20your%20work'>Sharing your work</a></li>
+<ul class='toc'></ul><li class='toc2'><a href='#Contributing%20to%20SC'>Contributing to SC</a></li>
+<ul class='toc'></ul><li class='toc2'><a href='#For%20more%20information'>For more information</a></li>
+<ul class='toc'></ul></ul><li class='toc1'><a href='#Licensing'>Licensing</a></li>
 <ul class='toc'></ul></ul></div><div id='menubar'></div>
 <div class='contents'>
 <div class='header'>
-<h1>SuperCollider 3.13.1<span class='headerimage'><img src='./images/SC_icon.png'/></span></h1>
+<h1>SuperCollider 3.14.0-rc1<span class='headerimage'><img src='./images/SC_icon.png'/></span></h1>
 <div id='summary'>Documentation home</div>
 </div>
 <div class='subheader'>
 </div>
+<div class='note'><span class='notelabel'>NOTE:</span> <a href="./Guides/News-3_13.html">News in SuperCollider version 3.13</a></div><h2><a class='anchor' name='An%20introductory%20overview'>An introductory overview</a></h2>
 
-<p>SuperCollider is an audio server, programming language, and IDE for sound synthesis and algorithmic composition.<div class='note'><span class='notelabel'>NOTE:</span> <a href="./Guides/News-3_13.html">News in SuperCollider version 3.13</a></div><h2><a class='anchor' name='Search%20and%20browse'>Search and browse</a></h2>
-<dl>
-<dt><a href="./Search.html">Search</a><dd>Search all documents and methods<dt><a href="./Browse.html">Browse</a><dd>Browse all documents by categories</dl>
-<h2><a class='anchor' name='Getting%20started'>Getting started</a></h2>
+<p><em>SuperCollider</em> is a cross-platform environment for audio synthesis and algorithmic composition used by musicians, artists and researchers working with sound. It can <a href="https://supercollider.github.io/downloads.html">be installed and run on Linux, macOS and Windows</a>, as well as microcomputers such as <a href="https://github.com/supercollider/supercollider/blob/develop/README_RASPBERRY_PI.md">Raspberry Pi</a> or <a href="https://github.com/supercollider/supercollider/blob/develop/README_BELA.md">Bela</a>. <em>SuperCollider</em> <a href="https://www.audiosynth.com">was originally developed</a> by James McCartney and <a href="https://supercollider.github.io/">is now distributed</a> as Free Software under the GNU General Public License. It <a href="https://github.com/supercollider/supercollider">is maintained and developed</a> by an active and enthusiastic community.
+<p><em>SuperCollider</em> consists of three main components:<dl>
+<dt>• <span class='soft'> </span><a href="./Classes/Server.html#Switching%20the%20server%20application">scsynth</a> — A real-time audio engine implemented as a <a href="./Classes/Server.html">server</a>.<dd>The default server is <a href="./Classes/Server.html#Switching%20the%20server%20application">scsynth</a>. SuperCollider also includes an alternative implementation of scsynth called <a href="./Classes/Server.html#Switching%20the%20server%20application">supernova</a> which has multi-threading support to fully exploit the potential of multi-core CPUs.<dt>• <span class='soft'> </span><a href="./Classes/Main.html#.thisProcess">sclang</a> — A text-based programming language and interpreter that acts as a client to the server.<dd><em>sclang</em> controls audio synthesis processes on the server and offers an interactive programming environment for <a href="./Overviews/JITLib.html">live coding</a>, an extensive library for creating <a href="./Tutorials/A-Practical-Guide/PG_01_Introduction.html">patterns</a> and a library of <a href="./Classes/Scale.html">scales and modes</a> from various cultures. Creating <a href="./Tutorials/Getting-Started/15-Sequencing-with-Routines-and-Tasks.html">processes</a> that unfold over time is straightforward in <em>sclang</em>. It also provides all the essential features of a graphical user interface (<a href="./Guides/GUI-Introduction.html">GUI</a>) that can be used to create custom user interfaces, data visualization, and animations. With support for <a href="./Guides/UsingMIDI.html">MIDI</a>, <a href="./Guides/OSC_communication.html">OSC</a>, <a href="./Guides/Working_with_HID.html">HID</a>, and <a href="./Classes/SerialPort.html">Serial Port</a>, <em>sclang</em> can be easily interfaced with local and networked hardware and software.<table>
+<tr><td>Although sclang is the native language and client for the server, there are also several client implementations in other programming languages, such as <a href="https://supriya-project.github.io/supriya/">Python (via Supriya API)</a>, <a href="https://crucialfelix.github.io/supercolliderjs/">JavaScript</a>, <a href="https://rohandrape.net/?t=hsc3">Haskell</a>, or <a href="https://codeberg.org/sciss/ScalaCollider">Scala</a>.</table>
+<dt>• <span class='soft'> </span><a href="./Classes/ScIDE.html">ScIDE</a> — A dedicated editor for SuperCollider with an integrated help system.<dd>The SuperCollider Integrated Development Environment (<a href="./Guides/SCIde.html">IDE</a>) allows you to start writing code right out of the box. Community members also maintain sclang integration with other popular IDEs. The full list of support editors is available at <a href="https://github.com/supercollider/supercollider/wiki/Systems-interfacing-with-SC#editors">https://github.com/supercollider/supercollider/wiki/Systems-interfacing-with-SC#editors</a></dl>
+
+<p>The server and client <a href="./Guides/ClientVsServer.html">communicate</a> via Open Sound Control (<a href="http://opensoundcontrol.org/">OSC</a>), allowing SuperCollider to run on a single machine or on multiple machines over a network. Thanks to this client/server architecture, it is possible for <a href="./Guides/MultiClient_Setups.html">multiple clients</a> to connect and control what is happening on the server. Users can also control the audio server directly with any OSC-enabled program by using the <a href="./Guides/NodeMessaging.html">Node Messaging</a> protocol.
+<p>An extensive library of Unit Generators—the building blocks of audio synthesis networks—are included with SuperCollider. Users may optionally extend this core library with the <a href="https://github.com/supercollider/sc3-plugins">sc3-plugins</a> suite of UGens. Additionally, there are many of user-developed language extensions, called <a href="./Classes/Quarks.html">Quarks</a>, to further extend the functionality of SuperCollider. Quarks can be browsed in the distribution <a href="https://github.com/supercollider-quarks/quarks">repository</a> where users can submit their own Quarks for distribution.<h2><a class='anchor' name='Getting%20started'>Getting started</a></h2>
 
 <p>These are useful starting points for getting help on SuperCollider:<dl>
-<dt><a href="./Tutorials/Getting-Started/00-Getting-Started-With-SC.html">Getting Started tutorial series</a><dd>Get started with SuperCollider<dt><a href="./Guides/Glossary.html">Glossary</a><dd>Glossary<dt><a href="./Guides/ClientVsServer.html">Client vs Server</a><dd>Explaining the client vs server architecture<dt><a href="./Guides/More-On-Getting-Help.html">More on Getting Help</a><dd>How to find more help<dt><a href="./Browse.html#Tutorials">All tutorials</a><dd>Index of all help files categorized under "Tutorials"<dt><a href="./Guides/UserFAQ.html">User FAQ</a><dd>Common Errors and FAQ</dl>
-<h2><a class='anchor' name='Documentation%20indexes'>Documentation indexes</a></h2>
+<dt><a href="./Tutorials/Getting-Started/00-Getting-Started-With-SC.html">Getting Started tutorial series</a><dd>Get started with SuperCollider<dt><a href="./Guides/Glossary.html">Glossary</a><dd>Glossary<dt><a href="./Guides/More-On-Getting-Help.html">More on Getting Help</a><dd>Using Help Files effectively and inspecting class definition files to build more understanding<dt><a href="./Browse.html#Tutorials">All tutorials</a><dd>Index of all help files categorized under "Tutorials"<dt><a href="./Guides/UserFAQ.html">User FAQ</a><dd>Common Errors and FAQ</dl>
+<h3><a class='anchor' name='Getting%20Sound'>Getting Sound</a></h3>
+<h4><a class='anchor' name='Generating%20Sound%20from%20Scratch'>Generating Sound from Scratch</a></h4>
+<ul>
+<li><a href="./Classes/Function.html#-play">Function: -play</a><li><a href="./Classes/Function.html#-scope">Function: -scope</a><li><a href="./Classes/Function.html#-freqscope">Function: -freqscope</a><li><a href="./Classes/Event.html#-play">Event: -play</a></ul>
+<h4><a class='anchor' name='Defining%20and%20Instantiating%20Synths'>Defining and Instantiating Synths</a></h4>
+<ul>
+<li><a href="./Classes/SynthDef.html">SynthDef</a><li><a href="./Classes/Synth.html">Synth</a><li><a href="./Classes/Node.html">Node</a><li><a href="./Classes/Group.html">Group</a><li><a href="./Classes/Bus.html">Bus</a></ul>
+<h4><a class='anchor' name='Live%20Coding%20Essentials'>Live Coding Essentials</a></h4>
+<ul>
+<li><a href="./Classes/Ndef.html">Ndef</a><li><a href="./Classes/Tdef.html">Tdef</a><li><a href="./Classes/Task.html">Task</a></ul>
+<h4><a class='anchor' name='Building%20Musical%20Patterns'>Building Musical Patterns</a></h4>
+<ul>
+<li><a href="./Classes/Pdef.html">Pdef</a><li><a href="./Classes/Pbind.html">Pbind</a></ul>
+<h2><a class='anchor' name='Diving%20deeper'>Diving deeper</a></h2>
+
+<p>These are helpful for gaining a better grasp of SuperCollider:<h3><a class='anchor' name='Debugging'>Debugging</a></h3>
+<ol>
+<li><a href="./Guides/How-to-Use-the-Interpreter.html">How to Use the Interpreter</a><li><a href="./Guides/Understanding-Errors.html">Understanding errors</a><li><a href="./Guides/Debugging-tips.html">Debugging tips</a><li><a href="./Guides/Tracing-Processes.html">Tracing Processes</a><li><a href="./Guides/Internal-Snooping.html">Internal Snooping (Introspection)</a><li><a href="./Guides/HID_permissions.html">HID permissions</a><li><a href="./Guides/LID_permissions.html">LID permissions</a></ol>
+<h3><a class='anchor' name='Language%20Reference'>Language Reference</a></h3>
+
+<p>Guides on writing code in the SuperCollider language (<code>sclang</code>).<ol>
+<li><a href="./Reference/Comments.html">Comments</a><li><a href="./Reference/Expression-Sequence.html">Expression Sequence</a><li><a href="./Guides/Intro-to-Objects.html">Introduction to Objects</a><li><a href="./Reference/Classes.html">Classes</a><li><a href="./Reference/Messages.html">Messages</a><li><a href="./Guides/Polymorphism.html">Polymorphism</a><li><a href="./Reference/Assignment.html">Assignment Statements</a><li><a href="./Reference/Scope.html">Scoping and Closure</a><li><a href="./Reference/Functions.html">Functions</a><li><a href="./Reference/Control-Structures.html">Control Structures</a><li><a href="./Reference/Syntax-Shortcuts.html">Syntax Shortcuts</a><li><a href="./Overviews/SymbolicNotations.html">Symbolic Notations</a><li><a href="./Reference/Adverbs.html">Adverbs for Binary Operators</a><li><a href="./Reference/Key-Value-Pairs.html">Key Value Pairs</a><li><a href="./Reference/Literals.html">Literals</a><li><a href="./Reference/Partial-Application.html">Partial Application</a><li><a href="./Guides/J-concepts-in-SC.html">Working with Multi-dimensional Arrays (J concepts in SC)</a><li><a href="./Guides/ListComprehensions.html">List Comprehensions</a><li><a href="./Guides/Tour-of-Special-Functions.html">Tour of Special Functions</a></ol>
+<h3><a class='anchor' name='Overviews'>Overviews</a></h3>
+
+<p>Guides and Tutorials on broad topics:<ol>
+<li><a href="./Reference/AudioDeviceSelection.html">Audio device selection</a><li><a href="./Guides/Tour_of_UGens.html">Tour of UGens</a><li><a href="./Overviews/Operators.html">Operators</a><li><a href="./Overviews/Collections.html">Collections</a><li><a href="./Overviews/GenericCollectors.html">Generic Collectors</a><li><a href="./Guides/Randomness.html">Randomness</a><li><a href="./Overviews/Streams.html">Streams</a><li><a href="./Overviews/Event_types.html">Event types</a><li><a href="./Guides/GUI-Introduction.html">Introduction to GUI</a><li><a href="./Overviews/GUI-Classes.html">List of GUI classes</a><li><a href="./Guides/GUI-Layout-Management.html">Layout Management</a><li><a href="./Guides/FFT-Overview.html">FFT Overview</a><li><a href="./Guides/Non-Realtime-Synthesis.html">Non-Realtime Synthesis (NRT)</a></ol>
+<h3><a class='anchor' name='Architecture'>Architecture</a></h3>
+
+<p>Guides and References focused on the important relationship between the Client and Server.<ol>
+<li><a href="./Guides/ClientVsServer.html">Client vs Server</a><li><a href="./Guides/UGens-and-Synths.html">Unit Generators and Synths</a><li><a href="./Guides/NodeMessaging.html">Node Messaging</a><li><a href="./Guides/Multichannel-Expansion.html">Multichannel Expansion</a><li><a href="./Guides/Order-of-execution.html">Order of execution</a><li><a href="./Reference/default_group.html">Default Group</a><li><a href="./Guides/Server-Guide.html">Server Guide</a><li><a href="./Reference/Server-Architecture.html">Server Architecture</a><li><a href="./Guides/MultiClient_Setups.html">Multi-client Setups</a><li><a href="./Tutorials/Server_Tutorial.html">Server Tutorial</a><li><a href="./Reference/Server-Command-Reference.html">Server Command Reference</a><li><a href="./Guides/ServerTiming.html">Scheduling and Server timing</a><li><a href="./Guides/Bundled-Messages.html">Bundled Server Messages</a><li><a href="./Reference/Synth-Definition-File-Format.html">Synth Definition File Format</a></ol>
+<h3><a class='anchor' name='Extending%20SC'>Extending SC</a></h3>
+
+<p>If there are things you want to do that can't be achieved using SuperCollider as it exists, you can extend SuperCollider's capabilities.<ol>
+<li><a href="./Reference/StartupFile.html">Sclang Startup File</a><li><a href="./Guides/UsingExtensions.html">Using Extensions</a><li><a href="./Guides/UsingQuarks.html">Using Quarks</a><li><a href="./Guides/WritingClasses.html">Writing Classes</a><li><a href="./Guides/standalones.html">Making Standalone Applications</a><li><a href="./Guides/WritingTests.html">Writing tests</a><li><a href="./Guides/WritingUGens.html">Writing Unit Generators</a><li><a href="./Reference/ServerPluginAPI.html">Server Plugin API</a><li><a href="./Guides/WritingPrimitives.html">Writing Primitives</a></ol>
+<h3><a class='anchor' name='Sharing%20your%20work'>Sharing your work</a></h3>
 <dl>
-<dt><a href="./Overviews/Documents.html">Documents</a><dd>Alphabetical index of all documents<dt><a href="./Overviews/Classes.html">Classes</a><dd>Alphabetical index of all classes<dt><a href="./Overviews/ClassTree.html">Class Tree</a><dd>All classes by inheritance tree<dt><a href="./Overviews/Methods.html">Methods</a><dd>Alphabetical index of all methods</dl>
-<h2><a class='anchor' name='Licensing'>Licensing</a></h2>
+<dt>Share Music<dd><ul>
+<li><a href="https://scsynth.org/c/music">Music on scsynth.org</a></ul>
+
+<p><dt>Share Code<dd><ul>
+<li><a href="http://sccode.org/">http://sccode.org/</a><li><a href="https://scsynth.org/c/questions/code-review">Code Review on scsynth.org</a><li><a href="https://scsynth.org/c/music/code-tennis">Code Tennis on scsynth.org</a><li><a href="https://github.com/supercollider/supercollider/wiki/Style-Guidelines:-SuperCollider">Style Guide: SuperCollider Code (for sclang)</a></ul>
+</dl>
+<h3><a class='anchor' name='Contributing%20to%20SC'>Contributing to SC</a></h3>
+<dl>
+<dt>Discussing<dd><ul>
+<li><a href="https://scsynth.org/c/development">Development on scsynth.org</a></ul>
+
+<p><dt>Help Documents<dd><ul>
+<li><a href="./Guides/WritingHelp.html">Writing Help</a><li><a href="./Reference/SCDocSyntax.html">SCDoc Syntax</a><li><a href="https://github.com/supercollider/supercollider/wiki/Style-Guidelines:-SCDocs">Style Guide: SuperCollider Help Files</a></ul>
+
+<p><dt>Developing<dd><ul>
+<li><a href="https://github.com/supercollider/supercollider">SuperCollider on GitHub</a><li><a href="https://github.com/supercollider/supercollider/wiki/Style-Guidelines:-Cpp">Style Guide: SuperCollider C++ Code (for scsynth)</a></ul>
+</dl>
+<h3><a class='anchor' name='For%20more%20information'>For more information</a></h3>
+
+<p><a href="https://github.com/supercollider/supercollider/wiki">SuperCollider Wiki</a><h2><a class='anchor' name='Licensing'>Licensing</a></h2>
 
 <p>SuperCollider is free software published under the GPL: <a href="./Other/Licensing.html">Licensing</a>.
-<p>These help files are published under the Creative Commons CC-BY-SA-3 license: <a href="./Other/HelpDocsLicensing.html">HelpDocsLicensing</a>.<div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Help.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Help.schelp</a><br>link::Help::<br></div></div><script src='./editor.js' type='text/javascript'></script>
+<p>These help files are published under the Creative Commons CC-BY-SA-3 license: <a href="./Other/HelpDocsLicensing.html">HelpDocsLicensing</a>.<div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Help.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Help.schelp</a><br>link::Help::<br></div></div><script src='./static/editor.js' type='text/javascript'></script>
 </body></html>

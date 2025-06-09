@@ -1,21 +1,25 @@
-<!doctype html><html lang='en'><head><title>Pdup | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>Pdup | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../lib/jquery.min.js'></script>
-<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/jquery.min.js'></script>
+<script src='./../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './..';
 var scdoc_title = 'Pdup';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../static/scdoc.js' type='text/javascript'></script>
 <script src='./../docmap.js' type='text/javascript'></script>
+<script src='./../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
@@ -42,17 +46,18 @@ var scdoc_sc_version = '3.13.1';
 <div id='summary'>repeat input stream values</div>
 </div>
 <div class='subheader'>
-<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/Common/Streams/FilterPatterns.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Streams/FilterPatterns.sc'>FilterPatterns.sc</a></div><div id='subclasses'>Subclasses: <a href="../Classes/PdurStutter.html">PdurStutter</a>, <a href="../Classes/Psubdivide.html">Psubdivide</a></div>
+<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/Common/Streams/FilterPatterns.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Streams/FilterPatterns.sc'>FilterPatterns.sc</a></div><div id='subclasses'>Subclasses: <a href="../Classes/PdurStutter.html">PdurStutter</a>, <a href="../Classes/Psubdivide.html">Psubdivide</a></div>
 <div id='related'>See also: <a href="./../Classes/Pn.html">Pn</a>, <a href="./../Classes/Pattern.html#-dup">Pattern: -dup</a></div>
 </div>
 <h2><a class='anchor' name='description'>Description</a></h2>
 
-<p>repeat each element n times.<textarea class='editor'>(
+<p>repeat each element n times.<div class='codeMirrorContainer'><textarea class='editor'>(
 var a, b;
 a = Pdup(2, Pwhite(-1.0, 1.0));
 x = a.asStream;
 8.do { x.next.postln };
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p>This is also a response to <a href="./../Classes/Pattern.html#-dup">Pattern: -dup</a><h2><a class='anchor' name='classmethods'>Class Methods</a></h2>
 <h3 class='method-code'><span class='method-prefix'>Pdup.</span><a class='method-name' name='*new' href='./../Overviews/Methods.html#new'>new</a>(<span class='argstr'>n</span>, <span class='argstr'>pattern</span>)</h3>
@@ -69,7 +74,7 @@ x = a.asStream;
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-n' href='./../Overviews/Methods.html#n'>n</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-n' href='./../Overviews/Methods.html#n'>n</a> = value</h3>
 <h2><a class='anchor' name='examples'>Examples</a></h2>
-<textarea class='editor'>// the first argument can be a pattern, too:
+<div class='codeMirrorContainer'><textarea class='editor'>// the first argument can be a pattern, too:
 (
 var a, b;
 a = Pdup(Prand([1, 2, 5], inf), Pwhite(-1.0, 1.0)); // repeat either once, twice, or five times
@@ -80,7 +85,7 @@ x = a.asStream;
 // using event patterns:
 (
 SynthDef(\help_sinegrain,
-    { | out=0, freq=440, sustain=0.05 |
+    { |out = 0, freq = 440, sustain = 0.05|
         var env;
                 env = Env.perc(0.01, sustain, 0.2).kr(doneAction: Done.freeSelf);
         Out.ar(out, SinOsc.ar(freq, 0.5pi, env))
@@ -123,6 +128,7 @@ c.asStream.nextN(1000).plot
 a = Pwhite();
 c = (2 ** (0..10)).sum { |n| a.dupEach(n.div(2).fin(1)) ++ a.dupEach(n) };
 c.asStream.nextN(1000).plot</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/Pdup.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/Pdup.schelp</a><br>link::Classes/Pdup::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/Pdup.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/Pdup.schelp</a><br>link::Classes/Pdup::<br></div></div><script src='./../static/editor.js' type='text/javascript'></script>
 </body></html>

@@ -1,21 +1,25 @@
-<!doctype html><html lang='en'><head><title>ListView | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>ListView | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../lib/jquery.min.js'></script>
-<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/jquery.min.js'></script>
+<script src='./../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './..';
 var scdoc_title = 'ListView';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../static/scdoc.js' type='text/javascript'></script>
 <script src='./../docmap.js' type='text/javascript'></script>
+<script src='./../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
@@ -140,48 +144,50 @@ var scdoc_sc_version = '3.13.1';
 <p> Sets <a href="#-valueAction">-valueAction</a> to the current drag data.</div><h3><a class='anchor' name='Inherited%20instance%20methods'>Inherited instance methods</a></h3>
 <div id='inheritedinstmets'></div><h2><a class='anchor' name='examples'>Examples</a></h2>
 <h3><a class='anchor' name='Basic%20Example'>Basic Example</a></h3>
-<textarea class='editor'>(
+<div class='codeMirrorContainer'><textarea class='editor'>(
 w = Window.new.front;
 
-v = ListView(w,Rect(10,10,120,70))
-    .items_([ "SinOsc", "Saw", "LFSaw", "WhiteNoise", "PinkNoise", "BrownNoise", "Osc" ])
+v = ListView(w, Rect(10, 10, 120, 70))
+    .items_(["SinOsc", "Saw", "LFSaw", "WhiteNoise", "PinkNoise", "BrownNoise", "Osc"])
     .background_(Color.clear)
-    .hiliteColor_(Color.green(alpha:0.6))
-    .action_({ arg sbs;
+    .hiliteColor_(Color.green(alpha: 0.6))
+    .action_({ |sbs|
         [sbs.value, v.items[sbs.value]].postln; // .value returns the integer
-    });
+   });
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h3><a class='anchor' name='Sound%20Example'>Sound Example</a></h3>
 
-<p>Use ListView to switch filters:<textarea class='editor'>(
+<p>Use ListView to switch filters:<div class='codeMirrorContainer'><textarea class='editor'>(
 s.waitForBoot({
     var f, freq, ww;
-    n={r=LFSaw.ar([220, 530],0,0.3)*LFPulse.ar(12,0,0.3,0.4); [r[0],Delay2.ar(r[1])]}.play;
-    freq={SinOsc.kr(0.5,0,4000,4200)}.play;
-    w=Window("Filters").front;
-    v = ListView(w,Rect(10,10,180,120))
-        .items_([ "No Filter","RLPF", "RHPF", "BPF", "Resonz", "MoogFF" ])
-        .background_(Color.clear)
-        .hiliteColor_(Color.green(alpha:0.6))
-        .action_({arg v;
-            v.value.switch(
-            0,{try{f.free};"test".postln},
-            1,{try{f.free};f={ReplaceOut.ar(0,RLPF.ar(In.ar(0,2),In.kr(0,1),0.2,0.3))}.play(addAction:\addToTail)},
-            2,{try{f.free};f={ReplaceOut.ar(0,RHPF.ar(In.ar(0,2),In.kr(0,1),0.2,0.3))}.play(addAction:\addToTail)},
-            3,{try{f.free};f={ReplaceOut.ar(0,BPF.ar(In.ar(0,2),In.kr(0,1),0.2,1.5))}.play(addAction:\addToTail)},
-            4,{try{f.free};f={ReplaceOut.ar(0,Resonz.ar(In.ar(0,2),In.kr(0,1),0.2,2))}.play(addAction:\addToTail)},
-            5,{try{f.free};f={ReplaceOut.ar(0,MoogFF.ar(In.ar(0,2),In.kr(0,1),1.5))}.play(addAction:\addToTail)}
-            );
-        });
-
-    ww=FreqScope.new(400, 200, 0);
-    w.bounds=Rect(50,Window.screenBounds.height-300,200,200);
-    ww.window.bounds=ww.window.bounds.moveTo(255,Window.screenBounds.height-328);
-    CmdPeriod.doOnce({{ww.window.close}.defer(0.5);w.close;});
-            //defer or crash, because FreqScopeWindow Class contains its own routine for cleaning up on CmdPeriod
-    w.onClose_({n.free;f.free;freq.free});
+    n = { r = LFSaw.ar([220, 530], 0, 0.1)*LFPulse.ar(12, 0, 0.3, 0.4); [r[0], Delay2.ar(r[1])] }.play;
+    freq = { SinOsc.kr(0.5, 0, 4000, 4200) }.play;
+    w = Window("Filters").front;
+    v = ListView(w, Rect(10, 10, 180, 120))
+    .items_(["No Filter", "RLPF", "RHPF", "BPF", "Resonz", "MoogFF"])
+    .background_(Color.clear)
+    .hiliteColor_(Color.green(alpha: 0.6))
+    .action_({ |v|
+        v.value.switch(
+            0, { try{ f.free }; "test".postln },
+            1, { try{ f.free }; f = { ReplaceOut.ar(0, RLPF.ar(In.ar(0, 2), In.kr(0, 1), 0.2, 0.3)) }.play(addAction: \addToTail) },
+            2, { try{ f.free }; f = { ReplaceOut.ar(0, RHPF.ar(In.ar(0, 2), In.kr(0, 1), 0.2, 0.3)) }.play(addAction: \addToTail) },
+            3, { try{ f.free }; f = { ReplaceOut.ar(0, BPF.ar(In.ar(0, 2), In.kr(0, 1), 0.2, 1.5)) }.play(addAction: \addToTail) },
+            4, { try{ f.free }; f = { ReplaceOut.ar(0, Resonz.ar(In.ar(0, 2), In.kr(0, 1), 0.2, 2)) }.play(addAction: \addToTail) },
+            5, { try{ f.free }; f = { ReplaceOut.ar(0, MoogFF.ar(In.ar(0, 2), In.kr(0, 1), 1.5)) }.play(addAction: \addToTail) }
+        );
+    });
+    
+    ww = FreqScope.new(400, 200, 0);
+    w.bounds = Rect(50, Window.screenBounds.height-300, 200, 200);
+    ww.window.bounds = ww.window.bounds.moveTo(255, Window.screenBounds.height-328);
+    CmdPeriod.doOnce({ { ww.window.close }.defer(0.5); w.close });
+    // defer or crash, because FreqScopeWindow Class contains its own routine for cleaning up on CmdPeriod
+    w.onClose_({ n.free; f.free; freq.free });
 });
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/ListView.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/ListView.schelp</a><br>link::Classes/ListView::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/ListView.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/ListView.schelp</a><br>link::Classes/ListView::<br></div></div><script src='./../static/editor.js' type='text/javascript'></script>
 </body></html>

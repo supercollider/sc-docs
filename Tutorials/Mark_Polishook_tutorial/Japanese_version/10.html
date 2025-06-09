@@ -1,21 +1,25 @@
-<!doctype html><html lang='en'><head><title>10 | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../../../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../../../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../../../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>10 | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../../../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../../../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../../../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../../../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../../../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../../../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../../../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../../../lib/jquery.min.js'></script>
-<script src='./../../../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../../../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../../../static/lib/jquery.min.js'></script>
+<script src='./../../../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../../../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../../../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './../../..';
 var scdoc_title = '10';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../../../scdoc.js' type='text/javascript'></script>
+<script src='./../../../static/scdoc.js' type='text/javascript'></script>
 <script src='./../../../docmap.js' type='text/javascript'></script>
+<script src='./../../../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
@@ -38,7 +42,8 @@ var scdoc_sc_version = '3.13.1';
 
 <p>減算合成の基本的な考え方はコーヒーをいれることに似ています。つまり、最終的に必要ない成分をフィルターを通じて取り除くということです。
 <p>////////////////////////////////////////////////////////////////////////////////////////////////////
-<p>次の様に.dumpClassSubtreeメッセージをFilterクラスに送ることで、SuperCollider 3のほとんど全てのフィルターのリストが得られます。<textarea class='editor'>Filter.dumpClassSubtree;</textarea>
+<p>次の様に.dumpClassSubtreeメッセージをFilterクラスに送ることで、SuperCollider 3のほとんど全てのフィルターのリストが得られます。<div class='codeMirrorContainer'><textarea class='editor'>Filter.dumpClassSubtree;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <ul class='tree'><li> <a href='./../../../Classes/Filter.html'>Filter</a> - Base class for filter UGens
 <ul class='tree'>
 <li> <a href='./../../../Classes/BEQSuite.html'>BEQSuite</a> - Base class for B Equalization Suite
@@ -59,6 +64,8 @@ var scdoc_sc_version = '3.13.1';
 <li> <a href='./../../../Classes/Changed.html'>Changed</a> - Triggers when a value changes
 <li> <a href='./../../../Classes/Decay.html'>Decay</a> - Exponential decay
 <li> <a href='./../../../Classes/Decay2.html'>Decay2</a> - Exponential decay
+<li> <a href='./../../../Classes/Delay1.html'>Delay1</a> - Single sample delay.
+<li> <a href='./../../../Classes/Delay2.html'>Delay2</a> - Two sample delay.
 <li> <a href='./../../../Classes/DetectSilence.html'>DetectSilence</a> - Detect when input falls below an amplitude threshold
 <li> <a href='./../../../Classes/FOS.html'>FOS</a> - First order filter section.
 <li> <a href='./../../../Classes/Formlet.html'>Formlet</a> - FOF-like filter.
@@ -116,11 +123,12 @@ var scdoc_sc_version = '3.13.1';
 </ul>
 <p>SuperColliderのヘルプ・システムでHelp/UGens/Filtersを調べることでもフィルターのヘルプ・ファイルをみることができます。ヘルプ・ファイルの全てにはそれぞれのフィルターがどのように動作するのかを示す素晴らしい例があります。
 <p>////////////////////////////////////////////////////////////////////////////////////////////////////
-<p>ヒント：次の様にObjectクラスに.dumpClassSubtreeメッセージを送ることで<textarea class='editor'>Object.dumpClassSubtree;</textarea>
+<p>ヒント：次の様にObjectクラスに.dumpClassSubtreeメッセージを送ることで<div class='codeMirrorContainer'><textarea class='editor'>Object.dumpClassSubtree;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p>SuperColliderのそれぞれの単独のクラスのリストが表示されます。
 <p>////////////////////////////////////////////////////////////////////////////////////////////////////
-<p>LPF（ローパス・フィルター）を使って入力ソースから高い周波数成分を減算します。<textarea class='editor'>(
+<p>LPF（ローパス・フィルター）を使って入力ソースから高い周波数成分を減算します。<div class='codeMirrorContainer'><textarea class='editor'>(
 SynthDef("subtractive", {
     Out.ar(
         0,
@@ -133,9 +141,10 @@ SynthDef("subtractive", {
 )
 
 Synth("subtractive")</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p>////////////////////////////////////////////////////////////////////////////////////////////////////
-<p>RLFP（レゾナント・ローパス・フィルター）は、高い周波数成分を取り除き、フィルターの（カットオフ・ポイントの）周波数を強調するためによく使います。<textarea class='editor'>(
+<p>RLFP（レゾナント・ローパス・フィルター）は、高い周波数成分を取り除き、フィルターの（カットオフ・ポイントの）周波数を強調するためによく使います。<div class='codeMirrorContainer'><textarea class='editor'>(
 SynthDef("passLowFreqs2", {
     Out.ar(
         0,
@@ -149,10 +158,11 @@ SynthDef("passLowFreqs2", {
 )
 
 Synth("passLowFreqs2")</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p>////////////////////////////////////////////////////////////////////////////////////////////////////
 <p>Rezonzはとても、とても、とても強力なフィルターです。特定の周波数帯域を強調する時に使います。
-<p>カットオフが非常にシャープなためにノイズをピッチに変えてしまいます。<textarea class='editor'>(
+<p>カットオフが非常にシャープなためにノイズをピッチに変えてしまいます。<div class='codeMirrorContainer'><textarea class='editor'>(
 SynthDef("noiseToPitch", { arg out = 0, mul = 1;
     Out.ar(
         out,
@@ -170,7 +180,8 @@ SynthDef("noiseToPitch", { arg out = 0, mul = 1;
 Synth("noiseToPitch", [\out, 0\mul, 1]);
 Synth("noiseToPitch", [\out, 1, \mul, 1]);
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p>////////////////////////////////////////////////////////////////////////////////////////////////////
-<p>go to <a href="./../../../Tutorials/Mark_Polishook_tutorial/Japanese_version/11.html">11</a><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Tutorials/Mark_Polishook_tutorial/Japanese_version/10.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Tutorials/Mark_Polishook_tutorial/Japanese_version/10.schelp</a><br>link::Tutorials/Mark_Polishook_tutorial/Japanese_version/10::<br></div></div><script src='./../../../editor.js' type='text/javascript'></script>
+<p>go to <a href="./../../../Tutorials/Mark_Polishook_tutorial/Japanese_version/11.html">11</a><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Tutorials/Mark_Polishook_tutorial/Japanese_version/10.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Tutorials/Mark_Polishook_tutorial/Japanese_version/10.schelp</a><br>link::Tutorials/Mark_Polishook_tutorial/Japanese_version/10::<br></div></div><script src='./../../../static/editor.js' type='text/javascript'></script>
 </body></html>

@@ -1,21 +1,25 @@
-<!doctype html><html lang='en'><head><title>PanAz | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>PanAz | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../lib/jquery.min.js'></script>
-<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/jquery.min.js'></script>
+<script src='./../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './..';
 var scdoc_title = 'PanAz';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../static/scdoc.js' type='text/javascript'></script>
 <script src='./../docmap.js' type='text/javascript'></script>
+<script src='./../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
@@ -40,7 +44,7 @@ var scdoc_sc_version = '3.13.1';
 <div id='summary'>Azimuth panner</div>
 </div>
 <div class='subheader'>
-<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/Common/Audio/Pan.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Audio/Pan.sc'>Pan.sc</a></div><div id='related'>See also: <a href="./../Classes/Balance2.html">Balance2</a>, <a href="./../Classes/LinPan2.html">LinPan2</a>, <a href="./../Classes/Pan2.html">Pan2</a>, <a href="./../Classes/Pan4.html">Pan4</a></div>
+<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/Common/Audio/Pan.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Audio/Pan.sc'>Pan.sc</a></div><div id='related'>See also: <a href="./../Classes/Balance2.html">Balance2</a>, <a href="./../Classes/LinPan2.html">LinPan2</a>, <a href="./../Classes/Pan2.html">Pan2</a>, <a href="./../Classes/Pan4.html">Pan4</a></div>
 </div>
 <h2><a class='anchor' name='description'>Description</a></h2>
 
@@ -51,18 +55,18 @@ var scdoc_sc_version = '3.13.1';
 <p><h4>Arguments:</h4>
 <table class='arguments'>
 <tr><td class='argumentname'>numChans<td class='argumentdesc'>
-<p>Number of output channels.<tr><td class='argumentname'>in<td class='argumentdesc'>
+<p>Number of output channels. Must be a nonzero, positive integer. This is fixed when the SynthDef is compiled so cannot be assigned to a SynthDef argument.<tr><td class='argumentname'>in<td class='argumentdesc'>
 <p>The input signal.<tr><td class='argumentname'>pos<td class='argumentdesc'>
 <p>pan position (<code>kr</code> or <code>ar</code>). Channels are evenly spaced over a cyclic period of <code>2.0</code> in pos with <code>0.0</code> equal to channel zero and <code>2.0/numChans</code> equal to channel 1, <code>4.0/numChans</code> equal to channel 2, etc.
 <p>Thus all channels will be cyclically panned through if a bipolar sawtooth wave from <code>-1</code> to <code>+1</code> is used to modulate the pos.<tr><td class='argumentname'>level<td class='argumentdesc'>
 <p>A control rate level input.<tr><td class='argumentname'>width<td class='argumentdesc'>
-<p>The width of the panning envelope. Nominally this is <code>2.0</code> which pans between pairs of adjacent speakers. Values greater than <code>2</code> will spread the pan over greater numbers of speakers. Values less than <code>1</code> will leave silent gaps between speakers.<tr><td class='argumentname'>orientation<td class='argumentdesc'>
+<p>The width of the panning envelope. Nominally this is <code>2.0</code> which pans between pairs of adjacent speakers. Values greater than <code>2</code> will spread the pan over greater numbers of speakers. Values less than <code>1</code> will leave silent gaps between speakers. The absolute of this value is taken as negative values have no meaning (a width of <code>-1</code> is the same as a width of <code>1</code>).<tr><td class='argumentname'>orientation<td class='argumentdesc'>
 <p>Should be <code>0</code> if the front is a vertex of the spanning polygon. The first speaker will be directly in front. Should be <code>0.5</code> if the front bisects a side of the spanning polygon. Then the first speaker will be the one left of center.</table></div><h3><a class='anchor' name='Inherited%20class%20methods'>Inherited class methods</a></h3>
 <div id='inheritedclassmets'></div><h2><a class='anchor' name='instancemethods'>Instance Methods</a></h2>
 <h3><a class='anchor' name='Inherited%20instance%20methods'>Inherited instance methods</a></h3>
 <div id='inheritedinstmets'></div><h2><a class='anchor' name='examples'>Examples</a></h2>
 
-<p>Five channel circular panning with first channel on the left<textarea class='editor'>(
+<p>Five channel circular panning with first channel on the left<div class='codeMirrorContainer'><textarea class='editor'>(
 {
     PanAz.ar(
         numChans: 5,
@@ -74,16 +78,19 @@ var scdoc_sc_version = '3.13.1';
     );
 }.scope
 )</textarea>
-<h2><a class='anchor' name='Comparison%20to%20Pan2'>Comparison to Pan2</a></h2>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>Despite a certain similarity, <a href="./../Classes/Pan2.html">Pan2</a> and <a href="./../Classes/PanAz.html">PanAz</a> with 2 channels behave differently.<textarea class='editor'>// one full cycle for PanAz: from -1 to 1
+<p><h2><a class='anchor' name='Comparison%20to%20Pan2'>Comparison to Pan2</a></h2>
+
+<p>Despite a certain similarity, <a href="./../Classes/Pan2.html">Pan2</a> and <a href="./../Classes/PanAz.html">PanAz</a> with 2 channels behave differently.<div class='codeMirrorContainer'><textarea class='editor'>// one full cycle for PanAz: from -1 to 1
 { PanAz.ar(2, DC.ar(1), Line.ar(-1, 1, 0.1), orientation: 0) }.plot(0.1)
 // comparing with Pan2
 { Pan2.ar(DC.ar(1), Line.ar(-1, 1, 0.1)) }.plot(0.1)
 // to create one full cycle for Pan2, move from 1 to -1 and back to 1
 { Pan2.ar(DC.ar(1), EnvGen.ar(Env([1, -1, 1], [0.05, 0.05]))) }.plot(0.1)</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>The same in one plot window:<textarea class='editor'>(
+<p>The same in one plot window:<div class='codeMirrorContainer'><textarea class='editor'>(
 {
     [
         PanAz.ar(2, DC.ar(1), Line.ar(-1, 1, 0.1), orientation: 0),
@@ -92,12 +99,14 @@ var scdoc_sc_version = '3.13.1';
     ].flat;
 }.plot(0.1)
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>In other words, while <code>Pan2</code> needs a position change of <code>2</code> from channel <code>0</code> to <code>1</code><textarea class='editor'>{ Pan2.ar(DC.ar(1), Line.ar(-1, 1, 0.1)) }.plot(0.1)
+<p>In other words, while <code>Pan2</code> needs a position change of <code>2</code> from channel <code>0</code> to <code>1</code><div class='codeMirrorContainer'><textarea class='editor'>{ Pan2.ar(DC.ar(1), Line.ar(-1, 1, 0.1)) }.plot(0.1)
 // we need a position change of 1 in PanAz:
 { PanAz.ar(2, DC.ar(1), Line.ar(0, 1, 0.1), orientation: 0) }.plot(0.1)</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>In one plot window:<textarea class='editor'>(
+<p>In one plot window:<div class='codeMirrorContainer'><textarea class='editor'>(
 {
     [
         Pan2.ar(DC.ar(1), Line.ar(-1, 1, 0.1)),
@@ -105,5 +114,6 @@ var scdoc_sc_version = '3.13.1';
     ].flat
 }.plot(0.1)
 )</textarea>
-<div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/PanAz.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/PanAz.schelp</a><br>link::Classes/PanAz::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+<div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/PanAz.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/PanAz.schelp</a><br>link::Classes/PanAz::<br></div></div><script src='./../static/editor.js' type='text/javascript'></script>
 </body></html>

@@ -1,21 +1,25 @@
-<!doctype html><html lang='en'><head><title>SCDoc | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>SCDoc | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../lib/jquery.min.js'></script>
-<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/jquery.min.js'></script>
+<script src='./../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './..';
 var scdoc_title = 'SCDoc';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../static/scdoc.js' type='text/javascript'></script>
 <script src='./../docmap.js' type='text/javascript'></script>
+<script src='./../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
@@ -40,6 +44,7 @@ var scdoc_sc_version = '3.13.1';
 <li class='toc3'><a href='#*parseDoc'>parseDoc</a> </li>
 <li class='toc3'><a href='#*parseAndRender'>parseAndRender</a> </li>
 <li class='toc3'><a href='#*renderAll'>renderAll</a> </li>
+<li class='toc3'><a href='#*refreshStaticFiles'>refreshStaticFiles</a> </li>
 <li class='toc3'><a href='#*prepareHelpForURL'>prepareHelpForURL</a> </li>
 </ul><li class='toc2'><a href='#Utilities'>Utilities</a></li>
 <ul class='toc'><li class='toc3'><a href='#*getMethodDoc'>getMethodDoc</a> </li>
@@ -65,7 +70,7 @@ var scdoc_sc_version = '3.13.1';
 <div id='summary'>Help system main class</div>
 </div>
 <div class='subheader'>
-<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/SCDoc/SCDoc.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/SCDoc/SCDoc.sc'>SCDoc.sc</a></div><div id='related'>See also: <a href="./../Reference/SCDocSyntax.html">SCDoc Syntax</a>, <a href="./../Guides/WritingHelp.html">Writing Help</a>, <a href="./../Classes/SCDocHTMLRenderer.html">SCDocHTMLRenderer</a>, <a href="./../Classes/SCDocNode.html">SCDocNode</a>, <a href="./../Classes/SCDocEntry.html">SCDocEntry</a></div>
+<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/SCDoc/SCDoc.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/SCDoc/SCDoc.sc'>SCDoc.sc</a></div><div id='related'>See also: <a href="./../Reference/SCDocSyntax.html">SCDoc Syntax</a>, <a href="./../Guides/WritingHelp.html">Writing Help</a>, <a href="./../Classes/SCDocHTMLRenderer.html">SCDocHTMLRenderer</a>, <a href="./../Classes/SCDocNode.html">SCDocNode</a>, <a href="./../Classes/SCDocEntry.html">SCDocEntry</a></div>
 </div>
 <h2><a class='anchor' name='description'>Description</a></h2>
 
@@ -79,7 +84,7 @@ var scdoc_sc_version = '3.13.1';
 <p>Run this method if you added a new document and want to see the changes without restarting SuperCollider.<h4>Arguments:</h4>
 <table class='arguments'>
 <tr><td class='argumentname'>clearCache<td class='argumentdesc'>
-<p>If true, force re-render of files even if the schelp source file is not newer than the destination.</table><h4>Discussion:</h4>
+<p>If true, force re-render of files even if the schelp source file is not newer than the destination. This will also refresh all static files via <a href="./../Classes/SCDoc.html#*refreshStaticFiles">SCDoc: *refreshStaticFiles</a>.</table><h4>Discussion:</h4>
 
 <p>This will take a couple of seconds, and will be done automatically once before any help can be viewed. You might consider putting this in your startup.scd file to avoid getting this delay later when you decide to view a helpfile.</div><h3 class='method-code'><span class='method-prefix'>SCDoc.</span><a class='method-name' name='*documents' href='./../Overviews/Methods.html#documents'>documents</a></h3>
 <div class='method'>
@@ -145,7 +150,12 @@ var scdoc_sc_version = '3.13.1';
 <p>Render all help-files. Useful mainly if you want to render all help to put online or similar.<h4>Arguments:</h4>
 <table class='arguments'>
 <tr><td class='argumentname'>includeExtensions<td class='argumentdesc'>
-<p>If false, skip quarks, plugins and other extensions.</table></div><h3 class='method-code'><span class='method-prefix'>SCDoc.</span><a class='method-name' name='*prepareHelpForURL' href='./../Overviews/Methods.html#prepareHelpForURL'>prepareHelpForURL</a>(<span class='argstr'>url</span>)</h3>
+<p>If false, skip quarks, plugins and other extensions.</table></div><h3 class='method-code'><span class='method-prefix'>SCDoc.</span><a class='method-name' name='*refreshStaticFiles' href='./../Overviews/Methods.html#refreshStaticFiles'>refreshStaticFiles</a></h3>
+<div class='method'>
+<p>Copy (and replace) all non-schelp files within <a href="./../Classes/SCDoc.html#*helpSourceDirs">SCDoc: *helpSourceDirs</a> to <a href="./../Classes/SCDoc.html#*helpTargetDir">SCDoc: *helpTargetDir</a>. This should only be called by the user for development or debugging purposes.
+<p>This will be invoked by<ul>
+<li><a href="./../Classes/SCDoc.html#*indexAllDocuments">SCDoc: *indexAllDocuments</a> if invoked with <code>clearCache=true</code> or if <a href="./../Classes/SCDoc.html#*checkVersion">SCDoc: *checkVersion</a> detects a version bump of <a href="./../Classes/SCDoc.html#*version">SCDoc: *version</a><li><a href="./../Classes/SCDoc.html#*renderAll">SCDoc: *renderAll</a></ul>
+</div><h3 class='method-code'><span class='method-prefix'>SCDoc.</span><a class='method-name' name='*prepareHelpForURL' href='./../Overviews/Methods.html#prepareHelpForURL'>prepareHelpForURL</a>(<span class='argstr'>url</span>)</h3>
 <div class='method'>
 <p>Prepare help for the given URL by checking if the file needs rendering from schelp source, or some other action needs to be done. Used as a wrapper to get on-the-fly rendering and processing of help files.<h4>Arguments:</h4>
 <table class='arguments'>
@@ -251,5 +261,5 @@ var scdoc_sc_version = '3.13.1';
 </ul>
 </ul>
 
-<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/SCDoc.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/SCDoc.schelp</a><br>link::Classes/SCDoc::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/SCDoc.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/SCDoc.schelp</a><br>link::Classes/SCDoc::<br></div></div><script src='./../static/editor.js' type='text/javascript'></script>
 </body></html>

@@ -1,21 +1,25 @@
-<!doctype html><html lang='en'><head><title>Integer | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>Integer | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../lib/jquery.min.js'></script>
-<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/jquery.min.js'></script>
+<script src='./../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './..';
 var scdoc_title = 'Integer';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../static/scdoc.js' type='text/javascript'></script>
 <script src='./../docmap.js' type='text/javascript'></script>
+<script src='./../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
@@ -73,6 +77,7 @@ var scdoc_sc_version = '3.13.1';
 <ul class='toc'><li class='toc3'><a href='#-*'>*</a> </li>
 <li class='toc3'><a href='#-+'>+</a> </li>
 <li class='toc3'><a href='#--'>-</a> </li>
+<li class='toc3'><a href='#-modSeaside'>modSeaside</a> </li>
 <li class='toc3'><a href='#-clip'>clip</a> </li>
 <li class='toc3'><a href='#-factorial'>factorial</a> </li>
 <li class='toc3'><a href='#-fold'>fold</a> </li>
@@ -103,13 +108,14 @@ var scdoc_sc_version = '3.13.1';
  | <span id='categories'><a href='./../Browse.html#Math'>Math</a></span>
 </div><h1>Integer<span id='superclasses'> : <a href="../Classes/SimpleNumber.html">SimpleNumber</a> : <a href="../Classes/Number.html">Number</a> : <a href="../Classes/Magnitude.html">Magnitude</a> : <a href="../Classes/Object.html">Object</a></span>
 </h1>
-<div id='summary'>Integer number</div>
+<div id='summary'>32-bit Integer number</div>
 </div>
 <div class='subheader'>
-<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/Common/Math/Integer.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Math/Integer.sc'>Integer.sc</a></div></div>
+<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/Common/Math/Integer.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Math/Integer.sc'>Integer.sc</a></div></div>
 <h2><a class='anchor' name='description'>Description</a></h2>
 
-<p>A 32 bit integer. Integer inherits most of its behaviour from its superclass.<div class='note'><span class='notelabel'>NOTE:</span> A 32 bit signed integer can represent values in the range -2147483648 to 2147483647. Adding up further returns in a wrapped result, so that and 2147483647+1= -2147483648. For a larger range, one can use <a href="./../Classes/Float.html">Float</a>, which is 64 bit and supports many (but not all) numerical methods that int does.</div><h2><a class='anchor' name='classmethods'>Class Methods</a></h2>
+<p>A 32-bit integer. Integer inherits most of its behaviour from its superclass, <a href="./../Classes/SimpleNumber.html">SimpleNumber</a>.<div class='note'><span class='notelabel'>NOTE:</span> Integer can represent values in the range -2147483648 (<code>-2^31</code>) to 2147483647 (<code>2^31 - 1</code>).
+<p>The overflow behavior of an Integer is undefined. This occurs whenever the result of an operation does not fit in the range of values supported by the return type, in this case, a 32-bit signed integer. Consider using the 64-bit <a href="./../Classes/Float.html">Float</a> for larger numbers (up to <code>±2^53</code>).</div><h2><a class='anchor' name='classmethods'>Class Methods</a></h2>
 <h3><a class='anchor' name='Inherited%20class%20methods'>Inherited class methods</a></h3>
 <div id='inheritedclassmets'></div><h2><a class='anchor' name='instancemethods'>Instance Methods</a></h2>
 <h3><a class='anchor' name='Iteration'>Iteration</a></h3>
@@ -182,8 +188,9 @@ var scdoc_sc_version = '3.13.1';
 <div class='returnvalue'>
 <p>an array with the n-ary digits.</div><h4>Discussion:</h4>
 
-<p>See also the complementary method <a href="./../Classes/SequenceableCollection.html#-convertDigits">SequenceableCollection: -convertDigits</a>.<textarea class='editor'>2007.asDigits;
+<p>See also the complementary method <a href="./../Classes/SequenceableCollection.html#-convertDigits">SequenceableCollection: -convertDigits</a>.<div class='codeMirrorContainer'><textarea class='editor'>2007.asDigits;
 2007.asDigits(2);</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-asBinaryString' href='./../Overviews/Methods.html#asBinaryString'>asBinaryString</a>(<span class='argstr'>width: 8</span>)</h3>
 <div class='method'><h4>Returns:</h4>
 <div class='returnvalue'>
@@ -197,19 +204,22 @@ var scdoc_sc_version = '3.13.1';
 <div class='method'><h4>Returns:</h4>
 <div class='returnvalue'>
 <p>a string with <code>width</code>-rightmost digits in base <code>base</code>.</div><h4>Discussion:</h4>
-<textarea class='editor'>15.asStringToBase(3,5); // returns 00120</textarea>
+<div class='codeMirrorContainer'><textarea class='editor'>15.asStringToBase(3, 5); // returns 00120</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-asUnicode' href='./../Overviews/Methods.html#asUnicode'>asUnicode</a></h3>
 <div class='method'><h4>Returns:</h4>
 <div class='returnvalue'>
 <p>the receiver.</div></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-degreeToKey' href='./../Overviews/Methods.html#degreeToKey'>degreeToKey</a>(<span class='argstr'>scale</span>, <span class='argstr'>stepsPerOctave: 12</span>)</h3>
 <div class='method'>
 <p>Interpret this as index into a scale with a given number of steps per ocatve.<h4>Discussion:</h4>
-<textarea class='editor'>2.degreeToKey([0, 2, 5, 7, 11]);</textarea>
+<div class='codeMirrorContainer'><textarea class='editor'>2.degreeToKey([0, 2, 5, 7, 11]);</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-grayCode' href='./../Overviews/Methods.html#grayCode'>grayCode</a></h3>
 <div class='method'><h4>Returns:</h4>
 <div class='returnvalue'>
 <p>the gray code for the number.</div><h4>Discussion:</h4>
-<textarea class='editor'>2.grayCode</textarea>
+<div class='codeMirrorContainer'><textarea class='editor'>2.grayCode</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-hash' href='./../Overviews/Methods.html#hash'>hash</a></h3>
 <div class='method'><h4>Returns:</h4>
 <div class='returnvalue'>
@@ -235,42 +245,49 @@ var scdoc_sc_version = '3.13.1';
 <div class='method'><h4>Returns:</h4>
 <div class='returnvalue'>
 <p>the next power of two greater than or equal to the receiver.</div><h4>Discussion:</h4>
-<textarea class='editor'>13.nextPowerOfTwo.postln;
+<div class='codeMirrorContainer'><textarea class='editor'>13.nextPowerOfTwo.postln;
 64.nextPowerOfTwo.postln;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-isPowerOfTwo' href='./../Overviews/Methods.html#isPowerOfTwo'>isPowerOfTwo</a></h3>
 <div class='method'><h4>Returns:</h4>
 <div class='returnvalue'>
 <p>the whether the receiver is a power of two.</div><h4>Discussion:</h4>
-<textarea class='editor'>13.isPowerOfTwo.postln;
+<div class='codeMirrorContainer'><textarea class='editor'>13.isPowerOfTwo.postln;
 64.isPowerOfTwo.postln;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3><a class='anchor' name='Prime%20Numbers'>Prime Numbers</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-nthPrime' href='./../Overviews/Methods.html#nthPrime'>nthPrime</a></h3>
 <div class='method'><h4>Returns:</h4>
 <div class='returnvalue'>
 <p>the nth prime number. The receiver must be from 0 to 6541.</div><h4>Discussion:</h4>
-<textarea class='editor'>[0,1,2,3,4,5].collect({ arg i; i.nthPrime; }).postln;</textarea>
+<div class='codeMirrorContainer'><textarea class='editor'>[0, 1, 2, 3, 4, 5].collect({ |i| i.nthPrime }).postln;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-prevPrime' href='./../Overviews/Methods.html#prevPrime'>prevPrime</a></h3>
 <div class='method'><h4>Returns:</h4>
 <div class='returnvalue'>
 <p>the next prime less than or equal to the receiver up to 65521.</div><h4>Discussion:</h4>
-<textarea class='editor'>25.prevPrime.postln;</textarea>
+<div class='codeMirrorContainer'><textarea class='editor'>25.prevPrime.postln;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-nextPrime' href='./../Overviews/Methods.html#nextPrime'>nextPrime</a></h3>
 <div class='method'><h4>Returns:</h4>
 <div class='returnvalue'>
 <p>the next prime less than or equal to the receiver up to 65521.</div><h4>Discussion:</h4>
-<textarea class='editor'>25.nextPrime.postln;</textarea>
+<div class='codeMirrorContainer'><textarea class='editor'>25.nextPrime.postln;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-isPrime' href='./../Overviews/Methods.html#isPrime'>isPrime</a></h3>
 <div class='method'><h4>Returns:</h4>
 <div class='returnvalue'>
 <p>whether the receiver is prime.</div><h4>Discussion:</h4>
-<textarea class='editor'>25.isPrime.postln;
+<div class='codeMirrorContainer'><textarea class='editor'>25.isPrime.postln;
 13.isPrime.postln;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-indexOfPrime' href='./../Overviews/Methods.html#indexOfPrime'>indexOfPrime</a></h3>
 <div class='method'><h4>Returns:</h4>
 <div class='returnvalue'>
 <p>the index of a prime number less than or equal to the receiver up to 65521. If the receiver is not a prime, the answer is nil.</div><h4>Discussion:</h4>
-<textarea class='editor'>23.indexOfPrime;
+<div class='codeMirrorContainer'><textarea class='editor'>23.indexOfPrime;
 25.indexOfPrime;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3><a class='anchor' name='Integer%20Math'>Integer Math</a></h3>
 <h3 class='method-code'><span class='method-prefix'></span><a class='method-name' name='-*' href='./../Overviews/Methods.html#*'>*</a>(<span class='argstr'>aNumber</span>, <span class='argstr'>adverb</span>)</h3>
 <div class='method'>
@@ -278,40 +295,68 @@ var scdoc_sc_version = '3.13.1';
 <div class='method'>
 <p>Addition.</div><h3 class='method-code'><span class='method-prefix'></span><a class='method-name' name='--' href='./../Overviews/Methods.html#-'>-</a>(<span class='argstr'>aNumber</span>, <span class='argstr'>adverb</span>)</h3>
 <div class='method'>
-<p>Subtraction.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-clip' href='./../Overviews/Methods.html#clip'>clip</a>(<span class='argstr'>lo</span>, <span class='argstr'>hi</span>)</h3>
+<p>Subtraction.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-modSeaside' href='./../Overviews/Methods.html#modSeaside'>modSeaside</a>(<span class='argstr'>aNumber</span>, <span class='argstr'>adverb</span>)</h3>
+<div class='method'>
+<p>Pre-3.14 modulo with unexpected behavior for negative integer modulus.
+<p>For dividends smaller than a negative divisor, modSeaside pulls the resulting remainder below the divisor. It thereby leaves zero as peaks on the zero line. Like in the usual mod, all larger dividends result in remainders above zero.<div class='codeMirrorContainer'><textarea class='editor'>(..-9).mod(-3);
+// returns [0, -1, -2, 0, -1, -2, 0, -1, -2, 0]
+(..-9).modSeaside(-3);
+// returns [0, 2, 1, 0, -4, -5, 0, -4, -5, 0]
+
+// plot
+(-25..25).modSeaside(-5).plot.plotMode_(\steps);
+
+// modSeaside
+Pbind(\note, modSeaside(Pseries(-15, 1, 25), -5), \dur, 0.2).play;
+
+// modSeaside with different divisors
+Pbind(\note, modSeaside(Pseries(-15, 1, 25), [3, -4, -5]), \dur, 0.2).play;
+
+// mod
+Pbind(\note, mod(Pseries(-15, 1, 25), -5), \dur, 0.2).play;
+
+// mod with different divisors
+Pbind(\note, mod(Pseries(-15, 1, 25), [3, -4, -5]), \dur, 0.2).play;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-clip' href='./../Overviews/Methods.html#clip'>clip</a>(<span class='argstr'>lo</span>, <span class='argstr'>hi</span>)</h3>
 <div class='method'><h4>Returns:</h4>
 <div class='returnvalue'><ul>
 <li>the receiver if it is between <code>lo</code> and <code>hi</code><li><code>lo</code> if the receiver is less than <code>lo</code><li><code>hi</code> if the receiver is greater than <code>hi</code></ul>
 
 <p>The result is an Integer only if both <code>lo</code> and <code>hi</code> are Integers.</div><h4>Discussion:</h4>
-<textarea class='editor'>4.clip(2,5); // returns 4
-0.clip(2,5); // returns 2
-7.clip(2,5); // returns 5</textarea>
+<div class='codeMirrorContainer'><textarea class='editor'>4.clip(2, 5); // returns 4
+0.clip(2, 5); // returns 2
+7.clip(2, 5); // returns 5</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-factorial' href='./../Overviews/Methods.html#factorial'>factorial</a></h3>
 <div class='method'><h4>Returns:</h4>
 <div class='returnvalue'>
 <p>the factorial of the receiver as an integer. This will overflow for numbers <code>&gt; 12</code> and throw an error. Floating point factorials can be used in such cases (see: <a href="./../Classes/SimpleNumber.html#-factorial">SimpleNumber: -factorial</a>).</div><h4>Discussion:</h4>
-<textarea class='editor'>12.factorial
+<div class='codeMirrorContainer'><textarea class='editor'>12.factorial
 23.0.factorial // for larger factorials, use floats.</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-fold' href='./../Overviews/Methods.html#fold'>fold</a>(<span class='argstr'>lo</span>, <span class='argstr'>hi</span>)</h3>
 <div class='method'>
 <p>Folds in to a value between <code>lo</code> and <code>hi</code>.<h4>Returns:</h4>
 <div class='returnvalue'>
 <p>an Integer between <code>lo</code> and <code>hi</code>.</div><h4>Discussion:</h4>
-<textarea class='editor'>(0..12).fold(0,3); // returns [ 0, 1, 2, 3, 2, 1, 0, 1, 2, 3, 2, 1, 0 ]</textarea>
+<div class='codeMirrorContainer'><textarea class='editor'>(0..12).fold(0, 3); // returns [0, 1, 2, 3, 2, 1, 0, 1, 2, 3, 2, 1, 0]</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-log2Ceil' href='./../Overviews/Methods.html#log2Ceil'>log2Ceil</a></h3>
 <div class='method'><h4>Returns:</h4>
 <div class='returnvalue'>
 <p>next larger integer of the base 2 logarithm of the receiver.</div><h4>Discussion:</h4>
-<textarea class='editor'>17.log2; // returns 4.0874628412503
+<div class='codeMirrorContainer'><textarea class='editor'>17.log2; // returns 4.0874628412503
 17.log2Ceil; // returns 5
 17.log2.ceil.asInteger; // equivalent to the previous line</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-wrap' href='./../Overviews/Methods.html#wrap'>wrap</a>(<span class='argstr'>lo</span>, <span class='argstr'>hi</span>)</h3>
 <div class='method'>
 <p>Wraps in to a value between <code>lo</code> and <code>hi</code>.<h4>Returns:</h4>
 <div class='returnvalue'>
 <p>an Integer between <code>lo</code> and <code>hi</code>.</div><h4>Discussion:</h4>
-<textarea class='editor'>(0..12).wrap(0,3); // returns [ 0, 1, 2, 3, 0, 1, 2, 3, 0, 1, 2, 3, 0 ]</textarea>
+<div class='codeMirrorContainer'><textarea class='editor'>(0..12).wrap(0, 3); // returns [0, 1, 2, 3, 0, 1, 2, 3, 0, 1, 2, 3, 0]</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3><a class='anchor' name='Range%20Limiting'>Range Limiting</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-clip' href='./../Overviews/Methods.html#clip'>clip</a>(<span class='argstr'>lo</span>, <span class='argstr'>hi</span>)</h3>
 <div class='method'>
@@ -336,14 +381,16 @@ var scdoc_sc_version = '3.13.1';
 <div class='method'><h4>Returns:</h4>
 <div class='returnvalue'>
 <p>exits the sclang program and returns the receiver as an exit code to the parent process (e.g. Unix shell).</div><h4>Discussion:</h4>
-<textarea class='editor'>7.exit; // this line stops the interpreter and returns 7 as exit code</textarea>
+<div class='codeMirrorContainer'><textarea class='editor'>7.exit; // this line stops the interpreter and returns 7 as exit code</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-generate' href='./../Overviews/Methods.html#generate'>generate</a>(<span class='argstr'>function</span>)</h3>
 <div class='method'><h4>Returns:</h4>
 <div class='returnvalue'>
 <p>calls <code>function.value(receiver)</code> but returns the receiver.</div><h4>Discussion:</h4>
-<textarea class='editor'>f = { arg i; "foo".postln; i*2 }
+<div class='codeMirrorContainer'><textarea class='editor'>f = { |i| "foo".postln; i*2 }
 3.generate(f) // returns 3 but the function f is executed
 f.value(3) // returns 6</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-isInteger' href='./../Overviews/Methods.html#isInteger'>isInteger</a></h3>
 <div class='method'><h4>Returns:</h4>
 <div class='returnvalue'>
@@ -358,7 +405,7 @@ f.value(3) // returns 6</textarea>
 <div class='method'><h4>Returns:</h4>
 <div class='returnvalue'>
 <p>a Boolean for whether or not the given key modifier is in effect. For a list of these, see <a href="./../Reference/Modifiers.html">Modifier Keys</a>.</div><h4>Discussion:</h4>
-<textarea class='editor'>v = TextView(nil, Rect(800, 100, 400, 300)).front;
+<div class='codeMirrorContainer'><textarea class='editor'>v = TextView(nil, Rect(800, 100, 400, 300)).front;
 
 v.keyDownAction = { |view, char, modifiers|
     case
@@ -372,25 +419,27 @@ v.keyDownAction = { |view, char, modifiers|
     { modifiers.isShift } { \shift }
     .postln
 };</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-pidRunning' href='./../Overviews/Methods.html#pidRunning'>pidRunning</a></h3>
 <div class='method'><h4>Returns:</h4>
 <div class='returnvalue'>
 <p>a Boolean for whether or not the specified pid is running.</div><h4>Discussion:</h4>
-<textarea class='editor'>p = "cat".unixCmd;
+<div class='codeMirrorContainer'><textarea class='editor'>p = "cat".unixCmd;
 p.pidRunning; // cat will stay alive
 ("kill" + p).unixCmd
 p.pidRunning;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3><a class='anchor' name='Inherited%20instance%20methods'>Inherited instance methods</a></h3>
 <div id='inheritedinstmets'></div><h3><a class='anchor' name='Undocumented%20instance%20methods'>Undocumented instance methods</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-asBus' href='./../Overviews/Methods.html#asBus'>asBus</a>(<span class='argstr'>rate: 'control'</span>, <span class='argstr'>numChannels: 1</span>, <span class='argstr'>server</span>)</h3>
-<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/Common/Control/asBus.sc'>/usr/local/share/SuperCollider/SCClassLibrary/Common/Control/asBus.sc</a></div>
+<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/Common/Control/asBus.sc'>/usr/local/share/SuperCollider/SCClassLibrary/Common/Control/asBus.sc</a></div>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-asGroup' href='./../Overviews/Methods.html#asGroup'>asGroup</a></h3>
-<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/Common/Control/asGroup.sc'>/usr/local/share/SuperCollider/SCClassLibrary/Common/Control/asGroup.sc</a></div>
+<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/Common/Control/asGroup.sc'>/usr/local/share/SuperCollider/SCClassLibrary/Common/Control/asGroup.sc</a></div>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-asNodeID' href='./../Overviews/Methods.html#asNodeID'>asNodeID</a></h3>
-<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/Common/Control/asTarget.sc'>/usr/local/share/SuperCollider/SCClassLibrary/Common/Control/asTarget.sc</a></div>
+<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/Common/Control/asTarget.sc'>/usr/local/share/SuperCollider/SCClassLibrary/Common/Control/asTarget.sc</a></div>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-asTarget' href='./../Overviews/Methods.html#asTarget'>asTarget</a></h3>
-<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/Common/Control/asTarget.sc'>/usr/local/share/SuperCollider/SCClassLibrary/Common/Control/asTarget.sc</a></div>
+<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/Common/Control/asTarget.sc'>/usr/local/share/SuperCollider/SCClassLibrary/Common/Control/asTarget.sc</a></div>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-schedBundle' href='./../Overviews/Methods.html#schedBundle'>schedBundle</a>(<span class='argstr'>bundle</span>, <span class='argstr'>server</span>, <span class='argstr'>timeOfRequest</span>)</h3>
-<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/Common/Control/schedBundle.sc'>/usr/local/share/SuperCollider/SCClassLibrary/Common/Control/schedBundle.sc</a></div>
-<div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/Integer.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/Integer.schelp</a><br>link::Classes/Integer::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/Common/Control/schedBundle.sc'>/usr/local/share/SuperCollider/SCClassLibrary/Common/Control/schedBundle.sc</a></div>
+<div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/Integer.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/Integer.schelp</a><br>link::Classes/Integer::<br></div></div><script src='./../static/editor.js' type='text/javascript'></script>
 </body></html>

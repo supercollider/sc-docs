@@ -1,21 +1,25 @@
-<!doctype html><html lang='en'><head><title>PriorityQueue | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>PriorityQueue | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../lib/jquery.min.js'></script>
-<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/jquery.min.js'></script>
+<script src='./../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './..';
 var scdoc_title = 'PriorityQueue';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../static/scdoc.js' type='text/javascript'></script>
 <script src='./../docmap.js' type='text/javascript'></script>
+<script src='./../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
@@ -48,7 +52,7 @@ var scdoc_sc_version = '3.13.1';
 <div id='summary'>Priority queue data structure</div>
 </div>
 <div class='subheader'>
-<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/Common/Collections/PriorityQueue.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Collections/PriorityQueue.sc'>PriorityQueue.sc</a></div></div>
+<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/Common/Collections/PriorityQueue.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Collections/PriorityQueue.sc'>PriorityQueue.sc</a></div></div>
 <h2><a class='anchor' name='description'>Description</a></h2>
 
 <p>PriorityQueue implements a priority queue data structure, which is used to build schedulers. It allows you to put in items at some arbitrary time and pop them in time order.<h2><a class='anchor' name='classmethods'>Class Methods</a></h2>
@@ -73,7 +77,7 @@ var scdoc_sc_version = '3.13.1';
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-do' href='./../Overviews/Methods.html#do'>do</a>(<span class='argstr'>func</span>)</h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-postpone' href='./../Overviews/Methods.html#postpone'>postpone</a>(<span class='argstr'>time</span>)</h3>
 <h2><a class='anchor' name='examples'>Examples</a></h2>
-<textarea class='editor'>(
+<div class='codeMirrorContainer'><textarea class='editor'>(
 var p;
 p = PriorityQueue.new;
 
@@ -83,7 +87,7 @@ p.put(0.5, \c);
 p.put(0.2, \d);
 p.put(1.0, \e);
 
-while ({ p.notEmpty },{
+while ({ p.notEmpty }, {
     [p.topPriority, p.pop].postln;
 });
 
@@ -94,14 +98,15 @@ p.pop.postln;
 
 )
 
-[ 0.1, a ]
-[ 0.2, d ]
-[ 0.5, c ]
-[ 1, e ]
-[ 2, b ]
+[0.1, a]
+[0.2, d]
+[0.5, c]
+[1, e]
+[2, b]
 nil
 nil
 nil</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/PriorityQueue.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/PriorityQueue.schelp</a><br>link::Classes/PriorityQueue::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/PriorityQueue.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/PriorityQueue.schelp</a><br>link::Classes/PriorityQueue::<br></div></div><script src='./../static/editor.js' type='text/javascript'></script>
 </body></html>

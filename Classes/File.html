@@ -1,21 +1,25 @@
-<!doctype html><html lang='en'><head><title>File | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>File | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../lib/jquery.min.js'></script>
-<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/jquery.min.js'></script>
+<script src='./../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './..';
 var scdoc_title = 'File';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../static/scdoc.js' type='text/javascript'></script>
 <script src='./../docmap.js' type='text/javascript'></script>
+<script src='./../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
@@ -68,7 +72,7 @@ var scdoc_sc_version = '3.13.1';
 <div id='summary'>A class for reading and writing files</div>
 </div>
 <div class='subheader'>
-<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/Common/Files/File.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Files/File.sc'>File.sc</a></div><div id='related'>See also: <a href="./../Classes/FileReader.html">FileReader</a></div>
+<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/Common/Files/File.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Files/File.sc'>File.sc</a></div><div id='related'>See also: <a href="./../Classes/FileReader.html">FileReader</a></div>
 </div>
 <h2><a class='anchor' name='description'>Description</a></h2>
 
@@ -85,17 +89,19 @@ var scdoc_sc_version = '3.13.1';
 <div class='method'>
 <p>Same as <a href="#*new">*new</a>, but a more intuitive name.</div><h3 class='method-code'><span class='method-prefix'>File.</span><a class='method-name' name='*getcwd' href='./../Overviews/Methods.html#getcwd'>getcwd</a></h3>
 <div class='method'>
-<p>POSIX standard 'get current working directory'.<textarea class='editor'>// example;
+<p>POSIX standard 'get current working directory'.<div class='codeMirrorContainer'><textarea class='editor'>// example;
 File.getcwd;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>File.</span><a class='method-name' name='*use' href='./../Overviews/Methods.html#use'>use</a>(<span class='argstr'>pathName</span>, <span class='argstr'>mode</span>, <span class='argstr'>function</span>)</h3>
 <div class='method'>
 <p>Open the file, evaluate the function with the file as argument, and close it again. If the process fails, close the file and throw an error.</div><h3 class='method-code'><span class='method-prefix'>File.</span><a class='method-name' name='*readAllString' href='./../Overviews/Methods.html#readAllString'>readAllString</a>(<span class='argstr'>pathName</span>)</h3>
 <div class='method'>
-<p>Open the file at the given path, call <a href="#-readAllString">-readAllString</a>, and return the string. Whether the process succeeds or fails, the file will always be closed.<textarea class='editor'>// write a file
+<p>Open the file at the given path, call <a href="#-readAllString">-readAllString</a>, and return the string. Whether the process succeeds or fails, the file will always be closed.<div class='codeMirrorContainer'><textarea class='editor'>// write a file
 File.use("~/test.txt".standardizePath, "w", { |f| f.write("The green fox fell into the blue lake") });
 
 // read it again
 File.readAllString("~/test.txt".standardizePath);</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>File.</span><a class='method-name' name='*readAllSignal' href='./../Overviews/Methods.html#readAllSignal'>readAllSignal</a>(<span class='argstr'>pathName</span>)</h3>
 <div class='method'>
 <p>Open the file at the given path, call <a href="#-readAllSignal">-readAllSignal</a>, and return the signal. Whether the process succeeds or fails, the file will always be closed.</div><h3 class='method-code'><span class='method-prefix'>File.</span><a class='method-name' name='*readAllStringHTML' href='./../Overviews/Methods.html#readAllStringHTML'>readAllStringHTML</a>(<span class='argstr'>pathName</span>)</h3>
@@ -152,7 +158,8 @@ File.readAllString("~/test.txt".standardizePath);</textarea>
 <div class='returnvalue'>
 <p>an <a href="./../Classes/Integer.html">Integer</a></div></div><h3><a class='anchor' name='Error%20handling%20in%20filesystem%20utilities'>Error handling in filesystem utilities</a></h3>
 
-<p>If one of the above filesystem primitives fails, in most cases, a PrimitiveFailedError object will be thrown:<textarea class='editor'>File.mkdir("/usr/oh-no-you-cant");</textarea>
+<p>If one of the above filesystem primitives fails, in most cases, a PrimitiveFailedError object will be thrown:<div class='codeMirrorContainer'><textarea class='editor'>File.mkdir("/usr/oh-no-you-cant");</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <pre>ERROR: Primitive '_FileMkDir' failed.
 caught exception 'boost::filesystem::create_directory: Permission denied: "/usr/oh-no-you-cant"' in primitive in method Meta_File:mkdir</pre>
 <p>The methods <a href="./../Classes/Function.html#-try">Function: -try</a> and <a href="./../Classes/Function.html#-protect">Function: -protect</a> can detect and handle these errors. See <a href="./../Guides/Understanding-Errors.html">Understanding errors</a> for details.
@@ -181,24 +188,24 @@ caught exception 'boost::filesystem::create_directory: Permission denied: "/usr/
 <div class='method'>
 <p>Returns the current file size in bytes.</div><h3><a class='anchor' name='Inherited%20instance%20methods'>Inherited instance methods</a></h3>
 <div id='inheritedinstmets'></div><h2><a class='anchor' name='examples'>Examples</a></h2>
-<textarea class='editor'>// write some string to a file:
+<div class='codeMirrorContainer'><textarea class='editor'>// write some string to a file:
 (
 var f, g;
-f = File("~/test.txt".standardizePath,"w");
+f = File("~/test.txt".standardizePath, "w");
 f.write("Does this work?\n is this thing on ?\n");
 f.close;
 )
 
 // read it again:
 (
-g = File("~/test.txt".standardizePath,"r");
+g = File("~/test.txt".standardizePath, "r");
 g.readAllString.postln;
 g.close;
 )
 
 // try the above with File.use:
 
-File.use("~/test.txt".standardizePath, "w", { |f| f.write("Doesn't this work?\n is this thing really on ?\n"); });
+File.use("~/test.txt".standardizePath, "w", { |f| f.write("Doesn't this work?\n is this thing really on ?\n") });
 File.use("~/test.txt".standardizePath, "r", { |f| f.readAllString.postln });
 
 
@@ -207,26 +214,26 @@ File.use("~/test.txt".standardizePath, "r", { |f| f.readAllString.postln });
 var h, k;
 h = File("~/test.dat".standardizePath, "wb");
 h.inspect;
-h.write( FloatArray[1.1, 2.2, 3.3, pi, 3.sqrt] );
+h.write(FloatArray[1.1, 2.2, 3.3, pi, 3.sqrt]);
 h.close;
 
 k = File("~/test.dat".standardizePath, "rb");
-(k.length div: 4).do({ k.getFloat.postln; });
+(k.length div: 4).do({ k.getFloat.postln });
 k.close;
 )
 
 
 (
 var f, g;
-f = File("~/test.txt".standardizePath,"w");
-100.do({ f.putChar([$a, $b, $c, $d, $e, $\n].choose); });
+f = File("~/test.txt".standardizePath, "w");
+100.do({ f.putChar([$a, $b, $c, $d, $e, $\n].choose) });
 f.close;
 
-g = File("~/test.txt".standardizePath,"r");
+g = File("~/test.txt".standardizePath, "r");
 g.readAllString.postln;
 g.close;
 
-g = File("~/test.txt".standardizePath,"r");
+g = File("~/test.txt".standardizePath, "r");
 g.getLine(1024).postln;
 "*".postln;
 g.getLine(1024).postln;
@@ -239,15 +246,15 @@ g.close;
 )
 
 (
-//var f, g;
-f = File("~/test.dat".standardizePath,"wb");
+// var f, g;
+f = File("~/test.dat".standardizePath, "wb");
 f.inspect;
-100.do({ f.putFloat(1.0.rand); });
+100.do({ f.putFloat(1.0.rand) });
 
 f.inspect;
 f.close;
 
-g = File("~/test.dat".standardizePath,"rb");
+g = File("~/test.dat".standardizePath, "rb");
 100.do({
     g.getFloat.postln;
 });
@@ -256,11 +263,12 @@ g.close;
 )
 
 (
-//var f, g;
-f = File("~/test.dat".standardizePath,"r");
+// var f, g;
+f = File("~/test.dat".standardizePath, "r");
 f.inspect;
 f.close;
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/File.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/File.schelp</a><br>link::Classes/File::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/File.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/File.schelp</a><br>link::Classes/File::<br></div></div><script src='./../static/editor.js' type='text/javascript'></script>
 </body></html>

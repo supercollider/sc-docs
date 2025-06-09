@@ -1,21 +1,25 @@
-<!doctype html><html lang='en'><head><title>Writing Help | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>Writing Help | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../lib/jquery.min.js'></script>
-<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/jquery.min.js'></script>
+<script src='./../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './..';
 var scdoc_title = 'Writing Help';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../static/scdoc.js' type='text/javascript'></script>
 <script src='./../docmap.js' type='text/javascript'></script>
+<script src='./../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
@@ -152,7 +156,8 @@ code:: { LFPulse.ar(Line.kr(100, 800, 0.1)) }.plot(0.1); ::
 code:: { LFPulse.ar(50) * 0.1 }.play; ::</pre><h2><a class='anchor' name='Categories'>Categories</a></h2>
 
 <p>Try to find good categories for the doc you are writing/converting. If a suitable category already exists, you should use that. See the <a href="./../Browse.html">Document Browser</a> (auto-generated) for existing categories.
-<p>For UGens, you should use the existing categories like UGens&gt;Filter&gt;Nonlinear. View the current categories like this:<textarea class='editor'>Ball.categories</textarea>
+<p>For UGens, you should use the existing categories like UGens&gt;Filter&gt;Nonlinear. View the current categories like this:<div class='codeMirrorContainer'><textarea class='editor'>Ball.categories</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p>Documents can exist in multiple categories, and also have hierarchical categories, like Sequencing&gt;Patterns.<h2><a class='anchor' name='Cross-document%20linking'>Cross-document linking</a></h2>
 
@@ -167,12 +172,13 @@ code:: { LFPulse.ar(50) * 0.1 }.play; ::</pre><h2><a class='anchor' name='Catego
 <h3><a class='anchor' name='Quarks%20and%20extensions'>Quarks and extensions</a></h3>
 
 <p>Each extension should have their own HelpSource folder with files that should be included in the help system.
-<p>Example file layout:<textarea class='editor'>MyQuark/HelpSource/Classes/MyClass1.schelp
+<p>Example file layout:<div class='codeMirrorContainer'><textarea class='editor'>MyQuark/HelpSource/Classes/MyClass1.schelp
 MyQuark/HelpSource/Classes/MyClass2.schelp
 MyQuark/HelpSource/Guides/MyGuide.schelp
 MyQuark/HelpSource/Guides/MyPicture.png
 MyQuark/MyClass1.sc
 MyQuark/MyClass2.sc</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <div class='note'><span class='notelabel'>NOTE:</span> All helpfiles contained in a quark will automatically get a category "Quarks&gt;NameOfQuark" added, so you should not add this yourself. This makes it easy to navigate all documentation of a specific quark.</div>
 <p>If you want to set a main help file for the quark, set <code>\schelp</code> in the Quark directory file to the path for the help file relative to <code>HelpSource</code> and without the <code>.schelp</code> extension. Example: <code>\schelp: "Guides/MyGuide"</code><h3><a class='anchor' name='Method%20extensions'>Method extensions</a></h3>
 
@@ -187,35 +193,45 @@ returns:: the stripped string</pre>
 <p>The contents are inserted into the right spot (section, subsection, etc). It works for all kind of sections, for example one can add a subsection to <code>DESCRIPTION::</code> with additional information, or add another top-level section, etc.<h2><a class='anchor' name='Links'>Links</a></h2>
 
 <p>URL's are automagically converted to links.
-<p>The <code>link::</code> tag is used for cross-reference between docs. It uses a simple namespace, example:<textarea class='editor'>See also link::Classes/SinOsc:: for a nice oscillator.
+<p>The <code>link::</code> tag is used for cross-reference between docs. It uses a simple namespace, example:<div class='codeMirrorContainer'><textarea class='editor'>See also link::Classes/SinOsc:: for a nice oscillator.
 Or take a look at link::Browse#UGens:: for a full list.
 The link::Overviews/Methods#play#play method:: is often very useful.</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>Anchors can be inserted manually with <code>anchor::name::</code> and referenced like this:<textarea class='editor'>link::Foo/Bar#hello::</textarea>
+<p>Anchors can be inserted manually with <code>anchor::name::</code> and referenced like this:<div class='codeMirrorContainer'><textarea class='editor'>link::Foo/Bar#hello::</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>or to jump to an anchor in this document:<textarea class='editor'>link::#hello::</textarea>
+<p>or to jump to an anchor in this document:<div class='codeMirrorContainer'><textarea class='editor'>link::#hello::</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p>All sections get anchor names automagically.
 <p>All methods get anchor names prefixed with <code>*</code> for class methods and <code>-</code> for instance methods.
-<p>One can change the rendered text of the link by using another <code>#</code> character:<textarea class='editor'>Also see link::Classes/SinOsc##a nice oscillator::</textarea>
+<p>One can change the rendered text of the link by using another <code>#</code> character:<div class='codeMirrorContainer'><textarea class='editor'>Also see link::Classes/SinOsc##a nice oscillator::</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>A link to specific methods:<textarea class='editor'>Take a look at link::Classes/SinOsc#*ar:: and link::Classes/Function#-play::</textarea>
+<p>A link to specific methods:<div class='codeMirrorContainer'><textarea class='editor'>Take a look at link::Classes/SinOsc#*ar:: and link::Classes/Function#-play::</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p>Renders as: <a href="./../Classes/SinOsc.html#*ar">SinOsc: *ar</a> and <a href="./../Classes/Function.html#-play">Function: -play</a>
-<p>The <a href="./../Overviews/Methods.html">Methods</a> overview is dynamic and allows a specific method to be shown, by using the methodname as anchor, for example to get a list of all classes implementing <code>play</code> :<textarea class='editor'>All classes implementing code::play:: can be seen link::Overviews/Methods#play#here::.</textarea>
+<p>The <a href="./../Overviews/Methods.html">Methods</a> overview is dynamic and allows a specific method to be shown, by using the methodname as anchor, for example to get a list of all classes implementing <code>play</code> :<div class='codeMirrorContainer'><textarea class='editor'>All classes implementing code::play:: can be seen link::Overviews/Methods#play#here::.</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p>Renders as: All classes implementing <code>play</code> can be seen <a href="./../Overviews/Methods.html#play">here</a>.
-<p>The <a href="./../Browse.html">Browse</a> page is also dynamic, and can take a category tree as anchor name:<textarea class='editor'>For more filters, see link::Browse#UGens&gt;Filters::</textarea>
+<p>The <a href="./../Browse.html">Browse</a> page is also dynamic, and can take a category tree as anchor name:<div class='codeMirrorContainer'><textarea class='editor'>For more filters, see link::Browse#UGens&gt;Filters::</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p>Renders as: For more filters, see <a href="./../Browse.html#UGens>Filters">Browse: UGens&gt;Filters</a><h2><a class='anchor' name='Contributing%20with%20documentation'>Contributing with documentation</a></h2>
 
 <p>The easiest way to contribute to the documentation is:
 <p> 1. Fork the SuperCollider repository <a href="https://github.com/supercollider/supercollider">https://github.com/supercollider/supercollider</a>
-<p> 2. Clone your repository<textarea class='editor'>    git clone --recursive https://github.com/{your_username}/supercollider.git</textarea>
+<p> 2. Clone your repository<div class='codeMirrorContainer'><textarea class='editor'>    git clone --recursive https://github.com/{your_username}/supercollider.git</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p> 3. Create a branch for doc updates<textarea class='editor'>    git checkout -b doc_updates</textarea>
+<p> 3. Create a branch for doc updates<div class='codeMirrorContainer'><textarea class='editor'>    git checkout -b doc_updates</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p> 4. Do your update, commit your changes and push to github<textarea class='editor'>    git push origin -u doc_updates</textarea>
+<p> 4. Do your update, commit your changes and push to github<div class='codeMirrorContainer'><textarea class='editor'>    git push origin -u doc_updates</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p> 5. Submit your pull request through github, from your branch doc_updates to SuperCollider develop<h2><a class='anchor' name='Working%20with%20legacy%20documentation'>Working with legacy documentation</a></h2>
 
@@ -230,5 +246,5 @@ The link::Overviews/Methods#play#play method:: is often very useful.</textarea>
 <li>open the old helpfile in your web browser<li>copy the text and insert it in a new textfile: FileName.schelp<li>add the appropriate tags, like title, sections, etc.. (see below)<li>save the file to the right subdirectory under HelpSource, depending on the document kind (see <a href="#Directory%20layout">Directory layout</a> below)<li><strong>check that it rendered OK</strong>. You can run <code>SCDoc.indexAllDocuments</code> (link to method documentation: <a href="./../Classes/SCDoc.html#*indexAllDocuments">SCDoc: *indexAllDocuments</a>) to make SCDoc detect the new file and add it to the document index.
 <p>If the file already existed and you want to see the changes, just press Reload in the help browser and SCDoc will re-render it.</ol>
 
-<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Guides/WritingHelp.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Guides/WritingHelp.schelp</a><br>link::Guides/WritingHelp::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Guides/WritingHelp.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Guides/WritingHelp.schelp</a><br>link::Guides/WritingHelp::<br></div></div><script src='./../static/editor.js' type='text/javascript'></script>
 </body></html>

@@ -1,21 +1,25 @@
-<!doctype html><html lang='en'><head><title>SynthDefs versus Synths | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>SynthDefs versus Synths | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../lib/jquery.min.js'></script>
-<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/jquery.min.js'></script>
+<script src='./../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './..';
 var scdoc_title = 'SynthDefs versus Synths';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../static/scdoc.js' type='text/javascript'></script>
 <script src='./../docmap.js' type='text/javascript'></script>
+<script src='./../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
@@ -41,7 +45,7 @@ var scdoc_sc_version = '3.13.1';
 <p>When maximum flexibility is required, it is still possible to compile and send SynthDefs 'on the fly', albeit with SC2-like CPU spikes and a small amount of messaging latency.
 <p>It is important to understand that creating and sending SynthDefs is <em>asynchronous</em>. This means that it is impossible to determine precisely how long it will take to compile and send a <a href="./../Classes/SynthDef.html">SynthDef</a>, and thus when it will be available for creating new Synths. A simple way around this is to execute code in blocks, selecting them one at a time. More complicated is to use completion messages. <code>SynthDef.play</code> takes care of this for you, and returns a <a href="./../Classes/Synth.html">Synth</a> object which you can then manipulate. See the example below
 <p>Another important distinction is between Synth in SC2 and <a href="./../Classes/Synth.html">Synth</a> in SC3. The latter is a client-side object which represents a synth node on the server. Although it has some of the same methods, it does not function in the same way. There is no top level Synth in SC3, within which all scheduling and creation of other Synths occurs. There are only <a href="./../Classes/Synth.html">Synth</a> objects which represent synth nodes on the server. These can be created at any time, within any scope.<h2><a class='anchor' name='examples'>Examples</a></h2>
-<textarea class='editor'>s.boot;
+<div class='codeMirrorContainer'><textarea class='editor'>s.boot;
 
 // Compile a SynthDef and write it to disk
 (
@@ -94,6 +98,7 @@ SynthDef("help-RandFreq", { arg out = 0;
     )
 }).play(s);
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Guides/SynthDefsVsSynths.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Guides/SynthDefsVsSynths.schelp</a><br>link::Guides/SynthDefsVsSynths::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Guides/SynthDefsVsSynths.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Guides/SynthDefsVsSynths.schelp</a><br>link::Guides/SynthDefsVsSynths::<br></div></div><script src='./../static/editor.js' type='text/javascript'></script>
 </body></html>

@@ -1,21 +1,25 @@
-<!doctype html><html lang='en'><head><title>MIDIResponder | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>MIDIResponder | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../lib/jquery.min.js'></script>
-<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/jquery.min.js'></script>
+<script src='./../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './..';
 var scdoc_title = 'MIDIResponder';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../static/scdoc.js' type='text/javascript'></script>
 <script src='./../docmap.js' type='text/javascript'></script>
+<script src='./../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
@@ -49,7 +53,7 @@ var scdoc_sc_version = '3.13.1';
 <div id='summary'>Register multiple functions to be evaluated when MIDI events occur</div>
 </div>
 <div class='subheader'>
-<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/Common/Control/MIDIResponder.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Control/MIDIResponder.sc'>MIDIResponder.sc</a></div><div id='subclasses'>Subclasses: <a href="../Classes/CCResponder.html">CCResponder</a>, <a href="../Classes/NoteOnResponder.html">NoteOnResponder</a>, <a href="../Classes/ProgramChangeResponder.html">ProgramChangeResponder</a>, <a href="../Classes/TouchResponder.html">TouchResponder</a></div>
+<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/Common/Control/MIDIResponder.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Control/MIDIResponder.sc'>MIDIResponder.sc</a></div><div id='subclasses'>Subclasses: <a href="../Classes/CCResponder.html">CCResponder</a>, <a href="../Classes/NoteOnResponder.html">NoteOnResponder</a>, <a href="../Classes/ProgramChangeResponder.html">ProgramChangeResponder</a>, <a href="../Classes/TouchResponder.html">TouchResponder</a></div>
 <div id='related'>See also: <a href="./../Classes/MIDIFunc.html">MIDIFunc</a>, <a href="./../Classes/MIDIdef.html">MIDIdef</a>, <a href="./../Classes/MIDIIn.html">MIDIIn</a>, <a href="./../Guides/MIDI.html">MIDI</a>, <a href="./../Guides/UsingMIDI.html">Using MIDI</a></div>
 </div>
 <h2><a class='anchor' name='description'>Description</a></h2>
@@ -66,26 +70,30 @@ var scdoc_sc_version = '3.13.1';
 <p>Any of the matching values may be one of the following:<dl>
 <dt>Nil<dd>Match anything. eg. if chan is nil, then respond to any MIDI channel.<dt>Integer<dd>Match only this specific number.<dt>Array<dd>Match any item in the array. Any kind of <a href="./../Classes/Collection.html">Collection</a> will work here.<dt>Function<dd>Evaluate the function with the incoming value as the argument. The function should return true or false.</dl>
 
-<p>For instance, the following example would respond to note on messages from any port, channels 2 and 7 only, even numbered note numbers only, and only velocity values greater than 50.<textarea class='editor'>NoteOnResponder({ |src, chan, num, vel| [src, chan, num, vel].postln },
+<p>For instance, the following example would respond to note on messages from any port, channels 2 and 7 only, even numbered note numbers only, and only velocity values greater than 50.<div class='codeMirrorContainer'><textarea class='editor'>NoteOnResponder({ |src, chan, num, vel| [src, chan, num, vel].postln },
     nil,    // any port
     [2, 7],    // midi channels 2 or 7 only
     (0, 2..126),    // this is an array of even numbers. could also be specified as { |num| num.even } or _.even
     { |vel| vel &gt; 50 });    // velocities greater than 50</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p>MIDIResponders automatically initialize the MIDIClient with 1 standard device. This means the first time you install any MIDIResponder, it will make sure that MIDI has been initialized. If you have more devices or a specific setup, simply initialize the MIDIClient yourself before using any MIDIResponders.<h3><a class='anchor' name='Removal'>Removal</a></h3>
 
-<p>Just call .remove on the responder.<textarea class='editor'>c = CCResponder({ ... }, num: 1);    // respond to any modwheel
+<p>Just call .remove on the responder.<div class='codeMirrorContainer'><textarea class='editor'>c = CCResponder({ ... }, num: 1);    // respond to any modwheel
 
 c.remove;        // stop this responder</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>Or remove all of a specific class:<textarea class='editor'>CCResponder.removeAll
+<p>Or remove all of a specific class:<div class='codeMirrorContainer'><textarea class='editor'>CCResponder.removeAll
 NoteOnResponder.removeAll
 NoteOffResponder.removeAll
 BendResponder.removeAll
 TouchResponder.removeAll
 ProgramChange.removeAll</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>or remove all midi responders in all classes:<textarea class='editor'>MIDIResponder.removeAll</textarea>
+<p>or remove all midi responders in all classes:<div class='codeMirrorContainer'><textarea class='editor'>MIDIResponder.removeAll</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p><h2><a class='anchor' name='classmethods'>Class Methods</a></h2>
 <h3><a class='anchor' name='Inherited%20class%20methods'>Inherited class methods</a></h3>
@@ -104,5 +112,5 @@ ProgramChange.removeAll</textarea>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-swallowEvent' href='./../Overviews/Methods.html#swallowEvent'>swallowEvent</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-swallowEvent' href='./../Overviews/Methods.html#swallowEvent'>swallowEvent</a> = value</h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-value' href='./../Overviews/Methods.html#value'>value</a>(<span class='argstr'>src</span>, <span class='argstr'>chan</span>, <span class='argstr'>a</span>, <span class='argstr'>b</span>)</h3>
-<div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/MIDIResponder.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/MIDIResponder.schelp</a><br>link::Classes/MIDIResponder::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+<div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/MIDIResponder.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/MIDIResponder.schelp</a><br>link::Classes/MIDIResponder::<br></div></div><script src='./../static/editor.js' type='text/javascript'></script>
 </body></html>

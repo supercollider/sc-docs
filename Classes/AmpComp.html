@@ -1,21 +1,25 @@
-<!doctype html><html lang='en'><head><title>AmpComp | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>AmpComp | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../lib/jquery.min.js'></script>
-<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/jquery.min.js'></script>
+<script src='./../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './..';
 var scdoc_title = 'AmpComp';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../static/scdoc.js' type='text/javascript'></script>
 <script src='./../docmap.js' type='text/javascript'></script>
+<script src='./../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
@@ -39,12 +43,13 @@ var scdoc_sc_version = '3.13.1';
 <div id='summary'>Basic psychoacoustic amplitude compensation.</div>
 </div>
 <div class='subheader'>
-<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/Common/Audio/Line.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Audio/Line.sc'>Line.sc</a></div><div id='subclasses'>Subclasses: <a href="../Classes/AmpCompA.html">AmpCompA</a></div>
+<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/Common/Audio/Line.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Audio/Line.sc'>Line.sc</a></div><div id='subclasses'>Subclasses: <a href="../Classes/AmpCompA.html">AmpCompA</a></div>
 <div id='related'>See also: <a href="./../Classes/AmpCompA.html">AmpCompA</a></div>
 </div>
 <h2><a class='anchor' name='description'>Description</a></h2>
 
-<p>Implements the (optimized) formula:<textarea class='editor'>compensationFactor = (root / freq) ** exp</textarea>
+<p>Implements the (optimized) formula:<div class='codeMirrorContainer'><textarea class='editor'>compensationFactor = (root / freq) ** exp</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p>Higher frequencies are normally perceived as louder, which AmpComp compensates.<h2><a class='anchor' name='classmethods'>Class Methods</a></h2>
 <h3 class='method-code'><span class='method-prefix'>AmpComp.</span><a class='method-name' name='*ar' href='./../Overviews/Methods.html#ar'>ar</a>(<span class='argstr'>freq</span>, <span class='argstr'>root</span>, <span class='argstr'>exp: 0.3333</span>)</h3>
@@ -62,7 +67,7 @@ var scdoc_sc_version = '3.13.1';
 <div id='inheritedclassmets'></div><h2><a class='anchor' name='instancemethods'>Instance Methods</a></h2>
 <h3><a class='anchor' name='Inherited%20instance%20methods'>Inherited instance methods</a></h3>
 <div id='inheritedinstmets'></div><h2><a class='anchor' name='examples'>Examples</a></h2>
-<textarea class='editor'>// compare a sine without compensation
+<div class='codeMirrorContainer'><textarea class='editor'>// compare a sine without compensation
 
 { SinOsc.ar(MouseX.kr(300, 15000, 1)) * 0.1 }.play;
 
@@ -89,16 +94,16 @@ var scdoc_sc_version = '3.13.1';
 // the curves:
 
 // exp = 0.3333
-(200,210..10000).collect {|freq| (200/freq) ** 0.3333 }.plot;
+(200, 210..10000).collect { |freq| (200/freq) ** 0.3333 }.plot;
 
 // nearly linear for semitone steps:
 
-(48..72).midicps.collect {|freq| (48.midicps/freq) ** 0.3333 }.plot;
+(48..72).midicps.collect { |freq| (48.midicps/freq) ** 0.3333 }.plot;
 { AmpComp.ar(Line.ar(48, 72, 1).midicps, 48.midicps) }.plot(1.0);
 
 // exp = 1.2
-(200,210..10000).collect {|freq| (200/freq) ** 1.2 }.plot;
-(48..72).midicps.collect {|freq| (200/freq) ** 1.2 }.plot;
+(200, 210..10000).collect { |freq| (200/freq) ** 1.2 }.plot;
+(48..72).midicps.collect { |freq| (200/freq) ** 1.2 }.plot;
 { AmpComp.ar(Line.ar(48, 72, 1).midicps, 48.midicps, 1.2) }.plot(1.0);
 
 
@@ -125,7 +130,7 @@ var scdoc_sc_version = '3.13.1';
 // in granular synthesis:
 (
 SynthDef("pgrain",
-    { arg out = 0, sustain=0.01, amp=0.5, pan = 0;
+    { |out = 0, sustain = 0.01, amp = 0.5, pan = 0|
         var freq = MouseX.kr(300, 7000, 1);
         var window = Env.sine(sustain, amp * AmpComp.ir(freq));
         Out.ar(out,
@@ -142,7 +147,7 @@ SynthDef("pgrain",
 (
 fork {
     loop {
-        s.sendBundle(0.1, [\s_new, \pgrain, -1,1,1]);
+        s.sendBundle(0.1, [\s_new, \pgrain, -1, 1, 1]);
         0.02.wait;
     };
 }
@@ -156,7 +161,7 @@ fork {
 
 (
 SynthDef("pgrain",
-    { arg out = 0, sustain=0.01, amp=0.5, pan = 0;
+    { |out = 0, sustain = 0.01, amp = 0.5, pan = 0|
         var freq = MouseX.kr(300, 7000, 1);
         var window = Env.sine(sustain, amp);
         Out.ar(out,
@@ -172,7 +177,7 @@ SynthDef("pgrain",
 // with AmpCompA
 (
 SynthDef("pgrain",
-    { arg out = 0, sustain=0.01, amp=0.5, pan = 0;
+    { |out = 0, sustain = 0.01, amp = 0.5, pan = 0|
         var freq = MouseX.kr(300, 7000, 1);
         var window = Env.sine(sustain, amp * AmpCompA.ir(freq));
         Out.ar(out,
@@ -184,5 +189,7 @@ SynthDef("pgrain",
     }
 ).add;
 )</textarea>
-<div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/AmpComp.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/AmpComp.schelp</a><br>link::Classes/AmpComp::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+
+<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/AmpComp.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/AmpComp.schelp</a><br>link::Classes/AmpComp::<br></div></div><script src='./../static/editor.js' type='text/javascript'></script>
 </body></html>

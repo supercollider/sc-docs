@@ -1,21 +1,25 @@
-<!doctype html><html lang='en'><head><title>Git | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>Git | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../lib/jquery.min.js'></script>
-<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/jquery.min.js'></script>
+<script src='./../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './..';
 var scdoc_title = 'Git';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../static/scdoc.js' type='text/javascript'></script>
 <script src='./../docmap.js' type='text/javascript'></script>
+<script src='./../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
@@ -45,7 +49,9 @@ var scdoc_sc_version = '3.13.1';
 <li class='toc3'><a href='#-pull'>pull</a> </li>
 <li class='toc3'><a href='#-clone'>clone</a> </li>
 </ul><li class='toc2'><a href='#Inherited%20instance%20methods'>Inherited instance methods</a></li>
-</ul><li class='toc1'><a href='#examples'>Examples</a></li>
+<li class='toc2'><a href='#Undocumented%20instance%20methods'>Undocumented instance methods</a></li>
+<ul class='toc'><li class='toc3'><a href='#-defaultBranchName'>defaultBranchName</a> </li>
+</ul></ul><li class='toc1'><a href='#examples'>Examples</a></li>
 <ul class='toc'></ul></ul></div><div id='menubar'></div>
 <div class='contents'>
 <div class='header'>
@@ -57,7 +63,7 @@ var scdoc_sc_version = '3.13.1';
 <div id='summary'>git interface</div>
 </div>
 <div class='subheader'>
-<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/Common/Quarks/Git.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Quarks/Git.sc'>Git.sc</a></div><div id='related'>See also: <a href="./../Classes/Quarks.html">Quarks</a>, <a href="./../Classes/Quark.html">Quark</a></div>
+<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/Common/Quarks/Git.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Quarks/Git.sc'>Git.sc</a></div><div id='related'>See also: <a href="./../Classes/Quarks.html">Quarks</a>, <a href="./../Classes/Quark.html">Quark</a></div>
 </div>
 <h2><a class='anchor' name='description'>Description</a></h2>
 
@@ -86,7 +92,7 @@ var scdoc_sc_version = '3.13.1';
 <div class='returnvalue'>
 <p>url of the first remote that it finds.</div></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-remoteAsHttpUrl' href='./../Overviews/Methods.html#remoteAsHttpUrl'>remoteAsHttpUrl</a></h3>
 <div class='method'>
-<p>Detects if the remote URI starts with <code>"git@"</code> or <code>"git:"</code> and remodels it to a valid <code>"https"</code> URI. Otherwise, it returns the unaltered remote.<textarea class='editor'>// git-style remote URI's are transformed to https
+<p>Detects if the remote URI starts with <code>"git@"</code> or <code>"git:"</code> and remodels it to a valid <code>"https"</code> URI. Otherwise, it returns the unaltered remote.<div class='codeMirrorContainer'><textarea class='editor'>// git-style remote URI's are transformed to https
 Git().url_("git@github.com:foo/bar.git").remoteAsHttpUrl;
 Git().url_("https://github.com/foo/bar").remoteAsHttpUrl;
 Git().url_("git@foo.net:foo/bar.git").remoteAsHttpUrl;
@@ -97,6 +103,7 @@ Git().url_("http://foo.org/bar").remoteAsHttpUrl;
 
 // unknown URI styles are left untouched
 Git().url_("fooBar").remoteAsHttpUrl;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h4>Returns:</h4>
 <div class='returnvalue'>
 <p>remote URI formatted for <code>http</code> respectively <code>https</code> requests.</div></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-remoteLatest' href='./../Overviews/Methods.html#remoteLatest'>remoteLatest</a></h3>
@@ -139,8 +146,10 @@ Git().url_("fooBar").remoteAsHttpUrl;</textarea>
 <table class='arguments'>
 <tr><td class='argumentname'>url<td class='argumentdesc'>
 <p>the url of the remotes</table></div><h3><a class='anchor' name='Inherited%20instance%20methods'>Inherited instance methods</a></h3>
-<div id='inheritedinstmets'></div><h2><a class='anchor' name='examples'>Examples</a></h2>
-<textarea class='editor'>// create a Git that points to a Quark directory
+<div id='inheritedinstmets'></div><h3><a class='anchor' name='Undocumented%20instance%20methods'>Undocumented instance methods</a></h3>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-defaultBranchName' href='./../Overviews/Methods.html#defaultBranchName'>defaultBranchName</a></h3>
+<h2><a class='anchor' name='examples'>Examples</a></h2>
+<div class='codeMirrorContainer'><textarea class='editor'>// create a Git that points to a Quark directory
 g = Git(Quarks.all.choose.localPath);
 
 // alternatively, provide a pathname to a local git repository:
@@ -154,6 +163,7 @@ g.localPath;
 
 // return url
 g.url;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/Git.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/Git.schelp</a><br>link::Classes/Git::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/Git.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/Git.schelp</a><br>link::Classes/Git::<br></div></div><script src='./../static/editor.js' type='text/javascript'></script>
 </body></html>

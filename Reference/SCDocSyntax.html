@@ -1,21 +1,25 @@
-<!doctype html><html lang='en'><head><title>SCDoc Syntax | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>SCDoc Syntax | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../lib/jquery.min.js'></script>
-<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/jquery.min.js'></script>
+<script src='./../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './..';
 var scdoc_title = 'SCDoc Syntax';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../static/scdoc.js' type='text/javascript'></script>
 <script src='./../docmap.js' type='text/javascript'></script>
+<script src='./../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
@@ -67,6 +71,9 @@ var scdoc_sc_version = '3.13.1';
 
 <p>Level 2:<dl>
 <dt><a class='anchor' name='kw_subsection::'>&nbsp;</a><code>SUBSECTION::</code> name<dd>A named subsection. The name should be plain text and can not contain any tags. Example:<pre>subsection:: Some more info</pre></dl>
+
+<p>Level 3:<dl>
+<dt><a class='anchor' name='kw_subsubsection::'>&nbsp;</a><code>SUBSUBSECTION::</code> name<dd>A named subsubsection. The name should be plain text and can not contain any tags. Example:<pre>subsubsection:: Some more detailed info</pre></dl>
 <h3><a class='anchor' name='Method%20tags'>Method tags</a></h3>
 
 <p>These are level 3 subsections:<dl>
@@ -104,15 +111,22 @@ or perhaps link::Classes/SinOsc##go make some music::</pre>
 <p>URL's are automagically turned into links, but can be explicitly created with this tag, if one wants to use another link label.<dt><a class='anchor' name='kw_anchor::'>&nbsp;</a><code>ANCHOR::</code><dd>Manually create an anchor at this position in the document.<dt><a class='anchor' name='kw_image::'>&nbsp;</a><code>IMAGE::</code><dd>Insert image, the text should be the relative path to the image.<pre>image::foo.png::</pre>
 <p>Optionally an image caption can be given:<pre>image::foo.png#Figure 1::</pre>
 <p>And, the image can be clickable and link to another page:<pre>image::foo.png#click this image#Classes/SinOsc::</pre>
-<p>Just leave the caption empty if you want a link but no caption.</dl>
+<p>Just leave the caption empty if you want a link but no caption.<dt><a class='anchor' name='kw_math::'>&nbsp;</a><code>MATH::</code><dd>Converts LaTeX code into an inline formula. E.g.<pre>math::\frac{\pi}{2}::</pre>
+<p>becomes <span class='math'>\frac{\pi}{2}</span> embedded within a line of text.</dl>
 
-<p>The following tags (CODE and TELETYPE) can be written in two forms, either inline or block. <strong>Inline</strong> form has the end-tag on the same line, and need any enclosed double-colons that should be part of the text to be escaped with backslash (<code>\</code>). <strong>Block</strong> form has the tag and end-tag on lines by themselves, and can take multi-line text. In block form, only a single end-tag on its own line counts and any end-tags inside the text should not be escaped (except if it's on a single line).<pre>code:: inline form ::
+<p>The following tags (CODE, TELETYPE and MATH) can be written in two forms, either inline or block. <strong>Inline</strong> form has the end-tag on the same line, and need any enclosed double-colons that should be part of the text to be escaped with backslash (<code>\</code>). <strong>Block</strong> form has the tag and end-tag on lines by themselves, and can take multi-line text. In block form, only a single end-tag on its own line counts and any end-tags inside the text should not be escaped (except if it's on a single line).<pre>code:: inline form ::
 
 code::
 block form :: &lt;- needs no escaping
 can span multiple lines
 ::</pre><dl>
-<dt><a class='anchor' name='kw_code::'>&nbsp;</a><code>CODE::</code><dd>Render syntax-colored SuperCollider code.<dt><a class='anchor' name='kw_teletype::'>&nbsp;</a><code>TELETYPE::</code><dd>Render monospace text.</dl>
+<dt><a class='anchor' name='kw_code::'>&nbsp;</a><code>CODE::</code><dd>Render syntax-colored SuperCollider code.<dt><a class='anchor' name='kw_teletype::'>&nbsp;</a><code>TELETYPE::</code><dd>Render monospace text.<dt><a class='anchor' name='kw_math::'>&nbsp;</a><code>MATH::</code><dd>Renders LaTeX code in display style. E.g.<pre>math::
+\int_0^{2\pi}\sin(x)~dx = 0
+::</pre>
+<p>becomes<span class='math block'>
+\int_0^{2\pi}\sin(x)~dx = 0
+</span>
+<p>which is separated from the text through a block. For specifics check out the used rendering engine kaTeX at <a href="https://katex.org">https://katex.org</a></dl>
 <h3><a class='anchor' name='Lists%20and%20tables'>Lists and tables</a></h3>
 
 <p>List items, table rows and definition terms are denoted with <code>##</code> (double-hash). Table cells and definition descriptions are denoted with <code>||</code> (double-bar). Lists and tables can be nested, and ends with the end-tag.<dl>
@@ -165,7 +179,7 @@ sectiontag        ::= "CLASSMETHODS::"
 optsections       ::= [ sections ]
 sections          ::= sections section
                     | section
-                    | subsubsections
+                    | subsections
 section           ::= ( "SECTION::" words2 eol | sectiontag ) optsubsections
 optsubsections    ::= [ subsections ]
 subsections       ::= subsections subsection
@@ -176,7 +190,8 @@ optsubsubsections ::= [ subsubsections ]
 subsubsections    ::= subsubsections subsubsection
                     | subsubsection
                     | body
-subsubsection     ::= "METHOD::" methnames optMETHODARGS eol methodbody
+subsubsection     ::= "SUBSUBSECTION::" words2 eol optbody
+                    | "METHOD::" methnames optMETHODARGS eol methodbody
                     | "COPYMETHOD::" words eol
                     | "PRIVATE::" commalist eol
 optMETHODARGS     ::= [ METHODARGS ]
@@ -213,9 +228,11 @@ inlinetag         ::= "LINK::"
                     | "EMPHASIS::"
                     | "CODE::"
                     | "TELETYPE::"
+                    | "MATH::"
                     | "ANCHOR::"
 blocktag          ::= CODEBLOCK
                     | TELETYPEBLOCK
+                    | MATHBLOCK
 listtag           ::= "LIST::"
                     | "TREE::"
                     | "NUMBEREDLIST::"
@@ -243,6 +260,7 @@ nocommawords      ::= nocommawords TEXT
                     | nocommawords URL
                     | TEXT
                     | URL
-commalist         ::= { nocommawords COMMA } nocommawords</pre><div class='footnotes'>
-<a class='anchor' name='footnote_1'/><div class='footnote'>[<a href='#footnote_org_1'>1</a>] - According to <a href="http://en.wikipedia.org/wiki/Geek">http://en.wikipedia.org/wiki/Geek</a> the word geek is a slang term, with different meanings ranging from "a computer expert or enthusiast" to "a carnival performer who performs sensationally morbid or disgusting acts"</div></div><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Reference/SCDocSyntax.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Reference/SCDocSyntax.schelp</a><br>link::Reference/SCDocSyntax::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+commalist         ::= { nocommawords COMMA } nocommawords</pre>
+<p><div class='footnotes'>
+<a class='anchor' name='footnote_1'/><div class='footnote'>[<a href='#footnote_org_1'>1</a>] - According to <a href="http://en.wikipedia.org/wiki/Geek">http://en.wikipedia.org/wiki/Geek</a> the word geek is a slang term, with different meanings ranging from "a computer expert or enthusiast" to "a carnival performer who performs sensationally morbid or disgusting acts"</div></div><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Reference/SCDocSyntax.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Reference/SCDocSyntax.schelp</a><br>link::Reference/SCDocSyntax::<br></div></div><script src='./../static/editor.js' type='text/javascript'></script>
 </body></html>

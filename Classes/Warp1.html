@@ -1,21 +1,25 @@
-<!doctype html><html lang='en'><head><title>Warp1 | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>Warp1 | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../lib/jquery.min.js'></script>
-<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/jquery.min.js'></script>
+<script src='./../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './..';
 var scdoc_title = 'Warp1';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../static/scdoc.js' type='text/javascript'></script>
 <script src='./../docmap.js' type='text/javascript'></script>
+<script src='./../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
@@ -39,7 +43,7 @@ var scdoc_sc_version = '3.13.1';
 <div id='summary'>Warp a buffer with a time pointer</div>
 </div>
 <div class='subheader'>
-<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/Common/Audio/GrainUGens.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Audio/GrainUGens.sc'>GrainUGens.sc</a></div></div>
+<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/Common/Audio/GrainUGens.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Audio/GrainUGens.sc'>GrainUGens.sc</a></div></div>
 <h2><a class='anchor' name='description'>Description</a></h2>
 
 <p>Inspired by Chad Kirby's SuperCollider2 Warp1 class, which was inspired by Richard Karpen's sndwarp for CSound. A granular time stretcher and pitchshifter.<h2><a class='anchor' name='classmethods'>Class Methods</a></h2>
@@ -47,7 +51,7 @@ var scdoc_sc_version = '3.13.1';
 <div class='method'><h4>Arguments:</h4>
 <table class='arguments'>
 <tr><td class='argumentname'>numChannels<td class='argumentdesc'>
-<p>the number of channels in the soundfile used in bufnum.<tr><td class='argumentname'>bufnum<td class='argumentdesc'>
+<p>the number of channels in the soundfile used in bufnum. Must be a nonzero, positive integer. This is fixed when the SynthDef is compiled so cannot be assigned to a SynthDef argument.<tr><td class='argumentname'>bufnum<td class='argumentdesc'>
 <p>the buffer number of a mono soundfile.<tr><td class='argumentname'>pointer<td class='argumentdesc'>
 <p>the position in the buffer. The value should be between 0 and 1, with 0 being the beginning of the buffer, and 1 the end.<tr><td class='argumentname'>freqScale<td class='argumentdesc'>
 <p>the amount of frequency shift. 1.0 is normal, 0.5 is one octave down, 2.0 is one octave up. Negative values play the soundfile backwards.<tr><td class='argumentname'>windowSize<td class='argumentdesc'>
@@ -59,10 +63,10 @@ var scdoc_sc_version = '3.13.1';
 <div id='inheritedclassmets'></div><h2><a class='anchor' name='instancemethods'>Instance Methods</a></h2>
 <h3><a class='anchor' name='Inherited%20instance%20methods'>Inherited instance methods</a></h3>
 <div id='inheritedinstmets'></div><h2><a class='anchor' name='examples'>Examples</a></h2>
-<textarea class='editor'>s.boot;
+<div class='codeMirrorContainer'><textarea class='editor'>s.boot;
 
 (
-b = Buffer.read(s, Platform.resourceDir +/+ "sounds/a11wlk01-44_1.aiff");
+b = Buffer.read(s, ExampleFiles.apollo11);
 x = { |envbuf = -1|
     var pointer, pitch;
     // pointer - move from beginning to end of soundfile over 15 seconds
@@ -70,15 +74,15 @@ x = { |envbuf = -1|
     // control pitch with MouseX
     pitch = MouseX.kr(0.5, 2);
     Warp1.ar(
-        numChannels:1,
-        bufnum:b,
-        pointer:pointer,
-        freqScale:pitch,
-        windowSize:0.1,
-        envbufnum:envbuf,
-        overlaps:8,
-        windowRandRatio:0.1,
-        interp:2
+        numChannels: 1,
+        bufnum: b,
+        pointer: pointer,
+        freqScale: pitch,
+        windowSize: 0.1,
+        envbufnum: envbuf,
+        overlaps: 8,
+        windowRandRatio: 0.1,
+        interp: 2
     )
 }.play
 
@@ -98,9 +102,10 @@ x.set(\envbuf, -1);
 
 // relase and end
 x.relase; z.free;</textarea>
-<textarea class='editor'>(
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+<div class='codeMirrorContainer'><textarea class='editor'>(
 b.free;
-b = Buffer.read(s, Platform.resourceDir +/+ "sounds/a11wlk01-44_1.aiff");
+b = Buffer.read(s, ExampleFiles.apollo11);
 {
     var pointer = Phasor.ar(0, SampleDur.ir / BufDur.ir(b) * XLine.kr(1, 0.25, 20));
     var sound = Warp1.ar(1, b, pointer, 1, 0.3, -1, 16, Line.kr(0, 1, 40), 4);
@@ -108,5 +113,7 @@ b = Buffer.read(s, Platform.resourceDir +/+ "sounds/a11wlk01-44_1.aiff");
 }.play
 )
 b.free;</textarea>
-<div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/Warp1.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/Warp1.schelp</a><br>link::Classes/Warp1::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+
+<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/Warp1.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/Warp1.schelp</a><br>link::Classes/Warp1::<br></div></div><script src='./../static/editor.js' type='text/javascript'></script>
 </body></html>

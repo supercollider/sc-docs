@@ -1,3 +1,4 @@
+
 var storage;
 var menubar;
 
@@ -87,15 +88,19 @@ escape_regexp = function(str) {
 }
 
 var toc_items;
+var firstMatch = null; // Variable to store the first match
+
 function toc_search(search_string) {
-//TODO: on enter, go to first match
     var re = RegExp("^"+escape_regexp(search_string),"i");
+    firstMatch = null; // Reset first match on each search
 
     for(var i=0;i<toc_items.length;i++) {
         var li = toc_items[i];
         var a = li.firstChild;
         if(re.test(a.innerHTML)) {
             li.style.display = "";
+            if(firstMatch === null) firstMatch = a; // Set first match
+
             var lev = li.className[3];
             for(var i2 = i-1;i2>=0;i2--) {
                 var e = toc_items[i2];
@@ -110,7 +115,6 @@ function toc_search(search_string) {
         }
     }
 }
-
 
 function set_up_toc() {
     var toc_container = $("<div>", {id: "toc-container"})
@@ -143,7 +147,30 @@ function set_up_toc() {
             $("#toc_search").focus();
         }
     });
+
+    $("#toc_search").on('keydown', function(event) {
+        if (event.key === 'Escape') {
+            $("#toc").toggle();
+        };
+
+        if (event.key === 'Enter' && firstMatch !== null) {
+            firstMatch.click(); // Simulate a click on the first matched item
+            $("#toc").toggle();
+        }
+
+        //TOC scroll with ctrl+{j,k}
+        if (event.ctrlKey && event.key === "j") {
+            $("#toc").scrollTop($("#toc").scrollTop() + 10);
+        }
+    
+        if (event.ctrlKey && event.key === "k") {
+            event.preventDefault();
+            $("#toc").scrollTop($("#toc").scrollTop() - 10);
+        }
+    });
 }
+
+
 
 function fixTOC() {
     addInheritedMethods();
@@ -170,7 +197,7 @@ function fixTOC() {
         var indexes_menu = $("<div>", {class: "submenu"}).hide()
             .appendTo(li);
 
-        var nav_items = ["Documents", "Classes", "Methods"];
+        var nav_items = ["Documents", "Classes", "ClassTree", "Methods"];
         nav_items.forEach(function (item) {
             $("<a>", {
                 text: item,
@@ -190,10 +217,96 @@ function fixTOC() {
         });
     });
 
+    buildThemeSwitcher();
+
     if ($("#toc").length) {
         set_up_toc();
     }
 }
+
+// theming
+const scDocsThemeStorageKey = "scDocsTheme";
+const scriptLocation = document.currentScript.src;
+const themeNames = [
+    "classic",
+    "dark",
+    "default",
+    "dracula",
+    "monokai",
+    "solarizedDark",
+    "solarizedLight"
+];
+
+function buildThemeSwitcher() {
+    create_menubar_item("Theme \u25bc", "#", function (a, li) {
+        const themesMenu = $("<div>", { class: "submenu" }).hide()
+            .appendTo(li);
+
+
+        themeNames.forEach(function (themeName) {
+            var themeLink = $("<a>", {
+                text: themeName,
+                href: "#"
+            });
+            themeLink.on("click", (e) => {
+                setTheme(e.target.text);
+            });
+            themeLink.appendTo(themesMenu);
+        });
+
+        themesMenu.append($("<hr>"));
+
+        buildLineNumberSwitch(themesMenu);
+
+        a.on("click", function (e) {
+            e.preventDefault();
+            themesMenu.toggle();
+        });
+
+        $(document).on("click", function (e) {
+            if (!$(e.target).closest(li).length) {
+                themesMenu.hide();
+            }
+        });
+    });
+}
+
+function buildLineNumberSwitch(themesMenu) {
+    const lineNumberCheckbox = $("<input>", {
+      type: "checkbox",
+      id: "line-number-checkbox",
+      checked: getLineNumberStorageValue(),
+    }).on("click", () => {
+      setLineNumberStorageValue(!getLineNumberStorageValue());
+    });
+    const lineNumberLabel = $("<label>", {
+      text: "Line numbers",
+      for: "line-number-checkbox",
+    });
+    const lineNumberSwitch = $("<div>").append(lineNumberCheckbox).append(lineNumberLabel);
+    themesMenu.append(lineNumberSwitch);
+}
+
+function setTheme(themeName) {
+    localStorage.setItem(scDocsThemeStorageKey, themeName);
+    applyTheme();
+}
+
+function applyTheme(theme=null) {
+    const themeName = theme ?? localStorage.getItem(scDocsThemeStorageKey) ?? "default";
+
+    const cssThemeTag = document.getElementById("scdoc-theme");
+    if(cssThemeTag===null) {
+        console.log(`Could not find scdoc-theme css tag! Can not apply theme ${themeName}`);
+        return;
+    }
+    
+    cssThemeTag.href = `${scriptLocation.split('/').slice(0, -1).join("/")}/themes/${themeName}.css`;
+}
+
+// scdoc.js is loaded after css themes so it's safe to call it here:
+// run immediately, don't wait for document load, to prevent "unstyled flash"
+applyTheme();
 
 // Set up a QWebChannel for communicating with C++ IDE objects. The main app publishes a handle
 // to IDE functionality at "IDE" which is made globally available here after the page and
@@ -216,4 +329,52 @@ function setUpWebChannel(port) {
             window.IDE = channel.objects.IDE;
         });
     }
+}
+
+function renderTex() {
+    for (let aSpan of document.getElementsByClassName("math")) {
+        const tex = aSpan.textContent;
+        katex.render(tex, aSpan, {
+            throwOnError: false,
+            displayMode: aSpan.classList.contains("block"),
+        });
+    }
+}
+
+function copyButtonInCodeArea() {
+    document.querySelectorAll('.codeMirrorContainer').forEach(container => {
+        const button = container.querySelector('.copy-button');
+        const editor = container.querySelector('.editor');
+
+        button.addEventListener('click', () => {
+            navigator.clipboard.writeText(editor.value).then(() => {
+                button.classList.add('copied');
+
+                setTimeout(() => {
+                    button.classList.remove('copied');
+                }, 1400);
+            });
+        });
+    });
+}
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    copyButtonInCodeArea();
+    renderTex();
+});
+
+function getLineNumberStorageValue() {
+    return window.localStorage.getItem("showLineNumbers") === "true"
+}
+
+function setLineNumberStorageValue(v) {
+    window.localStorage.setItem("showLineNumbers", v ? "true" : "false");
+    toggleLineNumbers(v);
+}
+
+function toggleLineNumbers(v) {
+    Array.from(document.querySelectorAll("textarea")).filter((t) => t.hasOwnProperty("editor")).forEach((t) => {
+      t.editor.setOption("lineNumbers", v);
+    });
 }

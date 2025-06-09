@@ -1,21 +1,25 @@
-<!doctype html><html lang='en'><head><title>Splay | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>Splay | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../lib/jquery.min.js'></script>
-<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/jquery.min.js'></script>
+<script src='./../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './..';
 var scdoc_title = 'Splay';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../static/scdoc.js' type='text/javascript'></script>
 <script src='./../docmap.js' type='text/javascript'></script>
+<script src='./../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
@@ -40,7 +44,7 @@ var scdoc_sc_version = '3.13.1';
 <div id='summary'>Splay spreads an array of channels across the stereo field</div>
 </div>
 <div class='subheader'>
-<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/Common/Audio/Splay.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Audio/Splay.sc'>Splay.sc</a></div><div id='related'>See also: <a href="./../Classes/SplayAz.html">SplayAz</a>, <a href="./../Classes/SplayZ.html">SplayZ</a></div>
+<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/Common/Audio/Splay.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Audio/Splay.sc'>Splay.sc</a></div><div id='related'>See also: <a href="./../Classes/SplayAz.html">SplayAz</a>, <a href="./../Classes/SplayZ.html">SplayZ</a>, <a href="./../Classes/LevelComp.html">LevelComp</a>, <a href="./../Guides/Level_Compensation.html">Level Compensation when Mixing and Panning</a></div>
 </div>
 <h2><a class='anchor' name='description'>Description</a></h2>
 
@@ -53,7 +57,12 @@ var scdoc_sc_version = '3.13.1';
 <p>The array of channels to be distributed over the two stereo pairs<tr><td class='argumentname'>spread<td class='argumentdesc'>
 <p>For spread = 0, all channels end up in the centre, for 1, they have maximum distribution<tr><td class='argumentname'>level<td class='argumentdesc'>
 <p>An amplitude multiplier for all channels<tr><td class='argumentname'>center<td class='argumentdesc'>
-<p>Shift the centre of the distribution.<tr><td class='argumentname'>levelComp<td class='argumentdesc'></table></div><h3 class='method-code'><span class='method-prefix'>Splay.</span><a class='method-name' name='*arFill' href='./../Overviews/Methods.html#arFill'>arFill</a>(<span class='argstr'>n</span>, <span class='argstr'>function</span>, <span class='argstr'>spread: 1</span>, <span class='argstr'>level: 1</span>, <span class='argstr'>center: 0.0</span>, <span class='argstr'>levelComp: true</span>)</h3>
+<p>Shift the centre of the distribution.<tr><td class='argumentname'>levelComp<td class='argumentdesc'>
+<p>a flag or numeric value:<ul>
+<li><code>true</code> : maintain equal power, keeping overall loudness the same.<li><code>false</code> : off / no level change,<li>float between <code>0.0</code> and <code>1.0</code> : smooth tuning of levelComp factor:<ul>
+<li><code>0.0</code> is none -&gt; factor 1<li><code>0.5</code> is equal power -&gt; factor (1/n).squared<li><code>1.0</code> is equal amplitude -&gt; factor (1/n)</ul>
+</ul>
+</table></div><h3 class='method-code'><span class='method-prefix'>Splay.</span><a class='method-name' name='*arFill' href='./../Overviews/Methods.html#arFill'>arFill</a>(<span class='argstr'>n</span>, <span class='argstr'>function</span>, <span class='argstr'>spread: 1</span>, <span class='argstr'>level: 1</span>, <span class='argstr'>center: 0.0</span>, <span class='argstr'>levelComp: true</span>)</h3>
 <div class='method'>
 <p>In analogy to Mix:arFill, this method takes a function that produces the channels. The counting index is passed to it.<h4>Arguments:</h4>
 <table class='arguments'>
@@ -62,50 +71,76 @@ var scdoc_sc_version = '3.13.1';
 <p>Function to return each channel<tr><td class='argumentname'>spread<td class='argumentdesc'>
 <p>For spread = 0, all channels end up in the centre, for 1, they have maximum distribution<tr><td class='argumentname'>level<td class='argumentdesc'>
 <p>An amplitude multiplier for all channels<tr><td class='argumentname'>center<td class='argumentdesc'>
-<p>Shift the centre of the distribution.<tr><td class='argumentname'>levelComp<td class='argumentdesc'></table></div><h3><a class='anchor' name='Inherited%20class%20methods'>Inherited class methods</a></h3>
+<p>Shift the centre of the distribution.<tr><td class='argumentname'>levelComp<td class='argumentdesc'>
+<p>see above</table></div><h3><a class='anchor' name='Inherited%20class%20methods'>Inherited class methods</a></h3>
 <div id='inheritedclassmets'></div><h2><a class='anchor' name='instancemethods'>Instance Methods</a></h2>
 <h3><a class='anchor' name='Inherited%20instance%20methods'>Inherited instance methods</a></h3>
 <div id='inheritedinstmets'></div><h2><a class='anchor' name='examples'>Examples</a></h2>
-<textarea class='editor'>(
-x = { arg spread=1, level=0.2, center=0.0;
- Splay.ar(
-  SinOsc.ar( { |i| LFNoise2.kr(1).exprange(200, 4000) } ! 10),
-  spread,
-  level,
-  center
- );
+
+<p>Basic usage:<div class='codeMirrorContainer'><textarea class='editor'>// splay 10 chans of sound into 2
+(
+x = { |spread = 1, level = 0.2, center = 0.0|
+    var numchans = 10;
+    Splay.ar(
+        SinOsc.ar({ |i| LFNoise2.kr(1).exprange(200, 4000) } ! numchans),
+        spread,
+        level,
+        center
+        // use levelComp default true
+    );
 }.play;
 )
 
-x.set(\spread, 1,   \center, 0);  // full stereo
-x.set(\spread, 0.5, \center, 0);  // less wide
-x.set(\spread, 0,   \center, 0);  // mono center
-x.set(\spread, 0.5, \center, 0.5);
-// spread from center to right
-x.set(\spread, 0,   \center, -1); // all left
-x.set(\spread, 1,   \center, 0);  // full stereo
+s.meter;
+s.scope;
 
+// change settings dynamically:
 
- // the a similar example written with arFill:
+x.set(\spread, 1,   \center, 0);   // full stereo
+x.set(\spread, 0.5, \center, 0);   // less wide
+x.set(\spread, 0,   \center, 0);   // mono center
+x.set(\spread, 0.5, \center, 0.5); // spread from center to right
+x.set(\spread, 0,   \center, -1);  // all left
+x.set(\spread, 1,   \center, 0);   // full stereo
+
+// A similar example written with arFill:
 (
-x = { arg spread=1, level=0.2, center=0.0;
- Splay.arFill(10,
-  { |i| SinOsc.ar( LFNoise2.kr( rrand(10, 20), 200, i + 3 * 100))  },
-  spread,
-  level,
-  center
- );
-}.play;
-)
-
-
- // with mouse control
-(
-x = { var src;
- src = SinOsc.ar( { |i| LFNoise2.kr( rrand(10, 20), 200, i + 3 * 100) } ! 10);
- Splay.ar(src, MouseY.kr(1, 0), 0.2, MouseX.kr(-1, 1));
+x = { |spread = 1, level = 0.2, center = 0.0|
+    var numchans = 10;
+    Splay.arFill(numchans,
+        { |i| SinOsc.ar(LFNoise2.kr(rrand(10, 20), 200, i + 3 * 100))  },
+        spread,
+        level,
+        center
+    );
 }.play;
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/Splay.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/Splay.schelp</a><br>link::Classes/Splay::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+<p><div class='note'><span class='notelabel'>NOTE:</span> levelComp new takes multiple input options: true, false as before for rough equal power level compensation, and newly added: a float between 0 and 1. This is to offer more choices for level compensation, such as equal maximum amplitude.</div>
+<p>For a full discussion, see <a href="./../Classes/LevelComp.html">LevelComp</a>; here is an overview of the levelComp variants:<div class='codeMirrorContainer'><textarea class='editor'>// default is equal power comp: level / (numchans.sqrt)
+Splay.ar(ins, spread, level, center); // true is default
+// write it explicitly for clarity
+Splay.ar(ins, spread, level, center, levelComp: true);
+// or do equal power as float levelComp
+Splay.ar(ins, spread, level, center, levelComp: 0.5); //
+
+// maximum peak safety by equal amplitude comp: level / numchans
+Splay.ar(ins, spread, level, center, levelComp: 1);
+// or calculate by hand:
+Splay.ar(ins, spread, level / ins.size, center, levelComp: false);
+
+// no compensation, just tune level by hand
+Splay.ar(ins, spread, level, center, levelComp: false);
+Splay.ar(ins, spread, level, center, levelComp: 0);
+
+// levelComp by float: level / numchans.pow(levelComp),
+// so 0.0 is no compensation: level / 1;
+//    0.5 is equal power : level / (numchans.sqrt)
+//    1.0 is equal amplitude : level / (numchans)
+// can be used to tune e.g. between equal power and equal amp:
+Splay.ar(ins, spread, level, center, levelComp: 0.75);</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+
+<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/Splay.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/Splay.schelp</a><br>link::Classes/Splay::<br></div></div><script src='./../static/editor.js' type='text/javascript'></script>
 </body></html>

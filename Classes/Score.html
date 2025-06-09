@@ -1,21 +1,25 @@
-<!doctype html><html lang='en'><head><title>Score | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>Score | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../lib/jquery.min.js'></script>
-<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/jquery.min.js'></script>
+<script src='./../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './..';
 var scdoc_title = 'Score';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../static/scdoc.js' type='text/javascript'></script>
 <script src='./../docmap.js' type='text/javascript'></script>
+<script src='./../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
@@ -40,6 +44,7 @@ var scdoc_sc_version = '3.13.1';
 <li class='toc3'><a href='#-write'>write</a> </li>
 <li class='toc3'><a href='#-score'>score</a> </li>
 <li class='toc3'><a href='#-add'>add</a> </li>
+<li class='toc3'><a href='#-addSystemSynthDefs'>addSystemSynthDefs</a> </li>
 <li class='toc3'><a href='#-sort'>sort</a> </li>
 <li class='toc3'><a href='#-recordNRT'>recordNRT</a> </li>
 <li class='toc3'><a href='#-saveToFile'>saveToFile</a> </li>
@@ -65,18 +70,19 @@ var scdoc_sc_version = '3.13.1';
 <div id='summary'>score of timed OSC commands</div>
 </div>
 <div class='subheader'>
-<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/Common/Control/Score.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Control/Score.sc'>Score.sc</a></div><div id='related'>See also: <a href="./../Guides/Non-Realtime-Synthesis.html">Non-Realtime Synthesis (NRT)</a></div>
+<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/Common/Control/Score.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Control/Score.sc'>Score.sc</a></div><div id='related'>See also: <a href="./../Guides/Non-Realtime-Synthesis.html">Non-Realtime Synthesis (NRT)</a></div>
 </div>
 <h2><a class='anchor' name='description'>Description</a></h2>
 
 <p>Score encapsulates a list of timed OSC commands and provides some methods for using it, as well as support for the creation of binary OSC files for non-realtime synthesis. See <a href="./../Guides/Non-Realtime-Synthesis.html">Non-Realtime Synthesis (NRT)</a> for more details.
-<p>The list should be in the following format, with times in ascending order. Bundles are okay.<textarea class='editor'>[
+<p>The list should be in the following format, with times in ascending order. Bundles are okay.<div class='codeMirrorContainer'><textarea class='editor'>[
 [beat1, [OSCcmd1]],
 [beat2, [OSCcmd2], [OSCcmd3]],
 ...
 [beat_n, [OSCcmdn]],
 [beatToEndNRT, [\c_set, 0, 0]] // finish
 ]</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p>For NRT synthesis the final event should a dummy event, after which synthesis will cease. It is thus important that this event be timed to allow previous events to complete.
 <p>Score scheduling defaults to <a href="./../Classes/TempoClock.html">TempoClock</a>. A setting of <code>TempoClock.default.tempo = 1</code> (60 beats per minute), may be used to express score events in seconds if desired.<h2><a class='anchor' name='classmethods'>Class Methods</a></h2>
@@ -143,7 +149,13 @@ var scdoc_sc_version = '3.13.1';
 <div class='method'>
 <p>get or set the list.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-add' href='./../Overviews/Methods.html#add'>add</a>(<span class='argstr'>bundle</span>)</h3>
 <div class='method'>
-<p>adds bundle to the list.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-sort' href='./../Overviews/Methods.html#sort'>sort</a></h3>
+<p>adds bundle to the list.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-addSystemSynthDefs' href='./../Overviews/Methods.html#addSystemSynthDefs'>addSystemSynthDefs</a></h3>
+<div class='method'>
+<p>Some code requires a number of SynthDefs that are assumed to exist on the server (<a href="./../Classes/SystemSynthDefs.html">SystemSynthDefs</a>). When booting a server in realtime mode, they are sent automatically. In non-realtime mode, they need to be added to the score explicitly:<div class='codeMirrorContainer'><textarea class='editor'>x = Score.new;
+x.addSystemSynthDefs;
+x.score</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-sort' href='./../Overviews/Methods.html#sort'>sort</a></h3>
 <div class='method'>
 <p>sort the score time order. This is recommended to do <strong>before recordNRT or write</strong> when you are not sure about the packet order.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-recordNRT' href='./../Overviews/Methods.html#recordNRT'>recordNRT</a>(<span class='argstr'>oscFilePath</span>, <span class='argstr'>outputFilePath</span>, <span class='argstr'>inputFilePath</span>, <span class='argstr'>sampleRate: 44100</span>, <span class='argstr'>headerFormat: "AIFF"</span>, <span class='argstr'>sampleFormat: "int16"</span>, <span class='argstr'>options</span>, <span class='argstr'>completionString: ""</span>, <span class='argstr'>duration</span>, <span class='argstr'>action</span>)</h3>
 <div class='method'>
@@ -158,7 +170,7 @@ var scdoc_sc_version = '3.13.1';
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-writeOSCFile' href='./../Overviews/Methods.html#writeOSCFile'>writeOSCFile</a>(<span class='argstr'>path</span>, <span class='argstr'>from</span>, <span class='argstr'>to</span>, <span class='argstr'>clock</span>)</h3>
 <h2><a class='anchor' name='examples'>Examples</a></h2>
 <h3><a class='anchor' name='NRT%20Examples'>NRT Examples</a></h3>
-<textarea class='editor'>// A sample synthDef
+<div class='codeMirrorContainer'><textarea class='editor'>// A sample synthDef
 // Here we use store instead of add to store the compiled synthdef in Platform.defaultTempDir +/+ "synthdefs/"
 // and make it available to the NRT server
 (
@@ -179,17 +191,19 @@ g = [
     [0.3, [\s_new, \helpscore, 1002, 0, 0, \freq, 220]],
     [1, [\c_set, 0, 0]] // finish
     ];
-f = File(Platform.defaultTempDir +/+ "score-test","w");
+f = File(Platform.defaultTempDir +/+ "score-test", "w");
 f.write(g.asCompileString);
 f.close;
 )
 
-//convert it to a binary OSC file for use with NRT
+// convert it to a binary OSC file for use with NRT
 Score.writeFromFile(Platform.defaultTempDir +/+ "score-test", Platform.defaultTempDir +/+ "test.osc");</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>From the command line, the file can then be rendered from within the build directory:<textarea class='editor'>scsynth -N test.osc _ test.aif 44100 AIFF int16 -o 1</textarea>
+<p>From the command line, the file can then be rendered from within the build directory:<div class='codeMirrorContainer'><textarea class='editor'>scsynth -N test.osc _ test.aif 44100 AIFF int16 -o 1</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>Score also provides methods to do all this more directly:<textarea class='editor'>(
+<p>Score also provides methods to do all this more directly:<div class='codeMirrorContainer'><textarea class='editor'>(
 var f, o;
 g = [
     [0.1, [\s_new, \helpscore, 1000, 0, 0, \freq, 440]],
@@ -201,8 +215,9 @@ g = [
 o = ServerOptions.new.numOutputBusChannels = 1; // mono output
 Score.recordNRT(g, Platform.defaultTempDir +/+ "help-oscFile", Platform.defaultTempDir +/+ "helpNRT.aiff", options: o); // synthesize
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h3><a class='anchor' name='Real-time%20Examples'>Real-time Examples</a></h3>
-<textarea class='editor'>s.boot; // boot the default server
+<div class='codeMirrorContainer'><textarea class='editor'>s.boot; // boot the default server
 
 // A sample synthDef
 (
@@ -224,7 +239,7 @@ g = [
     [0.3, [\s_new, \helpscore, 1003, 0, 0, \freq, 220]],
     [1, [\c_set, 0, 0]] // finish
     ];
-f = File(Platform.defaultTempDir +/+ "score-test","w");
+f = File(Platform.defaultTempDir +/+ "score-test", "w");
 f.write(g.asCompileString);
 f.close;
 )
@@ -237,26 +252,26 @@ z.play;
 // change the list
 (
 x = [
-[0.0, [ \s_new, \helpscore, 1000, 0, 0, \freq, 1413 ]],
-[0.1, [ \s_new, \helpscore, 1001, 0, 0, \freq, 712 ]],
-[0.2, [ \s_new, \helpscore, 1002, 0, 0, \freq, 417 ]],
-[0.3, [ \s_new, \helpscore, 1003, 0, 0, \freq, 1238 ]],
-[0.4, [ \s_new, \helpscore, 1004, 0, 0, \freq, 996 ]],
-[0.5, [ \s_new, \helpscore, 1005, 0, 0, \freq, 1320 ]],
-[0.6, [ \s_new, \helpscore, 1006, 0, 0, \freq, 864 ]],
-[0.7, [ \s_new, \helpscore, 1007, 0, 0, \freq, 1033 ]],
-[0.8, [ \s_new, \helpscore, 1008, 0, 0, \freq, 1693 ]],
-[0.9, [ \s_new, \helpscore, 1009, 0, 0, \freq, 410 ]],
-[1.0, [ \s_new, \helpscore, 1010, 0, 0, \freq, 1349 ]],
-[1.1, [ \s_new, \helpscore, 1011, 0, 0, \freq, 1449 ]],
-[1.2, [ \s_new, \helpscore, 1012, 0, 0, \freq, 1603 ]],
-[1.3, [ \s_new, \helpscore, 1013, 0, 0, \freq, 333 ]],
-[1.4, [ \s_new, \helpscore, 1014, 0, 0, \freq, 678 ]],
-[1.5, [ \s_new, \helpscore, 1015, 0, 0, \freq, 503 ]],
-[1.6, [ \s_new, \helpscore, 1016, 0, 0, \freq, 820 ]],
-[1.7, [ \s_new, \helpscore, 1017, 0, 0, \freq, 1599 ]],
-[1.8, [ \s_new, \helpscore, 1018, 0, 0, \freq, 968 ]],
-[1.9, [ \s_new, \helpscore, 1019, 0, 0, \freq, 1347 ]],
+[0.0, [\s_new, \helpscore, 1000, 0, 0, \freq, 1413]],
+[0.1, [\s_new, \helpscore, 1001, 0, 0, \freq, 712]],
+[0.2, [\s_new, \helpscore, 1002, 0, 0, \freq, 417]],
+[0.3, [\s_new, \helpscore, 1003, 0, 0, \freq, 1238]],
+[0.4, [\s_new, \helpscore, 1004, 0, 0, \freq, 996]],
+[0.5, [\s_new, \helpscore, 1005, 0, 0, \freq, 1320]],
+[0.6, [\s_new, \helpscore, 1006, 0, 0, \freq, 864]],
+[0.7, [\s_new, \helpscore, 1007, 0, 0, \freq, 1033]],
+[0.8, [\s_new, \helpscore, 1008, 0, 0, \freq, 1693]],
+[0.9, [\s_new, \helpscore, 1009, 0, 0, \freq, 410]],
+[1.0, [\s_new, \helpscore, 1010, 0, 0, \freq, 1349]],
+[1.1, [\s_new, \helpscore, 1011, 0, 0, \freq, 1449]],
+[1.2, [\s_new, \helpscore, 1012, 0, 0, \freq, 1603]],
+[1.3, [\s_new, \helpscore, 1013, 0, 0, \freq, 333]],
+[1.4, [\s_new, \helpscore, 1014, 0, 0, \freq, 678]],
+[1.5, [\s_new, \helpscore, 1015, 0, 0, \freq, 503]],
+[1.6, [\s_new, \helpscore, 1016, 0, 0, \freq, 820]],
+[1.7, [\s_new, \helpscore, 1017, 0, 0, \freq, 1599]],
+[1.8, [\s_new, \helpscore, 1018, 0, 0, \freq, 968]],
+[1.9, [\s_new, \helpscore, 1019, 0, 0, \freq, 1347]],
 [2.0, [\c_set, 0, 0]] // finish
 ];
 
@@ -269,10 +284,11 @@ z.play;
 // play and stop after one second
 (
 z.play;
-SystemClock.sched(1.0, {z.stop;});
+SystemClock.sched(1.0, { z.stop });
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h3><a class='anchor' name='creating%20Score%20from%20a%20pattern'>creating Score from a pattern</a></h3>
-<textarea class='editor'>(
+<div class='codeMirrorContainer'><textarea class='editor'>(
 SynthDef("helpscore", { |out, freq = 440|
     Out.ar(out,
         SinOsc.ar(freq, 0, 0.2) * Line.kr(1, 0, 0.5, doneAction: Done.freeSelf)
@@ -285,7 +301,7 @@ SynthDef("helpscore", { |out, freq = 440|
 p = Pbind(
     \instrument, \helpscore,
     \dur, Prand([0.3, 0.5], inf),
-    \freq, Prand([200, 300, 500],inf)
+    \freq, Prand([200, 300, 500], inf)
 );
 )
 
@@ -297,6 +313,7 @@ z.play;
 // rendering a pattern to sound file directly:
 // render the pattern to wav (4 beats)
 p.render(Platform.defaultTempDir +/+ "asScore-Help.wav", 4.0);</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/Score.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/Score.schelp</a><br>link::Classes/Score::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/Score.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/Score.schelp</a><br>link::Classes/Score::<br></div></div><script src='./../static/editor.js' type='text/javascript'></script>
 </body></html>

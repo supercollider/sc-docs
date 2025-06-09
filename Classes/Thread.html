@@ -1,21 +1,25 @@
-<!doctype html><html lang='en'><head><title>Thread | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>Thread | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../lib/jquery.min.js'></script>
-<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/jquery.min.js'></script>
+<script src='./../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './..';
 var scdoc_title = 'Thread';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../static/scdoc.js' type='text/javascript'></script>
 <script src='./../docmap.js' type='text/javascript'></script>
+<script src='./../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
@@ -71,7 +75,7 @@ var scdoc_sc_version = '3.13.1';
 <div id='summary'>The context of code evaluation</div>
 </div>
 <div class='subheader'>
-<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/Common/Core/Thread.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Core/Thread.sc'>Thread.sc</a></div><div id='subclasses'>Subclasses: <a href="../Classes/Routine.html">Routine</a></div>
+<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/Common/Core/Thread.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Core/Thread.sc'>Thread.sc</a></div><div id='subclasses'>Subclasses: <a href="../Classes/Routine.html">Routine</a></div>
 <div id='related'>See also: <a href="./../Classes/Routine.html">Routine</a></div>
 </div>
 <h2><a class='anchor' name='description'>Description</a></h2>
@@ -81,13 +85,14 @@ var scdoc_sc_version = '3.13.1';
 <p>When code on a Thread starts or resumes another Thread (Routine), the former Thread becomes the latter's <strong>parent</strong>, and the latter its <strong>child</strong>. The parent Thread's execution is <strong>blocked</strong> until the child Thread finishes or is suspended, at which point the parent Thread continues execution. The <strong>current</strong> Thread may be accessed using <a href="#thisThread">thisThread</a>, while a Thread's parent may be accessed using <a href="#-parent">-parent</a>.
 <p>A Thread has<ul>
 <li>associated <a href="#-beats">logical time</a><li>an associated <a href="#-clock">Clock</a><li>own <a href="#-randSeed">random number seed</a><li>own <a href="#-exceptionHandler">exception handler</a></ul>
-<h3 class='method-code'><span class='method-prefix'></span><a class='method-name' name='thisThread' href='./../Overviews/Methods.html#thisThread'>thisThread</a></h3>
+<h3 class='method-code'><span class='method-prefix'></span><a class='method-name' name='.thisThread' href='./../Overviews/Methods.html#thisThread'>thisThread</a></h3>
 <div class='method'>
 <p>The global pseudo-variable <code>thisThread</code> always represents the current Thread, i.e. the context in which the current code is running. It can be either the <a href="./../Classes/Process.html#-mainThread">main Thread</a> or the <a href="./../Classes/Routine.html">Routine</a> running the current code.
-<p>See also: <a href="./../Classes/Clock.html#Scheduling%20and%20Threads">Clock: Scheduling and Threads</a>.<textarea class='editor'>// example
+<p>See also: <a href="./../Classes/Clock.html#Scheduling%20and%20Threads">Clock: Scheduling and Threads</a>.<div class='codeMirrorContainer'><textarea class='editor'>// example
 thisThread.beats;
 thisThread.seconds;
 thisThread.clock;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h2><a class='anchor' name='classmethods'>Class Methods</a></h2>
 <h3 class='method-code'><span class='method-prefix'>Thread.</span><a class='method-name' name='*new' href='./../Overviews/Methods.html#new'>new</a>(<span class='argstr'>func</span>, <span class='argstr'>stackSize: 512</span>)</h3>
 <div class='method'>
@@ -154,20 +159,24 @@ thisThread.clock;</textarea>
 <div class='method'>
 <p>Set the random number generator seed using a single integer.<h4>Discussion:</h4>
 
-<p>Example:<textarea class='editor'>g = thisThread.randSeed = 4;
-10.do{1.0.rand2.postln};</textarea>
+<p>Example:<div class='codeMirrorContainer'><textarea class='editor'>g = thisThread.randSeed = 4;
+10.do{ 1.0.rand2.postln };</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-randData' href='./../Overviews/Methods.html#randData'>randData</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-randData' href='./../Overviews/Methods.html#randData'>randData</a> = <span class='argstr'>data</span></h3>
 <div class='method'>
 <p>Get or set the three integer array which defines the internal basis for the random number generator. You can use this to get back the exact same random number sequence, and it provides a mechanism for automatic replay for generative music.<h4>Discussion:</h4>
 
-<p>Example:<textarea class='editor'>g = thisThread.randData;
-10.do{1.0.rand2.postln};</textarea>
+<p>Example:<div class='codeMirrorContainer'><textarea class='editor'>g = thisThread.randData;
+10.do{ 1.0.rand2.postln };</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p><textarea class='editor'>// each time the seed is reset, the random number generation should give the same sequence
-thisThread.randData_(Int32Array[ -662787342, 1546785953, 1661466823 ]);
-10.do{1.0.rand2.postln};</textarea>
-</div><h3><a class='anchor' name='Inherited%20instance%20methods'>Inherited instance methods</a></h3>
+<p><div class='codeMirrorContainer'><textarea class='editor'>// each time the seed is reset, the random number generation should give the same sequence
+thisThread.randData_(Int32Array[-662787342, 1546785953, 1661466823]);
+10.do{ 1.0.rand2.postln };</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+
+<p></div><h3><a class='anchor' name='Inherited%20instance%20methods'>Inherited instance methods</a></h3>
 <div id='inheritedinstmets'></div><h3><a class='anchor' name='Undocumented%20instance%20methods'>Undocumented instance methods</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-archiveAsCompileString' href='./../Overviews/Methods.html#archiveAsCompileString'>archiveAsCompileString</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-checkCanArchive' href='./../Overviews/Methods.html#checkCanArchive'>checkCanArchive</a></h3>
@@ -191,5 +200,5 @@ thisThread.randData_(Int32Array[ -662787342, 1546785953, 1661466823 ]);
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-threadPlayer' href='./../Overviews/Methods.html#threadPlayer'>threadPlayer</a> = value</h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-value' href='./../Overviews/Methods.html#value'>value</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-valueArray' href='./../Overviews/Methods.html#valueArray'>valueArray</a></h3>
-<div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/Thread.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/Thread.schelp</a><br>link::Classes/Thread::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+<div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/Thread.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/Thread.schelp</a><br>link::Classes/Thread::<br></div></div><script src='./../static/editor.js' type='text/javascript'></script>
 </body></html>

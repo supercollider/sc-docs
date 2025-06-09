@@ -1,21 +1,25 @@
-<!doctype html><html lang='en'><head><title>12 | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../../../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../../../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../../../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>12 | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../../../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../../../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../../../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../../../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../../../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../../../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../../../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../../../lib/jquery.min.js'></script>
-<script src='./../../../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../../../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../../../static/lib/jquery.min.js'></script>
+<script src='./../../../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../../../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../../../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './../../..';
 var scdoc_title = '12';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../../../scdoc.js' type='text/javascript'></script>
+<script src='./../../../static/scdoc.js' type='text/javascript'></script>
 <script src='./../../../docmap.js' type='text/javascript'></script>
+<script src='./../../../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
@@ -39,9 +43,9 @@ var scdoc_sc_version = '3.13.1';
 </div>
 <h2><a class='anchor' name='複数の部分からなるシンセシス'>複数の部分からなるシンセシス</a></h2>
 
-<p>シンセシスのプロセスを部分に分割することは、モジュラー・デザインとコンポーネントの再利用を促進します。このことが意味するのは、小さく、うまく設計されたタスクを成し遂げる様にSynthDefを作るということには、しばしば〜があるということです。そのようにすることで、複雑なシンセシスのネットワークを構築するためにSynthDefを組み合わせたり、様々な方法で組み替えたりすることが可能になるのです。<textarea class='editor'>(
+<p>シンセシスのプロセスを部分に分割することは、モジュラー・デザインとコンポーネントの再利用を促進します。このことが意味するのは、小さく、うまく設計されたタスクを成し遂げる様にSynthDefを作るということには、しばしば〜があるということです。そのようにすることで、複雑なシンセシスのネットワークを構築するためにSynthDefを組み合わせたり、様々な方法で組み替えたりすることが可能になるのです。<div class='codeMirrorContainer'><textarea class='editor'>(
 // ディスクからサウンド・ファイルを読み込む
-b = Buffer.read(s, Platform.resourceDir +/+ "sounds/a11wlk01.wav");
+b = Buffer.read(s, ExampleFiles.child);
 
 // モノのサンプル・プレーヤー ... １チャンネルのみ
 SynthDef("aMonoSamplePlayer", { arg bus = 0, bufnum = 0, rateScale = 1;
@@ -72,21 +76,50 @@ Synth("aMonoSamplePlayer", [\bus, 0, \bufNum, b]);
 Synth("aMonoSamplePlayer", [\bus, 0, \bufNum, b, \rateScale, 0.99]);
 Synth("aMonoSamplePlayer", [\bus, 1, \bufNum, b, \rateScale, 1.01]);
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p>////////////////////////////////////////////////////////////////////////////////////////////////////<h2><a class='anchor' name='どのようにして情報を取得するか'>どのようにして情報を取得するか</a></h2>
 
 <p>前の例ではBufRateScaleとBufDurというUGenを使って、PlayBufがサウンド・ファイルをプレイするレートと、PlayBufに適用されるエンベロープの長さをコントロールしています。
 <p>BufRateScaleはサウンド・ファイルが録音されたときのレートでプレイバックされることを保証します。BufDurはバッファの長さを返します。これら両方のクラスはInfoUGenbaseまたはBufInfoUGenBaseを継承するUGenのファミリーです。
-<p>そのようなUGenの完全なリストを表示するためのコードがこれです。<textarea class='editor'>InfoUGenBase.dumpClassSubtree</textarea>
+<p>そのようなUGenの完全なリストを表示するためのコードがこれです。<div class='codeMirrorContainer'><textarea class='editor'>InfoUGenBase.dumpClassSubtree</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>このコードを実行すると次の様に表示されます。<textarea class='editor'>InfoUGenBase[  NumRunningSynths  NumBuffers  ControlDur  NumControlBuses  SubsampleOffset  RadiansPerSample  SampleDur  ControlRate  NumInputBuses  NumAudioBuses  SampleRate  NumOutputBuses]InfoUGenBase</textarea>
-<textarea class='editor'>BufInfoUGenBase.dumpClassSubtree</textarea>
+<p>このコードを実行すると次の様に表示されます。<div class='codeMirrorContainer'><textarea class='editor'>InfoUGenBase
+[
+  NumRunningSynths
+  NumBuffers
+  ControlDur
+  NumControlBuses
+  SubsampleOffset
+  RadiansPerSample
+  SampleDur
+  ControlRate
+  NumInputBuses
+  NumAudioBuses
+  SampleRate
+  NumOutputBuses
+]
+InfoUGenBase</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+<div class='codeMirrorContainer'><textarea class='editor'>BufInfoUGenBase.dumpClassSubtree</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>このコードを実行すると次の様に表示されます。<textarea class='editor'>BufInfoUGenBase[  BufChannels  BufSampleRate  BufRateScale  BufFrames  BufDur  BufSamples]BufInfoUGenBase</textarea>
+<p>このコードを実行すると次の様に表示されます。<div class='codeMirrorContainer'><textarea class='editor'>BufInfoUGenBase
+[
+  BufChannels
+  BufSampleRate
+  BufRateScale
+  BufFrames
+  BufDur
+  BufSamples
+]
+BufInfoUGenBase</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p>////////////////////////////////////////////////////////////////////////////////////////////////////<h2><a class='anchor' name='実行の順序'>実行の順序</a></h2>
 
-<p>もう一度、次の例はどのようにしてシンセをソースとエフェクトのグループに配置するのかを示します。２つのグループは２つのシンセが適切な順序で実行されることを保証します。<textarea class='editor'>(
+<p>もう一度、次の例はどのようにしてシンセをソースとエフェクトのグループに配置するのかを示します。２つのグループは２つのシンセが適切な順序で実行されることを保証します。<div class='codeMirrorContainer'><textarea class='editor'>(
 // エンベロープなしのフィルター　ー永遠にとどまる
 SynthDef("soundFileFilter", { arg bus = 0, freq = 440, rq = 0.05;
     ReplaceOut.ar(
@@ -112,6 +145,7 @@ SynthDef("soundFileFilter", { arg bus = 0, freq = 440, rq = 0.05;
 Synth.head(~effect, "soundFileFilter", [\out, 0, \freq, 500.rrand(1000), \rq, 0.04.rrand(0.1)]);
 Synth.head(~source, "aMonoSamplePlayer", [\bus, 0, \bufNum, b]);
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p>////////////////////////////////////////////////////////////////////////////////////////////////////<h2><a class='anchor' name='サンプルをループする'>サンプルをループする</a></h2>
 
@@ -120,9 +154,9 @@ Synth.head(~source, "aMonoSamplePlayer", [\bus, 0, \bufNum, b]);
 <p>////////////////////////////////////////////////////////////////////////////////////////////////////
 <p>この例は３つのSynthDefを使用しています。第1のSynthDefはサンプル・プレーヤーで、バッファ全体を永遠にループし続けます。第2のSynthDefはその入力をリング変調します。第3のSynthDefはその入力に対してローパス・フィルターを適用します。
 <p>３つのシンセはチェーンを形成します。第1のシンセはソース・シンセです。第2と第3のシンセは、それぞれのソースに対して処理を加えます。つまり、ソースに対して振幅変調を加え、振幅変調を行ったソースに対してローパス・フィルターをかけます。
-<p>処理の順序、つまり振幅変調とローパス・フィルターのどちらが最初でどちらが2番目かは任意です。それはどちらの方法でも定義することができます。<textarea class='editor'>(
+<p>処理の順序、つまり振幅変調とローパス・フィルターのどちらが最初でどちらが2番目かは任意です。それはどちらの方法でも定義することができます。<div class='codeMirrorContainer'><textarea class='editor'>(
 // サウンド・ファイルを読み込む
-b = Buffer.read(s, Platform.resourceDir +/+ "sounds/a11wlk01.wav");
+b = Buffer.read(s, ExampleFiles.child);
 
 // サウンド・ファイル全体をループ再生するサンプル・プレーヤーを定義する
 SynthDef("aLoopingSamplePlayer", { arg outBus = 0, bufnum = 0, rateScale = 1, mul = 1;
@@ -182,17 +216,19 @@ Synth.tail(
     ~effect,
     "aLowPassFilter", [\inBus, 5, \outBus, 0, \boost, 5])
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>このシンセシスのネットワークを文字による図で表すと、この様になります。<textarea class='editor'>Group (RootNode, ID 0)
+<p>このシンセシスのネットワークを文字による図で表すと、この様になります。<div class='codeMirrorContainer'><textarea class='editor'>Group (RootNode, ID 0)
       /\
      /  \
 ~source  ~effects    // ~sourceと~effectsはグループ
  |        |      \
  |        |       \
  synth    synth    synth</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p>////////////////////////////////////////////////////////////////////////////////////////////////////
-<p>ここでは、シンセとグループの配置は同じです。一部のアーギュメント（コントロール）を変えることでエフェクトの音色が劇的に変わります。<textarea class='editor'>(
+<p>ここでは、シンセとグループの配置は同じです。一部のアーギュメント（コントロール）を変えることでエフェクトの音色が劇的に変わります。<div class='codeMirrorContainer'><textarea class='editor'>(
 ~source = Group.head(s);
 ~effect = Group.tail(~s);
 )
@@ -208,7 +244,8 @@ Synth.tail(
     ~effect,
     "aLowPassFilter", [\inBus, 5, \outBus, 0, \freq, 500, \freqDev, 200, \boost, 7])
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p>////////////////////////////////////////////////////////////////////////////////////////////////////
-<p>go to <a href="./../../../Tutorials/Mark_Polishook_tutorial/Japanese_version/13.html">13</a><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Tutorials/Mark_Polishook_tutorial/Japanese_version/12.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Tutorials/Mark_Polishook_tutorial/Japanese_version/12.schelp</a><br>link::Tutorials/Mark_Polishook_tutorial/Japanese_version/12::<br></div></div><script src='./../../../editor.js' type='text/javascript'></script>
+<p>go to <a href="./../../../Tutorials/Mark_Polishook_tutorial/Japanese_version/13.html">13</a><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Tutorials/Mark_Polishook_tutorial/Japanese_version/12.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Tutorials/Mark_Polishook_tutorial/Japanese_version/12.schelp</a><br>link::Tutorials/Mark_Polishook_tutorial/Japanese_version/12::<br></div></div><script src='./../../../static/editor.js' type='text/javascript'></script>
 </body></html>

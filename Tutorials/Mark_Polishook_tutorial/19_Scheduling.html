@@ -1,21 +1,25 @@
-<!doctype html><html lang='en'><head><title>19_Scheduling | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>19_Scheduling | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../../lib/jquery.min.js'></script>
-<script src='./../../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../../static/lib/jquery.min.js'></script>
+<script src='./../../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './../..';
 var scdoc_title = '19_Scheduling';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../../scdoc.js' type='text/javascript'></script>
+<script src='./../../static/scdoc.js' type='text/javascript'></script>
 <script src='./../../docmap.js' type='text/javascript'></script>
+<script src='./../../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
@@ -41,43 +45,50 @@ var scdoc_sc_version = '3.13.1';
 
 <p>Use clocks to create automated, algorithmic scheduling. Among the things that clocks "play" are routines, tasks, and patterns.
 <p>To see how a clock "plays" a routine, first examine how a function works in a routine.
-<p>The first argument (and usually the only argument) to a routine is a function.<textarea class='editor'>// template for a routine
+<p>The first argument (and usually the only argument) to a routine is a function.<div class='codeMirrorContainer'><textarea class='editor'>// template for a routine
 Routine({ ".... code within curly braces is a function .... "});</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>A .yield message to an expression in a function (in a routine) returns a value.<textarea class='editor'>r = Routine({ "hello, world".yield.postln });
+<p>A .yield message to an expression in a function (in a routine) returns a value.<div class='codeMirrorContainer'><textarea class='editor'>r = Routine({ "hello, world".yield.postln });
 
 // to evaluate a routine, send a .next message
 // it will "hand over" the value of the expression to which the .yield message is attached
 r.next;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>Evaluate (again)<textarea class='editor'>r.next;</textarea>
+<p>Evaluate (again)<div class='codeMirrorContainer'><textarea class='editor'>r.next;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>The routine above returns nil when its evaluated a second time. This is because once a routine "yields" and if there's no additional code after the .yield message, the routine is finished, over, and done - unless it receives a reset message. Then it can start over again.<textarea class='editor'>r.next;        // returns nil
+<p>The routine above returns nil when its evaluated a second time. This is because once a routine "yields" and if there's no additional code after the .yield message, the routine is finished, over, and done - unless it receives a reset message. Then it can start over again.<div class='codeMirrorContainer'><textarea class='editor'>r.next;        // returns nil
 r.reset;    // reset the routine
 r.next;        // it works!</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>////////////////////////////////////////////////////////////////////////////////////////////////////<textarea class='editor'>(
+<p>////////////////////////////////////////////////////////////////////////////////////////////////////<div class='codeMirrorContainer'><textarea class='editor'>(
 r = Routine({
     "hello, world".yield;
     "what a world".yield;
     "i am a world".yield;
 });
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>The first three .next messages return a string. The fourth .next message returns nil.<textarea class='editor'>r.next;    // returns a string
+<p>The first three .next messages return a string. The fourth .next message returns nil.<div class='codeMirrorContainer'><textarea class='editor'>r.next;    // returns a string
 r.next;    // returns a string
 r.next;    // returns a string
 r.next;    // returns nil</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>Reset the routine.<textarea class='editor'>r.reset;
+<p>Reset the routine.<div class='codeMirrorContainer'><textarea class='editor'>r.reset;
 
 r.next;
 r.next;
 r.next;
 r.next;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p>////////////////////////////////////////////////////////////////////////////////////////////////////
-<p>Use a .do message in a routine to make a loop.<textarea class='editor'>(
+<p>Use a .do message in a routine to make a loop.<div class='codeMirrorContainer'><textarea class='editor'>(
 r = Routine({
 
     // setup code
@@ -89,12 +100,14 @@ r = Routine({
 
 });
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>Evaluate the routine one more time than the loop in the routine allows.<textarea class='editor'>4.do({ r.next.postln });</textarea>
+<p>Evaluate the routine one more time than the loop in the routine allows.<div class='codeMirrorContainer'><textarea class='editor'>4.do({ r.next.postln });</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p>The routine returned three strings followed by nil.<h2><a class='anchor' name='Scheduling%20routines'>Scheduling routines</a></h2>
 
-<p>Rewrite the routine so that it includes a .wait message.<textarea class='editor'>(
+<p>Rewrite the routine so that it includes a .wait message.<div class='codeMirrorContainer'><textarea class='editor'>(
 r = Routine({
 
     var array;
@@ -107,23 +120,29 @@ r = Routine({
 
 });
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>Then "play" the routine, eg, send it a .play message.<textarea class='editor'>r.play;</textarea>
+<p>Then "play" the routine, eg, send it a .play message.<div class='codeMirrorContainer'><textarea class='editor'>r.play;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>Append a .reset message to the routine so that it can start over.<textarea class='editor'>r.reset.play;</textarea>
+<p>Append a .reset message to the routine so that it can start over.<div class='codeMirrorContainer'><textarea class='editor'>r.reset.play;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h2><a class='anchor' name='Clocks%20and%20the%20convenience%20of%20.play'>Clocks and the convenience of .play</a></h2>
 
 <p>When a routine receives a .play message, control (of the routine) is redirected to a clock. The clock uses the receiver of the .wait message as a unit of time to schedule ("play") the routine.
-<p>SuperCollider has three clocks, each of which has a help file.<textarea class='editor'>SystemClock        // the most accurate
+<p>SuperCollider has three clocks, each of which has a help file.<div class='codeMirrorContainer'><textarea class='editor'>SystemClock        // the most accurate
 AppClock        // for use with GUIs
 TempoClock        // to schedule in beats</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>The .play message is a convenience that allows one to write<textarea class='editor'>r.reset.play;        // reset the routine before playing it</textarea>
+<p>The .play message is a convenience that allows one to write<div class='codeMirrorContainer'><textarea class='editor'>r.reset.play;        // reset the routine before playing it</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>instead of<textarea class='editor'>SystemClock.play(r)</textarea>
+<p>instead of<div class='codeMirrorContainer'><textarea class='editor'>SystemClock.play(r)</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h2><a class='anchor' name='Scheduling%20synths%20with%20routines'>Scheduling synths with routines</a></h2>
 
-<p>Enclose synths within routines. It's often the case that the synthdef used by the synth in routines should have an envelope with a doneAction parameter set to 2 (to deallocate the memory needed for the synth after its envelope has finished playing).<textarea class='editor'>(
+<p>Enclose synths within routines. It's often the case that the synthdef used by the synth in routines should have an envelope with a doneAction parameter set to 2 (to deallocate the memory needed for the synth after its envelope has finished playing).<div class='codeMirrorContainer'><textarea class='editor'>(
 // DEFINE A SYNTHDEF
 SynthDef("fm2", {
     arg bus = 0, freq = 440, carPartial = 1, modPartial = 1, index = 3, mul = 0.2, ts = 1;
@@ -174,9 +193,10 @@ r = Routine({
 
 // PLAY THE ROUTINE
 r.reset.play;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p>////////////////////////////////////////////////////////////////////////////////////////////////////
-<p>Process synths spawned in a routine through effects that run outside of the routine.<textarea class='editor'>(
+<p>Process synths spawned in a routine through effects that run outside of the routine.<div class='codeMirrorContainer'><textarea class='editor'>(
 // DEFINE A SYNTHDEF
 SynthDef("echoplex", {
     ReplaceOut.ar(
@@ -221,7 +241,8 @@ Synth.tail(~effect, "echoplex");
 )
 // PLAY THE ROUTINE
 r.reset.play;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p>////////////////////////////////////////////////////////////////////////////////////////////////////
-<p>go to <a href="./../../Tutorials/Mark_Polishook_tutorial/20_Debugging.html">20_Debugging</a><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Tutorials/Mark_Polishook_tutorial/19_Scheduling.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Tutorials/Mark_Polishook_tutorial/19_Scheduling.schelp</a><br>link::Tutorials/Mark_Polishook_tutorial/19_Scheduling::<br></div></div><script src='./../../editor.js' type='text/javascript'></script>
+<p>go to <a href="./../../Tutorials/Mark_Polishook_tutorial/20_Debugging.html">20_Debugging</a><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Tutorials/Mark_Polishook_tutorial/19_Scheduling.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Tutorials/Mark_Polishook_tutorial/19_Scheduling.schelp</a><br>link::Tutorials/Mark_Polishook_tutorial/19_Scheduling::<br></div></div><script src='./../../static/editor.js' type='text/javascript'></script>
 </body></html>

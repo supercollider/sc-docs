@@ -1,21 +1,25 @@
-<!doctype html><html lang='en'><head><title>Default Group | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>Default Group | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../lib/jquery.min.js'></script>
-<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/jquery.min.js'></script>
+<script src='./../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './..';
 var scdoc_title = 'Default Group';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../static/scdoc.js' type='text/javascript'></script>
 <script src='./../docmap.js' type='text/javascript'></script>
+<script src='./../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
@@ -42,13 +46,14 @@ var scdoc_sc_version = '3.13.1';
 <p>When a Server is booted, there is a top level group with an ID of 0 that defines the root of the tree. This is represented by a subclass of Group: <a href="./../Classes/RootNode.html">RootNode</a>.
 <p>Separate from the root group is sclang's notion of a "default group," which is automatically created when the server is booted. You can access it with the method <a href="./../Classes/Server.html#-defaultGroup">Server: -defaultGroup</a>. This group is the default enclosing group for all Nodes, i.e. it's what you get if you don't specify. In general, you should create new Nodes within the default group of a Server rather than in its RootNode. In a single-client setup, the default group will have an ID of 1.
 <p>Keep in mind that default groups are a client-side concept, and you are responsible for creating them if you're running scsynth from the command line or NRT mode, or developing an alternate client.<a class='footnote anchor' name='footnote_org_1' href='#footnote_1'><sup>1</sup></a> 
-<p>This is the default target for all Nodes when using object style and is what you will get if you supply a <a href="./../Classes/Server.html">Server</a> as a target. If you don't specify a target or pass in nil, you will get the default group of the default Server.<textarea class='editor'>s.boot;
+<p>This is the default target for all Nodes when using object style and is what you will get if you supply a <a href="./../Classes/Server.html">Server</a> as a target. If you don't specify a target or pass in nil, you will get the default group of the default Server.<div class='codeMirrorContainer'><textarea class='editor'>s.boot;
 a = Synth.new(\default); // creates a synth in the default group of the default Server
 a.group; // note the Group ID
 a.group == Server.default.defaultGroup;
 // -&gt; true</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>The default group serves an important purpose: It provides a predictable basic Node tree so that methods such as Server-scope, Server-record, etc. can function without running into order of execution problems. In the example below the scoping node will come after the default group.<textarea class='editor'>s.boot;
+<p>The default group serves an important purpose: It provides a predictable basic Node tree so that methods such as Server-scope, Server-record, etc. can function without running into order of execution problems. In the example below the scoping node will come after the default group.<div class='codeMirrorContainer'><textarea class='editor'>s.boot;
 
 { SinOsc.ar(mul: 0.2) }.scope(1);
 
@@ -59,8 +64,10 @@ s.queryAllNodes;
 // the scope node comes after the default group, so no problems
 
 s.quit;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>Note that the default group is persistent: It is created in Server's <code>initTree</code> method (executed along with any code stored in its tree instance variable; see Server for more detail) and is recreated upon reboot, after pressing Cmd-., and after all nodes are freed. When using osc messages this means that a target node of id 1 can always be used:<textarea class='editor'>s.sendMsg("/s_new", "snd", 1832,0,1); // add to head of group 1</textarea>
+<p>Note that the default group is persistent: It is created in Server's <code>initTree</code> method (executed along with any code stored in its tree instance variable; see Server for more detail) and is recreated upon reboot, after pressing Cmd-., and after all nodes are freed. When using osc messages this means that a target node of id 1 can always be used:<div class='codeMirrorContainer'><textarea class='editor'>s.sendMsg("/s_new", "snd", 1832,0,1); // add to head of group 1</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p>The default group can be specifically freed, but there is generally no reason that one would want to do so.
 <p>In general one should add nodes to the default group rather than the RootNode unless one has a specific reason to do so (i.e. adding some new functionality such as recording and scoping which is dependent upon a predictable basic node order). When using object style the default group is the default target for all new nodes, so nodes will normally not be added to the RootNode unless that is explicitly specified. It is of course possible to do so, but it should only be done with a proper understanding of the issues involved.
@@ -84,6 +91,7 @@ s.quit;</textarea>
 <p>See <a href="./../Guides/MultiClient_Setups.html">Multi-client Setups</a> for more info.
 <p>The default group mechanism is also used to separate clients in a multi-client setup. Every client registering with a server has its own individual default group. All nodes belonging to one client are in its default group and can be specifically addressed.
 <p>This keeps nodes cleanly separated by default, but a client also knows the default groups of all other clients. This is accessible via the method <a href="./../Classes/Server.html#-defaultGroups">Server: -defaultGroups</a>, which is an array mapping client IDs to default groups.<div class='footnotes'>
-<a class='anchor' name='footnote_1'/><div class='footnote'>[<a href='#footnote_org_1'>1</a>] - When booting the server from the command line, you can create the default group manually with:<textarea class='editor'>s.initTree;</textarea>
-</div></div><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Reference/default_group.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Reference/default_group.schelp</a><br>link::Reference/default_group::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+<a class='anchor' name='footnote_1'/><div class='footnote'>[<a href='#footnote_org_1'>1</a>] - When booting the server from the command line, you can create the default group manually with:<div class='codeMirrorContainer'><textarea class='editor'>s.initTree;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+</div></div><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Reference/default_group.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Reference/default_group.schelp</a><br>link::Reference/default_group::<br></div></div><script src='./../static/editor.js' type='text/javascript'></script>
 </body></html>

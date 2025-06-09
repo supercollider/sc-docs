@@ -1,21 +1,25 @@
-<!doctype html><html lang='en'><head><title>the_lazy_proxy | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>the_lazy_proxy | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../../lib/jquery.min.js'></script>
-<script src='./../../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../../static/lib/jquery.min.js'></script>
+<script src='./../../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './../..';
 var scdoc_title = 'the_lazy_proxy';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../../scdoc.js' type='text/javascript'></script>
+<script src='./../../static/scdoc.js' type='text/javascript'></script>
 <script src='./../../docmap.js' type='text/javascript'></script>
+<script src='./../../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
@@ -34,26 +38,32 @@ var scdoc_sc_version = '3.13.1';
 <div id='related'>See also: <a href="./../../Overviews/JITLib.html">JITLib</a>, <a href="./../../Classes/NodeProxy.html">NodeProxy</a>, <a href="./../../Classes/ProxySpace.html">ProxySpace</a></div>
 </div>
 
-<p>The class <a href="./../../Classes/NodeProxy.html">NodeProxy</a> (and <a href="./../../Classes/BusPlug.html">BusPlug</a>) uses a lazy evaluation scheme to derive its appropriate rate and numChannels from the first meaningful input that is assigned to it. see <a href="./../../Classes/NodeProxy.html">NodeProxy</a> and <a href="./../../Classes/ProxySpace.html">ProxySpace</a> helpfiles for basic info. So as long as the source is not set, the proxy is <strong>neutral</strong> :<textarea class='editor'>p = ProxySpace.push;
+<p>The class <a href="./../../Classes/NodeProxy.html">NodeProxy</a> (and <a href="./../../Classes/BusPlug.html">BusPlug</a>) uses a lazy evaluation scheme to derive its appropriate rate and numChannels from the first meaningful input that is assigned to it. see <a href="./../../Classes/NodeProxy.html">NodeProxy</a> and <a href="./../../Classes/ProxySpace.html">ProxySpace</a> helpfiles for basic info. So as long as the source is not set, the proxy is <strong>neutral</strong> :<div class='codeMirrorContainer'><textarea class='editor'>p = ProxySpace.push;
 ~x.isNeutral;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>as soon as the first time the source is set, it derives its bus arguments from that input<textarea class='editor'>~x = { Array.fill(14, { SinOsc.kr(1.0.rand, 0, 100) }) }; //~x is now 14 channels control rate
+<p>as soon as the first time the source is set, it derives its bus arguments from that input<div class='codeMirrorContainer'><textarea class='editor'>~x = { Array.fill(14, { SinOsc.kr(1.0.rand, 0, 100) }) }; //~x is now 14 channels control rate
 ~x;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>in order to reset these properties, clear is used:<textarea class='editor'>~x.clear;
+<p>in order to reset these properties, clear is used:<div class='codeMirrorContainer'><textarea class='editor'>~x.clear;
 //note that no other proxy should be reading from ~x when this is done:
 //for simplicity nodeproxy currently does not care for its children, only for its parents.</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>for a quick initialisation, also <code>defineBus</code> can be used:<textarea class='editor'>~x.defineBus(\control, 5);
+<p>for a quick initialisation, also <code>defineBus</code> can be used:<div class='codeMirrorContainer'><textarea class='editor'>~x.defineBus(\control, 5);
 // or in another way:
 ~x.kr(5)</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>the properties are also set when some other proxy reads from it:<textarea class='editor'>~x = { LFPulse.kr * ~b.kr(7) }; //the first arg to kr / ar is the default number of channels</textarea>
+<p>the properties are also set when some other proxy reads from it:<div class='codeMirrorContainer'><textarea class='editor'>~x = { LFPulse.kr * ~b.kr(7) }; //the first arg to kr / ar is the default number of channels</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>if no number of channels is passed in, the default value is used:<textarea class='editor'>~test.ar; // 2
+<p>if no number of channels is passed in, the default value is used:<div class='codeMirrorContainer'><textarea class='editor'>~test.ar; // 2
 ~krtest.kr; // 1</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>the default can be set in the class NodeProxy:<textarea class='editor'>NodeProxy.defaultNumAudio = 3;
+<p>the default can be set in the class NodeProxy:<div class='codeMirrorContainer'><textarea class='editor'>NodeProxy.defaultNumAudio = 3;
 NodeProxy.defaultNumControl = 13;
 
 ~test3.ar; // 3
@@ -62,12 +72,14 @@ NodeProxy.defaultNumControl = 13;
 // set them back:
 NodeProxy.defaultNumAudio = 2;
 NodeProxy.defaultNumControl = 1;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>also if a proxy is used as a map source, control rate is assumed:<textarea class='editor'>~u;
+<p>also if a proxy is used as a map source, control rate is assumed:<div class='codeMirrorContainer'><textarea class='editor'>~u;
 ~x.map(\zzz, ~u);
 ~u;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>when unary or binary operations are performed, the highest rate / numChannels is used to initialize all uninitialized proxies:<textarea class='editor'>~x.clear;
+<p>when unary or binary operations are performed, the highest rate / numChannels is used to initialize all uninitialized proxies:<div class='codeMirrorContainer'><textarea class='editor'>~x.clear;
 ~x.defineBus(\control, 5);
 ~x = ~e + ~f;
 
@@ -79,8 +91,9 @@ NodeProxy.defaultNumControl = 1;</textarea>
 ~x.clear; ~e.clear; ~f.clear;
 ~e.defineBus(\audio, 3);
 ~x = ~e;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>if a rate-1 proxy is used as rate-2 input, the rate is converted and the channels are expanded in the usual multichannel expansion pattern:<textarea class='editor'>~f.defineBus(\control);
+<p>if a rate-1 proxy is used as rate-2 input, the rate is converted and the channels are expanded in the usual multichannel expansion pattern:<div class='codeMirrorContainer'><textarea class='editor'>~f.defineBus(\control);
 ~f.ar(2);
 
 ~f.defineBus(\audio);
@@ -89,14 +102,16 @@ NodeProxy.defaultNumControl = 1;</textarea>
 // if the number of channels passed in is less, it only uses the first n channels
 ~f.defineBus(\audio, 8);
 ~f.ar(2);</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>an offset can be passed in as second argument to ar/kr<textarea class='editor'>//modulate offset:
+<p>an offset can be passed in as second argument to ar/kr<div class='codeMirrorContainer'><textarea class='editor'>//modulate offset:
 p = ProxySpace.push(s.boot);
 
 ~out.play;
 ~src = { SinOsc.ar(Array.rand(5, 400, 500.0), SinOsc.ar(Array.exprand(5, 2.1, 500.0)), 0.1) };
 ~out = { ~src.ar(1, MouseX.kr(0, 5)) };
 ~out = { Mix(~src.ar(3, MouseX.kr(0, 5))) }; //the wrapping offset is moved accordingly</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Tutorials/JITLib/the_lazy_proxy.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Tutorials/JITLib/the_lazy_proxy.schelp</a><br>link::Tutorials/JITLib/the_lazy_proxy::<br></div></div><script src='./../../editor.js' type='text/javascript'></script>
+<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Tutorials/JITLib/the_lazy_proxy.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Tutorials/JITLib/the_lazy_proxy.schelp</a><br>link::Tutorials/JITLib/the_lazy_proxy::<br></div></div><script src='./../../static/editor.js' type='text/javascript'></script>
 </body></html>

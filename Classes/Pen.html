@@ -1,21 +1,25 @@
-<!doctype html><html lang='en'><head><title>Pen | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>Pen | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../lib/jquery.min.js'></script>
-<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/jquery.min.js'></script>
+<script src='./../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './..';
 var scdoc_title = 'Pen';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../static/scdoc.js' type='text/javascript'></script>
 <script src='./../docmap.js' type='text/javascript'></script>
+<script src='./../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
@@ -134,9 +138,9 @@ var scdoc_sc_version = '3.13.1';
 <p>The end point of the second tangent line. Its start point is point1. An instance of <a href="./../Classes/Point.html">Point</a><tr><td class='argumentname'>radius<td class='argumentdesc'>
 <p>The radius of the arc.</table><h4>Discussion:</h4>
 
-<p>example:<textarea class='editor'>(
+<p>example:<div class='codeMirrorContainer'><textarea class='editor'>(
 var w = Window("arcTo", Rect(100, 200, 300, 300)).front;
-var r= 15;
+var r = 15;
 w.drawFunc = { |v|
     Pen.fillColor = Color.blue;
     Pen.strokeColor = Color.red;
@@ -149,11 +153,12 @@ w.drawFunc = { |v|
     Pen.fillStroke;
 };
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='*addArc' href='./../Overviews/Methods.html#addArc'>addArc</a></h3>
 <div class='method'>
 <p>Draw an arc around the <a href="./../Classes/Point.html">Point</a> <strong>center</strong>, at <strong>radius</strong> number of pixels. <strong>startAngle</strong> and <strong>arcAngle</strong> refer to the starting angle and the extent of the arc, and are in radians [0..2pi].<h4>Discussion:</h4>
 
-<p>example:<textarea class='editor'>(
+<p>example:<div class='codeMirrorContainer'><textarea class='editor'>(
 w = Window.new.front;
 w.view.background_(Color.white);
 w.drawFunc = {
@@ -163,15 +168,16 @@ w.drawFunc = {
         Pen.color = Color.red(rrand(0.0, 1), rrand(0.0, 0.5));
         Pen.addArc((100.rand)@(100.rand), rrand(10, 100), 2pi.rand, pi);
         Pen.perform([\stroke, \fill].choose);
-    }
+   }
 };
 w.refresh;
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='*addWedge' href='./../Overviews/Methods.html#addWedge'>addWedge</a></h3>
 <div class='method'>
 <p>Draw a wedge around the <a href="./../Classes/Point.html">Point</a> <strong>center</strong>, at <strong>radius</strong> number of pixels. <strong>startAngle</strong> and <strong>sweepLength</strong> refer to the starting angle and the extent of the arc, and are in radians [0..2pi].<h4>Discussion:</h4>
 
-<p>example:<textarea class='editor'>(
+<p>example:<div class='codeMirrorContainer'><textarea class='editor'>(
 w = Window.new.front;
 w.view.background_(Color.white);
 w.drawFunc = {
@@ -185,11 +191,12 @@ w.drawFunc = {
 };
 w.refresh;
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='*addAnnularWedge' href='./../Overviews/Methods.html#addAnnularWedge'>addAnnularWedge</a></h3>
 <div class='method'>
 <p>Draw an annular wedge around the <a href="./../Classes/Point.html">Point</a> <strong>center</strong>, from <strong>innerRadius</strong> to <strong>outerRadius</strong> in pixels. <strong>startAngle</strong> and <strong>sweepLength</strong> refer to the starting angle and the extent of the arc, and are in radians [0..2pi].<h4>Discussion:</h4>
 
-<p>example:<textarea class='editor'>(
+<p>example:<div class='codeMirrorContainer'><textarea class='editor'>(
 w = Window.new.front;
 w.view.background_(Color.white);
 w.drawFunc = {
@@ -209,11 +216,12 @@ w.drawFunc = {
 };
 w.refresh;
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='*addRect' href='./../Overviews/Methods.html#addRect'>addRect</a></h3>
 <div class='method'>
 <p>Adds a <a href="./../Classes/Rect.html">Rect</a> to the drawing.<h4>Discussion:</h4>
 
-<p>example:<textarea class='editor'>(
+<p>example:<div class='codeMirrorContainer'><textarea class='editor'>(
 w = Window.new.front;
 w.view.background_(Color.white);
 w.drawFunc = {
@@ -228,6 +236,7 @@ w.drawFunc = {
 };
 w.refresh;
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='*addOval' href='./../Overviews/Methods.html#addOval'>addOval</a></h3>
 <div class='method'>
 <p>Adds an Oval shape that fits inside the <a href="./../Classes/Rect.html">Rect</a> to the current path.</div><h3><a class='anchor' name='Draw%20the%20path'>Draw the path</a></h3>
@@ -235,7 +244,7 @@ w.refresh;
 <div class='method'>
 <p>Outline the previous defined path.<h4>Discussion:</h4>
 
-<p>example:<textarea class='editor'>(
+<p>example:<div class='codeMirrorContainer'><textarea class='editor'>(
 w = Window.new.front;
 w.view.background_(Color.white);
 w.drawFunc = {
@@ -254,11 +263,12 @@ w.drawFunc = {
 };
 w.refresh;
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='*fill' href='./../Overviews/Methods.html#fill'>fill</a></h3>
 <div class='method'>
 <p>Fill the previous defined path.<h4>Discussion:</h4>
 
-<p>example:<textarea class='editor'>(
+<p>example:<div class='codeMirrorContainer'><textarea class='editor'>(
 w = Window.new.front;
 w.view.background_(Color.white);
 w.drawFunc = {
@@ -277,6 +287,7 @@ w.drawFunc = {
 };
 w.refresh;
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='*draw' href='./../Overviews/Methods.html#draw'>draw</a></h3>
 <div class='method'>
 <p>Draw the previous defined path using any of the following options:<h4>Arguments:</h4>
@@ -286,7 +297,7 @@ w.refresh;
 
 <p></table><h4>Discussion:</h4>
 
-<p>example:<textarea class='editor'>(
+<p>example:<div class='codeMirrorContainer'><textarea class='editor'>(
 w = Window.new.front;
 w.view.background_(Color.white);
 w.drawFunc = {
@@ -305,6 +316,7 @@ w.drawFunc = {
 };
 w.refresh;
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='*fillStroke' href='./../Overviews/Methods.html#fillStroke'>fillStroke</a></h3>
 <div class='method'>
 <p>Fill and stroke the current path. Shortcut to the draw(3) method.</div><h3><a class='anchor' name='Construct%20and%20draw'>Construct and draw</a></h3>
@@ -322,7 +334,7 @@ w.refresh;
 <div class='method'>
 <p>Fills an Axial gradient.<h4>Discussion:</h4>
 
-<p>example:<textarea class='editor'>(
+<p>example:<div class='codeMirrorContainer'><textarea class='editor'>(
 w = Window.new.front;
 w.drawFunc = {
     // fill the gradient
@@ -331,11 +343,12 @@ w.drawFunc = {
 };
 w.refresh;
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='*fillRadialGradient' href='./../Overviews/Methods.html#fillRadialGradient'>fillRadialGradient</a></h3>
 <div class='method'>
 <p>Fills a Radial gradient.<h4>Discussion:</h4>
 
-<p>example:<textarea class='editor'>(
+<p>example:<div class='codeMirrorContainer'><textarea class='editor'>(
 w = Window.new.front;
 w.drawFunc = {
     // fill the gradient
@@ -345,18 +358,19 @@ w.drawFunc = {
 };
 w.refresh;
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3><a class='anchor' name='Graphics%20State%20Methods'>Graphics State Methods</a></h3>
 
 <p>The following commands transform the graphics state, i.e. they effect all subsequent drawing commands. These transformations are cumulative, i.e. each command applies to the previous graphics state, not the original one.<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='*translate' href='./../Overviews/Methods.html#translate'>translate</a></h3>
 <div class='method'>
 <p>Translate the coordinate system to have its origin moved by x,y<h4>Discussion:</h4>
 
-<p>example:<textarea class='editor'>(
+<p>example:<div class='codeMirrorContainer'><textarea class='editor'>(
 w = Window.new.front;
 w.view.background_(Color.white);
 w.drawFunc = {
     Pen.strokeColor = Color.blue;
-    Pen.translate(200,100); // 0@0 is now 200@100
+    Pen.translate(200, 100); // 0@0 is now 200@100
     Pen.moveTo(0@0);
     Pen.lineTo(50@100);
     Pen.lineTo(100@100);
@@ -368,8 +382,9 @@ w.drawFunc = {
 };
 w.refresh;
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>Cumulative translations:<textarea class='editor'>(
+<p>Cumulative translations:<div class='codeMirrorContainer'><textarea class='editor'>(
 w = Window.new.front;
 w.view.background_(Color.clear);
 w.drawFunc = {
@@ -383,16 +398,17 @@ w.drawFunc = {
 };
 w.refresh;
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='*scale' href='./../Overviews/Methods.html#scale'>scale</a></h3>
 <div class='method'>
 <p>Scales subsequent drawing. x and y are scaling factors (i.e. 1 is normal, 2 is double size, etc.).<h4>Discussion:</h4>
 
-<p>example:<textarea class='editor'>(
+<p>example:<div class='codeMirrorContainer'><textarea class='editor'>(
 w = Window.new.front;
 w.view.background_(Color.white);
 w.drawFunc = {
     Pen.strokeColor = Color.green;
-    Pen.translate(200,100);
+    Pen.translate(200, 100);
     Pen.scale(0.5, 2);
     Pen.moveTo(0@0); // you have to set a starting point...
     Pen.lineTo(50@100);
@@ -405,16 +421,17 @@ w.drawFunc = {
 };
 w.refresh;
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='*skew' href='./../Overviews/Methods.html#skew'>skew</a></h3>
 <div class='method'>
 <p>Skews subsequent drawing. x and y are skewing factors (i.e. 1 is normal).<h4>Discussion:</h4>
 
-<p>example:<textarea class='editor'>(
+<p>example:<div class='codeMirrorContainer'><textarea class='editor'>(
 w = Window.new.front;
 w.view.background_(Color.white);
 w.drawFunc = {
     Pen.fillColor = Color.green(0.5, 0.8);
-    Pen.translate(200,100);
+    Pen.translate(200, 100);
     Pen.skew(0.5, 0.2);
     Pen.moveTo(0@0); // you have to set a starting point...
     Pen.lineTo(50@100);
@@ -427,18 +444,19 @@ w.drawFunc = {
 };
 w.refresh;
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='*rotate' href='./../Overviews/Methods.html#rotate'>rotate</a></h3>
 <div class='method'>
 <p>Rotates subsequent drawing around the <a href="./../Classes/Point.html">Point</a> <code>x@y</code> by the amount <strong>angle</strong> in radians [0..2pi].<h4>Discussion:</h4>
 
-<p>example:<textarea class='editor'>(
+<p>example:<div class='codeMirrorContainer'><textarea class='editor'>(
 w = Window.new.front;
 w.view.background_(Color.white);
 c = 0;
 w.drawFunc = {
     Pen.translate(220, 200);
     10.do({
-        Pen.translate(0,10);
+        Pen.translate(0, 10);
         Pen.fillColor = Color.hsv(c.fold(0, 1), 1, 1, 0.5);
         Pen.moveTo(0@0); // you have to set a starting point...
         Pen.lineTo(50@100);
@@ -454,24 +472,25 @@ w.drawFunc = {
 };
 w.refresh;
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='*matrix' href='./../Overviews/Methods.html#matrix'>matrix</a></h3>
 <div class='method'>
 <p>Gets or sets the coordinate system transformation matrix.
 <p>See <a href="#Matrix%20example">Matrix example</a> for an example.<h4>Arguments:</h4>
 <table class='arguments'>
 <tr><td class='argumentname'>matrixArray<td class='argumentdesc'>
-<p>An array of the form <code>[ zoomX, shearingY, shearingX, zoomY, translateX, translateY ]</code></table></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='*width' href='./../Overviews/Methods.html#width'>width</a></h3>
+<p>An array of the form <code>[zoomX, shearingY, shearingX, zoomY, translateX, translateY]</code></table></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='*width' href='./../Overviews/Methods.html#width'>width</a></h3>
 <div class='method'>
 <p>Sets the width of the Pen for the whole stroke</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='*use' href='./../Overviews/Methods.html#use'>use</a></h3>
 <div class='method'>
 <p>Draw function, and then revert to the previous graphics state. This allows you to make complex transformations of the graphics state without having to explicitly revert to get back to 'normal'.<h4>Discussion:</h4>
 
-<p>example:<textarea class='editor'>(
+<p>example:<div class='codeMirrorContainer'><textarea class='editor'>(
 // modified by an example of Stefan Wittwer
 w = Window.new.front;
 w.view.background_(Color.white);
 w.drawFunc = {
-    //paint origin
+    // paint origin
     Pen.fillColor = Color.gray(0, 0.5);
     Pen.addArc(0@0, 20, 0, 2pi);
     Pen.fill;
@@ -479,7 +498,7 @@ w.drawFunc = {
 
     Pen.use { // draw something complex...
         Pen.width = 0.5;
-        Pen.translate(100,100);
+        Pen.translate(100, 100);
         Pen.fillColor = Color.blue;
         Pen.addArc(0@0, 10, 0, 2pi);
         Pen.fill;
@@ -499,6 +518,7 @@ w.drawFunc = {
 };
 w.refresh
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='*path' href='./../Overviews/Methods.html#path'>path</a></h3>
 <div class='method'>
 <p>Make a path, consisting of the drawing made in function.<div class='note'><span class='notelabel'>NOTE:</span> Unfortunately not working for now... (there's no Pen.endPath which currently is used in this method)</div></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='*beginPath' href='./../Overviews/Methods.html#beginPath'>beginPath</a></h3>
@@ -511,7 +531,7 @@ w.refresh
 <div class='method'>
 <p>Use the previously defined path as a clipping path.<h4>Discussion:</h4>
 
-<p>example:<textarea class='editor'>(
+<p>example:<div class='codeMirrorContainer'><textarea class='editor'>(
 w = Window.new.front;
 w.view.background_(Color.white);
 w.drawFunc = {
@@ -526,7 +546,7 @@ w.drawFunc = {
 
     // everything else we draw is now clipped
     Pen.fillColor = Color.yellow;
-    Pen.fillRect(Rect(0,0,400,400));
+    Pen.fillRect(Rect(0, 0, 400, 400));
     Pen.fillColor = Color.red;
     Pen.moveTo(200@100);
 
@@ -540,29 +560,31 @@ w.drawFunc = {
 };
 w.refresh;
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='*smoothing' href='./../Overviews/Methods.html#smoothing'>smoothing</a></h3>
 <div class='method'>
 <p>Turns on/off anti-aliasing.<h4>Discussion:</h4>
 
-<p>example:<textarea class='editor'>(
+<p>example:<div class='codeMirrorContainer'><textarea class='editor'>(
 var w = Window("smoothing", Rect(100, 200, 500, 300)).front;
 w.view.background_(Color.white);
 w.drawFunc = { |v|
     Pen.strokeColor = Color.grey(0.25);
-    Pen.smoothing_(false); //no anti-aliasing
-    50.do{|i|
+    Pen.smoothing_(false); // no anti-aliasing
+    50.do{ |i|
         Pen.moveTo(50@50.rrand(250));
         Pen.lineTo(250@50.rrand(250));
     };
     Pen.stroke;
-    Pen.smoothing_(true); //anti-aliasing (default)
-    50.do{|i|
+    Pen.smoothing_(true); // anti-aliasing (default)
+    50.do{ |i|
         Pen.moveTo(250@50.rrand(250));
         Pen.lineTo(450@50.rrand(250));
     };
     Pen.stroke;
 };
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='*setShadow' href='./../Overviews/Methods.html#setShadow'>setShadow</a></h3>
 <div class='method'>
 <p>Will fill the current path with a shadow. You should use this option between Pen.push / Pen.pop (or Pen.use)</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='*joinStyle' href='./../Overviews/Methods.html#joinStyle'>joinStyle</a></h3>
@@ -576,14 +598,14 @@ w.drawFunc = { |v|
 
 <p><h4>Discussion:</h4>
 
-<p>example:<textarea class='editor'>(
+<p>example:<div class='codeMirrorContainer'><textarea class='editor'>(
 w = Window.new.front;
 w.view.background_(Color.white);
-StaticText(w, Rect(0,0,200,20))
+StaticText(w, Rect(0, 0, 200, 20))
     .string_(" Change Line Cap &amp; Join Styles: ");
-y = PopUpMenu(w, Rect(200,0,130,20))
+y = PopUpMenu(w, Rect(200, 0, 130, 20))
     .items_(["Butt - Miter", "Round - Round", "Square - Bevel"])
-    .action_({w.refresh});
+    .action_({ w.refresh });
 w.drawFunc = {
     Pen.strokeColor = Color.red;
     Pen.width_(8.0);
@@ -600,6 +622,7 @@ w.drawFunc = {
 };
 w.refresh;
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='*alpha' href='./../Overviews/Methods.html#alpha'>alpha</a></h3>
 <div class='method'>
 <p>Set the opacity level.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='*blendMode' href='./../Overviews/Methods.html#blendMode'>blendMode</a></h3>
@@ -610,33 +633,34 @@ w.refresh;
 <div class='method'>
 <p>Draw a bitmap image using the Image class.<h4>Discussion:</h4>
 
-<p>example:<textarea class='editor'>(
+<p>example:<div class='codeMirrorContainer'><textarea class='editor'>(
 w = Window.new.front;
 w.view.background = Color.red;
 i = Image.open(SCDoc.helpSourceDir +/+ "images/Swamp.png");
 w.drawFunc_({
-    Pen.drawImage( Point(140, 140), i, operation: 'sourceOver', opacity:1);
+    Pen.drawImage(Point(140, 140), i, operation: 'sourceOver', opacity: 1);
 });
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3><a class='anchor' name='Inherited%20class%20methods'>Inherited class methods</a></h3>
 <div id='inheritedclassmets'></div><h2><a class='anchor' name='instancemethods'>Instance Methods</a></h2>
 <h3><a class='anchor' name='Inherited%20instance%20methods'>Inherited instance methods</a></h3>
 <div id='inheritedinstmets'></div><h2><a class='anchor' name='examples'>Examples</a></h2>
 
-<p>Simple rotating and scaling:<textarea class='editor'>(
+<p>Simple rotating and scaling:<div class='codeMirrorContainer'><textarea class='editor'>(
     w = Window("Pen Rotation and Scaling", Rect(128, 64, 360, 360));
     w.drawFunc = {
         Pen.use {
             // use the same rect for everything, just scale and rotate
-            var r = Rect(0,0,200,80);
+            var r = Rect(0, 0, 200, 80);
             Pen.fillColor = Color.black;
             // offset all subsequent co-ordinates
-            Pen.translate(80,20);
+            Pen.translate(80, 20);
             Pen.fillRect(r);
             Pen.fillColor = Color.red;
             // scale all subsequent co-ordinates
             Pen.scale(0.8, 0.8);
-            Pen.translate(8,10);
+            Pen.translate(8, 10);
             // rotate all subsequent co-ordinates
             Pen.rotate(0.1pi);
             Pen.fillRect(r);
@@ -646,22 +670,23 @@ w.drawFunc_({
             Pen.rotate(0.1pi);
             Pen.width = 3;
             Pen.strokeRect(r);
-            Pen.fillColor = Color.yellow(1,0.5);
+            Pen.fillColor = Color.yellow(1, 0.5);
             Pen.scale(0.8, 0.8);
             Pen.rotate(0.1pi);
-            Pen.translate(20,-20);
+            Pen.translate(20, -20);
             Pen.fillOval(r);
         }
     };
 
     w.front;
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>Redraw at random interval, different every time:<textarea class='editor'>(
+<p>Redraw at random interval, different every time:<div class='codeMirrorContainer'><textarea class='editor'>(
 var w, run = true;
 w = Window("my name is... panel", Rect(128, 64, 800, 800));
 w.view.background = Color.white;
-w.onClose = { run = false; };
+w.onClose = { run = false };
 w.front;
 w.drawFunc = {
     Pen.use {
@@ -678,18 +703,19 @@ w.drawFunc = {
 { while { run } { w.refresh; 1.0.rand.wait } }.fork(AppClock)
 
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p><textarea class='editor'>(
+<p><div class='codeMirrorContainer'><textarea class='editor'>(
 var w, run = true;
 w = Window("my name is... panel", Rect(128, 64, 800, 500));
 w.view.background = Color.white;
-w.onClose = { run = false; };
+w.onClose = { run = false };
 w.front;
 w.drawFunc = {
     Pen.use {
         Pen.width = 2;
         80.do {
-            Pen.width = rrand(0,4) + 0.5;
+            Pen.width = rrand(0, 4) + 0.5;
             Pen.beginPath;
             Pen.moveTo(Point(800.rand, 500.rand));
             Pen.lineTo(Point(800.rand, 500.rand));
@@ -701,13 +727,14 @@ w.drawFunc = {
 { while { run } { w.refresh; 1.0.rand.wait } }.fork(AppClock)
 
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h3><a class='anchor' name='Animation'>Animation</a></h3>
 
-<p>Uses random seed to 'store' data By reseting the seed each time the same random values and shapes are generated for each 'frame' These can then be subjected to cumulative rotation, etc., by simply incrementing the phase var.<textarea class='editor'>(
+<p>Uses random seed to 'store' data By reseting the seed each time the same random values and shapes are generated for each 'frame' These can then be subjected to cumulative rotation, etc., by simply incrementing the phase var.<div class='codeMirrorContainer'><textarea class='editor'>(
 // By James McCartney
 var w, h = 700, v = 700, seed, run = true, phase = 0;
 w = Window("wedge", Rect(40, 40, h, v), false);
-w.view.background = Color.rand(0,0.3);
+w.view.background = Color.rand(0, 0.3);
 w.onClose = { run = false }; // stop the thread on close
 w.front;
 // store an initial seed value for the random generator
@@ -718,8 +745,8 @@ w.drawFunc = {
         // reset this thread's seed for a moment
         thisThread.randSeed = Date.seed;
         // now a slight chance of a new seed or background color
-        if (0.006.coin) { seed = Date.seed; };
-        if (0.02.coin) { w.view.background = Color.rand(0,0.3); };
+        if (0.006.coin) { seed = Date.seed };
+        if (0.02.coin) { w.view.background = Color.rand(0, 0.3) };
         // either revert to the stored seed or set the new one
         thisThread.randSeed = seed;
         // the random values below will be the same each time if the seed has not changed
@@ -729,32 +756,33 @@ w.drawFunc = {
         // negative random values rotate one direction, positive the other
         Pen.rotate(phase * 1.0.rand2);
         // scale the rotated y axis in a sine pattern
-        Pen.scale(1, 0.3 * sin(phase * 1.0.rand2 + 2pi.rand) + 0.5 );
+        Pen.scale(1, 0.3 * sin(phase * 1.0.rand2 + 2pi.rand) + 0.5);
         // create a random number of annular wedges
-        rrand(6,24).do {
-            Pen.color = Color.rand(0.0,1.0).alpha_(rrand(0.1,0.7));
+        rrand(6, 24).do {
+            Pen.color = Color.rand(0.0, 1.0).alpha_(rrand(0.1, 0.7));
             Pen.beginPath;
-            Pen.addAnnularWedge(Point(0,0), a = rrand(60,300), a + 50.rand2, 2pi.rand
+            Pen.addAnnularWedge(Point(0, 0), a = rrand(60, 300), a + 50.rand2, 2pi.rand
                 + (phase * 2.0.rand2), 2pi.rand);
-            if (0.5.coin) {Pen.stroke}{Pen.fill};
+            if (0.5.coin) { Pen.stroke }{ Pen.fill };
         };
     };
 };
 
 // fork a thread to update 20 times a second, and advance the phase each time
-{ while { run } { w.refresh; 0.05.wait; phase = phase + 0.01pi;} }.fork(AppClock)
+{ while { run } { w.refresh; 0.05.wait; phase = phase + 0.01pi } }.fork(AppClock)
 
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p><textarea class='editor'>(
+<p><div class='codeMirrorContainer'><textarea class='editor'>(
 var w, phase = 0, seed = Date.seed, run = true;
 w = Window("my name is... panel", Rect(128, 64, 800, 800));
 w.view.background = Color.blue(0.4);
-w.onClose = { run = false; };
+w.onClose = { run = false };
 w.front;
 w.drawFunc = {
     Pen.use {
-        if (0.02.coin) { seed = Date.seed; };
+        if (0.02.coin) { seed = Date.seed };
         thisThread.randSeed = seed;
         Pen.strokeColor = Color.white;
         200.do {
@@ -762,12 +790,12 @@ w.drawFunc = {
             var b = 24.rand;
             var r1 = 230 + (50 * a);
             var a1 = 2pi / 24 * b + phase;
-            var r2 = 230 + (50 * (a + 1.rand2).fold(0,3));
-            var a2 = 2pi / 24 * (b + (3.rand2)).wrap(0,23) + phase;
+            var r2 = 230 + (50 * (a + 1.rand2).fold(0, 3));
+            var a2 = 2pi / 24 * (b + (3.rand2)).wrap(0, 23) + phase;
             Pen.width = 0.2 + 1.0.linrand;
             Pen.beginPath;
-            Pen.moveTo(Polar(r1, a1).asPoint + Point(400,400));
-            Pen.lineTo(Polar(r2, a2).asPoint + Point(400,400));
+            Pen.moveTo(Polar(r1, a1).asPoint + Point(400, 400));
+            Pen.lineTo(Polar(r2, a2).asPoint + Point(400, 400));
             Pen.stroke;
         };
         thisThread.randSeed = Date.seed;
@@ -776,12 +804,12 @@ w.drawFunc = {
             var b = 24.rand;
             var r1 = 230 + (50 * a);
             var a1 = 2pi / 24 * b + phase;
-            var r2 = 230 + (50 * (a + 1.rand2).fold(0,3));
-            var a2 = 2pi / 24 * (b + (3.rand2)).wrap(0,23) + phase;
+            var r2 = 230 + (50 * (a + 1.rand2).fold(0, 3));
+            var a2 = 2pi / 24 * (b + (3.rand2)).wrap(0, 23) + phase;
             Pen.width = 0.2 + 1.5.linrand;
             Pen.beginPath;
-            Pen.moveTo(Polar(r1, a1).asPoint + Point(400,400));
-            Pen.lineTo(Polar(r2, a2).asPoint + Point(400,400));
+            Pen.moveTo(Polar(r1, a1).asPoint + Point(400, 400));
+            Pen.lineTo(Polar(r2, a2).asPoint + Point(400, 400));
             Pen.stroke;
         };
     };
@@ -790,7 +818,8 @@ w.drawFunc = {
 { while { run } { w.refresh; 0.1.wait; phase = phase + (2pi/(20*24)) } }.fork(AppClock)
 
 )</textarea>
-<textarea class='editor'>(
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+<div class='codeMirrorContainer'><textarea class='editor'>(
 var w, h = 800, v = 600, seed = Date.seed, phase = 0, zoom = 0.7, zoomf = 1, run = true;
 w = Window("affines", Rect(40, 40, h, v));
 w.view.background = Color.blue(0.4);
@@ -798,8 +827,8 @@ w.onClose = { run = false };
 w.front;
 w.drawFunc = {
     thisThread.randSeed = Date.seed;
-    if (0.0125.coin) { seed = Date.seed; phase = 0; zoom = 0.7; zoomf = exprand(1/1.01, 1.01); }
-    { phase = phase + (2pi/80); zoom = zoom * zoomf; };
+    if (0.0125.coin) { seed = Date.seed; phase = 0; zoom = 0.7; zoomf = exprand(1/1.01, 1.01) }
+    { phase = phase + (2pi/80); zoom = zoom * zoomf };
     thisThread.randSeed = seed;
     Pen.use {
         var p1 = Point(20.rand2 + (h/2), 20.rand2 + (v/2));
@@ -815,8 +844,8 @@ w.drawFunc = {
         xlates = xlates ++ xlates.neg;
         ylates = ylates ++ xlates.neg;
         rots = rots ++ rots.neg;
-        xform = {|i| [xlates[i], ylates[i], rots[i], xscales[i], yscales[i]] } ! 4;
-        Pen.strokeColor = Color.grey(1,0.5);
+        xform = { |i| [xlates[i], ylates[i], rots[i], xscales[i], yscales[i]] } ! 4;
+        Pen.strokeColor = Color.grey(1, 0.5);
         Pen.width = 8.linrand + 1;
         Pen.translate(400, 400);
         Pen.scale(zoom, zoom);
@@ -836,11 +865,12 @@ w.drawFunc = {
     };
 };
 
-{ while { run } { w.refresh; 0.05.wait; } }.fork(AppClock)
+{ while { run } { w.refresh; 0.05.wait } }.fork(AppClock)
 
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h3><a class='anchor' name='Matrix%20example'>Matrix example</a></h3>
-<textarea class='editor'>(
+<div class='codeMirrorContainer'><textarea class='editor'>(
 var controlWindow, w;
 var r, a, b, c, d, matrix = [1, 0, 0, 1, 10, 10];
 var sliders, spex, name;
@@ -849,7 +879,7 @@ w = Window.new.front;
 w.view.background_(Color.white);
 
 // create a controller-window
-controlWindow = Window("matrix controls", Rect(400,200,350,120));
+controlWindow = Window("matrix controls", Rect(400, 200, 350, 120));
 controlWindow.front;
 
 // determine the rectangle to be drawn
@@ -870,14 +900,14 @@ w.drawFunc = {
     Pen.line(b, d);
     Pen.stroke;
 
-    Pen.font = Font( "Helvetica-Bold", 12 );
-    Pen.stringAtPoint( "A", a - 6 );
-    Pen.stringAtPoint( "B", b - 6 );
-    Pen.stringAtPoint( "C", c - (0@6) );
-    Pen.stringAtPoint( "D", d - (0@6) );
+    Pen.font = Font("Helvetica-Bold", 12);
+    Pen.stringAtPoint("A", a - 6);
+    Pen.stringAtPoint("B", b - 6);
+    Pen.stringAtPoint("C", c - (0@6));
+    Pen.stringAtPoint("D", d - (0@6));
 
-    Pen.font = Font( "Helvetica", 10 );
-    Pen.stringInRect( "a matrix test", r.moveBy( 50, 50 ));
+    Pen.font = Font("Helvetica", 10);
+    Pen.stringInRect("a matrix test", r.moveBy(50, 50));
 };
 
 controlWindow.view.decorator = sliders = FlowLayout(controlWindow.view.bounds);
@@ -901,9 +931,10 @@ name = #[zoomX, shearingY, shearingX, zoomY, translateX, translateY];
 };
 w.refresh;
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h3><a class='anchor' name='Transparency%20layer%20example'>Transparency layer example</a></h3>
-<textarea class='editor'>(
-w = Window.new("Transparency Layer test", Rect(400,400,430,450)).front;
+<div class='codeMirrorContainer'><textarea class='editor'>(
+w = Window.new("Transparency Layer test", Rect(400, 400, 430, 450)).front;
 w.drawFunc = {
     Color.blue.setStroke;
 
@@ -912,15 +943,15 @@ w.drawFunc = {
     Pen.beginTransparencyLayer;
 
     Color.red.setFill;
-    Pen.addOval(Rect(20,40,100,100));
+    Pen.addOval(Rect(20, 40, 100, 100));
     Pen.fill;
 
     Color.green.setFill;
-    Pen.addOval(Rect(30,70,100,100));
+    Pen.addOval(Rect(30, 70, 100, 100));
     Pen.fill;
 
     Color.blue.setFill;
-    Pen.addOval(Rect(60,40,100,100));
+    Pen.addOval(Rect(60, 40, 100, 100));
     Pen.fill;
 
     "With Transparency Layer".drawCenteredIn(Rect(30, 40, 100, 100), Font.default, Color.white);
@@ -933,15 +964,15 @@ w.drawFunc = {
 
 
     Color.red.setFill;
-    Pen.addOval(Rect(20,40,100,100));
+    Pen.addOval(Rect(20, 40, 100, 100));
     Pen.fill;
 
     Color.green.setFill;
-    Pen.addOval(Rect(30,70,100,100));
+    Pen.addOval(Rect(30, 70, 100, 100));
     Pen.fill;
 
     Color.blue.setFill;
-    Pen.addOval(Rect(60,40,100,100));
+    Pen.addOval(Rect(60, 40, 100, 100));
     Pen.fill;
 
     "Without Transparency Layer".drawCenteredIn(Rect(30, 40, 100, 100), Font.default, Color.white);
@@ -953,11 +984,11 @@ w.drawFunc = {
         Pen.beginTransparencyLayer;
 
         Pen.push;
-        Pen.addOval(Rect(20,40,170,170));
+        Pen.addOval(Rect(20, 40, 170, 170));
         Pen.fillAxialGradient(w.view.bounds.leftTop, w.view.bounds.rightBottom, Color.rand, Color.rand);
         Pen.pop;
 
-        "With Transparency Layer".drawCenteredIn(Rect(20,40,170,170), Font.default, Color.white);
+        "With Transparency Layer".drawCenteredIn(Rect(20, 40, 170, 170), Font.default, Color.white);
 
         Pen.endTransparencyLayer;
     };
@@ -965,16 +996,17 @@ w.drawFunc = {
     Pen.use {
         Pen.translate(200, 200);
         Pen.setShadow(2@2, 10, Color.black);
-        Pen.addOval(Rect(20,40,170,170));
+        Pen.addOval(Rect(20, 40, 170, 170));
         Pen.fillAxialGradient(w.view.bounds.leftTop, w.view.bounds.rightBottom, Color.rand, Color.rand);
 
-        "Without Transparency Layer".drawCenteredIn(Rect(20,40,170,170), Font.default, Color.white);
+        "Without Transparency Layer".drawCenteredIn(Rect(20, 40, 170, 170), Font.default, Color.white);
     };
 };
 w.refresh;
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h3><a class='anchor' name='Blending%20modes'>Blending modes</a></h3>
-<textarea class='editor'>/*
+<div class='codeMirrorContainer'><textarea class='editor'>/*
 different blend modes:
 --------------------
 0 - Normal
@@ -1007,7 +1039,7 @@ different blend modes:
 */
 
 (
-    var blendMode=0, blendString="Normal";
+    var blendMode = 0, blendString = "Normal";
     w = Window.new.front;
     m = PopUpMenu(w, Rect(10, w.view.bounds.height - 30, 150, 20));
     m.items = [
@@ -1029,13 +1061,13 @@ different blend modes:
         "15 - Luminosity"
     ];
 
-    m.action_({|view|
+    m.action_({ |view|
         blendMode = view.value;
         blendString = view.items.at(blendMode);
         w.refresh;
     });
     w.drawFunc = {
-        80.do{|i|
+        80.do{ |i|
             Pen.use {
             Pen.blendMode_(blendMode);
             Pen.color = Color.green(0.6, 0.10);
@@ -1048,6 +1080,7 @@ different blend modes:
     };
     w.refresh;
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/Pen.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/Pen.schelp</a><br>link::Classes/Pen::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/Pen.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/Pen.schelp</a><br>link::Classes/Pen::<br></div></div><script src='./../static/editor.js' type='text/javascript'></script>
 </body></html>

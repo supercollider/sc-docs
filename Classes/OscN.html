@@ -1,21 +1,25 @@
-<!doctype html><html lang='en'><head><title>OscN | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>OscN | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../lib/jquery.min.js'></script>
-<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/jquery.min.js'></script>
+<script src='./../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './..';
 var scdoc_title = 'OscN';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../static/scdoc.js' type='text/javascript'></script>
 <script src='./../docmap.js' type='text/javascript'></script>
+<script src='./../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
@@ -39,7 +43,7 @@ var scdoc_sc_version = '3.13.1';
 <div id='summary'>Noninterpolating wavetable oscillator.</div>
 </div>
 <div class='subheader'>
-<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/Common/Audio/Osc.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Audio/Osc.sc'>Osc.sc</a></div><div id='related'>See also: <a href="./../Classes/COsc.html">COsc</a>, <a href="./../Classes/Osc.html">Osc</a>, <a href="./../Classes/VOsc.html">VOsc</a>, <a href="./../Classes/VOsc3.html">VOsc3</a></div>
+<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/Common/Audio/Osc.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Audio/Osc.sc'>Osc.sc</a></div><div id='related'>See also: <a href="./../Classes/COsc.html">COsc</a>, <a href="./../Classes/Osc.html">Osc</a>, <a href="./../Classes/VOsc.html">VOsc</a>, <a href="./../Classes/VOsc3.html">VOsc3</a></div>
 </div>
 <h2><a class='anchor' name='description'>Description</a></h2>
 
@@ -58,18 +62,18 @@ var scdoc_sc_version = '3.13.1';
 <div id='inheritedclassmets'></div><h2><a class='anchor' name='instancemethods'>Instance Methods</a></h2>
 <h3><a class='anchor' name='Inherited%20instance%20methods'>Inherited instance methods</a></h3>
 <div id='inheritedinstmets'></div><h2><a class='anchor' name='examples'>Examples</a></h2>
-<textarea class='editor'>// compare examples below with interpolating Osc examples.
+<div class='codeMirrorContainer'><textarea class='editor'>// compare examples below with interpolating Osc examples.
 
 (
 s = Server.local;
-b = Buffer.alloc(s,512,1);
-b.sine1(1.0/[1,2,3,4,5,6],true,false,true);
+b.sine1(1.0/[1, 2, 3, 4, 5, 6], true, false, true);
+b = Buffer.alloc(s, 512, 1);
 
-SynthDef("help-OscN",{ arg out=0,bufnum=0;
+SynthDef("help-OscN", { |out = 0, bufnum = 0|
     Out.ar(out,
         OscN.ar(bufnum, 500, 0, 0.5)
     )
-}).play(s,[0,0,1,b.bufnum]);
+}).play(s, [0, 0, 1, b.bufnum]);
 
 )
 b.free;
@@ -81,14 +85,14 @@ b.free;
 // modulate freq
 
 s = Server.local;
-b = Buffer.alloc(s,512,1);
-b.sine1(1.0/[1,2,3,4,5,6].squared,true,false,true);
+b.sine1(1.0/[1, 2, 3, 4, 5, 6].squared, true, false, true);
+b = Buffer.alloc(s, 512, 1);
 
-SynthDef("help-OscN",{ arg out=0,bufnum=0;
+SynthDef("help-OscN", { |out = 0, bufnum = 0|
     Out.ar(out,
-        OscN.ar(bufnum, XLine.kr(2000,200), 0, 0.5)
+        OscN.ar(bufnum, XLine.kr(2000, 200), 0, 0.5)
     )
-}).play(s,[\out,0,\bufnum,b.bufnum]);
+}).play(s, [\out, 0, \bufnum, b.bufnum]);
 
 )
 b.free;
@@ -99,18 +103,18 @@ s = Server.local;
 b = Buffer.alloc(s, 512, 1);
 b.sine1([1.0], true, true, true);
 
-SynthDef("help-OscN",{ arg out=0,bufnum=0;
+SynthDef("help-OscN", { |out = 0, bufnum = 0|
     Out.ar(out,
         OscN.ar(bufnum,
             OscN.ar(bufnum,
-                XLine.kr(1,1000,9),
+                XLine.kr(1, 1000, 9),
                 0,
                 200,
                 800),
             0,
             0.25)
     )
-}).play(s,[\out, 0, \bufnum, b.bufnum]);
+}).play(s, [\out, 0, \bufnum, b.bufnum]);
 
 )
 b.free;
@@ -121,17 +125,17 @@ s = Server.local;
 b = Buffer.alloc(s, 512, 1);
 b.sine1([1.0], true, true, true);
 
-SynthDef("help-OscN",{ arg out=0,bufnum=0;
+SynthDef("help-OscN", { |out = 0, bufnum = 0|
     Out.ar(out,
         OscN.ar(bufnum,
                 800,
                 OscN.ar(bufnum,
-                        XLine.kr(20,8000,10),
+                        XLine.kr(20, 8000, 10),
                         0,
                         2pi),
                 0.25)
     )
-}).play(s,[\out, 0, \bufnum, b.bufnum]);
+}).play(s, [\out, 0, \bufnum, b.bufnum]);
 )
 b.free;
 
@@ -140,24 +144,26 @@ b.free;
 // change the buffer while its playing
 s = Server.local;
 b = Buffer.alloc(s, 4096, 1);
-b.sine1(1.0/[1,2,3,4,5,6], true, true, true);
+b.sine1(1.0/[1, 2, 3, 4, 5, 6], true, true, true);
 
-SynthDef("help-OscN",{ arg out=0,bufnum=0;
+SynthDef("help-OscN", { |out = 0, bufnum = 0|
     Out.ar(out,
-        OscN.ar(bufnum, [80,80.2], 0, 0.2)
+        OscN.ar(bufnum, [80, 80.2], 0, 0.2)
     )
-}).play(s,[\out, 0, \bufnum, b.bufnum]);
+}).play(s, [\out, 0, \bufnum, b.bufnum]);
 )
 
 (
 Routine({
     var n = 32;
     50.do({
-        b.sine1(Array.rand(n,0,1).cubed, true, true, true);
+        b.sine1(Array.rand(n, 0, 1).cubed, true, true, true);
         0.25.wait;
     });
 }).play;
 )
 b.free;</textarea>
-<div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/OscN.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/OscN.schelp</a><br>link::Classes/OscN::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+
+<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/OscN.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/OscN.schelp</a><br>link::Classes/OscN::<br></div></div><script src='./../static/editor.js' type='text/javascript'></script>
 </body></html>

@@ -1,0 +1,178 @@
+<!doctype html><html lang='en'><head><title>LevelComp | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../static/themes/default.css' type='text/css' />
+<link rel='stylesheet' href='./../frontend.css' type='text/css' />
+<link rel='stylesheet' href='./../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../static/lib/katex/katex.min.css' />
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+<script src='./../static/lib/jquery.min.js'></script>
+<script src='./../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../static/lib/katex/katex.min.js' type='text/javascript'></script>
+<script>
+var helpRoot = './..';
+var scdoc_title = 'LevelComp';
+var scdoc_sc_version = '3.14.0-rc1';
+</script>
+<script src='./../static/scdoc.js' type='text/javascript'></script>
+<script src='./../docmap.js' type='text/javascript'></script>
+<script src='./../frontend.js' type='text/javascript'></script>
+<script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
+</head>
+<body onload='fixTOC()'>
+<div id='toc'>
+<div id='toctitle'>LevelComp:</div>
+<span class='toc_search'>Filter: <input id='toc_search'></span><ul class='toc'><li class='toc1'><a href='#description'>Description</a></li>
+<ul class='toc'></ul><li class='toc1'><a href='#classmethods'>Class methods</a></li>
+<ul class='toc'><li class='toc3'><a href='#*new'>new</a> </li>
+<li class='toc2'><a href='#Inherited%20class%20methods'>Inherited class methods</a></li>
+</ul><li class='toc1'><a href='#instancemethods'>Instance methods</a></li>
+<ul class='toc'><li class='toc2'><a href='#Inherited%20instance%20methods'>Inherited instance methods</a></li>
+</ul><li class='toc1'><a href='#examples'>Examples</a></li>
+<ul class='toc'><li class='toc2'><a href='#Discussion%20and%20demonstration%20of%20level%20compensation%20options:'>Discussion and demonstration of level compensation options:</a></li>
+<ul class='toc'></ul></ul></ul></div><div id='menubar'></div>
+<div class='contents'>
+<div class='header'>
+<div id='label'>
+<span id='folder'>Classes</span>
+ | <span id='categories'><a href='./../Browse.html#Panning'>Panning</a></span>
+</div><h1>LevelComp<span id='superclasses'> : <a href="../Classes/Object.html">Object</a></span>
+</h1>
+<div id='summary'>Level compensation logic for Splay and SplayAz</div>
+</div>
+<div class='subheader'>
+<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/Common/Audio/Splay.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Audio/Splay.sc'>Splay.sc</a></div><div id='related'>See also: <a href="./../Classes/Splay.html">Splay</a>, <a href="./../Classes/SplayAz.html">SplayAz</a>, <a href="./../Guides/Level_Compensation.html">Level Compensation when Mixing and Panning</a></div>
+</div>
+<h2><a class='anchor' name='description'>Description</a></h2>
+
+<p>Mixing and Panning multichannel signals often requires <a href="./../Guides/Level_Compensation.html">Level Compensation when Mixing and Panning</a>. LevelComp provides a logic for this that is used internally in the <a href="./../Classes/Splay.html">Splay</a> and <a href="./../Classes/SplayAz.html">SplayAz</a> UGens. Using the <code>levelComp</code> argument of <code>Splay/Az</code>, it calculates a level compensation factor applied to the input signals, depending on the number of input channels.<h2><a class='anchor' name='classmethods'>Class Methods</a></h2>
+<h3 class='method-code'><span class='method-prefix'>LevelComp.</span><a class='method-name' name='*new' href='./../Overviews/Methods.html#new'>new</a>(<span class='argstr'>levelComp</span>, <span class='argstr'>rate</span>, <span class='argstr'>n</span>)</h3>
+<div class='method'>
+<p>Calculate a scaling factor based on the <code>levelComp</code> argument and the number of channels to be mixed.<h4>Arguments:</h4>
+<table class='arguments'>
+<tr><td class='argumentname'>levelComp<td class='argumentdesc'>
+<p>a flag or numeric value:<ul>
+<li><code>true</code> : equal power level compensation (default)<li><code>false</code> : off / no level change,<li>float between <code>0.0</code> and <code>1.0</code> : smooth tuning of levelComp factor:<ul>
+<li><code>0.0</code> is none -&gt; factor 1<li><code>0.5</code> is equal power -&gt; factor (1/n).squared<li><code>1.0</code> is equal amplitude -&gt; factor (1/n)</ul>
+</ul>
+<tr><td class='argumentname'>rate<td class='argumentdesc'>
+<p>the rate for which to calculate - \audio or \control.<tr><td class='argumentname'>n<td class='argumentdesc'>
+<p>the number of channels being mixed and scaled.</table><h4>Returns:</h4>
+<div class='returnvalue'>
+<p>the levelComp factor by which to multiply the output signals.</div></div><h3><a class='anchor' name='Inherited%20class%20methods'>Inherited class methods</a></h3>
+<div id='inheritedclassmets'></div><h2><a class='anchor' name='instancemethods'>Instance Methods</a></h2>
+<h3><a class='anchor' name='Inherited%20instance%20methods'>Inherited instance methods</a></h3>
+<div id='inheritedinstmets'></div><h2><a class='anchor' name='examples'>Examples</a></h2>
+
+<p><code>Splay</code> and <code>SplayAz</code> use <code>LevelComp</code> internally via the <code>levelComp</code> argument, and obtain rate and number of channels from <code>Splay/Az</code>.
+<p>Here is an Overview of the <code>levelComp</code> usage variants:<div class='codeMirrorContainer'><textarea class='editor'>// default is equal power comp: level / (numchans.sqrt)
+Splay.ar(ins, spread, level, center); // true is default
+// write it explicitly for clarity
+Splay.ar(ins, spread, level, center, levelComp: true);
+// or do equal power as float levelComp
+Splay.ar(ins, spread, level, center, levelComp: 0.5); //
+
+// maximum peak safety by equal amplitude comp: level / numchans
+Splay.ar(ins, spread, level, center, levelComp: 1);
+// or calculate by hand:
+Splay.ar(ins, spread, level / ins.size, center, levelComp: false);
+
+// no compensation, just tune level by hand
+Splay.ar(ins, spread, level, center, levelComp: false);
+Splay.ar(ins, spread, level, center, levelComp: 0);
+
+// levelComp by float: level / (numchans ** levelComp),
+// so 0.0 is no compensation: level / 1;
+//    0.5 is equal power : level / (numchans.sqrt)
+//    1.0 is equal amplitude : level / (numchans)
+// can be used to tune e.g. between equal power and equal amp:
+Splay.ar(ins, spread, level, center, levelComp: 0.75);</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+<h3><a class='anchor' name='Discussion%20and%20demonstration%20of%20level%20compensation%20options:'>Discussion and demonstration of level compensation options:</a></h3>
+
+<p>We begin testing with equal power compensation: how much too high can the summed levels rise for different numbers of channel to mix/pan with <a href="./../Classes/Splay.html">Splay</a>?<div class='codeMirrorContainer'><textarea class='editor'>s.meter;
+s.scope;
+
+// synthesize 2 test signals at level 0.1 (-20 dB), first on separate channels
+(
+{ var n = 2, level = 0.1, spread = 1, pan = 0;
+    LFPulse.ar({ 100.exprand(2000) } ! n).range(-1, 1) * level
+}.play;
+)
+
+// now mix/pan these 2 signals using Splay, level at 0.1 (-20dB)
+(
+x = { |spread = 1, level = 0.1, center = 0|
+    var n = 2;
+    var snd = LFPulse.ar({ 100.exprand(2000) } ! n).range(-1, 1);
+    var stereo = Splay.ar(snd, spread, level, center);
+    Peak.ar(stereo, Impulse.kr(2)).ampdb.poll(2);
+    stereo
+}.play;
+)
+
+// when we set full spread, panned to center:
+// the 2 signals are discrete, left and right
+// we see the energy-based levelComp applied (1/2.sqrt).ampdb = -3
+x.set(\spread, 1, \center, 0); // -20 - 3 = -23dB
+
+// no spread, panned center:
+// each signal decreases by 3dB as they move to the center (from the panning function)
+// and the two signals mix on each channel, so we get -20 dB
+x.set(\spread, 0, \center, 0); //  -20dB
+
+// no spread, panned fully right:
+// the signals fully mix in the right channel (+6 dB)
+x.set(\spread, 0, \center, 1); // -23 + 6 = -17db</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+
+<p>Trying the same example with 20 channels and with equal power compensation, (which we get with levelComp <code>true</code>), we see that the resulting sum levels are much higher:<div class='codeMirrorContainer'><textarea class='editor'>(
+x = { |spread = 1, level = 0.1, center = 0|
+    var n = 20;
+    var snd = Splay.ar(LFPulse.ar({ 100.exprand(2000) } ! n).range(-1, 1),
+        spread, level, center);
+    Peak.ar(snd, 0.01, 1).ampdb.poll(1);
+    snd
+}.play;
+)
+
+// at full spread, level -20, pan to center:
+// peak is higher at -11 db
+x.set(\spread, 1, \center, 0);
+// with no spread, i.e. all panned center, slightly higher -10
+x.set(\spread, 0, \center, 0);
+// worst case: no spread, pan full left: -8db
+x.set(\spread, 0, \center, -1); // -8</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+
+<p>Finally, here are the theoretical worst cases for 20, 200, and 2000 channels, with equal power: 13, 23 and 33 db louder!<div class='codeMirrorContainer'><textarea class='editor'>// plot 0.01 seconds, and poll for precise amp readout
+{ Splay.ar(DC.ar(1!20), 0, 1, 0.999).ampdb.poll }.plot;
+{ Splay.ar(DC.ar(1!200), 0, 1, 0.999).ampdb.poll }.plot; // 200: 23 db louder
+{ Splay.ar(DC.ar(1!2000), 0, 1, 0.999).ampdb.poll }.plot; // 2000: 33 db louder</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+
+<p>So for maximum peak safety, use <code>levelComp: 1</code> (or equivalently, set <code>levelComp: false</code>, and explicitly set level to 1/n, i.e. divide by the number of channels for amplitude compensation).
+<p>Then the levels predictably remain the same, independent of the number of channels to be mixed.<div class='codeMirrorContainer'><textarea class='editor'>{ n = 2; Splay.ar(DC.ar(1!n), 1, 1, 0, levelComp: 1).ampdb.poll }.plot; // -6 db on both
+{ n = 2; Splay.ar(DC.ar(1!n), 1, 1/n, 0, levelComp: false).ampdb.poll }.plot;
+{ n = 2; Splay.ar(DC.ar(1!n), 0, 1, 0, levelComp: 1).ampdb.poll }.plot; // -3 db on both
+{ n = 2; Splay.ar(DC.ar(1!n), 0, 1, 0.99, levelComp: 1).ampdb.poll }.plot; // 0 db
+
+// these are now the same for all tested values of n:
+{ n = 20; Splay.ar(DC.ar(1!n), 1, 1, 0, levelComp: 1).ampdb.poll }.plot; // -4 db
+{ n = 20; Splay.ar(DC.ar(1!n), 0, 1, 0, levelComp: 1).ampdb.poll }.plot; // -3 db
+{ n = 20; Splay.ar(DC.ar(1!n), 0, 1, 0.99, levelComp: 1).ampdb.poll }.plot; // 0 db on right
+
+{ n = 200; Splay.ar(DC.ar(1!n), 1, 1, 0, levelComp: 1).ampdb.poll }.plot; // -4 db
+{ n = 200; Splay.ar(DC.ar(1!n), 0, 1, 0, levelComp: 1).ampdb.poll }.plot; // -3 db
+{ n = 200; Splay.ar(DC.ar(1!n), 0, 1, 0.99, levelComp: 1).ampdb.poll }.plot; // 0 db on right
+
+{ n = 2000; Splay.ar(DC.ar(1!n), 1, 1, 0, levelComp: 1).ampdb.poll }.plot; // -4 db
+{ n = 2000; Splay.ar(DC.ar(1!n), 0, 1, 0, levelComp: 1).ampdb.poll }.plot; // -3 db
+{ n = 2000; Splay.ar(DC.ar(1!n), 0, 1, 0.99, levelComp: 1).ampdb.poll }.plot; // 0 db on right</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+
+<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/LevelComp.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/LevelComp.schelp</a><br>link::Classes/LevelComp::<br></div></div><script src='./../static/editor.js' type='text/javascript'></script>
+</body></html>

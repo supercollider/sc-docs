@@ -1,21 +1,25 @@
-<!doctype html><html lang='en'><head><title>Writing Primitives | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>Writing Primitives | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../lib/jquery.min.js'></script>
-<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/jquery.min.js'></script>
+<script src='./../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './..';
 var scdoc_title = 'Writing Primitives';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../static/scdoc.js' type='text/javascript'></script>
 <script src='./../docmap.js' type='text/javascript'></script>
+<script src='./../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
@@ -44,12 +48,13 @@ var scdoc_sc_version = '3.13.1';
 <p>Although much of SuperCollider's functionality is implemented in the SuperCollider language itself, for reasons of efficiency, some functionality is implemented in 'back end' C++ functions called 'primitives'. This document provides guidance to members of the SC development community on writing primitives.<h2><a class='anchor' name='Example'>Example</a></h2>
 <h3><a class='anchor' name='SuperCollider%20code'>SuperCollider code</a></h3>
 
-<p>Primitive calls are preceded with an underscore, so for example <code>_myPrimitiveName</code>. Here is an example call to a primitive in an SC class:<textarea class='editor'>Cocoa {
+<p>Primitive calls are preceded with an underscore, so for example <code>_myPrimitiveName</code>. Here is an example call to a primitive in an SC class:<div class='codeMirrorContainer'><textarea class='editor'>Cocoa {
     prGetPathsDialog { arg returnSlot;
         _Cocoa_GetPathsDialog
         ^this.primitiveFailed
     }
 }</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p>In the example above the primitive is dispatched at <code>_Cocoa_GetPathsDialog</code>. If it is successful, it will return without executing the code below that. Primitive functions (see below) return an integer, which should be one of the values defined in the file <em>PyrErrors.h</em>:<pre>enum { // primitive errors
     errReturn = -1,    // not really an error.. primitive executed a non-local return
@@ -71,12 +76,13 @@ var scdoc_sc_version = '3.13.1';
     errLastError
 };</pre>
 <p>If your primitive can return any value besides <code>errNone</code> then you will need to provide handling code after the primitive call. In most cases this will be <code>^this.primitiveFailed</code>. This will throw an <code>Error</code> giving the user information about what went wrong.
-<p>In some cases, you may wish to execute fallback SC code instead of throwing an <code>Error</code>. This can be useful in cases where for example a primitive provides an optimised version of a method which is not usable in all instances. Here is an example of how this can be done:<textarea class='editor'>flop {
+<p>In some cases, you may wish to execute fallback SC code instead of throwing an <code>Error</code>. This can be useful in cases where for example a primitive provides an optimised version of a method which is not usable in all instances. Here is an example of how this can be done:<div class='codeMirrorContainer'><textarea class='editor'>flop {
     _ArrayMultiChannelExpand
     ^super.flop // this gets executed if the primitive fails
 }</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>Note that returning anything besides <code>errNone</code> will result in executing the SC method <em>ignoring</em> the primitive call. For this reason, if you need to do some preparatory work in SC before calling the primitive, it is best practice to do this in a separate method to avoid duplication. For example:<textarea class='editor'>// do initial work here
+<p>Note that returning anything besides <code>errNone</code> will result in executing the SC method <em>ignoring</em> the primitive call. For this reason, if you need to do some preparatory work in SC before calling the primitive, it is best practice to do this in a separate method to avoid duplication. For example:<div class='codeMirrorContainer'><textarea class='editor'>// do initial work here
 openUDPPort {|portNum|
     var result;
     if(openPorts.includes(portNum), {^true});
@@ -90,6 +96,7 @@ prOpenUDPPort {|portNum|
     _OpenUDPPort
     ^this.primitiveFailed;
 }</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h3><a class='anchor' name='Define%20your%20primitive'>Define your primitive</a></h3>
 
 <p>In your primitive source code define the primitive:<pre>void initCocoaFilePrimitives()
@@ -259,5 +266,5 @@ It is good practice to avoid creating objects in a primitive at all where possib
 <dt>Now where do I put the thing to return it?<dd>Store your return value at <code>g-&gt;sp - inNumArgsPushed + 1</code>. (In most primitives this is referred to by the variable <code>a</code>.)</dl>
 
 <p><div class='footnotes'>
-<a class='anchor' name='footnote_1'/><div class='footnote'>[<a href='#footnote_org_1'>1</a>] - Some SC language objects, such as numbers, boolean types, chars, and symbols are stored directly within a PyrSlot, and do not require allocation. (Symbols are a special case: A reference to a location in the global symbol table is stored, where each defined symbol is permanently stored.)</div></div><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Guides/WritingPrimitives.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Guides/WritingPrimitives.schelp</a><br>link::Guides/WritingPrimitives::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+<a class='anchor' name='footnote_1'/><div class='footnote'>[<a href='#footnote_org_1'>1</a>] - Some SC language objects, such as numbers, boolean types, chars, and symbols are stored directly within a PyrSlot, and do not require allocation. (Symbols are a special case: A reference to a location in the global symbol table is stored, where each defined symbol is permanently stored.)</div></div><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Guides/WritingPrimitives.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Guides/WritingPrimitives.schelp</a><br>link::Guides/WritingPrimitives::<br></div></div><script src='./../static/editor.js' type='text/javascript'></script>
 </body></html>

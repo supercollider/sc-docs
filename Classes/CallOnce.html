@@ -1,21 +1,25 @@
-<!doctype html><html lang='en'><head><title>CallOnce | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>CallOnce | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../lib/jquery.min.js'></script>
-<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/jquery.min.js'></script>
+<script src='./../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './..';
 var scdoc_title = 'CallOnce';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../static/scdoc.js' type='text/javascript'></script>
 <script src='./../docmap.js' type='text/javascript'></script>
+<script src='./../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
@@ -47,16 +51,17 @@ var scdoc_sc_version = '3.13.1';
 <div id='summary'>execute a function (at most) once</div>
 </div>
 <div class='subheader'>
-<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/Common/Streams/EventStreamCleanup.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Streams/EventStreamCleanup.sc'>EventStreamCleanup.sc</a></div><div id='related'>See also: <a href="./../Classes/EventStreamCleanup.html">EventStreamCleanup</a></div>
+<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/Common/Streams/EventStreamCleanup.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Streams/EventStreamCleanup.sc'>EventStreamCleanup.sc</a></div><div id='related'>See also: <a href="./../Classes/EventStreamCleanup.html">EventStreamCleanup</a></div>
 </div>
 <h2><a class='anchor' name='description'>Description</a></h2>
 
 <p>Unlike a <a href="./../Classes/Thunk.html">Thunk</a>, which takes no arguments, a CallOnce does allow arguments to be passed to the function it wraps, but the function is executed at most once. A CallOnce can also be "cancelled" with a <code>clear</code> call, without ever executing the wrapped function, even if CallOnce's <code>value</code> is called later.
 <p>The general contract for CallOnce is that any calls into the function after the first would do the same or less (cleanup) work as the first call did. Thus, subsequent calls are completely redundant and can be answered with the result from the first call, even if the arguments change on subsequent calls. Prototypical use case: if a cleanup is called with a <code>releaseResource: false</code> argument, e.g. because the resource was already released by <a href="./../Classes/CmdPeriod.html">CmdPeriod</a>, it is assumed that the cleanup will not be called later with a <code>releaseResource: true</code> argument.
 <p>Since it executes its function (at most) once, CallOnce is not a general-purpose function memoization facility for functions with arguments.
-<p>Basic example (see end of page for more):<textarea class='editor'>c = CallOnce { |flag| if(flag) { "woking...".postln; "done:" + flag } };
+<p>Basic example (see end of page for more):<div class='codeMirrorContainer'><textarea class='editor'>c = CallOnce { |flag| if(flag) { "woking...".postln; "done:" + flag } };
 c.value(true);  // -&gt; done: true (and posts "woking...")
 c.value(false); // -&gt; done: true (nothing posted)</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h2><a class='anchor' name='classmethods'>Class Methods</a></h2>
 <h3 class='method-code'><span class='method-prefix'>CallOnce.</span><a class='method-name' name='*new' href='./../Overviews/Methods.html#new'>new</a>(<span class='argstr'>function</span>)</h3>
 <div class='supmethod'>From superclass: <a href='./../Classes/Thunk.html'>Thunk</a></div>
@@ -76,23 +81,24 @@ c.value(false); // -&gt; done: true (nothing posted)</textarea>
 <div class='method'>
 <p>Report if the CallOnce is considered already evaluated.<h4>Returns:</h4>
 <div class='returnvalue'>
-<p><code>false</code> if neither <code>clear</code> nor <code>value</code> were called previously; <code>true</code> otherwise.</div></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-value' href='./../Overviews/Methods.html#value'>value</a>( <span class='argstr'>... args</span>)</h3>
+<p><code>false</code> if neither <code>clear</code> nor <code>value</code> were called previously; <code>true</code> otherwise.</div></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-value' href='./../Overviews/Methods.html#value'>value</a>( <span class='argstr'>... args</span>, <span class='argstr'>... kwargs</span>)</h3>
 <div class='method'>
 <p>If <code>clear</code> was called previously, the <code>value</code> call has no side-effect. Otherwise, on the first call to <code>value</code> the function wrapped by the CallOnce is evaluated with the arguments provided to <code>value</code> and the result of this evaluation is stored as the CallOnce's result, used to answer all subsequent calls to <code>value</code>.<h4>Arguments:</h4>
 <table class='arguments'>
 <tr><td class='argumentname'>... args<td class='argumentdesc'>
-<p>Arguments to use in the call to the wrapped function, if the call happens. If <code>didEvaluate</code> already returns <code>true</code> (before the current call to <code>value</code>) then the current <code>args</code> are irrelevant because the wrapped function is not called anymore.</table><h4>Returns:</h4>
+<p>Arguments to use in the call to the wrapped function, if the call happens. If <code>didEvaluate</code> already returns <code>true</code> (before the current call to <code>value</code>) then the current <code>args</code> are irrelevant because the wrapped function is not called anymore.<tr><td class='argumentname'>kwargs<td class='argumentdesc'>
+<p>Array of key-value pairs for keyword arguments. See <a href="./../Classes/Function.html#-value">Function: -value</a>.</table><h4>Returns:</h4>
 <div class='returnvalue'><ul>
 <li><code>nil</code> if <code>clear</code> was called on the CallOnce before any calls to <code>value</code>, otherwise<li>the value that was computed by the function (wrapped by the CallOnce) on the first call to CallOnce's <code>value</code></ul>
 
 <p></div></div><h3><a class='anchor' name='Inherited%20instance%20methods'>Inherited instance methods</a></h3>
 <div id='inheritedinstmets'></div><h3><a class='anchor' name='Undocumented%20instance%20methods'>Undocumented instance methods</a></h3>
-<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-prEvaluate' href='./../Overviews/Methods.html#prEvaluate'>prEvaluate</a>(<span class='argstr'>selector</span>, <span class='argstr'>args</span>)</h3>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-prEvaluate' href='./../Overviews/Methods.html#prEvaluate'>prEvaluate</a>(<span class='argstr'>selector</span>, <span class='argstr'>args</span>, <span class='argstr'>kwargs</span>)</h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-valueArray' href='./../Overviews/Methods.html#valueArray'>valueArray</a>( <span class='argstr'>... args</span>)</h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-valueArrayEnvir' href='./../Overviews/Methods.html#valueArrayEnvir'>valueArrayEnvir</a>( <span class='argstr'>... args</span>)</h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-valueEnvir' href='./../Overviews/Methods.html#valueEnvir'>valueEnvir</a>( <span class='argstr'>... args</span>)</h3>
 <h2><a class='anchor' name='examples'>Examples</a></h2>
-<textarea class='editor'>r = 1; // some resource
+<div class='codeMirrorContainer'><textarea class='editor'>r = 1; // some resource
 c = CallOnce {  r = r - 1; postln("Resource is now released:" + r); r };
 c.didEvaluate; // -&gt; false
 c.value;       // -&gt; 0 (and posts "Resource is now released: 0")
@@ -131,5 +137,7 @@ d.didEvaluate; // -&gt; false (copy didn't evaluate yet)
 // semantically incorrect (contract breaking) use sequence
 d.value(false) // -&gt; nothing to do
 d.value(true)  // -&gt; nothing to do</textarea>
-<div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/CallOnce.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/CallOnce.schelp</a><br>link::Classes/CallOnce::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+
+<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/CallOnce.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/CallOnce.schelp</a><br>link::Classes/CallOnce::<br></div></div><script src='./../static/editor.js' type='text/javascript'></script>
 </body></html>

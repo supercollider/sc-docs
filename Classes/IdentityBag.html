@@ -1,21 +1,25 @@
-<!doctype html><html lang='en'><head><title>IdentityBag | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>IdentityBag | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../lib/jquery.min.js'></script>
-<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/jquery.min.js'></script>
+<script src='./../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './..';
 var scdoc_title = 'IdentityBag';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../static/scdoc.js' type='text/javascript'></script>
 <script src='./../docmap.js' type='text/javascript'></script>
+<script src='./../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
@@ -44,7 +48,7 @@ var scdoc_sc_version = '3.13.1';
 <div id='summary'>A Bag according to identity</div>
 </div>
 <div class='subheader'>
-<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/Common/Collections/Bag.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Collections/Bag.sc'>Bag.sc</a></div></div>
+<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/Common/Collections/Bag.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Collections/Bag.sc'>Bag.sc</a></div></div>
 <h2><a class='anchor' name='description'>Description</a></h2>
 
 <p>An IdentityBag is an unordered collection of objects. In some languages it is referred to as a counted set. A Bag keeps track of the number of times objects are inserted and requires that objects be removed the same number of times. There is only one instance of an object in a Bag even if the object has been added to the Bag multiple times (test is for <strong>identity</strong>).
@@ -55,26 +59,30 @@ var scdoc_sc_version = '3.13.1';
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-add' href='./../Overviews/Methods.html#add'>add</a>(<span class='argstr'>item</span>, <span class='argstr'>count: 1</span>)</h3>
 <div class='supmethod'>From superclass: <a href='./../Classes/Bag.html'>Bag</a></div>
 <div class='method'>
-<p>Add anObject to the Bag. A Bag may contain multiple entries of the same object.<textarea class='editor'>IdentityBag[1, 2, 3].add(4);
+<p>Add anObject to the Bag. A Bag may contain multiple entries of the same object.<div class='codeMirrorContainer'><textarea class='editor'>IdentityBag[1, 2, 3].add(4);
 IdentityBag[1, 2, 3].add(3);
 IdentityBag["abc", "def", "ghi"].add("jkl");
 IdentityBag["abc", "def", "ghi"].add("def");</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-remove' href='./../Overviews/Methods.html#remove'>remove</a>(<span class='argstr'>item</span>, <span class='argstr'>count: 1</span>)</h3>
 <div class='supmethod'>From superclass: <a href='./../Classes/Bag.html'>Bag</a></div>
 <div class='method'>
-<p>Remove anObject from the IdentityBag.<textarea class='editor'>IdentityBag[1, 2, 3].remove(3);</textarea>
+<p>Remove anObject from the IdentityBag.<div class='codeMirrorContainer'><textarea class='editor'>IdentityBag[1, 2, 3].remove(3);</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-contents' href='./../Overviews/Methods.html#contents'>contents</a></h3>
 <div class='supmethod'>From superclass: <a href='./../Classes/Bag.html'>Bag</a></div>
 <div class='method'>
-<p>Returns the dictionary that stores the objects in pairs (obj -&gt; numberOfObjects)<textarea class='editor'>IdentityBag[\a, \b, \c, \c].contents;</textarea>
+<p>Returns the dictionary that stores the objects in pairs (obj -&gt; numberOfObjects)<div class='codeMirrorContainer'><textarea class='editor'>IdentityBag[\a, \b, \c, \c].contents;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3><a class='anchor' name='Iteration'>Iteration</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-do' href='./../Overviews/Methods.html#do'>do</a>(<span class='argstr'>function</span>)</h3>
 <div class='supmethod'>From superclass: <a href='./../Classes/Bag.html'>Bag</a></div>
 <div class='method'>
-<p>Evaluates function for each item in the IdentityBag. The function is passed two arguments, the item and an integer index.<textarea class='editor'>IdentityBag[1, 2, 3, 300].do({ arg item, i; item.postln });</textarea>
+<p>Evaluates function for each item in the IdentityBag. The function is passed two arguments, the item and an integer index.<div class='codeMirrorContainer'><textarea class='editor'>IdentityBag[1, 2, 3, 300].do({ |item, i| item.postln });</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3><a class='anchor' name='Inherited%20instance%20methods'>Inherited instance methods</a></h3>
 <div id='inheritedinstmets'></div><h2><a class='anchor' name='Difference%20between%20Bag%20and%20IdentityBag'>Difference between Bag and IdentityBag</a></h2>
-<textarea class='editor'>// the two strings are equal, but not identical
+<div class='codeMirrorContainer'><textarea class='editor'>// the two strings are equal, but not identical
 "something" == "something"; // true
 "something" === "something" // false
 
@@ -87,6 +95,7 @@ a = IdentityBag.new;
 a.add("something");
 a.add("something");
 a.contents; // two objects in the bag</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/IdentityBag.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/IdentityBag.schelp</a><br>link::Classes/IdentityBag::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/IdentityBag.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/IdentityBag.schelp</a><br>link::Classes/IdentityBag::<br></div></div><script src='./../static/editor.js' type='text/javascript'></script>
 </body></html>

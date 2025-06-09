@@ -1,21 +1,25 @@
-<!doctype html><html lang='en'><head><title>BusPlug | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>BusPlug | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../lib/jquery.min.js'></script>
-<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/jquery.min.js'></script>
+<script src='./../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './..';
 var scdoc_title = 'BusPlug';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../static/scdoc.js' type='text/javascript'></script>
 <script src='./../docmap.js' type='text/javascript'></script>
+<script src='./../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
@@ -102,16 +106,17 @@ var scdoc_sc_version = '3.13.1';
 <div id='summary'>a listener on a bus</div>
 </div>
 <div class='subheader'>
-<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/JITLib/ProxySpace/BusPlug.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/JITLib/ProxySpace/BusPlug.sc'>BusPlug.sc</a></div><div id='subclasses'>Subclasses: <a href="../Classes/NodeProxy.html">NodeProxy</a></div>
+<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/JITLib/ProxySpace/BusPlug.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/JITLib/ProxySpace/BusPlug.sc'>BusPlug.sc</a></div><div id='subclasses'>Subclasses: <a href="../Classes/NodeProxy.html">NodeProxy</a></div>
 <div id='related'>See also: <a href="./../Classes/Bus.html">Bus</a>, <a href="./../Classes/Monitor.html">Monitor</a>, <a href="./../Classes/InBus.html">InBus</a>, <a href="./../Classes/NodeProxy.html">NodeProxy</a>, <a href="./../Classes/Ndef.html">Ndef</a></div>
 </div>
 <h2><a class='anchor' name='description'>Description</a></h2>
 
-<p>A BusPlug is represents a listener on a private <a href="./../Classes/Bus.html">Bus</a> that makes it easy to play back to multiple channels. It is mainly in use as a superclass of NodeProxy, but it can be used for general channel routings as well. Most methods are documented in the <a href="./../Classes/NodeProxy.html">NodeProxy</a> helpfile.<textarea class='editor'>s.boot;
+<p>A BusPlug represents a listener on a private <a href="./../Classes/Bus.html">Bus</a> that makes it easy to play back to multiple channels. It is mainly in use as a superclass of NodeProxy, but it can be used for general channel routings as well. Most methods are documented in the <a href="./../Classes/NodeProxy.html">NodeProxy</a> helpfile.<div class='codeMirrorContainer'><textarea class='editor'>s.boot;
 z = Bus.control(s, 16);
 z.setn({ |i| (i * 5).nthPrime } ! 16 * 5 + 100);
 a = BusPlug.for(z);
 { Splay.ar(SinOsc.ar(a.kr(3, MouseX.kr(0, 25)))) * 0.1 }.play; // selectively play 3 channel of the 16, modulate offset</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h2><a class='anchor' name='classmethods'>Class Methods</a></h2>
 <h3 class='method-code'><span class='method-prefix'>BusPlug.</span><a class='method-name' name='*new' href='./../Overviews/Methods.html#new'>new</a>(<span class='argstr'>server</span>)</h3>
 <div class='method'>
@@ -161,16 +166,18 @@ a = BusPlug.for(z);
 <p>Channel offset when reading a bus that has more channels than numChannels, cross fading between adjacent channels.<tr><td class='argumentname'>clip<td class='argumentdesc'>
 <p>If set to 'wrap', exceeding channels will wrap around, if set to 'clip', repeat the last one.</table></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-asUGenInput' href='./../Overviews/Methods.html#asUGenInput'>asUGenInput</a></h3>
 <div class='method'>
-<p>Returns the appropriate output to read from the BusPlug bus (an <a href="./../Classes/InBus.html">InBus</a> UGen)<textarea class='editor'>b = BusPlug.new;
+<p>Returns the appropriate output to read from the BusPlug bus (an <a href="./../Classes/InBus.html">InBus</a> UGen)<div class='codeMirrorContainer'><textarea class='editor'>b = BusPlug.new;
 { Blip.ar(b + 5) }.play;
 b.bus.set(12);</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-embedInStream' href='./../Overviews/Methods.html#embedInStream'>embedInStream</a>(<span class='argstr'>inval</span>)</h3>
 <div class='method'>
-<p>Returns the map argument for the bus, if the bus has multiple channels, it will return an array of map args.<textarea class='editor'>b = BusPlug.new;
+<p>Returns the map argument for the bus, if the bus has multiple channels, it will return an array of map args.<div class='codeMirrorContainer'><textarea class='editor'>b = BusPlug.new;
 x = Pbind(\z, b).asStream;
 x.next(()); // returns the map argument for the bus
 b.defineBus(\audio, 3);
 x.next(()); // returns map arguments for the audio rate bus</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-asControlInput' href='./../Overviews/Methods.html#asControlInput'>asControlInput</a></h3>
 <div class='method'>
 <p>Returns the map argument for the bus, just like <a href="#-embedInStream">-embedInStream</a></div><h3><a class='anchor' name='Monitoring%20and%20Routing'>Monitoring and Routing</a></h3>
@@ -231,7 +238,7 @@ x.next(()); // returns map arguments for the audio rate bus</textarea>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-asMap' href='./../Overviews/Methods.html#asMap'>asMap</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-asNodeArg' href='./../Overviews/Methods.html#asNodeArg'>asNodeArg</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-asOSCArgEmbeddedArray' href='./../Overviews/Methods.html#asOSCArgEmbeddedArray'>asOSCArgEmbeddedArray</a>(<span class='argstr'>array</span>)</h3>
-<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/JITLib/ProxySpace/NodeMap.sc'>/usr/local/share/SuperCollider/SCClassLibrary/JITLib/ProxySpace/NodeMap.sc</a></div>
+<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/JITLib/ProxySpace/NodeMap.sc'>/usr/local/share/SuperCollider/SCClassLibrary/JITLib/ProxySpace/NodeMap.sc</a></div>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-asStream' href='./../Overviews/Methods.html#asStream'>asStream</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-busArg' href='./../Overviews/Methods.html#busArg'>busArg</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-composeBinaryOp' href='./../Overviews/Methods.html#composeBinaryOp'>composeBinaryOp</a>(<span class='argstr'>aSelector</span>, <span class='argstr'>something</span>)</h3>
@@ -246,11 +253,11 @@ x.next(()); // returns map arguments for the audio rate bus</textarea>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-monitorGroup' href='./../Overviews/Methods.html#monitorGroup'>monitorGroup</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-monitorIndex' href='./../Overviews/Methods.html#monitorIndex'>monitorIndex</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-nodeMapMapsToControl' href='./../Overviews/Methods.html#nodeMapMapsToControl'>nodeMapMapsToControl</a></h3>
-<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/JITLib/ProxySpace/wrapForNodeProxy.sc'>/usr/local/share/SuperCollider/SCClassLibrary/JITLib/ProxySpace/wrapForNodeProxy.sc</a></div>
+<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/JITLib/ProxySpace/wrapForNodeProxy.sc'>/usr/local/share/SuperCollider/SCClassLibrary/JITLib/ProxySpace/wrapForNodeProxy.sc</a></div>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-numChannels' href='./../Overviews/Methods.html#numChannels'>numChannels</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-parentGroup' href='./../Overviews/Methods.html#parentGroup'>parentGroup</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-parentGroup' href='./../Overviews/Methods.html#parentGroup'>parentGroup</a> = value</h3>
-<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-plot' href='./../Overviews/Methods.html#plot'>plot</a>(<span class='argstr'>duration: 0.01</span>, <span class='argstr'>bounds</span>, <span class='argstr'>minval</span>, <span class='argstr'>maxval</span>, <span class='argstr'>separately: false</span>)</h3>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-plot' href='./../Overviews/Methods.html#plot'>plot</a>(<span class='argstr'>duration: 0.01</span>, <span class='argstr'>bounds</span>, <span class='argstr'>minval</span>, <span class='argstr'>maxval</span>, <span class='argstr'>separately: false</span>, <span class='argstr'>parent</span>)</h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-prepareOutput' href='./../Overviews/Methods.html#prepareOutput'>prepareOutput</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-quant' href='./../Overviews/Methods.html#quant'>quant</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-rate' href='./../Overviews/Methods.html#rate'>rate</a></h3>
@@ -263,7 +270,7 @@ x.next(()); // returns map arguments for the audio rate bus</textarea>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-vol' href='./../Overviews/Methods.html#vol'>vol</a> = <span class='argstr'>val</span></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-wakeUp' href='./../Overviews/Methods.html#wakeUp'>wakeUp</a></h3>
 <h2><a class='anchor' name='examples'>Examples</a></h2>
-<textarea class='editor'>// using as a control bus listener
+<div class='codeMirrorContainer'><textarea class='editor'>// using as a control bus listener
 
 s.boot;
 z = Bus.control(s, 16);
@@ -287,7 +294,7 @@ m.free; z.free;
 
 // using as a audio monitor
 
-p = BusPlug.audio(s,2);
+p = BusPlug.audio(s, 2);
 d = { Out.ar(p.index, PinkNoise.ar([0.1, 0.1])) }.play;
 
 
@@ -307,8 +314,9 @@ p.stop;
 p.play(12);
 
 // listen to that bus for a test:
-x = { InFeedback.ar(12,2) }.play;
+x = { InFeedback.ar(12, 2) }.play;
 x.free;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/BusPlug.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/BusPlug.schelp</a><br>link::Classes/BusPlug::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/BusPlug.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/BusPlug.schelp</a><br>link::Classes/BusPlug::<br></div></div><script src='./../static/editor.js' type='text/javascript'></script>
 </body></html>

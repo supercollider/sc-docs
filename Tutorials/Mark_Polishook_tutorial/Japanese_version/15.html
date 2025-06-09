@@ -1,21 +1,25 @@
-<!doctype html><html lang='en'><head><title>15 | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../../../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../../../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../../../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>15 | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../../../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../../../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../../../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../../../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../../../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../../../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../../../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../../../lib/jquery.min.js'></script>
-<script src='./../../../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../../../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../../../static/lib/jquery.min.js'></script>
+<script src='./../../../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../../../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../../../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './../../..';
 var scdoc_title = '15';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../../../scdoc.js' type='text/javascript'></script>
+<script src='./../../../static/scdoc.js' type='text/javascript'></script>
 <script src='./../../../docmap.js' type='text/javascript'></script>
+<script src='./../../../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
@@ -40,36 +44,43 @@ var scdoc_sc_version = '3.13.1';
 <p>クロックは、SuperColliderの中で自動のアルゴリズミックなスケジュ−リングを生成する際に使うメカニズムを提供します。クロックはルーチン、タスク、そしてパターンを再生します。
 <p>パターンとタスクはルーチンから作られます。
 <p>ルーチンに対する最初のアーギュメント（そして通常は唯一のアーギュメント）は関数です。
-<p>これが関数の一例です。<textarea class='editor'>// 関数を実行するには.valueメッセージを送る
+<p>これが関数の一例です。<div class='codeMirrorContainer'><textarea class='editor'>// 関数を実行するには.valueメッセージを送る
 f = { "hello, world" };
 f.value;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>これはルーチンの中に関数を配置したものです。.yieldメッセージを送ることで関数の中の式を評価します。<textarea class='editor'>r = Routine({ "hello, world".yield.postln });</textarea>
+<p>これはルーチンの中に関数を配置したものです。.yieldメッセージを送ることで関数の中の式を評価します。<div class='codeMirrorContainer'><textarea class='editor'>r = Routine({ "hello, world".yield.postln });</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>ルーチンを実行するには、評価して下さい。<textarea class='editor'>// ルーチンを評価するには、.nextメッセージを送る
+<p>ルーチンを実行するには、評価して下さい。<div class='codeMirrorContainer'><textarea class='editor'>// ルーチンを評価するには、.nextメッセージを送る
 r.next;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>もう一度やってみましょう。<textarea class='editor'>r.next;</textarea>
+<p>もう一度やってみましょう。<div class='codeMirrorContainer'><textarea class='editor'>r.next;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>これは一度ルーチンが"yield"（受け渡し）すると、関数の中にさらなるコードがあるか、resetメッセージを受け取らない限り、終了することを示します。<textarea class='editor'>r.reset;
+<p>これは一度ルーチンが"yield"（受け渡し）すると、関数の中にさらなるコードがあるか、resetメッセージを受け取らない限り、終了することを示します。<div class='codeMirrorContainer'><textarea class='editor'>r.reset;
 r.next;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p>////////////////////////////////////////////////////////////////////////////////////////////////////
-<p>この引用では、ルーチンに.nextメッセージが送られると、３つの表現（文字列）を順番に引き渡すことを引き起こします。例えば、nextメッセージが送られると、文字列が引き渡され、nextメッセージが送られると、文字列が引き渡さるという様にです。<textarea class='editor'>(
+<p>この引用では、ルーチンに.nextメッセージが送られると、３つの表現（文字列）を順番に引き渡すことを引き起こします。例えば、nextメッセージが送られると、文字列が引き渡され、nextメッセージが送られると、文字列が引き渡さるという様にです。<div class='codeMirrorContainer'><textarea class='editor'>(
 r = Routine({
     "hello, world".yield;
     "what a world".yield;
     "i am a world".yield;
 });
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>上の例での最後の.nextメッセージはnilを返すでしょう。最後の表現が引き渡されると、ルーチンはリセットされるまで常にnilを返します。<textarea class='editor'>r.next;
+<p>上の例での最後の.nextメッセージはnilを返すでしょう。最後の表現が引き渡されると、ルーチンはリセットされるまで常にnilを返します。<div class='codeMirrorContainer'><textarea class='editor'>r.next;
 r.next;
 r.next;
 r.next;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p>////////////////////////////////////////////////////////////////////////////////////////////////////
-<p>このルーチンを.doメッセージを使って書き直すと、loopを作ります。<textarea class='editor'>(
+<p>このルーチンを.doメッセージを使って書き直すと、loopを作ります。<div class='codeMirrorContainer'><textarea class='editor'>(
 r = Routine({
 
     var array;
@@ -79,11 +90,13 @@ r = Routine({
 
 });
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>このdo loopをルーチンの中のループよりももう1回多く実行すると、前の例と同じ様に、３つの文字列とnilを返します。<textarea class='editor'>4.do({ r.next.postln });</textarea>
+<p>このdo loopをルーチンの中のループよりももう1回多く実行すると、前の例と同じ様に、３つの文字列とnilを返します。<div class='codeMirrorContainer'><textarea class='editor'>4.do({ r.next.postln });</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p>////////////////////////////////////////////////////////////////////////////////////////////////////
-<p>次に、このルーチンを.waitメッセージを含む形で書き直します。.waitメッセージは、その数字が示す秒単位で指定した時間だけ、ルーチンを「プレイ」するクロックを一時停止させます。<textarea class='editor'>(
+<p>次に、このルーチンを.waitメッセージを含む形で書き直します。.waitメッセージは、その数字が示す秒単位で指定した時間だけ、ルーチンを「プレイ」するクロックを一時停止させます。<div class='codeMirrorContainer'><textarea class='editor'>(
 r = Routine({
 
     var array;
@@ -93,18 +106,21 @@ r = Routine({
 
 });
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p>以下のコードが示す様に、ルーチンに.resetメッセージを追加します。このようにして、ルーチンは常に再スタートできる様になります。そして、クロックとともにルーチンをプレイします。
-<p>以下のコードはSuperColliderがイベントをスケジューリングする時に使用する３つのクロックを示します。<textarea class='editor'>SystemClock.play(r.reset);        // 最も正確
+<p>以下のコードはSuperColliderがイベントをスケジューリングする時に使用する３つのクロックを示します。<div class='codeMirrorContainer'><textarea class='editor'>SystemClock.play(r.reset);        // 最も正確
 AppClock.play(r.reset);            // GUIで使用する
 TempoClock.new.play(r.reset);    // 主に拍でスケジューリングするために使われる</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p>////////////////////////////////////////////////////////////////////////////////////////////////////
-<p>または、そのプロセスを省略することができ、その場合にはデフォルトとしてTempoClockが使用されます。<textarea class='editor'>r.reset.play;</textarea>
+<p>または、そのプロセスを省略することができ、その場合にはデフォルトとしてTempoClockが使用されます。<div class='codeMirrorContainer'><textarea class='editor'>r.reset.play;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p>////////////////////////////////////////////////////////////////////////////////////////////////////<h2><a class='anchor' name='ルーチンを用いたシンセシスのスケジューリング'>ルーチンを用いたシンセシスのスケジューリング</a></h2>
 
-<p>ルーチンの中にシンセを入れます。シンセの中のSynthDefが必ずエンベロープを持つ様にし、そのエンベロープのdoneActionパラメータを２にセットします。これによって、エンベロープが終了した後に、そのシンセのために必要とされていたメモリが解放されます。<textarea class='editor'>(
+<p>ルーチンの中にシンセを入れます。シンセの中のSynthDefが必ずエンベロープを持つ様にし、そのエンベロープのdoneActionパラメータを２にセットします。これによって、エンベロープが終了した後に、そのシンセのために必要とされていたメモリが解放されます。<div class='codeMirrorContainer'><textarea class='editor'>(
 SynthDef("fm2", {
     arg bus = 0, freq = 440, carPartial = 1, modPartial = 1, index = 3, mul = 0.2, ts = 1;
 
@@ -143,9 +159,10 @@ r = Routine({
 });
 )
 r.reset.play;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p>////////////////////////////////////////////////////////////////////////////////////////////////////
-<p>ルーチンの中で引き起こされたシンセを、ルーチンの外側で実行するエコー・エフェクト・ユニットを通してプレイします。<textarea class='editor'>(
+<p>ルーチンの中で引き起こされたシンセを、ルーチンの外側で実行するエコー・エフェクト・ユニットを通してプレイします。<div class='codeMirrorContainer'><textarea class='editor'>(
 SynthDef("echoplex", {
     ReplaceOut.ar(
         0,
@@ -184,6 +201,7 @@ Synth.head(~effect, "echoplex");
 )
 // ルーチンをプレイする
 r.reset.play;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>////////////////////////////////////////////////////////////////////////////////////////////////////<div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Tutorials/Mark_Polishook_tutorial/Japanese_version/15.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Tutorials/Mark_Polishook_tutorial/Japanese_version/15.schelp</a><br>link::Tutorials/Mark_Polishook_tutorial/Japanese_version/15::<br></div></div><script src='./../../../editor.js' type='text/javascript'></script>
+<p>////////////////////////////////////////////////////////////////////////////////////////////////////<div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Tutorials/Mark_Polishook_tutorial/Japanese_version/15.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Tutorials/Mark_Polishook_tutorial/Japanese_version/15.schelp</a><br>link::Tutorials/Mark_Polishook_tutorial/Japanese_version/15::<br></div></div><script src='./../../../static/editor.js' type='text/javascript'></script>
 </body></html>

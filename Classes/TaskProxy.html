@@ -1,21 +1,25 @@
-<!doctype html><html lang='en'><head><title>TaskProxy | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>TaskProxy | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../lib/jquery.min.js'></script>
-<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/jquery.min.js'></script>
+<script src='./../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './..';
 var scdoc_title = 'TaskProxy';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../static/scdoc.js' type='text/javascript'></script>
 <script src='./../docmap.js' type='text/javascript'></script>
+<script src='./../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
@@ -80,7 +84,7 @@ var scdoc_sc_version = '3.13.1';
 <div id='summary'>event stream reference</div>
 </div>
 <div class='subheader'>
-<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/JITLib/Patterns/Pdef.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/JITLib/Patterns/Pdef.sc'>Pdef.sc</a></div><div id='subclasses'>Subclasses: <a href="../Classes/EventPatternProxy.html">EventPatternProxy</a>, <a href="../Classes/Tdef.html">Tdef</a></div>
+<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/JITLib/Patterns/Pdef.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/JITLib/Patterns/Pdef.sc'>Pdef.sc</a></div><div id='subclasses'>Subclasses: <a href="../Classes/EventPatternProxy.html">EventPatternProxy</a>, <a href="../Classes/Tdef.html">Tdef</a></div>
 <div id='related'>See also: <a href="./../Classes/Tdef.html">Tdef</a></div>
 </div>
 <h2><a class='anchor' name='description'>Description</a></h2>
@@ -160,7 +164,7 @@ var scdoc_sc_version = '3.13.1';
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-align' href='./../Overviews/Methods.html#align'>align</a>(<span class='argstr'>argQuant</span>)</h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-asProtected' href='./../Overviews/Methods.html#asProtected'>asProtected</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-buildForProxy' href='./../Overviews/Methods.html#buildForProxy'>buildForProxy</a>(<span class='argstr'>proxy</span>, <span class='argstr'>channelOffset: 0</span>)</h3>
-<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/JITLib/ProxySpace/wrapForNodeProxy.sc'>/usr/local/share/SuperCollider/SCClassLibrary/JITLib/ProxySpace/wrapForNodeProxy.sc</a></div>
+<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/JITLib/ProxySpace/wrapForNodeProxy.sc'>/usr/local/share/SuperCollider/SCClassLibrary/JITLib/ProxySpace/wrapForNodeProxy.sc</a></div>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-canPause' href='./../Overviews/Methods.html#canPause'>canPause</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-constrainStream' href='./../Overviews/Methods.html#constrainStream'>constrainStream</a>(<span class='argstr'>stream</span>, <span class='argstr'>newStream</span>)</h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-convertFunction' href='./../Overviews/Methods.html#convertFunction'>convertFunction</a>(<span class='argstr'>func</span>)</h3>
@@ -176,41 +180,42 @@ var scdoc_sc_version = '3.13.1';
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-playQuant' href='./../Overviews/Methods.html#playQuant'>playQuant</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-playQuant' href='./../Overviews/Methods.html#playQuant'>playQuant</a> = value</h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-proxyControlClass' href='./../Overviews/Methods.html#proxyControlClass'>proxyControlClass</a></h3>
-<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/JITLib/ProxySpace/wrapForNodeProxy.sc'>/usr/local/share/SuperCollider/SCClassLibrary/JITLib/ProxySpace/wrapForNodeProxy.sc</a></div>
+<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/JITLib/ProxySpace/wrapForNodeProxy.sc'>/usr/local/share/SuperCollider/SCClassLibrary/JITLib/ProxySpace/wrapForNodeProxy.sc</a></div>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-wakeUp' href='./../Overviews/Methods.html#wakeUp'>wakeUp</a></h3>
 <h2><a class='anchor' name='examples'>Examples</a></h2>
 <h3><a class='anchor' name='a)%20using%20TaskProxy%20as%20a%20player'>a) using TaskProxy as a player</a></h3>
-<textarea class='editor'>// create an empty Tdef and play it.
+<div class='codeMirrorContainer'><textarea class='editor'>// create an empty Tdef and play it.
 x = TaskProxy.new;
 x.play;
 
 
-x.source = { loop { "ggggggggggggggggg9999ggg999ggg999gg".scramble.postln; 0.5.wait; } };
+x.source = { loop { "ggggggggggggggggg9999ggg999ggg999gg".scramble.postln; 0.5.wait } };
 
 
-x.source = { loop { "---------////----------------------".scramble.postln; 0.25.wait; } };
-x.source = { loop { thisThread.seconds.postln; 1.wait; } };
-x.source = { loop { thisThread.seconds.postln; 1.01.wait; } };
+x.source = { loop { "---------////----------------------".scramble.postln; 0.25.wait } };
+x.source = { loop { thisThread.seconds.postln; 1.wait } };
+x.source = { loop { thisThread.seconds.postln; 1.01.wait } };
 
 TempoClock.default.tempo = 2;
 
 x.source = { "the end".postln };
 x.source = { "one more".postln };
-x.source = { 10.do { "ten more".scramble.postln; 0.25.wait; } };
-x.source = { loop { "many more".scramble.postln; 0.25.wait; } };
+x.source = { 10.do { "ten more".scramble.postln; 0.25.wait } };
+x.source = { loop { "many more".scramble.postln; 0.25.wait } };
 
 TempoClock.default.tempo = 1;
 
 x.stop;
 x.play;
 x.stop;</textarea>
-<textarea class='editor'>// sound example
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+<div class='codeMirrorContainer'><textarea class='editor'>// sound example
 
 (
 // load a synthdef
 s.boot;
 SynthDef("pdef_grainlet",
-    { arg out=0, freq=440, sustain=0.05;
+    { |out = 0, freq = 440, sustain = 0.05|
         var env;
         env = EnvGen.kr(Env.perc(0.01, sustain, 0.3), doneAction: Done.freeSelf);
         Out.ar(out, SinOsc.ar(freq, 0, env))
@@ -221,7 +226,7 @@ x.play;
 (
 x.source = {
     loop {
-        s.sendMsg("/s_new", "pdef_grainlet", -1,0,0, \freq, rrand(600, 640));
+        s.sendMsg("/s_new", "pdef_grainlet", -1, 0, 0, \freq, rrand(600, 640));
         0.1.wait;
     }
 }
@@ -232,7 +237,7 @@ x.source = {
     var x;
     x = Pseries(300, 20, 100).loop.asStream;
     loop {
-        s.sendMsg("/s_new", "pdef_grainlet", -1,0,0, \freq, x.next);
+        s.sendMsg("/s_new", "pdef_grainlet", -1, 0, 0, \freq, x.next);
         0.05.wait;
     }
 }
@@ -243,7 +248,7 @@ x.source = {
     var x;
     x = Plazy { Pseries(300 + 300.rand, 10 + 30.rand, 10 + 30.rand) }.loop.asStream;
     loop {
-        s.sendMsg("/s_new", "pdef_grainlet", -1,0,0, \freq, x.next);
+        s.sendMsg("/s_new", "pdef_grainlet", -1, 0, 0, \freq, x.next);
         0.05.wait;
     }
 }
@@ -252,7 +257,7 @@ x.source = {
 // metronome
 (
 y = TaskProxy {
-    loop { s.sendMsg("/s_new", "pdef_grainlet", -1,0,0, \freq, 1500); 1.wait; }
+    loop { s.sendMsg("/s_new", "pdef_grainlet", -1, 0, 0, \freq, 1500); 1.wait }
 };
 y.play;
 )
@@ -263,8 +268,8 @@ x.source = {
     var x, dt;
     dt = [0.1, 0.125, 0.05].choose;
     x = Plazy { Pseries(1300 + 300.rand, 110 + 130.rand, 16) }.asStream;
-    x.do { arg item;
-        s.sendMsg("/s_new", "pdef_grainlet", -1,0,0, \freq, item);
+    x.do { |item|
+        s.sendMsg("/s_new", "pdef_grainlet", -1, 0, 0, \freq, item);
         dt.wait;
     }
 }
@@ -274,8 +279,9 @@ x.source = {
 
 x.stop;
 y.stop;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h3><a class='anchor' name='b)%20embedding%20TaskProxy%20into%20other%20Tasks%20/%20Routines'>b) embedding TaskProxy into other Tasks / Routines</a></h3>
-<textarea class='editor'>(
+<div class='codeMirrorContainer'><textarea class='editor'>(
 #a, c = { TaskProxy.new } ! 2;
 a.source = { "one".postln; 1.wait; "two".postln };
 c.source = { var z; z = Synth(\default); 0.5.wait; z.release };
@@ -321,6 +327,7 @@ Routine {
 
 }.play;
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/TaskProxy.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/TaskProxy.schelp</a><br>link::Classes/TaskProxy::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/TaskProxy.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/TaskProxy.schelp</a><br>link::Classes/TaskProxy::<br></div></div><script src='./../static/editor.js' type='text/javascript'></script>
 </body></html>

@@ -1,21 +1,25 @@
-<!doctype html><html lang='en'><head><title>MouseButton | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>MouseButton | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../lib/jquery.min.js'></script>
-<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/jquery.min.js'></script>
+<script src='./../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './..';
 var scdoc_title = 'MouseButton';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../static/scdoc.js' type='text/javascript'></script>
 <script src='./../docmap.js' type='text/javascript'></script>
+<script src='./../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
@@ -41,11 +45,11 @@ var scdoc_sc_version = '3.13.1';
 <div id='summary'>Mouse button UGen.</div>
 </div>
 <div class='subheader'>
-<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/Common/Audio/MacUGens.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Audio/MacUGens.sc'>MacUGens.sc</a></div><div id='related'>See also: <a href="./../Classes/KeyState.html">KeyState</a>, <a href="./../Classes/MouseX.html">MouseX</a>, <a href="./../Classes/MouseY.html">MouseY</a></div>
+<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/Common/Audio/MacUGens.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Audio/MacUGens.sc'>MacUGens.sc</a></div><div id='related'>See also: <a href="./../Classes/KeyState.html">KeyState</a>, <a href="./../Classes/MouseX.html">MouseX</a>, <a href="./../Classes/MouseY.html">MouseY</a></div>
 </div>
 <h2><a class='anchor' name='description'>Description</a></h2>
 
-<p>Mouse button UGen.<h2><a class='anchor' name='classmethods'>Class Methods</a></h2>
+<p>Mouse button UGen.<div class='warning'><span class='warninglabel'>WARNING:</span> This UGen will not work for Linux users using Wayland, as the Wayland protocol does not allow a global keyboard or mouse state to be captured. The UGen will return <span class='math'>0.0</span> as constant value. For more information see <a href="https://github.com/supercollider/supercollider/issues/4544">https://github.com/supercollider/supercollider/issues/4544</a></div><h2><a class='anchor' name='classmethods'>Class Methods</a></h2>
 <h3 class='method-code'><span class='method-prefix'>MouseButton.</span><a class='method-name' name='*kr' href='./../Overviews/Methods.html#kr'>kr</a>(<span class='argstr'>minval: 0</span>, <span class='argstr'>maxval: 1</span>, <span class='argstr'>lag: 0.2</span>)</h3>
 <div class='method'>
 <p><h4>Arguments:</h4>
@@ -59,20 +63,22 @@ var scdoc_sc_version = '3.13.1';
 <div id='inheritedinstmets'></div><h3><a class='anchor' name='Undocumented%20instance%20methods'>Undocumented instance methods</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-signalRange' href='./../Overviews/Methods.html#signalRange'>signalRange</a></h3>
 <h2><a class='anchor' name='examples'>Examples</a></h2>
-<textarea class='editor'>{ SinOsc.ar(MouseButton.kr(400, 440, 0.1), 0, 0.1) }.play;
+<div class='codeMirrorContainer'><textarea class='editor'>{ SinOsc.ar(MouseButton.kr(400, 440, 0.1), 0, 0.1) }.play;
 { SinOsc.ar(MouseButton.kr(400, 740, 2), 0, 0.1) }.play;
 
 (
-SynthDef( \mousexyb, { |out=0|
+SynthDef(\mousexyb, { |out = 0|
     var mousex, mousey, mousebutton;
-    mousex = MouseX.kr( 500, 1000 ); // this will determine the frequency of the sound (minimum value, maximum value, warp, lag)
-    mousey = MouseY.kr( 0, 0.3 ); // this will determine the amplitude of the sound
-    mousebutton = MouseButton.kr( 0, 1, 2 ); // this will turn the sound on or off (minimum value, maximum value, lag)
-    Out.ar( out, SinOsc.ar( mousex, 0, mousey ) * mousebutton );
+    mousex = MouseX.kr(500, 1000); // this will determine the frequency of the sound (minimum value, maximum value, warp, lag)
+    mousey = MouseY.kr(0, 0.3); // this will determine the amplitude of the sound
+    mousebutton = MouseButton.kr(0, 1, 2); // this will turn the sound on or off (minimum value, maximum value, lag)
+    Out.ar(out, SinOsc.ar(mousex, 0, mousey) * mousebutton);
 }).add
 )
 
-x = Synth.new( \mousexyb );
+x = Synth.new(\mousexyb);
 x.free;</textarea>
-<div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/MouseButton.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/MouseButton.schelp</a><br>link::Classes/MouseButton::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+
+<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/MouseButton.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/MouseButton.schelp</a><br>link::Classes/MouseButton::<br></div></div><script src='./../static/editor.js' type='text/javascript'></script>
 </body></html>

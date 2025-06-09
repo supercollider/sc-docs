@@ -1,21 +1,25 @@
-<!doctype html><html lang='en'><head><title>LID | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>LID | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../lib/jquery.min.js'></script>
-<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/jquery.min.js'></script>
+<script src='./../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './..';
 var scdoc_title = 'LID';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../static/scdoc.js' type='text/javascript'></script>
 <script src='./../docmap.js' type='text/javascript'></script>
+<script src='./../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
@@ -98,32 +102,33 @@ var scdoc_sc_version = '3.13.1';
 <div id='summary'>Linux Input Device</div>
 </div>
 <div class='subheader'>
-<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/Platform/linux/LID.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Platform/linux/LID.sc'>LID.sc</a></div><div id='related'>See also: <a href="./../Classes/HID.html">HID</a>, <a href="./../Classes/LIDInfo.html">LIDInfo</a>, <a href="./../Classes/LIDSlot.html">LIDSlot</a>, <a href="./../Classes/LIDGui.html">LIDGui</a></div>
+<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/Platform/linux/LID.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Platform/linux/LID.sc'>LID.sc</a></div><div id='related'>See also: <a href="./../Classes/HID.html">HID</a>, <a href="./../Classes/LIDInfo.html">LIDInfo</a>, <a href="./../Classes/LIDSlot.html">LIDSlot</a>, <a href="./../Classes/LIDGui.html">LIDGui</a></div>
 </div>
 <h2><a class='anchor' name='description'>Description</a></h2>
 
 <p>This class provides a way to access devices in the Linux input layer, which supports many input devices (mouse, keyboard, joystick, gamepad, tablet) and busses (serial, PS/2, USB).<div class='note'><span class='notelabel'>NOTE:</span> For external HID devices it is recommended to use the <a href="./../Classes/HID.html">HID</a> interface, as described in <a href="./../Guides/Working_with_HID.html">Working with HID</a>, as it will ensure that your code is cross platform compatible. Only in cases where the raw HID interface does not provide access because the device needs a special driver (and this driver is provided in Linux kernel), or in case you want to access internal devices, you should use this class.</div>
 <p>NOTE: if you have trouble opening a device, e.g. when you get the message <code>ERROR: LID: Could not open device</code>, please check the <a href="./../Guides/LID_permissions.html">LID permissions</a><h3><a class='anchor' name='First%20example:'>First example:</a></h3>
-<textarea class='editor'>LID.findAvailable;
+<div class='codeMirrorContainer'><textarea class='editor'>LID.findAvailable;
 LID.postAvailable; // pick one that you want to open, and fill in the vendor and product id in the next line:
-d = LID.open( 2, 10 ); // trackpoint
+d = LID.open(2, 10); // trackpoint
 
 d.postInfo;
 d.postSlots;
 
-d.debug_( true ); // wiggle a little and see the data coming in
+d.debug_(true); // wiggle a little and see the data coming in
 
-d.debug_( false );
+d.debug_(false);
 
 // create a GUI:
 d.makeGui;
 
 // close the device (don't do this yet, if you want to excecute the further examples in this class)
 d.close;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h2><a class='anchor' name='classmethods'>Class Methods</a></h2>
 <h3><a class='anchor' name='Finding%20devices'>Finding devices</a></h3>
 
-<p>An example of finding a device:<textarea class='editor'>LID.findAvailable;
+<p>An example of finding a device:<div class='codeMirrorContainer'><textarea class='editor'>LID.findAvailable;
 
 LID.available;
 
@@ -131,7 +136,8 @@ LID.postAvailable;
 
 // look for the one you want and find it:
 
-LID.findBy( 2, 10 ) // by vendor and product</textarea>
+LID.findBy(2, 10) // by vendor and product</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h3 class='method-code'><span class='method-prefix'>LID.</span><a class='method-name' name='*findAvailable' href='./../Overviews/Methods.html#findAvailable'>findAvailable</a>(<span class='argstr'>name</span>)</h3>
 <div class='method'>
 <p>queries the operating system which LID devices are attached to the system and can be accessed. When using LID this is the first method you need to execute, before you can access any device.<h4>Arguments:</h4>
@@ -161,18 +167,19 @@ LID.findBy( 2, 10 ) // by vendor and product</textarea>
 <p>The physical location of the device, this is a path defined by the operating system.<tr><td class='argumentname'>unique<td class='argumentdesc'>
 <p>A unique identifier for the device, defined by the operating system.</table><h4>Returns:</h4>
 <div class='returnvalue'>
-<p>an IdentityDictionary of devices the match the search query, or nil if no arguments are given<textarea class='editor'>LID.findBy( 2 ); // by vendorID
-LID.findBy( 2, 10 ) // by vendor and product
-LID.findBy( productID: 10 );
-LID.findBy( path: "/dev/input/event4" );
-LID.findBy( version: 0 );
-LID.findBy( physical: 'synaptics-pt/serio0/input0' )
-LID.findBy( physical: "synaptics-pt/serio0/input0" ) // argument is converted to symbol for check
-LID.findBy( unique: '' )
-LID.findBy( unique: "" ) // argument is converted to symbol for check
+<p>an IdentityDictionary of devices the match the search query, or nil if no arguments are given<div class='codeMirrorContainer'><textarea class='editor'>LID.findBy(2); // by vendorID
+LID.findBy(2, 10) // by vendor and product
+LID.findBy(productID: 10);
+LID.findBy(path: "/dev/input/event4");
+LID.findBy(version: 0);
+LID.findBy(physical: 'synaptics-pt/serio0/input0')
+LID.findBy(physical: "synaptics-pt/serio0/input0") // argument is converted to symbol for check
+LID.findBy(unique: '')
+LID.findBy(unique: "") // argument is converted to symbol for check
 
 // using all possible arguments:
-LID.findBy( 2, 10, "/dev/input/event4", 0x0000, 'synaptics-pt/serio0/input0' )</textarea>
+LID.findBy(2, 10, "/dev/input/event4", 0x0000, 'synaptics-pt/serio0/input0')</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div></div><h3><a class='anchor' name='Opening%20devices'>Opening devices</a></h3>
 <h3 class='method-code'><span class='method-prefix'>LID.</span><a class='method-name' name='*open' href='./../Overviews/Methods.html#open'>open</a>(<span class='argstr'>vendorID</span>, <span class='argstr'>productID</span>, <span class='argstr'>path</span>, <span class='argstr'>version</span>, <span class='argstr'>physical</span>, <span class='argstr'>unique</span>)</h3>
 <div class='method'>
@@ -232,7 +239,7 @@ LID.findBy( 2, 10, "/dev/input/event4", 0x0000, 'synaptics-pt/serio0/input0' )</
 <div class='method'>
 <p>This method is called automatically upon Shutdown, if the LID subsystem was initialized. It can be stopped manually, in order to save system resources. This method will close all opened LID devices.</div><h3><a class='anchor' name='Creating%20specs%20for%20devices'>Creating specs for devices</a></h3>
 
-<p>Device specs are mappings between event codes and symbolic control names. New specs can be added to LID.specs via LID&gt;&gt;*register.<textarea class='editor'>// Add a mouse device spec for a Logitech trackball
+<p>Device specs are mappings between event codes and symbolic control names. New specs can be added to LID.specs via LID&gt;&gt;*register.<div class='codeMirrorContainer'><textarea class='editor'>// Add a mouse device spec for a Logitech trackball
 LID.register('Logitech Trackball', LID.mouseDeviceSpec);
 
 // Add a custom device spec for a Logitech gamepad
@@ -260,6 +267,7 @@ LID.register('Logitech WingMan RumblePad', (
     slider: #[0x0003, 0x0002]    // slider
 ));
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h3 class='method-code'><span class='method-prefix'>LID.</span><a class='method-name' name='*register' href='./../Overviews/Methods.html#register'>register</a>(<span class='argstr'>name</span>, <span class='argstr'>spec</span>)</h3>
 <div class='method'>
 <p>This will register the spec for the specified device. If the device was opened and did not use the spec before, it will use this spec. See also <a href="./../Classes/LID.html#*specs">LID: *specs</a>.<h4>Arguments:</h4>
@@ -278,9 +286,10 @@ LID.register('Logitech WingMan RumblePad', (
 <div class='method'>
 <p>Close the LID device, closing a device is asynchronous. You can set a closeAction (see below), which will be performed when the device closes.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-isOpen' href='./../Overviews/Methods.html#isOpen'>isOpen</a></h3>
 <div class='method'>
-<p>Returns true if the device is open, false if the device was closed.<textarea class='editor'>d.isOpen;
+<p>Returns true if the device is open, false if the device was closed.<div class='codeMirrorContainer'><textarea class='editor'>d.isOpen;
 d.close;
 d.isOpen;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3><a class='anchor' name='Posting%20human%20readable%20information%20about%20the%20device'>Posting human readable information about the device</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-postInfo' href='./../Overviews/Methods.html#postInfo'>postInfo</a></h3>
 <div class='method'>
@@ -309,41 +318,49 @@ d.isOpen;</textarea>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-debug' href='./../Overviews/Methods.html#debug'>debug</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-debug' href='./../Overviews/Methods.html#debug'>debug</a> = <span class='argstr'>onoff</span></h3>
 <div class='method'>
-<p>When set to true, the incoming data from this LID device will be printed to the post window.<textarea class='editor'>d.debug_( true );
-d.debug_( false );</textarea>
+<p>When set to true, the incoming data from this LID device will be printed to the post window.<div class='codeMirrorContainer'><textarea class='editor'>d.debug_(true);
+d.debug_(false);</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-closeAction' href='./../Overviews/Methods.html#closeAction'>closeAction</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-closeAction' href='./../Overviews/Methods.html#closeAction'>closeAction</a> = value</h3>
 <div class='method'>
-<p>Function to be performed when device is closed.<textarea class='editor'>d.closeAction_( { "hey, I got closed!".postln; } );
+<p>Function to be performed when device is closed.<div class='codeMirrorContainer'><textarea class='editor'>d.closeAction_({ "hey, I got closed!".postln });
 d.close;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-action' href='./../Overviews/Methods.html#action'>action</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-action' href='./../Overviews/Methods.html#action'>action</a> = value</h3>
 <div class='method'>
-<p>Set or get the action to be performed upon receiving data from the device. The function will be passed in the evtType, the evtCode, the value (mapped according to the slot's spec), and the raw value.<textarea class='editor'>d.action_( { arg ...args; ("my action" + args ).postln; } );
-d.action_( nil );</textarea>
+<p>Set or get the action to be performed upon receiving data from the device. The function will be passed in the evtType, the evtCode, the value (mapped according to the slot's spec), and the raw value.<div class='codeMirrorContainer'><textarea class='editor'>d.action_({ |...args| ("my action" + args).postln });
+d.action_(nil);</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3><a class='anchor' name='Properties%20of%20the%20device'>Properties of the device</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-slots' href='./../Overviews/Methods.html#slots'>slots</a></h3>
 <div class='method'>
 <p>An IdentityDictionary holding all the slots, i.e. controls, of the device</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-path' href='./../Overviews/Methods.html#path'>path</a></h3>
 <div class='method'>
-<p>Retrieve the path of this device<textarea class='editor'>d.path;</textarea>
+<p>Retrieve the path of this device<div class='codeMirrorContainer'><textarea class='editor'>d.path;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-info' href='./../Overviews/Methods.html#info'>info</a></h3>
 <div class='method'>
-<p>Retrieve the LIDInfo of this device<textarea class='editor'>d.info;</textarea>
+<p>Retrieve the LIDInfo of this device<div class='codeMirrorContainer'><textarea class='editor'>d.info;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-vendor' href='./../Overviews/Methods.html#vendor'>vendor</a></h3>
 <div class='method'>
-<p>Retrieve the vendor id of this device<textarea class='editor'>d.vendor;</textarea>
+<p>Retrieve the vendor id of this device<div class='codeMirrorContainer'><textarea class='editor'>d.vendor;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-product' href='./../Overviews/Methods.html#product'>product</a></h3>
 <div class='method'>
-<p>Retrieve the product id of this device<textarea class='editor'>d.product;</textarea>
+<p>Retrieve the product id of this device<div class='codeMirrorContainer'><textarea class='editor'>d.product;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-caps' href='./../Overviews/Methods.html#caps'>caps</a></h3>
 <div class='method'>
 <p>The list of available capabilities.</div><h3><a class='anchor' name='Grabbing%20devices'>Grabbing devices</a></h3>
 
-<p>Given proper permissions, devices can be grabbed to prevent use in other applications (including X). Be careful when grabbing mouse or keyboard, as you will not be able to use them for normal interaction (like typing code or moving the mouse pointer) anymore!<textarea class='editor'>d[\b].action = { d.ungrab };
+<p>Given proper permissions, devices can be grabbed to prevent use in other applications (including X). Be careful when grabbing mouse or keyboard, as you will not be able to use them for normal interaction (like typing code or moving the mouse pointer) anymore!<div class='codeMirrorContainer'><textarea class='editor'>d[\b].action = { d.ungrab };
 d.grab;
 
 d.isGrabbed;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-grab' href='./../Overviews/Methods.html#grab'>grab</a>(<span class='argstr'>flag: true</span>)</h3>
 <div class='method'>
 <p>Grab the device to use exclusively for SC.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-ungrab' href='./../Overviews/Methods.html#ungrab'>ungrab</a></h3>
@@ -353,69 +370,82 @@ d.isGrabbed;</textarea>
 <p>Check whether the device is grabbed.</div><h3><a class='anchor' name='Inherited%20instance%20methods'>Inherited instance methods</a></h3>
 <div id='inheritedinstmets'></div><h2><a class='anchor' name='examples'>Examples</a></h2>
 <h3><a class='anchor' name='Finding%20and%20opening%20the%20device'>Finding and opening the device</a></h3>
-<textarea class='editor'>LID.findAvailable;
+<div class='codeMirrorContainer'><textarea class='editor'>LID.findAvailable;
 LID.postAvailable; // pick one that you want to open, and fill in the vendor and product id in the next line:
-d = LID.open( 2, 10 ); // trackpoint
+d = LID.open(2, 10); // trackpoint
 
 d.postInfo;
 d.postSlots;
 
-d.debug_( true ); // wiggle a little and see the data coming in
-d.debug_( false );</textarea>
+d.debug_(true); // wiggle a little and see the data coming in
+d.debug_(false);</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h3><a class='anchor' name='Event%20actions%20(raw%20events)'>Event actions (raw events)</a></h3>
 
-<p>The device's 'action' instance variable can be used for event notifications. it is passed the event type, code and current value.<textarea class='editor'>(
-d.action = { | evtType, evtCode, evtValue |
+<p>The device's 'action' instance variable can be used for event notifications. it is passed the event type, code and current value.<div class='codeMirrorContainer'><textarea class='editor'>(
+d.action = { |evtType, evtCode, evtValue|
     [evtType.asHexString(4), evtCode.asHexString(4), evtValue].postln
 }
 )
 
 d.action = nil;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>If a device is detached LID will detect this, and close the device. It will execute a closeAction, which can be defined by the user:<textarea class='editor'>d.closeAction = { "device was detached".postln; };</textarea>
+<p>If a device is detached LID will detect this, and close the device. It will execute a closeAction, which can be defined by the user:<div class='codeMirrorContainer'><textarea class='editor'>d.closeAction = { "device was detached".postln };</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h3><a class='anchor' name='Event%20actions%20(raw%20slot%20events)'>Event actions (raw slot events)</a></h3>
 
-<p>When 'action' is nil, actions can be bound to specific events.<textarea class='editor'>(
-d.slot(0x0002, 0x0001).action = { | slot |
+<p>When 'action' is nil, actions can be bound to specific events.<div class='codeMirrorContainer'><textarea class='editor'>(
+d.slot(0x0002, 0x0001).action = { |slot|
     [slot.type.asHexString(4), slot.code.asHexString(4), slot.value].postln;
 }
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>Relative slots can have deltaActions:<textarea class='editor'>(
-d.slot(0x0002, 0x0001).deltaAction = { | slot |
+<p>Relative slots can have deltaActions:<div class='codeMirrorContainer'><textarea class='editor'>(
+d.slot(0x0002, 0x0001).deltaAction = { |slot|
     [slot.type.asHexString(4), slot.code.asHexString(4), slot.delta].postln;
 }
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h3><a class='anchor' name='Event%20actions%20(symbolic%20slot%20events)'>Event actions (symbolic slot events)</a></h3>
 
-<p>When a device spec was registered for a given device name, slot actions can be assigned by using the symbolic control name.<textarea class='editor'>    d[\x].action = { | slot | [\x, slot.value].postln };</textarea>
+<p>When a device spec was registered for a given device name, slot actions can be assigned by using the symbolic control name.<div class='codeMirrorContainer'><textarea class='editor'>    d[\x].action = { |slot| [\x, slot.value].postln };</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h3><a class='anchor' name='LED's'>LED's</a></h3>
 
-<p>some devices have LEDs which can be turned on and off. These show up with d.caps as events of type 0x0011<textarea class='editor'>d = LID("/dev/input/event0");
+<p>some devices have LEDs which can be turned on and off. These show up with d.caps as events of type 0x0011<div class='codeMirrorContainer'><textarea class='editor'>d = LID("/dev/input/event0");
 // LED's can be turned on:
-d.setLEDState( 0x0, 1 )
+d.setLEDState(0x0, 1)
 // (LED 0x0 should be available on any keyboard)
 // and off:
-d.setLEDState( 0x0, 0 )
+d.setLEDState(0x0, 0)
 d.close;
 
-// setLEDState( evtCode, evtValue ): value should be 1 or 0</textarea>
+// setLEDState(evtCode, evtValue): value should be 1 or 0</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h3><a class='anchor' name='Closing%20devices'>Closing devices</a></h3>
-<textarea class='editor'>d.close;
+<div class='codeMirrorContainer'><textarea class='editor'>d.close;
 LID.closeAll;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h3><a class='anchor' name='Opening%20devices%20with%20alternative%20deviceRoot'>Opening devices with alternative deviceRoot</a></h3>
 
 <p>Input devices are accessed through device nodes, typically <code>/dev/input/event[0-9]</code>. When using a userspace daemon like udev, meaningful names can be assigned to devices.
-<p>raw device name:<textarea class='editor'>d = LID("/dev/input/event4");</textarea>
+<p>raw device name:<div class='codeMirrorContainer'><textarea class='editor'>d = LID("/dev/input/event4");</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>symbolic device name<textarea class='editor'>d = LID("/dev/input/trackball");</textarea>
+<p>symbolic device name<div class='codeMirrorContainer'><textarea class='editor'>d = LID("/dev/input/trackball");</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>device name relative to LID.deviceRoot<textarea class='editor'>d = LID("gamepad");</textarea>
+<p>device name relative to LID.deviceRoot<div class='codeMirrorContainer'><textarea class='editor'>d = LID("gamepad");</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>build a list of the available devices:<textarea class='editor'>LID.findAvailable;</textarea>
+<p>build a list of the available devices:<div class='codeMirrorContainer'><textarea class='editor'>LID.findAvailable;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>buildDeviceList builds a table of the devices found in LID.deviceRoot+"/event", trying to open all that it finds, looking up its name and closing them again. The result is returned and can later be accessed by LID.deviceList. You can query another name than "/event" by passing an argument. (the search will be: LID.deviceRoot++"/"++name++"*")<textarea class='editor'>LID.findAvailable( "mouse" );</textarea>
+<p>buildDeviceList builds a table of the devices found in LID.deviceRoot+"/event", trying to open all that it finds, looking up its name and closing them again. The result is returned and can later be accessed by LID.deviceList. You can query another name than "/event" by passing an argument. (the search will be: LID.deviceRoot++"/"++name++"*")<div class='codeMirrorContainer'><textarea class='editor'>LID.findAvailable("mouse");</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p><div class='note'><span class='notelabel'>NOTE:</span> this is likely to give the info that the devices could not be opened, as "mouse" uses another interface (you can of course access mice via the "event" interface)</div><div class='note'><span class='notelabel'>NOTE:</span> if you cannot open the devices at all, please look in the helpfile for: <a href="./../Guides/LID_permissions.html">LID permissions</a></div>
-<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/LID.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/LID.schelp</a><br>link::Classes/LID::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/LID.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/LID.schelp</a><br>link::Classes/LID::<br></div></div><script src='./../static/editor.js' type='text/javascript'></script>
 </body></html>

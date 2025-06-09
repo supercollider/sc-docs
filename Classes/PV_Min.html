@@ -1,21 +1,25 @@
-<!doctype html><html lang='en'><head><title>PV_Min | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>PV_Min | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../lib/jquery.min.js'></script>
-<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/jquery.min.js'></script>
+<script src='./../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './..';
 var scdoc_title = 'PV_Min';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../static/scdoc.js' type='text/javascript'></script>
 <script src='./../docmap.js' type='text/javascript'></script>
+<script src='./../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
@@ -39,7 +43,7 @@ var scdoc_sc_version = '3.13.1';
 <div id='summary'>Minimum magnitude.</div>
 </div>
 <div class='subheader'>
-<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/Common/Audio/FFT.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Audio/FFT.sc'>FFT.sc</a></div><div id='related'>See also: <a href="./../Classes/FFT.html">FFT</a>, <a href="./../Classes/IFFT.html">IFFT</a>, <a href="./../Classes/PV_Add.html">PV_Add</a>, <a href="./../Classes/PV_CopyPhase.html">PV_CopyPhase</a>, <a href="./../Classes/PV_MagMul.html">PV_MagMul</a>, <a href="./../Classes/PV_Max.html">PV_Max</a>, <a href="./../Classes/PV_Mul.html">PV_Mul</a></div>
+<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/Common/Audio/FFT.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Audio/FFT.sc'>FFT.sc</a></div><div id='related'>See also: <a href="./../Classes/FFT.html">FFT</a>, <a href="./../Classes/IFFT.html">IFFT</a>, <a href="./../Classes/PV_Add.html">PV_Add</a>, <a href="./../Classes/PV_CopyPhase.html">PV_CopyPhase</a>, <a href="./../Classes/PV_MagMul.html">PV_MagMul</a>, <a href="./../Classes/PV_Max.html">PV_Max</a>, <a href="./../Classes/PV_Mul.html">PV_Mul</a></div>
 </div>
 <h2><a class='anchor' name='description'>Description</a></h2>
 
@@ -55,28 +59,30 @@ var scdoc_sc_version = '3.13.1';
 <div id='inheritedclassmets'></div><h2><a class='anchor' name='instancemethods'>Instance Methods</a></h2>
 <h3><a class='anchor' name='Inherited%20instance%20methods'>Inherited instance methods</a></h3>
 <div id='inheritedinstmets'></div><h2><a class='anchor' name='examples'>Examples</a></h2>
-<textarea class='editor'>s.boot;
-b = Buffer.read(s, Platform.resourceDir +/+ "sounds/a11wlk01.wav");
+<div class='codeMirrorContainer'><textarea class='editor'>s.boot;
+b = Buffer.read(s, ExampleFiles.child);
 
 (
 var exBuf;
-Dialog.getPaths({ arg paths; //get a second soundfile;
-    paths.do({ arg p; exBuf = Buffer.read(s, p);
-        SynthDef("help-min", { arg out=0, soundBufnum1=2, soundBufnum2 = 3;
+Dialog.getPaths({ |paths| // get a second soundfile;
+    paths.do({ |p| exBuf = Buffer.read(s, p);
+        SynthDef("help-min", { |out = 0, soundBufnum1 = 2, soundBufnum2 = 3|
             var inA, chainA, inB, chainB, chain ;
             inA = PlayBuf.ar(1, soundBufnum1, BufRateScale.kr(soundBufnum1), loop: 1);
             inB =  PlayBuf.ar(1, soundBufnum2, BufRateScale.kr(soundBufnum2), loop: 1);
             chainA = FFT(LocalBuf(2048), inA);
             chainB = FFT(LocalBuf(2048), inB);
             chain = PV_Min(chainA, chainB);
-            Out.ar(out,  0.1 * IFFT(chain).dup);
-        }).play(s,[\soundBufnum1, b.bufnum, \soundBufnum2, exBuf.bufnum]);
+            Out.ar(out, 0.1 * IFFT(chain).dup);
+        }).play(s, [\soundBufnum1, b.bufnum, \soundBufnum2, exBuf.bufnum]);
     })
-},{
+}, {
     "cancelled".postln;
 });
 )
 
 b.free</textarea>
-<div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/PV_Min.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/PV_Min.schelp</a><br>link::Classes/PV_Min::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+
+<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/PV_Min.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/PV_Min.schelp</a><br>link::Classes/PV_Min::<br></div></div><script src='./../static/editor.js' type='text/javascript'></script>
 </body></html>

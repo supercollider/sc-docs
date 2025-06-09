@@ -1,21 +1,25 @@
-<!doctype html><html lang='en'><head><title>Pattern Guide Cookbook 08: Swing | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>Pattern Guide Cookbook 08: Swing | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../../lib/jquery.min.js'></script>
-<script src='./../../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../../static/lib/jquery.min.js'></script>
+<script src='./../../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './../..';
 var scdoc_title = 'Pattern Guide Cookbook 08: Swing';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../../scdoc.js' type='text/javascript'></script>
+<script src='./../../static/scdoc.js' type='text/javascript'></script>
 <script src='./../../docmap.js' type='text/javascript'></script>
+<script src='./../../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
@@ -31,7 +35,7 @@ var scdoc_sc_version = '3.13.1';
 <div class='header'>
 <div id='label'>
 <span id='folder'>Tutorials/A-Practical-Guide</span>
- | <span id='categories'><a href='./../../Browse.html#Streams-Patterns-Events'>Streams-Patterns-Events</a>&#8201;&gt;&#8201;<a href='./../../Browse.html#Streams-Patterns-Events>A-Practical-Guide'>A-Practical-Guide</a></span>
+ | <span id='categories'><a href='./../../Browse.html#Streams-Patterns-Events'>Streams-Patterns-Events</a>&#8201;&gt;&#8201;<a href='./../../Browse.html#Streams-Patterns-Events>A-Practical-Guide'>A-Practical-Guide</a> | <a href='./../../Browse.html#Tutorials'>Tutorials</a>&#8201;&gt;&#8201;<a href='./../../Browse.html#Tutorials>Pattern-Guide'>Pattern-Guide</a></span>
 </div><h1>Pattern Guide Cookbook 08: Swing</h1>
 <div id='summary'>A filter pattern that turns equal rhythmic divisions into swung notes</div>
 </div>
@@ -48,7 +52,7 @@ var scdoc_sc_version = '3.13.1';
 
 <p><a href="./../../Classes/Pchain.html">Pchain</a> applies one pattern to the result of another pattern. So, if we can write a pattern that will modify the events coming from the source, Pchain will be an easy way to combine them.
 <p>The parameters noted above should be provided in the source pattern. Alternately, they may be given as an event at the end of Pchain's list of inputs. (Pchain, following the model of function composition, evaluates its patterns in reverse order. See <a href="./../../Tutorials/A-Practical-Guide/PG_06c_Composition_of_Patterns.html">Pattern Guide 06c: Composition of Patterns</a>.)
-<p>So... deep breath...<textarea class='editor'>(
+<p>So... deep breath...<div class='codeMirrorContainer'><textarea class='editor'>(
 ~swingify = Prout({ |ev|
     var now, nextTime = 0, thisShouldSwing, nextShouldSwing = false, adjust;
     while { ev.notNil } {
@@ -77,8 +81,9 @@ var scdoc_sc_version = '3.13.1';
     };
 });
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h3><a class='anchor' name='Examples'>Examples</a></h3>
-<textarea class='editor'>p = Pbind(\degree, Pseries(0, 1, 8), \dur, 0.25);
+<div class='codeMirrorContainer'><textarea class='editor'>p = Pbind(\degree, Pseries(0, 1, 8), \dur, 0.25);
 
 p.play;  // straight 16ths
 
@@ -121,8 +126,9 @@ q = Ppar([
     ])
 ]).play;
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>Swing should not apply to triplets. Note that the rhythmic value 1/6 introduces floating-point rounding error, so we need to raise the threshold slightly. <code>(1/6)+(1/6)+(1/6)</code> is within 0.05 of an eighth-note, but <code>1/6</code> is not, causing triplet notes to pass through unchanged.<textarea class='editor'>// swing threshold: throw a few triplets in
+<p>Swing should not apply to triplets. Note that the rhythmic value 1/6 introduces floating-point rounding error, so we need to raise the threshold slightly. <code>(1/6)+(1/6)+(1/6)</code> is within 0.05 of an eighth-note, but <code>1/6</code> is not, causing triplet notes to pass through unchanged.<div class='codeMirrorContainer'><textarea class='editor'>// swing threshold: throw a few triplets in
 (
 Pchain(
     ~swingify,
@@ -133,34 +139,39 @@ Pchain(
     (swingBase: 0.25, swingAmount: 0.2, swingThreshold: 0.05)
 ).play;
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h3><a class='anchor' name='Explanation'>Explanation</a></h3>
 
-<p>We need to measure the current metric position against some reference point. The most logical is the time when the pattern started processing. <a href="./../../Classes/Prout.html">Prout</a> allows variables to persist for the entire length of its stream (unlike <a href="./../../Classes/Pfunc.html">Pfunc</a>).<textarea class='editor'>(
+<p>We need to measure the current metric position against some reference point. The most logical is the time when the pattern started processing. <a href="./../../Classes/Prout.html">Prout</a> allows variables to persist for the entire length of its stream (unlike <a href="./../../Classes/Pfunc.html">Pfunc</a>).<div class='codeMirrorContainer'><textarea class='editor'>(
 ~swingify = Prout({ |ev|
     var now, nextTime = 0, thisShouldSwing, nextShouldSwing = false, adjust;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p>~~
-<p>If the source event is nil, errors will follow, so we should stop looping in that case.<textarea class='editor'>    while { ev.notNil } {</textarea>
+<p>If the source event is nil, errors will follow, so we should stop looping in that case.<div class='codeMirrorContainer'><textarea class='editor'>    while { ev.notNil } {</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p>~~
-<p><code>now</code> is what the next time <em>was</em>. The time of the next event simply adds <code>ev.delta</code>.<textarea class='editor'>        now = nextTime;
+<p><code>now</code> is what the next time <em>was</em>. The time of the next event simply adds <code>ev.delta</code>.<div class='codeMirrorContainer'><textarea class='editor'>        now = nextTime;
         nextTime = now + ev.delta;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p>~~
 <p>As discussed above, there are two factors to decide whether or not this note should be delayed:<dl>
 <dt>Is it close enough to the base rhythm grid?<dd>Round the current time to the grid, and the difference between the actual and rounded times must be less than the threshold: <code>(now absdif: now.round(ev[\swingBase])) &lt;= (ev[\swingThreshold] ? 0)</code>.<dt>Is it in a weaker metrical position?<dd>Dividing by the base value yields an even number for stronger positions, and odd for weaker positions: <code>(now / ev[\swingBase]).round.asInteger.odd</code>.</dl>
 
-<p>There's room also for a slight optimization. In the previous event, we decided whether the next event would need to swing or not. Now, in the current event, we are processing what used to be "next." So we can just copy the old value of <code>nextShouldSwing</code> from last time, instead of redoing the calculation. (Note that this requires <code>nextShouldSwing = false</code> in the beginning -- because <code>now</code> is always 0 for the first event, and consequently can never swing.)<textarea class='editor'>        // current this time is what was "next" last time
+<p>There's room also for a slight optimization. In the previous event, we decided whether the next event would need to swing or not. Now, in the current event, we are processing what used to be "next." So we can just copy the old value of <code>nextShouldSwing</code> from last time, instead of redoing the calculation. (Note that this requires <code>nextShouldSwing = false</code> in the beginning -- because <code>now</code> is always 0 for the first event, and consequently can never swing.)<div class='codeMirrorContainer'><textarea class='editor'>        // current this time is what was "next" last time
         thisShouldSwing = nextShouldSwing;
         nextShouldSwing = ((nextTime absdif: now.round(ev[\swingBase])) &lt;= (ev[\swingThreshold] ? 0)) and: {
             (nextTime / ev[\swingBase]).round.asInteger.odd
         };
         adjust = ev[\swingBase] * ev[\swingAmount];</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p>~~
 <p>Naming the variables appropriately makes the subsequent "if" block almost self-explanatory. Two notes:<ul>
 <li>The event's <code>timingOffset</code> may be nonzero, in which case, it would be wrong to overwrite. We need to <em>adjust</em> the timing offset: +.<li>The original <code>sustain</code> value may be calculated from <code>dur</code> and <code>legato</code>. That calculation is done by the <code>~sustain</code> function, which must be executed from within the event (<a href="./../../Classes/Environment.html#-use">Environment: -use</a>).</ul>
-<textarea class='editor'>        if(thisShouldSwing) {
+<div class='codeMirrorContainer'><textarea class='editor'>        if(thisShouldSwing) {
             ev[\timingOffset] = (ev[\timingOffset] ? 0) + adjust;
             // if next note will not swing, this note needs to be shortened
             if(nextShouldSwing.not) {
@@ -172,14 +183,16 @@ Pchain(
                 ev[\sustain] = ev.use { ~sustain.value } + adjust;
             };
         };</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p>~~
 <p><code>yield</code> is a bit of a funny method. It doesn't return its result right away. It passes the yielded value to whichever block of code called <code>next</code> on the stream, and then pauses. Then, the next time <code>next</code> is called, the <code>yield</code> method returns, taking its value from <code>next</code>'s argument. Here, that will be the event currently being processed, so we need to reassign it to <code>ev</code> and loop back.
-<p>This is the normal, correct way to handle input values from <code>next</code> within routines.<textarea class='editor'>        ev = ev.yield;
+<p>This is the normal, correct way to handle input values from <code>next</code> within routines.<div class='codeMirrorContainer'><textarea class='editor'>        ev = ev.yield;
     };
 });
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p>Previous: <a href="./../../Tutorials/A-Practical-Guide/PG_Cookbook07_Rhythmic_Variations.html">Pattern Guide Cookbook 07: Rhythmic Variations</a>
-<p>Next: <a href="./../../Tutorials/A-Practical-Guide/PG_Ref01_Pattern_Internals.html">Pattern Guide Reference 01: Pattern Internals</a><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Tutorials/A-Practical-Guide/PG_Cookbook08_Swing.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Tutorials/A-Practical-Guide/PG_Cookbook08_Swing.schelp</a><br>link::Tutorials/A-Practical-Guide/PG_Cookbook08_Swing::<br></div></div><script src='./../../editor.js' type='text/javascript'></script>
+<p>Next: <a href="./../../Tutorials/A-Practical-Guide/PG_Ref01_Pattern_Internals.html">Pattern Guide Reference 01: Pattern Internals</a><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Tutorials/A-Practical-Guide/PG_Cookbook08_Swing.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Tutorials/A-Practical-Guide/PG_Cookbook08_Swing.schelp</a><br>link::Tutorials/A-Practical-Guide/PG_Cookbook08_Swing::<br></div></div><script src='./../../static/editor.js' type='text/javascript'></script>
 </body></html>

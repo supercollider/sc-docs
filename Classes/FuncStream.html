@@ -1,21 +1,25 @@
-<!doctype html><html lang='en'><head><title>FuncStream | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>FuncStream | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../lib/jquery.min.js'></script>
-<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/jquery.min.js'></script>
+<script src='./../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './..';
 var scdoc_title = 'FuncStream';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../static/scdoc.js' type='text/javascript'></script>
 <script src='./../docmap.js' type='text/javascript'></script>
+<script src='./../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
@@ -44,21 +48,23 @@ var scdoc_sc_version = '3.13.1';
 <div id='summary'>Stream of a function</div>
 </div>
 <div class='subheader'>
-<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/Common/Streams/Stream.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Streams/Stream.sc'>Stream.sc</a></div><div id='related'>See also: <a href="./../Classes/Pfunc.html">Pfunc</a></div>
+<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/Common/Streams/Stream.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Streams/Stream.sc'>Stream.sc</a></div><div id='related'>See also: <a href="./../Classes/Pfunc.html">Pfunc</a></div>
 </div>
 <h2><a class='anchor' name='description'>Description</a></h2>
 
-<p>FuncStream is one of the most basic ways to describe a stream: it has a function that is called for each next stream value.<textarea class='editor'>// make a stream that returns a random number
+<p>FuncStream is one of the most basic ways to describe a stream: it has a function that is called for each next stream value.<div class='codeMirrorContainer'><textarea class='editor'>// make a stream that returns a random number
 a = FuncStream({ 1.0.rand });
 a.next;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>It uses <a href="./../Classes/Function.html#-inEnvir">Function: -inEnvir</a> to statically bind the function call to the environment in which the <code>FuncStream</code> was created.<textarea class='editor'>a = Environment.use { ~x = 100; FuncStream({ ~x + 8 }) };
+<p>It uses <a href="./../Classes/Function.html#-inEnvir">Function: -inEnvir</a> to statically bind the function call to the environment in which the <code>FuncStream</code> was created.<div class='codeMirrorContainer'><textarea class='editor'>a = Environment.use { ~x = 100; FuncStream({ ~x + 8 }) };
 ~x = 0;
 a.next; // returns 108, not 8.</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h2><a class='anchor' name='classmethods'>Class Methods</a></h2>
 <h3 class='method-code'><span class='method-prefix'>FuncStream.</span><a class='method-name' name='*new' href='./../Overviews/Methods.html#new'>new</a>(<span class='argstr'>nextFunc</span>, <span class='argstr'>resetFunc</span>)</h3>
 <div class='method'>
-<p>Return a new stream object.<textarea class='editor'>(
+<p>Return a new stream object.<div class='codeMirrorContainer'><textarea class='editor'>(
 var func, reset, count = 0;
 func = { count = count + 2.rand };
 reset = { count = 0 };
@@ -69,6 +75,7 @@ a.next;
 a.nextN(80).plot;
 a.reset;
 a.next; // starts again.</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h4>Arguments:</h4>
 <table class='arguments'>
 <tr><td class='argumentname'>nextFunc<td class='argumentdesc'>
@@ -92,7 +99,7 @@ a.next; // starts again.</textarea>
 <div class='method'>
 <p>Get or set the function which is called on <a href="#-reset">-reset</a>.</div><h3><a class='anchor' name='Inherited%20instance%20methods'>Inherited instance methods</a></h3>
 <div id='inheritedinstmets'></div><h2><a class='anchor' name='examples'>Examples</a></h2>
-<textarea class='editor'>(
+<div class='codeMirrorContainer'><textarea class='editor'>(
 // create 16 different series
 a = {
     var diff = [2, 4, 5].choose * [1, -1].choose;
@@ -123,5 +130,7 @@ fork {
     }
 }
 )</textarea>
-<div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/FuncStream.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/FuncStream.schelp</a><br>link::Classes/FuncStream::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+
+<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/FuncStream.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/FuncStream.schelp</a><br>link::Classes/FuncStream::<br></div></div><script src='./../static/editor.js' type='text/javascript'></script>
 </body></html>

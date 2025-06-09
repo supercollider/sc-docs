@@ -1,21 +1,25 @@
-<!doctype html><html lang='en'><head><title>Class Tree | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>Class Tree | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../lib/jquery.min.js'></script>
-<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/jquery.min.js'></script>
+<script src='./../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './..';
 var scdoc_title = 'Class Tree';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../static/scdoc.js' type='text/javascript'></script>
 <script src='./../docmap.js' type='text/javascript'></script>
+<script src='./../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
@@ -690,10 +694,6 @@ var scdoc_sc_version = '3.13.1';
 <li> <a href='./../Classes/CombL.html'>CombL</a> - Comb delay line with linear interpolation.
 </ul>
 <li> <a href='./../Classes/DegreeToKey.html'>DegreeToKey</a> - Convert signal to modal pitch.
-<li> <a href='./../Classes/Delay1.html'>Delay1</a> - Single sample delay.
-<ul class='tree'>
-<li> <a href='./../Classes/Delay2.html'>Delay2</a> - Two sample delay.
-</ul>
 <li> <a href='./../Classes/DelayN.html'>DelayN</a> - Simple delay line with no interpolation.
 <ul class='tree'>
 <li> <a href='./../Classes/DelayC.html'>DelayC</a> - Simple delay line with cubic interpolation.
@@ -719,6 +719,8 @@ var scdoc_sc_version = '3.13.1';
 <li> <a href='./../Classes/Changed.html'>Changed</a> - Triggers when a value changes
 <li> <a href='./../Classes/Decay.html'>Decay</a> - Exponential decay
 <li> <a href='./../Classes/Decay2.html'>Decay2</a> - Exponential decay
+<li> <a href='./../Classes/Delay1.html'>Delay1</a> - Single sample delay.
+<li> <a href='./../Classes/Delay2.html'>Delay2</a> - Two sample delay.
 <li> <a href='./../Classes/DetectSilence.html'>DetectSilence</a> - Detect when input falls below an amplitude threshold
 <li> <a href='./../Classes/FOS.html'>FOS</a> - First order filter section.
 <li> <a href='./../Classes/Formlet.html'>Formlet</a> - FOF-like filter.
@@ -847,7 +849,7 @@ var scdoc_sc_version = '3.13.1';
 <ul class='tree'>
 <li> <a href='./../Classes/BrownNoise.html'>BrownNoise</a> - Brown Noise.
 <li> <a href='./../Classes/ClipNoise.html'>ClipNoise</a> - Clip Noise.
-<li> <a href='./../Classes/GrayNoise.html'>GrayNoise</a> - Gray Noise.
+<li> <a href='./../Classes/GrayNoise.html'>GrayNoise</a> - Bit-flipping Noise
 <li> <a href='./../Classes/PinkNoise.html'>PinkNoise</a> - Pink Noise.
 </ul>
 <li> <a href='./../Classes/WidthFirstUGen.html'>WidthFirstUGen</a> - (Undocumented class)
@@ -998,7 +1000,7 @@ var scdoc_sc_version = '3.13.1';
 </ul>
 <li> <a href='./../Classes/Buffer.html'>Buffer</a> - Client-side representation of a buffer on a server
 <li> <a href='./../Classes/Bus.html'>Bus</a> - Representation of a bus on the server
-<li> <a href='./../Classes/Class.html'>Class</a> - A Class describes the structure and implementation of a set objects which are its instances.
+<li> <a href='./../Classes/Class.html'>Class</a> - A Class describes the structure and implementation of a set of objects which are its instances.
 <ul class='tree'>
 </ul>
 <li> <a href='./../Classes/Clock.html'>Clock</a> - abstract superclass for clocks
@@ -1028,7 +1030,7 @@ var scdoc_sc_version = '3.13.1';
 </ul>
 <li> <a href='./../Classes/Pair.html'>Pair</a> - LISP-like two element cells
 <li> <a href='./../Classes/Range.html'>Range</a> - (Undocumented class)
-<li> <a href='./../Classes/SequenceableCollection.html'>SequenceableCollection</a> - Abstract superclass of integer indexable collections
+<li> <a href='./../Classes/SequenceableCollection.html'>SequenceableCollection</a> - Abstract superclass of indexable collections
 <ul class='tree'>
 <li> <a href='./../Classes/ArrayedCollection.html'>ArrayedCollection</a> - Abstract superclass of Collections of fixed maximum size
 <ul class='tree'>
@@ -1057,7 +1059,7 @@ var scdoc_sc_version = '3.13.1';
 <ul class='tree'>
 <li> <a href='./../Classes/SparseArray.html'>SparseArray</a> - Array that stores duplicated values more efficiently
 </ul>
-<li> <a href='./../Classes/RingBuffer.html'>RingBuffer</a> - (Undocumented class)
+<li> <a href='./../Classes/RingBuffer.html'>RingBuffer</a> - Fixed size ringbuffer
 </ul>
 <li> <a href='./../Classes/Set.html'>Set</a> - a set according to equality
 <ul class='tree'>
@@ -1088,17 +1090,16 @@ var scdoc_sc_version = '3.13.1';
 <li> <a href='./../Classes/Color.html'>Color</a> - An object which stores color values
 <li> <a href='./../Classes/CondVar.html'>CondVar</a> - Condition variable: block one or more threads until some condition is true
 <li> <a href='./../Classes/Condition.html'>Condition</a> - Block the execution of a thread
-<li> <a href='./../Classes/ContiguousBlock.html'>ContiguousBlock</a> - (Undocumented class)
+<li> <a href='./../Classes/ContiguousBlock.html'>ContiguousBlock</a> - Represents a range of integer addresses
 <li> <a href='./../Classes/ContiguousBlockAllocator.html'>ContiguousBlockAllocator</a> - for better handling of dynamic allocation
 <li> <a href='./../Classes/ControlName.html'>ControlName</a> - Object to store control information of SynthDef (used internally)
-<li> <a href='./../Classes/Date.html'>Date</a> - an object describing a point in time
-<li> <a href='./../Classes/DebugFrame.html'>DebugFrame</a> - (Undocumented class)
+<li> <a href='./../Classes/DebugFrame.html'>DebugFrame</a> - A representation of the call frame
 <li> <a href='./../Classes/Env.html'>Env</a> - Specification for a segmented envelope
 <ul class='tree'>
 <li> <a href='./../Classes/Penv.html'>Penv</a> - (Undocumented class)
 </ul>
 <li> <a href='./../Classes/EnvGate.html'>EnvGate</a> - singleton fade envelope
-<li> <a href='./../Classes/EnvironmentRedirect.html'>EnvironmentRedirect</a> - base class for environment redirects
+<li> <a href='./../Classes/EnvironmentRedirect.html'>EnvironmentRedirect</a> - Base class for environment redirects.
 <ul class='tree'>
 <li> <a href='./../Classes/LazyEnvir.html'>LazyEnvir</a> - lazy environment
 <ul class='tree'>
@@ -1107,6 +1108,7 @@ var scdoc_sc_version = '3.13.1';
 </ul>
 <li> <a href='./../Classes/EventStreamCleanup.html'>EventStreamCleanup</a> - Helper class that collects information about internal state of streams that needs to be released
 <li> <a href='./../Classes/EventTypesWithCleanup.html'>EventTypesWithCleanup</a> - (Undocumented class)
+<li> <a href='./../Classes/ExampleFiles.html'>ExampleFiles</a> - A shortcut to example sounds bundled with SuperCollider
 <li> <a href='./../Classes/Exception.html'>Exception</a> - root error class
 <ul class='tree'>
 <li> <a href='./../Classes/Error.html'>Error</a> - superclass of all Errors
@@ -1162,6 +1164,7 @@ var scdoc_sc_version = '3.13.1';
 </ul>
 <li> <a href='./../Classes/LRUNumberAllocator.html'>LRUNumberAllocator</a> - (Undocumented class)
 <li> <a href='./../Classes/LanguageConfig.html'>LanguageConfig</a> - Access and modify interpreter configuration
+<li> <a href='./../Classes/LevelComp.html'>LevelComp</a> - Level compensation logic for Splay and SplayAz
 <li> <a href='./../Classes/LinLin.html'>LinLin</a> - Map a linear range to another linear range
 <li> <a href='./../Classes/LinkedListNode.html'>LinkedListNode</a> - Internally used class for LinkedList nodes
 <li> <a href='./../Classes/MIDIClient.html'>MIDIClient</a> - Basic access to MIDI on your computer
@@ -1186,6 +1189,7 @@ var scdoc_sc_version = '3.13.1';
 <ul class='tree'>
 <li> <a href='./../Classes/Association.html'>Association</a> - relate two objects
 <li> <a href='./../Classes/Char.html'>Char</a> - ASCII character
+<li> <a href='./../Classes/Date.html'>Date</a> - an object describing a point in time
 <li> <a href='./../Classes/Number.html'>Number</a> - Mathematical quantity
 <ul class='tree'>
 <li> <a href='./../Classes/Complex.html'>Complex</a> - complex number
@@ -1193,7 +1197,7 @@ var scdoc_sc_version = '3.13.1';
 <li> <a href='./../Classes/SimpleNumber.html'>SimpleNumber</a> - one-dimensional value
 <ul class='tree'>
 <li> <a href='./../Classes/Float.html'>Float</a> - 64-bit Floating point number
-<li> <a href='./../Classes/Integer.html'>Integer</a> - Integer number
+<li> <a href='./../Classes/Integer.html'>Integer</a> - 32-bit Integer number
 </ul>
 </ul>
 </ul>
@@ -1278,7 +1282,7 @@ var scdoc_sc_version = '3.13.1';
 <li> <a href='./../Classes/ReadableNodeIDAllocator.html'>ReadableNodeIDAllocator</a> - an allocator for nodeIDs with human-readable ownership
 <li> <a href='./../Classes/Recorder.html'>Recorder</a> - Write Audio to Harddisk
 <li> <a href='./../Classes/Rect.html'>Rect</a> - Rectangle
-<li> <a href='./../Classes/RingNumberAllocator.html'>RingNumberAllocator</a> - (Undocumented class)
+<li> <a href='./../Classes/RingNumberAllocator.html'>RingNumberAllocator</a> - cyclic number allocator within a specified range
 <li> <a href='./../Classes/SCDoc.html'>SCDoc</a> - Help system main class
 <li> <a href='./../Classes/SCDocEntry.html'>SCDocEntry</a> - An SCDoc document index entry
 <li> <a href='./../Classes/SCDocHTMLRenderer.html'>SCDocHTMLRenderer</a> - Render SCDoc markup text to HTML
@@ -1322,7 +1326,7 @@ var scdoc_sc_version = '3.13.1';
 <li> <a href='./../Classes/ControlSpec.html'>ControlSpec</a> - numerical input specification
 </ul>
 <li> <a href='./../Classes/SplayZ.html'>SplayZ</a> - Spreads an array of channels across a ring of channels
-<li> <a href='./../Classes/StackNumberAllocator.html'>StackNumberAllocator</a> - (Undocumented class)
+<li> <a href='./../Classes/StackNumberAllocator.html'>StackNumberAllocator</a> - consecutive number allocator
 <li> <a href='./../Classes/Symbol.html'>Symbol</a> - a unique name for something
 <li> <a href='./../Classes/SynthDef.html'>SynthDef</a> - Client-side representation of a synth definition
 <ul class='tree'>
@@ -1331,7 +1335,7 @@ var scdoc_sc_version = '3.13.1';
 </ul>
 <li> <a href='./../Classes/SynthDesc.html'>SynthDesc</a> - Description of a synth definition
 <li> <a href='./../Classes/SynthDescLib.html'>SynthDescLib</a> - SynthDesc library
-<li> <a href='./../Classes/SystemSynthDefs.html'>SystemSynthDefs</a> - (Undocumented class)
+<li> <a href='./../Classes/SystemSynthDefs.html'>SystemSynthDefs</a> - SynthDefs assumed to exist on the server
 <li> <a href='./../Classes/TChoose.html'>TChoose</a> - Randomly select one of several inputs
 <li> <a href='./../Classes/TWChoose.html'>TWChoose</a> - Randomly select one of several inputs
 <li> <a href='./../Classes/TestDependant.html'>TestDependant</a> - (Undocumented class)
@@ -1361,5 +1365,5 @@ var scdoc_sc_version = '3.13.1';
 <li> <a href='./../Classes/XIn.html'>XIn</a> - Helper class used by InBus.
 <li> <a href='./../Classes/XInFeedback.html'>XInFeedback</a> - Helper class used by InBus.
 </ul>
-</ul><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Overviews/ClassTree.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Overviews/ClassTree.schelp</a><br>link::Overviews/ClassTree::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+</ul><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Overviews/ClassTree.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Overviews/ClassTree.schelp</a><br>link::Overviews/ClassTree::<br></div></div><script src='./../static/editor.js' type='text/javascript'></script>
 </body></html>

@@ -1,21 +1,25 @@
-<!doctype html><html lang='en'><head><title>Emacs Editor | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>Emacs Editor | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../lib/jquery.min.js'></script>
-<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/jquery.min.js'></script>
+<script src='./../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './..';
 var scdoc_title = 'Emacs Editor';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../static/scdoc.js' type='text/javascript'></script>
 <script src='./../docmap.js' type='text/javascript'></script>
+<script src='./../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
@@ -117,19 +121,21 @@ var scdoc_sc_version = '3.13.1';
 <p>Setting the mark always makes an entry on the current buffer’s mark ring. If you have switched buffers since the previous mark setting, the new mark position makes an entry on the global mark ring also. The result is that the global mark ring records a sequence of buffers that you have been in, and, for each buffer, a place where you set the mark.
 <p>‘C-x C-SPC’ (‘pop-global-mark’) jumps to the buffer and position of the latest entry in the global mark ring. It also rotates the ring, so that successive uses of ‘C-x C-SPC’ take you to earlier and earlier buffers.<h2><a class='anchor' name='Customizing%20Emacs'%20behavior'>Customizing Emacs' behavior</a></h2>
 
-<p>You can customize the behaviour of Emacs, by putting things in the startup file of emacs. This file is <code>~/.emacs</code>. You can define options there, for example:<textarea class='editor'>(custom-set-variables
+<p>You can customize the behaviour of Emacs, by putting things in the startup file of emacs. This file is <code>~/.emacs</code>. You can define options there, for example:<div class='codeMirrorContainer'><textarea class='editor'>(custom-set-variables
  '(case-fold-search t)
  '(global-font-lock-mode t nil (font-lock))
  '(sclang-runtime-directory "~/SuperCollider/")
  '(show-paren-mode t nil (paren))
  '(transient-mark-mode t)
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>nil means that an option is turned off, t or 1 means that it is turned on.<textarea class='editor'>'(sclang-eval-line-forward nil)</textarea>
+<p>nil means that an option is turned off, t or 1 means that it is turned on.<div class='codeMirrorContainer'><textarea class='editor'>'(sclang-eval-line-forward nil)</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p>Configure the text cursor NOT to move after hitting C-c C-c<h3><a class='anchor' name='Customize%20w3m'>Customize w3m</a></h3>
 
-<p>Normally w3m uses the arrow keys to jump between hyperlinks. For browsing SC help files this is not very useful.<textarea class='editor'>(eval-after-load "w3m"
+<p>Normally w3m uses the arrow keys to jump between hyperlinks. For browsing SC help files this is not very useful.<div class='codeMirrorContainer'><textarea class='editor'>(eval-after-load "w3m"
  '(progn
  (define-key w3m-mode-map [left] 'backward-char)
  (define-key w3m-mode-map [right] 'forward-char)
@@ -137,15 +143,17 @@ var scdoc_sc_version = '3.13.1';
  (define-key w3m-mode-map [down] 'next-line)
  (setq w3m-auto-show 1)
  ))</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h3><a class='anchor' name='Automatically%20complete%20brackets%20and%20parentheses'>Automatically complete brackets and parentheses</a></h3>
-<textarea class='editor'>  (setq skeleton-pair t)
+<div class='codeMirrorContainer'><textarea class='editor'>  (setq skeleton-pair t)
   (global-set-key (kbd "(") 'skeleton-pair-insert-maybe)
   (global-set-key (kbd "{") 'skeleton-pair-insert-maybe)
   (global-set-key (kbd "[") 'skeleton-pair-insert-maybe)
   (global-set-key (kbd "\"") 'skeleton-pair-insert-maybe)
   (global-set-key (kbd "'") 'skeleton-pair-insert-maybe)</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h3><a class='anchor' name='Scrollwheel%20support'>Scrollwheel support</a></h3>
-<textarea class='editor'>;;; scrollwheel support
+<div class='codeMirrorContainer'><textarea class='editor'>;;; scrollwheel support
 (defun scroll-up-half ()
   "Scroll up half a page."
   (interactive)
@@ -159,12 +167,14 @@ var scdoc_sc_version = '3.13.1';
   )
 (global-set-key [(mouse-5)] 'scroll-up-half)
 (global-set-key [(mouse-4)] 'scroll-down-half)</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h3><a class='anchor' name='Recent%20files%20menu'>Recent files menu</a></h3>
 
-<p>Recentf is a minor mode that builds a list of recently opened files. This list is automatically saved across Emacs sessions. You can then access this list through a menu. Put this in your `~/.emacs’:<textarea class='editor'>(require 'recentf)
+<p>Recentf is a minor mode that builds a list of recently opened files. This list is automatically saved across Emacs sessions. You can then access this list through a menu. Put this in your `~/.emacs’:<div class='codeMirrorContainer'><textarea class='editor'>(require 'recentf)
 (recentf-mode 1)</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>For adding a shortcut (C-x C-r) to open a recent file add this code as well:<textarea class='editor'>(defun recentf-open-files-compl ()
+<p>For adding a shortcut (C-x C-r) to open a recent file add this code as well:<div class='codeMirrorContainer'><textarea class='editor'>(defun recentf-open-files-compl ()
   (interactive)
   (let* ((all-files recentf-list)
     (tocpl (mapcar (function
@@ -174,7 +184,8 @@ var scdoc_sc_version = '3.13.1';
     (find-file (cdr (assoc-ignore-representation fname tocpl)))))
 
 (global-set-key "\C-x\C-r" 'recentf-open-files-compl)</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h2><a class='anchor' name='More%20info%20on%20Emacs'>More info on Emacs</a></h2>
 
-<p>See the <a href="http://www.emacswiki.org/cgi-bin/wiki">Emacs Wiki</a><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Reference/EmacsEditor.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Reference/EmacsEditor.schelp</a><br>link::Reference/EmacsEditor::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+<p>See the <a href="http://www.emacswiki.org/cgi-bin/wiki">Emacs Wiki</a><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Reference/EmacsEditor.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Reference/EmacsEditor.schelp</a><br>link::Reference/EmacsEditor::<br></div></div><script src='./../static/editor.js' type='text/javascript'></script>
 </body></html>

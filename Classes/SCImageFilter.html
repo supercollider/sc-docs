@@ -1,21 +1,25 @@
-<!doctype html><html lang='en'><head><title>SCImageFilter | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>SCImageFilter | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../lib/jquery.min.js'></script>
-<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/jquery.min.js'></script>
+<script src='./../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './..';
 var scdoc_title = 'SCImageFilter';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../static/scdoc.js' type='text/javascript'></script>
 <script src='./../docmap.js' type='text/javascript'></script>
+<script src='./../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
@@ -51,21 +55,22 @@ var scdoc_sc_version = '3.13.1';
 
 <p>currently this class represents the CoreImage Filters you can apply to a SCImage. All the built-in filters and docs: <a href="http://developer.apple.com/documentation/GraphicsImaging/Reference/CoreImageFilterReference/Reference/reference.html">http://developer.apple.com/documentation/GraphicsImaging/Reference/CoreImageFilterReference/Reference/reference.html</a><h2><a class='anchor' name='classmethods'>Class Methods</a></h2>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='*new' href='./../Overviews/Methods.html#new'>new</a></h3>
-<div class='method'><textarea class='editor'>f = SCImageFilter.new(\CIStarShineGenerator);
+<div class='method'><div class='codeMirrorContainer'><textarea class='editor'>f = SCImageFilter.new(\CIStarShineGenerator);
 f.attributes;
 
 // or you can do also Synth like style if you already know the attributes of this synth
-f = SCImageFilter.new(\CIStarShineGenerator, [\center, [200,200], \radius, 200*0.05]);
+f = SCImageFilter.new(\CIStarShineGenerator, [\center, [200, 200], \radius, 200*0.05]);
 f.values; //</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h4>Arguments:</h4>
 <table class='arguments'>
 <tr><td class='argumentname'>filterName<td class='argumentdesc'>
 <p>The filter name <a href="./../Classes/Symbol.html">Symbol</a> or <a href="./../Classes/String.html">String</a><tr><td class='argumentname'>args<td class='argumentdesc'>
 <p>The filter name <a href="./../Classes/Symbol.html">Symbol</a> or <a href="./../Classes/String.html">String</a></table></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='*filterCategories' href='./../Overviews/Methods.html#filterCategories'>filterCategories</a></h3>
 <div class='method'>
-<p>Returns a Dictionary containing all the filters associated by categories.<textarea class='editor'>// getting filter categories (dictionary)
+<p>Returns a Dictionary containing all the filters associated by categories.<div class='codeMirrorContainer'><textarea class='editor'>// getting filter categories (dictionary)
 (
-    SCImageFilter.filterCategories.keysDo({|cat|
+    SCImageFilter.filterCategories.keysDo({ |cat|
         cat.postln;
     });
     "ok".postln;
@@ -82,7 +87,7 @@ SCImageFilter.filterCategories.at(\CICategoryGenerator);
 var n = 0;
 SCImageFilter.filterCategories.do ({
     |symbolArray|
-    symbolArray.do ({|pluginName|
+    symbolArray.do ({ |pluginName|
         if(pluginName.asString.beginsWith("CI").not, {
             ("External Filter Found: " ++ pluginName).postln;
             n = n+1;
@@ -92,6 +97,7 @@ SCImageFilter.filterCategories.do ({
 (n + "plugins found").postln;
 n;
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3><a class='anchor' name='Inherited%20class%20methods'>Inherited class methods</a></h3>
 <div id='inheritedclassmets'></div><h2><a class='anchor' name='instancemethods'>Instance Methods</a></h2>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-attributes' href='./../Overviews/Methods.html#attributes'>attributes</a></h3>
@@ -99,18 +105,19 @@ n;
 <p>returns an <a href="./../Classes/IdentityDictionary.html">IdentityDictionary</a> containing for each association:<ul>
 <li>the attribute/property name as the key.<li>the SuperCollider <a href="./../Classes/Class.html">Class</a> you should use as an argument to set the attribute.</ul>
 
-<p>Once you know the attributes you can set them like using normal instance setters, use the name and append '_'.<textarea class='editor'>(
+<p>Once you know the attributes you can set them like using normal instance setters, use the name and append '_'.<div class='codeMirrorContainer'><textarea class='editor'>(
 f = SCImageFilter.new(\CIStarShineGenerator);
-f.attributes.keysValuesDo({|k, v|
+f.attributes.keysValuesDo({ |k, v|
     ("CIStarShineGenerator responds to "++k.asString++"_("++v.asString++")").postln;
 });
 )
 
-f.center_([200,200]);
+f.center_([200, 200]);
 f.radius_(200*0.05);</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-attributeRange' href='./../Overviews/Methods.html#attributeRange'>attributeRange</a></h3>
 <div class='method'>
-<p>get the numerical range and the default Value for an attribute. returns an Array as <code>[ min, max, default ]</code>. min, max, or default may be a <a href="./../Classes/Float.html">Float</a>, a <a href="./../Classes/Color.html">Color</a>, an <a href="./../Classes/Array.html">Array</a> or <a href="./../Classes/Nil.html">Nil</a>.<textarea class='editor'>// a SCImageFilter
+<p>get the numerical range and the default Value for an attribute. returns an Array as <code>[min, max, default]</code>. min, max, or default may be a <a href="./../Classes/Float.html">Float</a>, a <a href="./../Classes/Color.html">Color</a>, an <a href="./../Classes/Array.html">Array</a> or <a href="./../Classes/Nil.html">Nil</a>.<div class='codeMirrorContainer'><textarea class='editor'>// a SCImageFilter
 f = SCImageFilter.new(\CIFlashTransition);
 
 f.dump;
@@ -121,15 +128,16 @@ f.attributeRange(\time);
 
 // getting all attributes MIN - MAX possible values
 (
-f.attributes.keysDo({|attr|
+f.attributes.keysDo({ |attr|
     (attr ++ " = " + f.attributeRange(attr)).postln; // nil results means there is no min max for those attributes
 });
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-values' href='./../Overviews/Methods.html#values'>values</a></h3>
 <div class='method'>
-<p>returns all the values you set for each attributes. If a value is not explicitly set for an attribute, it will be set to default when applied to the SCImage.<textarea class='editor'>(
+<p>returns all the values you set for each attributes. If a value is not explicitly set for an attribute, it will be set to default when applied to the SCImage.<div class='codeMirrorContainer'><textarea class='editor'>(
     f = SCImageFilter.new(\CIStarShineGenerator);
-    f.center_([200,200]);
+    f.center_([200, 200]);
     f.radius_(200*0.05);
     f.color_(Color.blue);
     f.crossWidth_(2.0);
@@ -137,13 +145,15 @@ f.attributes.keysDo({|attr|
     f.crossOpacity_(-4.0);
     f.values.postln;
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-set' href='./../Overviews/Methods.html#set'>set</a></h3>
 <div class='method'>
-<p>set the attributes for this SCImageFilter<textarea class='editor'>(
+<p>set the attributes for this SCImageFilter<div class='codeMirrorContainer'><textarea class='editor'>(
     f = SCImageFilter.new(\CIStarShineGenerator);
-    f.set(\center, [200,200], \radius, 200*0.05, \color, Color.blue, \crossWidth, 2.0);
+    f.set(\center, [200, 200], \radius, 200*0.05, \color, Color.blue, \crossWidth, 2.0);
     f.values.postln;
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-enable' href='./../Overviews/Methods.html#enable'>enable</a></h3>
 <div class='method'>
 <p>enable or not the Filter when applied to a SCImage.<h4>Arguments:</h4>
@@ -151,7 +161,7 @@ f.attributes.keysDo({|attr|
 <tr><td class='argumentname'>value<td class='argumentdesc'>
 <p>If this is false, applying the filter will do nothing.</table></div><h3><a class='anchor' name='Inherited%20instance%20methods'>Inherited instance methods</a></h3>
 <div id='inheritedinstmets'></div><h2><a class='anchor' name='examples'>Examples</a></h2>
-<textarea class='editor'>// thor's fast experimentation request
+<div class='codeMirrorContainer'><textarea class='editor'>// thor's fast experimentation request
 // example with the filters array which allows you to use filters without applying them in place
 // convenient for RT use / test or whatever...
 
@@ -189,7 +199,7 @@ a.plot;
 
 (
 a.removeAllFilters;
-a.plot(freeOnClose:true);
+a.plot(freeOnClose: true);
 )
 
 
@@ -206,7 +216,7 @@ a.applyFilters([f, SCImageFilter(\CIColorInvert), SCImageFilter(\CIMaskToAlpha)]
 g.backgroundImage_(a); // set up background image
 b.applyFilters(g); // create masked image
 a.free;
-w = b.plot(freeOnClose:true, background:Color.clear); // set to clear color to see plainly the image
+w = b.plot(freeOnClose: true, background: Color.clear); // set to clear color to see plainly the image
 )
 
 
@@ -218,7 +228,7 @@ w = b.plot(freeOnClose:true, background:Color.clear); // set to clear color to s
 // so this is convenient but not optimal
 // SCPhotoshop :)
 (
-var width=500, height=500, centerVector;
+var width = 500, height = 500, centerVector;
 var controller, specs;
 
 centerVector = [width*0.5, height*0.5];
@@ -246,11 +256,11 @@ specs = [
 
 ]; // CIStarShine opacity, CIZoomBlur
 
-controller = SCWindow.new("Close Me First !!!", Rect(400,400,300,specs.size * 40));
+controller = SCWindow.new("Close Me First !!!", Rect(400, 400, 300, specs.size * 40));
 controller.view.decorator = FlowLayout(controller.view.bounds.insetBy(10), 10@10);
-specs.size.do {|i|
-    SCSlider.new(controller, Rect(0,0,150,20))
-    .action_({|obj|
+specs.size.do { |i|
+    SCSlider.new(controller, Rect(0, 0, 150, 20))
+    .action_({ |obj|
         specs[i][0].perform(specs[i][1], specs[i][2].map(obj.value));
         w.refresh;
     })
@@ -263,10 +273,10 @@ a.addFilter(f);
 a.addFilter(g);
 a.addFilter(h);
 
-a.filters.do {|filt, i|
+a.filters.do { |filt, i|
     if(i != 0, {
-        SCButton.new(controller, Rect(0,0,20,20))
-        .action_({|obj|
+        SCButton.new(controller, Rect(0, 0, 20, 20))
+        .action_({ |obj|
             filt.enable_(obj.value != 1);
             w.refresh;
         })
@@ -275,7 +285,7 @@ a.filters.do {|filt, i|
 };
 
 // plotting
-w = a.plot(background:Color.black);
+w = a.plot(background: Color.black);
 controller.front;
 controller.onClose_({
     {
@@ -297,7 +307,7 @@ f.width_(500); f.height_(500);
 f.grayscale_(true);
 a = SCImage.new(500@500);
 a.applyFilters(f);
-w = a.plot(freeOnClose:true, background:Color.black);
+w = a.plot(freeOnClose: true, background: Color.black);
 )
 
 
@@ -309,7 +319,7 @@ f.radius_(30);
 f.shadowColor_(Color.red);
 a = SCImage.new("vduck2.jpg");
 a.applyFilters(f, a.bounds.outsetBy(500));
-w = a.plot(freeOnClose:true, background:Color.clear);
+w = a.plot(freeOnClose: true, background: Color.clear);
 a.bounds;
 )
 
@@ -318,16 +328,17 @@ f = SCImageFilter.new(\NIDotsGenerator);
 f.softness_(1);
 a = SCImage.new(500@500);
 a.applyFilters(f);
-w = a.plot(freeOnClose:true, background:Color.black);
+w = a.plot(freeOnClose: true, background: Color.black);
 )
 
 (
 f = SCImageFilter.new(\NICircle);
 a = SCImage.new(500@500);
 a.applyFilters(f);
-w = a.plot(freeOnClose:true);
+w = a.plot(freeOnClose: true);
 )
 */</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/SCImageFilter.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/SCImageFilter.schelp</a><br>link::Classes/SCImageFilter::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/SCImageFilter.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/SCImageFilter.schelp</a><br>link::Classes/SCImageFilter::<br></div></div><script src='./../static/editor.js' type='text/javascript'></script>
 </body></html>

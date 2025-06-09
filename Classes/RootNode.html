@@ -1,21 +1,25 @@
-<!doctype html><html lang='en'><head><title>RootNode | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>RootNode | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../lib/jquery.min.js'></script>
-<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/jquery.min.js'></script>
+<script src='./../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './..';
 var scdoc_title = 'RootNode';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../static/scdoc.js' type='text/javascript'></script>
 <script src='./../docmap.js' type='text/javascript'></script>
+<script src='./../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
@@ -41,20 +45,22 @@ var scdoc_sc_version = '3.13.1';
 <div id='summary'>The persistent root group on the server</div>
 </div>
 <div class='subheader'>
-<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/Common/Control/Node.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Control/Node.sc'>Node.sc</a></div><div id='related'>See also: <a href="./../Classes/Group.html">Group</a>, <a href="./../Reference/default_group.html">Default Group</a></div>
+<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/Common/Control/Node.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Control/Node.sc'>Node.sc</a></div><div id='related'>See also: <a href="./../Classes/Group.html">Group</a>, <a href="./../Reference/default_group.html">Default Group</a></div>
 </div>
 <h2><a class='anchor' name='description'>Description</a></h2>
 
 <p>A RootNode is the Group with the nodeID of 0 which is always present on each Server and represents the root of that server's node tree.
 <p>It is always playing, and always running, cannot be freed, or moved anywhere.
-<p>Caching is used so that there is always one RootNode per <a href="./../Classes/Server.html">Server</a>.<textarea class='editor'>s = Server.local;
+<p>Caching is used so that there is always one RootNode per <a href="./../Classes/Server.html">Server</a>.<div class='codeMirrorContainer'><textarea class='editor'>s = Server.local;
 
 a = RootNode(s);
 b = RootNode(s);
 
 a === b; // identical object</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>sending <code>"/s_new"</code> messages to the server, the target 0 is what is represented by this object.<textarea class='editor'>s.sendMsg("/s_new", "default", -1, 0, 0);//the last argument is the target id</textarea>
+<p>sending <code>"/s_new"</code> messages to the server, the target 0 is what is represented by this object.<div class='codeMirrorContainer'><textarea class='editor'>s.sendMsg("/s_new", "default", -1, 0, 0); // the last argument is the target id</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p>IMPORTANT: In general one should <strong>not</strong> add nodes to the RootNode unless one has a specific reason to do so. Instead one should add nodes to the default_group. This provides a known basic node order and protects functionality like Server.record, Server.scope, etc. The default group is the default target for all new nodes, so when using object style nodes will normally not be added to the RootNode unless that is explicitly specified. See <a href="./../Reference/default_group.html">Default Group</a> for more information.<h2><a class='anchor' name='classmethods'>Class Methods</a></h2>
 <h3><a class='anchor' name='Inherited%20class%20methods'>Inherited class methods</a></h3>
@@ -64,5 +70,5 @@ a === b; // identical object</textarea>
 <h3 class='method-code'><span class='method-prefix'>RootNode.</span><a class='method-name' name='*roots' href='./../Overviews/Methods.html#roots'>roots</a></h3>
 <h2><a class='anchor' name='instancemethods'>Instance Methods</a></h2>
 <h3><a class='anchor' name='Inherited%20instance%20methods'>Inherited instance methods</a></h3>
-<div id='inheritedinstmets'></div><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/RootNode.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/RootNode.schelp</a><br>link::Classes/RootNode::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+<div id='inheritedinstmets'></div><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/RootNode.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/RootNode.schelp</a><br>link::Classes/RootNode::<br></div></div><script src='./../static/editor.js' type='text/javascript'></script>
 </body></html>

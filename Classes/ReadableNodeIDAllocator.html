@@ -1,21 +1,25 @@
-<!doctype html><html lang='en'><head><title>ReadableNodeIDAllocator | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>ReadableNodeIDAllocator | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../lib/jquery.min.js'></script>
-<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/jquery.min.js'></script>
+<script src='./../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './..';
 var scdoc_title = 'ReadableNodeIDAllocator';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../static/scdoc.js' type='text/javascript'></script>
 <script src='./../docmap.js' type='text/javascript'></script>
+<script src='./../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
@@ -49,11 +53,11 @@ var scdoc_sc_version = '3.13.1';
 <div id='summary'>an allocator for nodeIDs with human-readable ownership</div>
 </div>
 <div class='subheader'>
-<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/Common/Control/ReadableNodeIDAllocator.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Control/ReadableNodeIDAllocator.sc'>ReadableNodeIDAllocator.sc</a></div><div id='related'>See also: <a href="./../Classes/Server.html">Server</a>, <a href="./../Guides/MultiClient_Setups.html">Multi-client Setups</a></div>
+<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/Common/Control/ReadableNodeIDAllocator.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Control/ReadableNodeIDAllocator.sc'>ReadableNodeIDAllocator.sc</a></div><div id='related'>See also: <a href="./../Classes/Server.html">Server</a>, <a href="./../Guides/MultiClient_Setups.html">Multi-client Setups</a></div>
 </div>
 <h2><a class='anchor' name='description'>Description</a></h2>
 
-<p>In multi-client setups, it is useful to know which client created which nodeIDs on a shared server. ReadableNodeIDAllocator provides that facility by using a decimal prefix based on the clientID.<textarea class='editor'>// default server uses a ReadableNodeIDAllocator
+<p>In multi-client setups, it is useful to know which client created which nodeIDs on a shared server. ReadableNodeIDAllocator provides that facility by using a decimal prefix based on the clientID.<div class='codeMirrorContainer'><textarea class='editor'>// default server uses a ReadableNodeIDAllocator
 s.nodeAllocator;
 s.nodeAllocator.userID; // its userID is
 s.clientID
@@ -72,6 +76,7 @@ r.defaultGroup;
 r.defaultGroupID;
 // and temp nodes begin with 400001000 ...
 3.do { r.nextNodeID.postln };</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h2><a class='anchor' name='classmethods'>Class Methods</a></h2>
 <h3 class='method-code'><span class='method-prefix'>ReadableNodeIDAllocator.</span><a class='method-name' name='*new' href='./../Overviews/Methods.html#new'>new</a>(<span class='argstr'>clientID: 0</span>, <span class='argstr'>lowestTempID: 1000</span>, <span class='argstr'>numClients: 32</span>)</h3>
 <div class='method'>
@@ -80,10 +85,11 @@ r.defaultGroupID;
 <tr><td class='argumentname'>clientID<td class='argumentdesc'>
 <p>the clientID for which to create an offset/prefix<tr><td class='argumentname'>lowestTempID<td class='argumentdesc'>
 <p>the offset for the lowest temporary id<tr><td class='argumentname'>numClients<td class='argumentdesc'>
-<p>the number of clients for which to split the number range<textarea class='editor'>// make an allocator with id 11
+<p>the number of clients for which to split the number range<div class='codeMirrorContainer'><textarea class='editor'>// make an allocator with id 11
 a = ReadableNodeIDAllocator(11, 1000, 12);
 // begins with 1100000 ... prefix
 3.do { a.alloc.postln };</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </table></div><h3><a class='anchor' name='Inherited%20class%20methods'>Inherited class methods</a></h3>
 <div id='inheritedclassmets'></div><h2><a class='anchor' name='instancemethods'>Instance Methods</a></h2>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-clientID' href='./../Overviews/Methods.html#clientID'>clientID</a></h3>
@@ -113,5 +119,5 @@ a = ReadableNodeIDAllocator(11, 1000, 12);
 <tr><td class='argumentname'>num<td class='argumentdesc'></table></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-reset' href='./../Overviews/Methods.html#reset'>reset</a></h3>
 <div class='method'>
 <p>reset allocator to initial state</div><h3><a class='anchor' name='Inherited%20instance%20methods'>Inherited instance methods</a></h3>
-<div id='inheritedinstmets'></div><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/ReadableNodeIDAllocator.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/ReadableNodeIDAllocator.schelp</a><br>link::Classes/ReadableNodeIDAllocator::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+<div id='inheritedinstmets'></div><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/ReadableNodeIDAllocator.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/ReadableNodeIDAllocator.schelp</a><br>link::Classes/ReadableNodeIDAllocator::<br></div></div><script src='./../static/editor.js' type='text/javascript'></script>
 </body></html>

@@ -1,21 +1,25 @@
-<!doctype html><html lang='en'><head><title>UGen | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>UGen | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../lib/jquery.min.js'></script>
-<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/jquery.min.js'></script>
+<script src='./../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './..';
 var scdoc_title = 'UGen';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../static/scdoc.js' type='text/javascript'></script>
 <script src='./../docmap.js' type='text/javascript'></script>
+<script src='./../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
@@ -73,6 +77,11 @@ var scdoc_sc_version = '3.13.1';
 <li class='toc3'><a href='#-prune'>prune</a> </li>
 <li class='toc3'><a href='#-checkBadValues'>checkBadValues</a> </li>
 <li class='toc3'><a href='#-if'>if</a> </li>
+<li class='toc3'><a href='#-binaryValue'>binaryValue</a> </li>
+<li class='toc3'><a href='#-isPositive'>isPositive</a> </li>
+<li class='toc3'><a href='#-isStrictlyPositive'>isStrictlyPositive</a> </li>
+<li class='toc3'><a href='#-isNegative'>isNegative</a> </li>
+<li class='toc3'><a href='#-|==|'>|==|</a> </li>
 <li class='toc3'><a href='#-@'>@</a> </li>
 <li class='toc3'><a href='#-asComplex'>asComplex</a> </li>
 <li class='toc3'><a href='#-dumpArgs'>dumpArgs</a> </li>
@@ -133,7 +142,6 @@ var scdoc_sc_version = '3.13.1';
 <li class='toc3'><a href='#-writeOutputSpec'>writeOutputSpec</a> </li>
 <li class='toc3'><a href='#-writeOutputSpecs'>writeOutputSpecs</a> </li>
 <li class='toc3'><a href='#-writesToBus'>writesToBus</a> </li>
-<li class='toc3'><a href='#-|==|'>|==|</a> </li>
 </ul></ul></ul></div><div id='menubar'></div>
 <div class='contents'>
 <div class='header'>
@@ -145,7 +153,7 @@ var scdoc_sc_version = '3.13.1';
 <div id='summary'>Abstract superclass of all unit generators</div>
 </div>
 <div class='subheader'>
-<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/Common/Audio/UGen.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Audio/UGen.sc'>UGen.sc</a></div><div id='subclasses'>Subclasses: <a href="../Classes/AbstractOut.html">AbstractOut</a>, <a href="../Classes/Amplitude.html">Amplitude</a>, <a href="../Classes/AnalogIn.html">AnalogIn</a>, <a href="../Classes/AnalogOut.html">AnalogOut</a>, <span id='hiddensubclasses' style='display:none;'><a href="../Classes/Ball.html">Ball</a>, <a href="../Classes/BasicOpUGen.html">BasicOpUGen</a>, <a href="../Classes/Blip.html">Blip</a>, <a href="../Classes/BufCombN.html">BufCombN</a>, <a href="../Classes/BufDelayN.html">BufDelayN</a>, <a href="../Classes/BufInfoUGenBase.html">BufInfoUGenBase</a>, <a href="../Classes/BufWr.html">BufWr</a>, <a href="../Classes/ChaosGen.html">ChaosGen</a>, <a href="../Classes/CheckBadValues.html">CheckBadValues</a>, <a href="../Classes/CoinGate.html">CoinGate</a>, <a href="../Classes/Compander.html">Compander</a>, <a href="../Classes/CompanderD.html">CompanderD</a>, <a href="../Classes/Convolution.html">Convolution</a>, <a href="../Classes/Convolution2.html">Convolution2</a>, <a href="../Classes/Convolution2L.html">Convolution2L</a>, <a href="../Classes/Convolution3.html">Convolution3</a>, <a href="../Classes/Crackle.html">Crackle</a>, <a href="../Classes/DUGen.html">DUGen</a>, <a href="../Classes/DelTapRd.html">DelTapRd</a>, <a href="../Classes/DelTapWr.html">DelTapWr</a>, <a href="../Classes/DemandEnvGen.html">DemandEnvGen</a>, <a href="../Classes/DigitalIO.html">DigitalIO</a>, <a href="../Classes/DigitalIn.html">DigitalIn</a>, <a href="../Classes/DigitalOut.html">DigitalOut</a>, <a href="../Classes/DiskOut.html">DiskOut</a>, <a href="../Classes/Done.html">Done</a>, <a href="../Classes/Dunique.html">Dunique</a>, <a href="../Classes/Dust.html">Dust</a>, <a href="../Classes/Dust2.html">Dust2</a>, <a href="../Classes/Duty.html">Duty</a>, <a href="../Classes/DynKlang.html">DynKlang</a>, <a href="../Classes/DynKlank.html">DynKlank</a>, <a href="../Classes/EnvGen.html">EnvGen</a>, <a href="../Classes/ExpRand.html">ExpRand</a>, <a href="../Classes/FSinOsc.html">FSinOsc</a>, <a href="../Classes/Free.html">Free</a>, <a href="../Classes/FreeSelf.html">FreeSelf</a>, <a href="../Classes/FreeSelfWhenDone.html">FreeSelfWhenDone</a>, <a href="../Classes/FreqShift.html">FreqShift</a>, <a href="../Classes/Gendy1.html">Gendy1</a>, <a href="../Classes/Gendy2.html">Gendy2</a>, <a href="../Classes/Gendy3.html">Gendy3</a>, <a href="../Classes/Hasher.html">Hasher</a>, <a href="../Classes/HilbertFIR.html">HilbertFIR</a>, <a href="../Classes/IEnvGen.html">IEnvGen</a>, <a href="../Classes/IRand.html">IRand</a>, <a href="../Classes/InBus.html">InBus</a>, <a href="../Classes/InRange.html">InRange</a>, <a href="../Classes/InRect.html">InRect</a>, <a href="../Classes/InfoUGenBase.html">InfoUGenBase</a>, <a href="../Classes/KeyState.html">KeyState</a>, <a href="../Classes/KeyTrack.html">KeyTrack</a>, <a href="../Classes/Klang.html">Klang</a>, <a href="../Classes/Klank.html">Klank</a>, <a href="../Classes/LFGauss.html">LFGauss</a>, <a href="../Classes/LFNoise0.html">LFNoise0</a>, <a href="../Classes/LastValue.html">LastValue</a>, <a href="../Classes/Latch.html">Latch</a>, <a href="../Classes/LinRand.html">LinRand</a>, <a href="../Classes/LinXFade2.html">LinXFade2</a>, <a href="../Classes/Line.html">Line</a>, <a href="../Classes/Linen.html">Linen</a>, <a href="../Classes/Logistic.html">Logistic</a>, <a href="../Classes/Loudness.html">Loudness</a>, <a href="../Classes/MantissaMask.html">MantissaMask</a>, <a href="../Classes/MaxLocalBufs.html">MaxLocalBufs</a>, <a href="../Classes/ModDif.html">ModDif</a>, <a href="../Classes/MostChange.html">MostChange</a>, <a href="../Classes/MouseButton.html">MouseButton</a>, <a href="../Classes/MouseX.html">MouseX</a>, <a href="../Classes/MulAdd.html">MulAdd</a>, <a href="../Classes/MultiOutUGen.html">MultiOutUGen</a>, <a href="../Classes/MultiplexAnalogIn.html">MultiplexAnalogIn</a>, <a href="../Classes/NRand.html">NRand</a>, <a href="../Classes/Normalizer.html">Normalizer</a>, <a href="../Classes/Onsets.html">Onsets</a>, <a href="../Classes/OutputProxy.html">OutputProxy</a>, <a href="../Classes/PSinGrain.html">PSinGrain</a>, <a href="../Classes/PartConv.html">PartConv</a>, <a href="../Classes/Pause.html">Pause</a>, <a href="../Classes/PauseSelf.html">PauseSelf</a>, <a href="../Classes/PauseSelfWhenDone.html">PauseSelfWhenDone</a>, <a href="../Classes/Peak.html">Peak</a>, <a href="../Classes/PeakFollower.html">PeakFollower</a>, <a href="../Classes/Phasor.html">Phasor</a>, <a href="../Classes/PitchShift.html">PitchShift</a>, <a href="../Classes/Pluck.html">Pluck</a>, <a href="../Classes/Poll.html">Poll</a>, <a href="../Classes/Pulse.html">Pulse</a>, <a href="../Classes/PulseCount.html">PulseCount</a>, <a href="../Classes/PulseDivider.html">PulseDivider</a>, <a href="../Classes/PureUGen.html">PureUGen</a>, <a href="../Classes/Rand.html">Rand</a>, <a href="../Classes/RecordBuf.html">RecordBuf</a>, <a href="../Classes/RunningSum.html">RunningSum</a>, <a href="../Classes/Sanitize.html">Sanitize</a>, <a href="../Classes/Saw.html">Saw</a>, <a href="../Classes/ScopeOut.html">ScopeOut</a>, <a href="../Classes/ScopeOut2.html">ScopeOut2</a>, <a href="../Classes/SendPeakRMS.html">SendPeakRMS</a>, <a href="../Classes/SendTrig.html">SendTrig</a>, <a href="../Classes/SpecCentroid.html">SpecCentroid</a>, <a href="../Classes/SpecFlatness.html">SpecFlatness</a>, <a href="../Classes/SpecPcile.html">SpecPcile</a>, <a href="../Classes/Splay.html">Splay</a>, <a href="../Classes/SplayAz.html">SplayAz</a>, <a href="../Classes/Spring.html">Spring</a>, <a href="../Classes/Stepper.html">Stepper</a>, <a href="../Classes/Sum3.html">Sum3</a>, <a href="../Classes/Sum4.html">Sum4</a>, <a href="../Classes/Sweep.html">Sweep</a>, <a href="../Classes/TBall.html">TBall</a>, <a href="../Classes/TExpRand.html">TExpRand</a>, <a href="../Classes/TIRand.html">TIRand</a>, <a href="../Classes/TRand.html">TRand</a>, <a href="../Classes/TWindex.html">TWindex</a>, <a href="../Classes/Tap.html">Tap</a>, <a href="../Classes/Timer.html">Timer</a>, <a href="../Classes/ToggleFF.html">ToggleFF</a>, <a href="../Classes/Trig1.html">Trig1</a>, <a href="../Classes/Unpack1FFT.html">Unpack1FFT</a>, <a href="../Classes/WhiteNoise.html">WhiteNoise</a>, <a href="../Classes/WidthFirstUGen.html">WidthFirstUGen</a>, <a href="../Classes/XFade2.html">XFade2</a>, <a href="../Classes/XLine.html">XLine</a>, <a href="../Classes/ZeroCrossing.html">ZeroCrossing</a></span><a class='subclass_toggle' href='#' onclick='javascript:showAllSubclasses(this); return false'>&hellip;&nbsp;see&nbsp;all</a></div>
+<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/Common/Audio/UGen.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Audio/UGen.sc'>UGen.sc</a></div><div id='subclasses'>Subclasses: <a href="../Classes/AbstractOut.html">AbstractOut</a>, <a href="../Classes/Amplitude.html">Amplitude</a>, <a href="../Classes/AnalogIn.html">AnalogIn</a>, <a href="../Classes/AnalogOut.html">AnalogOut</a>, <span id='hiddensubclasses' style='display:none;'><a href="../Classes/Ball.html">Ball</a>, <a href="../Classes/BasicOpUGen.html">BasicOpUGen</a>, <a href="../Classes/Blip.html">Blip</a>, <a href="../Classes/BufCombN.html">BufCombN</a>, <a href="../Classes/BufDelayN.html">BufDelayN</a>, <a href="../Classes/BufInfoUGenBase.html">BufInfoUGenBase</a>, <a href="../Classes/BufWr.html">BufWr</a>, <a href="../Classes/ChaosGen.html">ChaosGen</a>, <a href="../Classes/CheckBadValues.html">CheckBadValues</a>, <a href="../Classes/CoinGate.html">CoinGate</a>, <a href="../Classes/Compander.html">Compander</a>, <a href="../Classes/CompanderD.html">CompanderD</a>, <a href="../Classes/Convolution.html">Convolution</a>, <a href="../Classes/Convolution2.html">Convolution2</a>, <a href="../Classes/Convolution2L.html">Convolution2L</a>, <a href="../Classes/Convolution3.html">Convolution3</a>, <a href="../Classes/Crackle.html">Crackle</a>, <a href="../Classes/DUGen.html">DUGen</a>, <a href="../Classes/DelTapRd.html">DelTapRd</a>, <a href="../Classes/DelTapWr.html">DelTapWr</a>, <a href="../Classes/DemandEnvGen.html">DemandEnvGen</a>, <a href="../Classes/DigitalIO.html">DigitalIO</a>, <a href="../Classes/DigitalIn.html">DigitalIn</a>, <a href="../Classes/DigitalOut.html">DigitalOut</a>, <a href="../Classes/DiskOut.html">DiskOut</a>, <a href="../Classes/Done.html">Done</a>, <a href="../Classes/Dunique.html">Dunique</a>, <a href="../Classes/Dust.html">Dust</a>, <a href="../Classes/Dust2.html">Dust2</a>, <a href="../Classes/Duty.html">Duty</a>, <a href="../Classes/DynKlang.html">DynKlang</a>, <a href="../Classes/DynKlank.html">DynKlank</a>, <a href="../Classes/EnvGen.html">EnvGen</a>, <a href="../Classes/ExpRand.html">ExpRand</a>, <a href="../Classes/FSinOsc.html">FSinOsc</a>, <a href="../Classes/Free.html">Free</a>, <a href="../Classes/FreeSelf.html">FreeSelf</a>, <a href="../Classes/FreeSelfWhenDone.html">FreeSelfWhenDone</a>, <a href="../Classes/FreqShift.html">FreqShift</a>, <a href="../Classes/Gendy1.html">Gendy1</a>, <a href="../Classes/Gendy2.html">Gendy2</a>, <a href="../Classes/Gendy3.html">Gendy3</a>, <a href="../Classes/Hasher.html">Hasher</a>, <a href="../Classes/HilbertFIR.html">HilbertFIR</a>, <a href="../Classes/IEnvGen.html">IEnvGen</a>, <a href="../Classes/IRand.html">IRand</a>, <a href="../Classes/InBus.html">InBus</a>, <a href="../Classes/InRange.html">InRange</a>, <a href="../Classes/InRect.html">InRect</a>, <a href="../Classes/InfoUGenBase.html">InfoUGenBase</a>, <a href="../Classes/KeyState.html">KeyState</a>, <a href="../Classes/KeyTrack.html">KeyTrack</a>, <a href="../Classes/Klang.html">Klang</a>, <a href="../Classes/Klank.html">Klank</a>, <a href="../Classes/LFGauss.html">LFGauss</a>, <a href="../Classes/LFNoise0.html">LFNoise0</a>, <a href="../Classes/LastValue.html">LastValue</a>, <a href="../Classes/Latch.html">Latch</a>, <a href="../Classes/LinRand.html">LinRand</a>, <a href="../Classes/LinXFade2.html">LinXFade2</a>, <a href="../Classes/Line.html">Line</a>, <a href="../Classes/Linen.html">Linen</a>, <a href="../Classes/Logistic.html">Logistic</a>, <a href="../Classes/Loudness.html">Loudness</a>, <a href="../Classes/MantissaMask.html">MantissaMask</a>, <a href="../Classes/MaxLocalBufs.html">MaxLocalBufs</a>, <a href="../Classes/ModDif.html">ModDif</a>, <a href="../Classes/MostChange.html">MostChange</a>, <a href="../Classes/MouseButton.html">MouseButton</a>, <a href="../Classes/MouseX.html">MouseX</a>, <a href="../Classes/MulAdd.html">MulAdd</a>, <a href="../Classes/MultiOutUGen.html">MultiOutUGen</a>, <a href="../Classes/MultiplexAnalogIn.html">MultiplexAnalogIn</a>, <a href="../Classes/NRand.html">NRand</a>, <a href="../Classes/Normalizer.html">Normalizer</a>, <a href="../Classes/Onsets.html">Onsets</a>, <a href="../Classes/OutputProxy.html">OutputProxy</a>, <a href="../Classes/PSinGrain.html">PSinGrain</a>, <a href="../Classes/PartConv.html">PartConv</a>, <a href="../Classes/Pause.html">Pause</a>, <a href="../Classes/PauseSelf.html">PauseSelf</a>, <a href="../Classes/PauseSelfWhenDone.html">PauseSelfWhenDone</a>, <a href="../Classes/Peak.html">Peak</a>, <a href="../Classes/PeakFollower.html">PeakFollower</a>, <a href="../Classes/Phasor.html">Phasor</a>, <a href="../Classes/PitchShift.html">PitchShift</a>, <a href="../Classes/Pluck.html">Pluck</a>, <a href="../Classes/Poll.html">Poll</a>, <a href="../Classes/Pulse.html">Pulse</a>, <a href="../Classes/PulseCount.html">PulseCount</a>, <a href="../Classes/PulseDivider.html">PulseDivider</a>, <a href="../Classes/PureUGen.html">PureUGen</a>, <a href="../Classes/Rand.html">Rand</a>, <a href="../Classes/RecordBuf.html">RecordBuf</a>, <a href="../Classes/RunningSum.html">RunningSum</a>, <a href="../Classes/Sanitize.html">Sanitize</a>, <a href="../Classes/Saw.html">Saw</a>, <a href="../Classes/ScopeOut.html">ScopeOut</a>, <a href="../Classes/ScopeOut2.html">ScopeOut2</a>, <a href="../Classes/SendPeakRMS.html">SendPeakRMS</a>, <a href="../Classes/SendTrig.html">SendTrig</a>, <a href="../Classes/SpecCentroid.html">SpecCentroid</a>, <a href="../Classes/SpecFlatness.html">SpecFlatness</a>, <a href="../Classes/SpecPcile.html">SpecPcile</a>, <a href="../Classes/Splay.html">Splay</a>, <a href="../Classes/SplayAz.html">SplayAz</a>, <a href="../Classes/Spring.html">Spring</a>, <a href="../Classes/Stepper.html">Stepper</a>, <a href="../Classes/Sum3.html">Sum3</a>, <a href="../Classes/Sum4.html">Sum4</a>, <a href="../Classes/Sweep.html">Sweep</a>, <a href="../Classes/TBall.html">TBall</a>, <a href="../Classes/TExpRand.html">TExpRand</a>, <a href="../Classes/TIRand.html">TIRand</a>, <a href="../Classes/TRand.html">TRand</a>, <a href="../Classes/TWindex.html">TWindex</a>, <a href="../Classes/Tap.html">Tap</a>, <a href="../Classes/Timer.html">Timer</a>, <a href="../Classes/ToggleFF.html">ToggleFF</a>, <a href="../Classes/Trig1.html">Trig1</a>, <a href="../Classes/Unpack1FFT.html">Unpack1FFT</a>, <a href="../Classes/WhiteNoise.html">WhiteNoise</a>, <a href="../Classes/WidthFirstUGen.html">WidthFirstUGen</a>, <a href="../Classes/XFade2.html">XFade2</a>, <a href="../Classes/XLine.html">XLine</a>, <a href="../Classes/ZeroCrossing.html">ZeroCrossing</a></span><a class='subclass_toggle' href='#' onclick='javascript:showAllSubclasses(this); return false'>&hellip;&nbsp;see&nbsp;all</a></div>
 <div id='related'>See also: <a href="./../Browse.html#UGens">Browse: UGens</a>, <a href="./../Guides/Tour_of_UGens.html">Tour of UGens</a>, <a href="./../Guides/UGens-and-Synths.html">Unit Generators and Synths</a></div>
 </div>
 <h2><a class='anchor' name='description'>Description</a></h2>
@@ -153,10 +161,11 @@ var scdoc_sc_version = '3.13.1';
 <p>UGens represent calculations with signals. They are the basic building blocks of synth definitions on the server, and are used to generate or process both audio and control signals. The many subclasses of UGen are the client-side representations of unit generators, and are used to specify their parameters when constructing synth definitions (see <a href="./../Classes/SynthDef.html">SynthDef</a>).<h3><a class='anchor' name='Interface'>Interface</a></h3>
 
 <p>All UGens respond to one or more of the following class methods:<ul>
-<li><code>ar(arg1, arg2, ... )</code><li><code>kr(arg1, arg2, ... )</code><li><code>ir(arg1, arg2, ... )</code></ul>
+<li><code>ar(arg1, arg2, ...)</code><li><code>kr(arg1, arg2, ...)</code><li><code>ir(arg1, arg2, ...)</code></ul>
 
 <p>They return a new instance of UGen that calculates at audio/control rate or at initialization only (ir). Some UGens, like <a href="./../Classes/Rand.html">Rand</a>, use the <code>*new</code> method instead. These methods are implemented in subclasses, where argument names and their meaning depend on the case.
-<p>If any argument is an array, they return an array of UGens ( see: <a href="./../Guides/Multichannel-Expansion.html">Multichannel Expansion</a> ). If the combination of rates between arguments and ugen are not allowed, calling the methods will throw an error. This method adds the UGen to the current SynthDef, so it only fully works inside a UGen function.<textarea class='editor'>{ Blip.ar(Blip.kr(4, 5, 500, 60), 59, 0.1) }.play;</textarea>
+<p>If any argument is an array, they return an array of UGens (see: <a href="./../Guides/Multichannel-Expansion.html">Multichannel Expansion</a>). If the combination of rates between arguments and ugen are not allowed, calling the methods will throw an error. This method adds the UGen to the current SynthDef, so it only fully works inside a UGen function.<div class='codeMirrorContainer'><textarea class='editor'>{ Blip.ar(Blip.kr(4, 5, 500, 60), 59, 0.1) }.play;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h3><a class='anchor' name='Documentation%20of%20mul%20and%20add%20arguments'>Documentation of mul and add arguments</a></h3>
 
 <p>A great number of UGens take arguments for <code>mul</code> and <code>add</code> in their <code>*ar</code> and <code>*kr</code> methods. Because these arguments are so ubiquitous, they are not general documented in the individual help files. Mul and add simply refer to a constant or signal by which to multiply the output of the UGen, and a constant or signal to add to the output of the UGen. (mul happens before add.) They thus correspond in many cases to scaling the amplitude of the UGen signal in the case of mul, and adding a constant or DC offset in the case of add. In most cases the defaults for mul and add are 1 and 0 respectively, and they are commonly implemented using a automatically generated <a href="./../Classes/MulAdd.html">MulAdd</a> UGen for efficiency. See also the <code>range</code> and <code>madd</code> methods below.<h2><a class='anchor' name='classmethods'>Class Methods</a></h2>
@@ -165,11 +174,12 @@ var scdoc_sc_version = '3.13.1';
 <div class='method'><h4>Returns:</h4>
 <div class='returnvalue'>
 <p>the SynthDef in which the UGen is situated.</div><h4>Discussion:</h4>
-<textarea class='editor'>{ UGen.buildSynthDef.dump; Silent.ar }.play;</textarea>
+<div class='codeMirrorContainer'><textarea class='editor'>{ UGen.buildSynthDef.dump; Silent.ar }.play;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3><a class='anchor' name='Internally%20used%20class%20methods'>Internally used class methods</a></h3>
 <h3 class='method-code'><span class='method-prefix'>UGen.</span><a class='method-name' name='*multiNew' href='./../Overviews/Methods.html#multiNew'>multiNew</a>( <span class='argstr'>... args</span>)</h3>
 <div class='method'>
-<p>These methods are responsible for multichannel expansion. They call <code>*new1(rate, ...args)</code> for each parallel combination. Most <code>*ar/*kr</code> methods delegate to <a href="#*multiNewList">*multiNewList</a>.<h4>Arguments:</h4>
+<p>These methods are responsible for multichannel expansion. They call <code>*new1(rate, ...args)</code> for each parallel combination. Most <code>*ar / *kr</code> methods delegate to <a href="#*multiNewList">*multiNewList</a>.<h4>Arguments:</h4>
 <table class='arguments'>
 <tr><td class='argumentname'>... args<td class='argumentdesc'>
 <p>The first argument is rate, then the rest of the arguments. <code>(rate, ...args)</code></table></div><h3 class='method-code'><span class='method-prefix'>UGen.</span><a class='method-name' name='*multiNewList' href='./../Overviews/Methods.html#multiNewList'>multiNewList</a>(<span class='argstr'>args</span>)</h3>
@@ -185,7 +195,7 @@ var scdoc_sc_version = '3.13.1';
 <tr><td class='argumentname'>rate<td class='argumentdesc'>
 <p>A <a href="./../Classes/Symbol.html">Symbol</a>, <code>\audio, \control, \scalar</code></table><h4>Returns:</h4>
 <div class='returnvalue'>
-<p>An appropriate message selector ( <a href="./../Classes/Symbol.html">Symbol</a> like <code>\ar, \kr, \ir</code> ) for the given rate.</div></div><h3 class='method-code'><span class='method-prefix'>UGen.</span><a class='method-name' name='*replaceZeroesWithSilence' href='./../Overviews/Methods.html#replaceZeroesWithSilence'>replaceZeroesWithSilence</a>(<span class='argstr'>array</span>)</h3>
+<p>An appropriate message selector (<a href="./../Classes/Symbol.html">Symbol</a> like <code>\ar, \kr, \ir</code>) for the given rate.</div></div><h3 class='method-code'><span class='method-prefix'>UGen.</span><a class='method-name' name='*replaceZeroesWithSilence' href='./../Overviews/Methods.html#replaceZeroesWithSilence'>replaceZeroesWithSilence</a>(<span class='argstr'>array</span>)</h3>
 <div class='method'><h4>Returns:</h4>
 <div class='returnvalue'>
 <p>A new <a href="./../Classes/Array.html">Array</a>, where every zero is replaced by a <a href="./../Classes/Silent.html">Silent</a> UGen.</div><h4>Discussion:</h4>
@@ -203,10 +213,11 @@ var scdoc_sc_version = '3.13.1';
 <p>The name of the window<tr><td class='argumentname'>bufsize<td class='argumentdesc'>
 <p>Buffer size<tr><td class='argumentname'>zoom<td class='argumentdesc'>
 <p>Zoom factor</table><h4>Discussion:</h4>
-<textarea class='editor'>s.boot
+<div class='codeMirrorContainer'><textarea class='editor'>s.boot
 
 { Ringz.ar(PinkNoise.ar([0.1, 0.2]).scope(\pink), 2000, 1, 0.25) }.play; // multichannel works
 s.scope; // can still separately scope the output of the server</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-poll' href='./../Overviews/Methods.html#poll'>poll</a>(<span class='argstr'>trig: 10</span>, <span class='argstr'>label</span>, <span class='argstr'>trigid: -1</span>)</h3>
 <div class='method'>
 <p>Polls the output of this UGen every interval seconds, and posts the result.<h4>Arguments:</h4>
@@ -216,7 +227,7 @@ s.scope; // can still separately scope the output of the server</textarea>
 <p>A symbol to label the output<tr><td class='argumentname'>trigid<td class='argumentdesc'>
 <p>Numerical ID</table><h4>Discussion:</h4>
 
-<p>The default trig is 10, which converts to 10 triggers per second (or every 0.1 seconds). See <a href="./../Classes/Poll.html">Poll</a> for more info on polling.<textarea class='editor'>{ SinOsc.ar(LFNoise0.ar(2).range(420, 460).poll(label: \LFNoise), 0, 0.2) }.play;
+<p>The default trig is 10, which converts to 10 triggers per second (or every 0.1 seconds). See <a href="./../Classes/Poll.html">Poll</a> for more info on polling.<div class='codeMirrorContainer'><textarea class='editor'>{ SinOsc.ar(LFNoise0.ar(2).range(420, 460).poll(label: \LFNoise), 0, 0.2) }.play;
 
 // multichannel polling:
 (
@@ -226,33 +237,39 @@ s.scope; // can still separately scope the output of the server</textarea>
     SinOsc.ar(freqs, 0, 0.2);
 }.play;
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-dpoll' href='./../Overviews/Methods.html#dpoll'>dpoll</a>(<span class='argstr'>label</span>, <span class='argstr'>run: 1</span>, <span class='argstr'>trigid: -1</span>)</h3>
 <div class='method'>
 <p>Like <code>poll</code>, only that <code>dpoll</code> is used for Demand ugens. See <a href="./../Classes/Poll.html">Poll</a> for more info on polling.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-range' href='./../Overviews/Methods.html#range'>range</a>(<span class='argstr'>lo: 0.0</span>, <span class='argstr'>hi: 1.0</span>)</h3>
 <div class='method'>
 <p>Scales the output of this UGen to be within the range of <code>lo</code> and <code>hi</code>.<h4>Discussion:</h4>
 
-<p>Note that <code>range</code> expects the default output range, and thus should not be used in conjunction with mul and add arguments.<textarea class='editor'>{ SinOsc.ar(SinOsc.ar(0.3).range(440, 660), 0, 0.5) * 0.1 }.play;</textarea>
+<p>Note that <code>range</code> expects the default output range, and thus should not be used in conjunction with mul and add arguments.<div class='codeMirrorContainer'><textarea class='editor'>{ SinOsc.ar(SinOsc.ar(0.3).range(440, 660), 0, 0.5) * 0.1 }.play;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-exprange' href='./../Overviews/Methods.html#exprange'>exprange</a>(<span class='argstr'>lo: 0.01</span>, <span class='argstr'>hi: 1.0</span>)</h3>
 <div class='method'>
 <p>Maps the output of this UGen exponentially to be within the range of <code>lo</code> and <code>hi</code> using a <a href="./../Classes/LinExp.html">LinExp</a> UGen.<h4>Discussion:</h4>
 
-<p><code>lo</code> and <code>hi</code> should both be non-zero and have the same sign. Note that <code>exprange</code> expects the default output range, and thus should not be used in conjunction with mul and add arguments.<textarea class='editor'>{ SinOsc.ar(SinOsc.ar(0.3).exprange(440, 6600), 0, 0.5) * 0.1 }.play;</textarea>
+<p><code>lo</code> and <code>hi</code> should both be non-zero and have the same sign. Note that <code>exprange</code> expects the default output range, and thus should not be used in conjunction with mul and add arguments.<div class='codeMirrorContainer'><textarea class='editor'>{ SinOsc.ar(SinOsc.ar(0.3).exprange(440, 6600), 0, 0.5) * 0.1 }.play;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-curverange' href='./../Overviews/Methods.html#curverange'>curverange</a>(<span class='argstr'>lo: 0.0</span>, <span class='argstr'>hi: 1.0</span>, <span class='argstr'>curve: -4</span>)</h3>
 <div class='method'>
 <p>Scales the output of this UGen to be within the range of <code>lo</code> and <code>hi</code> using a curve factor of <code>curve</code>.<h4>Discussion:</h4>
 
-<p>Note that <code>curverange</code> expects the default output range, and thus should not be used in conjunction with mul and add arguments.<textarea class='editor'>{ SinOsc.ar(SinOsc.ar(0.3).curverange(440, 660, -3), 0, 0.5) * 0.1 }.play;</textarea>
+<p>Note that <code>curverange</code> expects the default output range, and thus should not be used in conjunction with mul and add arguments.<div class='codeMirrorContainer'><textarea class='editor'>{ SinOsc.ar(SinOsc.ar(0.3).curverange(440, 660, -3), 0, 0.5) * 0.1 }.play;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-unipolar' href='./../Overviews/Methods.html#unipolar'>unipolar</a>(<span class='argstr'>mul: 1</span>)</h3>
 <div class='method'>
 <p>Scales the output of this UGen to be between <code>(0..mul)</code> range (default 1).<h4>Discussion:</h4>
 
-<p>Note that <code>unipolar</code> expects the default output range, and thus should not be used in conjunction with mul and add arguments.<textarea class='editor'>{ SinOsc.ar(300, 0, 0.5) * SinOsc.kr(2).unipolar * 0.1 }.play;</textarea>
+<p>Note that <code>unipolar</code> expects the default output range, and thus should not be used in conjunction with mul and add arguments.<div class='codeMirrorContainer'><textarea class='editor'>{ SinOsc.ar(300, 0, 0.5) * SinOsc.kr(2).unipolar * 0.1 }.play;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-bipolar' href='./../Overviews/Methods.html#bipolar'>bipolar</a>(<span class='argstr'>mul: 1</span>)</h3>
 <div class='method'>
 <p>Scales the output of this UGen to be between <code>(-mul..mul)</code> range (default 1).<h4>Discussion:</h4>
 
-<p>Note that <code>bipolar</code> expects the default output range, and thus should not be used in conjunction with mul and add arguments.<textarea class='editor'>{ SinOsc.ar(500 + LFPulse.ar(4).bipolar(40), 0, 0.5) * 0.1 }.play;</textarea>
+<p>Note that <code>bipolar</code> expects the default output range, and thus should not be used in conjunction with mul and add arguments.<div class='codeMirrorContainer'><textarea class='editor'>{ SinOsc.ar(500 + LFPulse.ar(4).bipolar(40), 0, 0.5) * 0.1 }.play;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-degrad' href='./../Overviews/Methods.html#degrad'>degrad</a></h3>
 <div class='method'>
 <p>Converts degrees to radians. This method multiplies the receiver's output by <code>pi/180</code>.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-raddeg' href='./../Overviews/Methods.html#raddeg'>raddeg</a></h3>
@@ -288,8 +305,9 @@ s.scope; // can still separately scope the output of the server</textarea>
 <p>Wraps the receiver in a <code>min</code> <a href="./../Classes/BinaryOpUGen.html">BinaryOpUGen</a>, such that the lesser of the receiver's output and the Nyquist frequency is output. This can be useful to prevent aliasing.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-snap' href='./../Overviews/Methods.html#snap'>snap</a>(<span class='argstr'>resolution: 1.0</span>, <span class='argstr'>margin: 0.05</span>, <span class='argstr'>strength: 1.0</span>)</h3>
 <div class='method'>
 <p>Wraps the receiver so that its values are rounded within <code>margin</code> distance from a multiple of <code>resolution</code> to a multiple of resolution. By using <code>margin</code> and <code>strength</code> you can control when values will be rounded, and by how much. See <a href="./../Classes/SimpleNumber.html#-snap">SimpleNumber: -snap</a> for more details.
-<p>This can be used to make control signals (e.g. from sensors) "snap" to defined resolution. Example:<textarea class='editor'>s.boot;
-x = {SinOsc.ar((Line.kr(0, 10, 10).snap(1, 0.3, 1) + 60).poll.midicps, 0, -24.dbamp)}.play</textarea>
+<p>This can be used to make control signals (e.g. from sensors) "snap" to defined resolution. Example:<div class='codeMirrorContainer'><textarea class='editor'>s.boot;
+x = { SinOsc.ar((Line.kr(0, 10, 10).snap(1, 0.3, 1) + 60).poll.midicps, 0, -24.dbamp) }.play</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-softRound' href='./../Overviews/Methods.html#softRound'>softRound</a>(<span class='argstr'>resolution: 1.0</span>, <span class='argstr'>margin: 0.05</span>, <span class='argstr'>strength: 1.0</span>)</h3>
 <div class='method'>
 <p>Wraps the receiver so that its values are rounded outside of <code>margin</code> distance from a multiple of <code>resolution</code> to a multiple of resolution. By using <code>margin</code> and <code>strength</code> you can control when values will be rounded, and by how much. See <a href="./../Classes/SimpleNumber.html#-softRound">SimpleNumber: -softRound</a> for more details.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-linlin' href='./../Overviews/Methods.html#linlin'>linlin</a>(<span class='argstr'>inMin</span>, <span class='argstr'>inMax</span>, <span class='argstr'>outMin</span>, <span class='argstr'>outMax</span>, <span class='argstr'>clip: 'minmax'</span>)</h3>
@@ -299,42 +317,48 @@ x = {SinOsc.ar((Line.kr(0, 10, 10).snap(1, 0.3, 1) + 60).poll.midicps, 0, -24.db
 <p>The clip argument can be one of the four:<table>
 <tr><td><code>nil</code><td>do not clip at outMin or outMax<tr><td><code>\minmax</code><td>clip at outMin or outMax<tr><td><code>\min</code><td>clip at outMin<tr><td><code>\max</code><td>clip at outMax</table>
 
-<p>Example:<textarea class='editor'>{ Line.ar(-1, 5, 0.1).linlin(0, 3, -1, 1) }.plot(0.1);
+<p>Example:<div class='codeMirrorContainer'><textarea class='editor'>{ Line.ar(-1, 5, 0.1).linlin(0, 3, -1, 1) }.plot(0.1);
 
 // modulate some values
 (
 { Line.ar(-1, 5, 0.1).lincurve(SinOsc.ar(100), SinOsc.ar(130) + 3, -1, 1, clip: nil) }
     .plot(0.1, minval: -15, maxval: 5)
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-linexp' href='./../Overviews/Methods.html#linexp'>linexp</a>(<span class='argstr'>inMin</span>, <span class='argstr'>inMax</span>, <span class='argstr'>outMin</span>, <span class='argstr'>outMax</span>, <span class='argstr'>clip: 'minmax'</span>)</h3>
 <div class='method'>
-<p>Wraps the receiver so that a linear inputrange is mapped to an exponential output range.<h4>Discussion:</h4>
+<p>Wraps the receiver so that a linear input range is mapped to an exponential output range.<h4>Discussion:</h4>
 
-<p>outMin and outMax must be nonzero and of the same sign. For clip argument, see <code>linlin</code> above.<textarea class='editor'>{ Line.ar(-1, 5, 0.1).linexp(0, 3, 0.01, 1) }.plot(0.1);</textarea>
+<p>outMin and outMax must be nonzero and of the same sign. For clip argument, see <code>linlin</code> above.<div class='codeMirrorContainer'><textarea class='editor'>{ Line.ar(-1, 5, 0.1).linexp(0, 3, 0.01, 1) }.plot(0.1);</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-explin' href='./../Overviews/Methods.html#explin'>explin</a>(<span class='argstr'>inMin</span>, <span class='argstr'>inMax</span>, <span class='argstr'>outMin</span>, <span class='argstr'>outMax</span>, <span class='argstr'>clip: 'minmax'</span>)</h3>
 <div class='method'>
-<p>Wraps the receiver so that an exponential inputrange is mapped to a linear output range.<h4>Discussion:</h4>
+<p>Wraps the receiver so that an exponential input range is mapped to a linear output range.<h4>Discussion:</h4>
 
-<p>inMin and inMax must be nonzero and of the same sign. For clip argument, see <code>linlin</code> above.<textarea class='editor'>{ Line.ar(1, 5, 0.1).explin(1, 3, -1, 1) }.plot(0.1);</textarea>
+<p>inMin and inMax must be nonzero and of the same sign. For clip argument, see <code>linlin</code> above.<div class='codeMirrorContainer'><textarea class='editor'>{ Line.ar(1, 5, 0.1).explin(1, 3, -1, 1) }.plot(0.1);</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-expexp' href='./../Overviews/Methods.html#expexp'>expexp</a>(<span class='argstr'>inMin</span>, <span class='argstr'>inMax</span>, <span class='argstr'>outMin</span>, <span class='argstr'>outMax</span>, <span class='argstr'>clip: 'minmax'</span>)</h3>
 <div class='method'>
-<p>Wraps the receiver so that an exponential inputrange is mapped to an exponential output range.<h4>Discussion:</h4>
+<p>Wraps the receiver so that an exponential input range is mapped to an exponential output range.<h4>Discussion:</h4>
 
-<p>outMin, outMax, inMin and inMax must be nonzero and of the same sign. For clip argument, see <code>linlin</code> above.<textarea class='editor'>{ Line.ar(1, 5, 0.1).expexp(1, 3, 0.01, 1) }.plot(0.1);</textarea>
+<p>outMin, outMax, inMin and inMax must be nonzero and of the same sign. For clip argument, see <code>linlin</code> above.<div class='codeMirrorContainer'><textarea class='editor'>{ Line.ar(1, 5, 0.1).expexp(1, 3, 0.01, 1) }.plot(0.1);</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-lincurve' href='./../Overviews/Methods.html#lincurve'>lincurve</a>(<span class='argstr'>inMin: 0</span>, <span class='argstr'>inMax: 1</span>, <span class='argstr'>outMin: 0</span>, <span class='argstr'>outMax: 1</span>, <span class='argstr'>curve: -4</span>, <span class='argstr'>clip: 'minmax'</span>)</h3>
 <div class='method'>
-<p>Wraps the receiver so that a linear inputrange is mapped to a curve-like exponential output range.<h4>Discussion:</h4>
+<p>Wraps the receiver so that a linear input range is mapped to a curve-like exponential output range.<h4>Discussion:</h4>
 
-<p>outMin and outMax may be zero and of the different sign. For clip argument, see <code>linlin</code> above.<textarea class='editor'>{ Line.ar(-1, 5, 0.1).lincurve(0, 3, -1, 1, curve: -4) }.plot(0.1);
+<p>outMin and outMax may be zero and of the different sign. For clip argument, see <code>linlin</code> above.<div class='codeMirrorContainer'><textarea class='editor'>{ Line.ar(-1, 5, 0.1).lincurve(0, 3, -1, 1, curve: -4) }.plot(0.1);
 
 // modulate the curve. Unlike with numbers and CurveSpec, the curve absolute value
 // should not be much smaller than 0.5.
 { SinOsc.ar(100).lincurve(-1, 1, -1, 1, XLine.kr(-3, -100, 0.1)) * 0.1 }.plot(0.1);</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-curvelin' href='./../Overviews/Methods.html#curvelin'>curvelin</a>(<span class='argstr'>inMin: 0</span>, <span class='argstr'>inMax: 1</span>, <span class='argstr'>outMin: 0</span>, <span class='argstr'>outMax: 1</span>, <span class='argstr'>curve: -4</span>, <span class='argstr'>clip: 'minmax'</span>)</h3>
 <div class='method'>
-<p>Wraps the receiver so that a curve-like exponential inputrange is mapped to a linear output range.<h4>Discussion:</h4>
+<p>Wraps the receiver so that a curve-like exponential input range is mapped to a linear output range.<h4>Discussion:</h4>
 
-<p>inMin and inMax may be zero and of the different sign. For clip argument, see <code>linlin</code> above.<textarea class='editor'>{ Line.ar(-1, 5, 0.1).curvelin(0, 3, -1, 1, curve: -4) }.plot(0.1);</textarea>
+<p>inMin and inMax may be zero and of the different sign. For clip argument, see <code>linlin</code> above.<div class='codeMirrorContainer'><textarea class='editor'>{ Line.ar(-1, 5, 0.1).curvelin(0, 3, -1, 1, curve: -4) }.plot(0.1);</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-bilin' href='./../Overviews/Methods.html#bilin'>bilin</a>(<span class='argstr'>inCenter</span>, <span class='argstr'>inMin</span>, <span class='argstr'>inMax</span>, <span class='argstr'>outCenter</span>, <span class='argstr'>outMin</span>, <span class='argstr'>outMax</span>, <span class='argstr'>clip: 'minmax'</span>)</h3>
 <div class='method'>
 <p>Map the receiver from two assumed linear input ranges (inMin..inCenter) and (inCenter..inMax) to two linear output ranges (outMin..outCenter) and (outCenter..outMax). If the input exceeds the input range, the following behaviours are specified by the clip argument.<h4>Arguments:</h4>
@@ -345,7 +369,8 @@ x = {SinOsc.ar((Line.kr(0, 10, 10).snap(1, 0.3, 1) + 60).poll.midicps, 0, -24.db
 <p>output minimum<tr><td class='argumentname'>outMax<td class='argumentdesc'>
 <p>output maximum<tr><td class='argumentname'>clip<td class='argumentdesc'>
 <p>nil (don't clip) \max (clip ceiling) \min (clip floor) \minmax (clip both - this is default).</table><h4>Discussion:</h4>
-<textarea class='editor'>{Line.kr(0, 10, 0.1).bilin(1, 0, 10, 0.6, 0, 1)}.plot(0.1)</textarea>
+<div class='codeMirrorContainer'><textarea class='editor'>{ Line.kr(0, 10, 0.1).bilin(1, 0, 10, 0.6, 0, 1) }.plot(0.1)</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-prune' href='./../Overviews/Methods.html#prune'>prune</a>(<span class='argstr'>min</span>, <span class='argstr'>max</span>, <span class='argstr'>type</span>)</h3>
 <div class='method'>
 <p>Limits the receiver range to one of the four clip modes, see <code>linlin</code> above.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-checkBadValues' href='./../Overviews/Methods.html#checkBadValues'>checkBadValues</a>(<span class='argstr'>id: 0</span>, <span class='argstr'>post: 2</span>)</h3>
@@ -355,14 +380,37 @@ x = {SinOsc.ar((Line.kr(0, 10, 10).snap(1, 0.3, 1) + 60).poll.midicps, 0, -24.db
 <p>Outputs trueUGen when the receiver outputs 1, falseUGen when the receiver outputs 0. If the receiver outputs a value between 0 and 1, a mixture of both will be played.<h4>Discussion:</h4>
 
 <p>This is implemented as: <code>(this * (trueUGen - falseUGen)) + falseUGen)</code>
-<p>Note that both trueUGen and falseUGen will be calculated regardless of whether they are output, so this may not be the most efficient approach.<textarea class='editor'>// note different syntax in these two examples
-{ if( LFNoise1.kr(1.0, 0.5, 0.5) , SinOsc.ar, Saw.ar ) * 0.1 }.play;
+<p>Note that both trueUGen and falseUGen will be calculated regardless of whether they are output, so this may not be the most efficient approach.<div class='codeMirrorContainer'><textarea class='editor'>// note different syntax in these two examples
+{ if(LFNoise1.kr(1.0, 0.5, 0.5), SinOsc.ar, Saw.ar) * 0.1 }.play;
 
 { Trig1.ar(Dust.ar(3), 0.2).lag(0.1).if(FSinOsc.ar(440), FSinOsc.ar(880)) * 0.1 }.play;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-binaryValue' href='./../Overviews/Methods.html#binaryValue'>binaryValue</a></h3>
+<div class='method'>
+<p>Outputs 1, representing true for positive, 0 representing false for negative or zero input values.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-isPositive' href='./../Overviews/Methods.html#isPositive'>isPositive</a></h3>
+<div class='method'>
+<p>Outputs 1, representing true for positive or zero, 0 representing false for negative input values.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-isStrictlyPositive' href='./../Overviews/Methods.html#isStrictlyPositive'>isStrictlyPositive</a></h3>
+<div class='method'>
+<p>Outputs 1, representing true for positive, 0 representing false for negative or zero input values.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-isNegative' href='./../Overviews/Methods.html#isNegative'>isNegative</a></h3>
+<div class='method'>
+<p>Outputs 1, representing true for negative, 0 representing false for positive or zero input values.</div><h3 class='method-code'><span class='method-prefix'></span><a class='method-name' name='-|==|' href='./../Overviews/Methods.html#|==|'>|==|</a>(<span class='argstr'>that</span>)</h3>
+<div class='method'>
+<p>Outputs 1, representing true, when the receiver and argument signal coincide. Note that this may be ambivalent in many cases, because of floating point arithmetic. A special sign is needed, because <code>==</code> compares the UGen objects, and not the signal they produce.<div class='codeMirrorContainer'><textarea class='editor'>// an example of floating point relevance for the |==| operator.
+// the rounded signal will match at some point, but not the direct signal
+(
+{
+    var a = Line.ar(0, 1, 0.008);
+    var b = a |==| 0.5;
+    var c = a.round(0.01) |==| 0.5;
+    [a, Trig1.ar(b, 0.001), Trig1.ar(c, 0.001)]
+}.plot
+)</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'></span><a class='method-name' name='-@' href='./../Overviews/Methods.html#@'>@</a>(<span class='argstr'>y</span>)</h3>
 <div class='method'>
 <p>Dynamic geometry support. Returns <code>Point(this, y)</code>.<h4>Discussion:</h4>
-<textarea class='editor'>{ (SinOsc.ar(1001) @ SinOsc.ar(1207)).rho }.scope;</textarea>
+<div class='codeMirrorContainer'><textarea class='editor'>{ (SinOsc.ar(1001) @ SinOsc.ar(1207)).rho }.scope;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-asComplex' href='./../Overviews/Methods.html#asComplex'>asComplex</a></h3>
 <div class='method'>
 <p>Complex math support. Returns <code>Complex(this, 0.0)</code>.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-dumpArgs' href='./../Overviews/Methods.html#dumpArgs'>dumpArgs</a></h3>
@@ -412,9 +460,11 @@ x = {SinOsc.ar((Line.kr(0, 10, 10).snap(1, 0.3, 1) + 60).poll.midicps, 0, -24.db
 <div class='returnvalue'>
 <p>the receiver.</div><h4>Discussion:</h4>
 
-<p>Thus UGen-dup effectively returns a reference to the original and is a convenient way to copy a mono signal to multiple channels.<textarea class='editor'>{ SinOsc.ar(Rand(200, 4000), 0, 0.2).dup }.plot // this is the same UGen</textarea>
+<p>Thus UGen-dup effectively returns a reference to the original and is a convenient way to copy a mono signal to multiple channels.<div class='codeMirrorContainer'><textarea class='editor'>{ SinOsc.ar(Rand(200, 4000), 0, 0.2).dup }.plot // this is the same UGen</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>Function-dup evaluates that function multiple times, thus potentially returning distinct UGens.<textarea class='editor'>{ { SinOsc.ar(Rand(200, 4000), 0, 0.2) }.dup }.plot // these are different UGens</textarea>
+<p>Function-dup evaluates that function multiple times, thus potentially returning distinct UGens.<div class='codeMirrorContainer'><textarea class='editor'>{ { SinOsc.ar(Rand(200, 4000), 0, 0.2) }.dup }.plot // these are different UGens</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3><a class='anchor' name='Internally%20used%20instance%20methods'>Internally used instance methods</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-methodSelectorForRate' href='./../Overviews/Methods.html#methodSelectorForRate'>methodSelectorForRate</a></h3>
 <div class='method'>
@@ -424,11 +474,11 @@ x = {SinOsc.ar((Line.kr(0, 10, 10).snap(1, 0.3, 1) + 60).poll.midicps, 0, -24.db
 
 <p>This may be overridden to do other initialisations, as long as the inputs are set correctly.</div><h3><a class='anchor' name='Bela'>Bela</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-belaScope' href='./../Overviews/Methods.html#belaScope'>belaScope</a>(<span class='argstr'>scopeChannel</span>)</h3>
-<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/Common/Audio/Bela/BelaScope.sc'>/usr/local/share/SuperCollider/SCClassLibrary/Common/Audio/Bela/BelaScope.sc</a></div>
+<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/Common/Audio/Bela/BelaScope.sc'>/usr/local/share/SuperCollider/SCClassLibrary/Common/Audio/Bela/BelaScope.sc</a></div>
 <div class='method'>
 <p>Send this UGen's output to Bela's Oscilloscope (see <a href="./../Classes/BelaScope.html">BelaScope</a> for required setup)<h4>Arguments:</h4>
 <table class='arguments'>
-<tr><td class='argumentname'>channelOffset<td class='argumentdesc'>
+<tr><td class='argumentname'>scopeChannel<td class='argumentdesc'>
 <p>Bela's oscilloscope channel to start scoping on. This has to be a non-negative number, and can't be changed after scoping starts.<tr><td class='argumentname'>(server)<td class='argumentdesc'>
 <p>The server on which BelaScope is running. If not specified, it looks for the first server for which BelaScope was already initialized. If none is found, it attempts to initialize a <a href="./../Classes/BelaScope.html">BelaScope</a> instance on <a href="./../Classes/Server.html#*default">Server: *default</a>.</table><h4>Returns:</h4>
 <div class='returnvalue'>
@@ -471,13 +521,12 @@ x = {SinOsc.ar((Line.kr(0, 10, 10).snap(1, 0.3, 1) + 60).poll.midicps, 0, -24.db
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-widthFirstAntecedents' href='./../Overviews/Methods.html#widthFirstAntecedents'>widthFirstAntecedents</a> = value</h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-writeDef' href='./../Overviews/Methods.html#writeDef'>writeDef</a>(<span class='argstr'>file</span>)</h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-writeDefOld' href='./../Overviews/Methods.html#writeDefOld'>writeDefOld</a>(<span class='argstr'>file</span>)</h3>
-<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/Common/Audio/SynthDefOld.sc'>/usr/local/share/SuperCollider/SCClassLibrary/Common/Audio/SynthDefOld.sc</a></div>
+<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/Common/Audio/SynthDefOld.sc'>/usr/local/share/SuperCollider/SCClassLibrary/Common/Audio/SynthDefOld.sc</a></div>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-writeInputSpec' href='./../Overviews/Methods.html#writeInputSpec'>writeInputSpec</a>(<span class='argstr'>file</span>, <span class='argstr'>synthDef</span>)</h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-writeInputSpecOld' href='./../Overviews/Methods.html#writeInputSpecOld'>writeInputSpecOld</a>(<span class='argstr'>file</span>, <span class='argstr'>synthDef</span>)</h3>
-<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/Common/Audio/SynthDefOld.sc'>/usr/local/share/SuperCollider/SCClassLibrary/Common/Audio/SynthDefOld.sc</a></div>
+<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/Common/Audio/SynthDefOld.sc'>/usr/local/share/SuperCollider/SCClassLibrary/Common/Audio/SynthDefOld.sc</a></div>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-writeOutputSpec' href='./../Overviews/Methods.html#writeOutputSpec'>writeOutputSpec</a>(<span class='argstr'>file</span>)</h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-writeOutputSpecs' href='./../Overviews/Methods.html#writeOutputSpecs'>writeOutputSpecs</a>(<span class='argstr'>file</span>)</h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-writesToBus' href='./../Overviews/Methods.html#writesToBus'>writesToBus</a></h3>
-<h3 class='method-code'><span class='method-prefix'></span><a class='method-name' name='-|==|' href='./../Overviews/Methods.html#|==|'>|==|</a>(<span class='argstr'>that</span>)</h3>
-<div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/UGen.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/UGen.schelp</a><br>link::Classes/UGen::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+<div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/UGen.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/UGen.schelp</a><br>link::Classes/UGen::<br></div></div><script src='./../static/editor.js' type='text/javascript'></script>
 </body></html>

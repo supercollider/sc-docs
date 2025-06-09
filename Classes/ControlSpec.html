@@ -1,21 +1,25 @@
-<!doctype html><html lang='en'><head><title>ControlSpec | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>ControlSpec | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../lib/jquery.min.js'></script>
-<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/jquery.min.js'></script>
+<script src='./../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './..';
 var scdoc_title = 'ControlSpec';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../static/scdoc.js' type='text/javascript'></script>
 <script src='./../docmap.js' type='text/javascript'></script>
+<script src='./../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
@@ -68,12 +72,13 @@ var scdoc_sc_version = '3.13.1';
 <div id='summary'>numerical input specification</div>
 </div>
 <div class='subheader'>
-<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/Common/Control/Spec.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Control/Spec.sc'>Spec.sc</a></div><div id='related'>See also: <a href="./../Classes/Warp.html">Warp</a></div>
+<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/Common/Control/Spec.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Control/Spec.sc'>Spec.sc</a></div><div id='related'>See also: <a href="./../Classes/Warp.html">Warp</a></div>
 </div>
 <h2><a class='anchor' name='description'>Description</a></h2>
 
 <p>The original, and most common spec (see <a href="./../Classes/Spec.html">Spec</a>). A ControlSpec is used by GUI sliders and knobs to specify the range and curve of the controls. ControlSpec may be used in many ways to map from linear 0..1 range to your desired range and back.
-<p>The most common way to create a ControlSpec is by<textarea class='editor'>anObject.asSpec // the object may be an array or a symbol</textarea>
+<p>The most common way to create a ControlSpec is by<div class='codeMirrorContainer'><textarea class='editor'>anObject.asSpec // the object may be an array or a symbol</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h2><a class='anchor' name='classmethods'>Class Methods</a></h2>
 <h3 class='method-code'><span class='method-prefix'>ControlSpec.</span><a class='method-name' name='*new' href='./../Overviews/Methods.html#new'>new</a>(<span class='argstr'>minval: 0.0</span>, <span class='argstr'>maxval: 1.0</span>, <span class='argstr'>warp: 'lin'</span>, <span class='argstr'>step: 0.0</span>, <span class='argstr'>default</span>, <span class='argstr'>units</span>, <span class='argstr'>grid</span>)</h3>
 <div class='method'>
@@ -93,12 +98,13 @@ var scdoc_sc_version = '3.13.1';
 <div class='method'>
 <p>Maps and constrains a <strong>value</strong> between 0 and 1 to the range between minval and maxval.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-unmap' href='./../Overviews/Methods.html#unmap'>unmap</a>(<span class='argstr'>value</span>)</h3>
 <div class='method'>
-<p>Maps and constrains a <strong>value</strong> between minval and maxval to the range between 0 and 1.<textarea class='editor'>g = ControlSpec(0.01, 2000, \exp, 0.1, 220, "Hz");
+<p>Maps and constrains a <strong>value</strong> between minval and maxval to the range between 0 and 1.<div class='codeMirrorContainer'><textarea class='editor'>g = ControlSpec(0.01, 2000, \exp, 0.1, 220, "Hz");
 g.map(0.5); // convert from [0..1] to [0.01..2000]
 g.unmap(1000); // convert from [0.01..2000] to [0..1]
 
 // fore and back translation should be close to identical:
 g.unmap(g.map(0.5));</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-clipLo' href='./../Overviews/Methods.html#clipLo'>clipLo</a></h3>
 <div class='method'>
 <p>The lower of maxval and minval.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-clipHi' href='./../Overviews/Methods.html#clipHi'>clipHi</a></h3>
@@ -140,7 +146,7 @@ g.unmap(g.map(0.5));</textarea>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-warp' href='./../Overviews/Methods.html#warp'>warp</a> = <span class='argstr'>w</span></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-zoom' href='./../Overviews/Methods.html#zoom'>zoom</a>(<span class='argstr'>ratio: 1</span>)</h3>
 <h2><a class='anchor' name='examples'>Examples</a></h2>
-<textarea class='editor'>g = ControlSpec(0.01, 2000, \exp, 0.1, 220, "Hz");
+<div class='codeMirrorContainer'><textarea class='editor'>g = ControlSpec(0.01, 2000, \exp, 0.1, 220, "Hz");
 
 // or alternatively
 
@@ -149,9 +155,10 @@ g.unmap(g.map(0.5));</textarea>
 // or add it to the ControlSpec.specs IdentityDictionary:
 
 ControlSpec.specs[\myFreq] = ControlSpec(0.01, 2000, \exp, 0.01, 440, units: "Hz");</textarea>
-<textarea class='editor'>// array is used as arguments to ControlSpec.new(minval, maxval, warp, step, default)
-[300,3000,\exponential,100].asSpec.dump
-Instance of ControlSpec {    (0313FC08, gc=00, fmt=00, flg=00, set=03)
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+<div class='codeMirrorContainer'><textarea class='editor'>// array is used as arguments to ControlSpec.new(minval, maxval, warp, step, default)
+[300, 3000, \exponential, 100].asSpec.dump
+Instance of ControlSpec {    (0313FC08, gc = 00, fmt = 00, flg = 00, set = 03)
   instance variables [6]
     minval : Integer 300
     maxval : Integer 3000
@@ -161,8 +168,8 @@ Instance of ControlSpec {    (0313FC08, gc=00, fmt=00, flg=00, set=03)
 }
 
 // partially specified ...
-[-48,48].asSpec.dump
-Instance of ControlSpec {    (0313FF18, gc=00, fmt=00, flg=00, set=03)
+[-48, 48].asSpec.dump
+Instance of ControlSpec {    (0313FF18, gc = 00, fmt = 00, flg = 00, set = 03)
   instance variables [6]
     minval : Integer -48
     maxval : Integer 48
@@ -173,11 +180,11 @@ Instance of ControlSpec {    (0313FF18, gc=00, fmt=00, flg=00, set=03)
 
 // a Symbol
 \freq.asSpec.dump
-Instance of ControlSpec {    (180F4910, gc=3C, fmt=00, flg=00, set=03)
+Instance of ControlSpec {    (180F4910, gc = 3C, fmt = 00, flg = 00, set = 03)
   instance variables [8]
     minval : Integer 20
     maxval : Integer 20000
-    warp : instance of ExponentialWarp (17FEDB30, size=1, set=1)
+    warp : instance of ExponentialWarp (17FEDB30, size = 1, set = 1)
     step : Integer 0
     default : Integer 440
     units : " Hz"
@@ -188,7 +195,7 @@ Instance of ControlSpec {    (180F4910, gc=3C, fmt=00, flg=00, set=03)
 
 // nil becomes a default ControlSpec
 nil.asSpec.dump
-Instance of ControlSpec {    (0313FF18, gc=00, fmt=00, flg=00, set=03)
+Instance of ControlSpec {    (0313FF18, gc = 00, fmt = 00, flg = 00, set = 03)
   instance variables [6]
     minval : Float 0
     maxval : Float 1
@@ -196,7 +203,8 @@ Instance of ControlSpec {    (0313FF18, gc=00, fmt=00, flg=00, set=03)
     step : Float 0
     default : Float 0
 }</textarea>
-<textarea class='editor'>// make a frequency spec with an exponential range from 20 to 20000,
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+<div class='codeMirrorContainer'><textarea class='editor'>// make a frequency spec with an exponential range from 20 to 20000,
 // give it a rounding of 30 (Hz)
 a = \freq.asSpec;
 a.step = 100;
@@ -214,7 +222,8 @@ a.map(1.5); // exceeds the area: clip, returns max
 
 a.unmap(4000);
 a.unmap(22.0);</textarea>
-<textarea class='editor'>// like in envelopes, a CurveWarp is created by a number:
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+<div class='codeMirrorContainer'><textarea class='editor'>// like in envelopes, a CurveWarp is created by a number:
 
 a = [0, 1, -4].asSpec;
 a.map(0.5);
@@ -229,7 +238,8 @@ var invals = (0..10).normalize;
     a.map(invals).plot;
 }
 );</textarea>
-<textarea class='editor'>// using spec for sliders:
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+<div class='codeMirrorContainer'><textarea class='editor'>// using spec for sliders:
 (
 var w, c, d;
 w = Window.new("control", Rect(128, 64, 340, 160));
@@ -244,22 +254,24 @@ c.action = {
     + a.map(c.value)
 };
 )</textarea>
-<textarea class='editor'>// ControlSpec-map can also be used to map ugens
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+<div class='codeMirrorContainer'><textarea class='editor'>// ControlSpec-map can also be used to map ugens
 (
 var spec;
-spec = [ 100, 18000, \exp].asSpec;
+spec = [100, 18000, \exp].asSpec;
 {
-    var freq,osc;
-    osc = SinOsc.kr(0.1).range(0,1);
-    freq = spec.map( osc );
+    var freq, osc;
+    osc = SinOsc.kr(0.1).range(0, 1);
+    freq = spec.map(osc);
 
-    freq.dump;// BinaryOpUGen
+    freq.dump; // BinaryOpUGen
 
     SinOsc.ar(
         freq.poll
     )
 }.play
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/ControlSpec.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/ControlSpec.schelp</a><br>link::Classes/ControlSpec::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/ControlSpec.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/ControlSpec.schelp</a><br>link::Classes/ControlSpec::<br></div></div><script src='./../static/editor.js' type='text/javascript'></script>
 </body></html>

@@ -1,21 +1,25 @@
-<!doctype html><html lang='en'><head><title>MIDIClient | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>MIDIClient | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../lib/jquery.min.js'></script>
-<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/jquery.min.js'></script>
+<script src='./../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './..';
 var scdoc_title = 'MIDIClient';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../static/scdoc.js' type='text/javascript'></script>
 <script src='./../docmap.js' type='text/javascript'></script>
+<script src='./../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
@@ -50,7 +54,7 @@ var scdoc_sc_version = '3.13.1';
 <div id='summary'>Basic access to MIDI on your computer</div>
 </div>
 <div class='subheader'>
-<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/Common/Control/MIDIOut.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Control/MIDIOut.sc'>MIDIOut.sc</a></div><div id='related'>See also: <a href="./../Classes/MIDIIn.html">MIDIIn</a>, <a href="./../Classes/MIDIOut.html">MIDIOut</a>, <a href="./../Classes/MIDIFunc.html">MIDIFunc</a>, <a href="./../Classes/MIDIdef.html">MIDIdef</a>, <a href="./../Guides/MIDI.html">MIDI</a>, <a href="./../Guides/UsingMIDI.html">Using MIDI</a>, <a href="./../Classes/MIDIEndPoint.html">MIDIEndPoint</a></div>
+<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/Common/Control/MIDIOut.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Control/MIDIOut.sc'>MIDIOut.sc</a></div><div id='related'>See also: <a href="./../Classes/MIDIIn.html">MIDIIn</a>, <a href="./../Classes/MIDIOut.html">MIDIOut</a>, <a href="./../Classes/MIDIFunc.html">MIDIFunc</a>, <a href="./../Classes/MIDIdef.html">MIDIdef</a>, <a href="./../Guides/MIDI.html">MIDI</a>, <a href="./../Guides/UsingMIDI.html">Using MIDI</a>, <a href="./../Classes/MIDIEndPoint.html">MIDIEndPoint</a></div>
 </div>
 <h2><a class='anchor' name='description'>Description</a></h2>
 
@@ -74,7 +78,7 @@ var scdoc_sc_version = '3.13.1';
 <p>The list of available MIDI sources, including SuperCollider's own sources.<h4>Returns:</h4>
 <div class='returnvalue'>
 <p>A <code>List</code> of <code>MIDIEndPoints</code></div></div><h3 class='method-code'><span class='method-prefix'>MIDIClient.</span><a class='method-name' name='*externalSources' href='./../Overviews/Methods.html#externalSources'>externalSources</a></h3>
-<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/Platform/linux/SystemOverwrites/extMIDIOut.sc'>/usr/local/share/SuperCollider/SCClassLibrary/Platform/linux/SystemOverwrites/extMIDIOut.sc</a></div>
+<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/Platform/linux/SystemOverwrites/extMIDIOut.sc'>/usr/local/share/SuperCollider/SCClassLibrary/Platform/linux/SystemOverwrites/extMIDIOut.sc</a></div>
 <div class='method'>
 <p>The list of available MIDI sources, excluding SuperCollider's own sources. Only on Linux the list of <code>sources</code> and <code>externalSources</code> differs.<h4>Returns:</h4>
 <div class='returnvalue'>
@@ -83,7 +87,7 @@ var scdoc_sc_version = '3.13.1';
 <p>The list of available MIDI destinations, including SuperCollider's own destinations.<h4>Returns:</h4>
 <div class='returnvalue'>
 <p>A <code>List</code> of <code>MIDIEndPoints</code></div></div><h3 class='method-code'><span class='method-prefix'>MIDIClient.</span><a class='method-name' name='*externalDestinations' href='./../Overviews/Methods.html#externalDestinations'>externalDestinations</a></h3>
-<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/Platform/linux/SystemOverwrites/extMIDIOut.sc'>/usr/local/share/SuperCollider/SCClassLibrary/Platform/linux/SystemOverwrites/extMIDIOut.sc</a></div>
+<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/Platform/linux/SystemOverwrites/extMIDIOut.sc'>/usr/local/share/SuperCollider/SCClassLibrary/Platform/linux/SystemOverwrites/extMIDIOut.sc</a></div>
 <div class='method'>
 <p>The list of available MIDI destinations, excluding SuperCollider's own destinations. Only on Linux the list of <code>destinations</code> and <code>externalDestinations</code> differs.<h4>Returns:</h4>
 <div class='returnvalue'>
@@ -94,7 +98,7 @@ var scdoc_sc_version = '3.13.1';
 <p>The number of input ports that SuperCollider created. This is mainly useful to know on the Linux platform.</div><h3 class='method-code'><span class='method-prefix'>MIDIClient.</span><a class='method-name' name='*myoutports' href='./../Overviews/Methods.html#myoutports'>myoutports</a></h3>
 <div class='method'>
 <p>The number of output ports that SuperCollider created. This is mainly useful to know on the Linux platform.</div><h3 class='method-code'><span class='method-prefix'>MIDIClient.</span><a class='method-name' name='*getClientID' href='./../Overviews/Methods.html#getClientID'>getClientID</a></h3>
-<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/Platform/linux/SystemOverwrites/extMIDIOut.sc'>/usr/local/share/SuperCollider/SCClassLibrary/Platform/linux/SystemOverwrites/extMIDIOut.sc</a></div>
+<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/Platform/linux/SystemOverwrites/extMIDIOut.sc'>/usr/local/share/SuperCollider/SCClassLibrary/Platform/linux/SystemOverwrites/extMIDIOut.sc</a></div>
 <div class='method'>
 <p>Linux only. This gets the client ID by which the MIDIClient is defined in the ALSA subsystem. It can be used to identify whether a port is belonging to this client or another one.
 <p>On non-linux systems, it posts a warning and returns nil.</div><h3><a class='anchor' name='Inherited%20class%20methods'>Inherited class methods</a></h3>
@@ -102,8 +106,8 @@ var scdoc_sc_version = '3.13.1';
 <h3><a class='anchor' name='Inherited%20instance%20methods'>Inherited instance methods</a></h3>
 <div id='inheritedinstmets'></div><h2><a class='anchor' name='examples'>Examples</a></h2>
 
-<p>This is Linux specific code. The function takes care of initializing MIDIClient, detects a MIDI device named SE25 and connects it to port 0 of SuperCollider.<textarea class='editor'>(
-~connect_midi_devices = { arg device, name;
+<p>This is Linux specific code. The function takes care of initializing MIDIClient, detects a MIDI device named SE25 and connects it to port 0 of SuperCollider.<div class='codeMirrorContainer'><textarea class='editor'>(
+~connect_midi_devices = { |device, name|
     // init or refresh MIDIClient end points
     if(MIDIClient.initialized == false) {
         MIDIClient.init;
@@ -111,8 +115,8 @@ var scdoc_sc_version = '3.13.1';
         MIDIClient.list;
     };
 
-    MIDIClient.sources.do({ arg endPoint;
-        if(device.notNil and: { name.notNil} and: {endPoint.device == device} and: { endPoint.name == name }) {
+    MIDIClient.sources.do({ |endPoint|
+        if(device.notNil and: { name.notNil } and: { endPoint.device == device } and: { endPoint.name == name }) {
             // catch exception thrown when already connected
             try {
                 // connect SuperCollider out port 0 to MIDI device
@@ -129,5 +133,7 @@ var scdoc_sc_version = '3.13.1';
 )
 
 ~connect_midi_devices.("SE25", "SE25 MIDI 1"); // test it now</textarea>
-<div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/MIDIClient.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/MIDIClient.schelp</a><br>link::Classes/MIDIClient::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+
+<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/MIDIClient.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/MIDIClient.schelp</a><br>link::Classes/MIDIClient::<br></div></div><script src='./../static/editor.js' type='text/javascript'></script>
 </body></html>

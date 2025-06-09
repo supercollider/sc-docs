@@ -1,0 +1,504 @@
+<!doctype html><html lang='en'><head><title>GUI: Interfacing an instrument with a View | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../../static/themes/default.css' type='text/css' />
+<link rel='stylesheet' href='./../../frontend.css' type='text/css' />
+<link rel='stylesheet' href='./../../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../../static/lib/katex/katex.min.css' />
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+<script src='./../../static/lib/jquery.min.js'></script>
+<script src='./../../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../../static/lib/katex/katex.min.js' type='text/javascript'></script>
+<script>
+var helpRoot = './../..';
+var scdoc_title = 'GUI: Interfacing an instrument with a View';
+var scdoc_sc_version = '3.14.0-rc1';
+</script>
+<script src='./../../static/scdoc.js' type='text/javascript'></script>
+<script src='./../../docmap.js' type='text/javascript'></script>
+<script src='./../../frontend.js' type='text/javascript'></script>
+<script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
+</head>
+<body onload='fixTOC()'>
+<div id='toc'>
+<div id='toctitle'>GUI: Interfacing an instrument with a View:</div>
+<span class='toc_search'>Filter: <input id='toc_search'></span><ul class='toc'><li class='toc1'><a href='#GUI%20Tutorial'>GUI Tutorial</a></li>
+<ul class='toc'></ul><li class='toc1'><a href='#What%20is%20this%20tutorial%20about?'>What is this tutorial about?</a></li>
+<ul class='toc'></ul><li class='toc1'><a href='#Setup'>Setup</a></li>
+<ul class='toc'></ul><li class='toc1'><a href='#Connecting%20the%20button'>Connecting the button</a></li>
+<ul class='toc'></ul><li class='toc1'><a href='#Adding%20several%20buttons%20at%20once'>Adding several buttons at once</a></li>
+<ul class='toc'></ul><li class='toc1'><a href='#How%20HLayout%20and%20VLayout%20works'>How HLayout and VLayout works</a></li>
+<ul class='toc'></ul><li class='toc1'><a href='#Back%20to%20connecting%20the%20slider'>Back to connecting the slider</a></li>
+<ul class='toc'></ul><li class='toc1'><a href='#Adapting%20the%20Slider%20to%20the%20correct%20value%20(mapping)'>Adapting the Slider to the correct value (mapping)</a></li>
+<ul class='toc'></ul><li class='toc1'><a href='#Adding%20text,%20and%20specifying%20views%20ratios'>Adding text, and specifying views ratios</a></li>
+<ul class='toc'></ul><li class='toc1'><a href='#Conclusion'>Conclusion</a></li>
+<ul class='toc'></ul></ul></div><div id='menubar'></div>
+<div class='contents'>
+<div class='header'>
+<div id='label'>
+<span id='folder'>Tutorials/GUI</span>
+ | <span id='categories'><a href='./../../Browse.html#Tutorials'>Tutorials</a>&#8201;&gt;&#8201;<a href='./../../Browse.html#Tutorials>GUI'>GUI</a></span>
+</div><h1>GUI: Interfacing an instrument with a View</h1>
+<div id='summary'>Creating a view that interacts with a Synth, introduction to Layouts</div>
+</div>
+<div class='subheader'>
+<div id='related'>See also: <a href="./../../Tutorials/GUI/create_window.html">GUI: Create a Window</a>, <a href="./../../Tutorials/GUI/compose_complex_view.html">GUI: Composing views with basic components</a></div>
+</div>
+<h2><a class='anchor' name='GUI%20Tutorial'>GUI Tutorial</a></h2>
+
+<p>This helpfile is part of a <a href="./../../Tutorials/GUI/tutorial_intro.html">GUI tutorial</a>.
+<p>It is the second part of a beginner's introduction to SuperCollider's GUI system. First part covers  <a href="./../../Tutorials/GUI/create_window.html">creating a window</a>, while third part talks about <a href="./../../Tutorials/GUI/compose_complex_view.html">composing views with basic GUI components</a>.<h2><a class='anchor' name='What%20is%20this%20tutorial%20about?'>What is this tutorial about?</a></h2>
+
+<p>This is a tutorial to get started using SuperCollider's GUI system to create views and make them interact with a <a href="./../../Classes/Synth.html">Synth</a>.
+<p>It covers the following topics:<ul>
+<li>Create a keyboard from a list of midi notes<li>Create a volume slider, and a duration slider<li>Use the layout system so widgets are arranged in a grid pattern</ul>
+<h2><a class='anchor' name='Setup'>Setup</a></h2>
+
+<p>You will need to boot the <a href="./../../Classes/Server.html">Server</a> and add a <a href="./../../Classes/SynthDef.html">SynthDef</a> to it which we will be using in this tutorial.
+<p>The SynthDef is a simple sine wave with a percussive envelope.
+<p>We will control the frequency, volume and the duration of a <a href="./../../Classes/Synth.html">Synth</a>.<div class='codeMirrorContainer'><textarea class='editor'>// make sure the server is booted:
+s.boot;
+// add our SynthDef to the server:
+(
+SynthDef(\instrView, { |out = 0, amp = 0.25, freq = 440, dur = 1.0|
+    var snd, env;
+
+    env = EnvGen.kr(Env.perc(dur * 0.01, dur * 0.99), doneAction: Done.freeSelf);
+    snd = SinOsc.ar(freq, mul: amp);
+    snd = snd * env;
+    snd = snd!2;
+
+    Out.ar(out, snd);
+}).add;
+)</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+
+<p>You can try the synth using:<div class='codeMirrorContainer'><textarea class='editor'>Synth(\instrView)</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+
+<p>We'll start with the following code which is not yet connected to our synth and will therefore not yield any sound yet:<div class='codeMirrorContainer'><textarea class='editor'>(
+var window = Window();
+var layout = HLayout();
+var button = Button();
+
+button.string_("Play");
+
+window.layout_(layout);
+layout.add(button);
+
+window.front;
+)</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+
+<p>If this code does not make sense to you, you can find more explanations about it in <a href="./../../Tutorials/GUI/create_window.html">GUI: Create a Window</a>.<h2><a class='anchor' name='Connecting%20the%20button'>Connecting the button</a></h2>
+
+<p>So we start with a simple button, that, sadly, is not very useful so far. To connect it, you need to <strong>assign a function to its 'action' method</strong>.<div class='codeMirrorContainer'><textarea class='editor'>(
+var window = Window();
+var layout = HLayout();
+var button = Button();
+button.string_("Play");
+
+button.action_({
+    // This is the body of the function that the button will trigger
+    Synth(\instrView);
+    "ting".postln;
+});
+
+window.layout_(layout);
+layout.add(button);
+window.front;
+)</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+
+<p>As we already knew the command to play the synth, we just have to <strong>configure the button to evaluate this command when it is pressed</strong>. It is also posting a message to the console, which might be useful for debugging purposes.<h2><a class='anchor' name='Adding%20several%20buttons%20at%20once'>Adding several buttons at once</a></h2>
+
+<p>We now have a keyboard, but not a very good one ! It only has one key... I'd say that might be enough, but that's quite uncommon.
+<p>So let's <strong>add a second key</strong>:<div class='codeMirrorContainer'><textarea class='editor'>(
+var window = Window();
+var layout = HLayout();
+var button = Button();
+var button2 = Button();
+
+button.string_("Play");
+button.action_({ Synth(\instrView); });
+
+button2.string_("Play 2");
+button2.action_({ Synth(\instrView); });
+
+window.layout_(layout);
+
+layout.add(button);
+layout.add(button2);
+
+window.front;
+)</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+
+<p>As you can see, <strong>the Layout has arranged everything automatically</strong>.
+<p>But <strong>copy-pasting is not a good way to add</strong> keys. Instead, we can just ask SC to create a button 8 times:<div class='codeMirrorContainer'><textarea class='editor'>(
+var window = Window();
+var layout = HLayout();
+var numberOfButtons = 8;
+
+// 8 times...
+numberOfButtons.do({
+    // ...create a button...
+    var button = Button();
+    // ...assign its function...
+    button.action_({ Synth(\instrView); });
+    // ...and add it to the layout.
+    layout.add(button);
+});
+
+window.layout_(layout);
+window.front;
+)</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+
+<p>Those buttons feels too small. This is because <a href="./../../Classes/Button.html">Button</a> <strong>has a low default maximum height</strong>. We can change it by reassigning it:<div class='codeMirrorContainer'><textarea class='editor'>(
+var window = Window();
+var layout = HLayout();
+var numberOfButtons = 8;
+
+numberOfButtons.do({
+
+    // Changing this property
+    var button = Button()
+    .maxHeight_(200);
+
+    button.action_({ Synth(\instrView); });
+    layout.add(button);
+});
+
+window.layout_(layout);
+window.front;
+)</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+
+<p>So we now have 8 buttons, but they all make the same sound. That's doesn't sounds like much progress to me.
+<p>We can <strong>change the Synth parameters by modifying its arguments</strong>:<div class='codeMirrorContainer'><textarea class='editor'>Synth(\instrView, [\freq, 660]);</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+
+<p>We just need to introduce this inside the loop that creates the buttons. But instead of asking SC to do this 8 times, it will do it for a collection of frequencies instead.
+<p>We can <strong>transform a set of MIDI notes into frequencies and map them to the buttons</strong>:<div class='codeMirrorContainer'><textarea class='editor'>(
+var window = Window();
+var layout = HLayout();
+// Getting the C Major Scale, as frequencies, using MIDI notation:
+var frequencies = [60, 62, 64, 65, 67, 69, 71, 72].midicps;
+
+// For every frequency...
+frequencies.do({ |frequency|
+
+    // ...this particular button...
+    var button = Button()
+    .maxHeight_(200);
+
+    // ...will use this particular frequency.
+    button.action_({
+        Synth(\instrView, [\freq, frequency]);
+    });
+
+    layout.add(button);
+});
+
+window.layout_(layout);
+window.front;
+)</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+<h2><a class='anchor' name='How%20HLayout%20and%20VLayout%20works'>How HLayout and VLayout works</a></h2>
+
+<p>Now that we have a keyboard, we'd like to <strong>implement a volume slider</strong> to the view. We can do this by inserting a <a href="./../../Classes/Slider.html">Slider</a> to the layout:<div class='codeMirrorContainer'><textarea class='editor'>(
+var window = Window();
+var layout = HLayout();
+var frequencies = [60, 62, 64, 65, 67, 69, 71, 72].midicps;
+
+// Slider creation
+var slider = Slider();
+
+frequencies.do({ |frequency|
+    var button = Button()
+    .maxHeight_(200);
+    button.action_({ Synth(\instrView, [\freq, frequency]); });
+    layout.add(button);
+});
+
+// Add it inside the layout
+layout.add(slider);
+
+window.layout_(layout);
+window.front;
+)</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+
+<p>The volume slider now appears at the right of the piano, like it was a key. This is because it is on the same layout as the keys.
+<p>For now, <strong>the Window is only containing a</strong> <a href="./../../Classes/HLayout.html">HLayout</a>.
+<p><strong>The HLayout divides the Window horizontally</strong>, as if it was a succession of columns.
+<p><strong>It will distribute the views inside those columns, one by one, from left to right</strong>.
+<p>This is why the Slider has been pushed all the way to the right. With this division, you can add things to the left, to the right, and between columns.
+<p>But you cannot order views vertically. For this, you need to create a <a href="./../../Classes/VLayout.html">VLayout</a>, which in turns, cannot order views horizontally. <strong>To mix horizontal and vertical division of the Window, you will need to insert some layouts inside other layouts.</strong>
+<p>Let's see an example about layout hierarchy. Execute the following code before reading it to get a visual idea about the way it works:<div class='codeMirrorContainer'><textarea class='editor'>(
+var window = Window();
+var firstLayout = VLayout();
+var secondLayout = HLayout();
+
+var topButton = Button().string_("top").maxHeight_(200);
+
+var leftButton = Button().string_("left").maxHeight_(200);
+var rightButton = Button().string_("right").maxHeight_(200);
+
+// The window is divided vertically, using a VLayout:
+window.layout_(firstLayout);
+
+// We're adding two objects, this will split the window in two:
+
+// This will cover the top side of the window:
+firstLayout.add(topButton);
+
+// This will cover the bottom side of the window:
+firstLayout.add(secondLayout);
+
+// The bottom of the screen is a HLayout, so it's subdivided horizontally
+// In two, because we add two objects:
+secondLayout.add(leftButton);
+secondLayout.add(rightButton);
+
+window.front;
+)</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+
+<p>The window is first divided vertically, then the bottom of the window is divided horizontally. This means there are 3 emplacements, occupied by 3 buttons. It can take some time to get accustomed to this logic.<h2><a class='anchor' name='Back%20to%20connecting%20the%20slider'>Back to connecting the slider</a></h2>
+
+<p>Let's adapt our previous code to place the slider on top of the piano:<div class='codeMirrorContainer'><textarea class='editor'>(
+var window = Window();
+var windowLayout = VLayout();
+var pianoLayout = HLayout();
+
+var frequencies = [60, 62, 64, 65, 67, 69, 71, 72].midicps;
+
+var volumeSlider = Slider();
+
+frequencies.do({ |frequency|
+    var button = Button()
+    .maxHeight_(200);
+    button.action_({ Synth(\instrView, [\freq, frequency]); });
+    // Horizontal split, 'piano layout'
+    pianoLayout.add(button);
+});
+
+// Vertical split, 'window' layout
+windowLayout.add(volumeSlider);
+windowLayout.add(pianoLayout);
+
+window.layout_(windowLayout);
+window.front;
+)</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+
+<p>The slider is crushing everything ! It's because it is not on the right direction. We can fix this with the <code>.orientation</code> method. Then we can also reduce its maximum height with <code>.maxHeight</code> so it takes less space:<div class='codeMirrorContainer'><textarea class='editor'>(
+var window = Window();
+var windowLayout = VLayout();
+var pianoLayout = HLayout();
+var frequencies = [60, 62, 64, 65, 67, 69, 71, 72].midicps;
+
+// Slider setup
+var volumeSlider = Slider()
+.orientation_(\horizontal)
+.maxHeight_(60);
+
+frequencies.do({ |frequency|
+    var button = Button()
+    .maxHeight_(200);
+    button.action_({ Synth(\instrView, [\freq, frequency]); });
+    pianoLayout.add(button);
+});
+
+windowLayout.add(volumeSlider);
+windowLayout.add(pianoLayout);
+window.layout_(windowLayout);
+window.front;
+)</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+
+<p>So far, we changed its graphical properties, but the slider do not have any <code>action</code>. It's time to <strong>connect it</strong>:<div class='codeMirrorContainer'><textarea class='editor'>(
+var window = Window();
+var windowLayout = VLayout();
+var pianoLayout = HLayout();
+var frequencies = [60, 62, 64, 65, 67, 69, 71, 72].midicps;
+
+// Create a variable to store the volume
+var volume = 0.1;
+
+var volumeSlider = Slider()
+.orientation_(\horizontal)
+.maxHeight_(60)
+// Make the slider start at the correct value
+.value_(volume);
+
+// When the slider moves, update the volume variable
+volumeSlider.action = {
+    volume = volumeSlider.value;
+};
+
+frequencies.do({ |frequency|
+    var button = Button()
+    .maxHeight_(200);
+    button.action_({
+        // Use the volume variable
+        // to modify the Synth arguments
+        // when the key is pressed
+        Synth(\instrView, [
+            \freq, frequency,
+            \amp, volume
+        ]);
+
+    });
+    pianoLayout.add(button);
+});
+
+windowLayout.add(volumeSlider);
+windowLayout.add(pianoLayout);
+window.layout_(windowLayout);
+window.front;
+)</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+
+<p>In this case, the <code>action</code> function of the Slider will assign the sliders value to a variable called <code>volume</code>. When a key from our 'piano' is pressed, it will also check this variable to pass the right volume as argument, when evaluating the Synth command.
+<p>But how did the slider know what values were expected by the volume parameter ? Well it didn't. We were only lucky: <strong>Sliders value spans between 0 and 1</strong>, which is the correct setting for the volume.<h2><a class='anchor' name='Adapting%20the%20Slider%20to%20the%20correct%20value%20(mapping)'>Adapting the Slider to the correct value (mapping)</a></h2>
+
+<p>But what if we want to control other ranges ? We can use <code>.linlin</code> or <code>.linexp</code> to map the sliders value, which is between 0 and 1, to a value between 0.1 and 2. We'll use this to new value to control the duration of the percussive envelope:<div class='codeMirrorContainer'><textarea class='editor'>(
+var window = Window();
+var windowLayout = VLayout();
+
+var pianoLayout = HLayout();
+var frequencies = [60, 62, 64, 65, 67, 69, 71, 72].midicps;
+
+var volume = 0.1;
+var volumeSlider = Slider()
+.orientation_(\horizontal)
+.maxHeight_(60)
+.value_(volume)
+.action_({ volume = volumeSlider.value; });
+
+var dur = 1;
+var durMin = 0.1;
+var durMax = 2;
+var durSlider = Slider()
+.orientation_(\horizontal)
+.maxHeight_(60)
+.action_({
+    dur = durSlider.value;
+    // linlin maps a value
+    // from one linear range
+    // to another linear range
+    dur = dur.linlin(
+        0, 1,
+        durMin, durMax
+    );
+});
+
+frequencies.do({ |frequency|
+    var button = Button()
+    .maxHeight_(200);
+    button.action_({
+        Synth(\instrView, [
+            \freq, frequency,
+            \amp, volume,
+            \dur, dur,
+        ]);
+
+    });
+    pianoLayout.add(button);
+});
+
+windowLayout.add(volumeSlider);
+windowLayout.add(durSlider);
+windowLayout.add(pianoLayout);
+window.layout_(windowLayout);
+window.front;
+)</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+
+<p>Alternatively, we can use a <a href="./../../Classes/ControlSpec.html">ControlSpec</a> to do the same thing:<div class='codeMirrorContainer'><textarea class='editor'>var dur = 1;
+var durMin = 0.1;
+var durMax = 2;
+var durSlider = Slider()
+.orientation_(\horizontal)
+.maxHeight_(60)
+.action_({ dur = ControlSpec(durMin, durMax, \lin).map(durSlider.value); });</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+<h2><a class='anchor' name='Adding%20text,%20and%20specifying%20views%20ratios'>Adding text, and specifying views ratios</a></h2>
+
+<p>The last thing to do is to label our controls. It is easy to remember what the keyboard does, but the sliders could use some indications. We will use a <a href="./../../Classes/StaticText.html">StaticText</a> for this, configuring its string, and its alignment.<div class='codeMirrorContainer'><textarea class='editor'>(
+var window = Window();
+var windowLayout = VLayout();
+var pianoLayout = HLayout();
+var frequencies = [60, 62, 64, 65, 67, 69, 71, 72].midicps;
+
+var volume = 0.1;
+var volumeSlider = Slider()
+.orientation_(\horizontal)
+.maxHeight_(60)
+.value_(volume)
+.action_({ volume = volumeSlider.value; });
+// Creating the text, and assigning a string
+var volumeText = StaticText()
+.string_("Volume")
+.align_(\center);
+
+var dur = 1;
+var durMin = 0.1;
+var durMax = 2;
+var durSlider = Slider()
+.orientation_(\horizontal)
+.maxHeight_(60)
+.value_(dur.linlin(durMin, durMax, 0, 1))
+.action_({
+    dur = durSlider.value;
+    dur = dur.linlin(0, 1, durMin, durMax);
+});
+// And here
+var durText = StaticText()
+.string_("Duration")
+.align_(\center);
+
+frequencies.do({ |frequency|
+    var button = Button()
+    .maxHeight_(200);
+    button.action_({
+        Synth(\instrView, [
+            \freq, frequency,
+            \amp, volume,
+            \dur, dur,
+        ]);
+
+    });
+    pianoLayout.add(button);
+});
+
+// Inserting the volume text before the volume slider:
+windowLayout.add(volumeText, 1);
+windowLayout.add(volumeSlider, 3);
+// Inserting the duration text before the duration slider,
+// after the volume slider:
+windowLayout.add(durText, 1);
+windowLayout.add(durSlider, 3);
+
+windowLayout.add(pianoLayout, 8);
+window.layout_(windowLayout);
+window.front;
+)</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+
+<p>You can see that when adding the views inside the layouts, I also specified a number. This is called <strong>assigning a 'stretch'</strong> to a view:<div class='codeMirrorContainer'><textarea class='editor'>windowLayout.add(volumeSlider, stretch: 3);</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+
+<p>The <strong>stretch number defines the view's ratio relative to the sum of every view's stretch</strong> inside a layout. In our example, the keyboard has the same size as the rest of the views, because the keyboard has a stretch of 8, and the sum of every others views stretches is also 8.
+<p>This means that a view with a stretch of 3 will be 3 times bigger than a view with a stretch of 1. A view with a stretch of 6 will be 3 times bigger than a view with a stretch of 2, and 6 times bigger than a view with a stretch of 1.
+<p>Note that <strong>the minimum and maximum size of a view are also taken into account when using stretch</strong>, which can affect the real ratios of the views.<h2><a class='anchor' name='Conclusion'>Conclusion</a></h2>
+
+<p>This has been a long tutorial, but with those basic concepts, you should now be able to manipulate every GUI Class without much difficulties.
+<p>The next tutorial in this series is a tour of common things you might want to implement when using GUI, for example an interface with tabs, allowing you to switch between different views. Like we did here, it is about using basic GUI components to create interfaces. You can access it here: <a href="./../../Tutorials/GUI/compose_complex_view.html">GUI: Composing views with basic components</a>.<div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Tutorials/GUI/create_simple_instrument_view.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Tutorials/GUI/create_simple_instrument_view.schelp</a><br>link::Tutorials/GUI/create_simple_instrument_view::<br></div></div><script src='./../../static/editor.js' type='text/javascript'></script>
+</body></html>

@@ -1,21 +1,25 @@
-<!doctype html><html lang='en'><head><title>Color | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>Color | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../lib/jquery.min.js'></script>
-<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/jquery.min.js'></script>
+<script src='./../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './..';
 var scdoc_title = 'Color';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../static/scdoc.js' type='text/javascript'></script>
 <script src='./../docmap.js' type='text/javascript'></script>
+<script src='./../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
@@ -76,7 +80,7 @@ var scdoc_sc_version = '3.13.1';
 <div id='summary'>An object which stores color values</div>
 </div>
 <div class='subheader'>
-<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/Common/Core/Color.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Core/Color.sc'>Color.sc</a></div><div id='related'>See also: <a href="./../Classes/Object.html">Object</a></div>
+<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/Common/Core/Color.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Core/Color.sc'>Color.sc</a></div><div id='related'>See also: <a href="./../Classes/Object.html">Object</a></div>
 </div>
 <h2><a class='anchor' name='description'>Description</a></h2>
 
@@ -109,7 +113,8 @@ var scdoc_sc_version = '3.13.1';
 <tr><td class='argumentname'>string<td class='argumentdesc'>
 <p>A <a href="./../Classes/String.html">String</a>.</table><h4>Discussion:</h4>
 
-<p>The string should be a 6 character web color, or a 3 character CSS style color. A preceding # is optional.<textarea class='editor'>Color.fromHexString("#FF6600");</textarea>
+<p>The string should be a 6 character web color, or a 3 character CSS style color. A preceding # is optional.<div class='codeMirrorContainer'><textarea class='editor'>Color.fromHexString("#FF6600");</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>Color.</span><a class='method-name' name='*black' href='./../Overviews/Methods.html#black'>black</a></h3>
 <div class='method'>
 <p>Nothing is darker.</div><h3 class='method-code'><span class='method-prefix'>Color.</span><a class='method-name' name='*white' href='./../Overviews/Methods.html#white'>white</a></h3>
@@ -168,15 +173,18 @@ var scdoc_sc_version = '3.13.1';
 <div class='returnvalue'>
 <p>An instance of <a href="./../Classes/Float.html">Float</a> between 0 and 1.</div></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-hexString' href='./../Overviews/Methods.html#hexString'>hexString</a></h3>
 <div class='method'>
-<p>Returns a <a href="./../Classes/String.html">String</a> containing a 6 character web color code, preceded by a #.<textarea class='editor'>Color(1.0, 0.4).hexString;</textarea>
+<p>Returns a <a href="./../Classes/String.html">String</a> containing a 6 character web color code, preceded by a #.<div class='codeMirrorContainer'><textarea class='editor'>Color(1.0, 0.4).hexString;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'></span><a class='method-name' name='-==' href='./../Overviews/Methods.html#=='>==</a>(<span class='argstr'>that</span>)</h3>
 <div class='method'>
-<p>Binary operator.<textarea class='editor'>// returns true
+<p>Binary operator.<div class='codeMirrorContainer'><textarea class='editor'>// returns true
 Color.new255(0, 0, 255, 255) == Color.new(0, 0, 1, 1)</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-scaleByAlpha' href='./../Overviews/Methods.html#scaleByAlpha'>scaleByAlpha</a></h3>
 <div class='method'>
-<p>Returns a Color, where <code>red</code>, <code>green</code>, and <code>blue</code> are scaled by the <code>alpha</code> value, and alpha is set to 1.<textarea class='editor'>// returns true:
+<p>Returns a Color, where <code>red</code>, <code>green</code>, and <code>blue</code> are scaled by the <code>alpha</code> value, and alpha is set to 1.<div class='codeMirrorContainer'><textarea class='editor'>// returns true:
 Color(1, 0.5, 1, 0.5).scaleByAlpha == Color(0.5, 0.25, 0.5, 1)</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-blend' href='./../Overviews/Methods.html#blend'>blend</a>(<span class='argstr'>that</span>, <span class='argstr'>blend: 0.5</span>)</h3>
 <div class='method'>
 <p>Interpolates the <code>red</code>, <code>green</code>, <code>blue</code>, and <code>alpha</code> values of two Colors, linearly weighting between the first and the second.<h4>Arguments:</h4>
@@ -193,8 +201,9 @@ Color(1, 0.5, 1, 0.5).scaleByAlpha == Color(0.5, 0.25, 0.5, 1)</textarea>
 <p>High-clips the RGB variation here.<tr><td class='argumentname'>alphaVal<td class='argumentdesc'>
 <p>Varies the alpha value +/- this amount, and clips it between 0 and 1.</table></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-complementary' href='./../Overviews/Methods.html#complementary'>complementary</a></h3>
 <div class='method'>
-<p>Returns the complementary color.<textarea class='editor'>// returns true:
+<p>Returns the complementary color.<div class='codeMirrorContainer'><textarea class='editor'>// returns true:
 Color(1, 0.5, 1, 0.5).complementary == Color(0.0, 0.5, 0.0, 0.5)</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-multiply' href='./../Overviews/Methods.html#multiply'>multiply</a>(<span class='argstr'>aColor</span>, <span class='argstr'>opacity: 1.0</span>)</h3>
 <div class='method'><h4>Arguments:</h4>
 <table class='arguments'>
@@ -266,7 +275,7 @@ Color(1, 0.5, 1, 0.5).complementary == Color(0.0, 0.5, 0.0, 0.5)</textarea>
 <div class='method'>
 <p>Round the color.</div><h3><a class='anchor' name='Inherited%20instance%20methods'>Inherited instance methods</a></h3>
 <div id='inheritedinstmets'></div><h2><a class='anchor' name='examples'>Examples</a></h2>
-<textarea class='editor'>(
+<div class='codeMirrorContainer'><textarea class='editor'>(
 w = Window.new.front;
 w.view.background_(Color.white);
 w.drawFunc = {
@@ -288,8 +297,9 @@ w.drawFunc = {
 };
 w.refresh;
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h2><a class='anchor' name='X-windows%20colors'>X-windows colors</a></h2>
-<textarea class='editor'>'alice blue' -&gt; Color.new255(240, 248, 255),
+<div class='codeMirrorContainer'><textarea class='editor'>'alice blue' -&gt; Color.new255(240, 248, 255),
 'AliceBlue' -&gt; Color.new255(240, 248, 255),
 'antique white' -&gt; Color.new255(250, 235, 215),
 'AntiqueWhite' -&gt; Color.new255(250, 235, 215),
@@ -1027,6 +1037,7 @@ w.refresh;
 'yellow3' -&gt; Color.new255(205, 205, 0),
 'yellow4' -&gt; Color.new255(139, 139, 0),
 'YellowGreen' -&gt; Color.new255(154, 205, 50)</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/Color.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/Color.schelp</a><br>link::Classes/Color::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/Color.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/Color.schelp</a><br>link::Classes/Color::<br></div></div><script src='./../static/editor.js' type='text/javascript'></script>
 </body></html>

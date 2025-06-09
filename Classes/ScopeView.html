@@ -1,21 +1,25 @@
-<!doctype html><html lang='en'><head><title>ScopeView | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>ScopeView | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../lib/jquery.min.js'></script>
-<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/jquery.min.js'></script>
+<script src='./../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './..';
 var scdoc_title = 'ScopeView';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../static/scdoc.js' type='text/javascript'></script>
 <script src='./../docmap.js' type='text/javascript'></script>
+<script src='./../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
@@ -78,7 +82,7 @@ var scdoc_sc_version = '3.13.1';
 <p> Tells the ScopeView object to stop plotting. Plotting can be resumed anytime with the <a href="#start">start</a> method.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-style' href='./../Overviews/Methods.html#style'>style</a></h3>
 <div class='method'>
 <p> The plotting style:<ul>
-<li>0 = the channels are vertically spaced<li>1 = the channels are overlaid<li>2 = lissajou; the first two channels are used for 2D plotting (as streams of x and y coordinates).</ul>
+<li>0 = the channels are vertically spaced<li>1 = the channels are overlaid<li>2 = lissajou; each pair of channels is used for 2D plotting (as streams of x and y coordinates).</ul>
 <h4>Arguments:</h4>
 <table class='arguments'>
 <tr><td class='argumentname'><td class='argumentdesc'>
@@ -115,27 +119,27 @@ var scdoc_sc_version = '3.13.1';
 <p> An Array of Colors, one per channel.</table></div><h3><a class='anchor' name='Inherited%20instance%20methods'>Inherited instance methods</a></h3>
 <div id='inheritedinstmets'></div><h2><a class='anchor' name='examples'>Examples</a></h2>
 <h3><a class='anchor' name='A%20step-by-step%20example'>A step-by-step example</a></h3>
-<textarea class='editor'>// boot the server (if not already booted)
+<div class='codeMirrorContainer'><textarea class='editor'>// boot the server (if not already booted)
 s.boot;
 
 // execute the following two blocks in succession:
 (
-f = Buffer.alloc(s,1024,2);
-b = Bus.audio(s,1);
+f = Buffer.alloc(s, 1024, 2);
+b = Bus.audio(s, 1);
 
 w = Window.new.front;
 w.onClose = { // free everything when finished
     c.stop; a.free; d.free; f.free; b.free;
     "SynthDefs, busses and buffers have all been freed.".postln;
 };
-c = ScopeView(w.view,w.view.bounds.insetAll(10,10,10,10));
+c = ScopeView(w.view, w.view.bounds.insetAll(10, 10, 10, 10));
 c.bufnum = f.bufnum;
 c.server = s; // Important: one must assign the ScopeView to a server
 )
 
 (
 // listening to the bus, using ScopeOut2 to write it to the buffer
-a = SynthDef("monoscope", { arg bus, bufnum;
+a = SynthDef("monoscope", { |bus, bufnum|
     var z;
     z = In.ar(bus, 2);
 
@@ -148,105 +152,108 @@ a = SynthDef("monoscope", { arg bus, bufnum;
 );
 
 // making noise onto the buffer
-d = SynthDef("noise", { arg bus;
+d = SynthDef("noise", { |bus|
     var z;
-    z = LFSaw.ar(SinOsc.kr(0.1).range(300,1000),[0,1]*pi) * 0.1;
+    z = LFSaw.ar(SinOsc.kr(0.1).range(300, 1000), [0, 1]*pi) * 0.1;
     Out.ar(bus, z);
 }).play(
     s,
-    [\bus,b.index]
+    [\bus, b.index]
 );
 c.start; // Tell the ScopeView to start
-CmdPeriod.doOnce({w.close});
+CmdPeriod.doOnce({ w.close });
 )
 
 
 c.style = 0; // vertically spaced
 c.style = 1; // overlapped
 c.style = 2; // x/y</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h3><a class='anchor' name='An%20interactive%20example%20with%20sound'>An interactive example with sound</a></h3>
 
-<p>This explains all the options:<textarea class='editor'>(
+<p>This explains all the options:<div class='codeMirrorContainer'><textarea class='editor'>(
 s.waitForBoot({
-    var func, sdef1, sdef2, syn1, syn2,startButton ;
-    f = Buffer.alloc(s,1024,2);
-    b = Bus.audio(s,1);
+    var func, sdef1, sdef2, syn1, syn2, startButton ;
+    f = Buffer.alloc(s, 1024, 2);
+    b = Bus.audio(s, 1);
 
-    w = Window("Scope", Rect(150, Window.screenBounds.height-500,790,400)).front;
-    c = ScopeView(w,Rect(10,10,380,380)); // this is SCScope
+    w = Window("Scope", Rect(150, Window.screenBounds.height-500, 790, 400)).front;
+    c = ScopeView(w, Rect(10, 10, 380, 380)); // this is SCScope
     c.bufnum = f.bufnum;
 
     // IMPORTANT
     c.server = s;
 
-    v = CompositeView(w,Rect(400,10,380,380)).background_(Color.rand(0.7));
+    v = CompositeView(w, Rect(400, 10, 380, 380)).background_(Color.rand(0.7));
     v.decorator = n = FlowLayout(v.bounds, margin: 0@0, gap: 5@5);
 
     a = StaticText(v, Rect(20, 70, 90, 20)).string_(" xZoom = 1").background_(Color.rand);
-    m = Slider(v, Rect(20, 60, 285, 20)).background_(a.background).action_({func.value}).value_(0.5);
+    m = Slider(v, Rect(20, 60, 285, 20)).background_(a.background).action_({ func.value }).value_(0.5);
     d = StaticText(v, Rect(20, 70, 90, 20)).string_(" yZoom = 1").background_(Color.rand);
-    g = Slider(v, Rect(20, 60, 285, 20)).background_(d.background).action_({func.value}).value_(0.5);
+    g = Slider(v, Rect(20, 60, 285, 20)).background_(d.background).action_({ func.value }).value_(0.5);
 
     h = StaticText(v, Rect(20, 70, 90, 20)).string_(" x = 0").background_(Color.rand);
-    i = Slider(v, Rect(20, 60, 285, 20)).background_(h.background).action_({func.value}).value_(0.5);
+    i = Slider(v, Rect(20, 60, 285, 20)).background_(h.background).action_({ func.value }).value_(0.5);
 
-    Button(v, Rect(0,0,380, 20))
-    .states_([["waveColors = [ Color.rand, ... ]",Color.black,Color.rand]])
-    .action_({c.waveColors = [Color.rand,Color.rand]});
+    Button(v, Rect(0, 0, 380, 20))
+    .states_([["waveColors = [Color.rand, ...]", Color.black, Color.rand]])
+    .action_({ c.waveColors = [Color.rand, Color.rand] });
 
-    Button(v, Rect(0,0,380, 20))
-    .states_([[" background = Color.rand(0.1,0.3) ",Color.black,Color.rand]])
-    .action_({c.background = Color.rand(0.1,0.3) });
+    Button(v, Rect(0, 0, 380, 20))
+    .states_([[" background = Color.rand(0.1, 0.3) ", Color.black, Color.rand]])
+    .action_({ c.background = Color.rand(0.1, 0.3) });
 
-    t = Button(v, Rect(0,0,380, 20))
-    .states_([["Current style is 0",Color.black,Color.rand],
-        ["Current style is 1",Color.black,Color.rand],
-        ["Current style is 2",Color.black,Color.rand]])
-    .action_({func.value});
+    t = Button(v, Rect(0, 0, 380, 20))
+    .states_([["Current style is 0", Color.black, Color.rand],
+        ["Current style is 1", Color.black, Color.rand],
+        ["Current style is 2", Color.black, Color.rand]])
+    .action_({ func.value });
 
     func = {
         c.xZoom = ([0.25, 10, \exp, 1/8, 1].asSpec.map(m.value)); a.string = " xZoom = %".format(c.xZoom);
         c.yZoom = ([0.25, 10, \exp, 1/8, 1].asSpec.map(g.value)); d.string = " yZoom = %".format(c.yZoom);
-        c.x = ([ -1024,1024, \linear, 1/8, 1].asSpec.map(i.value)); h.string = " x = %".format(c.x);
-        c.style=t.value
+        c.x = ([-1024, 1024, \linear, 1/8, 1].asSpec.map(i.value)); h.string = " x = %".format(c.x);
+        c.style = t.value
     };
 
-    startButton = Button.new(v, Rect(0,0,380, 50))
-    .states_([["Start Sound",Color.black,Color.green],["Stop Sound",Color.black,Color.red]]).action_({});
+    startButton = Button.new(v, Rect(0, 0, 380, 50))
+    .states_([["Start Sound", Color.black, Color.green], ["Stop Sound", Color.black, Color.red]]).action_({ });
 
 
     startButton.action_{
-        (startButton.value==1).if{
-            syn1 = SynthDef("test1", { arg bus, bufnum;
+        (startButton.value == 1).if{
+            syn1 = SynthDef("test1", { |bus, bufnum|
                 var z;
-                z = In.ar(bus,2);
+                z = In.ar(bus, 2);
                 // ScopeOut2 writes the audio to the buffer
                 // IMPORTANT - ScopeOut2, not ScopeOut
                 ScopeOut2.ar(z, bufnum);
-                Out.ar(0,z);
+                Out.ar(0, z);
             }).play(
                 RootNode(s),
-                [\bus,b.index, \bufnum, f.bufnum] ,
+                [\bus, b.index, \bufnum, f.bufnum],
                 \addToTail // make sure it goes after what you are scoping
             );
 
             // making noise onto the buffer
-            syn2 = SynthDef("test2", { arg bus;
+            syn2 = SynthDef("test2", { |bus|
                 var z;
-                z = PMOsc.ar([300,250],*SinOsc.ar([0.027,0.017])*pi) * 0.1;
+                z = PMOsc.ar([300, 250], *SinOsc.ar([0.027, 0.017])*pi) * 0.1;
                 Out.ar(bus, z);
-            }).play(s,[\bus,b.index]);
-
-        }{syn1.free; syn2.free};
-    };
+            }).play(s, [\bus, b.index]);
+        } { 
+            syn1.free; syn2.free 
+        };
+   };
 
     // IMPORTANT
     c.start;
 
-    w.onClose={syn1.free; syn2.free; b.free; f.free};
-    CmdPeriod.doOnce({w.close});
+    w.onClose = { syn1.free; syn2.free; b.free; f.free };
+    CmdPeriod.doOnce({ w.close });
 })
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/ScopeView.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/ScopeView.schelp</a><br>link::Classes/ScopeView::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/ScopeView.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/ScopeView.schelp</a><br>link::Classes/ScopeView::<br></div></div><script src='./../static/editor.js' type='text/javascript'></script>
 </body></html>

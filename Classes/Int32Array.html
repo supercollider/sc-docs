@@ -1,21 +1,25 @@
-<!doctype html><html lang='en'><head><title>Int32Array | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>Int32Array | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../lib/jquery.min.js'></script>
-<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/jquery.min.js'></script>
+<script src='./../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './..';
 var scdoc_title = 'Int32Array';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../static/scdoc.js' type='text/javascript'></script>
 <script src='./../docmap.js' type='text/javascript'></script>
+<script src='./../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
@@ -38,16 +42,17 @@ var scdoc_sc_version = '3.13.1';
 <div id='summary'>an array whose indexed slots are all of the same type</div>
 </div>
 <div class='subheader'>
-<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/Common/Collections/ArrayedCollection.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Collections/ArrayedCollection.sc'>ArrayedCollection.sc</a></div><div id='related'>See also: <a href="./../Classes/FloatArray.html">FloatArray</a>, <a href="./../Classes/Int8Array.html">Int8Array</a>, <a href="./../Classes/Int16Array.html">Int16Array</a>, <a href="./../Classes/DoubleArray.html">DoubleArray</a>, <a href="./../Classes/SymbolArray.html">SymbolArray</a></div>
+<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/Common/Collections/ArrayedCollection.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Collections/ArrayedCollection.sc'>ArrayedCollection.sc</a></div><div id='related'>See also: <a href="./../Classes/FloatArray.html">FloatArray</a>, <a href="./../Classes/Int8Array.html">Int8Array</a>, <a href="./../Classes/Int16Array.html">Int16Array</a>, <a href="./../Classes/DoubleArray.html">DoubleArray</a>, <a href="./../Classes/SymbolArray.html">SymbolArray</a></div>
 </div>
 <h2><a class='anchor' name='description'>Description</a></h2>
 
 <p>These classes implement arrays whose indexed slots are all of the same type.<ul>
 <li>Int8Array - 8 bit integer<li>Int16Array - 16 bit integer<li>Int32Array - 32 bit integer<li>FloatArray - 32 bit floating point<li>DoubleArray - 64 bit floating point<li>SymbolArray - symbols</ul>
-<h2><a class='anchor' name='classmethods'>Class Methods</a></h2>
+<div class='note'><span class='notelabel'>NOTE:</span> The overflow behavior of an element in an Int32Array is undefined. This occurs whenever the result of an operation does not fit in the range of values supported by the return type, in this case, a 32-bit signed integer.
+<p>Elements in Int32Array are not guaranteed to behave like <a href="./../Classes/Integer.html">Integer</a>s.</div><h2><a class='anchor' name='classmethods'>Class Methods</a></h2>
 <h3><a class='anchor' name='Inherited%20class%20methods'>Inherited class methods</a></h3>
 <div id='inheritedclassmets'></div><h2><a class='anchor' name='instancemethods'>Instance Methods</a></h2>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-readFromStream' href='./../Overviews/Methods.html#readFromStream'>readFromStream</a>(<span class='argstr'>stream</span>)</h3>
 <div class='method'></div><h3><a class='anchor' name='Inherited%20instance%20methods'>Inherited instance methods</a></h3>
-<div id='inheritedinstmets'></div><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/Int32Array.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/Int32Array.schelp</a><br>link::Classes/Int32Array::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+<div id='inheritedinstmets'></div><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/Int32Array.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/Int32Array.schelp</a><br>link::Classes/Int32Array::<br></div></div><script src='./../static/editor.js' type='text/javascript'></script>
 </body></html>

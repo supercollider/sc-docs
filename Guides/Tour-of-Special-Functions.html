@@ -1,21 +1,25 @@
-<!doctype html><html lang='en'><head><title>Tour of Special Functions | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>Tour of Special Functions | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../lib/jquery.min.js'></script>
-<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/jquery.min.js'></script>
+<script src='./../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './..';
 var scdoc_title = 'Tour of Special Functions';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../static/scdoc.js' type='text/javascript'></script>
 <script src='./../docmap.js' type='text/javascript'></script>
+<script src='./../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
@@ -71,7 +75,7 @@ var scdoc_sc_version = '3.13.1';
 <p>Many of the functions are only valid in certain numerical ranges. The following tour will show you plots that illustrate the behavior of the functions, their ranges and asymptotes.
 <p>Define the plotting functions in the next section, then you can use the Table of Contents menu to jump between function families.<h2><a class='anchor' name='Before%20you%20get%20started...'>Before you get started...</a></h2>
 
-<p>Define the following functions that will lay out the plots for you:<textarea class='editor'>(
+<p>Define the following functions that will lay out the plots for you:<div class='codeMirrorContainer'><textarea class='editor'>(
 var genCol, getPlotLay, multiPlot, layOutPlots, plotSpecs;
 
 // generate colors for each plot
@@ -168,8 +172,9 @@ getPlotLay = { |plot, text|
     colbut.value_(0).doAction; // start with dark plots
 };
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h2><a class='anchor' name='Number%20Series'>Number Series</a></h2>
-<textarea class='editor'>/* Bernouli Numbers */
+<div class='codeMirrorContainer'><textarea class='editor'>/* Bernouli Numbers */
 
 //   Odd numbered Bernoulli numbers are zero, except B1
 //   which is -1/2. Post even Bernouli numbers:
@@ -179,10 +184,11 @@ getPlotLay = { |plot, text|
 /* Tangent numbers */
 
 (0..15).do { |i| postf("% %\n", i, tangentT2n(i)) }</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h2><a class='anchor' name='Gamma%20Functions'>Gamma Functions</a></h2>
 <h3><a class='anchor' name='Gamma,%20Log%20Gamma,%20Digamma,%20Trigamma,%20Polygamma'>Gamma, Log Gamma, Digamma, Trigamma, Polygamma</a></h3>
 
-<p>Be sure to define <code>~layOutPlots</code> and <code>~multiPlot</code> at the <a href="#Before%20you%20get%20started...">top of the page</a>.<textarea class='editor'>(
+<p>Be sure to define <code>~layOutPlots</code> and <code>~multiPlot</code> at the <a href="#Before%20you%20get%20started...">top of the page</a>.<div class='codeMirrorContainer'><textarea class='editor'>(
 var checkCall, plotSpecs;
 // make sure z isn't a negative integer
 checkCall = { |selector, z|
@@ -225,9 +231,10 @@ plotSpecs = [
 
 ~layOutPlots.( plotSpecs.collect{ |data| ~multiPlot.(*data) }, "Gamma Functions", 2 );
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h3><a class='anchor' name='Gamma%20Ratios,%20Incomplete/Inverses,%20and%20Derivatives%20of%20Gamma%20Functions'>Gamma Ratios, Incomplete/Inverses, and Derivatives of Gamma Functions</a></h3>
 
-<p>Be sure to define <code>~layOutPlots</code> and <code>~multiPlot</code> at the <a href="#Before%20you%20get%20started...">top of the page</a>.<textarea class='editor'>(
+<p>Be sure to define <code>~layOutPlots</code> and <code>~multiPlot</code> at the <a href="#Before%20you%20get%20started...">top of the page</a>.<div class='codeMirrorContainer'><textarea class='editor'>(
 var plotSpecs = [
     [   \gammaP,
         [ (0.1, 0.3 .. 8), (0.01, 0.05 .. 20) ],
@@ -256,8 +263,9 @@ var plotSpecs = [
 
 ~layOutPlots.( plotSpecs.collect { |data| ~multiPlot.(*data) }, "Gamma Functions (cont'd)", 2 );
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h2><a class='anchor' name='Factorials%20and%20Binomial%20Coefficients'>Factorials and Binomial Coefficients</a></h2>
-<textarea class='editor'>/*  Factorial  */
+<div class='codeMirrorContainer'><textarea class='editor'>/*  Factorial  */
 // Warning: overflows i &gt; 170
 (1..170).do{ |i| (i.asString + factorial(i.asFloat)).postln };
 
@@ -275,10 +283,11 @@ risingFactorial(9, 4)  // 9 * 10 * 11 ... (9+4-1)
 /*  Falling Factorial  */
 // x(x-1)(x-2)(x-3)...(x-i+1)
 fallingFactorial(9, 4) // 9 *  8 *  7 ... (9-4+1)</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h2><a class='anchor' name='Beta%20Functions'>Beta Functions</a></h2>
 <h3><a class='anchor' name='Beta%20Functions,%20Incomplete%20and%20Derivative'>Beta Functions, Incomplete and Derivative</a></h3>
 
-<p>Be sure to define <code>~layOutPlots</code> and <code>~multiPlot</code> at the <a href="#Before%20you%20get%20started...">top of the page</a>.<textarea class='editor'>(
+<p>Be sure to define <code>~layOutPlots</code> and <code>~multiPlot</code> at the <a href="#Before%20you%20get%20started...">top of the page</a>.<div class='codeMirrorContainer'><textarea class='editor'>(
 var as = [9,7,5,2,1];
 var bs = [1,2,5,7,9];
 var xs = (0, 0.005 .. 1);
@@ -317,9 +326,10 @@ var plotSpecs = [
 
 ~layOutPlots.( plotSpecs.collect{ |data| ~multiPlot.(*data) }, "Beta Functions, Incomplete and Derivative", 2);
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h3><a class='anchor' name='Incomplete%20Beta%20Function%20Inverses'>Incomplete Beta Function Inverses</a></h3>
 
-<p>Be sure to define <code>~layOutPlots</code> and <code>~multiPlot</code> at the <a href="#Before%20you%20get%20started...">top of the page</a>.<textarea class='editor'>(
+<p>Be sure to define <code>~layOutPlots</code> and <code>~multiPlot</code> at the <a href="#Before%20you%20get%20started...">top of the page</a>.<div class='codeMirrorContainer'><textarea class='editor'>(
 var abs = [9,7,5,2,1];
 var bs = [1,2,5,7,9];
 var xs = [ 0.1, 0.3, 0.5, 0.7, 0.9 ];
@@ -359,9 +369,10 @@ var plotSpecs = [
 
 ~layOutPlots.( plotSpecs.collect{ |data| ~multiPlot.(*data) }, "Incomplete Beta Function Inverses", 4);
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h2><a class='anchor' name='Error%20Functions'>Error Functions</a></h2>
 
-<p>Be sure to define <code>~layOutPlots</code> and <code>~multiPlot</code> at the <a href="#Before%20you%20get%20started...">top of the page</a>.<textarea class='editor'>(
+<p>Be sure to define <code>~layOutPlots</code> and <code>~multiPlot</code> at the <a href="#Before%20you%20get%20started...">top of the page</a>.<div class='codeMirrorContainer'><textarea class='editor'>(
 var erfSamps = (-3, -2.995 .. 3);
 var plotSpecs = [
     [   \erf,
@@ -388,10 +399,11 @@ var plotSpecs = [
 
 ~layOutPlots.( plotSpecs.collect{ |data| ~multiPlot.(*data) }, "Error Function" );
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h2><a class='anchor' name='Polynomials'>Polynomials</a></h2>
 <h3><a class='anchor' name='Legendre%20(and%20Associated)%20Polynomials'>Legendre (and Associated) Polynomials</a></h3>
 
-<p>Be sure to define <code>~layOutPlots</code> and <code>~multiPlot</code> at the <a href="#Before%20you%20get%20started...">top of the page</a>.<textarea class='editor'>(
+<p>Be sure to define <code>~layOutPlots</code> and <code>~multiPlot</code> at the <a href="#Before%20you%20get%20started...">top of the page</a>.<div class='codeMirrorContainer'><textarea class='editor'>(
 var plotSpecs = [
     [   { |l, x| legendreP(l, x.clip(-1,1)) },
         [(1..4), (-1,-0.995 .. 1)],
@@ -427,9 +439,10 @@ var plotSpecs = [
 
 ~layOutPlots.( plotSpecs.collect{ |data| ~multiPlot.(*data) }, "Legendre (and Associated) Polynomials" );
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h3><a class='anchor' name='Laguerre%20(and%20Associated)%20Polynomials'>Laguerre (and Associated) Polynomials</a></h3>
 
-<p>Be sure to define <code>~layOutPlots</code> and <code>~multiPlot</code> at the <a href="#Before%20you%20get%20started...">top of the page</a>.<textarea class='editor'>(
+<p>Be sure to define <code>~layOutPlots</code> and <code>~multiPlot</code> at the <a href="#Before%20you%20get%20started...">top of the page</a>.<div class='codeMirrorContainer'><textarea class='editor'>(
 var plotSpecs = [
     [   \laguerre,
         [(0..6), (-5, -4.995 .. 11)],
@@ -450,9 +463,10 @@ var plotSpecs = [
 
 ~layOutPlots.( plotSpecs.collect{ |data| ~multiPlot.(*data) }, "Laguerre (and Associated) Polynomials", 1);
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h3><a class='anchor' name='Hermite%20Polynomials'>Hermite Polynomials</a></h3>
 
-<p>Be sure to define <code>~layOutPlots</code> and <code>~multiPlot</code> at the <a href="#Before%20you%20get%20started...">top of the page</a>.<textarea class='editor'>(
+<p>Be sure to define <code>~layOutPlots</code> and <code>~multiPlot</code> at the <a href="#Before%20you%20get%20started...">top of the page</a>.<div class='codeMirrorContainer'><textarea class='editor'>(
 var plotSpecs = [
     [   \hermite,
         [(0..4), (-2, -1.95 .. 2)],
@@ -463,9 +477,10 @@ var plotSpecs = [
 
 ~layOutPlots.( plotSpecs.collect{ |data| ~multiPlot.(*data) }, "Hermite Polynomials");
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h3><a class='anchor' name='Chebyshev%20Polynomials'>Chebyshev Polynomials</a></h3>
 
-<p>Be sure to define <code>~layOutPlots</code> and <code>~multiPlot</code> at the <a href="#Before%20you%20get%20started...">top of the page</a>.<textarea class='editor'>(
+<p>Be sure to define <code>~layOutPlots</code> and <code>~multiPlot</code> at the <a href="#Before%20you%20get%20started...">top of the page</a>.<div class='codeMirrorContainer'><textarea class='editor'>(
 var ns = (0..6);
 var samps = (-1, -0.995 .. 1);
 var plotSpecs = [
@@ -489,9 +504,10 @@ var plotSpecs = [
 
 ~layOutPlots.( plotSpecs.collect{ |data| ~multiPlot.(*data) }, "Chebyshev Polynomials", 1 );
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h3><a class='anchor' name='Spherical%20Harmonics'>Spherical Harmonics</a></h3>
 
-<p>Be sure to define <code>~layOutPlots</code> and <code>~multiPlot</code> at the <a href="#Before%20you%20get%20started...">top of the page</a>.<textarea class='editor'>(
+<p>Be sure to define <code>~layOutPlots</code> and <code>~multiPlot</code> at the <a href="#Before%20you%20get%20started...">top of the page</a>.<div class='codeMirrorContainer'><textarea class='editor'>(
 var samps = (-2pi, -1.995pi .. 2pi);
 var dupN = { |n| n.dup(n*2+1) };
 var plotSpecs = [
@@ -527,10 +543,11 @@ var plotSpecs = [
 
 ~layOutPlots.( plotSpecs.collect{ |data| ~multiPlot.(*data) }, "Spherical Harmonics" );
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h2><a class='anchor' name='Bessel%20Functions'>Bessel Functions</a></h2>
 <h3><a class='anchor' name='Bessel%20and%20Modified%20Bessel%20Functions'>Bessel and Modified Bessel Functions</a></h3>
 
-<p>Be sure to define <code>~layOutPlots</code> and <code>~multiPlot</code> at the <a href="#Before%20you%20get%20started...">top of the page</a>.<textarea class='editor'>(
+<p>Be sure to define <code>~layOutPlots</code> and <code>~multiPlot</code> at the <a href="#Before%20you%20get%20started...">top of the page</a>.<div class='codeMirrorContainer'><textarea class='editor'>(
 var plotSpecs = [
     [   \cylBesselJ,
         [(0..4), (-20,-19.9 .. 20)],
@@ -566,9 +583,10 @@ var plotSpecs = [
 
 ~layOutPlots.( plotSpecs.collect{ |data| ~multiPlot.(*data) }, "Bessel Functions", 2 );
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h3><a class='anchor' name='Derivatives%20of%20Bessel%20and%20Modified%20Bessel%20Functions'>Derivatives of Bessel and Modified Bessel Functions</a></h3>
 
-<p>Be sure to define <code>~layOutPlots</code> and <code>~multiPlot</code> at the <a href="#Before%20you%20get%20started...">top of the page</a>.<textarea class='editor'>(
+<p>Be sure to define <code>~layOutPlots</code> and <code>~multiPlot</code> at the <a href="#Before%20you%20get%20started...">top of the page</a>.<div class='codeMirrorContainer'><textarea class='editor'>(
 var bPrimeVs = (0..5);
 var modBPrimeVs = [0,2,5,7,10];
 var plotSpecs = [
@@ -605,10 +623,11 @@ var plotSpecs = [
 
 ~layOutPlots.( plotSpecs.collect{ |data| ~multiPlot.(*data) }, "Derivatives of Bessel Functions", 2);
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h2><a class='anchor' name='Hankel%20Functions'>Hankel Functions</a></h2>
 <h3><a class='anchor' name='Cyclic%20Hankel%20Functions'>Cyclic Hankel Functions</a></h3>
 
-<p>Be sure to define <code>~layOutPlots</code> and <code>~multiPlot</code> at the <a href="#Before%20you%20get%20started...">top of the page</a>.<textarea class='editor'>(
+<p>Be sure to define <code>~layOutPlots</code> and <code>~multiPlot</code> at the <a href="#Before%20you%20get%20started...">top of the page</a>.<div class='codeMirrorContainer'><textarea class='editor'>(
 var ns = (0..3);
 var range = (0.001, 0.025 .. 6);
 var plotSpecs = [
@@ -636,9 +655,10 @@ var plotSpecs = [
 
 ~layOutPlots.( plotSpecs.collect{ |data| ~multiPlot.(*data) }, "Cyclic Hankel Functions" );
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h3><a class='anchor' name='Spherical%20Hankel%20Functions'>Spherical Hankel Functions</a></h3>
 
-<p>Be sure to define <code>~layOutPlots</code> and <code>~multiPlot</code> at the <a href="#Before%20you%20get%20started...">top of the page</a>.<textarea class='editor'>(
+<p>Be sure to define <code>~layOutPlots</code> and <code>~multiPlot</code> at the <a href="#Before%20you%20get%20started...">top of the page</a>.<div class='codeMirrorContainer'><textarea class='editor'>(
 var ns = (0..3);
 var range = (0.001, 0.025 .. 6);
 var plotSpecs = [
@@ -666,9 +686,10 @@ var plotSpecs = [
 
 ~layOutPlots.( plotSpecs.collect{ |data| ~multiPlot.(*data) }, "Spherical Hankel Functions" );
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h2><a class='anchor' name='Airy%20Functions'>Airy Functions</a></h2>
 
-<p>Be sure to define <code>~layOutPlots</code> and <code>~multiPlot</code> at the <a href="#Before%20you%20get%20started...">top of the page</a>.<textarea class='editor'>(
+<p>Be sure to define <code>~layOutPlots</code> and <code>~multiPlot</code> at the <a href="#Before%20you%20get%20started...">top of the page</a>.<div class='codeMirrorContainer'><textarea class='editor'>(
 var aiSamps = (-20, -19.95 .. 20);
 var biSamps = (-20, -19.95 .. 3);
 // generate sample points starting from a zero
@@ -693,9 +714,10 @@ var plotSpecs = [
 
 ~layOutPlots.( plotSpecs.collect { |data| ~multiPlot.(*data) }, "Airy Functions" );
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h2><a class='anchor' name='Elliptic%20Integrals'>Elliptic Integrals</a></h2>
 
-<p>Be sure to define <code>~layOutPlots</code> and <code>~multiPlot</code> at the <a href="#Before%20you%20get%20started...">top of the page</a>.<textarea class='editor'>(
+<p>Be sure to define <code>~layOutPlots</code> and <code>~multiPlot</code> at the <a href="#Before%20you%20get%20started...">top of the page</a>.<div class='codeMirrorContainer'><textarea class='editor'>(
 var samps = (-1, -0.995 ..1);
 var args1 = [0.5,0.75,1.25,pi/2]; // phis for first/second kind
 var args2 = [0, 0.5, 0.25, 0.75]; // ns/phis for third kind, D, Zeta, Lambda Funcs
@@ -757,9 +779,10 @@ var plotSpecs = [
 
 ~layOutPlots.( plotSpecs.collect{ |data| ~multiPlot.(*data) }, "Elliptic Integrals" );
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h2><a class='anchor' name='Jacobi%20Elliptic%20Functions'>Jacobi Elliptic Functions</a></h2>
 
-<p>Be sure to define <code>~layOutPlots</code> and <code>~multiPlot</code> at the <a href="#Before%20you%20get%20started...">top of the page</a>.<textarea class='editor'>(
+<p>Be sure to define <code>~layOutPlots</code> and <code>~multiPlot</code> at the <a href="#Before%20you%20get%20started...">top of the page</a>.<div class='codeMirrorContainer'><textarea class='editor'>(
 var plotSpecs =
 [
     \Cd, [-10, 10], \Cn, [-10, 10], \Cs, [0, 3], \Dc, [-10, 10], \Dn, [-10, 10], \Ds, [0, 3],
@@ -785,9 +808,10 @@ var plotSpecs =
 };
 ~layOutPlots.( plotSpecs.collect{ |data| ~multiPlot.(*data) }, "Jacobi Elliptic Functions" );
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h2><a class='anchor' name='Zeta%20Functions'>Zeta Functions</a></h2>
 
-<p>Be sure to define <code>~layOutPlots</code> and <code>~multiPlot</code> at the <a href="#Before%20you%20get%20started...">top of the page</a>.<textarea class='editor'>(
+<p>Be sure to define <code>~layOutPlots</code> and <code>~multiPlot</code> at the <a href="#Before%20you%20get%20started...">top of the page</a>.<div class='codeMirrorContainer'><textarea class='editor'>(
 var plotSpecs = [
     [   \zeta,
         (-28, -27.95 .. 5),
@@ -803,9 +827,10 @@ var plotSpecs = [
 
 ~layOutPlots.( plotSpecs.collect{ |data| ~multiPlot.(*data) }, "Riemann Zeta Function" );
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h2><a class='anchor' name='Exponential%20Integrals'>Exponential Integrals</a></h2>
 
-<p>Be sure to define <code>~layOutPlots</code> and <code>~multiPlot</code> at the <a href="#Before%20you%20get%20started...">top of the page</a>.<textarea class='editor'>(
+<p>Be sure to define <code>~layOutPlots</code> and <code>~multiPlot</code> at the <a href="#Before%20you%20get%20started...">top of the page</a>.<div class='codeMirrorContainer'><textarea class='editor'>(
 var plotSpecs = [
     [   \expintEn,
         [[1,2,3,4], (0.0001, 0.01 .. 2)],
@@ -821,9 +846,10 @@ var plotSpecs = [
 
 ~layOutPlots.( plotSpecs.collect{ |data| ~multiPlot.(*data) }, "Exponential Integrals" );
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h2><a class='anchor' name='Basic%20Functions'>Basic Functions</a></h2>
 
-<p>Be sure to define <code>~layOutPlots</code> and <code>~multiPlot</code> at the <a href="#Before%20you%20get%20started...">top of the page</a>.<textarea class='editor'>(
+<p>Be sure to define <code>~layOutPlots</code> and <code>~multiPlot</code> at the <a href="#Before%20you%20get%20started...">top of the page</a>.<div class='codeMirrorContainer'><textarea class='editor'>(
 var plotSpecs = [
     [   \sinPi,
         (0, 0.1 .. 8),
@@ -853,9 +879,10 @@ var plotSpecs = [
 
 ~layOutPlots.( plotSpecs.collect{ |data| ~multiPlot.(*data) }, "Basic Functions" );
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h2><a class='anchor' name='Sinus%20Cardinal%20(Sinc)%20and%20Hyperbolic%20Sinus%20Cardinal%20Functions,%20Inverse%20Hyperbolic%20Functions'>Sinus Cardinal (Sinc) and Hyperbolic Sinus Cardinal Functions, Inverse Hyperbolic Functions</a></h2>
 
-<p>Be sure to define <code>~layOutPlots</code> and <code>~multiPlot</code> at the <a href="#Before%20you%20get%20started...">top of the page</a>.<textarea class='editor'>(
+<p>Be sure to define <code>~layOutPlots</code> and <code>~multiPlot</code> at the <a href="#Before%20you%20get%20started...">top of the page</a>.<div class='codeMirrorContainer'><textarea class='editor'>(
 var plotSpecs = [
     [   \sincPi,
         (-40, -39.95 ..40),
@@ -881,9 +908,10 @@ var plotSpecs = [
 
 ~layOutPlots.( plotSpecs.collect{ |data| ~multiPlot.(*data) }, "Sinus &amp; Hyperbolic Sinus Cardinal, Inverse Hyperbolic Functions" );
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h2><a class='anchor' name='Owen's%20T%20Function'>Owen's T Function</a></h2>
 
-<p>Be sure to define <code>~layOutPlots</code> and <code>~multiPlot</code> at the <a href="#Before%20you%20get%20started...">top of the page</a>.<textarea class='editor'>(
+<p>Be sure to define <code>~layOutPlots</code> and <code>~multiPlot</code> at the <a href="#Before%20you%20get%20started...">top of the page</a>.<div class='codeMirrorContainer'><textarea class='editor'>(
 var plotSpecs = [
     [   { |a, h| owensT(h, a) },
         [(-6, -5.5 .. 6),(-5, -4.995 ..5)],
@@ -894,6 +922,7 @@ var plotSpecs = [
 
 ~layOutPlots.( plotSpecs.collect{ |data| ~multiPlot.(*data) }, "Owen's T Function" );
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Guides/Tour-of-Special-Functions.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Guides/Tour-of-Special-Functions.schelp</a><br>link::Guides/Tour-of-Special-Functions::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Guides/Tour-of-Special-Functions.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Guides/Tour-of-Special-Functions.schelp</a><br>link::Guides/Tour-of-Special-Functions::<br></div></div><script src='./../static/editor.js' type='text/javascript'></script>
 </body></html>

@@ -1,21 +1,25 @@
-<!doctype html><html lang='en'><head><title>SkipJack | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>SkipJack | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../lib/jquery.min.js'></script>
-<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/jquery.min.js'></script>
+<script src='./../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './..';
 var scdoc_title = 'SkipJack';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../static/scdoc.js' type='text/javascript'></script>
 <script src='./../docmap.js' type='text/javascript'></script>
+<script src='./../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
@@ -53,7 +57,7 @@ var scdoc_sc_version = '3.13.1';
 <div id='summary'>A utility for background tasks that survive cmd-period</div>
 </div>
 <div class='subheader'>
-<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/Common/Control/SkipJack.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Control/SkipJack.sc'>SkipJack.sc</a></div><div id='related'>See also: <a href="./../Classes/CmdPeriod.html">CmdPeriod</a></div>
+<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/Common/Control/SkipJack.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Control/SkipJack.sc'>SkipJack.sc</a></div><div id='related'>See also: <a href="./../Classes/CmdPeriod.html">CmdPeriod</a></div>
 </div>
 <h2><a class='anchor' name='description'>Description</a></h2>
 
@@ -93,7 +97,7 @@ var scdoc_sc_version = '3.13.1';
 <p>The name of this skipjack.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-stopTest' href='./../Overviews/Methods.html#stopTest'>stopTest</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-stopTest' href='./../Overviews/Methods.html#stopTest'>stopTest</a> = value</h3>
 <div class='method'>
-<p>The current stopTest. (see argument in <a href="#*new">*new</a> )</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-start' href='./../Overviews/Methods.html#start'>start</a></h3>
+<p>The current stopTest. (see argument in <a href="#*new">*new</a>)</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-start' href='./../Overviews/Methods.html#start'>start</a></h3>
 <div class='method'>
 <p>Start this skipjack.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-play' href='./../Overviews/Methods.html#play'>play</a></h3>
 <div class='method'>
@@ -107,7 +111,7 @@ var scdoc_sc_version = '3.13.1';
 <p>The updateFunc set by the argument to <a href="#*new">*new</a></div><h3><a class='anchor' name='Inherited%20instance%20methods'>Inherited instance methods</a></h3>
 <div id='inheritedinstmets'></div><h2><a class='anchor' name='examples'>Examples</a></h2>
 
-<p>Simple example:<textarea class='editor'>w = SkipJack({ "watch...".postln; }, 0.5, name: "test");
+<p>Simple example:<div class='codeMirrorContainer'><textarea class='editor'>w = SkipJack({ "watch...".postln }, 0.5, name: "test");
 SkipJack.verbose = true;    // post stop/wakeup logs
 
 w.stop;
@@ -117,16 +121,18 @@ w.start;
 thisProcess.stop;
 
 w.stop;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>Using stopTest:<textarea class='editor'>a = 5;
-w = SkipJack({ "watch...".postln; }, 0.5, { a == 10 }, "test");
+<p>Using stopTest:<div class='codeMirrorContainer'><textarea class='editor'>a = 5;
+w = SkipJack({ "watch...".postln }, 0.5, { a == 10 }, "test");
 a = 10;    // fulfill stopTest</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>Typical use: SkipJack updates a window displaying the state of some objects every now and then.<textarea class='editor'>(
+<p>Typical use: SkipJack updates a window displaying the state of some objects every now and then.<div class='codeMirrorContainer'><textarea class='editor'>(
 d = (a: 12, b: 24);
-d.win = Window("dict", Rect(0,0,200,60)).front;
+d.win = Window("dict", Rect(0, 0, 200, 60)).front;
 d.views = [\a, \b].collect { |name, i|
-    StaticText(d.win, Rect(i * 100,0,96,20))
+    StaticText(d.win, Rect(i * 100, 0, 96, 20))
         .background_(Color.yellow).align_(0).string_(name);
 };
 w = SkipJack({
@@ -144,11 +150,14 @@ w = SkipJack({
 d.a = 123;      // updates should be displayed
 d.b = \otto;
 d.win.close;    // when window closes, SkipJack stops.</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>If you need to get rid of an unreachable skipjack:<textarea class='editor'>SkipJack({ "unreachable, unkillable...".postln }, name: "jack");
+<p>If you need to get rid of an unreachable skipjack:<div class='codeMirrorContainer'><textarea class='editor'>SkipJack({ "unreachable, unkillable...".postln }, name: "jack");
 
 SkipJack.stopAll        // do this to stop all;
 
 SkipJack.stop("jack");  // reach it by name and stop</textarea>
-<div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/SkipJack.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/SkipJack.schelp</a><br>link::Classes/SkipJack::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+
+<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/SkipJack.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/SkipJack.schelp</a><br>link::Classes/SkipJack::<br></div></div><script src='./../static/editor.js' type='text/javascript'></script>
 </body></html>

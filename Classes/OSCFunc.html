@@ -1,21 +1,25 @@
-<!doctype html><html lang='en'><head><title>OSCFunc | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>OSCFunc | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../lib/jquery.min.js'></script>
-<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/jquery.min.js'></script>
+<script src='./../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './..';
 var scdoc_title = 'OSCFunc';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../static/scdoc.js' type='text/javascript'></script>
 <script src='./../docmap.js' type='text/javascript'></script>
+<script src='./../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
@@ -47,7 +51,7 @@ var scdoc_sc_version = '3.13.1';
 <div id='summary'>Fast Responder for incoming Open Sound Control Messages</div>
 </div>
 <div class='subheader'>
-<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/Common/Control/ResponseDefs.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Control/ResponseDefs.sc'>ResponseDefs.sc</a></div><div id='subclasses'>Subclasses: <a href="../Classes/OSCdef.html">OSCdef</a></div>
+<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/Common/Control/ResponseDefs.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Control/ResponseDefs.sc'>ResponseDefs.sc</a></div><div id='subclasses'>Subclasses: <a href="../Classes/OSCdef.html">OSCdef</a></div>
 <div id='related'>See also: <a href="./../Guides/OSC_communication.html">OSC Communication</a>, <a href="./../Classes/OSCdef.html">OSCdef</a>, <a href="./../Classes/NetAddr.html">NetAddr</a></div>
 </div>
 <h2><a class='anchor' name='description'>Description</a></h2>
@@ -108,11 +112,11 @@ var scdoc_sc_version = '3.13.1';
 <div id='inheritedinstmets'></div><h3><a class='anchor' name='Undocumented%20instance%20methods'>Undocumented instance methods</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-argTemplate' href='./../Overviews/Methods.html#argTemplate'>argTemplate</a></h3>
 <h2><a class='anchor' name='examples'>Examples</a></h2>
-<textarea class='editor'>n = NetAddr("127.0.0.1", NetAddr.langPort); // local machine
+<div class='codeMirrorContainer'><textarea class='editor'>n = NetAddr("127.0.0.1", NetAddr.langPort); // local machine
 
-OSCFunc.newMatching({|msg, time, addr, recvPort| \matching.postln}, '/chat', n); // path matching
-OSCFunc({|msg, time, addr, recvPort| \oneShot.postln}, '/chat', n).oneShot; // once only
-OSCdef(\test, {|msg, time, addr, recvPort| \unmatching.postln}, '/chat', n); // def style
+OSCFunc.newMatching({ |msg, time, addr, recvPort| \matching.postln }, '/chat', n); // path matching
+OSCFunc({ |msg, time, addr, recvPort| \oneShot.postln }, '/chat', n).oneShot; // once only
+OSCdef(\test, { |msg, time, addr, recvPort| \unmatching.postln }, '/chat', n); // def style
 
 m = NetAddr("127.0.0.1", NetAddr.langPort); // loopback
 
@@ -131,9 +135,9 @@ AbstractResponderFunc.allDisabled
 
 // change funcs
 OSCdef(\test).enable;
-OSCdef(\test, {|msg, time, addr, recvPort| 'Changed Unmatching'.postln}, '/chat', n); // replace at key \test
+OSCdef(\test, { |msg, time, addr, recvPort| 'Changed Unmatching'.postln }, '/chat', n); // replace at key \test
 m.sendMsg("/chat", "Hello App 1");
-OSCdef(\test).add(f = {\foo.postln}); // add another func
+OSCdef(\test).add(f = { \foo.postln }); // add another func
 m.sendMsg("/chat", "Hello App 1");
 OSCdef(\test).clear; // remove all functions
 m.sendMsg("/chat", "Hello App 1");
@@ -144,6 +148,7 @@ s.boot;
 x = Synth(\default);
 OSCFunc({ 'ended!'.postln }, '/n_end', s.addr, nil, [x.nodeID]).oneShot;
 x.release(3);</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/OSCFunc.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/OSCFunc.schelp</a><br>link::Classes/OSCFunc::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/OSCFunc.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/OSCFunc.schelp</a><br>link::Classes/OSCFunc::<br></div></div><script src='./../static/editor.js' type='text/javascript'></script>
 </body></html>

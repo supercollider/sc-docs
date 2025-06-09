@@ -1,21 +1,25 @@
-<!doctype html><html lang='en'><head><title>PatternConductor | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>PatternConductor | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../lib/jquery.min.js'></script>
-<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/jquery.min.js'></script>
+<script src='./../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './..';
 var scdoc_title = 'PatternConductor';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../static/scdoc.js' type='text/javascript'></script>
 <script src='./../docmap.js' type='text/javascript'></script>
+<script src='./../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
@@ -54,7 +58,7 @@ var scdoc_sc_version = '3.13.1';
 <div id='summary'>Simple interactive control for playing patterns</div>
 </div>
 <div class='subheader'>
-<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/Common/Streams/PatternConductor.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Streams/PatternConductor.sc'>PatternConductor.sc</a></div><div id='related'>See also: <a href="./../Classes/Pattern.html">Pattern</a></div>
+<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/Common/Streams/PatternConductor.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Streams/PatternConductor.sc'>PatternConductor.sc</a></div><div id='related'>See also: <a href="./../Classes/Pattern.html">Pattern</a></div>
 </div>
 <h2><a class='anchor' name='description'>Description</a></h2>
 
@@ -91,18 +95,18 @@ var scdoc_sc_version = '3.13.1';
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-quant' href='./../Overviews/Methods.html#quant'>quant</a> = value</h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-resume' href='./../Overviews/Methods.html#resume'>resume</a></h3>
 <h2><a class='anchor' name='examples'>Examples</a></h2>
-<textarea class='editor'>(
+<div class='codeMirrorContainer'><textarea class='editor'>(
 // a pattern with long notes
 p = Pbind(
-    \freq, Pwhite(0,log(32)).exp.round(1) * 36.midicps,
-    \detune, Pfunc({ | ev | ev[\freq]  * rand(0.01) }),
+    \freq, Pwhite(0, log(32)).exp.round(1) * 36.midicps,
+    \detune, Pfunc({ |ev| ev[\freq]  * rand(0.01) }),
     \sustain, Pwhite(log(0.1), log(20)).exp,
-    \dur, Prand([0.1,0.1,0.1,0.1,0.2,1,2],inf),
-    \db, Pstep(Pseq([-20,-30,-25,-30], inf),0.2)
+    \dur, Prand([0.1, 0.1, 0.1, 0.1, 0.2, 1, 2], inf),
+    \db, Pstep(Pseq([-20, -30, -25, -30], inf), 0.2)
 );
 
 // unrelated cluster pattern running on TempoClock.default
-Pbind(\dur,2, \midinote, Pseq([(48..60)],20), \db, -30).play;
+Pbind(\dur, 2, \midinote, Pseq([(48..60)], 20), \db, -30).play;
 
 // make a conductor
 a = PatternConductor(p, quant: 2);
@@ -119,6 +123,7 @@ a.play;
 a.pause;
 a.play;
 a.stop(1000);</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/PatternConductor.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/PatternConductor.schelp</a><br>link::Classes/PatternConductor::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/PatternConductor.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/PatternConductor.schelp</a><br>link::Classes/PatternConductor::<br></div></div><script src='./../static/editor.js' type='text/javascript'></script>
 </body></html>

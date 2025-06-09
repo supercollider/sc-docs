@@ -1,0 +1,137 @@
+<!doctype html><html lang='en'><head><title>Identity and Equality in SuperCollider | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../static/themes/default.css' type='text/css' />
+<link rel='stylesheet' href='./../frontend.css' type='text/css' />
+<link rel='stylesheet' href='./../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../static/lib/katex/katex.min.css' />
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+<script src='./../static/lib/jquery.min.js'></script>
+<script src='./../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../static/lib/katex/katex.min.js' type='text/javascript'></script>
+<script>
+var helpRoot = './..';
+var scdoc_title = 'Identity and Equality in SuperCollider';
+var scdoc_sc_version = '3.14.0-rc1';
+</script>
+<script src='./../static/scdoc.js' type='text/javascript'></script>
+<script src='./../docmap.js' type='text/javascript'></script>
+<script src='./../frontend.js' type='text/javascript'></script>
+<script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
+</head>
+<body onload='fixTOC()'>
+<div id='toc'>
+<div id='toctitle'>Identity and Equality in SuperCollider:</div>
+<span class='toc_search'>Filter: <input id='toc_search'></span><ul class='toc'><li class='toc1'><a href='#Two%20objects%20that%20are%20equal%20to%20each%20other%20are%20not%20necessarily%20identical.'>Two objects that are equal to each other are not necessarily identical.</a></li>
+<ul class='toc'><li class='toc2'><a href='#Where%20the%20distinction%20matters:%20Creating%20multiple%20instances%20from%20an%20object%20given%20in%20one%20variable%20using%20the%20.copy%20method'>Where the distinction matters: Creating multiple instances from an object given in one variable using the .copy method</a></li>
+<ul class='toc'></ul><li class='toc2'><a href='#Where%20the%20distinction%20matters:%20Do%20not%20use%20Strings%20as%20keys%20for%20IdentityDictionary%20and%20Event.'>Where the distinction matters: Do not use Strings as keys for IdentityDictionary and Event.</a></li>
+<ul class='toc'></ul></ul><li class='toc1'><a href='#Implementation%20details'>Implementation details</a></li>
+<ul class='toc'><li class='toc2'><a href='#Values%20with%20unique%20representations:%20Symbol,%20SimpleNumber,%20and%20more.'>Values with unique representations: Symbol, SimpleNumber, and more.</a></li>
+<ul class='toc'></ul><li class='toc2'><a href='#Unless%20overridden%20by%20a%20subclass,%20checking%20for%20equality%20defaults%20to%20checking%20for%20identity.'>Unless overridden by a subclass, checking for equality defaults to checking for identity.</a></li>
+<ul class='toc'></ul></ul></ul></div><div id='menubar'></div>
+<div class='contents'>
+<div class='header'>
+<div id='label'>
+<span id='folder'>Guides</span>
+ | <span id='categories'><a href='./../Browse.html#Tutorials'>Tutorials</a></span>
+</div><h1>Identity and Equality in SuperCollider</h1>
+<div id='summary'>Distinction between reference equality ("identity", ===) and value equality ("equality", ==) in SuperCollider</div>
+</div>
+<div class='subheader'>
+<div id='related'>See also: <a href="./../Classes/Event.html">Event</a>, <a href="./../Classes/Float.html">Float</a>, <a href="./../Guides/Intro-to-Objects.html">Introduction to Objects</a></div>
+</div>
+
+<p>The distinction between identity and equality connects to wider issues in philosophy, logic, and computer science.<a class='footnote anchor' name='footnote_org_1' href='#footnote_1'><sup>1</sup></a> 
+<p>The present discussion is more narrowly concerned with an overview of how the distinction is understood in SuperCollider.<h2><a class='anchor' name='Two%20objects%20that%20are%20equal%20to%20each%20other%20are%20not%20necessarily%20identical.'>Two objects that are equal to each other are not necessarily identical.</a></h2>
+<div class='note'><span class='notelabel'>NOTE:</span> The word "object" here refers to <em>instances</em> of classes, not to the abstract class <a href="./../Classes/Object.html">Object</a>. See <a href="./../Guides/Intro-to-Objects.html">Introduction to Objects</a>.</div>
+<p>A factory may produce thousands of screwdrivers each day that are all <em>equal</em> to each other with respect to some specification; but each single screwdriver is <em>identical</em> only to itself (because it occupies this particular location at this particular time, or has a particular serial number stamped on it). Thus we can say that identity, the relation of an object to itself, is a stronger relation than equality, the relation of an object so some other object with respect to a common property.
+<p>Likewise, in SuperCollider, identity of objects created in sclang is accounted for through their location in memory.<a class='footnote anchor' name='footnote_org_2' href='#footnote_2'><sup>2</sup></a> <div class='codeMirrorContainer'><textarea class='editor'>a = [1,2,3];
+b = [1,2,3];
+a === a // -&gt; true: identity as relation of an object (a) to itself.
+a == a // -&gt; true; identical objects are necessarily equal.
+a === b // -&gt; false; because a and b are distinct objects by virtue of their memory locations.
+a == b // -&gt; true; equal objects need not be identical.</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+
+<p>In the above example, a and b were <em>different</em> instances of the <a href="./../Classes/Array.html">Array</a> class, each with their own memory address. You can query said address through the <code>.dump</code> method:<div class='codeMirrorContainer'><textarea class='editor'>a.dump;
+b.dump;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+
+<p>For newcomers to programming, it may be sufficient to be aware of this difference:
+<p><strong>The === (identity) and == (equality) methods are not interchangeable, and mean different things.</strong>
+<p>In most cases, <code>==</code> behaves as "naively" expected. For instance,  from high school math, we expect <code>5 == 5.0</code> to return <code>true</code>; and it does.<a class='footnote anchor' name='footnote_org_3' href='#footnote_3'><sup>3</sup></a> 
+<p>The behavior of <code>===</code>, on the other hand, depends more on lower-level implementation, and in some cases may at first seem counter-intuitive.
+<p>The following two examples illustrate the difference further with respect to two relevant use cases: Copying the contents of a variable rather than merely assigning it to another variable (a distinction fundamental to programming, not just in SuperCollider); and indexing into an instance of <a href="./../Classes/IdentityDictionary.html">IdentityDictionary</a> or <a href="./../Classes/Event.html">Event</a> (specific to SuperCollider).<h3><a class='anchor' name='Where%20the%20distinction%20matters:%20Creating%20multiple%20instances%20from%20an%20object%20given%20in%20one%20variable%20using%20the%20.copy%20method'>Where the distinction matters: Creating multiple instances from an object given in one variable using the .copy method</a></h3>
+
+<p>The above example assigned each variable to an instance of an array <code>[1,2,3]</code>, and demonstrated that the variables now point do distinct memory locations, hence their contents are not identical. However, when a variable is assigned to another <em>variable</em> rather than to an object instance, no new instance is created; instead, both variables will refer to the same object, at the same location in memory. This is relevant in practice when you want to modify a given list in multiple distinct ways, but that list only exists in one variable. The problem then becomes one of creating multiple equal but non-identical instances from just this one variable. The following example does not work as desired:<div class='codeMirrorContainer'><textarea class='editor'>x = ['C', 'E', 'G']; // C major
+y = x; // this will cause trouble in a moment.
+z = x; // this too.
+// x equals y and z at this point.
+// now change last note in y to get a minor:
+y[2] = 'A'; // -&gt; ['C', 'E', 'A'] ... OK
+//change first note in z to get e minor;
+z[0] = 'B'; // -&gt; ['B', 'E', 'A'] ... ; NOT what we wanted.
+//why this didn't work as hoped:
+x === y; // -&gt; true: x and y point to the same List.
+y === z; // as does z.
+//We ended up modifying the original list twice,
+//even though we wanted to keep the original x and
+//get two distinct transformations from it...</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+
+<p>Stacked fourths are nice, but we wanted to be boring here and just use triads. What we need to do is use the <code>.copy</code> method to create versions of the <a href="./../Classes/Array.html">Array</a> object referenced by <code>x</code> that are <em>equal but not identical to it</em>, so we can then modify them separately:<div class='codeMirrorContainer'><textarea class='editor'>x = ['C', 'E', 'G']; //C major
+y = x.copy;
+z = x.copy;
+x == y; // -&gt; true
+x === y; // -&gt; false
+// now change last note in y to get a minor:
+y[2] = 'A'; // -&gt; ['C', 'E', 'A'] ... OK
+// change first note in z to get e minor;
+z[0] = 'B'; // -&gt; ['B', 'E', 'G'] ... OK</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+
+<p>Thus, the distinction between equality and identity is implicit in such simple instructions such as "paint this screwdriver green, and that one red." (Computers just need to be told these things in more formal terms.)<h3><a class='anchor' name='Where%20the%20distinction%20matters:%20Do%20not%20use%20Strings%20as%20keys%20for%20IdentityDictionary%20and%20Event.'>Where the distinction matters: Do not use Strings as keys for IdentityDictionary and Event.</a></h3>
+
+<p>In <a href="./../Classes/Dictionary.html">Dictionary</a> and its subclasses, the choice of lookup algorithm can impact performance. Using identity for this algorithm, as <a href="./../Classes/IdentityDictionary.html">IdentityDictionary</a> and <a href="./../Classes/Event.html">Event</a> do, is generally faster than usign equality, as <a href="./../Classes/Dictionary.html">Dictionary</a> does. Therefore when using <a href="./../Classes/IdentityDictionary.html">IdentityDictionary</a> and <a href="./../Classes/Event.html">Event</a> keys should not be <a href="./../Classes/String.html">String</a>s, but <a href="./../Classes/Symbol.html">Symbol</a>s. The following example demonstrates why:<div class='codeMirrorContainer'><textarea class='editor'>"String" == "String"; // -&gt; true
+//what happens next may surprise you:
+"String" === "String"; // -&gt; false
+//because each String object is a separate instance.
+
+//Dictionary with a String key (works):
+x = Dictionary.new();
+x.put("String",1234);
+x["String"] // -&gt; 1234
+
+//IdentityDictionary with a String key (won't work):
+y = IdentityDictionary.new();
+y.put("String",1234);
+y["String"] // -&gt; nil
+
+//Event with a String key (wont'work):
+z = (); //Shorthand for z = Event.new()
+z.put("String", 1234) // -&gt; ("String":1234)
+z["String"] // -&gt; nil
+//... because the String instances are not identical!
+
+//Symbols to the rescue:
+z.put('Symbol', 5678) // -&gt; ('Symbol':5678)
+z['Symbol'] // -&gt; 5678</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+<h2><a class='anchor' name='Implementation%20details'>Implementation details</a></h2>
+<h3><a class='anchor' name='Values%20with%20unique%20representations:%20Symbol,%20SimpleNumber,%20and%20more.'>Values with unique representations: Symbol, SimpleNumber, and more.</a></h3>
+
+<p>Why does <a href="./../Classes/Symbol.html">Symbol</a> work to index into an <a href="./../Classes/IdentityDictionary.html">IdentityDictionary</a>, while <a href="./../Classes/String.html">String</a> does not? Because each <a href="./../Classes/Symbol.html">Symbol</a> has a <strong>unique representation</strong> such that <code>'symbol'</code> and <code>'symbol'</code>will always point to the same memory location, regardless of where they sit in the code. Thus, the instance that is passed to the argument of the <code>.at</code> method of the dictionary is <em>identical</em>, rather than just <em>equal</em>, to the instance that serves as the key argument to the dictionary.
+<p>Other examples of classes with unique representations are <a href="./../Classes/SimpleNumber.html">SimpleNumber</a> and its subclasses (<a href="./../Classes/Integer.html">Integer</a>, <a href="./../Classes/Float.html">Float</a>): Each reference to a <a href="./../Classes/Float.html">Float</a> of a given value (say 1.234) points to one and the same instance. (Of course, this instance is not identical to floats of a different value, e.g. 1.23400001.)
+<p>As we have seen, this was <em>not</em> the case for <a href="./../Classes/String.html">String</a>, where each occurrence of a <a href="./../Classes/String.html">String</a> in the code will create a <em>new</em> instance rather than pointing to an exiting instance of the same value. It is also generally <em>not</em> the case for <a href="./../Classes/Collection.html">Collection</a>s. We have already seen this for <a href="./../Classes/Array.html">Array</a>s; here is a similar example for <a href="./../Classes/Set.html">Set</a>s.<div class='codeMirrorContainer'><textarea class='editor'>Set[1,2,3] === Set[1,2,3] // -&gt; false</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+<h3><a class='anchor' name='Unless%20overridden%20by%20a%20subclass,%20checking%20for%20equality%20defaults%20to%20checking%20for%20identity.'>Unless overridden by a subclass, checking for equality defaults to checking for identity.</a></h3>
+
+<p>Not all classes explicitly implement a <code>==</code> method. In that case, <code>==</code> simply defaults to <code>===</code>. An instance of this is <a href="./../Classes/Function.html">Function</a>,<a class='footnote anchor' name='footnote_org_4' href='#footnote_4'><sup>4</sup></a> where the following behavior may be surprising:<div class='codeMirrorContainer'><textarea class='editor'>{1} == {1} // -&gt; false!</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+
+<p>To understand this behavior, we must know two things: First, instances of <a href="./../Classes/Function.html">Function</a> do not have unique representations, that is, like <a href="./../Classes/String.html">String</a> (mentioned above), each <code>{1}</code> expression in the code is assigned a separate instance. Thus <code>{1} === {1}</code> will return <code>false</code>. Second, <em>unlike</em> <a href="./../Classes/String.html">String</a>, <a href="./../Classes/Function.html">Function</a> does not implement a <code>==</code> method, and therefore its <code>==</code> defaults to <code>===</code>.  <code>{1} == {1}</code> is thus really a question about whether the two functions designate the same object instance in memory,  i.e. whether <code>{1} === {1}</code>---which, as we just learned, returns <code>false</code>.<div class='footnotes'>
+<a class='anchor' name='footnote_1'/><div class='footnote'>[<a href='#footnote_org_1'>1</a>] - For philosophical background see <a href="https://plato.stanford.edu/archives/fall2022/entries/identity/">Noonan/Curtis 2022</a>. What SuperCollider calls Identity and Equality roughly correspond to what philosophy calls "numeric identity" and "relative identity," respectively; and more precisely, to what computer science calls "reference equality" and "value equality," respectively. (E.g., <a href="https://web.mit.edu/6.102/www/sp23/classes/10-equality/#reference_equality_vs_value_equality">Miller/Goldman 2023</a>, accessed May 2025.)</div><a class='anchor' name='footnote_2'/><div class='footnote'>[<a href='#footnote_org_2'>2</a>] - Exception: For primitives (such as numbers and symbols), an object's identity is tied directly to its value.</div><a class='anchor' name='footnote_3'/><div class='footnote'>[<a href='#footnote_org_3'>3</a>] - An important exception is floating-point arithmetics, where expressions like <code>0.1 * 3 == 0.3</code> may return false. However, this is not strictly speaking an issue with <em>equality</em>, but with floating-point representation (see <a href="./../Classes/Float.html">Float</a>).</div><a class='anchor' name='footnote_4'/><div class='footnote'>[<a href='#footnote_org_4'>4</a>] - The reason for this, at least for functions, lies ultimately in the undecideability of the "Halting Problem." See <a href="https://plato.stanford.edu/archives/win2021/entries/computability/#HalPro">Immermann2021</a>.</div></div><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Guides/EqualityIdentity.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Guides/EqualityIdentity.schelp</a><br>link::Guides/EqualityIdentity::<br></div></div><script src='./../static/editor.js' type='text/javascript'></script>
+</body></html>

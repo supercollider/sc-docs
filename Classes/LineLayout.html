@@ -1,21 +1,25 @@
-<!doctype html><html lang='en'><head><title>LineLayout | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>LineLayout | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../lib/jquery.min.js'></script>
-<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/jquery.min.js'></script>
+<script src='./../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './..';
 var scdoc_title = 'LineLayout';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../static/scdoc.js' type='text/javascript'></script>
 <script src='./../docmap.js' type='text/javascript'></script>
+<script src='./../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
@@ -64,14 +68,17 @@ var scdoc_sc_version = '3.13.1';
 
 <p>You can assign a <strong>stretch factor</strong> and/or <strong>alignment</strong> to an item by wrapping it into an array, followed by pairs of ('stretch', factor) and/or ('align', alignment). 'stretch' and 'align' may be abbreviated with 's' and 'a'. Simplified syntax for placing key-value pairs into an array comes handy (see <a href="./../Reference/Syntax-Shortcuts.html#Creating%20arrays%20with%20key-value%20pairs">Syntax Shortcuts: Creating arrays with key-value pairs</a>, and the example below). For possible alignment values see <a href="./../Reference/gui_alignments.html">Alignment</a>.
 <p>If the item is a stretchable empty space (nil) alignment will have no effect; if the item is a fixed-size empty space (an Integer), it is unaffected by both the stretch factor and alignment.
-<p>Example:<textarea class='editor'>w = Window.new;
+<p>Example:<div class='codeMirrorContainer'><textarea class='editor'>(
+w = Window.new;
 w.layout = VLayout(
-    [Button().states_([["Foo"]]), stretch:1, align:\bottomLeft],
+    [Button().states_([["Foo"]]), stretch: 1, align: \bottomLeft],
     20,
-    [TextView().string_("Bar\nBar\nBar\n"), s:3],
-    [nil, s:1]
+    [TextView().string_("Bar\nBar\nBar\n"), s: 3],
+    [nil, s: 1]
 );
-w.front;</textarea>
+w.front;
+)</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3><a class='anchor' name='Inherited%20class%20methods'>Inherited class methods</a></h3>
 <div id='inheritedclassmets'></div><h2><a class='anchor' name='instancemethods'>Instance Methods</a></h2>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-add' href='./../Overviews/Methods.html#add'>add</a></h3>
@@ -108,16 +115,32 @@ w.front;</textarea>
 <p>A symbol expressing the alignment. See <a href="./../Reference/gui_alignments.html">Alignment</a> for possible values.</table></div><h3><a class='anchor' name='Inherited%20instance%20methods'>Inherited instance methods</a></h3>
 <div id='inheritedinstmets'></div><h2><a class='anchor' name='examples'>Examples</a></h2>
 
-<p>Try resizing the window created by the following code.<textarea class='editor'>w = Window.new;
+<p>Try resizing the window created by the following code.<div class='codeMirrorContainer'><textarea class='editor'>(
+w = Window.new;
 w.layout = VLayout(
     TextView().string_("Foo\nBar\nFoo\nBar\nFoo"),
     HLayout(
         Button().states_([["Foo"]]),
-        [TextField().string_("Bar"), stretch:1],
-        [TextField().string_("BarBarBar"), stretch:4]
+        [TextField().string_("Bar"), stretch: 1],
+        [TextField().string_("BarBarBar"), stretch: 4]
     )
 );
-w.front;</textarea>
+w.front;
+)</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/LineLayout.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/LineLayout.schelp</a><br>link::Classes/LineLayout::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+<p>For a scroll view we need to set its canvas to a View with the desired layout.<div class='codeMirrorContainer'><textarea class='editor'>(
+var view = ScrollView();
+view.canvas = View().layout_(VLayout(
+    *(
+        100.collect {
+            Slider().orientation_(\horizontal).background_(Color.rand)
+        }
+    )
+));
+view.front;
+)</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+
+<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/LineLayout.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/LineLayout.schelp</a><br>link::Classes/LineLayout::<br></div></div><script src='./../static/editor.js' type='text/javascript'></script>
 </body></html>

@@ -1,28 +1,33 @@
-<!doctype html><html lang='en'><head><title>SequenceableCollection | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>SequenceableCollection | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../lib/jquery.min.js'></script>
-<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/jquery.min.js'></script>
+<script src='./../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './..';
 var scdoc_title = 'SequenceableCollection';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../static/scdoc.js' type='text/javascript'></script>
 <script src='./../docmap.js' type='text/javascript'></script>
+<script src='./../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
 <div id='toc'>
 <div id='toctitle'>SequenceableCollection:</div>
 <span class='toc_search'>Filter: <input id='toc_search'></span><ul class='toc'><li class='toc1'><a href='#description'>Description</a></li>
-<ul class='toc'></ul><li class='toc1'><a href='#classmethods'>Class methods</a></li>
+<ul class='toc'><li class='toc2'><a href='#Indexing'>Indexing</a></li>
+<ul class='toc'></ul></ul><li class='toc1'><a href='#classmethods'>Class methods</a></li>
 <ul class='toc'><li class='toc3'><a href='#*fill'>fill</a> </li>
 <li class='toc3'><a href='#*series'>series</a> </li>
 <li class='toc3'><a href='#*geom'>geom</a> </li>
@@ -83,6 +88,7 @@ var scdoc_sc_version = '3.13.1';
 <li class='toc3'><a href='#-resamp1'>resamp1</a> </li>
 <li class='toc3'><a href='#-choose'>choose</a> </li>
 <li class='toc3'><a href='#-wchoose'>wchoose</a> </li>
+<li class='toc3'><a href='#-wchoosen'>wchoosen</a> </li>
 <li class='toc3'><a href='#-sort'>sort</a> </li>
 <li class='toc3'><a href='#-sortBy'>sortBy</a> </li>
 <li class='toc3'><a href='#-order'>order</a> </li>
@@ -107,6 +113,7 @@ var scdoc_sc_version = '3.13.1';
 </ul><li class='toc2'><a href='#Math%20Support%20-%20Binary%20Messages'>Math Support - Binary Messages</a></li>
 <ul class='toc'><li class='toc3'><a href='#-+'>+</a>  <a href='#--'>-</a>  <a href='#-*'>*</a>  <a href='#-/'>/</a>  <a href='#-div'>div</a>  <a href='#-min'>min</a>  <a href='#-max'>max</a>  <a href='#-<'>&lt;</a>  <a href='#-<='>&lt;=</a>  <a href='#->'>&gt;</a>  <a href='#->='>&gt;=</a>  <a href='#-bitXor'>bitXor</a>  <a href='#-lcm'>lcm</a>  <a href='#-gcd'>gcd</a>  <a href='#-round'>round</a>  <a href='#-trunc'>trunc</a>  <a href='#-atan2'>atan2</a>  <a href='#-hypot'>hypot</a>  <a href='#-ring1'>ring1</a>  <a href='#-ring2'>ring2</a>  <a href='#-ring3'>ring3</a>  <a href='#-ring4'>ring4</a>  <a href='#-difsqr'>difsqr</a>  <a href='#-sumsqr'>sumsqr</a>  <a href='#-sqrdif'>sqrdif</a>  <a href='#-absdif'>absdif</a>  <a href='#-amclip'>amclip</a>  <a href='#-scaleneg'>scaleneg</a>  <a href='#-clip2'>clip2</a>  <a href='#-excess'>excess</a>  <a href='#-rrand'>rrand</a>  <a href='#-exprand'>exprand</a> </li>
 <li class='toc3'><a href='#-%'>%</a>  <a href='#-**'>**</a>  <a href='#-&'>&amp;</a>  <a href='#-|'>|</a>  <a href='#->>'>&gt;&gt;</a>  <a href='#-+>>'>+&gt;&gt;</a>  <a href='#-<!'>&lt;!</a> </li>
+<li class='toc3'><a href='#-modSeaside'>modSeaside</a> </li>
 <li class='toc3'><a href='#-performBinaryOp'>performBinaryOp</a> </li>
 </ul><li class='toc2'><a href='#Math%20Support%20-%20Special%20Functions'>Math Support - Special Functions</a></li>
 <ul class='toc'><li class='toc3'><a href='#-bernouliB2n'>bernouliB2n</a> </li>
@@ -237,7 +244,7 @@ var scdoc_sc_version = '3.13.1';
 <li class='toc3'><a href='#-multichannelExpandRef'>multichannelExpandRef</a> </li>
 </ul><li class='toc2'><a href='#Rhythm-lists'>Rhythm-lists</a></li>
 <ul class='toc'><li class='toc3'><a href='#-convertRhythm'>convertRhythm</a> </li>
-</ul><li class='toc2'><a href='#Starting%20UNIX%20processes'>Starting UNIX processes</a></li>
+</ul><li class='toc2'><a href='#Starting%20system%20processes'>Starting system processes</a></li>
 <ul class='toc'><li class='toc3'><a href='#-unixCmd'>unixCmd</a> </li>
 <li class='toc3'><a href='#-unixCmdGetStdOut'>unixCmdGetStdOut</a> </li>
 </ul><li class='toc2'><a href='#Inherited%20instance%20methods'>Inherited instance methods</a></li>
@@ -315,6 +322,7 @@ var scdoc_sc_version = '3.13.1';
 <li class='toc3'><a href='#-ramp'>ramp</a> </li>
 <li class='toc3'><a href='#-rate'>rate</a> </li>
 <li class='toc3'><a href='#-rectWindow'>rectWindow</a> </li>
+<li class='toc3'><a href='#-removeAt'>removeAt</a> </li>
 <li class='toc3'><a href='#-removing'>removing</a> </li>
 <li class='toc3'><a href='#-rightShift'>rightShift</a> </li>
 <li class='toc3'><a href='#-roundUp'>roundUp</a> </li>
@@ -344,37 +352,52 @@ var scdoc_sc_version = '3.13.1';
  | <span id='categories'><a href='./../Browse.html#Collections'>Collections</a>&#8201;&gt;&#8201;<a href='./../Browse.html#Collections>Ordered'>Ordered</a></span>
 </div><h1>SequenceableCollection<span id='superclasses'> : <a href="../Classes/Collection.html">Collection</a> : <a href="../Classes/Object.html">Object</a></span>
 </h1>
-<div id='summary'>Abstract superclass of integer indexable collections</div>
+<div id='summary'>Abstract superclass of indexable collections</div>
 </div>
 <div class='subheader'>
-<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/Common/Collections/SequenceableCollection.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Collections/SequenceableCollection.sc'>SequenceableCollection.sc</a></div><div id='subclasses'>Subclasses: <a href="../Classes/ArrayedCollection.html">ArrayedCollection</a>, <a href="../Classes/LinkedList.html">LinkedList</a>, <a href="../Classes/List.html">List</a>, <a href="../Classes/Order.html">Order</a>, <span id='hiddensubclasses' style='display:none;'><a href="../Classes/RingBuffer.html">RingBuffer</a></span><a class='subclass_toggle' href='#' onclick='javascript:showAllSubclasses(this); return false'>&hellip;&nbsp;see&nbsp;all</a></div>
+<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/Common/Collections/SequenceableCollection.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Collections/SequenceableCollection.sc'>SequenceableCollection.sc</a></div><div id='subclasses'>Subclasses: <a href="../Classes/ArrayedCollection.html">ArrayedCollection</a>, <a href="../Classes/LinkedList.html">LinkedList</a>, <a href="../Classes/List.html">List</a>, <a href="../Classes/Order.html">Order</a>, <span id='hiddensubclasses' style='display:none;'><a href="../Classes/RingBuffer.html">RingBuffer</a></span><a class='subclass_toggle' href='#' onclick='javascript:showAllSubclasses(this); return false'>&hellip;&nbsp;see&nbsp;all</a></div>
 </div>
 <h2><a class='anchor' name='description'>Description</a></h2>
 
-<p>SequenceableCollection is a subclass of Collection whose elements can be indexed by an Integer. It has many useful subclasses; <a href="./../Classes/Array.html">Array</a> and <a href="./../Classes/List.html">List</a> are amongst the most commonly used.<h2><a class='anchor' name='classmethods'>Class Methods</a></h2>
+<p><a href="./../Classes/SequenceableCollection.html">SequenceableCollection</a> is a subclass of <a href="./../Classes/Collection.html">Collection</a> whose items can be indexed by a <a href="./../Classes/SimpleNumber.html">SimpleNumber</a>. It has many useful subclasses; <a href="./../Classes/Array.html">Array</a> and <a href="./../Classes/List.html">List</a> are amongst the most commonly used.<h3><a class='anchor' name='Indexing'>Indexing</a></h3>
+
+<p>In SuperCollider, an <strong>index</strong> is a number used to access items in the subclasses of <a href="./../Classes/SequenceableCollection.html">SequenceableCollection</a> such as arrays and lists. Indexing starts at <code>0</code>, so the first element of a collection is at index <code>0</code>, the second at index <code>1</code>, and so on. The item at a specific index is accessed using <code>.at(index)</code> method or its shortcut <code>[index]</code>. If using an index that is outside the bounds of the collection (too low or too high), SuperCollider returns <code>nil</code>.
+<p>Example:<div class='codeMirrorContainer'><textarea class='editor'>a = [100, 200, 300];
+a.at(0); // Returns 100 (the first item)
+a[0]     // Same as above (syntactic sugar; shortcut)
+a[2];    // Returns 300 (the third item)
+a[5];    // Returns nil (the index is out of bounds)</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+<h2><a class='anchor' name='classmethods'>Class Methods</a></h2>
 <h3 class='method-code'><span class='method-prefix'>SequenceableCollection.</span><a class='method-name' name='*fill' href='./../Overviews/Methods.html#fill'>fill</a>(<span class='argstr'>size</span>, <span class='argstr'>function</span>)</h3>
 <div class='supmethod'>From superclass: <a href='./../Classes/Collection.html'>Collection</a></div>
 <div class='method'>
-<p>Creates a Collection of the given size, the elements of which are determined by evaluation the given function. The function is passed the index as an argument.<textarea class='editor'>Array.fill(4, { arg i; i * 2 });
-Bag.fill(14, { arg i; i.rand });</textarea>
+<p>Creates a Collection of the given size, the elements of which are determined by evaluation the given function. The function is passed the index as an argument.<div class='codeMirrorContainer'><textarea class='editor'>Array.fill(4, { |i| i * 2 });
+Bag.fill(14, { |i| i.rand });</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h4>Arguments:</h4>
 <table class='arguments'>
 <tr><td class='argumentname'>size<td class='argumentdesc'>
-<p>The size of the collection which is returned. If nil, it returns an empty collection. If an array of sizes is given, the resulting collection has the appropriate dimensions (see: <a href="#*fillND).">*fillND).</a><textarea class='editor'>Array.fill([2, 2, 3], { arg i, j, k;  i * 100 + (j * 10) + k });</textarea>
+<p>The size of the collection which is returned. If nil, it returns an empty collection. If an array of sizes is given, the resulting collection has the appropriate dimensions (see: <a href="#*fillND).">*fillND).</a><div class='codeMirrorContainer'><textarea class='editor'>Array.fill([2, 2, 3], { |i, j, k|  i * 100 + (j * 10) + k });</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <tr><td class='argumentname'>function<td class='argumentdesc'>
-<p>The function which is called for each new element - the index is passed in as a first argument. The function be anything that responds to the message "value".<textarea class='editor'>Array.fill(10, { arg i; 2 ** i });
+<p>The function which is called for each new element - the index is passed in as a first argument. The function be anything that responds to the message "value".<div class='codeMirrorContainer'><textarea class='editor'>Array.fill(10, { |i| 2 ** i });
 Array.fill(10, Pxrand([0, 1, 2], inf).iter);
 Array.fill(10, 7); // an object that doesn't respond with a new value is just repeatedly added.</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </table></div><h3 class='method-code'><span class='method-prefix'>SequenceableCollection.</span><a class='method-name' name='*series' href='./../Overviews/Methods.html#series'>series</a>(<span class='argstr'>size</span>, <span class='argstr'>start: 0</span>, <span class='argstr'>step: 1</span>)</h3>
 <div class='method'>
-<p>Fill a SequenceableCollection with an arithmetic series.<textarea class='editor'>Array.series(5, 10, 2);</textarea>
+<p>Fill a SequenceableCollection with an arithmetic series.<div class='codeMirrorContainer'><textarea class='editor'>Array.series(5, 10, 2);</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>SequenceableCollection.</span><a class='method-name' name='*geom' href='./../Overviews/Methods.html#geom'>geom</a>(<span class='argstr'>size</span>, <span class='argstr'>start</span>, <span class='argstr'>grow</span>)</h3>
 <div class='method'>
-<p>Fill a SequenceableCollection with a geometric series.<textarea class='editor'>Array.geom(5, 1, 3);</textarea>
+<p>Fill a SequenceableCollection with a geometric series.<div class='codeMirrorContainer'><textarea class='editor'>Array.geom(5, 1, 3);</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>SequenceableCollection.</span><a class='method-name' name='*fib' href='./../Overviews/Methods.html#fib'>fib</a>(<span class='argstr'>size</span>, <span class='argstr'>a: 0.0</span>, <span class='argstr'>b: 1.0</span>)</h3>
 <div class='method'>
-<p>Fill a SequenceableCollection with a fibonacci series.<textarea class='editor'>Array.fib(5);
+<p>Fill a SequenceableCollection with a fibonacci series.<div class='codeMirrorContainer'><textarea class='editor'>Array.fib(5);
 Array.fib(5, 2, 32); // start from 32 with step 2.</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p><h4>Arguments:</h4>
 <table class='arguments'>
@@ -383,19 +406,24 @@ Array.fib(5, 2, 32); // start from 32 with step 2.</textarea>
 <p>the starting step value<tr><td class='argumentname'>b<td class='argumentdesc'>
 <p>the starting value</table></div><h3 class='method-code'><span class='method-prefix'>SequenceableCollection.</span><a class='method-name' name='*rand' href='./../Overviews/Methods.html#rand'>rand</a>(<span class='argstr'>size</span>, <span class='argstr'>minVal</span>, <span class='argstr'>maxVal</span>)</h3>
 <div class='method'>
-<p>Fill a SequenceableCollection with random values in the range <strong>minVal</strong> to <strong>maxVal</strong>.<textarea class='editor'>Array.rand(8, 1, 100);</textarea>
+<p>Fill a SequenceableCollection with random values in the range <strong>minVal</strong> to <strong>maxVal</strong>.<div class='codeMirrorContainer'><textarea class='editor'>Array.rand(8, 1, 100);</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>SequenceableCollection.</span><a class='method-name' name='*rand2' href='./../Overviews/Methods.html#rand2'>rand2</a>(<span class='argstr'>size</span>, <span class='argstr'>val</span>)</h3>
 <div class='method'>
-<p>Fill a SequenceableCollection with random values in the range -<strong>val</strong> to +<strong>val</strong>.<textarea class='editor'>Array.rand2(8, 100);</textarea>
+<p>Fill a SequenceableCollection with random values in the range -<strong>val</strong> to +<strong>val</strong>.<div class='codeMirrorContainer'><textarea class='editor'>Array.rand2(8, 100);</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>SequenceableCollection.</span><a class='method-name' name='*linrand' href='./../Overviews/Methods.html#linrand'>linrand</a>(<span class='argstr'>size</span>, <span class='argstr'>minVal</span>, <span class='argstr'>maxVal</span>)</h3>
 <div class='method'>
-<p>Fill a SequenceableCollection with random values in the range <strong>minVal</strong> to <strong>maxVal</strong> with a linear distribution.<textarea class='editor'>Array.linrand(8, 1, 100);</textarea>
+<p>Fill a SequenceableCollection with random values in the range <strong>minVal</strong> to <strong>maxVal</strong> with a linear distribution.<div class='codeMirrorContainer'><textarea class='editor'>Array.linrand(8, 1, 100);</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>SequenceableCollection.</span><a class='method-name' name='*exprand' href='./../Overviews/Methods.html#exprand'>exprand</a>(<span class='argstr'>size</span>, <span class='argstr'>minVal</span>, <span class='argstr'>maxVal</span>)</h3>
 <div class='method'>
-<p>Fill a SequenceableCollection with random values in the range <strong>minVal</strong> to <strong>maxVal</strong> with exponential distribution.<textarea class='editor'>Array.exprand(8, 1, 100);</textarea>
+<p>Fill a SequenceableCollection with random values in the range <strong>minVal</strong> to <strong>maxVal</strong> with exponential distribution.<div class='codeMirrorContainer'><textarea class='editor'>Array.exprand(8, 1, 100);</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>SequenceableCollection.</span><a class='method-name' name='*interpolation' href='./../Overviews/Methods.html#interpolation'>interpolation</a>(<span class='argstr'>size</span>, <span class='argstr'>start: 0.0</span>, <span class='argstr'>end: 1.0</span>)</h3>
 <div class='method'>
-<p>Fill a SequenceableCollection with the interpolated values between the <strong>start</strong> and <strong>end</strong> values.<textarea class='editor'>Array.interpolation(5, 3.2, 20.5);</textarea>
+<p>Fill a SequenceableCollection with the interpolated values between the <strong>start</strong> and <strong>end</strong> values.<div class='codeMirrorContainer'><textarea class='editor'>Array.interpolation(5, 3.2, 20.5);</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3><a class='anchor' name='Inherited%20class%20methods'>Inherited class methods</a></h3>
 <div id='inheritedclassmets'></div><h3><a class='anchor' name='Undocumented%20class%20methods'>Undocumented class methods</a></h3>
 <h3 class='method-code'><span class='method-prefix'>SequenceableCollection.</span><a class='method-name' name='*streamContents' href='./../Overviews/Methods.html#streamContents'>streamContents</a>(<span class='argstr'>function</span>)</h3>
@@ -403,94 +431,122 @@ Array.fib(5, 2, 32); // start from 32 with step 2.</textarea>
 <h2><a class='anchor' name='instancemethods'>Instance Methods</a></h2>
 <h3 class='method-code'><span class='method-prefix'></span><a class='method-name' name='-|@|' href='./../Overviews/Methods.html#|@|'>|@|</a>(<span class='argstr'>index</span>)</h3>
 <div class='method'>
-<p>synonym for <a href="./../Classes/ArrayedCollection.html#-clipAt">ArrayedCollection: -clipAt</a>.<textarea class='editor'>[3, 4, 5]|@|6;</textarea>
+<p>synonym for <a href="./../Classes/ArrayedCollection.html#-clipAt">ArrayedCollection: -clipAt</a> and <a href="./../Classes/List.html#-clipAt">List: -clipAt</a>.<div class='codeMirrorContainer'><textarea class='editor'>[3, 4, 5]|@|6     // -&gt; 5
+List[3, 4, 5]|@|6 // -&gt; 5</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'></span><a class='method-name' name='-@@' href='./../Overviews/Methods.html#@@'>@@</a>(<span class='argstr'>index</span>)</h3>
 <div class='method'>
-<p>synonym for <a href="./../Classes/ArrayedCollection.html#-wrapAt">ArrayedCollection: -wrapAt</a>.<textarea class='editor'>[3, 4, 5]@@6;
-[3, 4, 5]@@ -1;
-[3, 4, 5]@@[6, 8]</textarea>
+<p>synonym for <a href="./../Classes/ArrayedCollection.html#-wrapAt">ArrayedCollection: -wrapAt</a> and <a href="./../Classes/List.html#-wrapAt">List: -wrapAt</a>.<div class='codeMirrorContainer'><textarea class='editor'>[3, 4, 5]@@6      // -&gt; 3
+[3, 4, 5]@@ -1    // -&gt; 5
+[3, 4, 5]@@[6, 8] // -&gt; [3, 5]
+
+List[3, 4, 5]@@6      // -&gt; 3
+List[3, 4, 5]@@ -1    // -&gt; 5
+List[3, 4, 5]@@[6, 8] // -&gt; [3, 5]</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'></span><a class='method-name' name='-@|@' href='./../Overviews/Methods.html#@|@'>@|@</a>(<span class='argstr'>index</span>)</h3>
 <div class='method'>
-<p>synonym for <a href="./../Classes/ArrayedCollection.html#-foldAt">ArrayedCollection: -foldAt</a>.<textarea class='editor'>[3, 4, 5]@|@[6, 8];</textarea>
+<p>synonym for <a href="./../Classes/ArrayedCollection.html#-foldAt">ArrayedCollection: -foldAt</a> and <a href="./../Classes/List.html#-foldAt">List: -foldAt</a>.<div class='codeMirrorContainer'><textarea class='editor'>[3, 4, 5]@|@[6, 8]     // -&gt; [5, 3]
+List[3, 4, 5]@|@[6, 8] // -&gt; [5, 3]</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-first' href='./../Overviews/Methods.html#first'>first</a></h3>
 <div class='method'>
-<p>Return the first element of the collection.<textarea class='editor'>[3, 4, 5].first;</textarea>
+<p>Return the first element of the collection.<div class='codeMirrorContainer'><textarea class='editor'>[3, 4, 5].first;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-last' href='./../Overviews/Methods.html#last'>last</a></h3>
 <div class='method'>
-<p>Return the last element of the collection.<textarea class='editor'>[3, 4, 5].last;</textarea>
+<p>Return the last element of the collection.<div class='codeMirrorContainer'><textarea class='editor'>[3, 4, 5].last;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-putFirst' href='./../Overviews/Methods.html#putFirst'>putFirst</a>(<span class='argstr'>obj</span>)</h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-putLast' href='./../Overviews/Methods.html#putLast'>putLast</a>(<span class='argstr'>obj</span>)</h3>
 <div class='method'>
-<p>Place <strong>item</strong> at the first / last index in the collection. Note that if the collection is empty (and therefore has no indexed slots) the item will not be added.<textarea class='editor'>[3, 4, 5].putFirst(100);
+<p>Place <strong>item</strong> at the first / last index in the collection. Note that if the collection is empty (and therefore has no indexed slots) the item will not be added.<div class='codeMirrorContainer'><textarea class='editor'>[3, 4, 5].putFirst(100);
 [3, 4, 5].putLast(100);</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-indexOf' href='./../Overviews/Methods.html#indexOf'>indexOf</a>(<span class='argstr'>item</span>)</h3>
 <div class='method'>
-<p>Return the index of an <strong>item</strong> in the collection, or nil if not found. Elements are checked for identity (not for equality).<textarea class='editor'>[3, 4, 100, 5].indexOf(100);
+<p>Return the index of an <strong>item</strong> in the collection, or nil if not found. Elements are checked for identity (not for equality).<div class='codeMirrorContainer'><textarea class='editor'>[3, 4, 100, 5].indexOf(100);
 [3, 4, \foo, \bar].indexOf(\foo);</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-indexOfEqual' href='./../Overviews/Methods.html#indexOfEqual'>indexOfEqual</a>(<span class='argstr'>item</span>, <span class='argstr'>offset: 0</span>)</h3>
 <div class='method'>
-<p>Return the index of something in the collection that equals the <strong>item</strong>, or nil if not found.<textarea class='editor'>[3, 4, "foo", "bar"].indexOfEqual("foo");</textarea>
+<p>Return the index of something in the collection that equals the <strong>item</strong>, or nil if not found.<div class='codeMirrorContainer'><textarea class='editor'>[3, 4, "foo", "bar"].indexOfEqual("foo");</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-indicesOfEqual' href='./../Overviews/Methods.html#indicesOfEqual'>indicesOfEqual</a>(<span class='argstr'>item</span>)</h3>
 <div class='method'>
-<p>Return an array of indices of things in the collection that equal the <strong>item</strong>, or nil if not found.<textarea class='editor'>y = [7, 8, 7, 6, 5, 6, 7, 6, 7, 8, 9];
+<p>Return an array of indices of things in the collection that equal the <strong>item</strong>, or nil if not found.<div class='codeMirrorContainer'><textarea class='editor'>y = [7, 8, 7, 6, 5, 6, 7, 6, 7, 8, 9];
 y.indicesOfEqual(7);
 y.indicesOfEqual(5);</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-indexOfGreaterThan' href='./../Overviews/Methods.html#indexOfGreaterThan'>indexOfGreaterThan</a>(<span class='argstr'>val</span>)</h3>
 <div class='method'>
-<p>Return the first index containing an <strong>item</strong> which is greater than <strong>item</strong>.<textarea class='editor'>y = List[ 10, 5, 77, 55, 12, 123];
+<p>Return the first index containing an <strong>item</strong> which is greater than <strong>item</strong>.<div class='codeMirrorContainer'><textarea class='editor'>y = List[10, 5, 77, 55, 12, 123];
 y.indexOfGreaterThan(70);</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-selectIndices' href='./../Overviews/Methods.html#selectIndices'>selectIndices</a>(<span class='argstr'>function</span>)</h3>
 <div class='method'>
-<p>Return a new collection of same type as receiver which consists of all indices of those elements of the receiver for which function answers <code>true</code>. The function is passed two arguments, the item and an integer index.<textarea class='editor'>#[a, b, c, g, h, h, j, h].selectIndices({|item, i| item === \h})</textarea>
+<p>Return a new collection of same type as receiver which consists of all indices of those elements of the receiver for which function answers <code>true</code>. The function is passed two arguments, the item and an integer index.<div class='codeMirrorContainer'><textarea class='editor'>#[a, b, c, g, h, h, j, h].selectIndices({ |item, i| item === \h })</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p>If you want to control what type of collection is returned, use <a href="#-selectIndicesAs">-selectIndicesAs</a></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-selectIndicesAs' href='./../Overviews/Methods.html#selectIndicesAs'>selectIndicesAs</a>(<span class='argstr'>function</span>, <span class='argstr'>class</span>)</h3>
 <div class='method'>
-<p>Return a new collection of type <em>class</em> which consists of all indices of those elements of the receiver for which function answers <code>true</code>. The function is passed two arguments, the item and an integer index.<textarea class='editor'>#[a, b, c, g, h, h, j, h].selectIndicesAs({|item, i| item === \h}, Set)</textarea>
+<p>Return a new collection of type <em>class</em> which consists of all indices of those elements of the receiver for which function answers <code>true</code>. The function is passed two arguments, the item and an integer index.<div class='codeMirrorContainer'><textarea class='editor'>#[a, b, c, g, h, h, j, h].selectIndicesAs({ |item, i| item === \h }, Set)</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-rejectIndices' href='./../Overviews/Methods.html#rejectIndices'>rejectIndices</a>(<span class='argstr'>function</span>)</h3>
 <div class='method'>
-<p>Return a new collection of same type as receiver which consists of all indices of those elements of the receiver for which function answers <code>false</code>. The function is passed two arguments, the item and an integer index.<textarea class='editor'>#[a, b, c, g, h, h, j, h].rejectIndices({|item, i| item === \h})</textarea>
+<p>Return a new collection of same type as receiver which consists of all indices of those elements of the receiver for which function answers <code>false</code>. The function is passed two arguments, the item and an integer index.<div class='codeMirrorContainer'><textarea class='editor'>#[a, b, c, g, h, h, j, h].rejectIndices({ |item, i| item === \h })</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p>If you want to control what type of collection is returned, use <a href="#-rejectIndicesAs">-rejectIndicesAs</a></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-rejectIndicesAs' href='./../Overviews/Methods.html#rejectIndicesAs'>rejectIndicesAs</a>(<span class='argstr'>function</span>, <span class='argstr'>class</span>)</h3>
 <div class='method'>
-<p>Return a new collection of type <em>class</em> which consists of all indices of those elements of the receiver for which function answers <code>false</code>. The function is passed two arguments, the item and an integer index.<textarea class='editor'>#[a, b, c, g, h, h, j, h].rejectIndicesAs({|item, i| item === \h}, Set)</textarea>
+<p>Return a new collection of type <em>class</em> which consists of all indices of those elements of the receiver for which function answers <code>false</code>. The function is passed two arguments, the item and an integer index.<div class='codeMirrorContainer'><textarea class='editor'>#[a, b, c, g, h, h, j, h].rejectIndicesAs({ |item, i| item === \h }, Set)</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-maxIndex' href='./../Overviews/Methods.html#maxIndex'>maxIndex</a>(<span class='argstr'>function</span>)</h3>
 <div class='supmethod'>From superclass: <a href='./../Classes/Collection.html'>Collection</a></div>
 <div class='method'>
-<p>Answer the index of the maximum of the results of <strong>function</strong> evaluated for each item in the receiver. The function is passed two arguments, the item and an integer index. If function is nil, then answer the maximum of all items in the receiver.<textarea class='editor'>List[1, 2, 3, 4].maxIndex({ arg item, i; item + 10 });
+<p>Answer the index of the maximum of the results of <strong>function</strong> evaluated for each item in the receiver. The function is passed two arguments, the item and an integer index. If function is nil, then answer the maximum of all items in the receiver.<div class='codeMirrorContainer'><textarea class='editor'>List[1, 2, 3, 4].maxIndex({ |item, i| item + 10 });
 [3.2, 12.2, 13, 0.4].maxIndex;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-minIndex' href='./../Overviews/Methods.html#minIndex'>minIndex</a>(<span class='argstr'>function</span>)</h3>
 <div class='supmethod'>From superclass: <a href='./../Classes/Collection.html'>Collection</a></div>
 <div class='method'>
-<p>Answer the index of the minimum of the results of <strong>function</strong> evaluated for each item in the receiver. The function is passed two arguments, the item and an integer index. If function is nil, then answer the minimum of all items in the receiver.<textarea class='editor'>List[1, 2, 3, 4].minIndex({ arg item, i; item + 10 });
+<p>Answer the index of the minimum of the results of <strong>function</strong> evaluated for each item in the receiver. The function is passed two arguments, the item and an integer index. If function is nil, then answer the minimum of all items in the receiver.<div class='codeMirrorContainer'><textarea class='editor'>List[1, 2, 3, 4].minIndex({ |item, i| item + 10 });
 List[3.2, 12.2, 13, 0.4].minIndex;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-find' href='./../Overviews/Methods.html#find'>find</a>(<span class='argstr'>sublist</span>, <span class='argstr'>offset: 0</span>)</h3>
 <div class='method'>
-<p>If the <strong>sublist</strong> exists in the receiver (in the specified order), at an offset greater than or equal to the initial <strong>offset</strong>, then return the starting index. The sublist must be of the same kind (class) as the list to search in. Elements are checked for equality (not for identity).<textarea class='editor'>y = [7, 8, 7, 6, 5, 6, 7, 6, 7, 8, 9];
+<p>If the <strong>sublist</strong> exists in the receiver (in the specified order), at an offset greater than or equal to the initial <strong>offset</strong>, then return the starting index. The sublist must be of the same kind (class) as the list to search in. Elements are checked for equality (not for identity).<div class='codeMirrorContainer'><textarea class='editor'>y = [7, 8, 7, 6, 5, 6, 7, 6, 7, 8, 9];
 y.find([7, 6, 5]);</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-findAll' href='./../Overviews/Methods.html#findAll'>findAll</a>(<span class='argstr'>arr</span>, <span class='argstr'>offset: 0</span>)</h3>
 <div class='method'>
-<p>Similar to <a href="#-find">-find</a> but returns an array of all the indices at which the sequence is found.<textarea class='editor'>y = [7, 8, 7, 6, 5, 6, 7, 6, 7, 8, 9];
+<p>Similar to <a href="#-find">-find</a> but returns an array of all the indices at which the sequence is found.<div class='codeMirrorContainer'><textarea class='editor'>y = [7, 8, 7, 6, 5, 6, 7, 6, 7, 8, 9];
 y.findAll([7, 6]);</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-indexIn' href='./../Overviews/Methods.html#indexIn'>indexIn</a>(<span class='argstr'>val</span>)</h3>
 <div class='method'>
-<p>Returns the closest index of the value in the collection (collection must be sorted).<textarea class='editor'>[2, 3, 5, 6].indexIn(5.2);</textarea>
+<p>Returns the closest index of the value in the collection (collection must be sorted).<div class='codeMirrorContainer'><textarea class='editor'>[2, 3, 5, 6].indexIn(5.2);</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-indexInBetween' href='./../Overviews/Methods.html#indexInBetween'>indexInBetween</a>(<span class='argstr'>val</span>)</h3>
 <div class='method'>
-<p>Returns a linearly interpolated float index for the value (collection must be sorted). Inverse operation is <a href="#-blendAt">-blendAt</a>.<textarea class='editor'>x = [2, 3, 5, 6].indexInBetween(5.2);
+<p>Returns a linearly interpolated float index for the value (collection must be sorted). Inverse operation is <a href="#-blendAt">-blendAt</a>.<div class='codeMirrorContainer'><textarea class='editor'>x = [2, 3, 5, 6].indexInBetween(5.2);
 [2, 3, 5, 6].blendAt(x);</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-blendAt' href='./../Overviews/Methods.html#blendAt'>blendAt</a>(<span class='argstr'>index</span>, <span class='argstr'>method: 'clipAt'</span>)</h3>
 <div class='supmethod'>From superclass: <a href='./../Classes/Object.html'>Object</a></div>
 <div class='method'>
-<p>Returns a linearly interpolated value between the two closest indices. Inverse operation is <a href="#-indexInBetween">-indexInBetween</a>.<textarea class='editor'>x = [2, 5, 6].blendAt(0.4);</textarea>
+<p>Returns a linearly interpolated value between the two closest indices. Inverse operation is <a href="#-indexInBetween">-indexInBetween</a>.<div class='codeMirrorContainer'><textarea class='editor'>x = [2, 5, 6].blendAt(0.4);</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-copyRange' href='./../Overviews/Methods.html#copyRange'>copyRange</a>(<span class='argstr'>start</span>, <span class='argstr'>end</span>)</h3>
 <div class='method'>
-<p>Return a new SequenceableCollection which is a copy of the indexed slots of the receiver from <strong>start</strong> to <strong>end</strong>. If <strong>end</strong> &lt; <strong>start</strong>, an empty collection is returned.<textarea class='editor'>(
+<p>Return a new SequenceableCollection which is a copy of the indexed slots of the receiver from <strong>start</strong> to <strong>end</strong>. If <strong>end</strong> &lt; <strong>start</strong>, an empty collection is returned.<div class='codeMirrorContainer'><textarea class='editor'>(
 var y, z;
 z = [1, 2, 3, 4, 5];
 y = z.copyRange(1, 3);
 z.postln;
 y.postln;
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p><div class='warning'><span class='warninglabel'>WARNING:</span> <code>x.copyRange(a, b)</code> is <strong>not</strong> equivalent to <code>x[a..b]</code>. The latter compiles to <a href="./../Classes/ArrayedCollection.html#-copySeries">ArrayedCollection: -copySeries</a>, which has different behavior when <strong>end</strong> &lt; <strong>start</strong>.</div></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-copyToEnd' href='./../Overviews/Methods.html#copyToEnd'>copyToEnd</a>(<span class='argstr'>start</span>)</h3>
 <div class='method'>
@@ -501,16 +557,17 @@ y.postln;
 <p>Remove <strong>item</strong> from collection. Elements are checked for identity (not for equality).</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-take' href='./../Overviews/Methods.html#take'>take</a>(<span class='argstr'>item</span>)</h3>
 <div class='method'>
 <p>Remove and return <strong>item</strong> from collection. The last item in the collection will move to occupy the vacated slot (and the collection size decreases by one). See also takeAt, defined for <a href="./../Classes/ArrayedCollection.html#-takeAt">ArrayedCollection: -takeAt</a>. Elements are checked for identity (not for equality).<div class='warning'><span class='warninglabel'>WARNING:</span> <code>take(item)</code> works on Arrays but not on Lists, because the internally called method <code>takeAt(item)</code> is not defined for Lists.</div>
-<p><textarea class='editor'>a = [11, 12, 13, 14, 15];
+<p><div class='codeMirrorContainer'><textarea class='editor'>a = [11, 12, 13, 14, 15];
 a.take(12);
 a;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-obtain' href='./../Overviews/Methods.html#obtain'>obtain</a>(<span class='argstr'>index</span>, <span class='argstr'>default</span>)</h3>
 <div class='method'>
 <p>Retrieve an element from a given index (like <a href="./../Classes/SequenceableCollection.html#-at">SequenceableCollection: -at</a>). This method is also implemented in <a href="./../Classes/Object.html">Object</a>, so that you can use it in situations where you don't want to know if the receiver is a collection or not. See also: <a href="./../Classes/SequenceableCollection.html#-instill">SequenceableCollection: -instill</a><h4>Arguments:</h4>
 <table class='arguments'>
 <tr><td class='argumentname'>index<td class='argumentdesc'>
 <p>The index at which to look for an element<tr><td class='argumentname'>default<td class='argumentdesc'>
-<p>If index exceeds collection size, or receiver is nil, return this instead<textarea class='editor'>(
+<p>If index exceeds collection size, or receiver is nil, return this instead<div class='codeMirrorContainer'><textarea class='editor'>(
 a = [10, 20, 30];
 b = [10, 20];
 c = 7;
@@ -520,6 +577,7 @@ c = 7;
 a.obtain(2, 1);
 b.obtain(2, 1);
 c.obtain(2, 1);</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </table></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-instill' href='./../Overviews/Methods.html#instill'>instill</a>(<span class='argstr'>index</span>, <span class='argstr'>item</span>, <span class='argstr'>default</span>)</h3>
 <div class='method'>
 <p>Put an element at a given index (like <a href="./../Classes/SequenceableCollection.html#-put">SequenceableCollection: -put</a>). This method is also implemented in <a href="./../Classes/Object.html">Object</a>, so that you can use it in situations where you don't want to know if the receiver is a collection or not. It will always return a new collection. See also: <a href="./../Classes/SequenceableCollection.html#-obtain">SequenceableCollection: -obtain</a><h4>Arguments:</h4>
@@ -527,7 +585,7 @@ c.obtain(2, 1);</textarea>
 <tr><td class='argumentname'>index<td class='argumentdesc'>
 <p>The index at which to put the item<tr><td class='argumentname'>item<td class='argumentdesc'>
 <p>The object to put into the new collection<tr><td class='argumentname'>default<td class='argumentdesc'>
-<p>If the index exceeds the current collection's size, extend the collection with this element<textarea class='editor'>(
+<p>If the index exceeds the current collection's size, extend the collection with this element<div class='codeMirrorContainer'><textarea class='editor'>(
 a = [10, 20, 30, 40];
 b = [10, 20];
 c = 7;
@@ -538,88 +596,99 @@ b.instill(2, -1);
 c.instill(2, -1);
 // providing a default value
 c.instill(2, -1, 0);</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </table></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-keep' href='./../Overviews/Methods.html#keep'>keep</a>(<span class='argstr'>n</span>)</h3>
 <div class='method'>
-<p>Keep the first <strong>n</strong> items of the array. If <strong>n</strong> is negative, keep the last -<strong>n</strong> items.<textarea class='editor'>a = [1, 2, 3, 4, 5];
+<p>Keep the first <strong>n</strong> items of the array. If <strong>n</strong> is negative, keep the last -<strong>n</strong> items.<div class='codeMirrorContainer'><textarea class='editor'>a = [1, 2, 3, 4, 5];
 a.keep(3);
 a.keep(-3);</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-drop' href='./../Overviews/Methods.html#drop'>drop</a>(<span class='argstr'>n</span>)</h3>
 <div class='method'>
-<p>Drop the first <strong>n</strong> items of the array. If <strong>n</strong> is negative, drop the last -<strong>n</strong> items.<textarea class='editor'>a = [1, 2, 3, 4, 5];
+<p>Drop the first <strong>n</strong> items of the array. If <strong>n</strong> is negative, drop the last -<strong>n</strong> items.<div class='codeMirrorContainer'><textarea class='editor'>a = [1, 2, 3, 4, 5];
 a.drop(3);
 a.drop(-3);</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-join' href='./../Overviews/Methods.html#join'>join</a>(<span class='argstr'>joiner</span>)</h3>
 <div class='method'>
-<p>Returns a <a href="./../Classes/String.html">String</a> formed by connecting all the elements of the receiver, with <strong>joiner</strong> inbetween. See also <a href="./../Classes/String.html#-split">String: -split</a> as the complementary operation.<textarea class='editor'>["m", "ss", "ss", "pp", ""].join("i").postcs;
+<p>Returns a <a href="./../Classes/String.html">String</a> formed by connecting all the elements of the receiver, with <strong>joiner</strong> inbetween. See also <a href="./../Classes/String.html#-split">String: -split</a> as the complementary operation.<div class='codeMirrorContainer'><textarea class='editor'>["m", "ss", "ss", "pp", ""].join("i").postcs;
 "mississippi".split("i").postcs;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-flat' href='./../Overviews/Methods.html#flat'>flat</a></h3>
 <div class='method'>
-<p>Returns a collection from which all nesting has been flattened.<textarea class='editor'>[[1, 2, 3], [[4, 5], [[6]]]].flat; // [ 1, 2, 3, 4, 5, 6 ]
-[1, 2, [3, 4, [5, 6, [7, 8, [9, 0]]]]].flat; // [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 0 ]</textarea>
+<p>Returns a collection from which all nesting has been flattened.<div class='codeMirrorContainer'><textarea class='editor'>[[1, 2, 3], [[4, 5], [[6]]]].flat; // [1, 2, 3, 4, 5, 6]
+[1, 2, [3, 4, [5, 6, [7, 8, [9, 0]]]]].flat; // [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-flatten' href='./../Overviews/Methods.html#flatten'>flatten</a>(<span class='argstr'>numLevels: 1</span>)</h3>
 <div class='method'>
 <p>Returns a collection from which <strong>numLevels</strong> of nesting has been flattened.<h4>Arguments:</h4>
 <table class='arguments'>
 <tr><td class='argumentname'>numLevels<td class='argumentdesc'>
-<p>Specifies how many levels downward (inward) to flatten. Zero returns the original.<textarea class='editor'>a = [1, 2, [3, 4, [5, 6, [7, 8, [9, 0]]]]];
-a.flatten(1); // [ 1, 2, [ 3, 4, [ 5, 6, [ 7, 8, [ 9, 0 ] ] ] ] ]
-a.flatten(2); // [ 1, 2, 3, 4, 5, 6, [ 7, 8, [ 9, 0 ] ] ]
-a.flatten(3); // [ 1, 2, 3, 4, 5, 6, 7, 8, [ 9, 0 ] ]
-a.flatten(4); // [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 0 ]</textarea>
+<p>Specifies how many levels downward (inward) to flatten. Zero returns the original.<div class='codeMirrorContainer'><textarea class='editor'>a = [1, 2, [3, 4, [5, 6, [7, 8, [9, 0]]]]];
+a.flatten(1); // [ 1, 2, 3, 4, [ 5, 6, [ 7, 8, [9, 0] ] ] ]
+a.flatten(2); // [ 1, 2, 3, 4, 5, 6, [ 7, 8, [9, 0] ] ]
+a.flatten(3); // [ 1, 2, 3, 4, 5, 6, 7, 8, [9, 0] ]
+a.flatten(4); // [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </table></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-flatten2' href='./../Overviews/Methods.html#flatten2'>flatten2</a>(<span class='argstr'>numLevels: 1</span>)</h3>
 <div class='method'>
 <p>A symmetric version of <a href="#-flatten">-flatten</a>. For a negative <code>numLevels</code>, it flattens starting from the innermost arrays.<h4>Arguments:</h4>
 <table class='arguments'>
 <tr><td class='argumentname'>numLevels<td class='argumentdesc'>
-<p>Specifies how many levels downward (inward) or upward (outward) to flatten.<textarea class='editor'>a = [1, 2, [3, 4, [5, 6, [7, 8, [9, 0]]]]];
-a.flatten2(4);  // [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 0 ]
-a.flatten2(3);  // [ 1, 2, 3, 4, 5, 6, 7, 8, [ 9, 0 ] ]
-a.flatten2(2);  // [ 1, 2, 3, 4, 5, 6, [ 7, 8, [ 9, 0 ] ] ]
-a.flatten2(1);  // [ 1, 2, 3, 4, [ 5, 6, [ 7, 8, [ 9, 0 ] ] ] ]
-a.flatten2(0);  // [ 1, 2, [ 3, 4, [ 5, 6, [ 7, 8, [ 9, 0 ] ] ] ] ]
-a.flatten2(-1); // [ 1, 2, [ 3, 4, [ 5, 6, [ 7, 8, 9, 0 ] ] ] ]
-a.flatten2(-2); // [ 1, 2, [ 3, 4, [ 5, 6, 7, 8, 9, 0 ] ] ]
-a.flatten2(-3); // [ 1, 2, [ 3, 4, 5, 6, 7, 8, 9, 0 ] ]
-a.flatten2(-4); // [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 0 ]</textarea>
+<p>Specifies how many levels downward (inward) or upward (outward) to flatten.<div class='codeMirrorContainer'><textarea class='editor'>a = [1, 2, [3, 4, [5, 6, [7, 8, [9, 0]]]]];
+a.flatten2(4);  // [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]
+a.flatten2(3);  // [ 1, 2, 3, 4, 5, 6, 7, 8, [9, 0] ]
+a.flatten2(2);  // [ 1, 2, 3, 4, 5, 6, [ 7, 8, [9, 0] ] ]
+a.flatten2(1);  // [ 1, 2, 3, 4, [ 5, 6, [ 7, 8, [9, 0] ] ] ]
+a.flatten2(0);  // [ 1, 2, [ 3, 4, [ 5, 6, [ 7, 8, [9, 0] ] ] ] ]
+a.flatten2(-1); // [ 1, 2, [ 3, 4, [ 5, 6, [7, 8, 9, 0] ] ] ]
+a.flatten2(-2); // [ 1, 2, [ 3, 4, [5, 6, 7, 8, 9, 0] ] ]
+a.flatten2(-3); // [ 1, 2, [3, 4, 5, 6, 7, 8, 9, 0] ]
+a.flatten2(-4); // [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </table></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-flatBelow' href='./../Overviews/Methods.html#flatBelow'>flatBelow</a>(<span class='argstr'>level: 1</span>)</h3>
 <div class='method'>
 <p>Flatten all subarrays deeper than <strong>level</strong>.<h4>Arguments:</h4>
 <table class='arguments'>
 <tr><td class='argumentname'>level<td class='argumentdesc'>
-<p>Specifies from what level onward to flatten. level 0 is outermost, so flatBelow(0) is like flat.<textarea class='editor'>a = [1, 2, [3, 4, [5, 6, [7, 8, [9, 0]]]]];
-a.flatBelow(0); // [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 0 ]
-a.flatBelow(1); // [ 1, 2, [ 3, 4, 5, 6, 7, 8, 9, 0 ] ]
-a.flatBelow(2); // [ 1, 2, [ 3, 4, [ 5, 6, 7, 8, 9, 0 ] ] ]
+<p>Specifies from what level onward to flatten. level 0 is outermost, so flatBelow(0) is like flat.<div class='codeMirrorContainer'><textarea class='editor'>a = [1, 2, [3, 4, [5, 6, [7, 8, [9, 0]]]]];
+a.flatBelow(0); // [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]
+a.flatBelow(1); // [ 1, 2, [3, 4, 5, 6, 7, 8, 9, 0] ]
+a.flatBelow(2); // [ 1, 2, [ 3, 4, [5, 6, 7, 8, 9, 0] ] ]
 
 // to set the level below which to flatten from the deepest level up,
 // one can use coll.maxDepth. E.g. to flatten only the innermost level:
-a.flatBelow( (a.maxDepth - 1) - 1);
+a.flatBelow((a.maxDepth - 1) - 1);
 // for lowest two levels:
-a.flatBelow( (a.maxDepth - 1) - 2);</textarea>
+a.flatBelow((a.maxDepth - 1) - 2);</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </table></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-flop' href='./../Overviews/Methods.html#flop'>flop</a></h3>
 <div class='method'>
-<p>Invert rows and columns in a two dimensional Collection (turn inside out). See also: <a href="./../Classes/Function.html">Function</a>.<textarea class='editor'>[[1, 2, 3], [4, 5, 6]].flop;
+<p>Invert rows and columns in a two dimensional Collection (turn inside out). See also: <a href="./../Classes/Function.html">Function</a>.<div class='codeMirrorContainer'><textarea class='editor'>[[1, 2, 3], [4, 5, 6]].flop;
 [[1, 2, 3], [4, 5, 6], [7, 8]].flop; // shorter array wraps
 [].flop; // result is always 2-d.</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>Note that the innermost arrays are not copied:<textarea class='editor'>a = [1, 2];
+<p>Note that the innermost arrays are not copied:<div class='codeMirrorContainer'><textarea class='editor'>a = [1, 2];
 x = [[[a, 5], [a, 10]], [[a, 50, 60]]].flop;
 a[0] = pi;
 x // pi is everywhere</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-flopWith' href='./../Overviews/Methods.html#flopWith'>flopWith</a>(<span class='argstr'>func</span>)</h3>
 <div class='method'>
-<p>Flop with a user defined function. Can be used to collect over several collections in parallel.<textarea class='editor'>[[1, 2, 3], [4, 5, 6]].flopWith(_+_);
-[[1, 2, 3], 1, [7, 8]].flopWith{ |a,b,c| a+b+c }; // shorter array wraps
+<p>Flop with a user defined function. Can be used to collect over several collections in parallel.<div class='codeMirrorContainer'><textarea class='editor'>[[1, 2, 3], [4, 5, 6]].flopWith(_+_);
+[[1, 2, 3], 1, [7, 8]].flopWith{ |a, b, c| a+b+c }; // shorter array wraps
 
 // typical use case (pseudocode)
-[synths, buffers].flopWith{ |a,b| a.set(\buf, b) }</textarea>
+[synths, buffers].flopWith{ |a, b| a.set(\buf, b) }</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p><h4>Arguments:</h4>
 <table class='arguments'>
 <tr><td class='argumentname'>func<td class='argumentdesc'>
 <p>A function taking as many arguments as elements in the array.</table></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-flopTogether' href='./../Overviews/Methods.html#flopTogether'>flopTogether</a>( <span class='argstr'>... moreArrays</span>)</h3>
 <div class='method'>
-<p>Invert rows and columns in a an array of dimensional Collections (turn inside out), so that they all match up in size, but remain separated.<textarea class='editor'>(
+<p>Invert rows and columns in a an array of dimensional Collections (turn inside out), so that they all match up in size, but remain separated.<div class='codeMirrorContainer'><textarea class='editor'>(
 a = flopTogether(
     [[1, 2, 3], [4, 5, 6, 7, 8]] * 100,
     [[1, 2, 3], [4, 5, 6], [7, 8]],
@@ -629,12 +698,13 @@ a = flopTogether(
 
 a.collect(_.size); // sizes are the same
 a.collect(_.shape) // shapes can be different</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-flopDeep' href='./../Overviews/Methods.html#flopDeep'>flopDeep</a>(<span class='argstr'>rank</span>)</h3>
 <div class='method'>
 <p>Fold dimensions in a multi-dimensional Collection (turn inside out).<h4>Arguments:</h4>
 <table class='arguments'>
 <tr><td class='argumentname'>rank<td class='argumentdesc'>
-<p>The depth (dimension) from which the array is inverted inside-out.<textarea class='editor'>[[1, 2, 3], [[41, 52], 5, 6]].flopDeep(2);
+<p>The depth (dimension) from which the array is inverted inside-out.<div class='codeMirrorContainer'><textarea class='editor'>[[1, 2, 3], [[41, 52], 5, 6]].flopDeep(2);
 [[1, 2, 3], [[41, 52], 5, 6]].flopDeep(1);
 [[1, 2, 3], [[41, 52], 5, 6]].flopDeep(0);
 [[1, 2, 3], [[41, 52], 5, 6]].flopDeep; // without argument, flop from the deepest level
@@ -642,62 +712,87 @@ a.collect(_.shape) // shapes can be different</textarea>
 [[[10, 100, 1000], 2, 3], [[41, 52], 5, 6]].flopDeep(2); // shorter array wraps
 [].flopDeep(1); // result is always one dimension higher.
 [[]].flopDeep(4);</textarea>
-<div class='note'><span class='notelabel'>NOTE:</span> Note that, just like in flop, the innermost arrays (deeper than rank) are not copied.</div><textarea class='editor'>a = [1, 2];
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+<div class='note'><span class='notelabel'>NOTE:</span> Note that, just like in flop, the innermost arrays (deeper than rank) are not copied.</div><div class='codeMirrorContainer'><textarea class='editor'>a = [1, 2];
 x = [[[a, 5], [a, 10]], [[a, 50, 60]]].flopDeep(1);
 a[0] = pi;
 x // pi is everywhere</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </table></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-maxSizeAtDepth' href='./../Overviews/Methods.html#maxSizeAtDepth'>maxSizeAtDepth</a>(<span class='argstr'>rank</span>)</h3>
 <div class='supmethod'>From superclass: <a href='./../Classes/Collection.html'>Collection</a></div>
 <div class='method'>
 <p>Returns the maximum size of all subarrays at a certain depth (dimension)<h4>Arguments:</h4>
 <table class='arguments'>
 <tr><td class='argumentname'>rank<td class='argumentdesc'>
-<p>The depth at which the size of the arrays is measured<textarea class='editor'>[[1, 2, 3], [[41, 52], 5, 6], 1, 2, 3].maxSizeAtDepth(2);
+<p>The depth at which the size of the arrays is measured<div class='codeMirrorContainer'><textarea class='editor'>[[1, 2, 3], [[41, 52], 5, 6], 1, 2, 3].maxSizeAtDepth(2);
 [[1, 2, 3], [[41, 52], 5, 6], 1, 2, 3].maxSizeAtDepth(1);
 [[1, 2, 3], [[41, 52], 5, 6], 1, 2, 3].maxSizeAtDepth(0);
 [].maxSizeAtDepth(0);
 [[]].maxSizeAtDepth(0);
 [[]].maxSizeAtDepth(1);</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </table></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-maxDepth' href='./../Overviews/Methods.html#maxDepth'>maxDepth</a>(<span class='argstr'>max: 1</span>)</h3>
 <div class='supmethod'>From superclass: <a href='./../Classes/Collection.html'>Collection</a></div>
 <div class='method'>
 <p>Returns the maximum depth of all subarrays.<h4>Arguments:</h4>
 <table class='arguments'>
 <tr><td class='argumentname'>max<td class='argumentdesc'>
-<p>Internally used only.<textarea class='editor'>[[1, 2, 3], [[41, 52], 5, 6], 1, 2, 3].maxDepth</textarea>
+<p>Internally used only.<div class='codeMirrorContainer'><textarea class='editor'>[[1, 2, 3], [[41, 52], 5, 6], 1, 2, 3].maxDepth</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </table></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-isSeries' href='./../Overviews/Methods.html#isSeries'>isSeries</a>(<span class='argstr'>step</span>)</h3>
 <div class='method'>
 <p>Returns true if the collection is an arithmetic series.<h4>Arguments:</h4>
 <table class='arguments'>
 <tr><td class='argumentname'>step<td class='argumentdesc'>
-<p>Step size to look for. If none is given, any step size will match.<textarea class='editor'>[ 0, 1, 2, 3, 4, 5 ].isSeries; // true
-[ 1.5, 2.5, 3.5, 4.5, 5.5, 6.5 ].isSeries; // true
-[ 0, 1, 4, 5 ].isSeries; // false
-[ 0, 3, 6, 9, 12, 15 ].isSeries; // true
-[ 0, 3, 6, 9, 12, 15 ].isSeries(1); // false
-[ 2 ] // true
-[ ] // true (empty sequence)</textarea>
+<p>Step size to look for. If none is given, any step size will match.<div class='codeMirrorContainer'><textarea class='editor'>[0, 1, 2, 3, 4, 5].isSeries; // true
+[1.5, 2.5, 3.5, 4.5, 5.5, 6.5].isSeries; // true
+[0, 1, 4, 5].isSeries; // false
+[0, 3, 6, 9, 12, 15].isSeries; // true
+[0, 3, 6, 9, 12, 15].isSeries(1); // false
+[2] // true
+[] // true (empty sequence)</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </table></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-resamp0' href='./../Overviews/Methods.html#resamp0'>resamp0</a>(<span class='argstr'>newSize</span>)</h3>
 <div class='method'>
-<p>Returns a new Collection of the desired length, with values resampled evenly-spaced from the receiver without interpolation.<textarea class='editor'>[1, 2, 3, 4].resamp0(12);
+<p>Returns a new Collection of the desired length, with values resampled evenly-spaced from the receiver without interpolation.<div class='codeMirrorContainer'><textarea class='editor'>[1, 2, 3, 4].resamp0(12);
 [1, 2, 3, 4].resamp0(2);</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-resamp1' href='./../Overviews/Methods.html#resamp1'>resamp1</a>(<span class='argstr'>newSize</span>)</h3>
 <div class='method'>
-<p>Returns a new Collection of the desired length, with values resampled evenly-spaced from the receiver with linear interpolation.<textarea class='editor'>[1, 2, 3, 4].resamp1(12);
+<p>Returns a new Collection of the desired length, with values resampled evenly-spaced from the receiver with linear interpolation.<div class='codeMirrorContainer'><textarea class='editor'>[1, 2, 3, 4].resamp1(12);
 [1, 2, 3, 4].resamp1(3);</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-choose' href='./../Overviews/Methods.html#choose'>choose</a></h3>
 <div class='method'>
-<p>Choose an element from the collection at random.<textarea class='editor'>[1, 2, 3, 4].choose;</textarea>
+<p>Choose an element from the collection at random.<div class='codeMirrorContainer'><textarea class='editor'>[1, 2, 3, 4].choose;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-wchoose' href='./../Overviews/Methods.html#wchoose'>wchoose</a>(<span class='argstr'>weights</span>)</h3>
 <div class='method'>
-<p>Choose an element from the collection at random using a list of probabilities or weights. The weights must sum to 1.0.<textarea class='editor'>[1, 2, 3, 4].wchoose([0.1, 0.2, 0.3, 0.4]);</textarea>
+<p>Choose an element from the collection at random using a list of probabilities or weights. The weights must sum to 1.0.<div class='codeMirrorContainer'><textarea class='editor'>[1, 2, 3, 4].wchoose([0.1, 0.2, 0.3, 0.4]);</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-wchoosen' href='./../Overviews/Methods.html#wchoosen'>wchoosen</a>(<span class='argstr'>weights</span>)</h3>
+<div class='method'>
+<p>Choose an element from the collection at random using a list of probabilities or weights. The weights are derived from a function or an array of any size, and their sum is automatically normalized to 1.0. If the weights are shorter than the collection, the remaining weights are assumed to be zero. If the weights are longer, the exceeding weights are ignored. A weight defined as a function is first called with the collection as the argument. Because the provided weights are normalized on every call, it is less efficient than using <a href="#-wchoose">-wchoose</a> with pre-normalized weights.<div class='codeMirrorContainer'><textarea class='editor'>// weights are a non-normalized array
+10.collect { [1, 2, 3, 4].wchoosen([10, 18, 3, 2]) }
+// weights are a non-normalized too short
+10.collect { [1, 2, 3, 4].wchoosen([10, 18]) }
+// weights contain functions
+10.collect {  [1, 2, 3, 4].wchoosen([1, 1, { 15.rand }, 1]) }
+// weights contains streams
+10.collect { [1, 2, 3, 4].wchoosen([1, 1, Pseries(0,1).asStream, 1]) };
+// weights is a function
+10.collect { [1, 2, 3, 4].wchoosen({ |list| list.collect { |x| if(x.even) { 1 } { 2 } }  }) };
+// weights is nil: behave like choose
+10.collect { [1, 2, 3, 4].wchoosen };</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-sort' href='./../Overviews/Methods.html#sort'>sort</a>(<span class='argstr'>function</span>)</h3>
 <div class='method'>
-<p>Sort the contents of the collection using the comparison function argument. The function should take two elements as arguments and return true if the first argument should be sorted before the second argument. If the function is nil, the following default function is used. { arg a, b; a &lt; b }<textarea class='editor'>[6, 2, 1, 7, 5].sort;
-[6, 2, 1, 7, 5].sort({ arg a, b; a &gt; b }); // reverse sort</textarea>
+<p>Sort the contents of the collection using the comparison function argument. The function should take two elements as arguments and return true if the first argument should be sorted before the second argument. If the function is nil, the following default function is used. { |a, b| a &lt;= b }<div class='codeMirrorContainer'><textarea class='editor'>[6, 2, 1, 7, 5].sort;
+[6, 2, 1, 7, 5].sort({ |a, b| a &gt; b }); // reverse sort</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-sortBy' href='./../Overviews/Methods.html#sortBy'>sortBy</a>(<span class='argstr'>key</span>)</h3>
 <div class='method'>
-<p>Sort the contents of the collection using the key <strong>key</strong>, which is assumed to be found inside each element of the receiver.<textarea class='editor'>(
+<p>Sort the contents of the collection using the key <strong>key</strong>, which is assumed to be found inside each element of the receiver.<div class='codeMirrorContainer'><textarea class='editor'>(
 a = [
     Dictionary[\a-&gt;5, \b-&gt;1, \c-&gt;62],
     Dictionary[\a-&gt;2, \b-&gt;9, \c-&gt;65],
@@ -708,92 +803,111 @@ a = [
 )
 a.sortBy(\b);
 a.sortBy(\c);</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-order' href='./../Overviews/Methods.html#order'>order</a>(<span class='argstr'>function</span>)</h3>
 <div class='method'>
-<p>Return an array of indices that would sort the collection into order. <strong>function</strong> is treated the same way as for the <a href="#-sort">-sort</a> method.<textarea class='editor'>[6, 2, 1, 7, 5].order;</textarea>
+<p>Return an array of indices that would sort the collection into order. <strong>function</strong> is treated the same way as for the <a href="#-sort">-sort</a> method.<div class='codeMirrorContainer'><textarea class='editor'>[6, 2, 1, 7, 5].order;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-swap' href='./../Overviews/Methods.html#swap'>swap</a>(<span class='argstr'>i</span>, <span class='argstr'>j</span>)</h3>
 <div class='method'>
 <p>Swap two elements in the collection at indices <strong>i</strong> and <strong>j</strong>.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-pairsDo' href='./../Overviews/Methods.html#pairsDo'>pairsDo</a>(<span class='argstr'>function</span>)</h3>
 <div class='method'>
-<p>Calls function for each subsequent pair of elements in the SequentialCollection. The function is passed the two elements and an index.<textarea class='editor'>[1, 2, 3, 4, 5].pairsDo({ arg a, b; [a, b].postln; });</textarea>
+<p>Calls function for each subsequent pair of elements in the SequentialCollection. The function is passed the two elements and an index.<div class='codeMirrorContainer'><textarea class='editor'>[1, 2, 3, 4, 5].pairsDo({ |a, b| [a, b].postln });</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-doAdjacentPairs' href='./../Overviews/Methods.html#doAdjacentPairs'>doAdjacentPairs</a>(<span class='argstr'>function</span>)</h3>
 <div class='method'>
-<p>Calls function for every adjacent pair of elements in the SequenceableCollection. The function is passed the two adjacent elements and an index.<textarea class='editor'>[1, 2, 3, 4, 5].doAdjacentPairs({ arg a, b; [a, b].postln; });</textarea>
+<p>Calls function for every adjacent pair of elements in the SequenceableCollection. The function is passed the two adjacent elements and an index.<div class='codeMirrorContainer'><textarea class='editor'>[1, 2, 3, 4, 5].doAdjacentPairs({ |a, b| [a, b].postln });</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-separate' href='./../Overviews/Methods.html#separate'>separate</a>(<span class='argstr'>function: true</span>)</h3>
 <div class='method'>
-<p>Separates the collection into sub-collections by calling the function for each adjacent pair of elements. If the function returns true, then a separation is made between the elements.<textarea class='editor'>[1, 2, 3, 5, 6, 8, 10].separate({ arg a, b; (b - a) &gt; 1 }).postcs;</textarea>
+<p>Separates the collection into sub-collections by calling the function for each adjacent pair of elements. If the function returns true, then a separation is made between the elements.<div class='codeMirrorContainer'><textarea class='editor'>[1, 2, 3, 5, 6, 8, 10].separate({ |a, b| (b - a) &gt; 1 }).postcs;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-clump' href='./../Overviews/Methods.html#clump'>clump</a>(<span class='argstr'>groupSize</span>)</h3>
 <div class='method'>
-<p>Separates the collection into sub-collections by separating every groupSize elements.<textarea class='editor'>[1, 2, 3, 4, 5, 6, 7, 8].clump(3).postcs;</textarea>
+<p>Separates the collection into sub-collections by separating every groupSize elements.<div class='codeMirrorContainer'><textarea class='editor'>[1, 2, 3, 4, 5, 6, 7, 8].clump(3).postcs;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-clumps' href='./../Overviews/Methods.html#clumps'>clumps</a>(<span class='argstr'>groupSizeList</span>)</h3>
 <div class='method'>
-<p>Separates the collection into sub-collections by separating elements into groupings whose size is given by integers in the groupSizeList.<textarea class='editor'>[1, 2, 3, 4, 5, 6, 7, 8].clumps([1, 2]).postcs;</textarea>
+<p>Separates the collection into sub-collections by separating elements into groupings whose size is given by integers in the groupSizeList.<div class='codeMirrorContainer'><textarea class='editor'>[1, 2, 3, 4, 5, 6, 7, 8].clumps([1, 2]).postcs;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-curdle' href='./../Overviews/Methods.html#curdle'>curdle</a>(<span class='argstr'>probability</span>)</h3>
 <div class='method'>
-<p>Separates the collection into sub-collections by randomly separating elements according to the given probability.<textarea class='editor'>[1, 2, 3, 4, 5, 6, 7, 8].curdle(0.3).postcs;</textarea>
+<p>Separates the collection into sub-collections by randomly separating elements according to the given probability.<div class='codeMirrorContainer'><textarea class='editor'>[1, 2, 3, 4, 5, 6, 7, 8].curdle(0.3).postcs;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-integrate' href='./../Overviews/Methods.html#integrate'>integrate</a></h3>
 <div class='method'>
-<p>Returns a collection with the incremental sums of all elements.<textarea class='editor'>[3, 4, 1, 1].integrate;</textarea>
+<p>Returns a collection with the incremental sums of all elements.<div class='codeMirrorContainer'><textarea class='editor'>[3, 4, 1, 1].integrate;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-differentiate' href='./../Overviews/Methods.html#differentiate'>differentiate</a></h3>
 <div class='method'>
-<p>Returns a collection with the pairwise difference between all elements.<textarea class='editor'>[3, 4, 1, 1].differentiate;</textarea>
+<p>Returns a collection with the pairwise difference between all elements.<div class='codeMirrorContainer'><textarea class='editor'>[3, 4, 1, 1].differentiate;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-reduce' href='./../Overviews/Methods.html#reduce'>reduce</a>(<span class='argstr'>operator</span>, <span class='argstr'>adverb</span>)</h3>
 <div class='method'>
 <p>Applies the method named by operator to the first and second elements of the collection, and then applies the method to the result and to the third element of the collection, then applies the method to the result and to the fourth element of the collection, and so on, until the end of the array.
 <p>If the collection contains only one element, it is returned as the result. If the collection is empty, returns <code>nil</code>.<h4>Arguments:</h4>
 <table class='arguments'>
 <tr><td class='argumentname'>operator<td class='argumentdesc'>
-<p>May be a <a href="./../Classes/Function.html">Function</a> (taking two or three arguments) or a <a href="./../Classes/Symbol.html">Symbol</a> (method selector).<textarea class='editor'>[3, 4, 5, 6].reduce('*'); // this is the same as [3, 4, 5, 6].product
+<p>May be a <a href="./../Classes/Function.html">Function</a> (taking two or three arguments) or a <a href="./../Classes/Symbol.html">Symbol</a> (method selector).<div class='codeMirrorContainer'><textarea class='editor'>[3, 4, 5, 6].reduce('*'); // this is the same as [3, 4, 5, 6].product
 [3, 4, 5, 6].reduce(\lcm); // Lowest common multiple of the whole set of numbers
 ["d", "e", (0..9), "h"].reduce('++'); // concatenation
 [3, 4, 5, 6].reduce({ |a, b| sin(a) * sin(b) }); // product of sines</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <tr><td class='argumentname'>adverb<td class='argumentdesc'>
-<p>An optional adverb to be used together with the operator (see <a href="./../Reference/Adverbs.html">Adverbs for Binary Operators</a>). If the operator is a functions, the adverb is passed as a third argument.<textarea class='editor'>// compare:
+<p>An optional adverb to be used together with the operator (see <a href="./../Reference/Adverbs.html">Adverbs for Binary Operators</a>). If the operator is a functions, the adverb is passed as a third argument.<div class='codeMirrorContainer'><textarea class='editor'>// compare:
 [1, 2] *.x [10, 20, 30]
 [[1, 2], [10, 20, 30]].reduce('*', 'x')
 [[1, 2], [10, 20, 30], [1000, 2000]].reduce('+', 'x') // but you can combine more</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </table></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-convertDigits' href='./../Overviews/Methods.html#convertDigits'>convertDigits</a>(<span class='argstr'>base: 10</span>)</h3>
 <div class='method'>
-<p>Returns an integer resulting from interpreting the elements as digits to a given base (default 10). See also asDigits in <a href="./../Classes/Integer.html#-asDigits">Integer: -asDigits</a> for the complementary method.<textarea class='editor'>[1, 0, 0, 0].convertDigits;
+<p>Returns an integer resulting from interpreting the elements as digits to a given base (default 10). See also asDigits in <a href="./../Classes/Integer.html#-asDigits">Integer: -asDigits</a> for the complementary method.<div class='codeMirrorContainer'><textarea class='editor'>[1, 0, 0, 0].convertDigits;
 [1, 0, 0, 0].convertDigits(2);
 [1, 0, 0, 0].convertDigits(3);</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-hammingDistance' href='./../Overviews/Methods.html#hammingDistance'>hammingDistance</a>(<span class='argstr'>that</span>)</h3>
 <div class='method'>
 <p>Returns the count of array elements that are not equal in identical positions. <a href="http://en.wikipedia.org/wiki/Hamming_distance">http://en.wikipedia.org/wiki/Hamming_distance</a>
-<p>The collections are not wrapped - if one array is shorter than the other, the difference in size should be included in the count.<textarea class='editor'>[0, 0, 0, 1, 1, 1, 0, 1, 0, 0].hammingDistance([0, 0, 1, 1, 0, 0, 0, 0, 1, 1]);
+<p>The collections are not wrapped - if one array is shorter than the other, the difference in size should be included in the count.<div class='codeMirrorContainer'><textarea class='editor'>[0, 0, 0, 1, 1, 1, 0, 1, 0, 0].hammingDistance([0, 0, 1, 1, 0, 0, 0, 0, 1, 1]);
 "SuperMan".hammingDistance("SuperCollider");</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3><a class='anchor' name='Fuzzy%20comparisons'>Fuzzy comparisons</a></h3>
 
 <p>With fuzzy comparisons, the arrays do not need to match exactly. We can check how similar they are, and make decisions based on that. This is the magic behind autocorrection.<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-editDistance' href='./../Overviews/Methods.html#editDistance'>editDistance</a>(<span class='argstr'>other</span>, <span class='argstr'>compareFunc</span>)</h3>
 <div class='method'>
 <p>Returns the minimum number of changes to modify this <code>SequenceableCollection</code> into the other <code>SequenceableCollection</code>. A change can be: an addition, a deletion, or a substitution. This is known as the Levenshtein Distance and is implemented in SuperCollider using the Wagner–Fischer algorithm.
 <p>The default comparison uses <strong>identity</strong> - see <a href="./../Classes/Object.html#-==">Object: -==</a> and <a href="./../Classes/Object.html#-===">Object: -===</a>
-<p>Where both arrays are raw arrays (String, Int16Array, Int32Array, FloatArray etc., or any derived classes), like comparing two strings, a faster primitive will be used to calculate the distance.<textarea class='editor'>"hello".editDistance("hallo"); // 1 (substitution)
+<p>Where both arrays are raw arrays (String, Int16Array, Int32Array, FloatArray etc., or any derived classes), like comparing two strings, a faster primitive will be used to calculate the distance.<div class='codeMirrorContainer'><textarea class='editor'>"hello".editDistance("hallo"); // 1 (substitution)
 "hello".editDistance("hell"); // 1 (deletion)
 "hello".editDistance("helloo"); // 1 (addition)
 "hello".editDistance("hllo"); // 1 (removal)
 "hello".editDistance("haldo"); // 2 (substitutions)</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>In cases where the arrays are of different types, it will fall back to a slower, non-primitive implementation.<textarea class='editor'>// String vs Array
+<p>In cases where the arrays are of different types, it will fall back to a slower, non-primitive implementation.<div class='codeMirrorContainer'><textarea class='editor'>// String vs Array
 "hello".editDistance([$h, $e, $l, $l, $o]);</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>For cases that require comparisons other than identity, the optional <code>compareFunc</code> can be given to compare elements. This function will be passed two arguments, representing a single element from each array to compare, and this function must return a boolean as to whether or not the elements are equal.<textarea class='editor'>// Using compareFunc for case insensitive comparisons
+<p>For cases that require comparisons other than identity, the optional <code>compareFunc</code> can be given to compare elements. This function will be passed two arguments, representing a single element from each array to compare, and this function must return a boolean as to whether or not the elements are equal.<div class='codeMirrorContainer'><textarea class='editor'>// Using compareFunc for case insensitive comparisons
 "HeLLO".editDistance("HELLO", { |a, b|
     a.toLower == b.toLower;
 });</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <div class='note'><span class='notelabel'>NOTE:</span> Specifying a <code>compareFunc</code> will bypass the primitive and may take significantly longer to execute for larger arrays.</div><h4>Arguments:</h4>
 <table class='arguments'>
 <tr><td class='argumentname'>other<td class='argumentdesc'>
 <p>The <code>SequenceableCollection</code> to compare against<tr><td class='argumentname'>compareFunc<td class='argumentdesc'>
-<p>An optional comparison function to use for each element. It will be provided two arguments, and the function must return a boolean as to whether or not they are the same. Default value is <code>nil</code>, which will use <strong>identity</strong> (not equality) to compare elements.<textarea class='editor'>[1,2,3,4].editDistance([2,3,4,5], { | a, b |
+<p>An optional comparison function to use for each element. It will be provided two arguments, and the function must return a boolean as to whether or not they are the same. Default value is <code>nil</code>, which will use <strong>identity</strong> (not equality) to compare elements.<div class='codeMirrorContainer'><textarea class='editor'>[1, 2, 3, 4].editDistance([2, 3, 4, 5], { |a, b|
     a == b;
 });</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </table></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-similarity' href='./../Overviews/Methods.html#similarity'>similarity</a>(<span class='argstr'>other</span>, <span class='argstr'>compareFunc</span>)</h3>
 <div class='method'>
 <p>Returns a value between 0 and 1 representing the percentage similarity between this <code>SequenceableCollection</code> and the other <code>SequenceableCollection</code>.
-<p>A value of 1 means they are exactly the same, a value of 0 means they are completely different. This is calculated based on the <a href="#-editDistance">-editDistance</a><textarea class='editor'>"hello".similarity("hello"); // 1
+<p>A value of 1 means they are exactly the same, a value of 0 means they are completely different. This is calculated based on the <a href="#-editDistance">-editDistance</a><div class='codeMirrorContainer'><textarea class='editor'>"hello".similarity("hello"); // 1
 "hello".similarity("asdf"); // 0
 "word".similarity("wodr"); // 0.5</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h4>Arguments:</h4>
 <table class='arguments'>
 <tr><td class='argumentname'>other<td class='argumentdesc'>
@@ -859,8 +973,9 @@ a.sortBy(\c);</textarea>
 <div class='method'>
 <p></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-performUnaryOp' href='./../Overviews/Methods.html#performUnaryOp'>performUnaryOp</a>(<span class='argstr'>aSelector</span>)</h3>
 <div class='method'>
-<p>Creates a new collection of the results of applying the selector to all elements in the receiver.<textarea class='editor'>[1, 2, 3, 4].neg;
+<p>Creates a new collection of the results of applying the selector to all elements in the receiver.<div class='codeMirrorContainer'><textarea class='editor'>[1, 2, 3, 4].neg;
 [1, 2, 3, 4].reciprocal;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3><a class='anchor' name='Math%20Support%20-%20Binary%20Messages'>Math Support - Binary Messages</a></h3>
 
 <p>All of the following messages send the message <a href="#-performBinaryOp">-performBinaryOp</a> to the receiver with the binary message selector and the second operand as arguments.<h3 class='method-code'><span class='method-prefix'></span><a class='method-name' name='-+' href='./../Overviews/Methods.html#+'>+</a>(<span class='argstr'>aNumber</span>, <span class='argstr'>adverb</span>)</h3>
@@ -911,10 +1026,13 @@ a.sortBy(\c);</textarea>
 <h3 class='method-code'><span class='method-prefix'></span><a class='method-name' name='-<!' href='./../Overviews/Methods.html#&lt;!'>&lt;!</a>(<span class='argstr'>that</span>)</h3>
 <div class='supmethod'>From superclass: <a href='./../Classes/Object.html'>Object</a></div>
 <div class='method'>
-<p></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-performBinaryOp' href='./../Overviews/Methods.html#performBinaryOp'>performBinaryOp</a>(<span class='argstr'>aSelector</span>, <span class='argstr'>theOperand</span>, <span class='argstr'>adverb</span>)</h3>
+<p></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-modSeaside' href='./../Overviews/Methods.html#modSeaside'>modSeaside</a>(<span class='argstr'>aNumber</span>, <span class='argstr'>adverb</span>)</h3>
 <div class='method'>
-<p>Creates a new collection of the results of applying the selector with the operand to all elements in the receiver. If the operand is a collection then elements of that collection are paired with elements of the receiver.<textarea class='editor'>([1, 2, 3, 4] * 10);
+<p>Pre-3.14 modulo with unexpected behavior for negative integer modulus; see <a href="./../Classes/Integer.html#-modSeaside">Integer: -modSeaside</a>. Calling <code>modSeaside</code> on a non-integer operand will fall back to <code>mod</code> behavior; see <a href="./../Classes/Float.html#-modSeaside">Float: -modSeaside</a>.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-performBinaryOp' href='./../Overviews/Methods.html#performBinaryOp'>performBinaryOp</a>(<span class='argstr'>aSelector</span>, <span class='argstr'>theOperand</span>, <span class='argstr'>adverb</span>)</h3>
+<div class='method'>
+<p>Creates a new collection of the results of applying the selector with the operand to all elements in the receiver. If the operand is a collection then elements of that collection are paired with elements of the receiver.<div class='codeMirrorContainer'><textarea class='editor'>([1, 2, 3, 4] * 10);
 ([1, 2, 3, 4] * [4, 5, 6, 7]);</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3><a class='anchor' name='Math%20Support%20-%20Special%20Functions'>Math Support - Special Functions</a></h3>
 
 <p>A variety of Special Functions are supplied by the Boost C++ library. The library's <a href="http://www.boost.org/doc/libs/1_66_0/libs/math/doc/html/special.html">online documentation</a> serves as the primary reference for the following functions. The methods here match closely with those found in the source library, as do argument names.
@@ -1020,7 +1138,7 @@ a.sortBy(\c);</textarea>
 <p>Returns a value <code>b</code> such that: <code>q = ibetaC(a, b, x)</code>.
 <p>Requires <code>a</code> &gt; 0, 0 &lt; <code>x</code> &lt; 1, and 0 &lt;= <code>q</code> &lt;= 1.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-ibetaDerivative' href='./../Overviews/Methods.html#ibetaDerivative'>ibetaDerivative</a>( <span class='argstr'>... args</span>)</h3>
 <div class='method'>
-<p>Returns the partial derivative with respect to <code>x</code> of the incomplete beta function <code>ibeta(a,b,x)</code>.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-erf' href='./../Overviews/Methods.html#erf'>erf</a></h3>
+<p>Returns the partial derivative with respect to <code>x</code> of the incomplete beta function <code>ibeta(a, b, x)</code>.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-erf' href='./../Overviews/Methods.html#erf'>erf</a></h3>
 <div class='method'>
 <p>Returns the error function of <code>z</code>.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-erfC' href='./../Overviews/Methods.html#erfC'>erfC</a></h3>
 <div class='method'>
@@ -1060,7 +1178,7 @@ a.sortBy(\c);</textarea>
 <p>Returns the roots (zeros) of the <code>n</code>-th Chebyshev polynomial of the first kind.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-sphericalHarmonic' href='./../Overviews/Methods.html#sphericalHarmonic'>sphericalHarmonic</a>( <span class='argstr'>... args</span>)</h3>
 <div class='method'>
 <p>Returns the (<code>Complex</code>) value of the Spherical Harmonic.
-<p><code>theta</code> is taken as the polar (colatitudinal) coordinate within <code>[0, pi]</code>, and <code>phi</code> as the azimuthal (longitudinal) coordinate within <code>[0,2pi]</code>.
+<p><code>theta</code> is taken as the polar (colatitudinal) coordinate within <code>[0, pi]</code>, and <code>phi</code> as the azimuthal (longitudinal) coordinate within <code>[0, 2pi]</code>.
 <p>See boost documentation for further information, including a note about the Condon-Shortley phase term of <code>(-1)^m</code>.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-sphericalHarmonicR' href='./../Overviews/Methods.html#sphericalHarmonicR'>sphericalHarmonicR</a>( <span class='argstr'>... args</span>)</h3>
 <div class='method'>
 <p>Returns the real part of the Spherical Harmonic.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-sphericalHarmonicI' href='./../Overviews/Methods.html#sphericalHarmonicI'>sphericalHarmonicI</a>( <span class='argstr'>... args</span>)</h3>
@@ -1200,7 +1318,7 @@ a.sortBy(\c);</textarea>
 <p>Requires <code>z != 1</code>.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-expintEn' href='./../Overviews/Methods.html#expintEn'>expintEn</a>(<span class='argstr'>n</span>, <span class='argstr'>z</span>)</h3>
 <div class='method'>
 <p>Returns the exponential integral En of <code>z</code>.
-<p>Requires that when <code>n == 1</code>, <code>z !=0</code>.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-expintEi' href='./../Overviews/Methods.html#expintEi'>expintEi</a></h3>
+<p>Requires that when <code>n == 1</code>, <code>z != 0</code>.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-expintEi' href='./../Overviews/Methods.html#expintEi'>expintEi</a></h3>
 <div class='method'>
 <p>Returns the exponential integral of <code>z</code>.
 <p>Requires <code>z != 0</code>.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-sinPi' href='./../Overviews/Methods.html#sinPi'>sinPi</a></h3>
@@ -1269,8 +1387,9 @@ a.sortBy(\c);</textarea>
 <p>This method is called internally on inputs to UGens that take multidimensional arrays, like <a href="./../Classes/Klank.html">Klank</a> and it allows proper multichannel expansion even in those cases. For SequenceableCollection, this returns the collection itself, assuming that it contains already a number of Refs. See <a href="./../Classes/Ref.html">Ref</a> for the corresponding method implementation.<h4>Arguments:</h4>
 <table class='arguments'>
 <tr><td class='argumentname'>rank<td class='argumentdesc'>
-<p>The depth at which the list is expanded. For instance the Klank spec has a rank of 2. For more examples, see <a href="./../Classes/SequenceableCollection.html#-flopDeep">SequenceableCollection: -flopDeep</a><textarea class='editor'>`([[[100, 200], 500], nil, [[[0.01, 0.3], 0.8]]]).multichannelExpandRef(2);
+<p>The depth at which the list is expanded. For instance the Klank spec has a rank of 2. For more examples, see <a href="./../Classes/SequenceableCollection.html#-flopDeep">SequenceableCollection: -flopDeep</a><div class='codeMirrorContainer'><textarea class='editor'>`([[[100, 200], 500], nil, [[[0.01, 0.3], 0.8]]]).multichannelExpandRef(2);
 [`[[100, 200], nil, [0.2, 0.8]], `[[130, 202], nil, [0.2, 0.5]]].multichannelExpandRef(2);</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </table></div><h3><a class='anchor' name='Rhythm-lists'>Rhythm-lists</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-convertRhythm' href='./../Overviews/Methods.html#convertRhythm'>convertRhythm</a></h3>
 <div class='method'>
@@ -1278,8 +1397,8 @@ a.sortBy(\c);</textarea>
 
 <p>supports a variation of Mikael Laurson's rhythm list RTM-notation.<a class='footnote anchor' name='footnote_org_1' href='#footnote_1'><sup>1</sup></a> 
 <p>The method converts a collection of the form <code>[beat-count, [rtm-list], repeats]</code> to a <a href="./../Classes/List.html">List</a> of <a href="./../Classes/Float.html">Float</a>s. A negative integer within the rtm-list equates to a value tied over to the duration following. The method is recursive in that any subdivision within the rtm-list can itself be a nested convertRhythm collection (see example below). The repeats integer has a default value of 1.
-<p>If the divisions in the rtm-list are events, the event durations are interpreted as relative durations, and a list of events is returned.<textarea class='editor'>// using numbers as score
-[3, [1, 2, 1], 1].convertRhythm; // List[ 0.75, 1.5, 0.75 ]
+<p>If the divisions in the rtm-list are events, the event durations are interpreted as relative durations, and a list of events is returned.<div class='codeMirrorContainer'><textarea class='editor'>// using numbers as score
+[3, [1, 2, 1], 1].convertRhythm; // List[0.75, 1.5, 0.75]
 [2, [1, 3, [1, [2, 1, 1, 1]], 1, 3], 1].convertRhythm;
 [2, [1, [1, [2, 1, 1, 1]]], 1].convertRhythm;
 [2, [1, [1, [2, 1, 1, 1]]], 2].convertRhythm; // repeat
@@ -1287,10 +1406,12 @@ a.sortBy(\c);</textarea>
 
 // sound example
 Pbind(\degree, Pseries(0, 1, inf), \dur, Pseq([2, [1, [1, [2, 1, 1, -1]]], 2].convertRhythm)).play;</textarea>
-</div><h3><a class='anchor' name='Starting%20UNIX%20processes'>Starting UNIX processes</a></h3>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+</div><h3><a class='anchor' name='Starting%20system%20processes'>Starting system processes</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-unixCmd' href='./../Overviews/Methods.html#unixCmd'>unixCmd</a>(<span class='argstr'>action</span>, <span class='argstr'>postOutput: true</span>)</h3>
 <div class='method'>
-<p>Execute a UNIX command <strong>asynchronously</strong>. This object should be an array of strings where the first string is the path to the executable to be run and all other strings are passed as arguments to the executable. This method starts the process directly without using a shell.<h4>Arguments:</h4>
+<p>Executes a system command <strong>asynchronously</strong>. This object should be an array of strings where the first string is the path to the executable to be run and all other strings are passed as arguments to the executable. This method starts the process directly without using a shell.
+<p>If you want to run a command using a shell, use <a href="./../Classes/String.html#-unixCmd">String: -unixCmd</a>.<h4>Arguments:</h4>
 <table class='arguments'>
 <tr><td class='argumentname'>action<td class='argumentdesc'>
 <p>A <a href="./../Classes/Function.html">Function</a> that is called when the process has exited. It is passed two arguments: the exit code and pid of the exited process.<tr><td class='argumentname'>postOutput<td class='argumentdesc'>
@@ -1298,11 +1419,13 @@ Pbind(\degree, Pseries(0, 1, inf), \dur, Pseq([2, [1, [1, [2, 1, 1, -1]]], 2].co
 <div class='returnvalue'>
 <p>An <a href="./../Classes/Integer.html">Integer</a> - the pid of the newly created process. Use <a href="./../Classes/Integer.html#-pidRunning">Integer: -pidRunning</a> to test if a process is alive.</div><h4>Discussion:</h4>
 
-<p>Example:<textarea class='editor'>["ls","/"].unixCmd;</textarea>
+<p>Example:<div class='codeMirrorContainer'><textarea class='editor'>["ls", "/"].unixCmd;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-unixCmdGetStdOut' href='./../Overviews/Methods.html#unixCmdGetStdOut'>unixCmdGetStdOut</a>(<span class='argstr'>maxLineLength: 1024</span>)</h3>
 <div class='method'>
-<p>Similar to <a href="#-unixCmd">-unixCmd</a> except that the stdout of the process is returned (<strong>synchronously</strong>) rather than sent to the post window. This object should be an array of strings where the first string is the path to the executable to be run and all other strings are passed as arguments to the executable. This method starts the process directly without using a shell.<textarea class='editor'>~listing = ["ls","/"].unixCmdGetStdOut; // Grab
+<p>Similar to <a href="#-unixCmd">-unixCmd</a> except that the stdout of the process is returned (<strong>synchronously</strong>) rather than sent to the post window. This object should be an array of strings where the first string is the path to the executable to be run and all other strings are passed as arguments to the executable. This method starts the process directly without using a shell.<div class='codeMirrorContainer'><textarea class='editor'>~listing = ["ls", "/"].unixCmdGetStdOut; // Grab
 ~listing.reverse.as(Array).dupEach.join.postln; // Mangle</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3><a class='anchor' name='Inherited%20instance%20methods'>Inherited instance methods</a></h3>
 <div id='inheritedinstmets'></div><h3><a class='anchor' name='Undocumented%20instance%20methods'>Undocumented instance methods</a></h3>
 <h3 class='method-code'><span class='method-prefix'></span><a class='method-name' name='-++' href='./../Overviews/Methods.html#++'>++</a>(<span class='argstr'>aSequenceableCollection</span>)</h3>
@@ -1310,13 +1433,13 @@ Pbind(\degree, Pseries(0, 1, inf), \dur, Pseq([2, [1, [1, [2, 1, 1, -1]]], 2].co
 <h3 class='method-code'><span class='method-prefix'></span><a class='method-name' name='-==' href='./../Overviews/Methods.html#=='>==</a>(<span class='argstr'>aCollection</span>)</h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-asFraction' href='./../Overviews/Methods.html#asFraction'>asFraction</a>(<span class='argstr'>denominator: 100</span>, <span class='argstr'>fasterBetter: true</span>)</h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-asMIDIInPortUID' href='./../Overviews/Methods.html#asMIDIInPortUID'>asMIDIInPortUID</a></h3>
-<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/Common/Control/asMIDIPort.sc'>/usr/local/share/SuperCollider/SCClassLibrary/Common/Control/asMIDIPort.sc</a></div>
+<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/Common/Control/asMIDIPort.sc'>/usr/local/share/SuperCollider/SCClassLibrary/Common/Control/asMIDIPort.sc</a></div>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-asOSCArgArray' href='./../Overviews/Methods.html#asOSCArgArray'>asOSCArgArray</a></h3>
-<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/Common/Control/extConvertToOSC.sc'>/usr/local/share/SuperCollider/SCClassLibrary/Common/Control/extConvertToOSC.sc</a></div>
+<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/Common/Control/extConvertToOSC.sc'>/usr/local/share/SuperCollider/SCClassLibrary/Common/Control/extConvertToOSC.sc</a></div>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-asOSCArgBundle' href='./../Overviews/Methods.html#asOSCArgBundle'>asOSCArgBundle</a></h3>
-<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/Common/Control/extConvertToOSC.sc'>/usr/local/share/SuperCollider/SCClassLibrary/Common/Control/extConvertToOSC.sc</a></div>
+<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/Common/Control/extConvertToOSC.sc'>/usr/local/share/SuperCollider/SCClassLibrary/Common/Control/extConvertToOSC.sc</a></div>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-asOSCArgEmbeddedArray' href='./../Overviews/Methods.html#asOSCArgEmbeddedArray'>asOSCArgEmbeddedArray</a>(<span class='argstr'>array</span>)</h3>
-<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/Common/Control/extConvertToOSC.sc'>/usr/local/share/SuperCollider/SCClassLibrary/Common/Control/extConvertToOSC.sc</a></div>
+<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/Common/Control/extConvertToOSC.sc'>/usr/local/share/SuperCollider/SCClassLibrary/Common/Control/extConvertToOSC.sc</a></div>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-asPoint' href='./../Overviews/Methods.html#asPoint'>asPoint</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-asQuant' href='./../Overviews/Methods.html#asQuant'>asQuant</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-asRect' href='./../Overviews/Methods.html#asRect'>asRect</a></h3>
@@ -1326,7 +1449,7 @@ Pbind(\degree, Pseries(0, 1, inf), \dur, Pseq([2, [1, [1, [2, 1, 1, -1]]], 2].co
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-bitHammingDistance' href='./../Overviews/Methods.html#bitHammingDistance'>bitHammingDistance</a>(<span class='argstr'>aNumber</span>, <span class='argstr'>adverb</span>)</h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-bitOr' href='./../Overviews/Methods.html#bitOr'>bitOr</a>(<span class='argstr'>aNumber</span>, <span class='argstr'>adverb</span>)</h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-canFreeSynth' href='./../Overviews/Methods.html#canFreeSynth'>canFreeSynth</a></h3>
-<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/Common/Audio/canFreeSynth.sc'>/usr/local/share/SuperCollider/SCClassLibrary/Common/Audio/canFreeSynth.sc</a></div>
+<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/Common/Audio/canFreeSynth.sc'>/usr/local/share/SuperCollider/SCClassLibrary/Common/Audio/canFreeSynth.sc</a></div>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-containsSeqColl' href='./../Overviews/Methods.html#containsSeqColl'>containsSeqColl</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-convertOneRhythm' href='./../Overviews/Methods.html#convertOneRhythm'>convertOneRhythm</a>(<span class='argstr'>list</span>, <span class='argstr'>tie: 0.0</span>, <span class='argstr'>stretch: 1.0</span>)</h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-curverange' href='./../Overviews/Methods.html#curverange'>curverange</a>( <span class='argstr'>... args</span>)</h3>
@@ -1376,7 +1499,7 @@ Pbind(\degree, Pseries(0, 1, inf), \dur, Pseq([2, [1, [1, [2, 1, 1, -1]]], 2].co
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-performNearestInScale' href='./../Overviews/Methods.html#performNearestInScale'>performNearestInScale</a>(<span class='argstr'>degree</span>, <span class='argstr'>stepsPerOctave: 12</span>)</h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-prFlat' href='./../Overviews/Methods.html#prFlat'>prFlat</a>(<span class='argstr'>list</span>)</h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-prepareForProxySynthDef' href='./../Overviews/Methods.html#prepareForProxySynthDef'>prepareForProxySynthDef</a>(<span class='argstr'>proxy</span>)</h3>
-<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/JITLib/ProxySpace/wrapForNodeProxy.sc'>/usr/local/share/SuperCollider/SCClassLibrary/JITLib/ProxySpace/wrapForNodeProxy.sc</a></div>
+<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/JITLib/ProxySpace/wrapForNodeProxy.sc'>/usr/local/share/SuperCollider/SCClassLibrary/JITLib/ProxySpace/wrapForNodeProxy.sc</a></div>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-prevPrime' href='./../Overviews/Methods.html#prevPrime'>prevPrime</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-quickSort' href='./../Overviews/Methods.html#quickSort'>quickSort</a>(<span class='argstr'>function</span>)</h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-quickSortRange' href='./../Overviews/Methods.html#quickSortRange'>quickSortRange</a>(<span class='argstr'>i</span>, <span class='argstr'>j</span>, <span class='argstr'>function</span>)</h3>
@@ -1384,6 +1507,7 @@ Pbind(\degree, Pseries(0, 1, inf), \dur, Pseq([2, [1, [1, [2, 1, 1, -1]]], 2].co
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-ramp' href='./../Overviews/Methods.html#ramp'>ramp</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-rate' href='./../Overviews/Methods.html#rate'>rate</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-rectWindow' href='./../Overviews/Methods.html#rectWindow'>rectWindow</a></h3>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-removeAt' href='./../Overviews/Methods.html#removeAt'>removeAt</a>(<span class='argstr'>index</span>)</h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-removing' href='./../Overviews/Methods.html#removing'>removing</a>(<span class='argstr'>item</span>)</h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-rightShift' href='./../Overviews/Methods.html#rightShift'>rightShift</a>(<span class='argstr'>aNumber</span>, <span class='argstr'>adverb</span>)</h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-roundUp' href='./../Overviews/Methods.html#roundUp'>roundUp</a>(<span class='argstr'>aNumber: 1</span>, <span class='argstr'>adverb</span>)</h3>
@@ -1406,5 +1530,5 @@ Pbind(\degree, Pseries(0, 1, inf), \dur, Pseq([2, [1, [1, [2, 1, 1, -1]]], 2].co
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-wrapAtDepth' href='./../Overviews/Methods.html#wrapAtDepth'>wrapAtDepth</a>(<span class='argstr'>rank</span>, <span class='argstr'>index</span>)</h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-wrapPut' href='./../Overviews/Methods.html#wrapPut'>wrapPut</a>(<span class='argstr'>index</span>, <span class='argstr'>value</span>)</h3>
 <div class='footnotes'>
-<a class='anchor' name='footnote_1'/><div class='footnote'>[<a href='#footnote_org_1'>1</a>] - see Laurson and Kuuskankare's 2003, "From RTM-notation to ENP-score-notation" <a href="http://jim2003.agglo-montbeliard.fr/articles/laurson.pdf">http://jim2003.agglo-montbeliard.fr/articles/laurson.pdf</a></div></div><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/SequenceableCollection.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/SequenceableCollection.schelp</a><br>link::Classes/SequenceableCollection::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+<a class='anchor' name='footnote_1'/><div class='footnote'>[<a href='#footnote_org_1'>1</a>] - see Laurson and Kuuskankare's 2003, "From RTM-notation to ENP-score-notation" <a href="http://jim2003.agglo-montbeliard.fr/articles/laurson.pdf">http://jim2003.agglo-montbeliard.fr/articles/laurson.pdf</a></div></div><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/SequenceableCollection.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/SequenceableCollection.schelp</a><br>link::Classes/SequenceableCollection::<br></div></div><script src='./../static/editor.js' type='text/javascript'></script>
 </body></html>

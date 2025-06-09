@@ -1,21 +1,25 @@
-<!doctype html><html lang='en'><head><title>EZGui | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>EZGui | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../lib/jquery.min.js'></script>
-<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/jquery.min.js'></script>
+<script src='./../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './..';
 var scdoc_title = 'EZGui';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../static/scdoc.js' type='text/javascript'></script>
 <script src='./../docmap.js' type='text/javascript'></script>
+<script src='./../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
@@ -107,11 +111,12 @@ var scdoc_sc_version = '3.13.1';
 
 <p>EZGui provides a standard and basic tools for most EZ classes. If you make a new EZ class, then subclass EZGui, and override the necessary methods. If your class only has a label and a widget, chances are, you need to override nothing, but only need to write the new and init class methods. See existing subclasses of EZGui for examples of this. You may also want to override the following:<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-widget' href='./../Overviews/Methods.html#widget'>widget</a></h3>
 <div class='method'>
-<p>Returns the active widget. Subclasses will typically refer to it or ignore it, e.g.:<textarea class='editor'>MyEZClass{
-    myOtherMethods{}
+<p>Returns the active widget. Subclasses will typically refer to it or ignore it, e.g.:<div class='codeMirrorContainer'><textarea class='editor'>MyEZClass{
+    myOtherMethods{ }
     ....
     listView{ ^widget }
 }</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-action' href='./../Overviews/Methods.html#action'>action</a></h3>
 <div class='method'>
 <p>Gets/sets the action of the EZ class instance.<h4>Arguments:</h4>
@@ -139,5 +144,5 @@ var scdoc_sc_version = '3.13.1';
 <p>Only defined by some subclasses. Sets the <code>resize</code> and <code>align</code> of all the views, according to the state of <code>layout</code>.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-prMakeMarginGap' href='./../Overviews/Methods.html#prMakeMarginGap'>prMakeMarginGap</a></h3>
 <div class='method'>
 <p>Called in the init method of all subclasses. Sets the margin and gap of <code>view</code>. By default, it tries to get its parent's gap, otherwise it defaults to <code>2@2</code>. Setting <code>argGap</code> overrides these.</div><h3><a class='anchor' name='Inherited%20instance%20methods'>Inherited instance methods</a></h3>
-<div id='inheritedinstmets'></div><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/EZGui.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/EZGui.schelp</a><br>link::Classes/EZGui::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+<div id='inheritedinstmets'></div><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/EZGui.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/EZGui.schelp</a><br>link::Classes/EZGui::<br></div></div><script src='./../static/editor.js' type='text/javascript'></script>
 </body></html>

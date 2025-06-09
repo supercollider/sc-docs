@@ -1,21 +1,25 @@
-<!doctype html><html lang='en'><head><title>FlowView | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>FlowView | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../lib/jquery.min.js'></script>
-<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/jquery.min.js'></script>
+<script src='./../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './..';
 var scdoc_title = 'FlowView';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../static/scdoc.js' type='text/javascript'></script>
 <script src='./../docmap.js' type='text/javascript'></script>
+<script src='./../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
@@ -48,24 +52,26 @@ var scdoc_sc_version = '3.13.1';
 </div>
 <h2><a class='anchor' name='description'>Description</a></h2>
 
-<p>In the simplest respect this is a lazy contraction of this:<textarea class='editor'>w = GUI.window.new;
+<p>In the simplest respect this is a lazy contraction of this:<div class='codeMirrorContainer'><textarea class='editor'>w = GUI.window.new;
 w.view.decorator = FlowLayout.new(w.bounds);
 w.front;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p><a href="./../Classes/FlowView.html">FlowView</a> add some features to this setup.<textarea class='editor'>(
+<p><a href="./../Classes/FlowView.html">FlowView</a> add some features to this setup.<div class='codeMirrorContainer'><textarea class='editor'>(
 f = FlowView.new;
 
-GUI.slider.new(f, Rect(0,0,100,100));
-GUI.slider.new(f, Rect(0,0,100,100));
+GUI.slider.new(f, Rect(0, 0, 100, 100));
+GUI.slider.new(f, Rect(0, 0, 100, 100));
 
 // the StartRow will be fixed at this point in the children array
 f.startRow;
 
-GUI.slider.new(f, Rect(0,0,100,100));
+GUI.slider.new(f, Rect(0, 0, 100, 100));
 f.startRow;
 
-GUI.slider.new(f, Rect(0,0,100,100));
+GUI.slider.new(f, Rect(0, 0, 100, 100));
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h2><a class='anchor' name='classmethods'>Class Methods</a></h2>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='*new' href='./../Overviews/Methods.html#new'>new</a></h3>
 <div class='method'>
@@ -82,54 +88,55 @@ GUI.slider.new(f, Rect(0,0,100,100));
 <div class='method'>
 <p>Start a new row.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-indentedRemaining' href='./../Overviews/Methods.html#indentedRemaining'>indentedRemaining</a></h3>
 <div class='method'>
-<p>The maximum space that is left, starting at the current cursor position.<textarea class='editor'>(
+<p>The maximum space that is left, starting at the current cursor position.<div class='codeMirrorContainer'><textarea class='editor'>(
 f = FlowView.new;
 
-GUI.slider.new(f, Rect(0,0,100,100));
-GUI.slider.new(f, Rect(0,0,100,100));
+GUI.slider.new(f, Rect(0, 0, 100, 100));
+GUI.slider.new(f, Rect(0, 0, 100, 100));
 
 GUI.slider.new(f, f.indentedRemaining)
-    .background = Color.blue(alpha:0.2)
+    .background = Color.blue(alpha: 0.2)
 )
 
 (
 f = FlowView.new;
 
-GUI.slider.new(f, Rect(0,0,100,100));
-GUI.slider.new(f, Rect(0,0,100,100));
+GUI.slider.new(f, Rect(0, 0, 100, 100));
+GUI.slider.new(f, Rect(0, 0, 100, 100));
 
 f.startRow; // new row
 
 GUI.slider.new(f, f.indentedRemaining)
-    .background = Color.blue(alpha:0.2)
+    .background = Color.blue(alpha: 0.2)
 )
 
 (
 f = FlowView.new;
 
-GUI.slider.new(f, Rect(0,0,100,100));
-GUI.slider.new(f, Rect(0,0,100,100));
-GUI.slider.new(f, Rect(0,0,100,100));
-GUI.slider.new(f, Rect(0,0,100,100));
+GUI.slider.new(f, Rect(0, 0, 100, 100));
+GUI.slider.new(f, Rect(0, 0, 100, 100));
+GUI.slider.new(f, Rect(0, 0, 100, 100));
+GUI.slider.new(f, Rect(0, 0, 100, 100));
 
 GUI.slider.new(f, f.indentedRemaining)
-    .background = Color.blue(alpha:0.2)
+    .background = Color.blue(alpha: 0.2)
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-used' href='./../Overviews/Methods.html#used'>used</a></h3>
 <div class='method'>
-<p>The area used so far, rounded up to the nearest rectangle plus margin.<textarea class='editor'>(
+<p>The area used so far, rounded up to the nearest rectangle plus margin.<div class='codeMirrorContainer'><textarea class='editor'>(
 w = GUI.window.new;
 w.front;
 f = FlowView.new(w);
-f.background = Color.blue(alpha:0.1);
+f.background = Color.blue(alpha: 0.1);
 
-GUI.slider.new(f, Rect(0,0,100,100));
-GUI.slider.new(f, Rect(0,0,100,100));
+GUI.slider.new(f, Rect(0, 0, 100, 100));
+GUI.slider.new(f, Rect(0, 0, 100, 100));
 
 f.used.postln;
 
 // overlaid
-GUI.compositeView.new(w,f.used)
+GUI.compositeView.new(w, f.used)
     .background = Color.red(alpha: 0.1);
 )
 
@@ -137,149 +144,152 @@ GUI.compositeView.new(w,f.used)
 w = GUI.window.new;
 w.front;
 f = FlowView.new(w);
-f.background = Color.blue(alpha:0.1);
+f.background = Color.blue(alpha: 0.1);
 
-GUI.slider.new(f, Rect(0,0,100,100));
-GUI.slider.new(f, Rect(0,0,100,100));
+GUI.slider.new(f, Rect(0, 0, 100, 100));
+GUI.slider.new(f, Rect(0, 0, 100, 100));
 
 f.startRow; // new row
 
-GUI.slider.new(f, Rect(0,0,100,100));
+GUI.slider.new(f, Rect(0, 0, 100, 100));
 
 f.used.postln;
 
 // overlaid
-GUI.compositeView.new(w,f.used)
+GUI.compositeView.new(w, f.used)
     .background = Color.red(alpha: 0.1);
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-flow' href='./../Overviews/Methods.html#flow'>flow</a></h3>
 <div class='method'>
-<p>Insert a sub flow view into the current view.<textarea class='editor'>(
+<p>Insert a sub flow view into the current view.<div class='codeMirrorContainer'><textarea class='editor'>(
 f = FlowView.new;
 
-GUI.slider.new(f, Rect(0,0,100,100));
+GUI.slider.new(f, Rect(0, 0, 100, 100));
 
 // flow within a flow
-g = f.flow({ arg g;
-    ActionButton(g,"a");
-    GUI.slider.new(g,Rect(0,0,100,100)).background_(Color.rand);
+g = f.flow({ |g|
+    ActionButton(g, "a");
+    GUI.slider.new(g, Rect(0, 0, 100, 100)).background_(Color.rand);
 }).background_(Color.black); // shrinks to fit the contents afterwards
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h4>Arguments:</h4>
 <table class='arguments'>
 <tr><td class='argumentname'>func<td class='argumentdesc'>
 <p>(describe argument here)<tr><td class='argumentname'>bounds<td class='argumentdesc'>
 <p>(describe argument here)</table></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-comp' href='./../Overviews/Methods.html#comp'>comp</a></h3>
 <div class='method'>
-<p>Insert a sub composite view into the current view.<textarea class='editor'>(
+<p>Insert a sub composite view into the current view.<div class='codeMirrorContainer'><textarea class='editor'>(
 f = FlowView.new;
 
-GUI.slider.new(f, Rect(0,0,100,100));
+GUI.slider.new(f, Rect(0, 0, 100, 100));
 
 // SuperCollider composite view
-g = f.comp({ arg g;
-    GUI.slider.new(g, Rect(50,30,50,100)).background_(Color.rand);
-    GUI.slider.new(g, Rect(120,30,50,100)).background_(Color.rand);
-},Rect(0, 0, 200, 200)).background_(Color.black);
+g = f.comp({ |g|
+    GUI.slider.new(g, Rect(50, 30, 50, 100)).background_(Color.rand);
+    GUI.slider.new(g, Rect(120, 30, 50, 100)).background_(Color.rand);
+}, Rect(0, 0, 200, 200)).background_(Color.black);
 
 f.startRow;
 "Back to flowing".gui(f);
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h4>Arguments:</h4>
 <table class='arguments'>
 <tr><td class='argumentname'>func<td class='argumentdesc'>
 <p>(describe argument here)<tr><td class='argumentname'>bounds<td class='argumentdesc'>
 <p>(describe argument here)</table></div><h3><a class='anchor' name='Inherited%20instance%20methods'>Inherited instance methods</a></h3>
 <div id='inheritedinstmets'></div><h2><a class='anchor' name='examples'>Examples</a></h2>
-<textarea class='editor'>// note: some of the following examples use ActionButton from the crucialib
+<div class='codeMirrorContainer'><textarea class='editor'>// note: some of the following examples use ActionButton from the crucialib
 
 // tests
 (
-FlowView.new.flow({ arg f;
-//    b = ActionButton(f,"hi",minWidth:140)
+FlowView.new.flow({ |f|
+//    b = ActionButton(f, "hi", minWidth: 140)
 }).background_(Color.grey)
 )
 
 
 (
-FlowView.new.flow({ arg f;
-    b = ActionButton(f,"hi",minWidth:140);
+FlowView.new.flow({ |f|
+    b = ActionButton(f, "hi", minWidth: 140);
 }).background_(Color.grey)
 )
 
 
 (
-FlowView.new.flow({ arg f;
-    b = GUI.slider.new(f,Rect(0,0,100,100));
+FlowView.new.flow({ |f|
+    b = GUI.slider.new(f, Rect(0, 0, 100, 100));
 }).background_(Color.grey)
 )
 
 
 (
-FlowView.new.flow({ arg f;
+FlowView.new.flow({ |f|
     g = f;
-    f.flow({ arg f;
-        //b = ActionButton(f,"hi",minWidth:140)
+    f.flow({ |f|
+        // b = ActionButton(f, "hi", minWidth: 140)
     }).background_(Color.white)
 }).background_(Color.grey)
 )
 
 
 (
-FlowView.new.flow({ arg f;
+FlowView.new.flow({ |f|
     g = f;
-    f.flow({ arg f;
-        b = ActionButton(f,"hi",minWidth:140)
+    f.flow({ |f|
+        b = ActionButton(f, "hi", minWidth: 140)
     }).background_(Color.white)
 }).background_(Color.grey)
 )
 
 
 (
-FlowView.new.flow({ arg f;
+FlowView.new.flow({ |f|
     g = f;
-    f.flow({ arg f;
-        f.flow({ arg f;
-            ActionButton(f,"hello",minWidth:100);
+    f.flow({ |f|
+        f.flow({ |f|
+            ActionButton(f, "hello", minWidth: 100);
         }).background_(Color.blue);
-        b = ActionButton(f,"hi",minWidth:140);
+        b = ActionButton(f, "hi", minWidth: 140);
     }).background_(Color.white)
 }).background_(Color.grey)
 )
 
 
 (
-FlowView.new.flow({ arg f;
+FlowView.new.flow({ |f|
     g = f;
-    f.flow({ arg f;
-        f.flow({ arg f;
-            ActionButton(f,"hello",minWidth:100);
+    f.flow({ |f|
+        f.flow({ |f|
+            ActionButton(f, "hello", minWidth: 100);
         }).background_(Color.blue);
-        b = ActionButton(f,"hi",minWidth:140);
+        b = ActionButton(f, "hi", minWidth: 140);
     }).background_(Color.white)
 }).background_(Color.grey)
 )
 
 
 (
-FlowView.new.flow({ arg f;
+FlowView.new.flow({ |f|
     g = f;
-    f.flow({ arg f;
-        b = ActionButton(f,"hi",minWidth:140);
-        f.flow({ arg f;
-            ActionButton(f,"hello",minWidth:100);
+    f.flow({ |f|
+        b = ActionButton(f, "hi", minWidth: 140);
+        f.flow({ |f|
+            ActionButton(f, "hello", minWidth: 100);
         }).background_(Color.blue);
     }).background_(Color.white)
 }).background_(Color.grey)
 )
 
 (
-FlowView.new.flow({ arg f;
+FlowView.new.flow({ |f|
     g = f;
-    f.flow({ arg f;
-        b = GUI.slider.new(f,Rect(0,0,140,20));
-        f.flow({ arg f;
-            ActionButton(f,"hello",minWidth:100);
+    f.flow({ |f|
+        b = GUI.slider.new(f, Rect(0, 0, 140, 20));
+        f.flow({ |f|
+            ActionButton(f, "hello", minWidth: 100);
         }).background_(Color.blue);
     }).background_(Color.white)
 }).background_(Color.grey)
@@ -287,36 +297,37 @@ FlowView.new.flow({ arg f;
 
 
 (
-FlowView.new.flow({ arg f;
-        b = GUI.slider.new(f,Rect(0,0,140,20));
-        f.flow({ arg f;
-            ActionButton(f,"hello",minWidth:100);
+FlowView.new.flow({ |f|
+        b = GUI.slider.new(f, Rect(0, 0, 140, 20));
+        f.flow({ |f|
+            ActionButton(f, "hello", minWidth: 100);
         }).background_(Color.blue);
 }).background_(Color.grey)
 )
 
 
 (
-a = FlowView.new.flow({ arg f;
+a = FlowView.new.flow({ |f|
     g = f;
-    w = f.flow({ arg f;
-        b = f.flow({ arg f;
-            ActionButton(f,"hello",minWidth:100);
+    w = f.flow({ |f|
+        b = f.flow({ |f|
+            ActionButton(f, "hello", minWidth: 100);
         }).background_(Color.blue);
-        ActionButton(f,"hi",minWidth:140);
+        ActionButton(f, "hi", minWidth: 140);
     }).background_(Color.white)
 }).background_(Color.grey)
 
 )
 
 b.remove(true);
-w.resizeToFit(true,true);
+w.resizeToFit(true, true);
 
 
 // add something big back in
-ActionButton(w,"i'm back",minWidth: 200);
-w.resizeToFit(true,true);
+ActionButton(w, "i'm back", minWidth: 200);
+w.resizeToFit(true, true);
 // slightly wrong size at the bottom</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/FlowView.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/FlowView.schelp</a><br>link::Classes/FlowView::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/FlowView.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/FlowView.schelp</a><br>link::Classes/FlowView::<br></div></div><script src='./../static/editor.js' type='text/javascript'></script>
 </body></html>

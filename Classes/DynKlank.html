@@ -1,21 +1,25 @@
-<!doctype html><html lang='en'><head><title>DynKlank | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>DynKlank | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../lib/jquery.min.js'></script>
-<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/jquery.min.js'></script>
+<script src='./../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './..';
 var scdoc_title = 'DynKlank';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../static/scdoc.js' type='text/javascript'></script>
 <script src='./../docmap.js' type='text/javascript'></script>
+<script src='./../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
@@ -39,7 +43,7 @@ var scdoc_sc_version = '3.13.1';
 <div id='summary'>Bank of resonators.</div>
 </div>
 <div class='subheader'>
-<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/Common/Audio/FSinOsc.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Audio/FSinOsc.sc'>FSinOsc.sc</a></div><div id='related'>See also: <a href="./../Classes/Klang.html">Klang</a>, <a href="./../Classes/DynKlang.html">DynKlang</a>, <a href="./../Classes/Klank.html">Klank</a></div>
+<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/Common/Audio/FSinOsc.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Audio/FSinOsc.sc'>FSinOsc.sc</a></div><div id='related'>See also: <a href="./../Classes/Klang.html">Klang</a>, <a href="./../Classes/DynKlang.html">DynKlang</a>, <a href="./../Classes/Klank.html">Klank</a></div>
 </div>
 <h2><a class='anchor' name='description'>Description</a></h2>
 
@@ -64,20 +68,21 @@ var scdoc_sc_version = '3.13.1';
 <div id='inheritedinstmets'></div><h2><a class='anchor' name='examples'>Examples</a></h2>
 
 <p>Four resonators each at maximum amplitude of 1.0 and ring times of 1 second, different exciters and no scaling:<div class='note'><span class='notelabel'>NOTE:</span> Watch the ` before the opening bracket of the parameter array! Also see <a href="./../Guides/Multichannel-Expansion.html">Multichannel Expansion</a></div>
-<p><textarea class='editor'>{ DynKlank.ar(`[[800, 1071, 1153, 1723], nil, [1, 1, 1, 1]], Impulse.ar(2, 0, 0.1)) }.play;
+<p><div class='codeMirrorContainer'><textarea class='editor'>{ DynKlank.ar(`[[800, 1071, 1153, 1723], nil, [1, 1, 1, 1]], Impulse.ar(2, 0, 0.1)) }.play;
 
 { DynKlank.ar(`[[800, 1071, 1353, 1723], nil, [1, 1, 1, 1]], Dust.ar(8, 0.1)) }.play;
 
 { DynKlank.ar(`[[800, 1071, 1353, 1723], nil, [1, 1, 1, 1]], PinkNoise.ar(0.007)) }.play;
 
 { DynKlank.ar(`[[200, 671, 1153, 1723], nil, [1, 1, 1, 1]], PinkNoise.ar([0.007, 0.007])) }.play;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>Changing parameters in realtime:<textarea class='editor'>(
+<p>Changing parameters in realtime:<div class='codeMirrorContainer'><textarea class='editor'>(
 // change freqs and ringtimes with mouse
 {    var freqs, ringtimes;
     freqs = [800, 1071, 1153, 1723] * MouseX.kr(0.5, 2, 1);
     ringtimes = [1, 1, 1, 1] * MouseY.kr(0.1, 10, 1);
-    DynKlank.ar(`[freqs, nil, ringtimes ], Impulse.ar(2, 0, 0.1))
+    DynKlank.ar(`[freqs, nil, ringtimes], Impulse.ar(2, 0, 0.1))
 }.play;
 )
 
@@ -87,7 +92,7 @@ SynthDef('help-dynKlank', { |out|
     var freqs, ringtimes, signal;
     freqs = Control.names([\freqs]).kr([800, 1071, 1153, 1723]);
     ringtimes = Control.names([\ringtimes]).kr([1, 1, 1, 1]);
-    signal = DynKlank.ar(`[freqs, nil, ringtimes ], Impulse.ar(2, 0, 0.1));
+    signal = DynKlank.ar(`[freqs, nil, ringtimes], Impulse.ar(2, 0, 0.1));
     Out.ar(out, signal);
 }).add;
 )
@@ -95,8 +100,8 @@ SynthDef('help-dynKlank', { |out|
 a = Synth('help-dynKlank');
 
 a.setn(\freqs, Array.rand(4, 500, 2000));
-a.setn(\ringtimes, Array.rand(4, 0.2, 4) );
-a.setn(\ringtimes, Array.rand(4, 0.02, 0.4) );
+a.setn(\ringtimes, Array.rand(4, 0.2, 4));
+a.setn(\ringtimes, Array.rand(4, 0.02, 0.4));
 
 // create multichannel controls directly with literal arrays:
 (
@@ -116,5 +121,7 @@ a.setn(\amps, Array.exprand(4, 0.01, 1));
 
 { Out.kr(102, MouseX.kr(1, 2) * Array.rand(4, 500, 2000)) }.play;
 a.mapn(\freqs, 102, 4);</textarea>
-<div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/DynKlank.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/DynKlank.schelp</a><br>link::Classes/DynKlank::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+
+<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/DynKlank.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/DynKlank.schelp</a><br>link::Classes/DynKlank::<br></div></div><script src='./../static/editor.js' type='text/javascript'></script>
 </body></html>

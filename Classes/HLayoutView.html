@@ -1,21 +1,25 @@
-<!doctype html><html lang='en'><head><title>HLayoutView | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>HLayoutView | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../lib/jquery.min.js'></script>
-<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/jquery.min.js'></script>
+<script src='./../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './..';
 var scdoc_title = 'HLayoutView';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../static/scdoc.js' type='text/javascript'></script>
 <script src='./../docmap.js' type='text/javascript'></script>
+<script src='./../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
@@ -50,120 +54,125 @@ var scdoc_sc_version = '3.13.1';
 <h3><a class='anchor' name='Inherited%20instance%20methods'>Inherited instance methods</a></h3>
 <div id='inheritedinstmets'></div><h2><a class='anchor' name='examples'>Examples</a></h2>
 
-<p>Child view height fills the HLayoutView automatically:<textarea class='editor'>(
+<p>Child view height fills the HLayoutView automatically:<div class='codeMirrorContainer'><textarea class='editor'>(
 q = 10;
 w = Window.new;
 
-h = HLayoutView(w,Rect(0,0,300,300));
+h = HLayoutView(w, Rect(0, 0, 300, 300));
 
-Array.fill(q,{ arg i;
-    Slider(h,Rect(0,0,20,75)).value_(i / q)
+Array.fill(q, { |i|
+    Slider(h, Rect(0, 0, 20, 75)).value_(i / q)
 });
 h.background_(Color.rand);
 
 w.front
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>Stretching the layout view; Slider height fills the View automatically:<textarea class='editor'>(
+<p>Stretching the layout view; Slider height fills the View automatically:<div class='codeMirrorContainer'><textarea class='editor'>(
 q = 8;
 w = Window.new;
 
-h = HLayoutView(w,Rect(0,0,300,300));
+h = HLayoutView(w, Rect(0, 0, 300, 300));
 h.background = Color.rand;
 h.resize = 5; // elastic
 
-Array.fill(q,{ arg i;
+Array.fill(q, { |i|
     var s;
-    s = Slider(h,Rect(0,0,20,75)).background_(Color.grey.alpha_(0.4));
+    s = Slider(h, Rect(0, 0, 20, 75)).background_(Color.grey.alpha_(0.4));
     s.value = i / q;
     s
 });
-StaticText(h, Rect(0,0,105,20)).background_(Color.rand).string_(" Some Example\n Text");
+StaticText(h, Rect(0, 0, 105, 20)).background_(Color.rand).string_(" Some Example\n Text");
 w.front
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>Stretching the layout view and the contents; if all the contents are elastic, the widths of the contents are perfectly divided up. In this example, the StaticText is not elastic in order to preserve its width:<textarea class='editor'>(
+<p>Stretching the layout view and the contents; if all the contents are elastic, the widths of the contents are perfectly divided up. In this example, the StaticText is not elastic in order to preserve its width:<div class='codeMirrorContainer'><textarea class='editor'>(
 q = 10;
 w = Window.new;
 
-h = HLayoutView(w,Rect(0,0,300,300));
+h = HLayoutView(w, Rect(0, 0, 300, 300));
 h.resize = 5; // elastic
 h.background = Color.rand;
 
-Array.fill(q,{ arg i;
+Array.fill(q, { |i|
     var s;
-    s = Slider(h,Rect(0,0,20,75));
+    s = Slider(h, Rect(0, 0, 20, 75));
     s.resize = 5; // elastic
     s.value = i / q;
     s
 });
-StaticText(h, Rect(0,0,105,20)).background_(Color.rand).string_(" Some Example\n Text");
+StaticText(h, Rect(0, 0, 105, 20)).background_(Color.rand).string_(" Some Example\n Text");
 
 w.front
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>Setting minWidth on contents; beware that if the layout view width is smaller than the combined width of all the contents, things might disappear when you try to handle them with the mouse:<textarea class='editor'>(
+<p>Setting minWidth on contents; beware that if the layout view width is smaller than the combined width of all the contents, things might disappear when you try to handle them with the mouse:<div class='codeMirrorContainer'><textarea class='editor'>(
 q = 5;
 w = Window.new;
 
-h = HLayoutView(w,Rect(0,0,300,300));
+h = HLayoutView(w, Rect(0, 0, 300, 300));
 h.background = Color.rand;
 h.resize = 5; // elastic
 
-Array.fill(q,{ arg i;
+Array.fill(q, { |i|
     var s;
-    s = Slider(h,Rect(0,0,20,75));
+    s = Slider(h, Rect(0, 0, 20, 75));
     s.value = i / 5;
-    if(i &lt; 2,{
+    if(i &lt; 2, {
         s.resize = 5; // some elastic
-        s.setProperty(\minWidth,20);
-    },{
+        s.setProperty(\minWidth, 20);
+    }, {
         s.resize = 1; // some not elastic
     });
     s
 });
-StaticText(h, Rect(0,0,105,20)).background_(Color.rand).string_(" Some Example\n Text");
+StaticText(h, Rect(0, 0, 105, 20)).background_(Color.rand).string_(" Some Example\n Text");
 
 w.front
 )</textarea>
-<textarea class='editor'>(
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+<div class='codeMirrorContainer'><textarea class='editor'>(
 q = 5;
 w = Window.new;
 
-h = HLayoutView(w,Rect(0,0,300,300));
+h = HLayoutView(w, Rect(0, 0, 300, 300));
 h.resize = 5; // elastic
 h.background = Color.rand;
-Array.fill(q,{ arg i;
+Array.fill(q, { |i|
     var s;
-    s = Slider(h,Rect(0,0,20,75));
+    s = Slider(h, Rect(0, 0, 20, 75));
     s.value = i / 5;
     s.resize = 5;
-    s.setProperty(\minWidth,20);
-    s.setProperty(\maxWidth,40);
+    s.setProperty(\minWidth, 20);
+    s.setProperty(\maxWidth, 40);
     s
 });
 
 w.front
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>Text flows:<textarea class='editor'>(
+<p>Text flows:<div class='codeMirrorContainer'><textarea class='editor'>(
 q = 5;
 w = Window.new;
 
-h = HLayoutView(w,Rect(0,0,300,300));
+h = HLayoutView(w, Rect(0, 0, 300, 300));
 h.resize = 5; // elastic
 
-Array.fill(q,{ arg i;
+Array.fill(q, { |i|
     var s;
-    s =     StaticText(h,120@20).string_("Some short text which wraps around");
+    s =     StaticText(h, 120@20).string_("Some short text which wraps around");
 
     s.resize = 5;
-    s.setProperty(\minWidth,10);
-    s.setProperty(\maxWidth,120);
+    s.setProperty(\minWidth, 10);
+    s.setProperty(\maxWidth, 120);
 
     // not working
-    s.setProperty(\maxHeight,10);
-    s.setProperty(\minHeight,10);
+    s.setProperty(\maxHeight, 10);
+    s.setProperty(\minHeight, 10);
 
     s.background = Color.white;
     s
@@ -171,20 +180,22 @@ Array.fill(q,{ arg i;
 
 w.front
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>Spacing:<textarea class='editor'>(
+<p>Spacing:<div class='codeMirrorContainer'><textarea class='editor'>(
 q = 10;
 w = Window.new;
 
-h = HLayoutView(w,Rect(0,0,300,300));
-h.setProperty(\spacing,0);
+h = HLayoutView(w, Rect(0, 0, 300, 300));
+h.setProperty(\spacing, 0);
 
-Array.fill(q,{
-    Slider(h,Rect(0,0,20,75))
+Array.fill(q, {
+    Slider(h, Rect(0, 0, 20, 75))
 });
 
 w.front
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/HLayoutView.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/HLayoutView.schelp</a><br>link::Classes/HLayoutView::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/HLayoutView.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/HLayoutView.schelp</a><br>link::Classes/HLayoutView::<br></div></div><script src='./../static/editor.js' type='text/javascript'></script>
 </body></html>

@@ -1,21 +1,25 @@
-<!doctype html><html lang='en'><head><title>Group | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>Group | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../lib/jquery.min.js'></script>
-<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/jquery.min.js'></script>
+<script src='./../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './..';
 var scdoc_title = 'Group';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../static/scdoc.js' type='text/javascript'></script>
 <script src='./../docmap.js' type='text/javascript'></script>
+<script src='./../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
@@ -64,7 +68,7 @@ var scdoc_sc_version = '3.13.1';
 <div id='summary'>Client-side representation of a group node on the server</div>
 </div>
 <div class='subheader'>
-<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/Common/Control/Node.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Control/Node.sc'>Node.sc</a></div><div id='subclasses'>Subclasses: <a href="../Classes/RootNode.html">RootNode</a></div>
+<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/Common/Control/Node.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Control/Node.sc'>Node.sc</a></div><div id='subclasses'>Subclasses: <a href="../Classes/RootNode.html">RootNode</a></div>
 </div>
 <h2><a class='anchor' name='description'>Description</a></h2>
 
@@ -73,7 +77,7 @@ var scdoc_sc_version = '3.13.1';
 <p>N.B. Group is a subclass of Node, and thus many of its most useful and important methods are documented in the <a href="./../Classes/Node.html">Node</a> help file. Please refer to it for more information.<h3><a class='anchor' name='RootNode%20and%20the%20default%20groups'>RootNode and the default groups</a></h3>
 
 <p>When a Server is booted, there is a top level group with an ID of 0 that defines the root of the tree. This is represented by a subclass of Group: <a href="./../Classes/RootNode.html">RootNode</a>.
-<p>sclang has the notion of a "default group," which is automatically created when the server is booted. This group is the default enclosing group for all Nodes, i.e. it's what you get if you don't specify. In general you should create new Nodes within the default group of a Server rather than in its RootNode. Multiclient setups may have different default groups for each client. See <a href="./../Reference/default_group.html">Default Group</a>, <a href="./../Classes/Server.html">Server</a>, and <a href="./../Classes/RootNode.html">RootNode</a> for more detail.<h3><a class='anchor' name='Bundling'>Bundling</a></h3>
+<p>sclang has the notion of a "default group, " which is automatically created when the server is booted. This group is the default enclosing group for all Nodes, i.e. it's what you get if you don't specify. In general you should create new Nodes within the default group of a Server rather than in its RootNode. Multiclient setups may have different default groups for each client. See <a href="./../Reference/default_group.html">Default Group</a>, <a href="./../Classes/Server.html">Server</a>, and <a href="./../Classes/RootNode.html">RootNode</a> for more detail.<h3><a class='anchor' name='Bundling'>Bundling</a></h3>
 
 <p>Some of the methods below have two versions: a regular one which sends its corresponding message to the server immediately, and one which returns the message in an <a href="./../Classes/Array.html">Array</a> so that it can be added to a bundle. It is also possible to capture the messages generated by the regular methods using Server's automated bundling capabilities. See <a href="./../Classes/Server.html">Server</a> and <a href="./../Guides/Bundled-Messages.html">Bundled Server Messages</a> for more detail.<h2><a class='anchor' name='classmethods'>Class Methods</a></h2>
 <h3><a class='anchor' name='Creation%20with%20Immediate%20Instantiation%20on%20the%20Server'>Creation with Immediate Instantiation on the Server</a></h3>
@@ -88,11 +92,12 @@ var scdoc_sc_version = '3.13.1';
 <tr><td>\addToHead<td>(the default) add at the head of the group specified by target<tr><td>\addToTail<td>add at the tail of the group specified by target<tr><td>\addAfter<td>add immediately after target in its server's node order<tr><td>\addBefore<td>add immediately before target in its server's node order<tr><td>\addReplace<td>replace target and take its place in its server's node order</table>
 
 <p>Note: A Synth is not a valid target for \addToHead and \addToTail.</table><h4>Discussion:</h4>
-<textarea class='editor'>s.boot;
+<div class='codeMirrorContainer'><textarea class='editor'>s.boot;
 g = Group.new; // add a Group at the head of the default Server's default group
 h = Group.new(g, \addAfter);
 s.queryAllNodes; // note the Group within the default group (ID 1)
 g.free; h.free;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3><a class='anchor' name='Convenience%20methods%20for%20add%20actions'>Convenience methods for add actions</a></h3>
 
 <p>The following convenience methods correspond to the add actions above:<h3 class='method-code'><span class='method-prefix'>Group.</span><a class='method-name' name='*after' href='./../Overviews/Methods.html#after'>after</a>(<span class='argstr'>aNode</span>)</h3>
@@ -120,11 +125,12 @@ g.free; h.free;</textarea>
 <tr><td class='argumentname'>server<td class='argumentdesc'>
 <p>An optional instance of Server. If nil this will default to the default Server.<tr><td class='argumentname'>nodeID<td class='argumentdesc'>
 <p>An optional node ID number. If not supplied one will be generated by the Server's NodeIDAllocator. Normally you should not need to supply an ID.</table><h4>Discussion:</h4>
-<textarea class='editor'>s.boot;
+<div class='codeMirrorContainer'><textarea class='editor'>s.boot;
 g = Group.basicNew(s); // Create without sending
-s.sendBundle(nil, g.newMsg;); // Now send a message; create at the head of s' default group
+s.sendBundle(nil, g.newMsg); // Now send a message; create at the head of s' default group
 s.queryAllNodes;
 g.free;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p>After creation, use instance methods <code>newMsg, addToHeadMsg, addToTailMsg, addBeforeMsg, addAfterMsg, addReplaceMsg</code> to instantiate this synth on the server. See <a href="#instancemethods">Instance Methods</a> below.</div><h3><a class='anchor' name='Inherited%20class%20methods'>Inherited class methods</a></h3>
 <div id='inheritedclassmets'></div><h2><a class='anchor' name='instancemethods'>Instance Methods</a></h2>
@@ -178,18 +184,18 @@ g.free;</textarea>
 <div class='method'>
 <p>Queries the server for a message describing this group's node subtree. (Sends a message of the type g_queryTree.) This reply is passed to the action function as an argument. See g_queryTree in <a href="./../Reference/Server-Command-Reference.html">Server Command Reference</a> or the example below for information on how the reply is structured.</div><h3><a class='anchor' name='Inherited%20instance%20methods'>Inherited instance methods</a></h3>
 <div id='inheritedinstmets'></div><h2><a class='anchor' name='examples'>Examples</a></h2>
-<textarea class='editor'>s.boot;
+<div class='codeMirrorContainer'><textarea class='editor'>s.boot;
 
 (
-SynthDef("help-Group-moto-rev", { arg out=0,freq=100,ffreq=120;
+SynthDef("help-Group-moto-rev", { |out = 0, freq = 100, ffreq = 120|
     var x;
-    x = RLPF.ar(LFPulse.ar(SinOsc.kr(0.2, 0, 10, freq), [0,0.1], 0.1),
+    x = RLPF.ar(LFPulse.ar(SinOsc.kr(0.2, 0, 10, freq), [0, 0.1], 0.1),
         ffreq, 0.1).clip2(0.4);
     Out.ar(out, x);
 }).add;
 
 
-SynthDef("help-Group-wah", { arg out, rate = 1.5, cfreq = 1400, mfreq = 1200, rq=0.1;
+SynthDef("help-Group-wah", { |out, rate = 1.5, cfreq = 1400, mfreq = 1200, rq = 0.1|
     var zin, zout, q;
 
     zin = In.ar(out, 2);
@@ -200,7 +206,7 @@ SynthDef("help-Group-wah", { arg out, rate = 1.5, cfreq = 1400, mfreq = 1200, rq
         * 0.15;
 
     // replace the incoming bus with the effected version
-    ReplaceOut.ar( out , zout );
+    ReplaceOut.ar(out, zout);
 
 }).add;
 )
@@ -208,23 +214,23 @@ SynthDef("help-Group-wah", { arg out, rate = 1.5, cfreq = 1400, mfreq = 1200, rq
 g = Group.new;
 
 (
-l = Array.fill(3,{
+l = Array.fill(3, {
     // random freq for each synth, added to g at the head
-    Synth("help-Group-moto-rev",["out",0,"freq",rrand(10,120)],g,\addToHead);
+    Synth("help-Group-moto-rev", ["out", 0, "freq", rrand(10, 120)], g, \addToHead);
 });
 )
 
 // set all controls that match "ffreq" in all nodes in g to 90
-g.set("ffreq",300);
+g.set("ffreq", 300);
 
-g.set("freq",80);
+g.set("freq", 80);
 
 // since we stored the Synths in an Array, we can also control them individually
 (
 r = Routine({
     inf.do({
-        l.do({ arg node;
-            node.set("freq",rrand(10,120));
+        l.do({ |node|
+            node.set("freq", rrand(10, 120));
             1.0.wait;
         });
     })
@@ -237,7 +243,7 @@ r.play;
 g.group.inspect;
 
 // asking a wah to go order-of-execution after g, in the same group as g.
-x = Synth.after(g,"help-Group-wah",["out",0]);
+x = Synth.after(g, "help-Group-wah", ["out", 0]);
 
 // now dump my tree to confirm
 g.dumpTree;
@@ -260,30 +266,30 @@ g.query;
 (
 3.do({
     // random freq for each synth, added to g at the head
-    Synth("help-Group-moto-rev",["out",0,"freq",rrand(10,1200)],g,\addToHead);
+    Synth("help-Group-moto-rev", ["out", 0, "freq", rrand(10, 1200)], g, \addToHead);
 });
 )
 
 // now query my tree and post a graph of it (duplicates dumpTree)
 // msg format is ['/g_querytree.reply', node1-ID, numChildren, defName, child1-ID, numChildren, ...]
 (
-g.queryTree({|msg|
-   var i = 1, tabs = 0, dumpFunc;
-   ("NODE TREE Group" + msg[1]).postln;
-   if(msg[2] &gt; 0, {
-       dumpFunc = {|numChildren|
-           tabs = tabs + 1;
-           numChildren.do({
-               i = i + 3;
-               tabs.do({ "   ".post });
-               msg[i].post;
-               (" " ++ msg[i + 2]).postln;
-               if(msg[i + 1] &gt; 0, { dumpFunc.value(msg[i + 1]) });
-           });
-           tabs = tabs - 1;
-       };
-       dumpFunc.value(msg[2]);
-   });
+g.queryTree({ |msg|
+    var i = 1, tabs = 0, dumpFunc;
+    ("NODE TREE Group" + msg[1]).postln;
+    if(msg[2] &gt; 0, {
+        dumpFunc = { |numChildren|
+            tabs = tabs + 1;
+            numChildren.do({
+                i = i + 3;
+                tabs.do({ "   ".post });
+                msg[i].post;
+                (" " ++ msg[i + 2]).postln;
+                if(msg[i + 1] &gt; 0, { dumpFunc.value(msg[i + 1]) });
+            });
+            tabs = tabs - 1;
+        };
+        dumpFunc.value(msg[2]);
+    });
 });
 )
 
@@ -292,5 +298,7 @@ g.free;
 
 // see, I'm gone
 g.query;</textarea>
-<div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/Group.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/Group.schelp</a><br>link::Classes/Group::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+
+<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/Group.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/Group.schelp</a><br>link::Classes/Group::<br></div></div><script src='./../static/editor.js' type='text/javascript'></script>
 </body></html>

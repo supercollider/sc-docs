@@ -1,21 +1,25 @@
-<!doctype html><html lang='en'><head><title>jitlib_efficiency | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>jitlib_efficiency | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../../lib/jquery.min.js'></script>
-<script src='./../../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../../static/lib/jquery.min.js'></script>
+<script src='./../../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './../..';
 var scdoc_title = 'jitlib_efficiency';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../../scdoc.js' type='text/javascript'></script>
+<script src='./../../static/scdoc.js' type='text/javascript'></script>
 <script src='./../../docmap.js' type='text/javascript'></script>
+<script src='./../../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
@@ -40,14 +44,15 @@ var scdoc_sc_version = '3.13.1';
 
 <p><a href="./../../Classes/NodeProxy.html">NodeProxy</a> (and, in disguise <a href="./../../Classes/ProxySpace.html">ProxySpace</a>) represent "pronouns", placeholders for all kinds of sound producing objects that are able to write to a specific bus on the server.
 <p>To prepare such an object for playing, different objects require different things, some very little, some more. As working with the placeholders does not show directly which actions are very efficient and which ones are not, it is shown here more in detail.
-<p>This is also important if you want to automate certain processes (e.g. for control by an external interface or a task) - some things (a) are not meant to be used in certain ways and better solutions should be used instead then, others are much more efficient (b, c).<textarea class='editor'>a = NodeProxy.audio;
+<p>This is also important if you want to automate certain processes (e.g. for control by an external interface or a task) - some things (a) are not meant to be used in certain ways and better solutions should be used instead then, others are much more efficient (b, c).<div class='codeMirrorContainer'><textarea class='editor'>a = NodeProxy.audio;
 ProxySpace.push;
 
 a.source = ... is equivalent to ~a = ...
 a.add(...) a.put(0,...) a[0] = ... ~a[0] = ... are equivalent in cpu load.</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h2><a class='anchor' name='a)%20rebuild%20and%20send:%20manual%20rate'>a) rebuild and send: manual rate</a></h2>
 
-<p>the following code requires a rebuild and send of a <a href="./../../Classes/SynthDef.html">SynthDef</a> and is thus most cpu-expensive. though fine for slower use (esp.hand-use) for automatisation it is better to build a synthdef and assign it.<textarea class='editor'>~a = { someUGenFunction };
+<p>the following code requires a rebuild and send of a <a href="./../../Classes/SynthDef.html">SynthDef</a> and is thus most cpu-expensive. though fine for slower use (esp.hand-use) for automatisation it is better to build a synthdef and assign it.<div class='codeMirrorContainer'><textarea class='editor'>~a = { someUGenFunction };
 ~a = Patch(instrname, args);
 ~a = SynthDef(\name, { someUGenFunction });
 
@@ -57,15 +62,17 @@ a.add(...) a.put(0,...) a[0] = ... ~a[0] = ... are equivalent in cpu load.</text
 
 // this rebuild is also used when setting one of the following properties:
 server, bus, setRates</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h2><a class='anchor' name='b)%20starting%20synths%20and%20tasks'>b) starting synths and tasks</a></h2>
 
-<p>the following code sends commands to the server to start synths, which is load mainly on the server and depends on the characteristics of the synthdef:<textarea class='editor'>~a = \synthDefName; // the synthdef is already on the server
+<p>the following code sends commands to the server to start synths, which is load mainly on the server and depends on the characteristics of the synthdef:<div class='codeMirrorContainer'><textarea class='editor'>~a = \synthDefName; // the synthdef is already on the server
 ~a = Pbind(\instrument, name, \freq, ...);
 ~a = Routine({ loop({ s.sendMsg("/s_new", name, ...)}) });
 
 ~a.refresh; ~a.wakeUp; // waking up a stopped proxy does not require a resend</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>these resend the synth with new properties<textarea class='editor'>~a.send(...)    // directly sends a message. the mapping bundle of the proxy is cached
+<p>these resend the synth with new properties<div class='codeMirrorContainer'><textarea class='editor'>~a.send(...)    // directly sends a message. the mapping bundle of the proxy is cached
 ~a.sendAll(...)
 
         // for the following the bundle is recalculated if a new key is assigned.
@@ -83,9 +90,10 @@ server, bus, setRates</textarea>
 // the above or a lag in the synth.
 
 ~a.lineAt(key), ~a.xlineAt(key)</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h2><a class='anchor' name='c)%20sending%20messages%20to%20running%20synths'>c) sending messages to running synths</a></h2>
 
-<p>for these the least calculation has to be done<textarea class='editor'>~a.set(\freq, 400, \dt, 0.2); ~a.unset(\freq); // if running the bundle will be recalculated
+<p>for these the least calculation has to be done<div class='codeMirrorContainer'><textarea class='editor'>~a.set(\freq, 400, \dt, 0.2); ~a.unset(\freq); // if running the bundle will be recalculated
 ~a.map(\freq, ~lfo); ~a.unmap(\freq);
 ~a.fadeTime = 2;
 ~a.gateAt(key)
@@ -93,11 +101,12 @@ server, bus, setRates</textarea>
 // for avoiding bundle recalculation you can directly talk to the group.
 // this setting will not be kept when you exchange the synth
 ~a.group.set(\freq, 500);</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h2><a class='anchor' name='switching%20audio'>switching audio</a></h2>
 
 <p>(this can now be done with map!)
 <p>todo: rewrite this part.
-<p>control rate sources can be easily and efficiently switched using <strong>map</strong> or <strong>xmap</strong>. here is an example of how already running audio rate inputs can be switched. it is about as efficient as (b) - first example (setting a defname). it works only for 1 or 2 channels right now.<textarea class='editor'>(
+<p>control rate sources can be easily and efficiently switched using <strong>map</strong> or <strong>xmap</strong>. here is an example of how already running audio rate inputs can be switched. it is about as efficient as (b) - first example (setting a defname). it works only for 1 or 2 channels right now.<div class='codeMirrorContainer'><textarea class='editor'>(
 s.boot;
 p = ProxySpace.push(s);
 )
@@ -172,6 +181,7 @@ t.stop;
     });
 });
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Tutorials/JITLib/jitlib_efficiency.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Tutorials/JITLib/jitlib_efficiency.schelp</a><br>link::Tutorials/JITLib/jitlib_efficiency::<br></div></div><script src='./../../editor.js' type='text/javascript'></script>
+<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Tutorials/JITLib/jitlib_efficiency.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Tutorials/JITLib/jitlib_efficiency.schelp</a><br>link::Tutorials/JITLib/jitlib_efficiency::<br></div></div><script src='./../../static/editor.js' type='text/javascript'></script>
 </body></html>

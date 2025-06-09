@@ -1,21 +1,25 @@
-<!doctype html><html lang='en'><head><title>Platform | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>Platform | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../lib/jquery.min.js'></script>
-<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/jquery.min.js'></script>
+<script src='./../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './..';
 var scdoc_title = 'Platform';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../static/scdoc.js' type='text/javascript'></script>
 <script src='./../docmap.js' type='text/javascript'></script>
+<script src='./../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
@@ -43,6 +47,8 @@ var scdoc_sc_version = '3.13.1';
 <li class='toc3'><a href='#*hasQt'>hasQt</a> </li>
 <li class='toc3'><a href='#*hasQtWebEngine'>hasQtWebEngine</a> </li>
 <li class='toc3'><a href='#*architecture'>architecture</a> </li>
+<li class='toc3'><a href='#*systemInformation'>systemInformation</a> </li>
+<li class='toc3'><a href='#*postBugReportInfo'>postBugReportInfo</a> </li>
 </ul><li class='toc2'><a href='#Features'>Features</a></li>
 <ul class='toc'><li class='toc3'><a href='#*when'>when</a> </li>
 </ul><li class='toc2'><a href='#Inherited%20class%20methods'>Inherited class methods</a></li>
@@ -107,23 +113,25 @@ var scdoc_sc_version = '3.13.1';
 <div id='summary'>handle cross-platform differencies</div>
 </div>
 <div class='subheader'>
-<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/Platform/Platform.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Platform/Platform.sc'>Platform.sc</a></div><div id='subclasses'>Subclasses: <a href="../Classes/UnixPlatform.html">UnixPlatform</a></div>
+<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/Platform/Platform.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Platform/Platform.sc'>Platform.sc</a></div><div id='subclasses'>Subclasses: <a href="../Classes/UnixPlatform.html">UnixPlatform</a></div>
 </div>
 <h2><a class='anchor' name='description'>Description</a></h2>
 
 <p>The Platform class (along with its subclasses) handles things which differ between operating systems (mac/linux/windows/...), to simplify cross-platform aspects of SuperCollider.
-<p>Platform is an abstract class encapsulating various platform dependent constants and properties, such as directories, primitive features and startup files. The platform object is accessible through the <code>platform</code> method of the main process instance:<textarea class='editor'>thisProcess.platform</textarea>
+<p>Platform is an abstract class encapsulating various platform dependent constants and properties, such as directories, primitive features and startup files. The platform object is accessible through the <code>platform</code> method of the main process instance:<div class='codeMirrorContainer'><textarea class='editor'>thisProcess.platform</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p>Currently implemented platforms include: OSXPlatform, LinuxPlatform, WindowsPlatform, UnixPlatform.<h2><a class='anchor' name='classmethods'>Class Methods</a></h2>
 
 <p>Most of Platforms class methods are simply wrappers to <code>thisProcess.platform.method</code>.<h3><a class='anchor' name='Platform%20name%20and%20platform%20dependent%20actions'>Platform name and platform dependent actions</a></h3>
 <h3 class='method-code'><span class='method-prefix'>Platform.</span><a class='method-name' name='*case' href='./../Overviews/Methods.html#case'>case</a>( <span class='argstr'>... cases</span>)</h3>
 <div class='method'>
-<p>Perform actions depending on the current platform (name), just like Object:switch:<textarea class='editor'>Platform.case(
+<p>Perform actions depending on the current platform (name), just like Object:switch:<div class='codeMirrorContainer'><textarea class='editor'>Platform.case(
     \osx,       { "OSX".postln },
     \linux,     { "Linux".postln },
     \windows,   { "Windows".postln }
 );</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>Platform.</span><a class='method-name' name='*ideName' href='./../Overviews/Methods.html#ideName'>ideName</a></h3>
 <div class='method'>
 <p>returns a String indicating which IDE the language believes it is running in. (Often this is determined via the "-i" option to the sclang executable.) This is determined when sclang starts and cannot be changed dynamically.
@@ -161,10 +169,15 @@ var scdoc_sc_version = '3.13.1';
 <div class='method'>
 <p>true if the QtWebEngine library is available, false otherwise</div><h3 class='method-code'><span class='method-prefix'>Platform.</span><a class='method-name' name='*architecture' href='./../Overviews/Methods.html#architecture'>architecture</a></h3>
 <div class='method'>
-<p>A <a href="./../Classes/Symbol.html">Symbol</a> naming the architecture for which this version of SuperCollider was built. Returns one of 'AArch32' (32-bit ARM), 'AArch64' (64-bit ARM, introduced in ARMv8), 'Itanium64', 'i386', 'x86_64', 'PowerPC', or 'unknown' if the architecture is unidentifiable.</div><h3><a class='anchor' name='Features'>Features</a></h3>
+<p>A <a href="./../Classes/Symbol.html">Symbol</a> naming the architecture for which this version of SuperCollider was built. Returns one of 'AArch32' (32-bit ARM), 'AArch64' (64-bit ARM, introduced in ARMv8), 'Itanium64', 'i386', 'x86_64', 'PowerPC', or 'unknown' if the architecture is unidentifiable.</div><h3 class='method-code'><span class='method-prefix'>Platform.</span><a class='method-name' name='*systemInformation' href='./../Overviews/Methods.html#systemInformation'>systemInformation</a></h3>
+<div class='method'>
+<p>Return a dictionary with system/context information like SuperCollider, QT, and OS versions.</div><h3 class='method-code'><span class='method-prefix'>Platform.</span><a class='method-name' name='*postBugReportInfo' href='./../Overviews/Methods.html#postBugReportInfo'>postBugReportInfo</a>(<span class='argstr'>includePaths: true</span>, <span class='argstr'>includeDevices: false</span>)</h3>
+<div class='method'>
+<p>Post system information that is useful to attach to bug reports.</div><h3><a class='anchor' name='Features'>Features</a></h3>
 <h3 class='method-code'><span class='method-prefix'>Platform.</span><a class='method-name' name='*when' href='./../Overviews/Methods.html#when'>when</a>(<span class='argstr'>features</span>, <span class='argstr'>ifFunction</span>, <span class='argstr'>elseFunction</span>)</h3>
 <div class='method'>
-<p>Evaluate ifFunction if all features are present, otherwise evaluate elseFunction.<textarea class='editor'>Platform.when(#[\Document, \SCWindow], { "yeehah!".postln });</textarea>
+<p>Evaluate ifFunction if all features are present, otherwise evaluate elseFunction.<div class='codeMirrorContainer'><textarea class='editor'>Platform.when(#[\Document, \SCWindow], { "yeehah!".postln });</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3><a class='anchor' name='Inherited%20class%20methods'>Inherited class methods</a></h3>
 <div id='inheritedclassmets'></div><h3><a class='anchor' name='Undocumented%20class%20methods'>Undocumented class methods</a></h3>
 <h3 class='method-code'><span class='method-prefix'>Platform.</span><a class='method-name' name='*clearMetadata' href='./../Overviews/Methods.html#clearMetadata'>clearMetadata</a>(<span class='argstr'>path</span>)</h3>
@@ -228,37 +241,44 @@ var scdoc_sc_version = '3.13.1';
 <p>files to be loaded on startup</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-loadStartupFiles' href='./../Overviews/Methods.html#loadStartupFiles'>loadStartupFiles</a></h3>
 <div class='method'>
 <p>(re)load startup files</div><h3><a class='anchor' name='System%20commands'>System commands</a></h3>
-<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-killAll' href='./../Overviews/Methods.html#killAll'>killAll</a>(<span class='argstr'>cmdLineArgs</span>)</h3>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-killAll' href='./../Overviews/Methods.html#killAll'>killAll</a>(<span class='argstr'>cmdLineArgs</span>, <span class='argstr'>force: true</span>)</h3>
 <div class='method'>
 <p>kill all processes as defined by cmdLineArgs.<h4>Arguments:</h4>
 <table class='arguments'>
 <tr><td class='argumentname'>cmdLineArgs<td class='argumentdesc'>
-<p>a string containing one or several process names.<textarea class='editor'>// e.g. kill all possibly running servers (scsynth or supernova)
+<p>a string containing one or several process names.<tr><td class='argumentname'>force<td class='argumentdesc'>
+<p>if true (default), the process will be closed forcefully, using <code>killall -KILL</code> on *nix and <code>taskkill /f</code> on Windows.<div class='codeMirrorContainer'><textarea class='editor'>// e.g. kill all possibly running servers (scsynth or supernova)
 thisProcess.platform.killAll("scsynth supernova");</textarea>
-</table></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-killProcessByID' href='./../Overviews/Methods.html#killProcessByID'>killProcessByID</a>(<span class='argstr'>pid</span>)</h3>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+</table></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-killProcessByID' href='./../Overviews/Methods.html#killProcessByID'>killProcessByID</a>(<span class='argstr'>pid</span>, <span class='argstr'>force: true</span>, <span class='argstr'>subprocesses: true</span>)</h3>
 <div class='method'>
 <p>kill a single process as identified by its process ID.<h4>Arguments:</h4>
 <table class='arguments'>
 <tr><td class='argumentname'>pid<td class='argumentdesc'>
-<p>an Integer which is the pid of the process to kill.<textarea class='editor'>// start a server program from the cmdLine for testing
+<p>an Integer which is the pid of the process to kill.<tr><td class='argumentname'>force<td class='argumentdesc'>
+<p>if true (default), the process will be closed forcefully, using <code>kill -KILL</code> on *nix and <code>taskkill /f</code> on Windows.<tr><td class='argumentname'>subprocesses<td class='argumentdesc'>
+<p>if true (default), the subprocesses (children) of the process will be closed as well; this is useful if the process is a shell that started a subprocess, e.g. when using <code>String -unixCmd</code><div class='codeMirrorContainer'><textarea class='editor'>// start a server program from the cmdLine for testing
 ~pid = unixCmd(Server.program + s.options.asOptionsString(57100));
 // kill just that server program by its pid:
 thisProcess.platform.killProcessByID(~pid);</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </table></div><h3><a class='anchor' name='Features'>Features</a></h3>
 
 <p>Features are abstract symbols that can be declared by extension authors and be checked during runtime in user code. Apart from explicitly declared features, class and primitive names are implicitly declared.<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-declareFeature' href='./../Overviews/Methods.html#declareFeature'>declareFeature</a>(<span class='argstr'>aFeature</span>)</h3>
 <div class='method'>
 <p>Declare aSymbol to be a feature present in the runtime. Class names and primitive names cannot be declared as features.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-hasFeature' href='./../Overviews/Methods.html#hasFeature'>hasFeature</a>(<span class='argstr'>symbol</span>)</h3>
 <div class='method'>
-<p>Return true if the feature aSymbol is present in the runtime system. aSymbol can refer to explicitly declared features as well as class and primitive names.<textarea class='editor'>thisProcess.platform.hasFeature(\Object);
+<p>Return true if the feature aSymbol is present in the runtime system. aSymbol can refer to explicitly declared features as well as class and primitive names.<div class='codeMirrorContainer'><textarea class='editor'>thisProcess.platform.hasFeature(\Object);
 thisProcess.platform.hasFeature('_SCWindow_BeginFullScreen');
 thisProcess.platform.hasFeature('_myFuncyPrimitive');
 
 thisProcess.platform.declareFeature('superCrazyCompositionSystem');
 thisProcess.platform.hasFeature('superCrazyCompositionSystem');</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-when' href='./../Overviews/Methods.html#when'>when</a>(<span class='argstr'>features</span>, <span class='argstr'>ifFunction</span>, <span class='argstr'>elseFunction</span>)</h3>
 <div class='method'>
-<p>Evaluate ifFunction if all features are present, otherwise evaluate elseFunction.<textarea class='editor'>thisProcess.platform.when(#[\Document, \SCWindow], { "yeehah!".postln });</textarea>
+<p>Evaluate ifFunction if all features are present, otherwise evaluate elseFunction.<div class='codeMirrorContainer'><textarea class='editor'>thisProcess.platform.when(#[\Document, \SCWindow], { "yeehah!".postln });</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p></div><h3><a class='anchor' name='Inherited%20instance%20methods'>Inherited instance methods</a></h3>
 <div id='inheritedinstmets'></div><h3><a class='anchor' name='Undocumented%20instance%20methods'>Undocumented instance methods</a></h3>
@@ -272,5 +292,5 @@ thisProcess.platform.hasFeature('superCrazyCompositionSystem');</textarea>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-isPathSeparator' href='./../Overviews/Methods.html#isPathSeparator'>isPathSeparator</a>(<span class='argstr'>char</span>)</h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-isSleeping' href='./../Overviews/Methods.html#isSleeping'>isSleeping</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-writeClientCSS' href='./../Overviews/Methods.html#writeClientCSS'>writeClientCSS</a></h3>
-<div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/Platform.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/Platform.schelp</a><br>link::Classes/Platform::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+<div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/Platform.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/Platform.schelp</a><br>link::Classes/Platform::<br></div></div><script src='./../static/editor.js' type='text/javascript'></script>
 </body></html>

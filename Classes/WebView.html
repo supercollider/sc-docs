@@ -1,21 +1,25 @@
-<!doctype html><html lang='en'><head><title>WebView | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>WebView | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../lib/jquery.min.js'></script>
-<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/jquery.min.js'></script>
+<script src='./../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './..';
 var scdoc_title = 'WebView';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../static/scdoc.js' type='text/javascript'></script>
 <script src='./../docmap.js' type='text/javascript'></script>
+<script src='./../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
@@ -264,11 +268,12 @@ var scdoc_sc_version = '3.13.1';
 <tr><td class='argumentname'><td class='argumentdesc'>
 <p> A String.<tr><td class='argumentname'><td class='argumentdesc'>
 <p> A function to be called when execution is complete, with the result as first argument.<div class='note'><span class='notelabel'>NOTE:</span> javascript code can correctly return Numbers, Strings and Arrays, but it can't currently pass javascript Objects to sclang. It is possible however to use JSON serialization to acheive this:</div>
-<p><textarea class='editor'>// passing a nested object from javascript to sclang:
-WebView().runJavaScript("JSON.stringify({a: [1,2,3], b: {ba: 1, bb: 'yeah'}})"){ |res| res.parseJSON.postln }</textarea>
+<p><div class='codeMirrorContainer'><textarea class='editor'>// passing a nested object from javascript to sclang:
+WebView().runJavaScript("JSON.stringify({ a: [1,2,3], b: { ba: 1, bb: 'yeah' } })"){ |res| res.parseJSON.postln }</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </table></div><h3><a class='anchor' name='Inherited%20instance%20methods'>Inherited instance methods</a></h3>
 <div id='inheritedinstmets'></div><h2><a class='anchor' name='examples'>Examples</a></h2>
-<textarea class='editor'>// A simple web browser
+<div class='codeMirrorContainer'><textarea class='editor'>// A simple web browser
 (
 var browser, webview, reloadStop, prev, next, urlBox, go;
 
@@ -323,7 +328,7 @@ webview.onLoadFailed = {
     urlBox.background = Color.red(1, 0.2);
 };
 
-browser = View(bounds:900@700).layout_(VLayout(
+browser = View(bounds: 900@700).layout_(VLayout(
     HLayout(
         prev, reloadStop, next,
         urlBox,
@@ -336,6 +341,7 @@ browser.front;
 
 urlBox.valueAction = "http://supercollider.github.io/"
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/WebView.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/WebView.schelp</a><br>link::Classes/WebView::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/WebView.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/WebView.schelp</a><br>link::Classes/WebView::<br></div></div><script src='./../static/editor.js' type='text/javascript'></script>
 </body></html>

@@ -1,21 +1,25 @@
-<!doctype html><html lang='en'><head><title>Select | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>Select | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../lib/jquery.min.js'></script>
-<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/jquery.min.js'></script>
+<script src='./../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './..';
 var scdoc_title = 'Select';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../static/scdoc.js' type='text/javascript'></script>
 <script src='./../docmap.js' type='text/javascript'></script>
+<script src='./../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
@@ -39,7 +43,7 @@ var scdoc_sc_version = '3.13.1';
 <div id='summary'>Select output from an array of inputs.</div>
 </div>
 <div class='subheader'>
-<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/Common/Audio/Osc.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Audio/Osc.sc'>Osc.sc</a></div><div id='related'>See also: <a href="./../Classes/SelectX.html">SelectX</a>, <a href="./../Classes/SelectXFocus.html">SelectXFocus</a>, <a href="./../Classes/LinSelectX.html">LinSelectX</a></div>
+<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/Common/Audio/Osc.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Audio/Osc.sc'>Osc.sc</a></div><div id='related'>See also: <a href="./../Classes/SelectX.html">SelectX</a>, <a href="./../Classes/SelectXFocus.html">SelectXFocus</a>, <a href="./../Classes/LinSelectX.html">LinSelectX</a></div>
 </div>
 <h2><a class='anchor' name='description'>Description</a></h2>
 
@@ -56,10 +60,10 @@ var scdoc_sc_version = '3.13.1';
 <div id='inheritedclassmets'></div><h2><a class='anchor' name='instancemethods'>Instance Methods</a></h2>
 <h3><a class='anchor' name='Inherited%20instance%20methods'>Inherited instance methods</a></h3>
 <div id='inheritedinstmets'></div><h2><a class='anchor' name='examples'>Examples</a></h2>
-<textarea class='editor'>(
-SynthDef("help-Select",{ arg out=0;
+<div class='codeMirrorContainer'><textarea class='editor'>(
+SynthDef("help-Select", { |out = 0|
 
-    var a,cycle;
+    var a, cycle;
     a = [
             SinOsc.ar,
             Saw.ar,
@@ -67,30 +71,32 @@ SynthDef("help-Select",{ arg out=0;
         ];
     cycle = a.size  * 0.5;
     Out.ar(out,
-        Select.ar(LFSaw.kr(1.0,0.0,cycle,cycle),a) * 0.2
+        Select.ar(LFSaw.kr(1.0, 0.0, cycle, cycle), a) * 0.2
     )
 }).play;
 
 )
 
-//Here used as a sequencer:
+// Here used as a sequencer:
 (
-SynthDef("help-Select-2",{ arg out=0;
+SynthDef("help-Select-2", { |out = 0|
 
-    var a,s,cycle;
-    a = Array.fill(32,{ rrand(30,80) }).midicps;
+    var a, s, cycle;
+    a = Array.fill(32, { rrand(30, 80) }).midicps;
     a.postln;
     cycle = a.size  * 0.5;
 
     s = Saw.ar(
             Select.kr(
-                LFSaw.kr(1.0,0.0,cycle,cycle),
+                LFSaw.kr(1.0, 0.0, cycle, cycle),
                 a
             ),
             0.2
     );
-    Out.ar(out,s )
+    Out.ar(out, s)
 }).play;
 )</textarea>
-<div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/Select.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/Select.schelp</a><br>link::Classes/Select::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+
+<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/Select.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/Select.schelp</a><br>link::Classes/Select::<br></div></div><script src='./../static/editor.js' type='text/javascript'></script>
 </body></html>

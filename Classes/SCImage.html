@@ -1,21 +1,25 @@
-<!doctype html><html lang='en'><head><title>SCImage | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>SCImage | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../lib/jquery.min.js'></script>
-<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/jquery.min.js'></script>
+<script src='./../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './..';
 var scdoc_title = 'SCImage';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../static/scdoc.js' type='text/javascript'></script>
 <script src='./../docmap.js' type='text/javascript'></script>
+<script src='./../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
@@ -102,19 +106,21 @@ var scdoc_sc_version = '3.13.1';
 <table class='arguments'>
 <tr><td class='argumentname'>multiple<td class='argumentdesc'>
 <p>May be a...<ul>
-<li><a href="./../Classes/Number.html">Number</a> to create an <strong>empty</strong> image of size multiple as width and height<textarea class='editor'>i = SCImage.new(400);        // Create a 400x400 pixels SCimage.
+<li><a href="./../Classes/Number.html">Number</a> to create an <strong>empty</strong> image of size multiple as width and height<div class='codeMirrorContainer'><textarea class='editor'>i = SCImage.new(400);        // Create a 400x400 pixels SCimage.
 i.dump;
 i.free;
 
-i = SCImage.new(400,200);    // Create a 400x200 pixels SCimage.
+i = SCImage.new(400, 200);    // Create a 400x200 pixels SCimage.
 i.dump;
 i.free;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p><li><a href="./../Classes/Point.html">Point</a> to create an <strong>empty</strong> image of size multiple.x as width and multiple.y as height<textarea class='editor'>i = SCImage.new(400@200);    // Create a 400x200 pixels SCimage.
+<p><li><a href="./../Classes/Point.html">Point</a> to create an <strong>empty</strong> image of size multiple.x as width and multiple.y as height<div class='codeMirrorContainer'><textarea class='editor'>i = SCImage.new(400@200);    // Create a 400x200 pixels SCimage.
 i.dump;
 i.free;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p><li><a href="./../Classes/String.html">String</a> to create an image from a <strong>local file</strong> or from an <strong>URL</strong> (http://, ftp://, <a href="file:///)">file:///)</a><textarea class='editor'>//    Path string
+<p><li><a href="./../Classes/String.html">String</a> to create an image from a <strong>local file</strong> or from an <strong>URL</strong> (http://, ftp://, <a href="file:///)">file:///)</a><div class='codeMirrorContainer'><textarea class='editor'>//    Path string
 i = SCImage.new("/Library/Desktop Pictures/Ripples Blue.jpg");
 [i.width, i.height].postln;
 i.plot;
@@ -124,37 +130,42 @@ i = SCImage.new("http://www.google.com/intl/en_ALL/images/logo.gif");
 i.plot;
 i.url;
 i.free;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </ul>
 </table></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='*color' href='./../Overviews/Methods.html#color'>color</a></h3>
 <div class='method'>
-<p>Creates a new SCImage instance filled with the specified color.<textarea class='editor'>i = SCImage.color(400, 200, Color.blue(0.9,0.1));
-i.plot(freeOnClose:true);</textarea>
+<p>Creates a new SCImage instance filled with the specified color.<div class='codeMirrorContainer'><textarea class='editor'>i = SCImage.color(400, 200, Color.blue(0.9, 0.1));
+i.plot(freeOnClose: true);</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h4>Arguments:</h4>
 <table class='arguments'>
 <tr><td class='argumentname'>args<td class='argumentdesc'>
 <p>multiple arguments. the last argument should be a valid <a href="./../Classes/Color.html">Color</a></table></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='*open' href='./../Overviews/Methods.html#open'>open</a></h3>
 <div class='method'>
-<p>Creates a new SCImage instance from the local file at <strong>path</strong>.<textarea class='editor'>(
+<p>Creates a new SCImage instance from the local file at <strong>path</strong>.<div class='codeMirrorContainer'><textarea class='editor'>(
 i = SCImage.open("/Library/Desktop Pictures/Ripples Blue.jpg");
-i.plot(freeOnClose:true);
+i.plot(freeOnClose: true);
 i.url.postln;
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='*openURL' href='./../Overviews/Methods.html#openURL'>openURL</a></h3>
 <div class='method'>
-<p>Creates a new SCImage instance from a valid image at the specified URL <strong>path</strong>.<textarea class='editor'>i = SCImage.openURL("file:///Library/Desktop%20Pictures/Ripples%20Blue.jpg");
+<p>Creates a new SCImage instance from a valid image at the specified URL <strong>path</strong>.<div class='codeMirrorContainer'><textarea class='editor'>i = SCImage.openURL("file:///Library/Desktop%20Pictures/Ripples%20Blue.jpg");
 i.url;
-w = i.plot(freeOnClose:true);</textarea>
+w = i.plot(freeOnClose: true);</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='*fromImage' href='./../Overviews/Methods.html#fromImage'>fromImage</a></h3>
 <div class='method'>
-<p>Creates a new SCImage instance from another SCImage.<textarea class='editor'>i = SCImage.new(SCDoc.helpSourceDir +/+ "images/vduck2.jpg");
+<p>Creates a new SCImage instance from another SCImage.<div class='codeMirrorContainer'><textarea class='editor'>i = SCImage.new(SCDoc.helpSourceDir +/+ "images/vduck2.jpg");
 j = SCImage.fromImage(i);
 i.dump;
 j.dump;
 [i, j].do(_.plot);
 [i, j].do(_.free);</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='*fromWindow' href='./../Overviews/Methods.html#fromWindow'>fromWindow</a></h3>
 <div class='method'>
-<p>Creates a new SCImage from a portion of a SCWindow. this can be used to capture either a window or a specific SCView.<textarea class='editor'>// WINDOW Example:
+<p>Creates a new SCImage from a portion of a SCWindow. this can be used to capture either a window or a specific SCView.<div class='codeMirrorContainer'><textarea class='editor'>// WINDOW Example:
 // First create a window and draw inside of it
 (
     w = SCWindow.new;
@@ -176,7 +187,7 @@ j.dump;
 (
     i = SCImage.fromWindow(w);
     w.close;
-    i.plot(freeOnClose:true);
+    i.plot(freeOnClose: true);
 )
 
 // VIEW Capture Example:
@@ -186,7 +197,7 @@ j.dump;
     b = [10, 80].asSpec;
     c = SCNumberBox(w, Rect(20, 20, 60, 40));
     a = SCSlider(w, Rect(20, 80, 100, 40))
-        .focusColor_(Color.red(alpha:0.2))
+        .focusColor_(Color.red(alpha: 0.2))
         .action_({
             c.value_(b.map(a.value).round(0.01))
     // round the float so it will fit in the SCNumberBox
@@ -197,8 +208,9 @@ j.dump;
 (
     i = SCImage.fromWindow(w, a.bounds);
     w.close;
-    i.plot(freeOnClose:true);
+    i.plot(freeOnClose: true);
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h4>Arguments:</h4>
 <table class='arguments'>
 <tr><td class='argumentname'>window<td class='argumentdesc'>
@@ -206,13 +218,16 @@ j.dump;
 <p>optional. the constrained rect to capture inside the SCWindow. By default, it is the window size.</table></div><h3><a class='anchor' name='Class%20variables%20and%20attributes'>Class variables and attributes</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='*formats' href='./../Overviews/Methods.html#formats'>formats</a></h3>
 <div class='method'>
-<p>returns all the valid image formats as an <a href="./../Classes/Array.html">Array</a><textarea class='editor'>SCImage.formats;</textarea>
+<p>returns all the valid image formats as an <a href="./../Classes/Array.html">Array</a><div class='codeMirrorContainer'><textarea class='editor'>SCImage.formats;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='*compositingOperations' href='./../Overviews/Methods.html#compositingOperations'>compositingOperations</a></h3>
 <div class='method'>
-<p>returns all the valid compositing operations you can use when drawing an SCImage as an <a href="./../Classes/Array.html">Array</a><textarea class='editor'>SCImage.compositingOperations;</textarea>
+<p>returns all the valid compositing operations you can use when drawing an SCImage as an <a href="./../Classes/Array.html">Array</a><div class='codeMirrorContainer'><textarea class='editor'>SCImage.compositingOperations;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='*interpolations' href='./../Overviews/Methods.html#interpolations'>interpolations</a></h3>
 <div class='method'>
-<p>returns an <a href="./../Classes/Array.html">Array</a> of the different levels of interpolation you can specify when drawing an SCImage.<textarea class='editor'>SCImage.interpolations;</textarea>
+<p>returns an <a href="./../Classes/Array.html">Array</a> of the different levels of interpolation you can specify when drawing an SCImage.<div class='codeMirrorContainer'><textarea class='editor'>SCImage.interpolations;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='*closeAllPlotWindows' href='./../Overviews/Methods.html#closeAllPlotWindows'>closeAllPlotWindows</a></h3>
 <div class='method'>
 <p>close all the SCImage plot windows currently opened.</div><h3><a class='anchor' name='Inherited%20class%20methods'>Inherited class methods</a></h3>
@@ -228,38 +243,41 @@ j.dump;
 <div class='method'>
 <p>returns the bounds of the receiver.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-free' href='./../Overviews/Methods.html#free'>free</a></h3>
 <div class='method'>
-<p>deallocate the receiver. this method is useful if you want to manage and reclaim yourself resources. otherwise you do not need to call this method since each object is automatically garbage collected.<textarea class='editor'>i = SCImage.new("/Library/Desktop Pictures/Ripples Blue.jpg");
+<p>deallocate the receiver. this method is useful if you want to manage and reclaim yourself resources. otherwise you do not need to call this method since each object is automatically garbage collected.<div class='codeMirrorContainer'><textarea class='editor'>i = SCImage.new("/Library/Desktop Pictures/Ripples Blue.jpg");
 SCImage.all;
 i.free;
 SCImage.all;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-scalesWhenResized' href='./../Overviews/Methods.html#scalesWhenResized'>scalesWhenResized</a></h3>
 <div class='method'>
-<p>flag to tell or set if the receiver should update its bitmap representation to scale when a resize operation if performed<textarea class='editor'>(
+<p>flag to tell or set if the receiver should update its bitmap representation to scale when a resize operation if performed<div class='codeMirrorContainer'><textarea class='editor'>(
     i = SCImage.new("/Library/Desktop Pictures/Ripples Blue.jpg");
     i.bounds.postln; // getting the dimensions
-    w =i.plot;
+    w = i.plot;
 )
 
 // changing the size of an image
 (
     i.scalesWhenResized_(true);
     i.setSize(400, 400 / (i.width / i.height));
-    a =i.plot;
+    a = i.plot;
 )
 (
 a.close; w.close; i.free;
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-url' href='./../Overviews/Methods.html#url'>url</a></h3>
 <div class='method'>
-<p>returns or set the url of the receiver. Returning only if any where supplied at creation, otherwise returns nil. Setting may be used for different purpose but try to supply a valid one since it is used for archiving the image as an object.<textarea class='editor'>i = SCImage.new("http://www.google.com/intl/en_ALL/images/logo.gif");
+<p>returns or set the url of the receiver. Returning only if any where supplied at creation, otherwise returns nil. Setting may be used for different purpose but try to supply a valid one since it is used for archiving the image as an object.<div class='codeMirrorContainer'><textarea class='editor'>i = SCImage.new("http://www.google.com/intl/en_ALL/images/logo.gif");
 i.url;
 i.plot;
 i.free;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-accelerated' href='./../Overviews/Methods.html#accelerated'>accelerated</a></h3>
 <div class='method'>
 <p>if true, the receiver currently use the CoreImage model, possibly caching its data on GPU, if not the bitmap model. Set it to switch representation.<div class='warning'><span class='warninglabel'>WARNING:</span> this method should never be used directly unless you know perfectly what you are doing. Since the SCImage will switch internally and manage itself the syncronization between representations.</div></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-interpolation' href='./../Overviews/Methods.html#interpolation'>interpolation</a></h3>
 <div class='method'>
-<p>get or set the level of interpolation used when rendering the image - it has not effect when the SCImage is accelerated. see <a href="#*interpolations">*interpolations</a> for a valid range of values.<textarea class='editor'>(
+<p>get or set the level of interpolation used when rendering the image - it has not effect when the SCImage is accelerated. see <a href="#*interpolations">*interpolations</a> for a valid range of values.<div class='codeMirrorContainer'><textarea class='editor'>(
 i = SCImage.new(SCDoc.helpSourceDir +/+ "images/vduck2.jpg");
 w = i.plot;
 i.interpolation;            // get the image current interpolation mode
@@ -297,10 +315,11 @@ w.refresh;
 )
 
 i.free;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3><a class='anchor' name='saving%20and%20archiving'>saving and archiving</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-write' href='./../Overviews/Methods.html#write'>write</a></h3>
 <div class='method'>
-<p>write the SCImage to a file.<textarea class='editor'>i = SCImage.new("/Library/Desktop Pictures/Ripples Blue.jpg");
+<p>write the SCImage to a file.<div class='codeMirrorContainer'><textarea class='editor'>i = SCImage.new("/Library/Desktop Pictures/Ripples Blue.jpg");
 i.dump
 i.write("~/Desktop/my_image.png");
 i.free;
@@ -319,6 +338,7 @@ Document.open("~/Desktop/my_image.scd".standardizePath);
 i = Object.readArchive("~/Desktop/my_image.scd".standardizePath);
 i.plot;
 i.free;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h4>Arguments:</h4>
 <table class='arguments'>
 <tr><td class='argumentname'>path<td class='argumentdesc'>
@@ -326,16 +346,17 @@ i.free;</textarea>
 <p>(optional) format to use. see SCImage.formats for supported formats. If nil, it will get the format depending on the path extension.</table></div><h3><a class='anchor' name='rendering'>rendering</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-plot' href='./../Overviews/Methods.html#plot'>plot</a></h3>
 <div class='method'>
-<p>plots the image in a SCWindow.<textarea class='editor'>i = SCImage.new("/Library/Desktop Pictures/Ripples Blue.jpg");
+<p>plots the image in a SCWindow.<div class='codeMirrorContainer'><textarea class='editor'>i = SCImage.new("/Library/Desktop Pictures/Ripples Blue.jpg");
 w = i.plot;
 w.close;
 
-w = i.plot(showInfo:false);
+w = i.plot(showInfo: false);
 w.close;
 i.free;
 
 // other option - image will be automatically freed when closed
-SCImage.new("/Library/Desktop Pictures/Ripples Blue.jpg").plot("Hello", freeOnClose:true);</textarea>
+SCImage.new("/Library/Desktop Pictures/Ripples Blue.jpg").plot("Hello", freeOnClose: true);</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h4>Arguments:</h4>
 <table class='arguments'>
 <tr><td class='argumentname'>name<td class='argumentdesc'>
@@ -347,8 +368,8 @@ SCImage.new("/Library/Desktop Pictures/Ripples Blue.jpg").plot("Hello", freeOnCl
 <div class='method'>
 <p>sets the receiver as the current graphic context. So you can use SCPen to draw inside of it.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-unlockFocus' href='./../Overviews/Methods.html#unlockFocus'>unlockFocus</a></h3>
 <div class='method'>
-<p>restore the graphic context state. the receiver is not anymore the current graphic context.<textarea class='editor'>(
-    j = SCImage.new(400,300);
+<p>restore the graphic context state. the receiver is not anymore the current graphic context.<div class='codeMirrorContainer'><textarea class='editor'>(
+    j = SCImage.new(400, 300);
 
     j.lockFocus;
 
@@ -372,14 +393,15 @@ SCImage.new("/Library/Desktop Pictures/Ripples Blue.jpg").plot("Hello", freeOnCl
 j.plot;
 j.write("~/Desktop/my_drawing.png"); // write the image
 j.free;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-draw' href='./../Overviews/Methods.html#draw'>draw</a></h3>
 <div class='method'>
 <p>shortcut for drawing inside an image. equivalent to :<ul>
 <li>receiver.lockFocus<li>aFunction<li>receiver.unlockFocus</ul>
 
-<p><textarea class='editor'>(
-    j = SCImage.new(400,300);
-    j.draw({ arg image;
+<p><div class='codeMirrorContainer'><textarea class='editor'>(
+    j = SCImage.new(400, 300);
+    j.draw({ |image|
 
         SCPen.translate(100, 100);
         1000.do {
@@ -394,14 +416,14 @@ j.free;</textarea>
             );
             SCPen.perform([\stroke, \fill].choose);
         };
-    }).plot(freeOnClose:true);
+    }).plot(freeOnClose: true);
 )
 
 //    String drawing support on the image
 //    drawStringAtPoint(string, point, font, color);
 (
-    j = SCImage.new(150,50);
-    j.draw({ arg bounds;
+    j = SCImage.new(150, 50);
+    j.draw({ |bounds|
         j.drawStringAtPoint("Hello, world!", 10@10, Font("Lucida Grande", 24), Color.black);
     });
 )
@@ -409,10 +431,11 @@ j.free;</textarea>
 j.plot;
 j.write("~/Desktop/hello.png");
 j.free;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-drawStringAtPoint' href='./../Overviews/Methods.html#drawStringAtPoint'>drawStringAtPoint</a></h3>
 <div class='method'>
-<p>renders *correctly* a String inside an SCImage :) <code>// to fix to have a compliant interface</code><textarea class='editor'>(
-    var width, height, tgHeight, ratio, str, font, color, strb, targetWidth=400, shadowColor, run = true;
+<p>renders *correctly* a String inside an SCImage :) <code>// to fix to have a compliant interface</code><div class='codeMirrorContainer'><textarea class='editor'>(
+    var width, height, tgHeight, ratio, str, font, color, strb, targetWidth = 400, shadowColor, run = true;
     shadowColor = Color.black;
 
     color = Color.gray(0.8);
@@ -423,25 +446,26 @@ j.free;</textarea>
     height = strb.height;
     ratio = height / width;
     i = SCImage(width@(height));
-    i.draw({|bb|
+    i.draw({ |bb|
         SCPen.smoothing_(false);
         i.drawStringAtPoint(str, 0@0, font, color);
     });
     i.interpolation_(\none);
     tgHeight = targetWidth * ratio;
-    w = SCWindow.new("", Rect(400,400, 450, 150)).drawFunc_({
-        SCPen.setShadow(2@2, 0.4, color:Color.red);
-        i.drawInRect(Rect(5,5,targetWidth, tgHeight));
+    w = SCWindow.new("", Rect(400, 400, 450, 150)).drawFunc_({
+        SCPen.setShadow(2@2, 0.4, color: Color.red);
+        i.drawInRect(Rect(5, 5, targetWidth, tgHeight));
     });
 
     w.view.background_(Color.white);
-    w.onClose_({run = false; i.free;});
+    w.onClose_({ run = false; i.free });
     w.front;
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-drawAtPoint' href='./../Overviews/Methods.html#drawAtPoint'>drawAtPoint</a></h3>
 <div class='method'>
-<p>render the image or a portion of it in the current graphic context.<textarea class='editor'>(
-    var operation='sourceOver', fraction=1.0, i, w;
+<p>render the image or a portion of it in the current graphic context.<div class='codeMirrorContainer'><textarea class='editor'>(
+    var operation = 'sourceOver', fraction = 1.0, i, w;
 
     i = SCImage.new(
     //    "http://supercollider.sourceforge.net/theme/sc01/icon.supercollider.gif"
@@ -453,15 +477,15 @@ j.free;</textarea>
 
     SCSlider.new(w, Rect(10, 150, 150, 16))
         .value_(1.0)
-        .action_({ arg sl;
+        .action_({ |sl|
             fraction = sl.value;
             w.refresh;
         });
 
     SCPopUpMenu.new(w, Rect(170, 150, 100, 16))
-        .items_( SCImage.compositingOperations.collect({ arg i; i.asString }) )
+        .items_(SCImage.compositingOperations.collect({ |i| i.asString }))
         .value_(2)
-        .action_({ arg pm;
+        .action_({ |pm|
             operation = SCImage.compositingOperations.at(pm.value);
             w.refresh;
         });
@@ -474,6 +498,7 @@ j.free;</textarea>
 
     });
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h4>Arguments:</h4>
 <table class='arguments'>
 <tr><td class='argumentname'>point<td class='argumentdesc'>
@@ -482,7 +507,7 @@ j.free;</textarea>
 <p>the compositing operation to use. <code>'sourceOver'</code> is the default.<tr><td class='argumentname'>fraction<td class='argumentdesc'>
 <p>the opacity to use, ranging from 0.0 (fully transparent) to 1.0 (fully opaque)</table></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-drawInRect' href='./../Overviews/Methods.html#drawInRect'>drawInRect</a></h3>
 <div class='method'>
-<p>render the image or a portion of it in a specified rectangle of the current graphic context. This may stretch the image depending on the destination rect.<textarea class='editor'>(
+<p>render the image or a portion of it in a specified rectangle of the current graphic context. This may stretch the image depending on the destination rect.<div class='codeMirrorContainer'><textarea class='editor'>(
     i = SCImage.new(
         // "http://supercollider.sourceforge.net/theme/sc01/icon.supercollider.gif"
         SCDoc.helpSourceDir +/+ "images/icon.supercollider.png"
@@ -491,9 +516,10 @@ j.free;</textarea>
     w = SCWindow.new("SCImage", Rect(120, 400, 360, 180)).front;
     w.onClose_({ i.free }); // free the image when the window is closed
     w.drawFunc_({
-        i.drawInRect(Rect(10,10,50,50), Rect(10,10,50,50), 2, 1.0); // only a section
+        i.drawInRect(Rect(10, 10, 50, 50), Rect(10, 10, 50, 50), 2, 1.0); // only a section
     });
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h4>Arguments:</h4>
 <table class='arguments'>
 <tr><td class='argumentname'>rect<td class='argumentdesc'>
@@ -502,7 +528,7 @@ j.free;</textarea>
 <p>the compositing operation to use. <code>'sourceOver'</code> is the default.<tr><td class='argumentname'>fraction<td class='argumentdesc'>
 <p>the opacity to use, ranging from 0.0 (fully transparent) to 1.0 (fully opaque)</table></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-tileInRect' href='./../Overviews/Methods.html#tileInRect'>tileInRect</a></h3>
 <div class='method'>
-<p>tile the image or a portion of it in a specified rectangle of the current graphic context. This may stretch the image depending on the destination rect.<textarea class='editor'>(
+<p>tile the image or a portion of it in a specified rectangle of the current graphic context. This may stretch the image depending on the destination rect.<div class='codeMirrorContainer'><textarea class='editor'>(
     i = SCImage.new(
         // "http://supercollider.sourceforge.net/theme/sc01/icon.supercollider.gif"
         SCDoc.helpSourceDir +/+ "images/icon.supercollider.png"
@@ -514,6 +540,7 @@ j.free;</textarea>
         i.tileInRect(w.view.bounds, nil, 2, 1.0); // all image contents
     });
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h4>Arguments:</h4>
 <table class='arguments'>
 <tr><td class='argumentname'>rect<td class='argumentdesc'>
@@ -523,23 +550,24 @@ j.free;</textarea>
 <p>the opacity to use, ranging from 0.0 (fully transparent) to 1.0 (fully opaque)</table></div><h3><a class='anchor' name='Instance%20Methods%20/%20accessing%20and%20setting%20pixels'>Instance Methods / accessing and setting pixels</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-setPixel' href='./../Overviews/Methods.html#setPixel'>setPixel</a></h3>
 <div class='method'>
-<p>fill a pixel located at x @ y.<textarea class='editor'>i = SCImage.color(60, 60, Color.blue(0.1,0.1));
+<p>fill a pixel located at x @ y.<div class='codeMirrorContainer'><textarea class='editor'>i = SCImage.color(60, 60, Color.blue(0.1, 0.1));
 w = i.plot;
-i.setPixel([255,0,0,255].asRGBA, 0, 0); // setting red
+i.setPixel([255, 0, 0, 255].asRGBA, 0, 0); // setting red
 w.refresh;
-("pixel at 0 @ 0:"+i.getPixel(0,0).rgbaArray).postln;
+("pixel at 0 @ 0:"+i.getPixel(0, 0).rgbaArray).postln;
 i.free;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h4>Arguments:</h4>
 <table class='arguments'>
 <tr><td class='argumentname'>rgbaInteger<td class='argumentdesc'>
 <p>an 32 bit <a href="./../Classes/Integer.html">Integer</a> containing color information packed as 8bit RGBA</table></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-getPixel' href='./../Overviews/Methods.html#getPixel'>getPixel</a></h3>
 <div class='method'>
-<p>retrieve the pixel value at x @ y as a RGBA integer<textarea class='editor'>// A simple example on how to manipulate pixels with SCImage
+<p>retrieve the pixel value at x @ y as a RGBA integer<div class='codeMirrorContainer'><textarea class='editor'>// A simple example on how to manipulate pixels with SCImage
 b = Int32Array[
-    Integer.fromRGBA(255,0,0,255), // red
-    Integer.fromRGBA(0,255,0,255), // green
-    Integer.fromRGBA(0,0,255,255), // blue
-    Integer.fromRGBA(255,0,255,255) // purple
+    Integer.fromRGBA(255, 0, 0, 255), // red
+    Integer.fromRGBA(0, 255, 0, 255), // green
+    Integer.fromRGBA(0, 0, 255, 255), // blue
+    Integer.fromRGBA(255, 0, 255, 255) // purple
 ];
 
 b[0].red; // 255 see Integer.red
@@ -553,7 +581,7 @@ a.plot;
 
 // Set + Get
 a.setPixel([255, 0, 255, 128].asRGBA /* create an Integer from 0-255 integer rgba value */, 0, 0).plot;
-p = a.getPixel(0,0);
+p = a.getPixel(0, 0);
 
 p.red; // 255
 p.green; // 0
@@ -562,7 +590,7 @@ p.alpha; // 128
 
 // now another important example
 a.setPixel([255, 0, 255, 0].asRGBA, 1, 0).plot; // clear color -&gt; alpha is 0
-p = a.getPixel(1,0);
+p = a.getPixel(1, 0);
 
 p.red; // you expect 255 but you get 0 ??? Why = because SCImage uses premultiplied color component value internally
 // meaning all Red, Green, and Blue component are premultiplied by the alpha
@@ -572,7 +600,8 @@ p.green; // 0
 p.blue; // 0
 p.alpha; // 0
 
-p = a.getColor(1,0); // more explicit - but same here</textarea>
+p = a.getColor(1, 0); // more explicit - but same here</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-setColor' href='./../Overviews/Methods.html#setColor'>setColor</a></h3>
 <div class='method'>
 <p>fill the pixel located at x @ y with the specified <strong>color</strong>.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-getColor' href='./../Overviews/Methods.html#getColor'>getColor</a></h3>
@@ -584,7 +613,7 @@ p = a.getColor(1,0); // more explicit - but same here</textarea>
 <tr><td class='argumentname'>array<td class='argumentdesc'>
 <p>an <a href="./../Classes/Int32Array.html">Int32Array</a> of size receiver.width * receiver.height containing all pixel values as 32bit Integer</table></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-loadPixels' href='./../Overviews/Methods.html#loadPixels'>loadPixels</a></h3>
 <div class='method'>
-<p>load all the pixels of the receiver in an array. it is better and faster to call this function instead of <a href="#-pixels">-pixels</a> if you plan to retrieve frequently the pixel data (since it won't allocate a new array everytime !)<textarea class='editor'>// exec one line at a time
+<p>load all the pixels of the receiver in an array. it is better and faster to call this function instead of <a href="#-pixels">-pixels</a> if you plan to retrieve frequently the pixel data (since it won't allocate a new array everytime !)<div class='codeMirrorContainer'><textarea class='editor'>// exec one line at a time
 i = SCImage.new(
     // "http://supercollider.sourceforge.net/theme/sc01/icon.supercollider.gif"
     SCDoc.helpSourceDir +/+ "images/icon.supercollider.png"
@@ -600,6 +629,7 @@ i.invert;
 i.loadPixels(p);
 i.free;
 p;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h4>Arguments:</h4>
 <table class='arguments'>
 <tr><td class='argumentname'>array<td class='argumentdesc'>
@@ -607,28 +637,29 @@ p;</textarea>
 <p>the targeted rectangular region. (nil by default, meaning full size)<tr><td class='argumentname'>start<td class='argumentdesc'>
 <p>the start index of the array.</table></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-setPixels' href='./../Overviews/Methods.html#setPixels'>setPixels</a></h3>
 <div class='method'>
-<p>set the pixels in a specific portion of the receiver.<textarea class='editor'>(
+<p>set the pixels in a specific portion of the receiver.<div class='codeMirrorContainer'><textarea class='editor'>(
     i = SCImage.new(20@20);
     i.pixels_(
         Int32Array.fill(i.width * i.height, {
-            Integer.fromRGBA(255.rand,127.rand,255.rand,255)
+            Integer.fromRGBA(255.rand, 127.rand, 255.rand, 255)
         })
     );
-    //i.interpolation_(\none); // uncomment to see the difference
-    w = i.plot(freeOnClose:true);
+    // i.interpolation_(\none); // uncomment to see the difference
+    w = i.plot(freeOnClose: true);
     i.pixels.postln;
 )
 
 (
     i = SCImage.color(50@50, Color.white);
     i.setPixels(
-        Int32Array.fill(20*20,{Integer.fromRGBA(255.rand, 127.rand, 255.rand, 255)}),
-        Rect(10,10,20,20)
+        Int32Array.fill(20*20, { Integer.fromRGBA(255.rand, 127.rand, 255.rand, 255) }),
+        Rect(10, 10, 20, 20)
     );
     i.interpolation_(\none); // uncomment to see the difference
-    w = i.plot(freeOnClose:true);
+    w = i.plot(freeOnClose: true);
     i.pixels.postln;
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h4>Arguments:</h4>
 <table class='arguments'>
 <tr><td class='argumentname'>array<td class='argumentdesc'>
@@ -638,7 +669,7 @@ p;</textarea>
 
 <p>see <a href="./../Classes/SCImageFilter.html">SCImageFilter</a> for more info<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-applyFilters' href='./../Overviews/Methods.html#applyFilters'>applyFilters</a></h3>
 <div class='method'>
-<p>apply an array of <a href="./../Classes/SCImageFilter.html">SCImageFilter</a> to the image. this should be considered as an in place operation, meaning the SCImage is altered after it.<textarea class='editor'>// ******** Built In CoreImage Generators ********
+<p>apply an array of <a href="./../Classes/SCImageFilter.html">SCImageFilter</a> to the image. this should be considered as an in place operation, meaning the SCImage is altered after it.<div class='codeMirrorContainer'><textarea class='editor'>// ******** Built In CoreImage Generators ********
 // Generators are not filters, they actually create an image but do not need an input image
 // you just have to create an image of a new size
 // ** The Simple Random Filter **
@@ -646,15 +677,15 @@ p;</textarea>
 f = SCImageFilter.new(\CIRandomGenerator);
 a = SCImage.new(500@500);
 a.applyFilters(f);
-w = a.plot(freeOnClose:true, background:Color.black);
+w = a.plot(freeOnClose: true, background: Color.black);
 a.bounds.postln;
 )
 
 // ** The StarShine example **
 (
-var width=500, height=500, centerVector;
+var width = 500, height = 500, centerVector;
 
-centerVector = [ width*0.5, height*0.5 ];
+centerVector = [width*0.5, height*0.5];
 a = SCImage.new(500@500);
 f = SCImageFilter.new(\CIStarShineGenerator);
 
@@ -666,15 +697,15 @@ f.crossAngle_(0.0);
 f.crossOpacity_(-4.0);
 
 a.applyFilters(f);
-w = a.plot(freeOnClose:true, background:Color.gray); // change background to see
+w = a.plot(freeOnClose: true, background: Color.gray); // change background to see
 )
 
 
 // ** Starshine + Pixellate + ZoomBlur **
 (
-var width=500, height=500, centerVector;
+var width = 500, height = 500, centerVector;
 
-centerVector = [ width*0.5, height*0.5 ];
+centerVector = [width*0.5, height*0.5];
 a = SCImage.new(500@500);
 
 f = SCImageFilter.new(\CIStarShineGenerator);
@@ -692,8 +723,9 @@ h.center_(centerVector);
 h.amount_(50);
 
 a.applyFilters([f, g, h]);
-w = a.plot(freeOnClose:true, background:Color.black);
+w = a.plot(freeOnClose: true, background: Color.black);
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h4>Arguments:</h4>
 <table class='arguments'>
 <tr><td class='argumentname'>filters<td class='argumentdesc'>
@@ -719,18 +751,20 @@ w = a.plot(freeOnClose:true, background:Color.black);
 <div class='method'>
 <p>if <a href="#-filters">-filters</a> is not zero sized, this method will apply all those filters in place. if the image is accelerated this method force a bitmap representation of the receiver.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-invert' href='./../Overviews/Methods.html#invert'>invert</a></h3>
 <div class='method'>
-<p>invert the receiver<textarea class='editor'>(
+<p>invert the receiver<div class='codeMirrorContainer'><textarea class='editor'>(
 i = SCImage.new("/Library/Desktop Pictures/Ripples Blue.jpg");
 i.invert;
-i.plot(freeOnClose:true);
+i.plot(freeOnClose: true);
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-crop' href='./../Overviews/Methods.html#crop'>crop</a></h3>
 <div class='method'>
-<p>crop the receiver<textarea class='editor'>(
+<p>crop the receiver<div class='codeMirrorContainer'><textarea class='editor'>(
 i = SCImage.new("/Library/Desktop Pictures/Ripples Blue.jpg");
-i.crop( Rect(10,10,120,100) );
-i.plot(freeOnClose:true);
+i.crop(Rect(10, 10, 120, 100));
+i.plot(freeOnClose: true);
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h4>Arguments:</h4>
 <table class='arguments'>
 <tr><td class='argumentname'>aRect<td class='argumentdesc'>
@@ -747,17 +781,17 @@ i.plot(freeOnClose:true);
 
 <p>you can now use a SCImage as a valid view background. 16 drawing modes are defined to behave differently.<dl>
 <dt>tileMode values:<dd><table>
-<tr><td>1<td>fixed to left, fixed to top<tr><td>2<td>horizontally tile, fixed to top<tr><td>3<td>fixed to right, fixed to top<tr><td>4<td>fixed to left, vertically tile<tr><td>5<td>horizontally tile, vertically tile<tr><td>6<td>fixed to right, vertically tile<tr><td>7<td>fixed to left, fixed to bottom<tr><td>8<td>horizontally tile, fixed to bottom<tr><td>9<td>fixed to right, fixed to bottom<tr><td>10<td>fit<tr><td>11<td>center, center (scale)<tr><td>12<td>center , fixed to top<tr><td>13<td>center , fixed to bottom<tr><td>14<td>fixed to left, center<tr><td>15<td>fixed to right, center<tr><td>16<td>center, center (no scale)</table>
-<dt>SCView:backgroundImage_<dd><strong>image</strong> - the SCImage to use
+<tr><td>1<td>fixed to left, fixed to top<tr><td>2<td>horizontally tile, fixed to top<tr><td>3<td>fixed to right, fixed to top<tr><td>4<td>fixed to left, vertically tile<tr><td>5<td>horizontally tile, vertically tile<tr><td>6<td>fixed to right, vertically tile<tr><td>7<td>fixed to left, fixed to bottom<tr><td>8<td>horizontally tile, fixed to bottom<tr><td>9<td>fixed to right, fixed to bottom<tr><td>10<td>fit<tr><td>11<td>center, center (scale)<tr><td>12<td>center, fixed to top<tr><td>13<td>center, fixed to bottom<tr><td>14<td>fixed to left, center<tr><td>15<td>fixed to right, center<tr><td>16<td>center, center (no scale)</table>
+<dt>SCView: backgroundImage_<dd><strong>image</strong> - the SCImage to use
 <p><strong>tileMode</strong> - the mode to use. by default fixed to left, fixed to top
 <p><strong>alpha</strong> - opacity 0 &lt; x &lt; 1
 <p><strong>fromRect</strong> - the portion of the image to use. by default use the full image.</dl>
 
-<p><textarea class='editor'>(
+<p><div class='codeMirrorContainer'><textarea class='editor'>(
     b = 1.0;
     a = SCImage.new(SCDoc.helpSourceDir +/+ "images/vduck2.jpg");
-    r = Rect(20,3,40,40);
-    w = SCWindow.new("SCImage background" /*, textured:false*/ );
+    r = Rect(20, 3, 40, 40);
+    w = SCWindow.new("SCImage background" /*, textured: false*/);
     w.view.background_(Color.gray);
     w.view.backgroundImage_(a, 5, b, r);
     w.front;
@@ -790,14 +824,14 @@ w.close;
 (
     a = SCImage.new("/Library/Desktop Pictures/Ripples Blue.jpg");
     w = SCWindow.new("SCImage background");
-    l = SC2DSlider.new(w, Rect(10,10,200,200))
-        .backgroundImage_( a, 5, 1, Rect(0,0,10,10) );
+    l = SC2DSlider.new(w, Rect(10, 10, 200, 200))
+        .backgroundImage_(a, 5, 1, Rect(0, 0, 10, 10));
     w.front;
     a.free; // safe
 )
 
 (
-    var bounds = Rect(10,10,150,18);
+    var bounds = Rect(10, 10, 150, 18);
     a = SCImage.new("/Library/Desktop Pictures/Ripples Blue.jpg");
     w = SCWindow.new("SCImage background");
     l = SCSlider.new(w, bounds)
@@ -805,6 +839,7 @@ w.close;
     w.front;
     a.free; // safe
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/SCImage.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/SCImage.schelp</a><br>link::Classes/SCImage::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/SCImage.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/SCImage.schelp</a><br>link::Classes/SCImage::<br></div></div><script src='./../static/editor.js' type='text/javascript'></script>
 </body></html>

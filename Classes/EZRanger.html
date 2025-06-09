@@ -1,21 +1,25 @@
-<!doctype html><html lang='en'><head><title>EZRanger | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>EZRanger | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../lib/jquery.min.js'></script>
-<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/jquery.min.js'></script>
+<script src='./../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './..';
 var scdoc_title = 'EZRanger';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../static/scdoc.js' type='text/javascript'></script>
 <script src='./../docmap.js' type='text/javascript'></script>
+<script src='./../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
@@ -83,15 +87,16 @@ var scdoc_sc_version = '3.13.1';
 <p><code>\vert</code>, <code>\line2</code>, or <code>\horz</code>. The default is <code>\horz</code>.<tr><td class='argumentname'>gap<td class='argumentdesc'>
 <p>A <a href="./../Classes/Point.html">Point</a>. By default, the view tries to get its parent's gap, otherwise it defaults to <code>2@2</code>. Setting it overrides these.<tr><td class='argumentname'>margin<td class='argumentdesc'>
 <p>A <a href="./../Classes/Point.html">Point</a>. This will inset the bounds occupied by the subviews of view.</table><h4>Discussion:</h4>
-<textarea class='editor'>(
+<div class='codeMirrorContainer'><textarea class='editor'>(
 w = Window.new.front;
-g = EZRanger(w, 400@16," test  ", \freq, { |v| v.value.postln }, [50,2000], unitWidth:30)
+g = EZRanger(w, 400@16, " test  ", \freq, { |v| v.value.postln }, [50, 2000], unitWidth: 30)
 )
 
 // Simplest version, no parent view, so a window is created
 (
-EZRanger(nil, 400@16," test  ", \freq, { |v| v.value.postln }, [50,2000])
+EZRanger(nil, 400@16, " test  ", \freq, { |v| v.value.postln }, [50, 2000])
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p>The contained views can be accessed via the EZRanger instance variables: <code>rangeSlider</code>, <code>hiBox</code>, <code>loBox</code>, <code>unitView</code>, <code>labelView</code>.</div><h3><a class='anchor' name='Inherited%20class%20methods'>Inherited class methods</a></h3>
 <div id='inheritedclassmets'></div><h2><a class='anchor' name='instancemethods'>Instance Methods</a></h2>
@@ -147,22 +152,22 @@ EZRanger(nil, 400@16," test  ", \freq, { |v| v.value.postln }, [50,2000])
 <tr><td class='argumentname'>font<td class='argumentdesc'>
 <p>An instance of <a href="./../Classes/Font.html">Font</a>.</table></div><h3><a class='anchor' name='Inherited%20instance%20methods'>Inherited instance methods</a></h3>
 <div id='inheritedinstmets'></div><h2><a class='anchor' name='examples'>Examples</a></h2>
-<textarea class='editor'>(    // basic use
-    w=Window.new.front;
-    g=EZRanger(w, 400@16," test  ", \freq,{|v| v.value.postln},[50,2000],unitWidth:30);
-    g.setColors(Color.grey,Color.white, Color.grey(0.7),Color.grey, Color.white, Color.yellow);
+<div class='codeMirrorContainer'><textarea class='editor'>(    // basic use
+    w = Window.new.front;
+    g = EZRanger(w, 400@16, " test  ", \freq, { |v| v.value.postln }, [50, 2000], unitWidth: 30);
+    g.setColors(Color.grey, Color.white, Color.grey(0.7), Color.grey, Color.white, Color.yellow);
 );
 
 // lots of range sliders on a view
 (
-w=Window.new.front;
-w.view.decorator=FlowLayout(w.view.bounds);
-w.view.decorator.gap=1@1;
+w = Window.new.front;
+w.view.decorator = FlowLayout(w.view.bounds);
+w.view.decorator.gap = 1@1;
 
 20.do{
-    g=EZRanger(w, 400@16," test  ", \freq,{|v| v.value.postln},[50.rand,50+20000.rand],unitWidth:30)
-    .setColors(Color.grey,Color.white, Color.grey(0.7),Color.grey,Color.white, Color.white, Color.yellow)
-    .font_(Font("Helvetica",11));
+    g = EZRanger(w, 400@16, " test  ", \freq, { |v| v.value.postln }, [50.rand, 50+20000.rand], unitWidth: 30)
+    .setColors(Color.grey, Color.white, Color.grey(0.7), Color.grey, Color.white, Color.white, Color.yellow)
+    .font_(Font("Helvetica", 11));
 
 };
 );
@@ -173,122 +178,122 @@ Window.closeAll
 ////////// click these parentheses to see all features and layouts
 (
 
-m=nil;
-m=2@2; // comment for no margin
+m = nil;
+m = 2@2; // comment for no margin
 
 
 /////////////////
 /// Layout \horz
 
 (        // all features, small font
-        g=EZRanger(nil, 400@16," freq  ", \freq,
-            initVal:[100.rand,200+2000.rand],unitWidth:30, numberWidth:60,layout:\horz, margin:2@2);
-        g.setColors(Color.grey,Color.white, Color.grey(0.7),
-            Color.grey, Color.white, Color.yellow, background:Color.grey(0.7),
+        g = EZRanger(nil, 400@16, " freq  ", \freq,
+            initVal: [100.rand, 200+2000.rand], unitWidth: 30, numberWidth: 60, layout: \horz, margin: 2@2);
+        g.setColors(Color.grey, Color.white, Color.grey(0.7),
+            Color.grey, Color.white, Color.yellow, background: Color.grey(0.7),
                 knobColor: HiliteGradient(Color.grey, Color.white));
-        g.window.bounds = g.window.bounds.moveBy(-180,50);
-        g.font_(Font("Helvetica",10));
+        g.window.bounds = g.window.bounds.moveBy(-180, 50);
+        g.font_(Font("Helvetica", 10));
 );
 
 (        // no unitView
-        g=EZRanger(nil, 400@16," freq  ", \freq,initVal:[100.rand,200+2000.rand],
-            unitWidth:0, numberWidth:60,layout:\horz, margin:2@2);
-        g.setColors(Color.grey,Color.white, Color.grey(0.7),
-            Color.grey, Color.white, Color.yellow, background:Color.grey(0.7),
+        g = EZRanger(nil, 400@16, " freq  ", \freq, initVal: [100.rand, 200+2000.rand],
+            unitWidth: 0, numberWidth: 60, layout: \horz, margin: 2@2);
+        g.setColors(Color.grey, Color.white, Color.grey(0.7),
+            Color.grey, Color.white, Color.yellow, background: Color.grey(0.7),
                 knobColor: HiliteGradient(Color.grey, Color.white));
         g.window.bounds = g.window.bounds.moveBy(-180, -20);
-        g.font_(Font("Helvetica",10));
+        g.font_(Font("Helvetica", 10));
 );
 (        // no label, so use window name as label
-        g=EZRanger(nil, 400@16, nil, \freq,initVal:[100.rand,200+2000.rand],
-            unitWidth:0, numberWidth:60,layout:\horz, margin:2@2);
-        g.setColors(Color.grey,Color.white, Color.grey(0.7),
-            Color.grey, Color.white, Color.yellow, background:Color.grey(0.7),
+        g = EZRanger(nil, 400@16, nil, \freq, initVal: [100.rand, 200+2000.rand],
+            unitWidth: 0, numberWidth: 60, layout: \horz, margin: 2@2);
+        g.setColors(Color.grey, Color.white, Color.grey(0.7),
+            Color.grey, Color.white, Color.yellow, background: Color.grey(0.7),
                 knobColor: HiliteGradient(Color.grey, Color.white));
         g.window.bounds = g.window.bounds.moveBy(-180, -90);
-        g.window.name="Freq";
-        g.font_(Font("Helvetica",10));
+        g.window.name = "Freq";
+        g.font_(Font("Helvetica", 10));
 );
 
 /////////////////
 /// Layout \line2
 
 (        // all features
-        g=EZRanger(nil, 300@42," freq  ", \freq,initVal:[100.rand,200+2000.rand],
-            unitWidth:30, numberWidth:60,layout:\line2, margin:2@2);
-        g.setColors(Color.grey,Color.white, Color.grey(0.7),
-            Color.grey, Color.white, Color.yellow, background:Color.grey(0.7),
+        g = EZRanger(nil, 300@42, " freq  ", \freq, initVal: [100.rand, 200+2000.rand],
+            unitWidth: 30, numberWidth: 60, layout: \line2, margin: 2@2);
+        g.setColors(Color.grey, Color.white, Color.grey(0.7),
+            Color.grey, Color.white, Color.yellow, background: Color.grey(0.7),
                 knobColor: HiliteGradient(Color.grey, Color.white));
-        g.window.bounds = g.window.bounds.moveBy(-180,-160);
+        g.window.bounds = g.window.bounds.moveBy(-180, -160);
 );
 
 (        // no unitView, with label
-        g=EZRanger(nil, 300@42," freq  ", \freq,initVal:[100.rand,200+2000.rand],
-            unitWidth:0, numberWidth:60,layout:\line2, margin:2@2);
-        g.setColors(Color.grey,Color.white, Color.grey(0.7),
-            Color.grey, Color.white, Color.yellow, background:Color.grey(0.7),
+        g = EZRanger(nil, 300@42, " freq  ", \freq, initVal: [100.rand, 200+2000.rand],
+            unitWidth: 0, numberWidth: 60, layout: \line2, margin: 2@2);
+        g.setColors(Color.grey, Color.white, Color.grey(0.7),
+            Color.grey, Color.white, Color.yellow, background: Color.grey(0.7),
                 knobColor: HiliteGradient(Color.grey, Color.white));
-        g.window.bounds = g.window.bounds.moveBy(-180,-260);
+        g.window.bounds = g.window.bounds.moveBy(-180, -260);
 );
 
 (        // no label
-        g=EZRanger(nil, 300@42,nil, \freq, initVal:[100.rand,200+2000.rand],
-            unitWidth:30, numberWidth:60,layout:\line2, margin:2@2);
-        g.setColors(Color.grey,Color.white, Color.grey(0.7),
-            Color.grey, Color.white, Color.yellow, background:Color.grey(0.7),
+        g = EZRanger(nil, 300@42, nil, \freq, initVal: [100.rand, 200+2000.rand],
+            unitWidth: 30, numberWidth: 60, layout: \line2, margin: 2@2);
+        g.setColors(Color.grey, Color.white, Color.grey(0.7),
+            Color.grey, Color.white, Color.yellow, background: Color.grey(0.7),
                 knobColor: HiliteGradient(Color.grey, Color.white));
-        g.window.bounds = g.window.bounds.moveBy(-180,-360);
-        g.window.name="Freq";
+        g.window.bounds = g.window.bounds.moveBy(-180, -360);
+        g.window.name = "Freq";
 );
 
 (        // no label, so use window name as label
-        g=EZRanger(nil, 150@42,nil, \freq,initVal:[100.rand,200+2000.rand],
-            unitWidth:0, numberWidth:60,layout:\line2, margin:2@2);
-        g.setColors(Color.grey,Color.white, Color.grey(0.7),
-            Color.grey, Color.white, Color.yellow, background:Color.grey(0.7),
+        g = EZRanger(nil, 150@42, nil, \freq, initVal: [100.rand, 200+2000.rand],
+            unitWidth: 0, numberWidth: 60, layout: \line2, margin: 2@2);
+        g.setColors(Color.grey, Color.white, Color.grey(0.7),
+            Color.grey, Color.white, Color.yellow, background: Color.grey(0.7),
                 knobColor: HiliteGradient(Color.grey, Color.white));
-        g.window.bounds = g.window.bounds.moveBy(-180,-460);
-        g.window.name="Freq";
+        g.window.bounds = g.window.bounds.moveBy(-180, -460);
+        g.window.name = "Freq";
 );
 
 /////////////////
 /// Layout \vert
 
 (        // all features, small font
-        g=EZRanger(nil, 45@300," Vol  ", \db.asSpec.step_(0.01),initVal:[-3-15.rand,-2.rand],
-            unitWidth:30, numberWidth:60,layout:\vert, margin:2@2);
-        g.setColors(Color.grey,Color.white, Color.grey(0.7),
-            Color.grey, Color.white, Color.yellow, background:Color.grey(0.7),
-                knobColor: HiliteGradient(Color.grey, Color.white,\h));
-        g.window.bounds = g.window.bounds.moveBy(250,50);
-        g.font_(Font("Helvetica",9));
+        g = EZRanger(nil, 45@300, " Vol  ", \db.asSpec.step_(0.01), initVal: [-3-15.rand, -2.rand],
+            unitWidth: 30, numberWidth: 60, layout: \vert, margin: 2@2);
+        g.setColors(Color.grey, Color.white, Color.grey(0.7),
+            Color.grey, Color.white, Color.yellow, background: Color.grey(0.7),
+                knobColor: HiliteGradient(Color.grey, Color.white, \h));
+        g.window.bounds = g.window.bounds.moveBy(250, 50);
+        g.font_(Font("Helvetica", 9));
 );
 (        // no label, small font
-        g=EZRanger(nil, 45@300, nil, \db.asSpec.step_(0.01),initVal:[-3-15.rand,-2.rand],
-            unitWidth:30, numberWidth:60,layout:\vert, margin:2@2);
-        g.setColors(Color.grey,Color.white, Color.grey(0.7),
-            Color.grey, Color.white, Color.yellow, background:Color.grey(0.7),
-                knobColor: HiliteGradient(Color.grey, Color.white,\h));
-        g.window.bounds = g.window.bounds.moveBy(310,50);
-        g.font_(Font("Helvetica",9));
+        g = EZRanger(nil, 45@300, nil, \db.asSpec.step_(0.01), initVal: [-3-15.rand, -2.rand],
+            unitWidth: 30, numberWidth: 60, layout: \vert, margin: 2@2);
+        g.setColors(Color.grey, Color.white, Color.grey(0.7),
+            Color.grey, Color.white, Color.yellow, background: Color.grey(0.7),
+                knobColor: HiliteGradient(Color.grey, Color.white, \h));
+        g.window.bounds = g.window.bounds.moveBy(310, 50);
+        g.font_(Font("Helvetica", 9));
 );
 (        // no Units small font
-        g=EZRanger(nil, 45@300, " Vol", \db.asSpec.step_(0.01),initVal:[-3-15.rand,-2.rand],
-            unitWidth:0, numberWidth:60,layout:\vert, margin:2@2);
-        g.setColors(Color.grey,Color.white, Color.grey(0.7),
-            Color.grey, Color.white, Color.yellow, background:Color.grey(0.7),
-                knobColor: HiliteGradient(Color.grey, Color.white,\h));
-        g.window.bounds = g.window.bounds.moveBy(370,50);
-        g.font_(Font("Helvetica",9));
+        g = EZRanger(nil, 45@300, " Vol", \db.asSpec.step_(0.01), initVal: [-3-15.rand, -2.rand],
+            unitWidth: 0, numberWidth: 60, layout: \vert, margin: 2@2);
+        g.setColors(Color.grey, Color.white, Color.grey(0.7),
+            Color.grey, Color.white, Color.yellow, background: Color.grey(0.7),
+                knobColor: HiliteGradient(Color.grey, Color.white, \h));
+        g.window.bounds = g.window.bounds.moveBy(370, 50);
+        g.font_(Font("Helvetica", 9));
 );
 (        // no unitView, no units small font
-        g=EZRanger(nil, 45@300, nil, \db.asSpec.step_(0.01),initVal:[-3-15.rand,-2.rand],
-            unitWidth:0, numberWidth:60,layout:\vert, margin:2@2);
-        g.setColors(Color.grey,Color.white, Color.grey(0.7),
-            Color.grey, Color.white, Color.yellow, background:Color.grey(0.7),
-                knobColor: HiliteGradient(Color.grey, Color.white,\h));
-        g.window.bounds = g.window.bounds.moveBy(430,50);
-        g.font_(Font("Helvetica",9));
+        g = EZRanger(nil, 45@300, nil, \db.asSpec.step_(0.01), initVal: [-3-15.rand, -2.rand],
+            unitWidth: 0, numberWidth: 60, layout: \vert, margin: 2@2);
+        g.setColors(Color.grey, Color.white, Color.grey(0.7),
+            Color.grey, Color.white, Color.yellow, background: Color.grey(0.7),
+                knobColor: HiliteGradient(Color.grey, Color.white, \h));
+        g.window.bounds = g.window.bounds.moveBy(430, 50);
+        g.font_(Font("Helvetica", 9));
 );
 
 )
@@ -307,7 +312,7 @@ q.ampRange = [0.1, 1];
 q.ringRange = [0.1, 10];
 q.numRange = [3, 30];
 
-q.soundfunc = { |dens=5|
+q.soundfunc = { |dens = 5|
     Splay.ar(
         Array.fill(exprand(q.numRange[0], q.numRange[1]).asInteger, {
             Ringz.ar(
@@ -332,17 +337,18 @@ w.view.decorator_(FlowLayout(w.bounds.copy.moveTo(0, 0)));
 Spec.add(\ring, [0.03, 30, \exp]);
 Spec.add(\num, [3, 30, \exp, 1]);
 
-EZRanger(w, 390@20, "numRange", \num, { |sl| q.numRange = sl.value; }, labelWidth: 65)
+EZRanger(w, 390@20, "numRange", \num, { |sl| q.numRange = sl.value }, labelWidth: 65)
     .round_(1);
 
-EZRanger(w, 390@20, "freqRange", \freq, { |sl| q.freqRange = sl.value; }, q.freqRange, labelWidth: 65)
+EZRanger(w, 390@20, "freqRange", \freq, { |sl| q.freqRange = sl.value }, q.freqRange, labelWidth: 65)
     .round_(0.1);
-EZRanger(w, 390@20, "ringRange", \ring, { |sl| q.ringRange = sl.value; }, q.ringRange, labelWidth: 65)
+EZRanger(w, 390@20, "ringRange", \ring, { |sl| q.ringRange = sl.value }, q.ringRange, labelWidth: 65)
     .round_(0.0001);
-EZRanger(w, 390@20, "ampRange", \amp, { |sl| q.ampRange = sl.value; }, q.ampRange, labelWidth: 65)
+EZRanger(w, 390@20, "ampRange", \amp, { |sl| q.ampRange = sl.value }, q.ampRange, labelWidth: 65)
     .round_(0.0001);
-Button(w, 190@20).states_([[\newSound]]).action_({~plong = q[\soundfunc] });
+Button(w, 190@20).states_([[\newSound]]).action_({ ~plong = q[\soundfunc] });
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/EZRanger.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/EZRanger.schelp</a><br>link::Classes/EZRanger::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/EZRanger.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/EZRanger.schelp</a><br>link::Classes/EZRanger::<br></div></div><script src='./../static/editor.js' type='text/javascript'></script>
 </body></html>

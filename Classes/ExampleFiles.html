@@ -1,0 +1,82 @@
+<!doctype html><html lang='en'><head><title>ExampleFiles | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../static/themes/default.css' type='text/css' />
+<link rel='stylesheet' href='./../frontend.css' type='text/css' />
+<link rel='stylesheet' href='./../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../static/lib/katex/katex.min.css' />
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+<script src='./../static/lib/jquery.min.js'></script>
+<script src='./../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../static/lib/katex/katex.min.js' type='text/javascript'></script>
+<script>
+var helpRoot = './..';
+var scdoc_title = 'ExampleFiles';
+var scdoc_sc_version = '3.14.0-rc1';
+</script>
+<script src='./../static/scdoc.js' type='text/javascript'></script>
+<script src='./../docmap.js' type='text/javascript'></script>
+<script src='./../frontend.js' type='text/javascript'></script>
+<script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
+</head>
+<body onload='fixTOC()'>
+<div id='toc'>
+<div id='toctitle'>ExampleFiles:</div>
+<span class='toc_search'>Filter: <input id='toc_search'></span><ul class='toc'><li class='toc1'><a href='#description'>Description</a></li>
+<ul class='toc'></ul><li class='toc1'><a href='#classmethods'>Class methods</a></li>
+<ul class='toc'><li class='toc3'><a href='#*apollo11'>apollo11</a> </li>
+<li class='toc3'><a href='#*sinedPink'>sinedPink</a> </li>
+<li class='toc3'><a href='#*child'>child</a> </li>
+<li class='toc2'><a href='#Inherited%20class%20methods'>Inherited class methods</a></li>
+</ul><li class='toc1'><a href='#instancemethods'>Instance methods</a></li>
+<ul class='toc'><li class='toc2'><a href='#Inherited%20instance%20methods'>Inherited instance methods</a></li>
+</ul></ul></div><div id='menubar'></div>
+<div class='contents'>
+<div class='header'>
+<div id='label'>
+<span id='folder'>Classes</span>
+ | <span id='categories'><a href='./../Browse.html#Files'>Files</a></span>
+</div><h1>ExampleFiles<span id='superclasses'> : <a href="../Classes/Object.html">Object</a></span>
+</h1>
+<div id='summary'>A shortcut to example sounds bundled with SuperCollider</div>
+</div>
+<div class='subheader'>
+<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/Common/Files/ExampleFiles.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Files/ExampleFiles.sc'>ExampleFiles.sc</a></div><div id='related'>See also: <a href="./../Classes/Buffer.html">Buffer</a>, <a href="./../Classes/SoundFile.html">SoundFile</a>, <a href="./../Classes/File.html">File</a>, <a href="./../Classes/PathName.html">PathName</a></div>
+</div>
+<h2><a class='anchor' name='description'>Description</a></h2>
+
+<p>Provides a shortcut to the paths of example files which are bundled with SuperCollider and are located in <a href="./../Classes/Platform.html#*resourceDir">Platform: *resourceDir</a>.<div class='codeMirrorContainer'><textarea class='editor'>// instead of writing
+Platform.resourceDir +/+ "sounds" +/+ "a11wlk01-44_1.aiff";
+// one can write
+ExampleFiles.apollo11;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+<h2><a class='anchor' name='classmethods'>Class Methods</a></h2>
+<h3 class='method-code'><span class='method-prefix'>ExampleFiles.</span><a class='method-name' name='*apollo11' href='./../Overviews/Methods.html#apollo11'>apollo11</a></h3>
+<div class='method'>
+<p>A radio recording from the Apollo 11 moon landing program where Bruce McCandless says <em>"Columbia, this is Houston. Over."</em>. For more information see <a href="https://www.nasa.gov/history/alsj/a11/a11.mobility.html">https://www.nasa.gov/history/alsj/a11/a11.mobility.html</a> at the mark <code>110:25:41</code> (it seems to be the third repetition, though the pitch does not match).<table>
+<tr><td>Filename<td><code>a11wlk01-44_1.aiff</code><tr><td>Channels<td>1<tr><td>Samplerate<td>44100 Hz<tr><td>Format<td>pcm_s16be<tr><td>Duration<td>00:00:02.44</table>
+<h4>Returns:</h4>
+<div class='returnvalue'>
+<p>The full path of <code>a11wlk01-44_1.aiff</code> as a <a href="./../Classes/String.html">String</a></div><h4>Discussion:</h4>
+
+<p>Trivia time: Although the file in its current form was introduced on 2004-07-11 by Scott Wilson via commit <code>bc9a4d4fd8cdccd2b1c787010c776176c7993d2c</code>, its original version as a 11025 Hz mono file dates back to at least 2002-09-28 via the commit <code>f30d769ab6b8eb1f36027ed3a400efd3b829f43a</code> by James McCartney.
+<p>This can be considered the "Hello world" audio sample of SuperCollider.</div><h3 class='method-code'><span class='method-prefix'>ExampleFiles.</span><a class='method-name' name='*sinedPink' href='./../Overviews/Methods.html#sinedPink'>sinedPink</a></h3>
+<div class='method'>
+<p>A very short stereo sample which has 10 cycles of a 440Hz <a href="./../Classes/SinOsc.html">SinOsc</a> on its first channel and a <a href="./../Classes/PinkNoise.html">PinkNoise</a> on its second channel. <table>
+<tr><td>Filename<td><code>SinedPink.aiff</code><tr><td>Channels<td>2<tr><td>Samplerate<td>44100 Hz<tr><td>Format<td>pcm_f32be<tr><td>Duration<td>00:00:00.02</table>
+<h4>Returns:</h4>
+<div class='returnvalue'>
+<p>The full path of <code>SinedPink.aiff</code> as a <a href="./../Classes/String.html">String</a> </div></div><h3 class='method-code'><span class='method-prefix'>ExampleFiles.</span><a class='method-name' name='*child' href='./../Overviews/Methods.html#child'>child</a></h3>
+<div class='method'>
+<p>Allegedly a re-recording of <a href="./../Classes/ExampleFiles.html#*apollo11">ExampleFiles: *apollo11</a> performed by a child of a developer.<table>
+<tr><td>Filename<td><code>a11wlk01.wav</code><tr><td>Channels<td>1<tr><td>Samplerate<td>44100 Hz<tr><td>Format<td>pcm_s16le<tr><td>Duration<td>00:00:04.28</table>
+<h4>Returns:</h4>
+<div class='returnvalue'>
+<p>The full path of <code>a11wlk01.wav</code> as a <a href="./../Classes/String.html">String</a></div></div><h3><a class='anchor' name='Inherited%20class%20methods'>Inherited class methods</a></h3>
+<div id='inheritedclassmets'></div><h2><a class='anchor' name='instancemethods'>Instance Methods</a></h2>
+<h3><a class='anchor' name='Inherited%20instance%20methods'>Inherited instance methods</a></h3>
+<div id='inheritedinstmets'></div><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/ExampleFiles.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/ExampleFiles.schelp</a><br>link::Classes/ExampleFiles::<br></div></div><script src='./../static/editor.js' type='text/javascript'></script>
+</body></html>

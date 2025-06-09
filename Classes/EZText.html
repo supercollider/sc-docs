@@ -1,21 +1,25 @@
-<!doctype html><html lang='en'><head><title>EZText | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>EZText | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../lib/jquery.min.js'></script>
-<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/jquery.min.js'></script>
+<script src='./../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './..';
 var scdoc_title = 'EZText';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../static/scdoc.js' type='text/javascript'></script>
 <script src='./../docmap.js' type='text/javascript'></script>
+<script src='./../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
@@ -76,16 +80,16 @@ var scdoc_sc_version = '3.13.1';
 <p>A <a href="./../Classes/Point.html">Point</a>. By default, the view tries to get its parent's gap, otherwise it defaults to <code>2@2</code>. Setting it overrides these.<tr><td class='argumentname'>margin<td class='argumentdesc'>
 <p>A <a href="./../Classes/Point.html">Point</a>. This will inset the bounds occupied by the subviews of view.</table><h4>Discussion:</h4>
 
-<p>Example:<textarea class='editor'>(
+<p>Example:<div class='codeMirrorContainer'><textarea class='editor'>(
 w = Window("EZText", Rect(300, 300, 260, 60)).front;
-g = EZText( w,          // parent
+g = EZText(w,          // parent
             250@50,     // bounds
             "testing",  // label
             { |ez| (ez.value.asString ++" is the value of " ++ ez).postln }, // action
             [1, 2, 3],  // initValue
             true        // initAction
 );
-g.setColors(Color.grey,Color.white);
+g.setColors(Color.grey, Color.white);
 );
 
 // Simplest version, no parent view, so a window is created
@@ -95,9 +99,10 @@ g.setColors(Color.grey,Color.white);
 );
 
 (
-    g = EZText(bounds: Rect( 100, 200, 150, 50), label:" test ", layout: \vert);
+    g = EZText(bounds: Rect(100, 200, 150, 50), label:" test ", layout: \vert);
     g.action_({ |ez| (ez.value.asString ++" is the value of " ++ ez).postln });
 );</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p>The contained views can be accessed via the EZText instance variables: <code>labelView</code>, <code>textField</code>.</div><h3><a class='anchor' name='Inherited%20class%20methods'>Inherited class methods</a></h3>
 <div id='inheritedclassmets'></div><h2><a class='anchor' name='instancemethods'>Instance Methods</a></h2>
@@ -140,22 +145,22 @@ g.setColors(Color.grey,Color.white);
 <tr><td class='argumentname'>font<td class='argumentdesc'>
 <p>An instance of <a href="./../Classes/Font.html">Font</a>.</table></div><h3><a class='anchor' name='Inherited%20instance%20methods'>Inherited instance methods</a></h3>
 <div id='inheritedinstmets'></div><h2><a class='anchor' name='examples'>Examples</a></h2>
-<textarea class='editor'>// Simplest version
+<div class='codeMirrorContainer'><textarea class='editor'>// Simplest version
 (        // basic use
-        w=Window("ez", Rect(300, 300, 300, 50)).front;
-        g=EZText(w, 290@40," test  ", textWidth: 220,layout:\horz);
-        g.setColors(Color.grey,Color.white);
+        w = Window("ez", Rect(300, 300, 300, 50)).front;
+        g = EZText(w, 290@40, " test  ", textWidth: 220, layout: \horz);
+        g.setColors(Color.grey, Color.white);
 );
 
 
 // lots of textFields on one window
 (
-w=Window.new.front;
-w.view.decorator=FlowLayout(w.view.bounds);
-w.view.decorator.gap=2@2;
+w = Window.new.front;
+w.view.decorator = FlowLayout(w.view.bounds);
+w.view.decorator.gap = 2@2;
 
 40.do{
-        g=EZText(w, 170@16," test  ", textWidth: 120,layout:\horz);
+        g = EZText(w, 170@16, " test  ", textWidth: 120, layout: \horz);
         g.setColors(Color.grey, Color.white, Color.grey(0.8));
 };
 );
@@ -164,32 +169,32 @@ w.view.decorator.gap=2@2;
 // click these parentheses to see three variants
 (
 
-m=nil;
-m=2@2;        //comment for no margin
+m = nil;
+m = 2@2;        // comment for no margin
 
 /////////////////
 /// Layout \horz
 
 (        // with label
-        g=EZText(nil, 170@20," freq  ", textWidth:120,layout:\horz,margin:m);
-        g.setColors(Color.grey,Color.white,background: Color.grey(0.7));
-        g.window.bounds = g.window.bounds.moveBy(-180,50);
+        g = EZText(nil, 170@20, " freq  ", textWidth: 120, layout: \horz, margin: m);
+        g.setColors(Color.grey, Color.white, background: Color.grey(0.7));
+        g.window.bounds = g.window.bounds.moveBy(-180, 50);
 );
 
 (        // no label. use window name as label
-        g=EZText(nil, 120@20, layout:\horz,margin:m);
-        g.setColors(Color.grey,Color.white,background: Color.grey(0.7));
+        g = EZText(nil, 120@20, layout: \horz, margin: m);
+        g.setColors(Color.grey, Color.white, background: Color.grey(0.7));
         g.window.bounds = g.window.bounds.moveBy(-180, -90);
-        g.window.name="Freq";
+        g.window.name = "Freq";
 );
 
 /////////////////
 /// Layout \vert
 
 (        // all features
-        g=EZText(nil, 120@60," freq  ", textWidth: 120,layout: \vert, margin:m);
-        g.setColors(Color.grey,Color.white,background: Color.grey(0.7));
-        g.window.bounds = g.window.bounds.moveBy(100,50);
+        g = EZText(nil, 120@60, " freq  ", textWidth: 120, layout: \vert, margin: m);
+        g.setColors(Color.grey, Color.white, background: Color.grey(0.7));
+        g.window.bounds = g.window.bounds.moveBy(100, 50);
 );
 
 )
@@ -205,7 +210,7 @@ w.addFlowLayout;
 
 TdefGui(Tdef(\text), 0, w);
 Tdef(\text).envir.keysValuesDo { |k, v|
-    EZText(w, Rect(0,0,300,40), k, { |ez|
+    EZText(w, Rect(0, 0, 300, 40), k, { |ez|
         Tdef(\text).envir.put(*[k, ez.value].postcs);
     }, v);
 };
@@ -223,7 +228,8 @@ Tdef(\text, { |ev|
 // type these or similar functions into dur and note fields and evaluate:
 
 { [0.1, 0.2, 0.3].choose }
-{ [ 0, 2, 7, 10 ].scramble.keep(rrand(0, 4)) }</textarea>
+{ [0, 2, 7, 10].scramble.keep(rrand(0, 4)) }</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/EZText.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/EZText.schelp</a><br>link::Classes/EZText::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/EZText.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/EZText.schelp</a><br>link::Classes/EZText::<br></div></div><script src='./../static/editor.js' type='text/javascript'></script>
 </body></html>

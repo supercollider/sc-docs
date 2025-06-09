@@ -1,21 +1,25 @@
-<!doctype html><html lang='en'><head><title>News in 3.6 | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>News in 3.6 | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../lib/jquery.min.js'></script>
-<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/jquery.min.js'></script>
+<script src='./../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './..';
 var scdoc_title = 'News in 3.6';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../static/scdoc.js' type='text/javascript'></script>
 <script src='./../docmap.js' type='text/javascript'></script>
+<script src='./../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
@@ -51,8 +55,9 @@ var scdoc_sc_version = '3.13.1';
 <p>Read <a href="./../Guides/SCIde.html">the guide</a>!<h2><a class='anchor' name='Language-side%20news'>Language-side news</a></h2>
 <h3><a class='anchor' name='More%20informative%20syntax%20errors'>More informative syntax errors</a></h3>
 
-<p>The parser now posts the details of syntax errors, example:<textarea class='editor'>[1,2,%,4];
+<p>The parser now posts the details of syntax errors, example:<div class='codeMirrorContainer'><textarea class='editor'>[1,2,%,4];
 123;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p>Posts the following error message:<pre>ERROR: syntax error, unexpected BINOP, expecting ']'
   in file 'selected text'
@@ -72,7 +77,8 @@ ERROR: Command line parse failed</pre><h3><a class='anchor' name='Remove%20old%2
 
 <p>The process of building synthdefs now performs a simple dead code elimination pass, which removes all <a href="./../Classes/PureUGen.html">PureUGen</a> instances without successor.<h3><a class='anchor' name='Case%20sensitive%20String%20comparison'>Case sensitive String comparison</a></h3>
 
-<p>String comparison operators (<code>==, !=, &lt;=, &gt;=, &gt;, &lt;</code>) are now case sensitive.<textarea class='editor'>"Foo" == "fOo"; // false</textarea>
+<p>String comparison operators (<code>==, !=, &lt;=, &gt;=, &gt;, &lt;</code>) are now case sensitive.<div class='codeMirrorContainer'><textarea class='editor'>"Foo" == "fOo"; // false</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h3><a class='anchor' name='SplayAz%20Bug%20Fix'>SplayAz Bug Fix</a></h3>
 
 <p>Positioning of SplayAz was broken. The semantics of the <code>spread</code> and <code>center</code> arguments has been changed in order to fix the behavior.<h3><a class='anchor' name='Array%20primitives%20respect%20mutability'>Array primitives respect mutability</a></h3>
@@ -81,5 +87,5 @@ ERROR: Command line parse failed</pre><h3><a class='anchor' name='Remove%20old%2
 <h3><a class='anchor' name='SynthDef2%20fileformat'>SynthDef2 fileformat</a></h3>
 <h3><a class='anchor' name='C++%20base%20class%20for%20Unit%20Generators'>C++ base class for Unit Generators</a></h3>
 
-<p>A new C++ base class has been introduced, which extends the plain c-style Unit struct by a C++ interface.<div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Guides/News-3_6.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Guides/News-3_6.schelp</a><br>link::Guides/News-3_6::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+<p>A new C++ base class has been introduced, which extends the plain c-style Unit struct by a C++ interface.<div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Guides/News-3_6.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Guides/News-3_6.schelp</a><br>link::Guides/News-3_6::<br></div></div><script src='./../static/editor.js' type='text/javascript'></script>
 </body></html>

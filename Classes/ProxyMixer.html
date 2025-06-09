@@ -1,21 +1,25 @@
-<!doctype html><html lang='en'><head><title>ProxyMixer | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>ProxyMixer | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../lib/jquery.min.js'></script>
-<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/jquery.min.js'></script>
+<script src='./../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './..';
 var scdoc_title = 'ProxyMixer';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../static/scdoc.js' type='text/javascript'></script>
 <script src='./../docmap.js' type='text/javascript'></script>
+<script src='./../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
@@ -57,7 +61,7 @@ var scdoc_sc_version = '3.13.1';
 <h2><a class='anchor' name='description'>Description</a></h2>
 
 <p>ProxyMixer provides controls for handling and editing the node proxies in a proxyspace and their monitors (cross-platform graphics). It replaces the earlier ProxyMixer class. For Ndefs, use <a href="./../Classes/NdefMixer.html">NdefMixer</a>.
-<p>Overview: <a href="./../Overviews/JITLib.html">JITLib</a><textarea class='editor'>// First examples:
+<p>Overview: <a href="./../Overviews/JITLib.html">JITLib</a><div class='codeMirrorContainer'><textarea class='editor'>// First examples:
 (
 p = ProxySpace.push(s.boot, p);
 "abcde".do { |k| p[k.asSymbol].ar };
@@ -70,7 +74,7 @@ m.object_(nil);
 m.object_(p);
 
 // if you have JITLibExtensions installed, try ProxyMeter to see the proxy levels:
-if (\ProxyMeter.asClass.notNil) { ProxyMeter.addMixer(m); };
+if (\ProxyMeter.asClass.notNil) { ProxyMeter.addMixer(m) };
 
 
 "abcdefghijk".do { |k| p[k.asSymbol].ar };
@@ -78,12 +82,13 @@ if (\ProxyMeter.asClass.notNil) { ProxyMeter.addMixer(m); };
 "lmnopqrtuvw".do { |k| p[k.asSymbol].kr };
 
 "abcdefghijk".do { |k, i|
-    p[k.asSymbol].playN(vol: 0.8 - (0.1 * i) );
+    p[k.asSymbol].playN(vol: 0.8 - (0.1 * i));
     p[k.asSymbol].source = {
         VarSaw.ar((i + 1 * 100) + [-1, 1])
         * LFSaw.ar((i + 1 * 0.25));
     };
 };</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h2><a class='anchor' name='classmethods'>Class Methods</a></h2>
 <h3><a class='anchor' name='Creation'>Creation</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='*new' href='./../Overviews/Methods.html#new'>new</a></h3>
@@ -143,7 +148,7 @@ if (\ProxyMeter.asClass.notNil) { ProxyMeter.addMixer(m); };
 <div class='method'>
 <p>sets current left border of nameView, trading size with volume slider</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-shiftNameLeftBorder' href='./../Overviews/Methods.html#shiftNameLeftBorder'>shiftNameLeftBorder</a></h3>
 <div class='method'>
-<p>shifts current left border of nameView<textarea class='editor'>m.getNameLeftBorder; // get its current left border position
+<p>shifts current left border of nameView<div class='codeMirrorContainer'><textarea class='editor'>m.getNameLeftBorder; // get its current left border position
 m.setNameLeftBorder(250); // default
 m.setNameLeftBorder(200); // aps left pos, smaller slider
 // relative adjust:
@@ -172,7 +177,7 @@ m.object_(nil); // no object
 m.object_(p);   // the proxyspace
 
 // if you have JITLibExtensions installed, try ProxyMeter to see the proxy levels:
-if (\ProxyMeter.asClass.notNil) { ProxyMeter.addMixer(m); };
+if (\ProxyMeter.asClass.notNil) { ProxyMeter.addMixer(m) };
 
     // make too many ar proxies, get a scroller
 "abcdefghijk".do { |k| p[k.asSymbol].ar };
@@ -190,9 +195,9 @@ m.arNames.scramble.keep(5).do { |k| p[k.asSymbol].playN };
 ~test.ar;
 
 (        // activeProxies: proxy appears when it is alive
-~test = { |freq=250, intv=19, timescale=1, curve=0, loopnode=0|
+~test = { |freq = 250, intv = 19, timescale = 1, curve = 0, loopnode = 0|
     var env = EnvGen.kr(
-        Env({ 1.0.rand2 }!11, {1.0.rand}!10, curve, releaseNode: 9, loopNode: loopnode),
+        Env({ 1.0.rand2 }!11, { 1.0.rand }!10, curve, releaseNode: 9, loopNode: loopnode),
         timeScale: timescale);
     var pitch = (env * [1, 0.33, -1] * intv).midiratio * freq;
     Splay.ar(Formant.ar(pitch, pitch.scramble * 2, pitch.scramble)) * 0.1;
@@ -206,7 +211,7 @@ m.arNames.scramble.keep(5).do { |k| p[k.asSymbol].playN };
 // switch back to active proxies...
         // the reduce button removes all proxies that are not playing
         // and that are not used as sources in other proxies:
-~otto = { |dens=12| Dust.ar(dens) };
+~otto = { |dens = 12| Dust.ar(dens) };
 
 ~otto.clear;        // remove it
 p.reduce;
@@ -271,7 +276,7 @@ n.setNameLeftBorder(200);   // or set by code
 
         // kr proxies show up in the middle
 ~lfo = { SinOsc.kr(2) };
-~lfnoyz0 = { |lofreq = 0.5, mul=1, add| LFDNoise0.kr(lofreq, mul, add) };
+~lfnoyz0 = { |lofreq = 0.5, mul = 1, add| LFDNoise0.kr(lofreq, mul, add) };
 
         // the editor zone is a NodeProxyEditor
         // open it and set some params
@@ -303,7 +308,8 @@ p.reduce(method: \clear);
 p.clean;
 
 p.clear;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p></div><h3><a class='anchor' name='Inherited%20instance%20methods'>Inherited instance methods</a></h3>
-<div id='inheritedinstmets'></div><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/ProxyMixer.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/ProxyMixer.schelp</a><br>link::Classes/ProxyMixer::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+<div id='inheritedinstmets'></div><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/ProxyMixer.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/ProxyMixer.schelp</a><br>link::Classes/ProxyMixer::<br></div></div><script src='./../static/editor.js' type='text/javascript'></script>
 </body></html>

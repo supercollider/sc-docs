@@ -1,21 +1,25 @@
-<!doctype html><html lang='en'><head><title>Error | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>Error | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../lib/jquery.min.js'></script>
-<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/jquery.min.js'></script>
+<script src='./../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './..';
 var scdoc_title = 'Error';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../static/scdoc.js' type='text/javascript'></script>
 <script src='./../docmap.js' type='text/javascript'></script>
+<script src='./../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
@@ -41,12 +45,12 @@ var scdoc_sc_version = '3.13.1';
 <div id='summary'>superclass of all Errors</div>
 </div>
 <div class='subheader'>
-<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/Common/Core/Error.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Core/Error.sc'>Error.sc</a></div><div id='subclasses'>Subclasses: <a href="../Classes/MethodError.html">MethodError</a></div>
+<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/Common/Core/Error.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Core/Error.sc'>Error.sc</a></div><div id='subclasses'>Subclasses: <a href="../Classes/MethodError.html">MethodError</a></div>
 </div>
 <h2><a class='anchor' name='description'>Description</a></h2>
 
 <p>Error and its subclasses separate different types of error is that can occur in the SuperCollider program into distinct classes, so that they can be reported differently to the user.
-<p>Anywhere that an error must be reported to the user and execution must stop, an error object must be created and thrown.<textarea class='editor'>(
+<p>Anywhere that an error must be reported to the user and execution must stop, an error object must be created and thrown.<div class='codeMirrorContainer'><textarea class='editor'>(
 var file, path = "betcha-this-file-doesnt-exist.txt";
 if((file = File(path, "r")).isOpen) {
     "File is % bytes long.\n".postf(file.length);
@@ -55,8 +59,10 @@ if((file = File(path, "r")).isOpen) {
     Error("File % could not be opened.".format(path)).throw;
 };
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>For backward compatibility, <code>.die()</code> creates the error for you.<textarea class='editor'>"Keyboard not found. Press F1 to Resume.".die;</textarea>
+<p>For backward compatibility, <code>.die()</code> creates the error for you.<div class='codeMirrorContainer'><textarea class='editor'>"Keyboard not found. Press F1 to Resume.".die;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p>Throwing an error object gives the caller the opportunity to catch, and possibly recover from, the error. See the Exception help file for more information about this.<h3><a class='anchor' name='Error%20hierarchy'>Error hierarchy</a></h3>
 
@@ -88,5 +94,5 @@ if((file = File(path, "r")).isOpen) {
 <div id='inheritedinstmets'></div><h3><a class='anchor' name='Undocumented%20instance%20methods'>Undocumented instance methods</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-errorPathString' href='./../Overviews/Methods.html#errorPathString'>errorPathString</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-errorString' href='./../Overviews/Methods.html#errorString'>errorString</a></h3>
-<div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/Error.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/Error.schelp</a><br>link::Classes/Error::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+<div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/Error.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/Error.schelp</a><br>link::Classes/Error::<br></div></div><script src='./../static/editor.js' type='text/javascript'></script>
 </body></html>

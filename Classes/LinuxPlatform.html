@@ -1,21 +1,25 @@
-<!doctype html><html lang='en'><head><title>LinuxPlatform | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>LinuxPlatform | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../lib/jquery.min.js'></script>
-<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/jquery.min.js'></script>
+<script src='./../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './..';
 var scdoc_title = 'LinuxPlatform';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../static/scdoc.js' type='text/javascript'></script>
 <script src='./../docmap.js' type='text/javascript'></script>
+<script src='./../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
@@ -32,9 +36,11 @@ var scdoc_sc_version = '3.13.1';
 <ul class='toc'><li class='toc2'><a href='#Inherited%20instance%20methods'>Inherited instance methods</a></li>
 <li class='toc2'><a href='#Undocumented%20instance%20methods'>Undocumented instance methods</a></li>
 <ul class='toc'><li class='toc3'><a href='#-initPlatform'>initPlatform</a> </li>
+<li class='toc3'><a href='#-killProcessByID'>killProcessByID</a> </li>
 <li class='toc3'><a href='#-name'>name</a> </li>
 <li class='toc3'><a href='#-startup'>startup</a> </li>
 <li class='toc3'><a href='#-startupFiles'>startupFiles</a> </li>
+<li class='toc3'><a href='#-version'>version</a> </li>
 </ul></ul></ul></div><div id='menubar'></div>
 <div class='contents'>
 <div class='header'>
@@ -46,7 +52,7 @@ var scdoc_sc_version = '3.13.1';
 <div id='summary'>Linux platform-specific methods</div>
 </div>
 <div class='subheader'>
-<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/Platform/linux/LinuxPlatform.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Platform/linux/LinuxPlatform.sc'>LinuxPlatform.sc</a></div></div>
+<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/Platform/linux/LinuxPlatform.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Platform/linux/LinuxPlatform.sc'>LinuxPlatform.sc</a></div></div>
 <h2><a class='anchor' name='description'>Description</a></h2>
 
 <p>This class is available only on Linux, and implements Linux platform-specific methods.<h3><a class='anchor' name='Environment%20variables%20for%20Jack'>Environment variables for Jack</a></h3>
@@ -62,7 +68,8 @@ var scdoc_sc_version = '3.13.1';
 <p><h4>Arguments:</h4>
 <table class='arguments'>
 <tr><td class='argumentname'>(value)<td class='argumentdesc'>
-<p>a string, which has to necessarily include <strong>two</strong> <code>%</code>. For example:<textarea class='editor'>LinuxPlatform.runInTerminalCmd = "xterm -T % -e %"</textarea>
+<p>a string, which has to necessarily include <strong>two</strong> <code>%</code>. For example:<div class='codeMirrorContainer'><textarea class='editor'>LinuxPlatform.runInTerminalCmd = "xterm -T % -e %"</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p>The first <code>"%"</code> is a placeholder for the window title, and the second is a placeholder for the actual command to be executed. Refer to your terminal emulator's documentation to find appropriate command line flags.</table></div><h3 class='method-code'><span class='method-prefix'>LinuxPlatform.</span><a class='method-name' name='*getTerminalEmulatorCmd' href='./../Overviews/Methods.html#getTerminalEmulatorCmd'>getTerminalEmulatorCmd</a></h3>
 <div class='method'>
@@ -73,8 +80,10 @@ var scdoc_sc_version = '3.13.1';
 <h3><a class='anchor' name='Inherited%20instance%20methods'>Inherited instance methods</a></h3>
 <div id='inheritedinstmets'></div><h3><a class='anchor' name='Undocumented%20instance%20methods'>Undocumented instance methods</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-initPlatform' href='./../Overviews/Methods.html#initPlatform'>initPlatform</a></h3>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-killProcessByID' href='./../Overviews/Methods.html#killProcessByID'>killProcessByID</a>(<span class='argstr'>pid</span>, <span class='argstr'>force: true</span>, <span class='argstr'>subprocesses: true</span>)</h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-name' href='./../Overviews/Methods.html#name'>name</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-startup' href='./../Overviews/Methods.html#startup'>startup</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-startupFiles' href='./../Overviews/Methods.html#startupFiles'>startupFiles</a></h3>
-<div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/LinuxPlatform.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/LinuxPlatform.schelp</a><br>link::Classes/LinuxPlatform::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-version' href='./../Overviews/Methods.html#version'>version</a></h3>
+<div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/LinuxPlatform.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/LinuxPlatform.schelp</a><br>link::Classes/LinuxPlatform::<br></div></div><script src='./../static/editor.js' type='text/javascript'></script>
 </body></html>

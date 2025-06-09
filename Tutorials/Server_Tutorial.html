@@ -1,21 +1,25 @@
-<!doctype html><html lang='en'><head><title>Server Tutorial | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>Server Tutorial | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../lib/jquery.min.js'></script>
-<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/jquery.min.js'></script>
+<script src='./../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './..';
 var scdoc_title = 'Server Tutorial';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../static/scdoc.js' type='text/javascript'></script>
 <script src='./../docmap.js' type='text/javascript'></script>
+<script src='./../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
@@ -49,51 +53,63 @@ var scdoc_sc_version = '3.13.1';
 <p>The server can run either inside the language application ("internal server"), as a separate program on the same machine ("local server"), or run on a different computer across a network connection. The language application sends command messages to the server using a subset of the Open Sound Control protocol.<h2><a class='anchor' name='Booting%20a%20Server'>Booting a Server</a></h2>
 
 <p>In order to run sound we need to start a server running. The easiest way to start a server is to click on "Boot Server" in the pull-up menu you get by clicking on the server stats field on the bottom of the IDE's editor window. Or by clicking on the "Start Server" button in the respective server window. This you get with s.makeWindow (for instance for the default server) for any server object you created (see below). Sometimes though it is useful to start a server programmatically. To do this we need to get or create a server object and tell it to "boot". Two servers, internal and local, are predefined.
-<p>The internal server runs in the same process as the SuperCollider application. It is internal to the program itself.<textarea class='editor'>// set the interpreter variable i to the internal server object.
+<p>The internal server runs in the same process as the SuperCollider application. It is internal to the program itself.<div class='codeMirrorContainer'><textarea class='editor'>// set the interpreter variable i to the internal server object.
 i = Server.internal;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p><strong>VERY IMPORTANT</strong> : This line must be executed for the variable 'i' to be set. The mechanics are different depending on your platform. The macOS standard is to place the cursor anywhere on this line and press the "Enter" key on the numeric keypad. Pressing the main return key does not execute code! This allows you to write code fragments of multiple lines. To execute a multi-line block of code, select the block and press "Enter." For convenience, a code block can be enclosed in parentheses, and the entire block selected by double-clicking just inside either parenthesis. For instructions in other editors (e.g. on Linux or Windows), consult the documentation specific to that platform. See also the helpfile <a href="./../Reference/KeyboardShortcuts.html">Keyboard Shortcuts</a> for key commands in other editors. If you don't have an enter key, then you can use Ctrl-Return, Ctrl-C, Fn-Return (on some Macs), or Shift-Return.
-<p>The local server runs on the same machine as the SuperCollider application, but is a separate program, 'scsynth' (or 'supernova').<div class='note'><span class='notelabel'>NOTE:</span> By default the interpreter variable <code>s</code> is set to the local server at startup. For further information see the <a href="./../Classes/Server.html">Server</a> helpfile.</div><textarea class='editor'>// set the interpreter variable s to the local server object.
+<p>The local server runs on the same machine as the SuperCollider application, but is a separate program, 'scsynth' (or 'supernova').<div class='note'><span class='notelabel'>NOTE:</span> By default the interpreter variable <code>s</code> is set to the local server at startup. For further information see the <a href="./../Classes/Server.html">Server</a> helpfile.</div><div class='codeMirrorContainer'><textarea class='editor'>// set the interpreter variable s to the local server object.
 s = Server.local;    // s is set to Server.default at startup of SuperCollider</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>To boot the server you send it the boot message.<textarea class='editor'>s.boot;</textarea>
+<p>To boot the server you send it the boot message.<div class='codeMirrorContainer'><textarea class='editor'>s.boot;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>To quit the server send it the quit message.<textarea class='editor'>s.quit;</textarea>
+<p>To quit the server send it the quit message.<div class='codeMirrorContainer'><textarea class='editor'>s.quit;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>We can also create a server to run. To create a server object we need to provide the IP address or the server and a port number. Port numbers are somewhat arbitrary but they should not conflict with common protocols like telnet, ftp http, etc. The IP address 127.0.0.1 is defined to mean the local host. This is the IP address to use for running a server on your own machine.<textarea class='editor'>// create another server object that will run on the local host using port #58009
+<p>We can also create a server to run. To create a server object we need to provide the IP address or the server and a port number. Port numbers are somewhat arbitrary but they should not conflict with common protocols like telnet, ftp http, etc. The IP address 127.0.0.1 is defined to mean the local host. This is the IP address to use for running a server on your own machine.<div class='codeMirrorContainer'><textarea class='editor'>// create another server object that will run on the local host using port #58009
 m = Server(\myServer, NetAddr("127.0.0.1", 58009));
 
 m.boot; //start the server
 
 m.quit; // quit the server</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>It is not possible to boot a server on a remote machine, but if you have one running already or you know of one running, you can send messages to it. You create the server object using the IP address of the machine running the server and the port it is using.<textarea class='editor'>// create a server object for talking to the server running on a
+<p>It is not possible to boot a server on a remote machine, but if you have one running already or you know of one running, you can send messages to it. You create the server object using the IP address of the machine running the server and the port it is using.<div class='codeMirrorContainer'><textarea class='editor'>// create a server object for talking to the server running on a
 // remote machine having IP address 192.168.0.47 using port #57110
 r = Server(\myServer, NetAddr("192.168.0.47", 57110));</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h2><a class='anchor' name='Making%20Sound'>Making Sound</a></h2>
 
 <p>(note: This tutorial uses raw OSC commands as described in <a href="./../Reference/Server-Command-Reference.html">Server Command Reference</a>, rather than the classes <a href="./../Classes/Synth.html">Synth</a> and <a href="./../Classes/Group.html">Group</a>. See those helpfiles also for some simpler ways of working with Synths. This tutorial explains the basic underlying design of Synths and SynthDefs).
 <p>Now lets make some audio.
-<p>Boot the server:<textarea class='editor'>s.boot;</textarea>
+<p>Boot the server:<div class='codeMirrorContainer'><textarea class='editor'>s.boot;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>Create a <a href="./../Classes/SynthDef.html">SynthDef</a>. A SynthDef is a description of a processing module that you want to run on the server. It can read audio from the server's audio buses, read control from the control buses and write control or audio back to buses. Here we will create a sine oscillator and send it to audio bus zero.<textarea class='editor'>(
+<p>Create a <a href="./../Classes/SynthDef.html">SynthDef</a>. A SynthDef is a description of a processing module that you want to run on the server. It can read audio from the server's audio buses, read control from the control buses and write control or audio back to buses. Here we will create a sine oscillator and send it to audio bus zero.<div class='codeMirrorContainer'><textarea class='editor'>(
 SynthDef("sine", { arg freq=800;
     var osc;
     osc = SinOsc.ar(freq, 0, 0.1); // 800 Hz sine oscillator
     Out.ar(0, osc); // send output to audio bus zero.
 }).writeDefFile; // write the def to disk in the default directory synthdefs/
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>Send the SynthDef to the server.<textarea class='editor'>s.sendSynthDef("sine");</textarea>
+<p>Send the SynthDef to the server.<div class='codeMirrorContainer'><textarea class='editor'>s.sendSynthDef("sine");</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>Start the sound. The <code>/s_new</code> command creates a new Synth which is an instance of the "sine" SynthDef. Each synth running on the server needs to have a unique ID. The simplest and safest way to do this is to get an ID from the server's NodeIDAllocator. This will automatically allow IDs to be reused, and will prevent conflicts both with your own nodes, and with nodes created automatically for purposes such as visual scoping and recording. Each synth needs to be installed in a Group. We install it in group one which is the default group. There is a group zero, called the RootNode, which contains the default group, but it is generally best not to use it as doing so can result in order of execution issues with automatically created nodes such as those mentioned above. (For more detail see the <a href="./../Reference/default_group.html">Default Group</a>, <a href="./../Classes/RootNode.html">RootNode</a>, and <a href="./../Guides/Order-of-execution.html">Order of execution</a> helpfiles.)<textarea class='editor'>s.sendMsg("/s_new", "sine", x = s.nextNodeID, 1, 1);</textarea>
+<p>Start the sound. The <code>/s_new</code> command creates a new Synth which is an instance of the "sine" SynthDef. Each synth running on the server needs to have a unique ID. The simplest and safest way to do this is to get an ID from the server's NodeIDAllocator. This will automatically allow IDs to be reused, and will prevent conflicts both with your own nodes, and with nodes created automatically for purposes such as visual scoping and recording. Each synth needs to be installed in a Group. We install it in group one which is the default group. There is a group zero, called the RootNode, which contains the default group, but it is generally best not to use it as doing so can result in order of execution issues with automatically created nodes such as those mentioned above. (For more detail see the <a href="./../Reference/default_group.html">Default Group</a>, <a href="./../Classes/RootNode.html">RootNode</a>, and <a href="./../Guides/Order-of-execution.html">Order of execution</a> helpfiles.)<div class='codeMirrorContainer'><textarea class='editor'>s.sendMsg("/s_new", "sine", x = s.nextNodeID, 1, 1);</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>Stop the sound.<textarea class='editor'>s.sendMsg("/n_free", x);</textarea>
+<p>Stop the sound.<div class='codeMirrorContainer'><textarea class='editor'>s.sendMsg("/n_free", x);</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>Stop the server.<textarea class='editor'>s.quit;</textarea>
+<p>Stop the server.<div class='codeMirrorContainer'><textarea class='editor'>s.quit;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p>SynthDef has three methods which send the def automatically, load which writes it to disk, and send which sends it without writing it to disk. The latter can be useful to avoid clutter on your drive, but is limited to SynthDefs up to a certain complexity.
-<p>Most generally useful and recommended is to use the method <strong>add</strong>, which sends or writes to disk only if it can't send, and it sends to all servers listed in the SynthDefLib (A server can be added by SynthDescLib.global.addServer(server)).<textarea class='editor'>(
+<p>Most generally useful and recommended is to use the method <strong>add</strong>, which sends or writes to disk only if it can't send, and it sends to all servers listed in the SynthDefLib (A server can be added by SynthDescLib.global.addServer(server)).<div class='codeMirrorContainer'><textarea class='editor'>(
 SynthDef("sine", { arg freq=800;
     var osc;
     osc = SinOsc.ar(freq, 0, 0.1); // 800 Hz sine oscillator
@@ -117,9 +133,10 @@ SynthDef("sine", { arg freq=800;
     Out.ar(0, osc); // send output to audio bus zero.
 }).send(s); // send without writing
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h2><a class='anchor' name='Using%20Arguments'>Using Arguments</a></h2>
 
-<p>It is useful to be able to specify parameters of a synth when it is created. Here a frequency argument is added to the sine SynthDef so that we can create it<textarea class='editor'>s.boot;
+<p>It is useful to be able to specify parameters of a synth when it is created. Here a frequency argument is added to the sine SynthDef so that we can create it<div class='codeMirrorContainer'><textarea class='editor'>s.boot;
 
 (
 SynthDef("sine", { arg freq;
@@ -128,16 +145,19 @@ SynthDef("sine", { arg freq;
     Out.ar(0, osc); // send output to audio bus zero.
 }).add;
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>Play a 900 Hz sine wave.<textarea class='editor'>s.sendMsg("/s_new", "sine", x = s.nextNodeID, 1, 1, "freq", 900);
+<p>Play a 900 Hz sine wave.<div class='codeMirrorContainer'><textarea class='editor'>s.sendMsg("/s_new", "sine", x = s.nextNodeID, 1, 1, "freq", 900);
 
 s.sendMsg("/n_free", x);</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>Play a 1000 Hz sine wave.<textarea class='editor'>s.sendMsg("/s_new", "sine", y = s.nextNodeID, 1, 1, "freq", 1000);
+<p>Play a 1000 Hz sine wave.<div class='codeMirrorContainer'><textarea class='editor'>s.sendMsg("/s_new", "sine", y = s.nextNodeID, 1, 1, "freq", 1000);
 
 s.sendMsg("/n_free", y);</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>Playing three voices at once<textarea class='editor'>(
+<p>Playing three voices at once<div class='codeMirrorContainer'><textarea class='editor'>(
 s.sendMsg("/s_new", "sine", x = s.nextNodeID, 1, 1, "freq", 800);
 s.sendMsg("/s_new", "sine", y = s.nextNodeID, 1, 1, "freq", 1001);
 s.sendMsg("/s_new", "sine", z = s.nextNodeID, 1, 1, "freq", 1202);
@@ -148,27 +168,31 @@ s.sendMsg("/n_free", x);
 s.sendMsg("/n_free", y);
 s.sendMsg("/n_free", z);
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>Playing three voices at once using bundles. Bundles allow you to send multiple messages with a time stamp. The messages in the bundle will be scheduled to be performed together. The time argument to sendBundle is an offset into the future from the current thread's logical time.<textarea class='editor'>(
+<p>Playing three voices at once using bundles. Bundles allow you to send multiple messages with a time stamp. The messages in the bundle will be scheduled to be performed together. The time argument to sendBundle is an offset into the future from the current thread's logical time.<div class='codeMirrorContainer'><textarea class='editor'>(
 s.sendBundle(0.2,
     ["/s_new", "sine", x = s.nextNodeID, 1, 1, "freq", 800],
     ["/s_new", "sine", y = s.nextNodeID, 1, 1, "freq", 1001],
     ["/s_new", "sine", z = s.nextNodeID, 1, 1, "freq", 1202]);
 s.sendBundle(1.2, ["/n_free", x],["/n_free", y],["/n_free", z]);
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h2><a class='anchor' name='Controlling%20a%20Synth'>Controlling a Synth</a></h2>
 
 <p>You can send messages to update the values of a Synth's arguments.
-<p>Play a 900 Hz sine wave.<textarea class='editor'>s.sendMsg("/s_new", "sine", x = s.nextNodeID, 1, 1, "freq", 900);</textarea>
+<p>Play a 900 Hz sine wave.<div class='codeMirrorContainer'><textarea class='editor'>s.sendMsg("/s_new", "sine", x = s.nextNodeID, 1, 1, "freq", 900);</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>Change the frequency using the /n_set command. You send the node ID, the parameter name and the value.<textarea class='editor'>s.sendMsg("/n_set", x, "freq", 800);
+<p>Change the frequency using the /n_set command. You send the node ID, the parameter name and the value.<div class='codeMirrorContainer'><textarea class='editor'>s.sendMsg("/n_set", x, "freq", 800);
 
 s.sendMsg("/n_set", x, "freq", 700);
 
 s.sendMsg("/n_free", x);</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h2><a class='anchor' name='Adding%20an%20Effect%20Dynamically'>Adding an Effect Dynamically</a></h2>
 
-<p>You can dynamically add and remove an effect to process another synth. In order to do this, the effect has to be added after the node to be processed.<textarea class='editor'>(
+<p>You can dynamically add and remove an effect to process another synth. In order to do this, the effect has to be added after the node to be processed.<div class='codeMirrorContainer'><textarea class='editor'>(
 // define a noise pulse
 SynthDef("tish", { arg freq = 1200, rate = 2;
     var osc, trg;
@@ -205,28 +229,36 @@ s.sendMsg("/n_free", z);
 
 // stop the pulse
 s.sendMsg("/n_free", x);</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p>This works because we added the effect after the other node. Sometimes you will need to use groups or <code>/n_after</code> to insure that an effect gets added after what it is supposed to process.<h2><a class='anchor' name='Mapping%20an%20Argument%20to%20a%20Control%20Bus'>Mapping an Argument to a Control Bus</a></h2>
-<textarea class='editor'>(
+<div class='codeMirrorContainer'><textarea class='editor'>(
 // define a control
 SynthDef("line", { arg i_bus=10, i_start=1000, i_end=500, i_time=1;
     ReplaceOut.kr(i_bus, Line.kr(i_start, i_end, i_time, doneAction: Done.freeSelf));
 }).add
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>Play a 900 Hz sine wave.<textarea class='editor'>s.sendMsg("/s_new", "sine", x = s.nextNodeID, 1, 1, "freq", 900);</textarea>
+<p>Play a 900 Hz sine wave.<div class='codeMirrorContainer'><textarea class='editor'>s.sendMsg("/s_new", "sine", x = s.nextNodeID, 1, 1, "freq", 900);</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>Put a frequency value on the control bus.<textarea class='editor'>s.sendMsg("/c_set", 10, x);</textarea>
+<p>Put a frequency value on the control bus.<div class='codeMirrorContainer'><textarea class='editor'>s.sendMsg("/c_set", 10, x);</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>Map the node's freq argument to read from control bus #10.<textarea class='editor'>s.sendMsg("/n_map", x, \freq, 10);</textarea>
+<p>Map the node's freq argument to read from control bus #10.<div class='codeMirrorContainer'><textarea class='editor'>s.sendMsg("/n_map", x, \freq, 10);</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>Change the value on the control bus.<textarea class='editor'>s.sendMsg("/c_set", 10, 1200);</textarea>
+<p>Change the value on the control bus.<div class='codeMirrorContainer'><textarea class='editor'>s.sendMsg("/c_set", 10, 1200);</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>Start a control process that writes to bus #10. The <a href="./../Classes/EnvGen.html">EnvGen</a> doneAction will free this node automatically when it finishes.<textarea class='editor'>s.sendMsg("/s_new", "line", s.nextNodeID, 0, 1);</textarea>
+<p>Start a control process that writes to bus #10. The <a href="./../Classes/EnvGen.html">EnvGen</a> doneAction will free this node automatically when it finishes.<div class='codeMirrorContainer'><textarea class='editor'>s.sendMsg("/s_new", "line", s.nextNodeID, 0, 1);</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>Free the node.<textarea class='editor'>s.sendMsg("/n_free", x);</textarea>
+<p>Free the node.<div class='codeMirrorContainer'><textarea class='editor'>s.sendMsg("/n_free", x);</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h2><a class='anchor' name='Sequencing%20with%20Routines'>Sequencing with Routines</a></h2>
-<textarea class='editor'>(
+<div class='codeMirrorContainer'><textarea class='editor'>(
 var space, offset, timer, saw, envsaw, sampler, delay;
 
 SynthDef("saw", { arg out=100, pan=0, trig=0.0, freq=500, amp=1, cutoff=10000, rezz=1;
@@ -262,7 +294,7 @@ Tempo.bpm = 120;
 timer = BeatSched.new;
 offset = Tempo.tempo.reciprocal;
 
-space = Buffer.read(s, Platform.resourceDir +/+ "sounds/a11wlk01.wav");
+space = Buffer.read(s, ExampleFiles.child);
 
 saw = Synth("saw");
 delay = Synth.after(saw,"delay", [\decay, 20]);
@@ -294,8 +326,9 @@ timer.sched(0,{
 });
 
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h2><a class='anchor' name='Sequencing%20with%20Patterns'>Sequencing with Patterns</a></h2>
-<textarea class='editor'>(
+<div class='codeMirrorContainer'><textarea class='editor'>(
 //sappy emo electronica example...
 Tempo.bpm = 120;
 SynthDef("patternefx_Ex", { arg out, in;
@@ -350,6 +383,7 @@ Ptpar([
 ]).play;
 
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Tutorials/Server_Tutorial.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Tutorials/Server_Tutorial.schelp</a><br>link::Tutorials/Server_Tutorial::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Tutorials/Server_Tutorial.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Tutorials/Server_Tutorial.schelp</a><br>link::Tutorials/Server_Tutorial::<br></div></div><script src='./../static/editor.js' type='text/javascript'></script>
 </body></html>

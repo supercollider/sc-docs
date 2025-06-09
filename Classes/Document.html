@@ -1,21 +1,25 @@
-<!doctype html><html lang='en'><head><title>Document | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>Document | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../lib/jquery.min.js'></script>
-<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/jquery.min.js'></script>
+<script src='./../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './..';
 var scdoc_title = 'Document';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../static/scdoc.js' type='text/javascript'></script>
 <script src='./../docmap.js' type='text/javascript'></script>
+<script src='./../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
@@ -58,6 +62,7 @@ var scdoc_sc_version = '3.13.1';
 <li class='toc3'><a href='#-didResignKey'>didResignKey</a> </li>
 </ul><li class='toc2'><a href='#Controlling%20Document'>Controlling Document</a></li>
 <ul class='toc'><li class='toc3'><a href='#-close'>close</a> </li>
+<li class='toc3'><a href='#-save'>save</a> </li>
 <li class='toc3'><a href='#-front'>front</a> </li>
 <li class='toc3'><a href='#-onClose'>onClose</a> </li>
 <li class='toc3'><a href='#-endFrontAction'>endFrontAction</a> </li>
@@ -108,7 +113,8 @@ var scdoc_sc_version = '3.13.1';
 <p>An instance of <a href="./../Classes/String.html">String</a> or <a href="./../Classes/Symbol.html">Symbol</a>.<tr><td class='argumentname'>string<td class='argumentdesc'>
 <p>An instance of <a href="./../Classes/String.html">String</a>. The contents of the document.<tr><td class='argumentname'>envir<td class='argumentdesc'>
 <p>An instance of <a href="./../Classes/Environment.html">Environment</a>. The <a href="./../Classes/Environment.html">Environment</a> to be used by the interpreter of the document window. By default, it is set to the current <a href="./../Classes/Environment.html">Environment</a>.</table><h4>Discussion:</h4>
-<textarea class='editor'>Document.new("this is the title", "this is the text");</textarea>
+<div class='codeMirrorContainer'><textarea class='editor'>Document.new("this is the title", "this is the text");</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='*open' href='./../Overviews/Methods.html#open'>open</a></h3>
 <div class='method'>
 <p>Open a document from a path.<h4>Arguments:</h4>
@@ -118,10 +124,13 @@ var scdoc_sc_version = '3.13.1';
 <p>The beginning of the cursor selection of the file content.<tr><td class='argumentname'>selectionLength<td class='argumentdesc'>
 <p>The length of the cursor selection of the file content.<tr><td class='argumentname'>envir<td class='argumentdesc'>
 <p>An instance of <a href="./../Classes/Environment.html">Environment</a>. The Environment to be used by the interpreter of the document window. By default, it is set to the current <a href="./../Classes/Environment.html">Environment</a>.</table><h4>Discussion:</h4>
-<textarea class='editor'>Document.open("README", 292,253); // notice the selected text in the open document</textarea>
+
+<p>See also <a href="./../Classes/Document.html#save">Document: save</a> below.<div class='codeMirrorContainer'><textarea class='editor'>Document.open("README", 292, 253); // notice the selected text in the open document</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='*openDocuments' href='./../Overviews/Methods.html#openDocuments'>openDocuments</a></h3>
 <div class='method'>
-<p>Returns an Array of all open documents.<textarea class='editor'>d = Document.openDocuments.do{ |doc| doc.name.postln };</textarea>
+<p>Returns an Array of all open documents.<div class='codeMirrorContainer'><textarea class='editor'>d = Document.openDocuments.do{ |doc| doc.name.postln };</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='*hasEditedDocuments' href='./../Overviews/Methods.html#hasEditedDocuments'>hasEditedDocuments</a></h3>
 <div class='method'>
 <p>Returns true if there are edited Documents.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='*closeAll' href='./../Overviews/Methods.html#closeAll'>closeAll</a></h3>
@@ -140,7 +149,8 @@ var scdoc_sc_version = '3.13.1';
 <table class='arguments'>
 <tr><td class='argumentname'>value<td class='argumentdesc'>
 <p>A Document.</table><h4>Discussion:</h4>
-<textarea class='editor'>Document.current.name.postln; // Prints "Document.html"</textarea>
+<div class='codeMirrorContainer'><textarea class='editor'>Document.current.name.postln; // Prints "Document.html"</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='*allDocuments' href='./../Overviews/Methods.html#allDocuments'>allDocuments</a></h3>
 <div class='method'>
 <p>Returns all documents.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='*globalKeyDownAction' href='./../Overviews/Methods.html#globalKeyDownAction'>globalKeyDownAction</a></h3>
@@ -177,14 +187,15 @@ var scdoc_sc_version = '3.13.1';
 <tr><td class='argumentname'>path<td class='argumentdesc'>
 <p>The file system path to the directory. An instance of <a href="./../Classes/String.html">String</a>.</table><h4>Discussion:</h4>
 
-<p>In Main-startUp you can set this to a more practical directory:<textarea class='editor'>Document.dir = "~/Documents/SuperCollider";</textarea>
+<p>In Main-startUp you can set this to a more practical directory:<div class='codeMirrorContainer'><textarea class='editor'>Document.dir = "~/Documents/SuperCollider";</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='*standardizePath' href='./../Overviews/Methods.html#standardizePath'>standardizePath</a></h3>
 <div class='method'><h4>Arguments:</h4>
 <table class='arguments'>
 <tr><td class='argumentname'>p<td class='argumentdesc'>
 <p>The file system path to the directory. An instance of <a href="./../Classes/String.html">String</a>.</table><h4>Discussion:</h4>
 
-<p>If it is a relative path, expand it to an absolute path relative to your document directory. Expand tildes in path (your home directory), resolve symbolic links (but not aliases). Also converts from Mac OS 9 path format. See PathName for more complex needs.<textarea class='editor'>Document.standardizePath("~/"); // This will print your home directory
+<p>If it is a relative path, expand it to an absolute path relative to your document directory. Expand tildes in path (your home directory), resolve symbolic links (but not aliases). Also converts from Mac OS 9 path format. See PathName for more complex needs.<div class='codeMirrorContainer'><textarea class='editor'>Document.standardizePath("~/"); // This will print your home directory
 
 Document.standardizePath(":Patches:newfoots:fastRuckAndTuck");
 // Returns: /Volumes/Macintosh HD/Users/cruxxial/Documents/SC3docs/Patches/newfoots/fastRuckAndTuck
@@ -194,6 +205,7 @@ Document.standardizePath("~/Documents/SC3docs/Patches/newfoots/fastRuckAndTuck")
 
 Document.standardizePath("Patches/newfoots/fastRuckAndTuck")
 // Returns: Patches/newfoots/fastRuckAndTuck</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='*abrevPath' href='./../Overviews/Methods.html#abrevPath'>abrevPath</a></h3>
 <div class='method'>
 <p>Returns a path relative to Document.dir, if the path is inside Document.dir.<h4>Arguments:</h4>
@@ -208,18 +220,21 @@ Document.standardizePath("Patches/newfoots/fastRuckAndTuck")
 <table class='arguments'>
 <tr><td class='argumentname'>apath<td class='argumentdesc'>
 <p>An instance of <a href="./../Classes/String.html">String</a>. A files system path.</table><h4>Discussion:</h4>
-<textarea class='editor'>Document.current.path.postln;</textarea>
+<div class='codeMirrorContainer'><textarea class='editor'>Document.current.path.postln;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-dir' href='./../Overviews/Methods.html#dir'>dir</a></h3>
 <div class='method'>
 <p>Returns the directory of a Document.<h4>Discussion:</h4>
-<textarea class='editor'>Document.current.dir.postln;</textarea>
+<div class='codeMirrorContainer'><textarea class='editor'>Document.current.dir.postln;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'></span><a class='method-name' name='-==' href='./../Overviews/Methods.html#=='>==</a></h3>
 <div class='method'>
 <p>A binary operator.<h4>Arguments:</h4>
 <table class='arguments'>
 <tr><td class='argumentname'>that<td class='argumentdesc'>
 <p>An instance of Document.</table><h4>Discussion:</h4>
-<textarea class='editor'>Document.current == Document.listener; // presumably returns false</textarea>
+<div class='codeMirrorContainer'><textarea class='editor'>Document.current == Document.listener; // presumably returns false</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-editable' href='./../Overviews/Methods.html#editable'>editable</a></h3>
 <div class='method'>
 <p>Get / set the document is editable.<h4>Arguments:</h4>
@@ -231,7 +246,8 @@ Document.standardizePath("Patches/newfoots/fastRuckAndTuck")
 <table class='arguments'>
 <tr><td class='argumentname'>aname<td class='argumentdesc'>
 <p>An instance of <a href="./../Classes/String.html">String</a>.</table><h4>Discussion:</h4>
-<textarea class='editor'>Document.current.name.postln;</textarea>
+<div class='codeMirrorContainer'><textarea class='editor'>Document.current.name.postln;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-title' href='./../Overviews/Methods.html#title'>title</a></h3>
 <div class='method'>
 <p>Get / set the title (same as <a href="#-name">-name</a>).<h4>Arguments:</h4>
@@ -246,7 +262,8 @@ Document.standardizePath("Patches/newfoots/fastRuckAndTuck")
 <div class='method'>
 <p>Returns <code>true</code> if the document has been closed.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-isEdited' href='./../Overviews/Methods.html#isEdited'>isEdited</a></h3>
 <div class='method'>
-<p>Returns <code>true</code> if the document has been edited.<textarea class='editor'>Document.current.isEdited.postln;</textarea>
+<p>Returns <code>true</code> if the document has been edited.<div class='codeMirrorContainer'><textarea class='editor'>Document.current.isEdited.postln;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-isFront' href='./../Overviews/Methods.html#isFront'>isFront</a></h3>
 <div class='method'>
 <p>Returns <code>true</code> if the document is in front.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-didBecomeKey' href='./../Overviews/Methods.html#didBecomeKey'>didBecomeKey</a></h3>
@@ -256,20 +273,35 @@ Document.standardizePath("Patches/newfoots/fastRuckAndTuck")
 <p>Performs the Document's <a href="#-endFrontAction">-endFrontAction</a> and restores the current <a href="./../Classes/Environment.html">Environment</a>.</div><h3><a class='anchor' name='Controlling%20Document'>Controlling Document</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-close' href='./../Overviews/Methods.html#close'>close</a></h3>
 <div class='method'>
-<p>Close a document.<textarea class='editor'>(
+<p>Close a document.<div class='codeMirrorContainer'><textarea class='editor'>(
 Task({
     var doc;
     doc = Document("background", "closing in 2 seconds");
     doc.stringColor_(Color.blue);
     1.wait;
-    doc.background_(Color.blue(alpha:0.8));
+    doc.background_(Color.blue(alpha: 0.8));
     1.wait;
     doc.close;
 }).play(AppClock);
 )</textarea>
-</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-front' href='./../Overviews/Methods.html#front'>front</a></h3>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-save' href='./../Overviews/Methods.html#save'>save</a></h3>
 <div class='method'>
-<p>Bring a document to the front.<textarea class='editor'>Document.listener.front;</textarea>
+<p>Save this Document.<h4>Arguments:</h4>
+<table class='arguments'>
+<tr><td class='argumentname'>path<td class='argumentdesc'>
+<p>An optional instance of <a href="./../Classes/String.html">String</a> indicating the path to save the Document. If a path is not provided, the current path (if it has been previously saved or read) is used. After a successful save, this Document's path will be updated if needed. See also <a href="./../Classes/Document.html#*open">Document: *open</a> above.<div class='codeMirrorContainer'><textarea class='editor'>d = Document.new("testSave", "foo");
+d.save(Platform.defaultTempDir ++ "foo.scd"); // saved in the temp dir
+d.string_("foobar", 0, 3);
+d.save; // save at previous path
+d.string_("save as now", 0, 6);
+d.save(Platform.defaultTempDir ++ "savedAs.scd");
+d.path;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+</table></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-front' href='./../Overviews/Methods.html#front'>front</a></h3>
+<div class='method'>
+<p>Bring a document to the front.<div class='codeMirrorContainer'><textarea class='editor'>Document.listener.front;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-onClose' href='./../Overviews/Methods.html#onClose'>onClose</a></h3>
 <div class='method'>
 <p>Get/set the action to be performed on closing the document.<h4>Arguments:</h4>
@@ -296,44 +328,48 @@ Task({
 <table class='arguments'>
 <tr><td class='argumentname'>action<td class='argumentdesc'>
 <p>An instance of <a href="./../Classes/Function.html">Function</a> or <a href="./../Classes/FunctionList.html">FunctionList</a>. The arguments passed to the function are: <code>document</code>, <code>x</code>, <code>y</code>, <code>modifiers</code>, <code>buttonNumber</code>.</table><h4>Discussion:</h4>
-<textarea class='editor'>(
+<div class='codeMirrorContainer'><textarea class='editor'>(
 
-//add a mouse action to this document:
-//example: easy button:
-//when you click in front of a 17 a SinOsc will start up;
+// add a mouse action to this document:
+// example: easy button:
+// when you click in front of a 17 a SinOsc will start up;
 s.waitForBoot({
-    Document.current.mouseUpAction_({arg doc;
+    Document.current.mouseUpAction_({ |doc|
         var char;
         char = doc.rangeText(doc.selectionStart, 2);
-        if(char == "17",{
-            {EnvGen.kr(Env.perc, doneAction: Done.freeSelf) * SinOsc.ar([600,720,300].choose, 0, 0.5)}.play;
+        if(char == "17", {
+            { EnvGen.kr(Env.perc, doneAction: Done.freeSelf) * SinOsc.ar([600, 720, 300].choose, 0, 0.5) }.play;
         });
-        if(char == "23",{
-            {EnvGen.kr(Env.perc, doneAction: Done.freeSelf) * PinkNoise.ar(0.2)}.play;
+        if(char == "23", {
+            { EnvGen.kr(Env.perc, doneAction: Done.freeSelf) * PinkNoise.ar(0.2) }.play;
         });
     })
 });
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>Test here and click in front of the numbers: 17 and 23.<textarea class='editor'>Document.current.mouseUpAction = nil; // clear mouseUpAction</textarea>
+<p>Test here and click in front of the numbers: 17 and 23.<div class='codeMirrorContainer'><textarea class='editor'>Document.current.mouseUpAction = nil; // clear mouseUpAction</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-keyDownAction' href='./../Overviews/Methods.html#keyDownAction'>keyDownAction</a></h3>
 <div class='method'>
 <p>Get/set the action to be performed on <a href="#-keyDown">-keyDown</a>.<h4>Arguments:</h4>
 <table class='arguments'>
 <tr><td class='argumentname'>action<td class='argumentdesc'>
 <p>An instance of <a href="./../Classes/Function.html">Function</a> or <a href="./../Classes/FunctionList.html">FunctionList</a>. The arguments passed to the function are: <code>document</code>, <code>char</code>, <code>modifiers</code>, <code>unicode</code>, <code>keycode</code>. See <a href="./../Classes/View.html#Key%20actions">View: Key actions</a> for details on these arguments.</table><h4>Discussion:</h4>
-<textarea class='editor'>Document.current.keyDownAction = { arg ...args; args.postln };
+<div class='codeMirrorContainer'><textarea class='editor'>Document.current.keyDownAction = { |...args| args.postln };
 // now type some text
 Document.current.keyDownAction = nil;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-keyUpAction' href='./../Overviews/Methods.html#keyUpAction'>keyUpAction</a></h3>
 <div class='method'>
 <p>Get/set the action to be performed on <a href="#-keyUp">-keyUp</a>.<h4>Arguments:</h4>
 <table class='arguments'>
 <tr><td class='argumentname'>action<td class='argumentdesc'>
 <p>An instance of <a href="./../Classes/Function.html">Function</a> or <a href="./../Classes/FunctionList.html">FunctionList</a>. The arguments passed to the function are: <code>document</code>, <code>char</code>, <code>modifiers</code>, <code>unicode</code>, <code>keycode</code>. See <a href="./../Classes/View.html#Key%20actions">View: Key actions</a> for details on these arguments.</table><h4>Discussion:</h4>
-<textarea class='editor'>Document.current.keyUpAction = { arg ...args; args.postln };
+<div class='codeMirrorContainer'><textarea class='editor'>Document.current.keyUpAction = { |...args| args.postln };
 // now type some text
 Document.current.keyUpAction = nil;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3><a class='anchor' name='Accessing%20and%20Editing%20Content'>Accessing and Editing Content</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-selectLine' href='./../Overviews/Methods.html#selectLine'>selectLine</a></h3>
 <div class='method'>
@@ -341,7 +377,8 @@ Document.current.keyUpAction = nil;</textarea>
 <table class='arguments'>
 <tr><td class='argumentname'>line<td class='argumentdesc'>
 <p>An <a href="./../Classes/Integer.html">Integer</a>.</table><h4>Discussion:</h4>
-<textarea class='editor'>Document.current.selectLine(390);</textarea>
+<div class='codeMirrorContainer'><textarea class='editor'>Document.current.selectLine(390);</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-selectRange' href='./../Overviews/Methods.html#selectRange'>selectRange</a></h3>
 <div class='method'>
 <p>Select a text range in the string of the document.<h4>Arguments:</h4>
@@ -349,49 +386,55 @@ Document.current.keyUpAction = nil;</textarea>
 <tr><td class='argumentname'>start<td class='argumentdesc'>
 <p>The start index.<tr><td class='argumentname'>length<td class='argumentdesc'>
 <p>The length of the selection.</table><h4>Discussion:</h4>
-<textarea class='editor'>(
+<div class='codeMirrorContainer'><textarea class='editor'>(
 Document.current.selectRange(Document.current.selectedRangeLocation + 3, 150);
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-selectionStart' href='./../Overviews/Methods.html#selectionStart'>selectionStart</a></h3>
 <div class='method'>
-<p>Returns the start of a current selection.<textarea class='editor'>Document.current.selectionStart.postln;</textarea>
+<p>Returns the start of a current selection.<div class='codeMirrorContainer'><textarea class='editor'>Document.current.selectionStart.postln;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-selectionSize' href='./../Overviews/Methods.html#selectionSize'>selectionSize</a></h3>
 <div class='method'>
-<p>Returns the size of a current selection.<textarea class='editor'>(
+<p>Returns the size of a current selection.<div class='codeMirrorContainer'><textarea class='editor'>(
 var doc;
 doc = Document.current;
 doc.selectRange(doc.selectionStart - 40, 10);
 doc.selectionSize.postln;
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-selectedString' href='./../Overviews/Methods.html#selectedString'>selectedString</a></h3>
 <div class='method'>
 <p>Gets/sets the selected string.<h4>Arguments:</h4>
 <table class='arguments'>
 <tr><td class='argumentname'>txt<td class='argumentdesc'>
 <p>An instance of <a href="./../Classes/String.html">String</a>.</table><h4>Discussion:</h4>
-<textarea class='editor'>(
+<div class='codeMirrorContainer'><textarea class='editor'>(
 var doc;
 doc = Document.current;
 doc.selectRange(doc.selectionStart - 40, 10);
 doc.selectedString.postln;
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-currentLine' href='./../Overviews/Methods.html#currentLine'>currentLine</a></h3>
 <div class='method'>
-<p>Returns the current line as a <a href="./../Classes/String.html">String</a>.<textarea class='editor'>(
+<p>Returns the current line as a <a href="./../Classes/String.html">String</a>.<div class='codeMirrorContainer'><textarea class='editor'>(
 var doc;
 doc = Document.current;
 doc.selectRange(doc.selectionStart - 40, 10);
 doc.currentLine.postln;
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-getSelectedLines' href='./../Overviews/Methods.html#getSelectedLines'>getSelectedLines</a></h3>
 <div class='method'>
 <p>Returns all full lines from before <code>rangestart</code> to after <code>rangestart + rangesize</code> as a <a href="./../Classes/String.html">String</a>.<h4>Discussion:</h4>
-<textarea class='editor'>(
+<div class='codeMirrorContainer'><textarea class='editor'>(
 var doc;
 doc = Document.current;
 doc.selectRange(doc.selectionStart - 40, 10);
 doc.getSelectedLines(doc.selectionStart - 40, 130).postln;
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-string' href='./../Overviews/Methods.html#string'>string</a></h3>
 <div class='method'>
 <p>Gets or sets the string within a certain range.<h4>Arguments:</h4>
@@ -400,13 +443,14 @@ doc.getSelectedLines(doc.selectionStart - 40, 130).postln;
 <p>A <a href="./../Classes/String.html">String</a>.<tr><td class='argumentname'>rangestart<td class='argumentdesc'>
 <p>An <a href="./../Classes/Integer.html">Integer</a>.<tr><td class='argumentname'>rangesize<td class='argumentdesc'>
 <p>An <a href="./../Classes/Integer.html">Integer</a>.</table><h4>Discussion:</h4>
-<textarea class='editor'>// Select the following code in parentheses and execute it
+<div class='codeMirrorContainer'><textarea class='editor'>// Select the following code in parentheses and execute it
 (
 Document.current.string_(": test test test test test ",
     Document.current.selectedRangeLocation + 12,
     18);
 )
 // Watch me change content</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-getText' href='./../Overviews/Methods.html#getText'>getText</a></h3>
 <div class='method'>
 <p>Get a range of text from the document. Synchronous. The text is directly returned.<h4>Arguments:</h4>
@@ -422,7 +466,7 @@ Document.current.string_(": test test test test test ",
 <p>An <a href="./../Classes/Integer.html">Integer</a> for the starting position to access.<tr><td class='argumentname'>range<td class='argumentdesc'>
 <p>An <a href="./../Classes/Integer.html">Integer</a> for the number of characters to retrieve. -1 retrieves to the end of the document.</table></div><h3><a class='anchor' name='Subclassing%20and%20Internal%20Methods'>Subclassing and Internal Methods</a></h3>
 
-<p>The following methods are usually not used directly or are called by a primitive. Programmers can still call or override these as needed.<textarea class='editor'>    *startup
+<p>The following methods are usually not used directly or are called by a primitive. Programmers can still call or override these as needed.<div class='codeMirrorContainer'><textarea class='editor'>    *startup
     *numberOfOpen
     mouseUp (x, y, modifiers, buttonNumber, clickCount, clickPos)
     keyDown (character, modifiers, unicode, keycode)
@@ -472,9 +516,10 @@ Document.current.string_(": test test test test test ",
     initLast
     initFromPath (path, selectionStart, selectionLength)
     initByString (argTitle, str, makeListener)</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h3><a class='anchor' name='Inherited%20instance%20methods'>Inherited instance methods</a></h3>
 <div id='inheritedinstmets'></div><h2><a class='anchor' name='examples'>Examples</a></h2>
-<textarea class='editor'>//unfocusedFront_
+<div class='codeMirrorContainer'><textarea class='editor'>// unfocusedFront_
 (
 Document.allDocuments.at(0).unfocusedFront
 )
@@ -519,8 +564,9 @@ Task({
     doc.close;
 }).play(AppClock)
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>A simple implementation of TBT (time based text) <a href="http://tbt.dyne.org/?info=download">http://tbt.dyne.org/?info=download</a><textarea class='editor'>// record: type some text
+<p>A simple implementation of TBT (time based text) <a href="http://tbt.dyne.org/?info=download">http://tbt.dyne.org/?info=download</a><div class='codeMirrorContainer'><textarea class='editor'>// record: type some text
 (
 var time = Main.elapsedTime;
 a = List.new;
@@ -532,14 +578,14 @@ loop {
 };
 
 Document.new("type some text")
-    .bounds_(Rect(100,SCWindow.screenBounds.height - 250, 400, 200))
-    .keyDownAction = { |doc, key| r.value(key) ; time = Main.elapsedTime};
+    .bounds_(Rect(100, SCWindow.screenBounds.height - 250, 400, 200))
+    .keyDownAction = { |doc, key| r.value(key) ; time = Main.elapsedTime };
 )
 
 // play back text in time
 (
 d = Document.new("type some text")
-    .bounds_(Rect(550,SCWindow.screenBounds.height-250,400,200));
+    .bounds_(Rect(550, SCWindow.screenBounds.height-250, 400, 200));
 fork({
     a.do { |pair|
         d.string = d.string ++ pair[0];
@@ -547,17 +593,19 @@ fork({
     }
 }, AppClock)
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>Changing the default look of documents can be done with the help of the <a href="#*initAction">*initAction</a> method. Run the following example once. Afterwards all newly created documents will have a dark grey background. To make this change happen every time you start SuperCollider, put the code inside your startup.scd file (and optionally wrap it in a <code>{}.defer(0.1)</code> ).<textarea class='editor'>(
-Document.listener.background = Color.red;    //a special color for post document
-Document.listener.bounds = Rect(1, 461, 620, 567);    //move and resize post document
-Document.initAction = {|doc|            //function to run for every new document
+<p>Changing the default look of documents can be done with the help of the <a href="#*initAction">*initAction</a> method. Run the following example once. Afterwards all newly created documents will have a dark grey background. To make this change happen every time you start SuperCollider, put the code inside your startup.scd file (and optionally wrap it in a <code>{ }.defer(0.1)</code>).<div class='codeMirrorContainer'><textarea class='editor'>(
+Document.listener.background = Color.red;    // a special color for post document
+Document.listener.bounds = Rect(1, 461, 620, 567);    // move and resize post document
+Document.initAction = { |doc|            // function to run for every new document
     doc.background = Color.grey(0.1, 0.9);
     doc.bounds = Rect(0, 119, 1280, 659);
     doc.selectedBackground = Color(0.4, 0.05, 0.18);
     doc.stringColor = Color.grey(0.9);
 };
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/Document.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/Document.schelp</a><br>link::Classes/Document::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/Document.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/Document.schelp</a><br>link::Classes/Document::<br></div></div><script src='./../static/editor.js' type='text/javascript'></script>
 </body></html>

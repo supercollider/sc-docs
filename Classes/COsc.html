@@ -1,21 +1,25 @@
-<!doctype html><html lang='en'><head><title>COsc | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>COsc | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../lib/jquery.min.js'></script>
-<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/jquery.min.js'></script>
+<script src='./../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './..';
 var scdoc_title = 'COsc';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../static/scdoc.js' type='text/javascript'></script>
 <script src='./../docmap.js' type='text/javascript'></script>
+<script src='./../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
@@ -39,11 +43,12 @@ var scdoc_sc_version = '3.13.1';
 <div id='summary'>Chorusing wavetable oscillator.</div>
 </div>
 <div class='subheader'>
-<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/Common/Audio/Osc.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Audio/Osc.sc'>Osc.sc</a></div><div id='related'>See also: <a href="./../Classes/Osc.html">Osc</a>, <a href="./../Classes/OscN.html">OscN</a>, <a href="./../Classes/VOsc.html">VOsc</a>, <a href="./../Classes/VOsc3.html">VOsc3</a></div>
+<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/Common/Audio/Osc.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Audio/Osc.sc'>Osc.sc</a></div><div id='related'>See also: <a href="./../Classes/Osc.html">Osc</a>, <a href="./../Classes/OscN.html">OscN</a>, <a href="./../Classes/VOsc.html">VOsc</a>, <a href="./../Classes/VOsc3.html">VOsc3</a></div>
 </div>
 <h2><a class='anchor' name='description'>Description</a></h2>
 
-<p>Chorusing wavetable lookup oscillator. Produces sum of two signals at<textarea class='editor'>(freq ± (beats / 2)).</textarea>
+<p>Chorusing wavetable lookup oscillator. Produces sum of two signals at<div class='codeMirrorContainer'><textarea class='editor'>(freq ± (beats / 2)).</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p>Due to summing, the peak amplitude is not the same as the wavetable and can be twice of that.<h2><a class='anchor' name='classmethods'>Class Methods</a></h2>
 <h3 class='method-code'><span class='method-prefix'>COsc.</span><a class='method-name' name='*ar' href='./../Overviews/Methods.html#ar'>ar</a>(<span class='argstr'>bufnum</span>, <span class='argstr'>freq: 440.0</span>, <span class='argstr'>beats: 0.5</span>, <span class='argstr'>mul: 1.0</span>, <span class='argstr'>add: 0.0</span>)</h3>
@@ -60,9 +65,11 @@ var scdoc_sc_version = '3.13.1';
 <div id='inheritedclassmets'></div><h2><a class='anchor' name='instancemethods'>Instance Methods</a></h2>
 <h3><a class='anchor' name='Inherited%20instance%20methods'>Inherited instance methods</a></h3>
 <div id='inheritedinstmets'></div><h2><a class='anchor' name='examples'>Examples</a></h2>
-<textarea class='editor'>(
-b = Buffer.alloc(s, 512, 1, {arg buf; buf.sine1Msg(1.0/[1,2,3,4,5,6,7,8,9,10])});
+<div class='codeMirrorContainer'><textarea class='editor'>(
+b = Buffer.alloc(s, 512, 1, { |buf| buf.sine1Msg(1.0/[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]) });
 { COsc.ar(b.bufnum, 200, 0.7, 0.25) }.play;
 )</textarea>
-<div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/COsc.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/COsc.schelp</a><br>link::Classes/COsc::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+
+<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/COsc.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/COsc.schelp</a><br>link::Classes/COsc::<br></div></div><script src='./../static/editor.js' type='text/javascript'></script>
 </body></html>

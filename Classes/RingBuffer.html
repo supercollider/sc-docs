@@ -1,21 +1,25 @@
-<!doctype html><html lang='en'><head><title>RingBuffer | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>RingBuffer | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../lib/jquery.min.js'></script>
-<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/jquery.min.js'></script>
+<script src='./../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './..';
 var scdoc_title = 'RingBuffer';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../static/scdoc.js' type='text/javascript'></script>
 <script src='./../docmap.js' type='text/javascript'></script>
+<script src='./../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
@@ -23,153 +27,107 @@ var scdoc_sc_version = '3.13.1';
 <div id='toctitle'>RingBuffer:</div>
 <span class='toc_search'>Filter: <input id='toc_search'></span><ul class='toc'><li class='toc1'><a href='#description'>Description</a></li>
 <ul class='toc'></ul><li class='toc1'><a href='#classmethods'>Class methods</a></li>
-<ul class='toc'><li class='toc2'><a href='#Inherited%20class%20methods'>Inherited class methods</a></li>
-<li class='toc2'><a href='#Undocumented%20class%20methods'>Undocumented class methods</a></li>
 <ul class='toc'><li class='toc3'><a href='#*new'>new</a> </li>
-</ul></ul><li class='toc1'><a href='#instancemethods'>Instance methods</a></li>
-<ul class='toc'><li class='toc2'><a href='#Inherited%20instance%20methods'>Inherited instance methods</a></li>
-<li class='toc2'><a href='#Undocumented%20instance%20methods'>Undocumented instance methods</a></li>
-<ul class='toc'><li class='toc3'><a href='#-add'>add</a> </li>
-<li class='toc3'><a href='#-array'>array</a> </li>
-<li class='toc3'><a href='#-do'>do</a> </li>
-<li class='toc3'><a href='#-maxSize'>maxSize</a> </li>
-<li class='toc3'><a href='#-overwrite'>overwrite</a> </li>
-<li class='toc3'><a href='#-pop'>pop</a> </li>
+<li class='toc2'><a href='#Inherited%20class%20methods'>Inherited class methods</a></li>
+</ul><li class='toc1'><a href='#instancemethods'>Instance methods</a></li>
+<ul class='toc'><li class='toc3'><a href='#-array'>array</a> </li>
 <li class='toc3'><a href='#-readPos'>readPos</a> </li>
-<li class='toc3'><a href='#-readable'>readable</a> </li>
-<li class='toc3'><a href='#-size'>size</a> </li>
-<li class='toc3'><a href='#-writable'>writable</a> </li>
 <li class='toc3'><a href='#-writePos'>writePos</a> </li>
-</ul></ul><li class='toc1'><a href='#Help%20template'>Help template</a></li>
+<li class='toc3'><a href='#-maxSize'>maxSize</a> </li>
+<li class='toc3'><a href='#-size'>size</a> </li>
+<li class='toc3'><a href='#-readable'>readable</a> </li>
+<li class='toc3'><a href='#-writable'>writable</a> </li>
+<li class='toc3'><a href='#-add'>add</a> </li>
+<li class='toc3'><a href='#-pop'>pop</a> </li>
+<li class='toc3'><a href='#-overwrite'>overwrite</a> </li>
+<li class='toc3'><a href='#-do'>do</a> </li>
+<li class='toc2'><a href='#Inherited%20instance%20methods'>Inherited instance methods</a></li>
+</ul><li class='toc1'><a href='#examples'>Examples</a></li>
 <ul class='toc'></ul></ul></div><div id='menubar'></div>
 <div class='contents'>
 <div class='header'>
 <div id='label'>
 <span id='folder'>Classes</span>
- | <span id='categories'><a href='./../Browse.html#Undocumented classes'>Undocumented classes</a></span>
+ | <span id='categories'><a href='./../Browse.html#Collections'>Collections</a>&#8201;&gt;&#8201;<a href='./../Browse.html#Collections>Ordered'>Ordered</a></span>
 </div><h1>RingBuffer<span id='superclasses'> : <a href="../Classes/SequenceableCollection.html">SequenceableCollection</a> : <a href="../Classes/Collection.html">Collection</a> : <a href="../Classes/Object.html">Object</a></span>
 </h1>
-<div id='summary'>(Undocumented class)</div>
+<div id='summary'>Fixed size ringbuffer</div>
 </div>
 <div class='subheader'>
-<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/Common/Collections/RingBuffer.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Collections/RingBuffer.sc'>RingBuffer.sc</a></div></div>
+<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/Common/Collections/RingBuffer.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Collections/RingBuffer.sc'>RingBuffer.sc</a></div><div id='related'>See also: <a href="./../Classes/LinkedList.html">LinkedList</a></div>
+</div>
 <h2><a class='anchor' name='description'>Description</a></h2>
 
-<p>This class is missing documentation.<h2><a class='anchor' name='classmethods'>Class Methods</a></h2>
-<h3><a class='anchor' name='Inherited%20class%20methods'>Inherited class methods</a></h3>
-<div id='inheritedclassmets'></div><h3><a class='anchor' name='Undocumented%20class%20methods'>Undocumented class methods</a></h3>
+<p>A circular buffer that holds a fixed-size collection. Can be used as a queue.<h2><a class='anchor' name='classmethods'>Class Methods</a></h2>
 <h3 class='method-code'><span class='method-prefix'>RingBuffer.</span><a class='method-name' name='*new' href='./../Overviews/Methods.html#new'>new</a>(<span class='argstr'>size</span>, <span class='argstr'>collectionClass</span>)</h3>
-<h2><a class='anchor' name='instancemethods'>Instance Methods</a></h2>
-<h3><a class='anchor' name='Inherited%20instance%20methods'>Inherited instance methods</a></h3>
-<div id='inheritedinstmets'></div><h3><a class='anchor' name='Undocumented%20instance%20methods'>Undocumented instance methods</a></h3>
-<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-add' href='./../Overviews/Methods.html#add'>add</a>(<span class='argstr'>value</span>)</h3>
+<div class='method'>
+<p>Create a new buffer.<h4>Arguments:</h4>
+<table class='arguments'>
+<tr><td class='argumentname'>size<td class='argumentdesc'>
+<p>Initial size. The collection will be able to hold one minus this number of values.<tr><td class='argumentname'>collectionClass<td class='argumentdesc'>
+<p>Defaults to the <a href="./../Classes/Array.html">Array</a> class.</table></div><h3><a class='anchor' name='Inherited%20class%20methods'>Inherited class methods</a></h3>
+<div id='inheritedclassmets'></div><h2><a class='anchor' name='instancemethods'>Instance Methods</a></h2>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-array' href='./../Overviews/Methods.html#array'>array</a></h3>
-<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-do' href='./../Overviews/Methods.html#do'>do</a>(<span class='argstr'>function</span>)</h3>
-<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-maxSize' href='./../Overviews/Methods.html#maxSize'>maxSize</a></h3>
-<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-overwrite' href='./../Overviews/Methods.html#overwrite'>overwrite</a>(<span class='argstr'>value</span>)</h3>
-<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-pop' href='./../Overviews/Methods.html#pop'>pop</a></h3>
-<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-readPos' href='./../Overviews/Methods.html#readPos'>readPos</a></h3>
-<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-readable' href='./../Overviews/Methods.html#readable'>readable</a></h3>
-<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-size' href='./../Overviews/Methods.html#size'>size</a></h3>
-<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-writable' href='./../Overviews/Methods.html#writable'>writable</a></h3>
-<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-writePos' href='./../Overviews/Methods.html#writePos'>writePos</a></h3>
-<h2><a class='anchor' name='Help%20template'>Help template</a></h2>
-
-<p>Copy and paste the text below and save to HelpSource/Classes/RingBuffer.schelp<textarea class='editor'>TITLE:: RingBuffer
-summary:: (put short description here)
-categories:: Undocumented classes
-related:: Classes/SomeRelatedClass, Reference/SomeRelatedStuff, etc.
-
-DESCRIPTION::
-(put long description here)
-
-
-CLASSMETHODS::
-
-METHOD:: new
-(describe method here)
-
-ARGUMENT:: size
-(describe argument here)
-
-ARGUMENT:: collectionClass
-(describe argument here)
-
-returns:: (describe returnvalue here)
+<div class='method'>
+<p>The collection.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-readPos' href='./../Overviews/Methods.html#readPos'>readPos</a></h3>
+<div class='method'>
+<p>Current read position.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-writePos' href='./../Overviews/Methods.html#writePos'>writePos</a></h3>
+<div class='method'>
+<p>Current write position.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-maxSize' href='./../Overviews/Methods.html#maxSize'>maxSize</a></h3>
+<div class='method'>
+<p>Maximum capacity.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-size' href='./../Overviews/Methods.html#size'>size</a></h3>
+<div class='method'>
+<p>Alias of <a href="#-readable">-readable</a>.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-readable' href='./../Overviews/Methods.html#readable'>readable</a></h3>
+<div class='method'>
+<p>Number of readble items.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-writable' href='./../Overviews/Methods.html#writable'>writable</a></h3>
+<div class='method'>
+<p>Number of writable items.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-add' href='./../Overviews/Methods.html#add'>add</a>(<span class='argstr'>value</span>)</h3>
+<div class='method'>
+<p>Add value and increase <a href="#-writePos">-writePos</a>. Do nothing if no items can be written.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-pop' href='./../Overviews/Methods.html#pop'>pop</a></h3>
+<div class='method'>
+<p>Return next readable item and increase <a href="#-readPos">-readPos</a>. Return <code>nil</code> if no items can be read.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-overwrite' href='./../Overviews/Methods.html#overwrite'>overwrite</a>(<span class='argstr'>value</span>)</h3>
+<div class='method'>
+<p>Add value and increase <a href="#-writePos">-writePos</a> by overwriting oldest readable item.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-do' href='./../Overviews/Methods.html#do'>do</a>(<span class='argstr'>function</span>)</h3>
+<div class='method'>
+<p>Iterate over the currently readable items.</div><h3><a class='anchor' name='Inherited%20instance%20methods'>Inherited instance methods</a></h3>
+<div id='inheritedinstmets'></div><h2><a class='anchor' name='examples'>Examples</a></h2>
+<div class='codeMirrorContainer'><textarea class='editor'>r = RingBuffer(4);
+r.add(\one);
+r.add(\two);
+r.add(\three);
+r.readable;
+r.do{ |x| x.postln };
 
 
-INSTANCEMETHODS::
-
-METHOD:: array
-(describe method here)
-
-returns:: (describe returnvalue here)
-
-METHOD:: writePos
-(describe method here)
-
-returns:: (describe returnvalue here)
-
-METHOD:: readPos
-(describe method here)
-
-returns:: (describe returnvalue here)
-
-METHOD:: do
-(describe method here)
-
-ARGUMENT:: function
-(describe argument here)
-
-returns:: (describe returnvalue here)
-
-METHOD:: readable
-(describe method here)
-
-returns:: (describe returnvalue here)
-
-METHOD:: maxSize
-(describe method here)
-
-returns:: (describe returnvalue here)
-
-METHOD:: size
-(describe method here)
-
-returns:: (describe returnvalue here)
-
-METHOD:: writable
-(describe method here)
-
-returns:: (describe returnvalue here)
-
-METHOD:: pop
-(describe method here)
-
-returns:: (describe returnvalue here)
-
-METHOD:: add
-(describe method here)
-
-ARGUMENT:: value
-(describe argument here)
-
-returns:: (describe returnvalue here)
-
-METHOD:: overwrite
-(describe method here)
-
-ARGUMENT:: value
-(describe argument here)
-
-returns:: (describe returnvalue here)
+r = RingBuffer(12, Int16Array);
+r.writable.do{ |i| r.add(i + 1 * 100) };
+r.array;
+r.readable;  // 11
+r.writable;  // 0 = full
+r.pop;
+r.pop;
+r.pop;
+r.readable;  // 8
+r.writable;  // 3
 
 
-EXAMPLES::
+(
+var num = 100;
+var m = MultiSliderView().elasticMode_(1).size_(num).front;
+var r = RingBuffer(num + 1, DoubleArray);
+Routine({
+    while { m.isClosed.not } {
+        if(r.writable == 0, { r.pop });
+        r.add(sin(thisThread.seconds).abs);
+        r.do{ |v, i|
+            m.index = i;
+            m.currentvalue = v;
+        };
+        (1/60).wait;
+    }
+}).play(AppClock);
+)</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-code::
-(some example code)
-::
-</textarea>
-<div class='doclink'>link::Classes/RingBuffer::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/RingBuffer.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/RingBuffer.schelp</a><br>link::Classes/RingBuffer::<br></div></div><script src='./../static/editor.js' type='text/javascript'></script>
 </body></html>

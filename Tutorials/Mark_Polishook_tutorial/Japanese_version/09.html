@@ -1,21 +1,25 @@
-<!doctype html><html lang='en'><head><title>09 | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../../../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../../../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../../../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>09 | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../../../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../../../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../../../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../../../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../../../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../../../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../../../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../../../lib/jquery.min.js'></script>
-<script src='./../../../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../../../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../../../static/lib/jquery.min.js'></script>
+<script src='./../../../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../../../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../../../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './../../..';
 var scdoc_title = '09';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../../../scdoc.js' type='text/javascript'></script>
+<script src='./../../../static/scdoc.js' type='text/javascript'></script>
 <script src='./../../../docmap.js' type='text/javascript'></script>
+<script src='./../../../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
@@ -49,13 +53,14 @@ var scdoc_sc_version = '3.13.1';
 <tr><td>OBJECT<td>OPERATOR<td>OPERAND</table>
 
 <p>オブジェクト　オペレータ　オペランド
-<p>であり、例えば次の様に<textarea class='editor'>2 * 3</textarea>
+<p>であり、例えば次の様に<div class='codeMirrorContainer'><textarea class='editor'>2 * 3</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p>オブジェクト、2項演算子、オペランド、となります。
 <p>UGenに対して適用することのできる2項演算の多くのリストを見るには、SuperColliderのヘルプ・システムでHelp/BinaryOpsを参照して下さい。
 <p>////////////////////////////////////////////////////////////////////////////////////////////////////<h2><a class='anchor' name='ミキシング＝加算'>ミキシング＝加算</a></h2>
 
-<p>2つ、またはそれ以上のUGenをミックスするには加算します。<textarea class='editor'>(
+<p>2つ、またはそれ以上のUGenをミックスするには加算します。<div class='codeMirrorContainer'><textarea class='editor'>(
     // 2つのノコギリ波をミックスする
     {
         Saw.ar(500, 0.05)    // オブジェクト
@@ -63,10 +68,11 @@ var scdoc_sc_version = '3.13.1';
         Saw.ar(600, 0.06)    // オペランド
     }.scope;
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p>加算の結果は1つのBinaryOpUGenになります。
 <p>////////////////////////////////////////////////////////////////////////////////////////////////////
-<p>次の例は、3つのUGenが加算を通して合体することによって何が起きるのかを示します。最初に、2つのUGenが1つのBinarOpUGenに合体します。その結果に加算演算子ともう1つのUGen（オペランド）が続き、もう1つのBinaryOpUGenを生成します。<textarea class='editor'>(
+<p>次の例は、3つのUGenが加算を通して合体することによって何が起きるのかを示します。最初に、2つのUGenが1つのBinarOpUGenに合体します。その結果に加算演算子ともう1つのUGen（オペランド）が続き、もう1つのBinaryOpUGenを生成します。<div class='codeMirrorContainer'><textarea class='editor'>(
 {
     // 最初の2つのUGenは1つのBinaryOpUGenに合体する
     Saw.ar(500, 0.05)
@@ -77,9 +83,10 @@ var scdoc_sc_version = '3.13.1';
     Saw.ar(700, 0.07)
 }.scope;
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p>////////////////////////////////////////////////////////////////////////////////////////////////////
-<p>MixというUGenを用いることで前の例と同じ結果になります。<textarea class='editor'>(
+<p>MixというUGenを用いることで前の例と同じ結果になります。<div class='codeMirrorContainer'><textarea class='editor'>(
 {
     // ミックスしたいUGenを配列の中に入れる
     Mix.ar(
@@ -91,15 +98,18 @@ var scdoc_sc_version = '3.13.1';
     )
 }.scope
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p>////////////////////////////////////////////////////////////////////////////////////////////////////
-<p>もしくは、Mix.arFillを使って似た様な結果を生成することもできます。この関数が実行される時には毎回、アーギュメントiはインクリメントされます。つまり、1回目に関数が実行される時にはiは0に等しく、2回目には1、3回目には２、という様になります。<textarea class='editor'>{ Mix.arFill(3, { arg i; Saw.ar(500 + ((i+1) * 100), 0.05) }) }.scope;</textarea>
+<p>もしくは、Mix.arFillを使って似た様な結果を生成することもできます。この関数が実行される時には毎回、アーギュメントiはインクリメントされます。つまり、1回目に関数が実行される時にはiは0に等しく、2回目には1、3回目には２、という様になります。<div class='codeMirrorContainer'><textarea class='editor'>{ Mix.arFill(3, { arg i; Saw.ar(500 + ((i+1) * 100), 0.05) }) }.scope;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p>////////////////////////////////////////////////////////////////////////////////////////////////////<h2><a class='anchor' name='スケーリング＝掛算'>スケーリング＝掛算</a></h2>
 
-<p>低い周波数のオシレータを用いる次の例は、WhiteNoiseジェネレータに対してエンベロープを適用します。これは、1つのUGenを他のUGenと掛算することにより、双方をスケーリングするということをデモするものです。<textarea class='editor'>{ WhiteNoise.ar(0.1) * SinOsc.kr(1, 1) }.scope;</textarea>
+<p>低い周波数のオシレータを用いる次の例は、WhiteNoiseジェネレータに対してエンベロープを適用します。これは、1つのUGenを他のUGenと掛算することにより、双方をスケーリングするということをデモするものです。<div class='codeMirrorContainer'><textarea class='editor'>{ WhiteNoise.ar(0.1) * SinOsc.kr(1, 1) }.scope;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>次の例は、2つのノイズを生成するUgenがサイン波でスケーリングされてBinaryOpUGenを生成し、それがまた別のBinaryOpUGenに加算されるというものです。<textarea class='editor'>(
+<p>次の例は、2つのノイズを生成するUGenがサイン波でスケーリングされてBinaryOpUGenを生成し、それがまた別のBinaryOpUGenに加算されるというものです。<div class='codeMirrorContainer'><textarea class='editor'>(
     // ... 汽車のまね？
     {
         (WhiteNoise.ar(0.1) * SinOsc.kr(1, 1))
@@ -107,16 +117,18 @@ var scdoc_sc_version = '3.13.1';
         (BrownNoise.ar(0.1) * SinOsc.kr(2, 1))
     }.scope;
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p>////////////////////////////////////////////////////////////////////////////////////////////////////<h2><a class='anchor' name='エンベロープ'>エンベロープ</a></h2>
 
-<p>UGenの任意のアスペクト、例えば、周波数、位相、振幅といったものをダイナミックに変調するにはエンベロープを使います。<textarea class='editor'>// 振幅を変調する
+<p>UGenの任意のアスペクト、例えば、周波数、位相、振幅といったものをダイナミックに変調するにはエンベロープを使います。<div class='codeMirrorContainer'><textarea class='editor'>// 振幅を変調する
 { SinOsc.ar(440, 0, 0.1) * EnvGen.kr(Env.sine(1), doneAction: Done.freeSelf) }.scope;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p>doneActionアーギュメント（コントロール）を2にセットすると、SuperColliderはSinOscとEnvGenのインスタンスを保持するために要求されていたメモリを解放することを確約します。アーギュメントがキーワードのスタイルで与えられていることに注意して下さい。キーワードのスタイルとは、アーギュメントの名前の後にコロン（‘:’）が続き、コロンの後に値が続く、というものです。
 <p>キーワードはコードをより読みやすいものにします。また、これによってアーギュメントを任意の順番で書くことができる様になります。
 <p>////////////////////////////////////////////////////////////////////////////////////////////////////
-<p>EnvGenのtimeScaleアーギュメント（コントロール）は、エンベロープの継続時間を変調します。<textarea class='editor'>(
+<p>EnvGenのtimeScaleアーギュメント（コントロール）は、エンベロープの継続時間を変調します。<div class='codeMirrorContainer'><textarea class='editor'>(
 SynthDef("timeScale", { arg ts = 1;
     Out.ar(
         0,
@@ -126,8 +138,9 @@ SynthDef("timeScale", { arg ts = 1;
 )
 
 Synth("timeScale", [\ts, 0.1]); // timeScaleコントロールはエンベロープの継続時間</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>////////////////////////////////////////////////////////////////////////////////////////////////////<textarea class='editor'>//  ... エンベロープの時間をシンセが作られるたびに毎回違ったものにスケーリングする
+<p>////////////////////////////////////////////////////////////////////////////////////////////////////<div class='codeMirrorContainer'><textarea class='editor'>//  ... エンベロープの時間をシンセが作られるたびに毎回違ったものにスケーリングする
 (
 r = Routine({
     loop({
@@ -137,10 +150,11 @@ r = Routine({
 });
 )
 r.play</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p>////////////////////////////////////////////////////////////////////////////////////////////////////<h2><a class='anchor' name='加算合成'>加算合成</a></h2>
 
-<p>加算合成とはその名が示す通りのものです。コンポーネントはお互いに加えられ（または合計され）ます。<textarea class='editor'>(
+<p>加算合成とはその名が示す通りのものです。コンポーネントはお互いに加えられ（または合計され）ます。<div class='codeMirrorContainer'><textarea class='editor'>(
 {    // 関数を12回実行する
     var n = 12;
     Mix.arFill(
@@ -157,12 +171,13 @@ r.play</textarea>
     EnvGen.kr(Env.perc(11, 6), doneAction: Done.freeSelf)
 }.scope
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p>////////////////////////////////////////////////////////////////////////////////////////////////////<h2><a class='anchor' name='それぞれのコンポーネントにエンベロープを与える'>それぞれのコンポーネントにエンベロープを与える</a></h2>
 
 <p>加算合成に期待されて来たこととは、求められる周波数成分に従ってサイン波を加算することで、想像しうるサウンドを生成または再現することができるということでした。
 <p>加算合成の問題点とは、サウンドの正確な周波数成分を知る必要があるということで、それには必要とされる数のサイン波のそれぞれが理想的なエンベロープで制御されることによって初めて可能になるのです。
-<p>どちらにせよ、前の例のそれぞれのコンポーネントに別々のエンベロープを与えることによって、より微妙なテクスチャーを生成することができます。<textarea class='editor'>(
+<p>どちらにせよ、前の例のそれぞれのコンポーネントに別々のエンベロープを与えることによって、より微妙なテクスチャーを生成することができます。<div class='codeMirrorContainer'><textarea class='editor'>(
 {    var n = 12;
 
     Mix.arFill(
@@ -191,11 +206,12 @@ r.play</textarea>
 
 }.scope
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p>（もしくは<a href="./../../../Classes/Klang.html">Klang</a> ugenを用いることで同じ様な結果が得られます）
 <p>////////////////////////////////////////////////////////////////////////////////////////////////////<h2><a class='anchor' name='リング変調'>リング変調</a></h2>
 
-<p>2つのUGenを掛算することでリング変調を生成します。<textarea class='editor'>// キャリアの振幅を低周波オシレータ（LFO）で変調
+<p>2つのUGenを掛算することでリング変調を生成します。<div class='codeMirrorContainer'><textarea class='editor'>// キャリアの振幅を低周波オシレータ（LFO）で変調
 { SinOsc.ar(440, 0, 0.571) * SinOsc.kr(2.reciprocal) }.scope
 
 // LFOの周波数を可聴帯域にすることで追加の周波数成分を生成する
@@ -212,11 +228,12 @@ r.play</textarea>
         )
     }.scope
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p>////////////////////////////////////////////////////////////////////////////////////////////////////<h2><a class='anchor' name='振幅変調'>振幅変調</a></h2>
 
 <p>2つのUGenを掛算する際にモジュレータの値を正の値に制限することで、Charles Dodgeが「クラシック」振幅変調と呼ぶものを生成します。
-<p>モジュレーター、もし低周波のオシレータである場合には、その出力が正の値に制限されているか正の値に制限されていないかの違いは、変調の振幅のみに表れます。UGenを正の値のみに制限するために.absメッセージを使っています。<textarea class='editor'>// 低周波のオシレータ（lfo）でキャリアの振幅を変調する
+<p>モジュレーター、もし低周波のオシレータである場合には、その出力が正の値に制限されているか正の値に制限されていないかの違いは、変調の振幅のみに表れます。UGenを正の値のみに制限するために.absメッセージを使っています。<div class='codeMirrorContainer'><textarea class='editor'>// 低周波のオシレータ（lfo）でキャリアの振幅を変調する
 { SinOsc.ar(440, 0, 0.571) * SinOsc.kr(2.reciprocal).abs }.scope
 
 // lfoを用いてモジュレータの振幅を変調する
@@ -230,15 +247,17 @@ r.play</textarea>
         )
     }.scope
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p>////////////////////////////////////////////////////////////////////////////////////////////////////
-<p>モジュレータの出力を正の値に制限して低周波のオシレータの周波数を上げることにより、（サイドバンドを生成することによって）著しく音色が変化させます。<textarea class='editor'>// lfoの周波数を可聴帯域にして.absメッセージをモジュレータに適用する
+<p>モジュレータの出力を正の値に制限して低周波のオシレータの周波数を上げることにより、（サイドバンドを生成することによって）著しく音色が変化させます。<div class='codeMirrorContainer'><textarea class='editor'>// lfoの周波数を可聴帯域にして.absメッセージをモジュレータに適用する
 { SinOsc.ar(440, 0, 0.571) * SinOsc.kr(880).abs }.scope
 
 // 前の例をリング変調（.absメッセージの無いもの）と比較せよ
 // ... 何が違うだろう？
 { SinOsc.ar(440, 0, 0.571) * SinOsc.kr(880) }.scope</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p>////////////////////////////////////////////////////////////////////////////////////////////////////
-<p>go to <a href="./../../../Tutorials/Mark_Polishook_tutorial/Japanese_version/10.html">10</a><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Tutorials/Mark_Polishook_tutorial/Japanese_version/09.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Tutorials/Mark_Polishook_tutorial/Japanese_version/09.schelp</a><br>link::Tutorials/Mark_Polishook_tutorial/Japanese_version/09::<br></div></div><script src='./../../../editor.js' type='text/javascript'></script>
+<p>go to <a href="./../../../Tutorials/Mark_Polishook_tutorial/Japanese_version/10.html">10</a><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Tutorials/Mark_Polishook_tutorial/Japanese_version/09.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Tutorials/Mark_Polishook_tutorial/Japanese_version/09.schelp</a><br>link::Tutorials/Mark_Polishook_tutorial/Japanese_version/09::<br></div></div><script src='./../../../static/editor.js' type='text/javascript'></script>
 </body></html>

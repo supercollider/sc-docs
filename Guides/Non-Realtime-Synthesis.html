@@ -1,21 +1,25 @@
-<!doctype html><html lang='en'><head><title>Non-Realtime Synthesis (NRT) | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>Non-Realtime Synthesis (NRT) | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../lib/jquery.min.js'></script>
-<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/jquery.min.js'></script>
+<script src='./../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './..';
 var scdoc_title = 'Non-Realtime Synthesis (NRT)';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../static/scdoc.js' type='text/javascript'></script>
 <script src='./../docmap.js' type='text/javascript'></script>
+<script src='./../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
@@ -26,6 +30,7 @@ var scdoc_sc_version = '3.13.1';
 <ul class='toc'><li class='toc2'><a href='#Timed%20messages'>Timed messages</a></li>
 <ul class='toc'></ul><li class='toc2'><a href='#Rendering%20a%20Score%20using%20'recordNRT''>Rendering a Score using 'recordNRT'</a></li>
 <ul class='toc'></ul><li class='toc2'><a href='#Score%20files'>Score files</a></li>
+<ul class='toc'></ul><li class='toc2'><a href='#Using%20system%20SynthDefs'>Using system SynthDefs</a></li>
 <ul class='toc'></ul><li class='toc2'><a href='#Server%20instance'>Server instance</a></li>
 <ul class='toc'></ul><li class='toc2'><a href='#Server%20resources'>Server resources</a></li>
 <ul class='toc'></ul></ul><li class='toc1'><a href='#Examples'>Examples</a></li>
@@ -60,7 +65,7 @@ var scdoc_sc_version = '3.13.1';
 
 <p>It is recommended to use a <a href="./../Classes/Score.html">Score</a> object to run NRT processes. A Score object:<ul>
 <li>prepares the binary OSC file for you, in the correct format;<li>manages NRT server processes;<li>can optionally play the Score, or portions of it, in real time for testing.</ul>
-<textarea class='editor'>(
+<div class='codeMirrorContainer'><textarea class='editor'>(
 var server = Server(\nrt,
     options: ServerOptions.new
     .numOutputBusChannels_(2)
@@ -88,23 +93,27 @@ a.recordNRT(
 
 server.remove;
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h3><a class='anchor' name='Timed%20messages'>Timed messages</a></h3>
 
 <p>A new Score object needs a list of commands, with times.
 <p>Each command is an array, e.g. <code>['/n_set', 1000, 'gate', 0]</code>.
-<p>Each command is bound to a time by placing it in another array, with the time (a floating point number, in beats) first:<textarea class='editor'>[143.2647423, ['/n_set', 1000, 'gate', 0]]</textarea>
+<p>Each command is bound to a time by placing it in another array, with the time (a floating point number, in beats) first:<div class='codeMirrorContainer'><textarea class='editor'>[143.2647423, ['/n_set', 1000, 'gate', 0]]</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <div class='note'><span class='notelabel'>NOTE:</span> Times are adjusted for the clock's tempo. <a href="./../Classes/Score.html#*new">Score: *new</a> allows you to specify a <a href="./../Classes/TempoClock.html">TempoClock</a>; if you don't, then <code>TempoClock.default</code> will be used.</div>
 <p>Server abstraction objects (Synth, Group, Buffer etc.) include methods to give you the OSC message. So, a Score may frequently include idioms such as:<ul>
 <li>Create a group: <code>[time, Group.basicNew(server).newMsg]</code><li>Create a synth: <code>[time, Synth.basicNew(\defname, server).newMsg(target, args: [...])]</code><li>Read a buffer from disk: <code>[time, Buffer(server).allocReadMsg(path)]</code></ul>
 <div class='note'><span class='notelabel'>NOTE:</span> Normal usage of <a href="./../Classes/Synth.html">Synth</a> or <a href="./../Classes/Buffer.html">Buffer</a> communicates immediately with the server: <code>Synth.new(...)</code> transmits <code>/s_new</code>; <code>Buffer.alloc(server, ...)</code> sends <code>/b_alloc</code>. To build a NRT score, create the object as a placeholder (no immediate communication) and then ask a placeholder for the message: <a href="./../Classes/Synth.html#*basicNew">Synth: *basicNew</a> and <a href="./../Classes/Synth.html#-newMsg">Synth: -newMsg</a>, or <a href="./../Classes/Buffer.html#*new">Buffer: *new</a> and <a href="./../Classes/Buffer.html#-allocMsg">Buffer: -allocMsg</a> or <a href="./../Classes/Buffer.html#-allocReadMsg">Buffer: -allocReadMsg</a>. There is no need for a bus-allocation message simmilar to <a href="./../Classes/Buffer.html#-allocMsg">Buffer: -allocMsg</a>. If you have only used realtime synthesis, this code style is unfamiliar, but it's worth practicing.
 <p>(The result of, e.g., <code>newMsg</code> is already the array representing the message. So it is sufficient for each Score item to be an array containing the time and method call. The subarray should be explicit only when writing the message by hand.)</div>
 <p>Consult help files for the server abstraction classes for additional "...Msg" methods.
-<p>If you save the result of <code>Synth.basicNew(...)</code> in a variable, then you can free it later using either <a href="./../Classes/Node.html#-freeMsg">Node: -freeMsg</a> or <a href="./../Classes/Node.html#-releaseMsg">Node: -releaseMsg</a>, e.g.:<textarea class='editor'>[1.0, (x = Synth.basicNew(\default, server)).newMsg(args: [freq: 200])],
+<p>If you save the result of <code>Synth.basicNew(...)</code> in a variable, then you can free it later using either <a href="./../Classes/Node.html#-freeMsg">Node: -freeMsg</a> or <a href="./../Classes/Node.html#-releaseMsg">Node: -releaseMsg</a>, e.g.:<div class='codeMirrorContainer'><textarea class='editor'>[1.0, (x = Synth.basicNew(\default, server)).newMsg(args: [freq: 200])],
 [2.0, x.releaseMsg]</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>For <a href="./../Classes/SynthDef.html">SynthDef</a>, there is no <code>addMsg</code> or <code>recvMsg</code> method. Add SynthDefs into the Score as follows:<textarea class='editor'>[0.0, ['/d_recv', SynthDef(...).asBytes]]</textarea>
+<p>For <a href="./../Classes/SynthDef.html">SynthDef</a>, there is no <code>addMsg</code> or <code>recvMsg</code> method. Add SynthDefs into the Score as follows:<div class='codeMirrorContainer'><textarea class='editor'>[0.0, ['/d_recv', SynthDef(...).asBytes]]</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>Very large SynthDefs will need to be written to disk and <em>not</em> rendered as OSC messages in the Score. The SuperCollider language client limits the size of a single OSC message to 65516 bytes. If a SynthDef exceeds this limit, creation of the Score object will fail with the error message <code>ERROR: makeSynthMsgWithTags: buffer overflow</code>. Resolve this error message as follows:<textarea class='editor'>(
+<p>Very large SynthDefs will need to be written to disk and <em>not</em> rendered as OSC messages in the Score. The SuperCollider language client limits the size of a single OSC message to 65516 bytes. If a SynthDef exceeds this limit, creation of the Score object will fail with the error message <code>ERROR: makeSynthMsgWithTags: buffer overflow</code>. Resolve this error message as follows:<div class='codeMirrorContainer'><textarea class='editor'>(
 SynthDef(\veryLarge, {
     // ... very large UGen graph...
 }).writeDefFile;
@@ -117,9 +126,10 @@ x = Score([
     ...
 ]);
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h3><a class='anchor' name='Rendering%20a%20Score%20using%20'recordNRT''>Rendering a Score using 'recordNRT'</a></h3>
 
-<p>To render the Score, use the <a href="./../Classes/Score.html#-recordNRT">Score: -recordNRT</a> method. Here is a rough template, followed by an explanation of the <code>recordNRT</code> parameters.<textarea class='editor'>(
+<p>To render the Score, use the <a href="./../Classes/Score.html#-recordNRT">Score: -recordNRT</a> method. Here is a rough template, followed by an explanation of the <code>recordNRT</code> parameters.<div class='codeMirrorContainer'><textarea class='editor'>(
 a = Score(...);
 
 a.recordNRT(
@@ -135,6 +145,7 @@ a.recordNRT(
     action:
 );
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <dl>
 <dt>oscFilePath<dd>Recommended to omit (leave as <code>nil</code>). Score will generate a temporary filename for you.<dt>outputFilePath<dd>The output audio file that you want (full path).<dt>inputFilePath<dd>Optional. If you provide an existing audio file, its contents will stream to the NRT server's hardware input buses.<dt>sampleRate<dd>Output file sample rate.<dt>headerFormat<dd>See <a href="./../Classes/SoundFile.html#-headerFormat">SoundFile: -headerFormat</a>.<dt>sampleFormat<dd>See <a href="./../Classes/SoundFile.html#-sampleFormat">SoundFile: -sampleFormat</a>.<dt>options<dd>An instance of <a href="./../Classes/ServerOptions.html">ServerOptions</a>. In particular, this is important to set the desired number of output channels, e.g. <code>ServerOptions.new.numOutputBusChannels_(2)</code>.<dt>completionString<dd>Undocumented. No apparent purpose.<dt>duration<dd>The desired total length of the output file, in seconds.<dt>action<dd>A function to evaluate when rendering is complete.</dl>
 
@@ -142,13 +153,19 @@ a.recordNRT(
 <p>If you are repeatedly rendering NRT scores, you can set <code>Score.options = ServerOptions.new...</code> and <code>recordNRT</code> will use this set of server options by default.<h3><a class='anchor' name='Score%20files'>Score files</a></h3>
 
 <p><code>recordNRT</code> allows you optionally to specify the path to the binary OSC score file. This is useful if you want to keep the file for archival purposes, or to delete the file in <code>recordNRT</code>'s action function.
-<p>If you do not give a path, <code>recordNRT</code> will generate one for you in the system's temporary file location. These files are not automatically deleted after rendering. Some systems may automatically clean up old temporary files after some time. Otherwise, you can take it into your own hands:<textarea class='editor'>var oscPath = PathName.tmp +/+ "mytempscore";
+<p>If you do not give a path, <code>recordNRT</code> will generate one for you in the system's temporary file location. These files are not automatically deleted after rendering. Some systems may automatically clean up old temporary files after some time. Otherwise, you can take it into your own hands:<div class='codeMirrorContainer'><textarea class='editor'>var oscPath = PathName.tmp +/+ "mytempscore";
 
 x = Score([ ... ]);
 
 x.recordNRT(oscFilePath: oscPath, ..., action: {
     File.delete(oscPath)
 });</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+<h3><a class='anchor' name='Using%20system%20SynthDefs'>Using system SynthDefs</a></h3>
+
+<p>Some code requires a number of SynthDefs that are assumed to exist on the server (<a href="./../Classes/SystemSynthDefs.html">SystemSynthDefs</a>). When booting a server in realtime mode, they are sent automatically. In non-realtime mode, they need to be added to the score explicitly:<div class='codeMirrorContainer'><textarea class='editor'>x = Score.new;
+x.addSystemSynthDefs;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h3><a class='anchor' name='Server%20instance'>Server instance</a></h3>
 
 <p>If you want to use server abstraction objects (e.g. Synth, Group, Buffer), you might also want them to allocate node IDs or buffer and bus numbers for you. <a href="./../Classes/Synth.html#*basicNew">Synth: *basicNew</a> and <a href="./../Classes/Buffer.html#*new">Buffer: *new</a> use the server's allocators if you don't supply an ID (leave it nil). However, if you accidentally use the default server, any IDs you allocate for NRT will be marked as allocated in the default, realtime server. To avoid this, you can create a separate Server instance, just for producing the Score, and then remove the instance after rendering. This is a client-only object; you don't need to boot it.
@@ -156,7 +173,7 @@ x.recordNRT(oscFilePath: oscPath, ..., action: {
 
 <p>A NRT server is <em>a separate server process</em> from any other. Every time you run a Score, it launches a brand-new server process. Each new server starts with a blank slate. In particular, any SynthDefs you have added or Buffers you have loaded are not automatically available to the new server.
 <p>Therefore, your Score must include instructions to prepare these resources.
-<p>It is a very common mistake to load a buffer into a realtime server, and then run a non-realtime server, and find that resources are not available. For instance, this example adds a SynthDef in the normal way (added in memory only), and the SynthDef is not automatically transferred to the NRT server.<textarea class='editor'>// Incorrect
+<p>It is a very common mistake to load a buffer into a realtime server, and then run a non-realtime server, and find that resources are not available. For instance, this example adds a SynthDef in the normal way (added in memory only), and the SynthDef is not automatically transferred to the NRT server.<div class='codeMirrorContainer'><textarea class='editor'>// Incorrect
 (
 SynthDef(\NRTsine, { |out, freq = 440|
     Out.ar(out, SinOsc.ar(freq, 0, 0.2).dup)
@@ -186,15 +203,17 @@ a.recordNRT(
 
 server.remove;
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <pre>-&gt;
 nextOSCPacket 0
 *** ERROR: SynthDef NRTsine not found
-FAILURE IN SERVER /s_new SynthDef not found</pre><textarea class='editor'>File.delete(PathName.tmp +/+ "nrt-help-fail.wav");</textarea>
+FAILURE IN SERVER /s_new SynthDef not found</pre><div class='codeMirrorContainer'><textarea class='editor'>File.delete(PathName.tmp +/+ "nrt-help-fail.wav");</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <div class='note'><span class='notelabel'>NOTE:</span> Another common technique to transmit SynthDefs to an NRT server is to use <a href="./../Classes/SynthDef.html#-writeDefFile">SynthDef: -writeDefFile</a> to avoid this problem. This works by writing the SynthDef into the default SynthDef directory; then, the NRT server reads SynthDefs from the default location when it starts up. This approach is perfectly valid, but has the disadvantage of leaving <code>.scsyndef</code> files on disk that you might not need later. For that reason, this document demonstrates how to make SynthDefs available to NRT servers without using disk files.</div>
 <p>The good news is that a NRT server does not have to wait for "heavy" operations like receiving SynthDefs or loading buffers. Commands that are considered asynchronous in a realtime server behave as synchronous commands in NRT. So, you can simply front-load your Score with all the SynthDefs and Buffers, at time 0.0, and then start the audio processing also at time 0.0. (However, you might need a slight offset for the audio processing because <code>sort</code> may not know which entries at time 0.0 must come first.) The following examples demonstrate.<h2><a class='anchor' name='Examples'>Examples</a></h2>
 <h3><a class='anchor' name='Algorithmic%20generation%20of%20Synth%20messages'>Algorithmic generation of Synth messages</a></h3>
 
-<p>The preceding example, for simplicity, adds only one synth. Another approach is to create the initial Score with "setup" messages, and add further Synth messages for notes.<textarea class='editor'>(
+<p>The preceding example, for simplicity, adds only one synth. Another approach is to create the initial Score with "setup" messages, and add further Synth messages for notes.<div class='codeMirrorContainer'><textarea class='editor'>(
 var server = Server(\nrt,
     options: ServerOptions.new
     .numOutputBusChannels_(2)
@@ -233,12 +252,13 @@ x.recordNRT(
 
 server.remove;
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h3><a class='anchor' name='NRT%20processing%20of%20an%20audio%20file'>NRT processing of an audio file</a></h3>
 
 <p>Applying a custom effect to a very long audio file is an especially good use of NRT: create a Score that defines an effect SynthDef and runs it for the duration of of the input file. You can use <code>recordNRT</code>'s input file parameter to pipe the source audio to the NRT server's hardware inputs, and read it with <a href="./../Classes/SoundIn.html">SoundIn</a>.
-<p>The example audio file is not very long, but processing here is almost instantaneous.<textarea class='editor'>(
+<p>The example audio file is not very long, but processing here is almost instantaneous.<div class='codeMirrorContainer'><textarea class='editor'>(
 var server,
-inputFile = SoundFile.openRead(Platform.resourceDir +/+ "sounds/a11wlk01.wav");
+inputFile = SoundFile.openRead(ExampleFiles.child);
 
 inputFile.close;  // doesn't need to stay open; we just need the stats
 
@@ -272,10 +292,11 @@ x.recordNRT(
 
 server.remove;
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h3><a class='anchor' name='Generating%20NRT%20scores%20from%20patterns'>Generating NRT scores from patterns</a></h3>
 
 <p>Event patterns can be converted into Scores by <code>asScore</code>. (Note that <code>asScore</code> internally creates a Server instance to use for allocators. So, it is not necessary for this example to create a Server.)
-<p>First, a simple example using the default SynthDef. Note that the default SynthDef is not stored to disk by default, so it is necessary to include it in the score. The slight time offset in <code>asScore</code> is necessary to be sure that the SynthDef message comes first.<textarea class='editor'>(
+<p>First, a simple example using the default SynthDef. Note that the default SynthDef is not stored to disk by default, so it is necessary to include it in the score. The slight time offset in <code>asScore</code> is necessary to be sure that the SynthDef message comes first.<div class='codeMirrorContainer'><textarea class='editor'>(
 x = Pbind(
     \freq, Pexprand(200, 800, inf),
     \dur, Pexprand(0.8, 1.25, inf) * Pgeom(0.01, 1.0143978590819, 400),
@@ -294,8 +315,9 @@ x.recordNRT(
     duration: 10
 );
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>To use Buffers and Buses, it is recommended to avoid conflicts with real-time server instances by creating a Server object just for the non-realtime process. It is not necessary to boot this server, only to use its allocators. After rendering, you may safely <code>remove</code> the server instance.<textarea class='editor'>(
+<p>To use Buffers and Buses, it is recommended to avoid conflicts with real-time server instances by creating a Server object just for the non-realtime process. It is not necessary to boot this server, only to use its allocators. After rendering, you may safely <code>remove</code> the server instance.<div class='codeMirrorContainer'><textarea class='editor'>(
 var server = Server(\nrt,
     options: ServerOptions.new
     .numOutputBusChannels_(2)
@@ -323,7 +345,7 @@ x = Pbind(
 
 // the score also needs the def and buffer
 x.add([0.0, [\d_recv, def.asBytes]]);
-x.add([0.0, buf.allocReadMsg(Platform.resourceDir +/+ "sounds/a11wlk01.wav")]);
+x.add([0.0, buf.allocReadMsg(ExampleFiles.child)]);
 x.sort;
 
 x.recordNRT(
@@ -337,12 +359,13 @@ x.recordNRT(
 
 server.remove;
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p>See also <a href="./../Classes/Pproto.html">Pproto</a> for another way to initialize buffers and other resources within a pattern object. Not every type of resource is supported in <code>Pproto</code>, but for typical cases, it may be more convenient than the above approach.<h3><a class='anchor' name='Analysis%20using%20a%20Non-Realtime%20server'>Analysis using a Non-Realtime server</a></h3>
 
 <p>An NRT server may also be used to extract analytical data from a sound file. The main issues are:<dl>
 <dt>Suppressing audio file output<dd>In macOS and Linux environments, use <code>/dev/null</code> for the output file path. In Windows, use <code>NUL</code>.<dt>Retrieving analytical data.<dd>The easiest way is to allocate a buffer at the beginning of the NRT score, and use BufWr to fill the buffer. At the end of the score, write the buffer into a temporary file. Then you can use SoundFile on the language side to access the data. See the example.</dl>
-<textarea class='editor'>// Example: Extract onsets into a buffer.
+<div class='codeMirrorContainer'><textarea class='editor'>// Example: Extract onsets into a buffer.
 
 (
 fork {
@@ -354,7 +377,7 @@ fork {
     var resultbuf, resultpath, oscpath, score, dur, sf, cond, size, data;
 
     // get duration
-    sf = SoundFile.openRead(Platform.resourceDir +/+ "sounds/a11wlk01.wav");
+    sf = SoundFile.openRead(ExampleFiles.child);
     dur = sf.duration;
     sf.close;
 
@@ -407,13 +430,14 @@ fork {
     data.postln;  // these are your onsets!
 };
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h2><a class='anchor' name='OSC%20file%20format'>OSC file format</a></h2>
 
 <p>If, for some reason, you need to write the OSC command file yourself without using Score, the general method is:<ol>
 <li>Open a file for writing: <code>File(path, "w")</code>.<li>For each OSC command:<ol>
 <li>Create the command as an array, and save it in a variable such as <code>cmd</code>.<li>Convert to binary: <code>cmd = cmd.asRawOSC;</code><li>Write the byte size as an integer: <code>file.write(cmd.size);</code><li>Write the binary command: <code>file.write(cmd);</code></ol>
 </ol>
-<textarea class='editor'>f = File(PathName.tmp +/+ "Cmds.osc", "w");
+<div class='codeMirrorContainer'><textarea class='editor'>f = File(PathName.tmp +/+ "Cmds.osc", "w");
 
 // start a sine oscillator at 0.2 seconds.
 c = [0.2, [\s_new, \default, 1001, 0, 0]].asRawOSC;
@@ -435,9 +459,10 @@ f.close;
 
 // after rendering, always remember to clean up your mess:
 File.delete(PathName.tmp +/+ "Cmds.osc");</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h2><a class='anchor' name='Bus%20allocation%20and%20synth/LFO%20mapping'>Bus allocation and synth/LFO mapping</a></h2>
 
-<p>In this example, a control bus and LFO map is used to have various affects on the source sound.<textarea class='editor'>(
+<p>In this example, a control bus and LFO map is used to have various affects on the source sound.<div class='codeMirrorContainer'><textarea class='editor'>(
 var nrtserver = Server(\nrt,
     options: ServerOptions.new
     .numOutputBusChannels_(2)
@@ -478,5 +503,7 @@ a.recordNRT(
 
 nrtserver.remove;
 )</textarea>
-<div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Guides/Non-Realtime-Synthesis.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Guides/Non-Realtime-Synthesis.schelp</a><br>link::Guides/Non-Realtime-Synthesis::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+
+<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Guides/Non-Realtime-Synthesis.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Guides/Non-Realtime-Synthesis.schelp</a><br>link::Guides/Non-Realtime-Synthesis::<br></div></div><script src='./../static/editor.js' type='text/javascript'></script>
 </body></html>

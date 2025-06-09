@@ -1,0 +1,168 @@
+<!doctype html><html lang='en'><head><title>GUI: Create a Window | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../../static/themes/default.css' type='text/css' />
+<link rel='stylesheet' href='./../../frontend.css' type='text/css' />
+<link rel='stylesheet' href='./../../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../../static/lib/katex/katex.min.css' />
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+<script src='./../../static/lib/jquery.min.js'></script>
+<script src='./../../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../../static/lib/katex/katex.min.js' type='text/javascript'></script>
+<script>
+var helpRoot = './../..';
+var scdoc_title = 'GUI: Create a Window';
+var scdoc_sc_version = '3.14.0-rc1';
+</script>
+<script src='./../../static/scdoc.js' type='text/javascript'></script>
+<script src='./../../docmap.js' type='text/javascript'></script>
+<script src='./../../frontend.js' type='text/javascript'></script>
+<script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
+</head>
+<body onload='fixTOC()'>
+<div id='toc'>
+<div id='toctitle'>GUI: Create a Window:</div>
+<span class='toc_search'>Filter: <input id='toc_search'></span><ul class='toc'><li class='toc1'><a href='#GUI%20Tutorial'>GUI Tutorial</a></li>
+<ul class='toc'></ul><li class='toc1'><a href='#Creating%20and%20manipulating%20a%20Window'>Creating and manipulating a Window</a></li>
+<ul class='toc'></ul><li class='toc1'><a href='#Inserting%20and%20positioning%20views'>Inserting and positioning views</a></li>
+<ul class='toc'></ul><li class='toc1'><a href='#Keyboard%20input'>Keyboard input</a></li>
+<ul class='toc'></ul><li class='toc1'><a href='#And%20that's%20it!'>And that's it!</a></li>
+<ul class='toc'></ul></ul></div><div id='menubar'></div>
+<div class='contents'>
+<div class='header'>
+<div id='label'>
+<span id='folder'>Tutorials/GUI</span>
+ | <span id='categories'><a href='./../../Browse.html#Tutorials'>Tutorials</a>&#8201;&gt;&#8201;<a href='./../../Browse.html#Tutorials>GUI'>GUI</a></span>
+</div><h1>GUI: Create a Window</h1>
+<div id='summary'>How to create a window, insert widgets and map keyboard inputs to it with SuperCollider.</div>
+</div>
+<div class='subheader'>
+<div id='related'>See also: <a href="./../../Tutorials/GUI/create_simple_instrument_view.html">GUI: Interfacing an instrument with a View</a>, <a href="./../../Tutorials/GUI/compose_complex_view.html">GUI: Composing views with basic components</a></div>
+</div>
+<h2><a class='anchor' name='GUI%20Tutorial'>GUI Tutorial</a></h2>
+
+<p>This helpfile is part of a <a href="./../../Tutorials/GUI/tutorial_intro.html">GUI tutorial</a>.
+<p>It is the first part of a beginner's introduction to SuperCollider's GUI system. Second part covers  <a href="./../../Tutorials/GUI/create_simple_instrument_view.html">interfacing a synth with a GUI interface</a>, while third part talks about <a href="./../../Tutorials/GUI/compose_complex_view.html">composing views with basic GUI components</a>.<h2><a class='anchor' name='Creating%20and%20manipulating%20a%20Window'>Creating and manipulating a Window</a></h2>
+
+<p>To <strong>create</strong> a <a href="./../../Classes/Window.html">Window</a> in SuperCollider, simply execute the following code:<div class='codeMirrorContainer'><textarea class='editor'>(
+var win = Window();
+win.front;
+)</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+
+<p>The first command creates the window, and the second tells your graphical system to display it.
+<p>You can customize its name, position and size directly when creating it:<div class='codeMirrorContainer'><textarea class='editor'>(
+var window = Window("My window", Rect(100, 100, 600, 200));
+
+window.front;
+)</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+
+<p>You can also toggle its <strong>fullscreen</strong> mode:<div class='codeMirrorContainer'><textarea class='editor'>(
+var window = Window();
+window.fullScreen;
+window.front;
+)</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+
+<p>If you executed the previous example, you might have noticed that closing it can be difficult, because it doesn't show its top menu, and doesn't respond to keyboard inputs. To <strong>close every window</strong> that SuperCollider created using code, simply execute the following command:<div class='codeMirrorContainer'><textarea class='editor'>Window.closeAll;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+
+<p>If you stored your window in a global variable, you can also <strong>close it directly</strong>:<div class='codeMirrorContainer'><textarea class='editor'>~window.close;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+
+<p>Once closed, you need to recreate it, because it has been completely deleted.<div class='note'><span class='notelabel'>NOTE:</span> The following code can be useful when developing graphical interfaces:<div class='codeMirrorContainer'><textarea class='editor'>(
+var window = Window();
+CmdPeriod.doOnce({ window.close; });
+window.front;
+)</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+
+<p>Every time you hit <strong>ctrl + shift + .</strong>, this will close the window you're currently creating, if it is still open, preventing the accumulation of windows during development process.</div><h2><a class='anchor' name='Inserting%20and%20positioning%20views'>Inserting and positioning views</a></h2>
+
+<p>Once you've created the window, you can <strong>add</strong> a <a href="./../../Classes/View.html">View</a> <strong>directly</strong> into it, by passing the window as parent argument when creating the <a href="./../../Classes/View.html">View</a>:<div class='codeMirrorContainer'><textarea class='editor'>(
+var window = Window();
+var button = Button(window);
+button.string_("Click me!");
+window.front;
+)</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+
+<p>When doing so, <strong>you are responsible for</strong> setting your <a href="./../../Classes/View.html">View</a> at <strong>the right position and size</strong>:<div class='codeMirrorContainer'><textarea class='editor'>(
+var window = Window();
+var button = Button(
+    window,
+    Rect(100, 100, 200, 200)
+);
+button.string_("Click me!");
+window.front;
+)</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+
+<p>If you'd rather use <strong>automatic positioning</strong> and <strong>automatic resizing</strong> when the window is re-sized, you should use a <a href="./../../Classes/Layout.html">Layout</a>:<div class='codeMirrorContainer'><textarea class='editor'>(
+var window = Window();
+
+var layout = HLayout();
+
+var button = Button(window);
+button.string_("Click me!");
+
+// Assign the layout to the window
+window.layout_(layout);
+// Then add the View to the layout
+layout.add(button);
+
+window.front;
+)</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+
+<p>See <a href="./../../Classes/Layout.html">Layout</a> for more information about this organisation method. The layout system is also discussed in the next tutorial of this series.<div class='note'><span class='notelabel'>NOTE:</span> Adding a <a href="./../../Classes/StackLayout.html">StackLayout</a> as primary Layout for a Window allows to easily switch between different Views, in other words, different interfaces.</div><h2><a class='anchor' name='Keyboard%20input'>Keyboard input</a></h2>
+
+<p><a href="./../../Classes/Window.html">Window</a> 'inherits' from the <a href="./../../Classes/UserView.html">UserView</a> <strong>action</strong> system. It can respond to mouse and keyboard events. See the <a href="./../../Classes/UserView.html">UserView</a> help file for more information about this.
+<p>Another way to interact with the window using the keyboard, which might be preferable, is to assign a function to <code>View.globalKeyDownAction</code>.
+<p><code>View.globalKeyDownAction</code> <strong>will be executed whenever a keyboard input is received</strong> (regardless of current focus), and <strong>allows an action to take place in response</strong> to the keyboard event, for example closing the window:<div class='codeMirrorContainer'><textarea class='editor'>(
+var window = Window();
+var fullScreenActive = false;
+
+View.globalKeyDownAction = { |view, char, mod, unicode, keycode, key|
+
+    switch(keycode)
+
+    // if the keycode is 65307 (ESC): close the window
+    { 65307 } { window.close; }
+
+    // if the keycode is 102 (f): toggle full screen ON / OFF
+    { 102 } {
+        fullScreenActive = fullScreenActive.not;
+        if(fullScreenActive)
+        { window.fullScreen; }
+        { window.endFullScreen; };
+    };
+};
+
+window.front;
+)</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+<div class='note'><span class='notelabel'>NOTE:</span> Using a <a href="./../../Classes/FunctionList.html">FunctionList</a> with <code>View.globalKeyDownAction</code> allows to incrementally build up keyboard input response:<div class='codeMirrorContainer'><textarea class='editor'>(
+var window = Window();
+
+View.globalKeyDownAction = FunctionList();
+
+View.globalKeyDownAction.addFunc({ |view, char, mod, unicode, keycode, key|
+
+    switch(keycode)
+    // if the keycode is 65307, i.e. ESC, close the window
+    { 65307 } { window.close; };
+});
+
+window.front;
+)</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+</div><h2><a class='anchor' name='And%20that's%20it!'>And that's it!</a></h2>
+
+<p>With the ability to <strong>create a window</strong>, <strong>insert views inside</strong> and make it <strong>respond to keyboard inputs</strong>, you're well set to go forward in your SuperCollider graphical experiments.
+<p>The next section of this tutorial is: <a href="./../../Tutorials/GUI/create_simple_instrument_view.html">GUI: Interfacing an instrument with a View</a>. It starts from the previous examples and talks about connecting a button and a slider to a synth, and about the layout system.<div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Tutorials/GUI/create_window.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Tutorials/GUI/create_window.schelp</a><br>link::Tutorials/GUI/create_window::<br></div></div><script src='./../../static/editor.js' type='text/javascript'></script>
+</body></html>

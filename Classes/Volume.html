@@ -1,21 +1,25 @@
-<!doctype html><html lang='en'><head><title>Volume | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>Volume | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../lib/jquery.min.js'></script>
-<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/jquery.min.js'></script>
+<script src='./../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './..';
 var scdoc_title = 'Volume';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../static/scdoc.js' type='text/javascript'></script>
 <script src='./../docmap.js' type='text/javascript'></script>
+<script src='./../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
@@ -36,8 +40,11 @@ var scdoc_sc_version = '3.13.1';
 <li class='toc2'><a href='#Undocumented%20instance%20methods'>Undocumented instance methods</a></li>
 <ul class='toc'><li class='toc3'><a href='#-ampSynth'>ampSynth</a> </li>
 <li class='toc3'><a href='#-close'>close</a> </li>
+<li class='toc3'><a href='#-defName'>defName</a> </li>
 <li class='toc3'><a href='#-freeSynth'>freeSynth</a> </li>
+<li class='toc3'><a href='#-group'>group</a> </li>
 <li class='toc3'><a href='#-isMuted'>isMuted</a> </li>
+<li class='toc3'><a href='#-listener'>listener</a> </li>
 <li class='toc3'><a href='#-max'>max</a> </li>
 <li class='toc3'><a href='#-min'>min</a> </li>
 <li class='toc3'><a href='#-numChannels'>numChannels</a> </li>
@@ -48,6 +55,7 @@ var scdoc_sc_version = '3.13.1';
 <li class='toc3'><a href='#-sendSynthDef'>sendSynthDef</a> </li>
 <li class='toc3'><a href='#-server'>server</a> </li>
 <li class='toc3'><a href='#-startBus'>startBus</a> </li>
+<li class='toc3'><a href='#-startListener'>startListener</a> </li>
 <li class='toc3'><a href='#-updateSynth'>updateSynth</a> </li>
 <li class='toc3'><a href='#-window'>window</a> </li>
 </ul></ul><li class='toc1'><a href='#examples'>Examples</a></li>
@@ -62,10 +70,10 @@ var scdoc_sc_version = '3.13.1';
 <div id='summary'>Model for the global volume of the synthesis server</div>
 </div>
 <div class='subheader'>
-<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/Common/Control/Volume.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Control/Volume.sc'>Volume.sc</a></div></div>
+<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/Common/Control/Volume.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Control/Volume.sc'>Volume.sc</a></div></div>
 <h2><a class='anchor' name='description'>Description</a></h2>
 
-<p>Internally used by Server. When volume value != 0 dB or muted, a server's volume object will create a synth for controlling the volume on the main outputs for the number of channels given.<h2><a class='anchor' name='classmethods'>Class Methods</a></h2>
+<p>Internally used by Server. When volume value != 0 dB or muted, a server's volume object will create a synth for controlling the volume on the main outputs for the number of channels given. For shared use of this volume synth with remote clients on this server, volume has its own group with fixed nodeID 2, and the synth (when present) uses the fixed nodeID 3.<h2><a class='anchor' name='classmethods'>Class Methods</a></h2>
 <h3 class='method-code'><span class='method-prefix'>Volume.</span><a class='method-name' name='*new' href='./../Overviews/Methods.html#new'>new</a>(<span class='argstr'>server</span>, <span class='argstr'>startBus: 0</span>, <span class='argstr'>numChannels</span>, <span class='argstr'>min: -90</span>, <span class='argstr'>max: 6</span>, <span class='argstr'>persist: false</span>)</h3>
 <div class='method'>
 <p>Create and return a new instance of Volume for a given server, ranging from <code>startBus</code> over <code>numChans</code> (usually the server's number of output bus channels).<h4>Arguments:</h4>
@@ -96,26 +104,30 @@ var scdoc_sc_version = '3.13.1';
 <div id='inheritedinstmets'></div><h3><a class='anchor' name='Undocumented%20instance%20methods'>Undocumented instance methods</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-ampSynth' href='./../Overviews/Methods.html#ampSynth'>ampSynth</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-close' href='./../Overviews/Methods.html#close'>close</a></h3>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-defName' href='./../Overviews/Methods.html#defName'>defName</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-freeSynth' href='./../Overviews/Methods.html#freeSynth'>freeSynth</a></h3>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-group' href='./../Overviews/Methods.html#group'>group</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-isMuted' href='./../Overviews/Methods.html#isMuted'>isMuted</a></h3>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-listener' href='./../Overviews/Methods.html#listener'>listener</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-max' href='./../Overviews/Methods.html#max'>max</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-min' href='./../Overviews/Methods.html#min'>min</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-numChannels' href='./../Overviews/Methods.html#numChannels'>numChannels</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-numChannels' href='./../Overviews/Methods.html#numChannels'>numChannels</a> = <span class='argstr'>num</span></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-numChans' href='./../Overviews/Methods.html#numChans'>numChans</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-numChans' href='./../Overviews/Methods.html#numChans'>numChans</a> = </h3>
-<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/deprecated/3.10/deprecated-3.10.sc'>/usr/local/share/SuperCollider/SCClassLibrary/deprecated/3.10/deprecated-3.10.sc</a></div>
+<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/deprecated/3.10/deprecated-3.10.sc'>/usr/local/share/SuperCollider/SCClassLibrary/deprecated/3.10/deprecated-3.10.sc</a></div>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-numOutputChannels' href='./../Overviews/Methods.html#numOutputChannels'>numOutputChannels</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-persist' href='./../Overviews/Methods.html#persist'>persist</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-reset' href='./../Overviews/Methods.html#reset'>reset</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-sendSynthDef' href='./../Overviews/Methods.html#sendSynthDef'>sendSynthDef</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-server' href='./../Overviews/Methods.html#server'>server</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-startBus' href='./../Overviews/Methods.html#startBus'>startBus</a></h3>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-startListener' href='./../Overviews/Methods.html#startListener'>startListener</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-updateSynth' href='./../Overviews/Methods.html#updateSynth'>updateSynth</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-window' href='./../Overviews/Methods.html#window'>window</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-window' href='./../Overviews/Methods.html#window'>window</a> = value</h3>
 <h2><a class='anchor' name='examples'>Examples</a></h2>
-<textarea class='editor'>v = s.volume;
+<div class='codeMirrorContainer'><textarea class='editor'>v = s.volume;
 
 v.min;
 v.max;
@@ -126,5 +138,7 @@ v.unmute;
 
 // separate window
 v.gui;</textarea>
-<div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/Volume.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/Volume.schelp</a><br>link::Classes/Volume::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+
+<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/Volume.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/Volume.schelp</a><br>link::Classes/Volume::<br></div></div><script src='./../static/editor.js' type='text/javascript'></script>
 </body></html>

@@ -1,21 +1,25 @@
-<!doctype html><html lang='en'><head><title>Understanding Streams, Patterns and Events - Part 7 | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>Understanding Streams, Patterns and Events - Part 7 | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../lib/jquery.min.js'></script>
-<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/jquery.min.js'></script>
+<script src='./../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './..';
 var scdoc_title = 'Understanding Streams, Patterns and Events - Part 7';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../static/scdoc.js' type='text/javascript'></script>
 <script src='./../docmap.js' type='text/javascript'></script>
+<script src='./../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
@@ -39,7 +43,7 @@ var scdoc_sc_version = '3.13.1';
 </div>
 <h2><a class='anchor' name='Practical%20Considerations'>Practical Considerations</a></h2>
 <h3><a class='anchor' name='Using%20your%20own%20instrument'>Using your own instrument</a></h3>
-<textarea class='editor'>(
+<div class='codeMirrorContainer'><textarea class='editor'>(
 SynthDef(\help_SPE7_BerlinB, { arg i_out=0, freq = 80, amp = 0.2, pan=0;
     var out, a, b;
     amp = Decay2.kr(Impulse.kr(0), 0.05, 8, amp);
@@ -63,8 +67,9 @@ SynthDef(\help_SPE7_CFString1, { arg i_out, freq = 360, gate = 1, pan, amp=0.1;
     Out.ar(i_out, Mix.ar(PanAz.ar(4, [a, b], [pan, pan+0.3])));
 }).add;
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p><a href="./../Classes/Pattern.html#-play">Pattern: -play</a> creates an <a href="./../Classes/EventStreamPlayer.html">EventStreamPlayer</a> for you and also supplies a default protoEvent. If you were using your own event model you would just pass in your own protoEvent to the play method.<textarea class='editor'>(
+<p><a href="./../Classes/Pattern.html#-play">Pattern: -play</a> creates an <a href="./../Classes/EventStreamPlayer.html">EventStreamPlayer</a> for you and also supplies a default protoEvent. If you were using your own event model you would just pass in your own protoEvent to the play method.<div class='codeMirrorContainer'><textarea class='editor'>(
 Pbind(
     \instrument, Prand([\help_SPE7_BerlinB, \help_SPE7_CFString1],inf),
     \degree, Pseq([0,1,2,4,6,3,4,8],inf),
@@ -73,16 +78,18 @@ Pbind(
     \amp, 0.03
 ).play; // this returns an EventStreamPlayer
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h3><a class='anchor' name='Defining%20your%20own%20message%20bindings'>Defining your own message bindings</a></h3>
 
 <p>The default event prototype uses a <code>msgFunc</code> to determine which bindings to pass to the server. Synthdefs that have been stored in a <a href="./../Classes/SynthDescLib.html">SynthDescLib</a> ("synth description library") construct the <code>msgFunc</code> automatically. The default event looks up the instrument name in a SynthDescLib of your choosing (using the <code>\synthLib</code> key). Normally only the global SynthDescLib is used; if <code>\synthLib</code> is empty, the global library is the default.
-<p>You should not send or load synthdefs that you plan to use with patterns. Instead, store them in a SynthDescLib.<textarea class='editor'>// saves .scsyndef file on disk (like .load), and adds description to the global library
+<p>You should not send or load synthdefs that you plan to use with patterns. Instead, store them in a SynthDescLib.<div class='codeMirrorContainer'><textarea class='editor'>// saves .scsyndef file on disk (like .load), and adds description to the global library
 SynthDef(...).store;
 
 // adds description to the global library; no file is saved (like .send)
 SynthDef(...).add;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>If you don't do this, nondefault bindings will be ignored. In that case, you can provide a custom <code>msgFunc</code> manually. Here's an example:<textarea class='editor'>(
+<p>If you don't do this, nondefault bindings will be ignored. In that case, you can provide a custom <code>msgFunc</code> manually. Here's an example:<div class='codeMirrorContainer'><textarea class='editor'>(
 SynthDef(\help_SPE4_CFString2, { arg i_out, freq = 360, gate = 1, pan, amp=0.1, dorkarg=1;
     var out, eg, fc, osc, a, b, w;
     fc = LinExp.kr(LFNoise1.kr(Rand(0.25,0.4)), -1,1,500,2000);
@@ -93,8 +100,9 @@ SynthDef(\help_SPE4_CFString2, { arg i_out, freq = 360, gate = 1, pan, amp=0.1, 
     Out.ar(i_out, Mix.ar(PanAz.ar(4, [a, b], [pan, pan+0.3])));
 }).send(s);    // change .send(s) to .add
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>As you can see I have added <code>dorkarg</code> to the arglist of the SynthDef from earlier.<textarea class='editor'>(
+<p>As you can see I have added <code>dorkarg</code> to the arglist of the SynthDef from earlier.<div class='codeMirrorContainer'><textarea class='editor'>(
 Pbind(
     \instrument, \help_SPE4_CFString2,
     \degree, Pseq([0,1,2,4,6,3,4,8],inf),
@@ -104,9 +112,10 @@ Pbind(
     \dorkarg, Pseq([1,0,1],inf) // silence every second note - doesn't work
 ).play;
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p><code>dorkarg</code> is ignored because the SynthDef was not properly <code>.add</code>'d and consequently, the event prototype doesn't know that <code>dorkarg</code> is important.
-<p>You could also supply a <code>\msgFunc</code> that includes <code>dorkarg</code> :<textarea class='editor'>(
+<p>You could also supply a <code>\msgFunc</code> that includes <code>dorkarg</code> :<div class='codeMirrorContainer'><textarea class='editor'>(
 Pbind(
     \instrument, \help_SPE4_CFString2,
     \degree, Pseq([0,1,2,4,6,3,4,8],inf),
@@ -121,10 +130,11 @@ Pbind(
     }
 ).play;
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p>But this is quite clumsy. It is strongly recommended to get into the habit of using <code>.add</code> for all SynthDefs intended for use with Patterns.
 <p>The other option you have if you will be using unspecified bindings, is of course to define an event with the appropriate <code>msgFunc</code> as default. Have a look at Event's source, it's easy, and it's cleaner than passing in the <code>msgFunc</code> every time.<h3><a class='anchor' name='Manipulating%20an%20EventStreamPlayer%20in%20Realtime'>Manipulating an EventStreamPlayer in Realtime</a></h3>
-<textarea class='editor'>(
+<div class='codeMirrorContainer'><textarea class='editor'>(
 p = Pbind(
     \degree, Pwhite(0,12),
     \dur, 0.2,
@@ -160,8 +170,9 @@ e.stream = Pbind(
     \instrument, \help_SPE7_CFString1
 ).asStream;
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>The following methods are possible because an <a href="./../Classes/EventStreamPlayer.html">EventStreamPlayer</a> is a <a href="./../Classes/PauseStream.html">PauseStream</a> :<textarea class='editor'>e.mute;        // keeps playing, but replaces notes with rests
+<p>The following methods are possible because an <a href="./../Classes/EventStreamPlayer.html">EventStreamPlayer</a> is a <a href="./../Classes/PauseStream.html">PauseStream</a> :<div class='codeMirrorContainer'><textarea class='editor'>e.mute;        // keeps playing, but replaces notes with rests
 
 e.unmute;
 
@@ -174,6 +185,7 @@ e.resume;
 e.stop;        // will reset before resume.
 
 e.resume;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Tutorials/Streams-Patterns-Events7.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Tutorials/Streams-Patterns-Events7.schelp</a><br>link::Tutorials/Streams-Patterns-Events7::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Tutorials/Streams-Patterns-Events7.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Tutorials/Streams-Patterns-Events7.schelp</a><br>link::Tutorials/Streams-Patterns-Events7::<br></div></div><script src='./../static/editor.js' type='text/javascript'></script>
 </body></html>

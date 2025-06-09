@@ -1,21 +1,25 @@
-<!doctype html><html lang='en'><head><title>ServerOptions | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>ServerOptions | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../lib/jquery.min.js'></script>
-<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/jquery.min.js'></script>
+<script src='./../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './..';
 var scdoc_title = 'ServerOptions';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../static/scdoc.js' type='text/javascript'></script>
 <script src='./../docmap.js' type='text/javascript'></script>
+<script src='./../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
@@ -60,6 +64,7 @@ var scdoc_sc_version = '3.13.1';
 <li class='toc3'><a href='#-ugenPluginsPath'>ugenPluginsPath</a> </li>
 <li class='toc3'><a href='#-restrictedPath'>restrictedPath</a> </li>
 <li class='toc3'><a href='#-threads'>threads</a> </li>
+<li class='toc3'><a href='#-threadPinning'>threadPinning</a> </li>
 <li class='toc3'><a href='#-useSystemClock'>useSystemClock</a> </li>
 <li class='toc3'><a href='#-memoryLocking'>memoryLocking</a> </li>
 <li class='toc3'><a href='#-maxLogins'>maxLogins</a> </li>
@@ -92,7 +97,7 @@ var scdoc_sc_version = '3.13.1';
 <div id='summary'>Encapsulates commandline and other options for a Server</div>
 </div>
 <div class='subheader'>
-<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/Common/Control/Server.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Control/Server.sc'>Server.sc</a></div><div id='subclasses'>Subclasses: <a href="../Classes/BelaServerOptions.html">BelaServerOptions</a></div>
+<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/Common/Control/Server.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Control/Server.sc'>Server.sc</a></div><div id='subclasses'>Subclasses: <a href="../Classes/BelaServerOptions.html">BelaServerOptions</a></div>
 <div id='related'>See also: <a href="./../Classes/Server.html">Server</a>, <a href="./../Reference/Server-Architecture.html">Server Architecture</a>, <a href="./../Reference/Server-Command-Reference.html">Server Command Reference</a>, <a href="./../Reference/AudioDeviceSelection.html">Audio device selection</a></div>
 </div>
 <h2><a class='anchor' name='description'>Description</a></h2>
@@ -198,7 +203,10 @@ var scdoc_sc_version = '3.13.1';
 <p>Allows you to restrict the system paths in which the server is allowed to read/write files during running. A nil value (the default) means no restriction. Otherwise, set it as a string representing a single path.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-threads' href='./../Overviews/Methods.html#threads'>threads</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-threads' href='./../Overviews/Methods.html#threads'>threads</a> = value</h3>
 <div class='method'>
-<p>Number of audio threads that are spawned by supernova. For scsynth this value is ignored. If it is <code>nil</code>or 0, it uses the one thread per CPU. Default is <code>nil</code>.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-useSystemClock' href='./../Overviews/Methods.html#useSystemClock'>useSystemClock</a></h3>
+<p>Number of audio threads that are spawned by supernova. For scsynth this value is ignored. If it is <code>nil</code>or 0, it uses one thread per CPU core. Default is <code>nil</code>.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-threadPinning' href='./../Overviews/Methods.html#threadPinning'>threadPinning</a></h3>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-threadPinning' href='./../Overviews/Methods.html#threadPinning'>threadPinning</a> = value</h3>
+<div class='method'>
+<p>Enable/disable thread pinning. For scsynth this value is ignored. Thread pinning forces each thread to only run on a particular CPU core. Depending on the system, this might give better or worse performance. Default is <code>nil</code> which means that the value is chosen by Supernova. (At the time of writing, it is by default enabled on Linux and disabled on macOS and Windows.)</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-useSystemClock' href='./../Overviews/Methods.html#useSystemClock'>useSystemClock</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-useSystemClock' href='./../Overviews/Methods.html#useSystemClock'>useSystemClock</a> = value</h3>
 <div class='method'>
 <p>Tells supernova whether to sync to the driver's sample clock, or to the system clock.<div class='note'><span class='notelabel'>NOTE:</span> scsynth always uses system clock and this value is ignored.</div>
@@ -247,7 +255,7 @@ var scdoc_sc_version = '3.13.1';
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-reservedNumControlBusChannels' href='./../Overviews/Methods.html#reservedNumControlBusChannels'>reservedNumControlBusChannels</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-reservedNumControlBusChannels' href='./../Overviews/Methods.html#reservedNumControlBusChannels'>reservedNumControlBusChannels</a> = value</h3>
 <h2><a class='anchor' name='examples'>Examples</a></h2>
-<textarea class='editor'>// Get the default server's options
+<div class='codeMirrorContainer'><textarea class='editor'>// Get the default server's options
 
 o = Server.default.options;
 
@@ -261,7 +269,7 @@ o.numOutputBusChannels = 6; // The next time it boots, this will take effect
 
 // specify a device
 
-o.device ="MOTU Traveler";     // use a specific soundcard
+o.device = "MOTU Traveler";     // use a specific soundcard
 o.device = nil;            // use the system default soundcard
 
 // finally, boot the server
@@ -287,6 +295,7 @@ t = Server(\Local2, NetAddr("127.0.0.1", 57111), p);
 t.makeWindow;
 t.boot;
 t.quit;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/ServerOptions.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/ServerOptions.schelp</a><br>link::Classes/ServerOptions::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/ServerOptions.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/ServerOptions.schelp</a><br>link::Classes/ServerOptions::<br></div></div><script src='./../static/editor.js' type='text/javascript'></script>
 </body></html>

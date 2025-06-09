@@ -1,21 +1,25 @@
-<!doctype html><html lang='en'><head><title>NdefMixer | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>NdefMixer | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../lib/jquery.min.js'></script>
-<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/jquery.min.js'></script>
+<script src='./../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './..';
 var scdoc_title = 'NdefMixer';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../static/scdoc.js' type='text/javascript'></script>
 <script src='./../docmap.js' type='text/javascript'></script>
+<script src='./../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
@@ -47,12 +51,12 @@ var scdoc_sc_version = '3.13.1';
 <div id='inheritedclassmets'></div><h2><a class='anchor' name='instancemethods'>Instance Methods</a></h2>
 <h3><a class='anchor' name='Inherited%20instance%20methods'>Inherited instance methods</a></h3>
 <div id='inheritedinstmets'></div><h2><a class='anchor' name='examples'>Examples</a></h2>
-<textarea class='editor'>n = NdefMixer(s);
+<div class='codeMirrorContainer'><textarea class='editor'>n = NdefMixer(s);
 n.parent.alwaysOnTop_(true); // show mixer in front of IDE
 
 s.boot;
 // if you have JITLibExtensions installed, try ProxyMeter to see the proxy levels:
-if (\ProxyMeter.asClass.notNil) { ProxyMeter.addMixer(n); };
+if (\ProxyMeter.asClass.notNil) { ProxyMeter.addMixer(n) };
 
 
 "bcdefghijk".do { |k| Ndef(k.asSymbol).ar };
@@ -61,9 +65,9 @@ if (\ProxyMeter.asClass.notNil) { ProxyMeter.addMixer(n); };
 
 "abcdefghijk".do { |k| Ndef(k.asSymbol).playN };
 (
-Ndef(\aaaaaa, { |freq=250, intv=19, timescale=1, curve=0, loopnode=0|
+Ndef(\aaaaaa, { |freq = 250, intv = 19, timescale = 1, curve = 0, loopnode = 0|
     var env = EnvGen.kr(
-        Env({ 1.0.rand2 }!11, {1.0.rand}!10, curve, releaseNode: 9, loopNode: loopnode),
+        Env({ 1.0.rand2 }!11, { 1.0.rand }!10, curve, releaseNode: 9, loopNode: loopnode),
         timeScale: timescale);
     var pitch = (env * [1, 0.33, -1] * intv).midiratio * freq;
     Splay.ar(Formant.ar(pitch, pitch.scramble * 2, pitch.scramble)) * 0.1;
@@ -78,6 +82,7 @@ n.switchSize(2);
 n.editGui.object_(Ndef(\aaaaaa));
 
 NdefMixer(Server.internal, 24);</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/NdefMixer.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/NdefMixer.schelp</a><br>link::Classes/NdefMixer::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/NdefMixer.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/NdefMixer.schelp</a><br>link::Classes/NdefMixer::<br></div></div><script src='./../static/editor.js' type='text/javascript'></script>
 </body></html>

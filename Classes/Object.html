@@ -1,21 +1,25 @@
-<!doctype html><html lang='en'><head><title>Object | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>Object | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../lib/jquery.min.js'></script>
-<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/jquery.min.js'></script>
+<script src='./../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './..';
 var scdoc_title = 'Object';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../static/scdoc.js' type='text/javascript'></script>
 <script src='./../docmap.js' type='text/javascript'></script>
+<script src='./../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
@@ -39,6 +43,8 @@ var scdoc_sc_version = '3.13.1';
 <li class='toc3'><a href='#-isMemberOf'>isMemberOf</a> </li>
 </ul><li class='toc2'><a href='#Accessing'>Accessing</a></li>
 <ul class='toc'><li class='toc3'><a href='#-size'>size</a> </li>
+<li class='toc3'><a href='#-rank'>rank</a> </li>
+<li class='toc3'><a href='#-shape'>shape</a> </li>
 </ul><li class='toc2'><a href='#Copying'>Copying</a></li>
 <ul class='toc'><li class='toc3'><a href='#-copy'>copy</a> </li>
 <li class='toc3'><a href='#-shallowCopy'>shallowCopy</a> </li>
@@ -80,6 +86,7 @@ var scdoc_sc_version = '3.13.1';
 </ul><li class='toc2'><a href='#Messaging'>Messaging</a></li>
 <ul class='toc'><li class='toc3'><a href='#-perform'>perform</a> </li>
 <li class='toc3'><a href='#-performList'>performList</a> </li>
+<li class='toc3'><a href='#-performArgs'>performArgs</a> </li>
 <li class='toc3'><a href='#-performMsg'>performMsg</a> </li>
 <li class='toc3'><a href='#-performWithEnvir'>performWithEnvir</a> </li>
 <li class='toc3'><a href='#-performKeyValuePairs'>performKeyValuePairs</a> </li>
@@ -99,7 +106,8 @@ var scdoc_sc_version = '3.13.1';
 <li class='toc3'><a href='#-update'>update</a> </li>
 <li class='toc3'><a href='#-release'>release</a> </li>
 </ul><li class='toc2'><a href='#Error%20Support'>Error Support</a></li>
-<ul class='toc'><li class='toc3'><a href='#-throw'>throw</a> </li>
+<ul class='toc'><li class='toc3'><a href='#-doesNotUnderstand'>doesNotUnderstand</a> </li>
+<li class='toc3'><a href='#-throw'>throw</a> </li>
 <li class='toc3'><a href='#-subclassResponsibility'>subclassResponsibility</a> </li>
 <li class='toc3'><a href='#-shouldNotImplement'>shouldNotImplement</a> </li>
 <li class='toc3'><a href='#-deprecated'>deprecated</a> </li>
@@ -197,7 +205,6 @@ var scdoc_sc_version = '3.13.1';
 <li class='toc3'><a href='#-dereference'>dereference</a> </li>
 <li class='toc3'><a href='#-dereferenceOperand'>dereferenceOperand</a> </li>
 <li class='toc3'><a href='#-doOnCmdPeriod'>doOnCmdPeriod</a> </li>
-<li class='toc3'><a href='#-doesNotUnderstand'>doesNotUnderstand</a> </li>
 <li class='toc3'><a href='#-dumpBackTrace'>dumpBackTrace</a> </li>
 <li class='toc3'><a href='#-dumpDetailedBackTrace'>dumpDetailedBackTrace</a> </li>
 <li class='toc3'><a href='#-dumpStack'>dumpStack</a> </li>
@@ -269,7 +276,6 @@ var scdoc_sc_version = '3.13.1';
 <li class='toc3'><a href='#-primitiveFailed'>primitiveFailed</a> </li>
 <li class='toc3'><a href='#-printClassNameOn'>printClassNameOn</a> </li>
 <li class='toc3'><a href='#-proxyControlClass'>proxyControlClass</a> </li>
-<li class='toc3'><a href='#-rank'>rank</a> </li>
 <li class='toc3'><a href='#-reduceFuncProxy'>reduceFuncProxy</a> </li>
 <li class='toc3'><a href='#-reference'>reference</a> </li>
 <li class='toc3'><a href='#-releaseDependants'>releaseDependants</a> </li>
@@ -278,7 +284,6 @@ var scdoc_sc_version = '3.13.1';
 <li class='toc3'><a href='#-replaceFunc'>replaceFunc</a> </li>
 <li class='toc3'><a href='#-reportError'>reportError</a> </li>
 <li class='toc3'><a href='#-setSlots'>setSlots</a> </li>
-<li class='toc3'><a href='#-shape'>shape</a> </li>
 <li class='toc3'><a href='#-simplifyStoreArgs'>simplifyStoreArgs</a> </li>
 <li class='toc3'><a href='#-slice'>slice</a> </li>
 <li class='toc3'><a href='#-slotAt'>slotAt</a> </li>
@@ -294,11 +299,13 @@ var scdoc_sc_version = '3.13.1';
 <li class='toc3'><a href='#-stop'>stop</a> </li>
 <li class='toc3'><a href='#-storeModifiersOn'>storeModifiersOn</a> </li>
 <li class='toc3'><a href='#-storeParamsOn'>storeParamsOn</a> </li>
+<li class='toc3'><a href='#-superPerformArgs'>superPerformArgs</a> </li>
 <li class='toc3'><a href='#-threadPlayer'>threadPlayer</a> </li>
 <li class='toc3'><a href='#-totalFree'>totalFree</a> </li>
 <li class='toc3'><a href='#-trueAt'>trueAt</a> </li>
 <li class='toc3'><a href='#-unbubble'>unbubble</a> </li>
 <li class='toc3'><a href='#-value'>value</a> </li>
+<li class='toc3'><a href='#-valueArgs'>valueArgs</a> </li>
 <li class='toc3'><a href='#-valueArray'>valueArray</a> </li>
 <li class='toc3'><a href='#-valueArrayEnvir'>valueArrayEnvir</a> </li>
 <li class='toc3'><a href='#-valueEnvir'>valueEnvir</a> </li>
@@ -321,7 +328,7 @@ var scdoc_sc_version = '3.13.1';
 <div id='summary'>abstract superclass of all objects</div>
 </div>
 <div class='subheader'>
-<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/Common/Core/Object.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Core/Object.sc'>Object.sc</a></div><div id='subclasses'>Subclasses: <a href="../Classes/AbstractDispatcher.html">AbstractDispatcher</a>, <a href="../Classes/AbstractFunction.html">AbstractFunction</a>, <a href="../Classes/AbstractMDPlugin.html">AbstractMDPlugin</a>, <a href="../Classes/AbstractMessageMatcher.html">AbstractMessageMatcher</a>, <span id='hiddensubclasses' style='display:none;'><a href="../Classes/AbstractNodeWatcher.html">AbstractNodeWatcher</a>, <a href="../Classes/AbstractPlayControl.html">AbstractPlayControl</a>, <a href="../Classes/AbstractResponderFunc.html">AbstractResponderFunc</a>, <a href="../Classes/AbstractSystemAction.html">AbstractSystemAction</a>, <a href="../Classes/BHiPass4.html">BHiPass4</a>, <a href="../Classes/BLowPass4.html">BLowPass4</a>, <a href="../Classes/BelaScope.html">BelaScope</a>, <a href="../Classes/Boolean.html">Boolean</a>, <a href="../Classes/Buffer.html">Buffer</a>, <a href="../Classes/Bus.html">Bus</a>, <a href="../Classes/Class.html">Class</a>, <a href="../Classes/Clock.html">Clock</a>, <a href="../Classes/Collection.html">Collection</a>, <a href="../Classes/Color.html">Color</a>, <a href="../Classes/CondVar.html">CondVar</a>, <a href="../Classes/Condition.html">Condition</a>, <a href="../Classes/ContiguousBlock.html">ContiguousBlock</a>, <a href="../Classes/ContiguousBlockAllocator.html">ContiguousBlockAllocator</a>, <a href="../Classes/ControlName.html">ControlName</a>, <a href="../Classes/Date.html">Date</a>, <a href="../Classes/DebugFrame.html">DebugFrame</a>, <a href="../Classes/Env.html">Env</a>, <a href="../Classes/EnvGate.html">EnvGate</a>, <a href="../Classes/EnvironmentRedirect.html">EnvironmentRedirect</a>, <a href="../Classes/EventStreamCleanup.html">EventStreamCleanup</a>, <a href="../Classes/EventTypesWithCleanup.html">EventTypesWithCleanup</a>, <a href="../Classes/Exception.html">Exception</a>, <a href="../Classes/Finalizer.html">Finalizer</a>, <a href="../Classes/FlowVar.html">FlowVar</a>, <a href="../Classes/Frame.html">Frame</a>, <a href="../Classes/FunctionDef.html">FunctionDef</a>, <a href="../Classes/Git.html">Git</a>, <a href="../Classes/GraphBuilder.html">GraphBuilder</a>, <a href="../Classes/HID.html">HID</a>, <a href="../Classes/HIDCollection.html">HIDCollection</a>, <a href="../Classes/HIDElement.html">HIDElement</a>, <a href="../Classes/HIDElementProto.html">HIDElementProto</a>, <a href="../Classes/HIDInfo.html">HIDInfo</a>, <a href="../Classes/HIDProto.html">HIDProto</a>, <a href="../Classes/HIDUsage.html">HIDUsage</a>, <a href="../Classes/Harmonics.html">Harmonics</a>, <a href="../Classes/Help.html">Help</a>, <a href="../Classes/History.html">History</a>, <a href="../Classes/IODesc.html">IODesc</a>, <a href="../Classes/Interpreter.html">Interpreter</a>, <a href="../Classes/LID.html">LID</a>, <a href="../Classes/LIDAbsInfo.html">LIDAbsInfo</a>, <a href="../Classes/LIDInfo.html">LIDInfo</a>, <a href="../Classes/LIDSlot.html">LIDSlot</a>, <a href="../Classes/LRUNumberAllocator.html">LRUNumberAllocator</a>, <a href="../Classes/LanguageConfig.html">LanguageConfig</a>, <a href="../Classes/LinLin.html">LinLin</a>, <a href="../Classes/LinkedListNode.html">LinkedListNode</a>, <a href="../Classes/MIDIClient.html">MIDIClient</a>, <a href="../Classes/MIDIEndPoint.html">MIDIEndPoint</a>, <a href="../Classes/MIDIEvent.html">MIDIEvent</a>, <a href="../Classes/MIDIIn.html">MIDIIn</a>, <a href="../Classes/MIDIOut.html">MIDIOut</a>, <a href="../Classes/MIDIResponder.html">MIDIResponder</a>, <a href="../Classes/Magnitude.html">Magnitude</a>, <a href="../Classes/Message.html">Message</a>, <a href="../Classes/MeterSync.html">MeterSync</a>, <a href="../Classes/MethodOverride.html">MethodOverride</a>, <a href="../Classes/MethodQuote.html">MethodQuote</a>, <a href="../Classes/Mix.html">Mix</a>, <a href="../Classes/Monitor.html">Monitor</a>, <a href="../Classes/MultiTap.html">MultiTap</a>, <a href="../Classes/NamedControl.html">NamedControl</a>, <a href="../Classes/NetAddr.html">NetAddr</a>, <a href="../Classes/Nil.html">Nil</a>, <a href="../Classes/Node.html">Node</a>, <a href="../Classes/NodeControl.html">NodeControl</a>, <a href="../Classes/NodeIDAllocator.html">NodeIDAllocator</a>, <a href="../Classes/NotificationCenter.html">NotificationCenter</a>, <a href="../Classes/NotificationRegistration.html">NotificationRegistration</a>, <a href="../Classes/NumChannels.html">NumChannels</a>, <a href="../Classes/OSCBundle.html">OSCBundle</a>, <a href="../Classes/OSCresponder.html">OSCresponder</a>, <a href="../Classes/PMOsc.html">PMOsc</a>, <a href="../Classes/PathName.html">PathName</a>, <a href="../Classes/PatternConductor.html">PatternConductor</a>, <a href="../Classes/PingPong.html">PingPong</a>, <a href="../Classes/Platform.html">Platform</a>, <a href="../Classes/Point.html">Point</a>, <a href="../Classes/Post.html">Post</a>, <a href="../Classes/PowerOfTwoAllocator.html">PowerOfTwoAllocator</a>, <a href="../Classes/PowerOfTwoBlock.html">PowerOfTwoBlock</a>, <a href="../Classes/PrettyState.html">PrettyState</a>, <a href="../Classes/PriorityQueue.html">PriorityQueue</a>, <a href="../Classes/Process.html">Process</a>, <a href="../Classes/Quant.html">Quant</a>, <a href="../Classes/Quark.html">Quark</a>, <a href="../Classes/Quarks.html">Quarks</a>, <a href="../Classes/RawPointer.html">RawPointer</a>, <a href="../Classes/ReadableNodeIDAllocator.html">ReadableNodeIDAllocator</a>, <a href="../Classes/Recorder.html">Recorder</a>, <a href="../Classes/Rect.html">Rect</a>, <a href="../Classes/RingNumberAllocator.html">RingNumberAllocator</a>, <a href="../Classes/SCDoc.html">SCDoc</a>, <a href="../Classes/SCDocEntry.html">SCDocEntry</a>, <a href="../Classes/SCDocHTMLRenderer.html">SCDocHTMLRenderer</a>, <a href="../Classes/SCDocNode.html">SCDocNode</a>, <a href="../Classes/Scale.html">Scale</a>, <a href="../Classes/ScaleStream.html">ScaleStream</a>, <a href="../Classes/Scheduler.html">Scheduler</a>, <a href="../Classes/ScopeBuffer.html">ScopeBuffer</a>, <a href="../Classes/Score.html">Score</a>, <a href="../Classes/SelectX.html">SelectX</a>, <a href="../Classes/SelectXFocus.html">SelectXFocus</a>, <a href="../Classes/Semaphore.html">Semaphore</a>, <a href="../Classes/SerialPort.html">SerialPort</a>, <a href="../Classes/Server.html">Server</a>, <a href="../Classes/ServerOptions.html">ServerOptions</a>, <a href="../Classes/ServerShmInterface.html">ServerShmInterface</a>, <a href="../Classes/ServerStatusWatcher.html">ServerStatusWatcher</a>, <a href="../Classes/Silent.html">Silent</a>, <a href="../Classes/SimpleController.html">SimpleController</a>, <a href="../Classes/Size.html">Size</a>, <a href="../Classes/SkipJack.html">SkipJack</a>, <a href="../Classes/SoundFile.html">SoundFile</a>, <a href="../Classes/SoundIn.html">SoundIn</a>, <a href="../Classes/Spec.html">Spec</a>, <a href="../Classes/SplayZ.html">SplayZ</a>, <a href="../Classes/StackNumberAllocator.html">StackNumberAllocator</a>, <a href="../Classes/Symbol.html">Symbol</a>, <a href="../Classes/SynthDef.html">SynthDef</a>, <a href="../Classes/SynthDesc.html">SynthDesc</a>, <a href="../Classes/SynthDescLib.html">SynthDescLib</a>, <a href="../Classes/SystemSynthDefs.html">SystemSynthDefs</a>, <a href="../Classes/TChoose.html">TChoose</a>, <a href="../Classes/TWChoose.html">TWChoose</a>, <a href="../Classes/TestDependant.html">TestDependant</a>, <a href="../Classes/Tuning.html">Tuning</a>, <a href="../Classes/URI.html">URI</a>, <a href="../Classes/UniqueID.html">UniqueID</a>, <a href="../Classes/UnitTest.html">UnitTest</a>, <a href="../Classes/UnitTestResult.html">UnitTestResult</a>, <a href="../Classes/Unix.html">Unix</a>, <a href="../Classes/Volume.html">Volume</a>, <a href="../Classes/VolumeGui.html">VolumeGui</a>, <a href="../Classes/Warp.html">Warp</a>, <a href="../Classes/XIn.html">XIn</a>, <a href="../Classes/XInFeedback.html">XInFeedback</a></span><a class='subclass_toggle' href='#' onclick='javascript:showAllSubclasses(this); return false'>&hellip;&nbsp;see&nbsp;all</a></div>
+<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/Common/Core/Object.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Core/Object.sc'>Object.sc</a></div><div id='subclasses'>Subclasses: <a href="../Classes/AbstractDispatcher.html">AbstractDispatcher</a>, <a href="../Classes/AbstractFunction.html">AbstractFunction</a>, <a href="../Classes/AbstractMDPlugin.html">AbstractMDPlugin</a>, <a href="../Classes/AbstractMessageMatcher.html">AbstractMessageMatcher</a>, <span id='hiddensubclasses' style='display:none;'><a href="../Classes/AbstractNodeWatcher.html">AbstractNodeWatcher</a>, <a href="../Classes/AbstractPlayControl.html">AbstractPlayControl</a>, <a href="../Classes/AbstractResponderFunc.html">AbstractResponderFunc</a>, <a href="../Classes/AbstractSystemAction.html">AbstractSystemAction</a>, <a href="../Classes/BHiPass4.html">BHiPass4</a>, <a href="../Classes/BLowPass4.html">BLowPass4</a>, <a href="../Classes/BelaScope.html">BelaScope</a>, <a href="../Classes/Boolean.html">Boolean</a>, <a href="../Classes/Buffer.html">Buffer</a>, <a href="../Classes/Bus.html">Bus</a>, <a href="../Classes/Class.html">Class</a>, <a href="../Classes/Clock.html">Clock</a>, <a href="../Classes/Collection.html">Collection</a>, <a href="../Classes/Color.html">Color</a>, <a href="../Classes/CondVar.html">CondVar</a>, <a href="../Classes/Condition.html">Condition</a>, <a href="../Classes/ContiguousBlock.html">ContiguousBlock</a>, <a href="../Classes/ContiguousBlockAllocator.html">ContiguousBlockAllocator</a>, <a href="../Classes/ControlName.html">ControlName</a>, <a href="../Classes/DebugFrame.html">DebugFrame</a>, <a href="../Classes/Env.html">Env</a>, <a href="../Classes/EnvGate.html">EnvGate</a>, <a href="../Classes/EnvironmentRedirect.html">EnvironmentRedirect</a>, <a href="../Classes/EventStreamCleanup.html">EventStreamCleanup</a>, <a href="../Classes/EventTypesWithCleanup.html">EventTypesWithCleanup</a>, <a href="../Classes/ExampleFiles.html">ExampleFiles</a>, <a href="../Classes/Exception.html">Exception</a>, <a href="../Classes/Finalizer.html">Finalizer</a>, <a href="../Classes/FlowVar.html">FlowVar</a>, <a href="../Classes/Frame.html">Frame</a>, <a href="../Classes/FunctionDef.html">FunctionDef</a>, <a href="../Classes/Git.html">Git</a>, <a href="../Classes/GraphBuilder.html">GraphBuilder</a>, <a href="../Classes/HID.html">HID</a>, <a href="../Classes/HIDCollection.html">HIDCollection</a>, <a href="../Classes/HIDElement.html">HIDElement</a>, <a href="../Classes/HIDElementProto.html">HIDElementProto</a>, <a href="../Classes/HIDInfo.html">HIDInfo</a>, <a href="../Classes/HIDProto.html">HIDProto</a>, <a href="../Classes/HIDUsage.html">HIDUsage</a>, <a href="../Classes/Harmonics.html">Harmonics</a>, <a href="../Classes/Help.html">Help</a>, <a href="../Classes/History.html">History</a>, <a href="../Classes/IODesc.html">IODesc</a>, <a href="../Classes/Interpreter.html">Interpreter</a>, <a href="../Classes/LID.html">LID</a>, <a href="../Classes/LIDAbsInfo.html">LIDAbsInfo</a>, <a href="../Classes/LIDInfo.html">LIDInfo</a>, <a href="../Classes/LIDSlot.html">LIDSlot</a>, <a href="../Classes/LRUNumberAllocator.html">LRUNumberAllocator</a>, <a href="../Classes/LanguageConfig.html">LanguageConfig</a>, <a href="../Classes/LevelComp.html">LevelComp</a>, <a href="../Classes/LinLin.html">LinLin</a>, <a href="../Classes/LinkedListNode.html">LinkedListNode</a>, <a href="../Classes/MIDIClient.html">MIDIClient</a>, <a href="../Classes/MIDIEndPoint.html">MIDIEndPoint</a>, <a href="../Classes/MIDIEvent.html">MIDIEvent</a>, <a href="../Classes/MIDIIn.html">MIDIIn</a>, <a href="../Classes/MIDIOut.html">MIDIOut</a>, <a href="../Classes/MIDIResponder.html">MIDIResponder</a>, <a href="../Classes/Magnitude.html">Magnitude</a>, <a href="../Classes/Message.html">Message</a>, <a href="../Classes/MeterSync.html">MeterSync</a>, <a href="../Classes/MethodOverride.html">MethodOverride</a>, <a href="../Classes/MethodQuote.html">MethodQuote</a>, <a href="../Classes/Mix.html">Mix</a>, <a href="../Classes/Monitor.html">Monitor</a>, <a href="../Classes/MultiTap.html">MultiTap</a>, <a href="../Classes/NamedControl.html">NamedControl</a>, <a href="../Classes/NetAddr.html">NetAddr</a>, <a href="../Classes/Nil.html">Nil</a>, <a href="../Classes/Node.html">Node</a>, <a href="../Classes/NodeControl.html">NodeControl</a>, <a href="../Classes/NodeIDAllocator.html">NodeIDAllocator</a>, <a href="../Classes/NotificationCenter.html">NotificationCenter</a>, <a href="../Classes/NotificationRegistration.html">NotificationRegistration</a>, <a href="../Classes/NumChannels.html">NumChannels</a>, <a href="../Classes/OSCBundle.html">OSCBundle</a>, <a href="../Classes/OSCresponder.html">OSCresponder</a>, <a href="../Classes/PMOsc.html">PMOsc</a>, <a href="../Classes/PathName.html">PathName</a>, <a href="../Classes/PatternConductor.html">PatternConductor</a>, <a href="../Classes/PingPong.html">PingPong</a>, <a href="../Classes/Platform.html">Platform</a>, <a href="../Classes/Point.html">Point</a>, <a href="../Classes/Post.html">Post</a>, <a href="../Classes/PowerOfTwoAllocator.html">PowerOfTwoAllocator</a>, <a href="../Classes/PowerOfTwoBlock.html">PowerOfTwoBlock</a>, <a href="../Classes/PrettyState.html">PrettyState</a>, <a href="../Classes/PriorityQueue.html">PriorityQueue</a>, <a href="../Classes/Process.html">Process</a>, <a href="../Classes/Quant.html">Quant</a>, <a href="../Classes/Quark.html">Quark</a>, <a href="../Classes/Quarks.html">Quarks</a>, <a href="../Classes/RawPointer.html">RawPointer</a>, <a href="../Classes/ReadableNodeIDAllocator.html">ReadableNodeIDAllocator</a>, <a href="../Classes/Recorder.html">Recorder</a>, <a href="../Classes/Rect.html">Rect</a>, <a href="../Classes/RingNumberAllocator.html">RingNumberAllocator</a>, <a href="../Classes/SCDoc.html">SCDoc</a>, <a href="../Classes/SCDocEntry.html">SCDocEntry</a>, <a href="../Classes/SCDocHTMLRenderer.html">SCDocHTMLRenderer</a>, <a href="../Classes/SCDocNode.html">SCDocNode</a>, <a href="../Classes/Scale.html">Scale</a>, <a href="../Classes/ScaleStream.html">ScaleStream</a>, <a href="../Classes/Scheduler.html">Scheduler</a>, <a href="../Classes/ScopeBuffer.html">ScopeBuffer</a>, <a href="../Classes/Score.html">Score</a>, <a href="../Classes/SelectX.html">SelectX</a>, <a href="../Classes/SelectXFocus.html">SelectXFocus</a>, <a href="../Classes/Semaphore.html">Semaphore</a>, <a href="../Classes/SerialPort.html">SerialPort</a>, <a href="../Classes/Server.html">Server</a>, <a href="../Classes/ServerOptions.html">ServerOptions</a>, <a href="../Classes/ServerShmInterface.html">ServerShmInterface</a>, <a href="../Classes/ServerStatusWatcher.html">ServerStatusWatcher</a>, <a href="../Classes/Silent.html">Silent</a>, <a href="../Classes/SimpleController.html">SimpleController</a>, <a href="../Classes/Size.html">Size</a>, <a href="../Classes/SkipJack.html">SkipJack</a>, <a href="../Classes/SoundFile.html">SoundFile</a>, <a href="../Classes/SoundIn.html">SoundIn</a>, <a href="../Classes/Spec.html">Spec</a>, <a href="../Classes/SplayZ.html">SplayZ</a>, <a href="../Classes/StackNumberAllocator.html">StackNumberAllocator</a>, <a href="../Classes/Symbol.html">Symbol</a>, <a href="../Classes/SynthDef.html">SynthDef</a>, <a href="../Classes/SynthDesc.html">SynthDesc</a>, <a href="../Classes/SynthDescLib.html">SynthDescLib</a>, <a href="../Classes/SystemSynthDefs.html">SystemSynthDefs</a>, <a href="../Classes/TChoose.html">TChoose</a>, <a href="../Classes/TWChoose.html">TWChoose</a>, <a href="../Classes/TestDependant.html">TestDependant</a>, <a href="../Classes/Tuning.html">Tuning</a>, <a href="../Classes/URI.html">URI</a>, <a href="../Classes/UniqueID.html">UniqueID</a>, <a href="../Classes/UnitTest.html">UnitTest</a>, <a href="../Classes/UnitTestResult.html">UnitTestResult</a>, <a href="../Classes/Unix.html">Unix</a>, <a href="../Classes/Volume.html">Volume</a>, <a href="../Classes/VolumeGui.html">VolumeGui</a>, <a href="../Classes/Warp.html">Warp</a>, <a href="../Classes/XIn.html">XIn</a>, <a href="../Classes/XInFeedback.html">XInFeedback</a></span><a class='subclass_toggle' href='#' onclick='javascript:showAllSubclasses(this); return false'>&hellip;&nbsp;see&nbsp;all</a></div>
 <div id='related'>See also: <a href="./../Classes/Class.html">Class</a>, <a href="./../Guides/Intro-to-Objects.html">Introduction to Objects</a>, <a href="./../Reference/Classes.html">Classes</a></div>
 </div>
 <h2><a class='anchor' name='description'>Description</a></h2>
@@ -329,7 +336,7 @@ var scdoc_sc_version = '3.13.1';
 <p>Object is the root class of all other classes. All objects are indirect instances of class Object. We call the "receiver" the object the message is sent to: <code>receiver.method(argument)</code>.<h2><a class='anchor' name='classmethods'>Class Methods</a></h2>
 <h3 class='method-code'><span class='method-prefix'>Object.</span><a class='method-name' name='*readArchive' href='./../Overviews/Methods.html#readArchive'>readArchive</a>(<span class='argstr'>pathname</span>)</h3>
 <div class='method'>
-<p>Read in an object from a text archive.<textarea class='editor'>(
+<p>Read in an object from a text archive.<div class='codeMirrorContainer'><textarea class='editor'>(
 a = Array.fill(100, { 100.rand });
 a.writeArchive(PathName.tmp ++ "myArray");
 b = Object.readArchive(PathName.tmp ++ "myArray");
@@ -350,22 +357,41 @@ num = 2;
 f = { num + 2 };
 f.writeArchive(PathName.tmp ++ "myFunc"); // fails
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h4>Arguments:</h4>
 <table class='arguments'>
 <tr><td class='argumentname'>pathname<td class='argumentdesc'>
 <p>A String containing the archive file's path.</table></div><h3 class='method-code'><span class='method-prefix'>Object.</span><a class='method-name' name='*new' href='./../Overviews/Methods.html#new'>new</a>(<span class='argstr'>maxSize: 0</span>)</h3>
 <div class='method'>
-<p>Create a new instance. The creation of new instances of any Object actually happens in this method (or with <code>newCopyArgs</code>) when it is called by a child class. See <a href="./../Guides/WritingClasses.html">Writing Classes</a>.</div><h3 class='method-code'><span class='method-prefix'>Object.</span><a class='method-name' name='*newCopyArgs' href='./../Overviews/Methods.html#newCopyArgs'>newCopyArgs</a>( <span class='argstr'>... args</span>)</h3>
+<p>Create a new instance. The creation of new instances of any Object actually happens in this method (or with <code>newCopyArgs</code>) when it is called by a child class. See <a href="./../Guides/WritingClasses.html">Writing Classes</a>.</div><h3 class='method-code'><span class='method-prefix'>Object.</span><a class='method-name' name='*newCopyArgs' href='./../Overviews/Methods.html#newCopyArgs'>newCopyArgs</a>( <span class='argstr'>... args</span>, <span class='argstr'>... kwargs</span>)</h3>
 <div class='method'>
-<p>Creates a new instance and copies the arguments to the instance variables in the order that the variables were defined. If the superclass's <code>new</code> method requires arguments, the first arguments passed to <code>newCopyArgs</code> will be passed on to that method, and the following arguments will be copied to this class's instance variables. Class variables are ignored.<textarea class='editor'>MyClass {
+<p>Creates a new instance and copies the arguments to the instance variables in the order that the variables were defined.
+<p>Importantly, superclass constructors are NOT called, but the values are directly placed in the superclass's instance variables.<div class='codeMirrorContainer'><textarea class='editor'>MyClass {
     var a, b, c;
+    // Will copy arg1, arg2, arg3 to variables a, b, c.
+    *new { |arg1, arg2, arg3| ^super.newCopyArgs(arg1, arg2, arg3) }
+    *newKw { |arg1| ^super.newCopyArgs(arg1, c: 10) }
+    value { ^[a, b, c] }
+}
+MyClass.new(1, 2, 3).value() == [1, 2, 3];
+MyClass.newKw(1).value() == [1, nil, 10];</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-    *new {
-        arg arg1, arg2, arg3;
-        // will copy arg1, arg2, arg3 to variables a, b, c
-        ^super.newCopyArgs(arg1, arg2, arg3);
-    }
-}</textarea>
+<p>Example of inheritance.<div class='codeMirrorContainer'><textarea class='editor'>Base {
+    var a, b, c;
+    *new { ^\didNotCallBase } // This is NEVER called
+}
+
+Derived : Base {
+    var d, e, f;
+    *new { |d, e, f| ^super.newCopyArgs(1, 2, 3, d, e, f) }
+    *newKw { |d, e, f| ^super.newCopyArgs(c: 3, d: d, e: e, f: f) }
+    value { ^[a, b, c, d, e, f] }
+}
+
+Derived.new(10, 11, 12).value() == [1, 2, 3, 10, 11, 12];
+Derived.newKw(10, 11, 12).value() == [nil, nil, 3, 10, 11, 12];</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3><a class='anchor' name='Undocumented%20class%20methods'>Undocumented class methods</a></h3>
 <h3 class='method-code'><span class='method-prefix'>Object.</span><a class='method-name' name='*dependantsDictionary' href='./../Overviews/Methods.html#dependantsDictionary'>dependantsDictionary</a></h3>
 <h3 class='method-code'><span class='method-prefix'>Object.</span><a class='method-name' name='*readBinaryArchive' href='./../Overviews/Methods.html#readBinaryArchive'>readBinaryArchive</a>(<span class='argstr'>pathname</span>)</h3>
@@ -375,26 +401,34 @@ f.writeArchive(PathName.tmp ++ "myFunc"); // fails
 <h3><a class='anchor' name='Class%20Membership'>Class Membership</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-class' href='./../Overviews/Methods.html#class'>class</a></h3>
 <div class='method'>
-<p>Answer the class of the receiver.<textarea class='editor'>5.class;</textarea>
+<p>Answer the class of the receiver.<div class='codeMirrorContainer'><textarea class='editor'>5.class;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-respondsTo' href='./../Overviews/Methods.html#respondsTo'>respondsTo</a>(<span class='argstr'>aSymbol</span>)</h3>
 <div class='method'>
-<p>Answer a <a href="./../Classes/Boolean.html">Boolean</a> whether the receiver understands the message selector.<textarea class='editor'>5.respondsTo('+'); // true
+<p>Answer a <a href="./../Classes/Boolean.html">Boolean</a> whether the receiver understands the message selector.<div class='codeMirrorContainer'><textarea class='editor'>5.respondsTo('+'); // true
 5.respondsTo('indexOf'); // false</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h4>Arguments:</h4>
 <table class='arguments'>
 <tr><td class='argumentname'>aSymbol<td class='argumentdesc'>
 <p>A selector name. Must be a <a href="./../Classes/Symbol.html">Symbol</a>.</table></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-isKindOf' href='./../Overviews/Methods.html#isKindOf'>isKindOf</a>(<span class='argstr'>aClass</span>)</h3>
 <div class='method'>
-<p>Answer a Boolean indicating whether the receiver is a direct or indirect instance of aClass. Use of this message in code must be questioned, because it often indicates a missed opportunity to exploit object polymorphism.<textarea class='editor'>5.isKindOf(Number); // true
+<p>Answer a Boolean indicating whether the receiver is a direct or indirect instance of aClass. Use of this message in code must be questioned, because it often indicates a missed opportunity to exploit object polymorphism.<div class='codeMirrorContainer'><textarea class='editor'>5.isKindOf(Number); // true
 5.isKindOf(String); // false</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-isMemberOf' href='./../Overviews/Methods.html#isMemberOf'>isMemberOf</a>(<span class='argstr'>aClass</span>)</h3>
 <div class='method'>
-<p>Answer a Boolean whether the receiver is a direct instance of aClass. Use of this message in code is almost always a design mistake.<textarea class='editor'>5.isMemberOf(Number); // false
+<p>Answer a Boolean whether the receiver is a direct instance of aClass. Use of this message in code is almost always a design mistake.<div class='codeMirrorContainer'><textarea class='editor'>5.isMemberOf(Number); // false
 5.isMemberOf(Integer); // true</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3><a class='anchor' name='Accessing'>Accessing</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-size' href='./../Overviews/Methods.html#size'>size</a></h3>
 <div class='method'>
-<p>Different classes respond to this message differently. Object always returns 0.</div><h3><a class='anchor' name='Copying'>Copying</a></h3>
+<p>Different classes respond to this message differently. Object always returns 0.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-rank' href='./../Overviews/Methods.html#rank'>rank</a></h3>
+<div class='method'>
+<p>Returns the number of dimensions the value has. A single value (scalar) has rank of zero. See <a href="./../Classes/ArrayedCollection.html#-rank">ArrayedCollection: -rank</a> for cases where this is useful.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-shape' href='./../Overviews/Methods.html#shape'>shape</a></h3>
+<div class='method'>
+<p>For a multidimensional array, returns an array of the number of elements along each consecutive dimension, see <a href="./../Classes/ArrayedCollection.html#-shape">ArrayedCollection: -shape</a>. For a scalar value (most objects) returns nil.</div><h3><a class='anchor' name='Copying'>Copying</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-copy' href='./../Overviews/Methods.html#copy'>copy</a></h3>
 <div class='method'>
 <p>Make a copy of the receiver. The implementation of this message depends on the object's class. In class Object, copy calls shallowCopy.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-shallowCopy' href='./../Overviews/Methods.html#shallowCopy'>shallowCopy</a></h3>
@@ -407,24 +441,28 @@ f.writeArchive(PathName.tmp ++ "myFunc"); // fails
 
 <p>To convert an object of a certain class into a similar object of another class, Object provides a number of methods.<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-as' href='./../Overviews/Methods.html#as'>as</a>(<span class='argstr'>aSimilarClass</span>)</h3>
 <div class='method'>
-<p>Returns a similar new Object of a different class.<textarea class='editor'>[1, 2, 3].as(Set);
+<p>Returns a similar new Object of a different class.<div class='codeMirrorContainer'><textarea class='editor'>[1, 2, 3].as(Set);
 Pwhite(0.0, 1.0, 10).as(Set);</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-asArray' href='./../Overviews/Methods.html#asArray'>asArray</a></h3>
 <div class='method'>
-<p>Returns an Array with the receiver, unless it is an Array already.<textarea class='editor'>[1, 2, 3].asArray;
+<p>Returns an Array with the receiver, unless it is an Array already.<div class='codeMirrorContainer'><textarea class='editor'>[1, 2, 3].asArray;
 5.asArray;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-asCompileString' href='./../Overviews/Methods.html#asCompileString'>asCompileString</a></h3>
 <div class='method'>
-<p>Returns a String that can be interpreted to reconstruct a copy of the receiver. For the complementary method, see <a href="./../Classes/String.html#-interpret">String: -interpret</a>.<textarea class='editor'>a = { 10.do { 10.postln } };
+<p>Returns a String that can be interpreted to reconstruct a copy of the receiver. For the complementary method, see <a href="./../Classes/String.html#-interpret">String: -interpret</a>.<div class='codeMirrorContainer'><textarea class='editor'>a = { 10.do { 10.postln } };
 a.asCompileString.postcs;
 a.postcs;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-asInt' href='./../Overviews/Methods.html#asInt'>asInt</a></h3>
-<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/deprecated/3.11/deprecated-3.11.sc'>/usr/local/share/SuperCollider/SCClassLibrary/deprecated/3.11/deprecated-3.11.sc</a></div>
+<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/deprecated/3.11/deprecated-3.11.sc'>/usr/local/share/SuperCollider/SCClassLibrary/deprecated/3.11/deprecated-3.11.sc</a></div>
 <div class='method'>
 <p>Deprecated. Use <code>asInteger</code> instead.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-cs' href='./../Overviews/Methods.html#cs'>cs</a></h3>
 <div class='method'>
-<p>Shorthand for <a href="#-asCompileString">-asCompileString</a>.<textarea class='editor'>{ 10.do { 10.postln } }.cs;
+<p>Shorthand for <a href="#-asCompileString">-asCompileString</a>.<div class='codeMirrorContainer'><textarea class='editor'>{ 10.do { 10.postln } }.cs;
 "Strings don't post with surrounding quotes.".cs;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3><a class='anchor' name='Archiving'>Archiving</a></h3>
 
 <p>Object implements methods for writing and retrieving objects from disk. Note that you cannot archive instances of Thread and its subclasses (i.e. Routine), or open Functions (i.e., a Function which refers to variables from outside its own scope).<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-writeArchive' href='./../Overviews/Methods.html#writeArchive'>writeArchive</a>(<span class='argstr'>pathname</span>)</h3>
@@ -435,40 +473,44 @@ a.postcs;</textarea>
 <p>A String containing the resulting file's path.</table></div><h3><a class='anchor' name='Equality%20and%20Identity'>Equality and Identity</a></h3>
 <h3 class='method-code'><span class='method-prefix'></span><a class='method-name' name='-==' href='./../Overviews/Methods.html#=='>==</a>(<span class='argstr'>obj</span>)</h3>
 <div class='method'>
-<p>Answer whether the receiver equals anotherObject. The definition of equality depends on the class of the receiver. The default implementation in Object is to answer if the two objects are identical.<div class='note'><span class='notelabel'>NOTE:</span> Whenever == is overridden in a class, hash should be overridden as well.</div><textarea class='editor'>5.0 == 5; // true
+<p>Answer whether the receiver equals anotherObject. The definition of equality depends on the class of the receiver. The default implementation in Object is to answer if the two objects are identical.<div class='note'><span class='notelabel'>NOTE:</span> Whenever == is overridden in a class, hash should be overridden as well.</div><div class='codeMirrorContainer'><textarea class='editor'>5.0 == 5; // true
 5.0 === 5; // false
 a = [1, 2, 3]; b = [1, 2, 3];
 a == b; // equal
 a === b; // not identical
 "worth trying" == "worth trying"; // equal</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'></span><a class='method-name' name='-===' href='./../Overviews/Methods.html#==='>===</a>(<span class='argstr'>obj</span>)</h3>
 <div class='method'>
-<p>Answer whether the receiver is the exact same object as anotherObject.<textarea class='editor'>5.0 === 5; // false
+<p>Answer whether the receiver is the exact same object as anotherObject.<div class='codeMirrorContainer'><textarea class='editor'>5.0 === 5; // false
 "worth trying" === "worth trying"; // not identical
 'worth trying' === 'worth trying'; // identical (symbols are unique)</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'></span><a class='method-name' name='-!=' href='./../Overviews/Methods.html#!='>!=</a>(<span class='argstr'>obj</span>)</h3>
 <div class='method'>
 <p>Answer whether the receiver does not equal anotherObject. The default implementation in Object is to determine '==' for the two operands and negate this result. (see below).</div><h3 class='method-code'><span class='method-prefix'></span><a class='method-name' name='-!==' href='./../Overviews/Methods.html#!=='>!==</a>(<span class='argstr'>obj</span>)</h3>
 <div class='method'>
 <p>Answer whether the receiver is not identical to anotherObject.</div><h3 class='method-code'><span class='method-prefix'></span><a class='method-name' name='-|==|' href='./../Overviews/Methods.html#|==|'>|==|</a>(<span class='argstr'>that</span>)</h3>
 <div class='method'>
-<p>A lazy equality operator. For typical object types, <code>|==|</code> behaves the same as <a href="./../Classes/Object.html#-==">Object: -==</a>. For <a href="./../Classes/AbstractFunction.html">AbstractFunction</a> and its subclasses (including <a href="./../Classes/Pattern.html">Pattern</a> and <a href="./../Classes/UGen.html">UGen</a>), it does not perform the equality check immediately, but rather composes an equality operation to be performed at the time of evaluating the resulting function or stream.<textarea class='editor'>1 |==| 1  // true
+<p>A lazy equality operator. For typical object types, <code>|==|</code> behaves the same as <a href="./../Classes/Object.html#-==">Object: -==</a>. For <a href="./../Classes/AbstractFunction.html">AbstractFunction</a> and its subclasses (including <a href="./../Classes/Pattern.html">Pattern</a> and <a href="./../Classes/UGen.html">UGen</a>), it does not perform the equality check immediately, but rather composes an equality operation to be performed at the time of evaluating the resulting function or stream.<div class='codeMirrorContainer'><textarea class='editor'>1 |==| 1  // true
 
 Pseq([1], inf) == 1  // false (because "a Pseq" is not 1)
 
 Pseq([1], inf) |==| 1  // a Pbinop
 
 (Pseq([1], inf) |==| 1).asStream.next  // Pbinop evaluates to true</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'></span><a class='method-name' name='-|!=|' href='./../Overviews/Methods.html#|!=|'>|!=|</a>(<span class='argstr'>that</span>)</h3>
 <div class='method'>
 <p>A lazy inequality operator, defined as <code>not(this |==| that)</code>. See <a href="./../Classes/Object.html#-|==|">Object: -|==|</a>.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-fuzzyEqual' href='./../Overviews/Methods.html#fuzzyEqual'>fuzzyEqual</a>(<span class='argstr'>that</span>, <span class='argstr'>precision: 1.0</span>)</h3>
 <div class='method'>
-<p>Returns the degree of equality between two objects with regard to a given precision. The compared objects must support <code>.max</code>, subtraction, and division.<textarea class='editor'>5.0.fuzzyEqual(5.0, 0.5);  // 1.0 - full equality
+<p>Returns the degree of equality between two objects with regard to a given precision. The compared objects must support <code>.max</code>, subtraction, and division.<div class='codeMirrorContainer'><textarea class='editor'>5.0.fuzzyEqual(5.0, 0.5);  // 1.0 - full equality
 5.25.fuzzyEqual(5.0, 0.5); // 0.5 - 50% equality
 4.75.fuzzyEqual(5.0, 0.5); // 0.5 - 50% equality
 5.9.fuzzyEqual(5.0, 0.5);  // 0.0 - no equality</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>Resolve to a Boolean within your precision threshold by checking whether the returned degree of equality is above <code>0.0</code>.<textarea class='editor'>(
+<p>Resolve to a Boolean within your precision threshold by checking whether the returned degree of equality is above <code>0.0</code>.<div class='codeMirrorContainer'><textarea class='editor'>(
 // Cartesian to Polar and back, accumulating precision error
 var x = 3.0, y = 5.0;
 var hypot = hypot(y, x);
@@ -484,26 +526,30 @@ postf(
 );
 [x, xFromPolar]
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h4>Returns:</h4>
 <div class='returnvalue'>
 <p>A <a href="./../Classes/Float.html">Float</a> in the range <code>0.0</code> to <code>1.0</code>.</div></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-compareObject' href='./../Overviews/Methods.html#compareObject'>compareObject</a>(<span class='argstr'>that</span>, <span class='argstr'>instVarNames</span>)</h3>
 <div class='method'>
-<p>Tests if two Objects (of the same class) are the same in a certain respect: It returns true if instVarNames are equal in both. If none are given, all instance variables are tested (see also: <a href="#-instVarHash">-instVarHash</a>)<textarea class='editor'>a = Pseq([1, 2, 3], inf); b = Pseq([100, 200, 300], inf);
+<p>Tests if two Objects (of the same class) are the same in a certain respect: It returns true if instVarNames are equal in both. If none are given, all instance variables are tested (see also: <a href="#-instVarHash">-instVarHash</a>)<div class='codeMirrorContainer'><textarea class='editor'>a = Pseq([1, 2, 3], inf); b = Pseq([100, 200, 300], inf);
 a.compareObject(b, [\repeats]); // true
 a.compareObject(b, [\list]); // false</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-hash' href='./../Overviews/Methods.html#hash'>hash</a></h3>
 <div class='method'>
-<p>Answer a code used to index into a hash table. This is used by Dictionary and Set and their subclasses to implement fast object lookup. Objects which are equal == should have the same hash values. Whenever == is overridden in a class, hash should be overridden as well.<textarea class='editor'>a = "worth trying"; b = "worth trying";
+<p>Answer a code used to index into a hash table. This is used by Dictionary and Set and their subclasses to implement fast object lookup. Objects which are equal == should have the same hash values. Whenever == is overridden in a class, hash should be overridden as well.<div class='codeMirrorContainer'><textarea class='editor'>a = "worth trying"; b = "worth trying";
 a.hash;
 b.hash;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-identityHash' href='./../Overviews/Methods.html#identityHash'>identityHash</a></h3>
 <div class='method'>
-<p>Answer a code used to index into a hash table. This method is implemented by a primitive and is not overridden. Objects which are identical === should have the same hash values.<textarea class='editor'>a = "worth trying"; b = "worth trying";
+<p>Answer a code used to index into a hash table. This method is implemented by a primitive and is not overridden. Objects which are identical === should have the same hash values.<div class='codeMirrorContainer'><textarea class='editor'>a = "worth trying"; b = "worth trying";
 a.identityHash;
 b.identityHash;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-instVarHash' href='./../Overviews/Methods.html#instVarHash'>instVarHash</a>(<span class='argstr'>instVarNames</span>)</h3>
 <div class='method'>
-<p>Returns a combined hash value for the object's instance variables and the object's class. If none are given, all instance variables are tested (see also: <a href="#-compareObject">-compareObject</a>).<textarea class='editor'>a = Pseq([1, 2, 3], inf); b = Pseq([100, 200, 300], inf);
+<p>Returns a combined hash value for the object's instance variables and the object's class. If none are given, all instance variables are tested (see also: <a href="#-compareObject">-compareObject</a>).<div class='codeMirrorContainer'><textarea class='editor'>a = Pseq([1, 2, 3], inf); b = Pseq([100, 200, 300], inf);
 
 a.instVarHash([\repeats]); // same
 b.instVarHash([\repeats]);
@@ -514,6 +560,7 @@ b.instVarHash([\list]);
 a = Pseq([1, 2, 3], inf); b = Prand([1, 2, 3], inf);
 a.instVarHash([\list]); // different
 b.instVarHash([\list]);</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3><a class='anchor' name='Testing'>Testing</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-isNil' href='./../Overviews/Methods.html#isNil'>isNil</a></h3>
 <div class='method'>
@@ -534,43 +581,48 @@ b.instVarHash([\list]);</textarea>
 <p>If the receiver is not nil, evaluate the <a href="./../Classes/Function.html">Function</a> passing in the receiver as argument and return the result, otherwise return nil.<div class='note'><span class='notelabel'>NOTE:</span> The function will be inlined if it contains no variables or arguments.</div><h4>Discussion:</h4>
 
 <p>This method allow building up chains of actions to be performed on an object (possibly across several methods) without having to check if the object is nil or not. After all the desired actions are performed, <a href="#-??">-??</a> can be used to check if result the result is nil and supply a default value in that case.
-<p>Examples:<textarea class='editor'>x !? ( _ * 3 ) ?? { "It was a nil, so I give a default value".postln; Point(1,1) }</textarea>
+<p>Examples:<div class='codeMirrorContainer'><textarea class='editor'>x !? (_ * 3) ?? { "It was a nil, so I give a default value".postln; Point(1, 1) }</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p>With <code>x = nil</code>, this will result in:<pre>It was a nil, so I give a default value
-Point( 1, 1 )</pre>
-<p>But if <code>x = Point(3,4)</code>, the result will be:<pre>Point( 9, 12 )</pre>
-<p>Nested nil checks:<textarea class='editor'>(
+Point(1, 1)</pre>
+<p>But if <code>x = Point(3, 4)</code>, the result will be:<pre>Point(9, 12)</pre>
+<p>Nested nil checks:<div class='codeMirrorContainer'><textarea class='editor'>(
 x = nil;
-y = Point(3,4);
-z = Point(5,6);
+y = Point(3, 4);
+z = Point(5, 6);
 x !? { |x| y !? { |y| z !? { |z|  x.rho * y.rho * z.rho } } }
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>Results in <code>nil</code><textarea class='editor'>(
-x = Point(1,2);
-y = Point(3,4);
-z = Point(5,6);
+<p>Results in <code>nil</code><div class='codeMirrorContainer'><textarea class='editor'>(
+x = Point(1, 2);
+y = Point(3, 4);
+z = Point(5, 6);
 x !? { |x| y !? { |y| z !? {  |z| x.rho * y.rho * z.rho } } }
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p>Results in <code>87.321245982865</code></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-pointsTo' href='./../Overviews/Methods.html#pointsTo'>pointsTo</a>(<span class='argstr'>obj</span>)</h3>
 <div class='method'>
-<p>Returns true if receiver has a direct reference to obj.<textarea class='editor'>a = 9;
+<p>Returns true if receiver has a direct reference to obj.<div class='codeMirrorContainer'><textarea class='editor'>a = 9;
 b = [1, a, 6, 8];
 c = [1, b, 5];
 c.pointsTo(b); // true
 c.pointsTo(a); // false</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-mutable' href='./../Overviews/Methods.html#mutable'>mutable</a></h3>
 <div class='method'>
-<p>Returns true if receiver is mutable.<textarea class='editor'>a = #[1, 2, 3]; b = [1, 2, 3];
+<p>Returns true if receiver is mutable.<div class='codeMirrorContainer'><textarea class='editor'>a = #[1, 2, 3]; b = [1, 2, 3];
 a.mutable; // false
 b.mutable; // true</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-frozen' href='./../Overviews/Methods.html#frozen'>frozen</a></h3>
 <div class='method'>
 <p>Returns true if receiver is frozen.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-switch' href='./../Overviews/Methods.html#switch'>switch</a>( <span class='argstr'>... cases</span>)</h3>
 <div class='method'>
 <p>Object implements a switch method which allows for conditional evaluation with multiple cases. These are implemented as pairs of test objects (tested using if this == test.value) and corresponding functions to be evaluated if true. In order for switch to be inlined (and thus be as efficient as nested if statements) the matching values must be literal Integers, Floats, Chars, Symbols and the functions must have no variables or arguments.<h4>Discussion:</h4>
-<textarea class='editor'>(
+<div class='codeMirrorContainer'><textarea class='editor'>(
 var x, z;
 z = [0, 1, 1.1, 1.3, 1.5, 2];
 switch (z.choose.postln,
@@ -582,32 +634,48 @@ switch (z.choose.postln,
     0,   { \true }
 ).postln;
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>or:<textarea class='editor'>(
+<p>or:<div class='codeMirrorContainer'><textarea class='editor'>(
 var x, z;
 z = [0, 1, 1.1, 1.3, 1.5, 2];
 x = switch (z.choose)
-    {1}   { \no }
-    {1.1} { \wrong }
-    {1.3} { \wrong }
-    {1.5} { \wrong }
-    {2}   { \wrong }
-    {0}   { \true };
+    { 1 }   { \no }
+    { 1.1 } { \wrong }
+    { 1.3 } { \wrong }
+    { 1.5 } { \wrong }
+    { 2 }   { \wrong }
+    { 0 }   { \true };
 x.postln;
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3><a class='anchor' name='Messaging'>Messaging</a></h3>
 
 <p>Instead of directly sending a method to an object, a method may be invoked given a method selector only (a Symbol). The other arguments may be provided by passing them directly, from an environment. If it is not known whether the receiver implements the method, tryPerform only sends if it does, and superPerform invokes the method of the superclass.<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-perform' href='./../Overviews/Methods.html#perform'>perform</a>(<span class='argstr'>selector</span> <span class='argstr'>... args</span>)</h3>
 <div class='method'>
 <p>The selector argument must be a Symbol. Sends the method named by the selector with the given arguments to the receiver.
-<p>If the first argument is an Array or List, this method behaves like <code>performMsg</code>. However, this usage is discouraged, and <code>performMsg</code> ought to be used instead.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-performList' href='./../Overviews/Methods.html#performList'>performList</a>(<span class='argstr'>selector</span>, <span class='argstr'>arglist</span>)</h3>
+<p>If the first argument is an Array or List, this method behaves like <code>performMsg</code>. However, this usage is discouraged, and <code>performMsg</code> ought to be used instead.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-performList' href='./../Overviews/Methods.html#performList'>performList</a>( <span class='argstr'>... args</span>, <span class='argstr'>... kwargs</span>)</h3>
 <div class='method'>
-<p>The selector argument must be a Symbol. Sends the method named by the selector with the given arguments to the receiver. If the last argument is a List or an Array, then its elements are unpacked and passed as arguments.<textarea class='editor'>a = { |a, b, c| postf("% plus % plus % is %\n", a, b, c, a + b + c); "" };
+<p>The selector argument must be a Symbol. Sends the method named by the selector with the given arguments to the receiver. If the last argument is a List or an Array, then its elements are unpacked and passed as arguments.<div class='codeMirrorContainer'><textarea class='editor'>a = { |a, b, c| postf("% plus % plus % is %\n", a, b, c, a + b + c); "" };
 a.performList(\value, [1, 2, 3]);</textarea>
-</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-performMsg' href='./../Overviews/Methods.html#performMsg'>performMsg</a>(<span class='argstr'>msg</span>)</h3>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-performArgs' href='./../Overviews/Methods.html#performArgs'>performArgs</a>(<span class='argstr'>selector</span>, <span class='argstr'>args</span>, <span class='argstr'>kwargs</span>)</h3>
 <div class='method'>
-<p>The argument must be a List or Array whose first element is a Symbol representing a method selector. The remaining elements are unpacked and passed as arguments to the method named by the selector.<textarea class='editor'>a = { |a, b, c| postf("% plus % plus % is %\n", a, b, c, a + b + c); "" };
+<p>Like <a href="#-perform">-perform</a>, but allows you to pass a key-value array of keyword arguments. Useful in <a href="#-doesNotUnderstand">-doesNotUnderstand</a> and other places where you might accept a variety of keyword arguments.<h4>Arguments:</h4>
+<table class='arguments'>
+<tr><td class='argumentname'>selector<td class='argumentdesc'>
+<p>A <a href="./../Classes/Symbol.html">Symbol</a> of the method name.<tr><td class='argumentname'>args<td class='argumentdesc'>
+<p>An <a href="./../Classes/Array.html">Array</a> of the arguments.<tr><td class='argumentname'>kwargs<td class='argumentdesc'>
+<p>An <a href="./../Classes/Array.html">Array</a> of keyword-argument pairs.
+<p>Example<div class='codeMirrorContainer'><textarea class='editor'>x.performArgs(\foo, [1, 2], [\bar, 10]);
+// is equivalent to...
+x.foo(1, 2, bar: 10);</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+</table></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-performMsg' href='./../Overviews/Methods.html#performMsg'>performMsg</a>(<span class='argstr'>msg</span>)</h3>
+<div class='method'>
+<p>The argument must be a List or Array whose first element is a Symbol representing a method selector. The remaining elements are unpacked and passed as arguments to the method named by the selector.<div class='codeMirrorContainer'><textarea class='editor'>a = { |a, b, c| postf("% plus % plus % is %\n", a, b, c, a + b + c); "" };
 a.performMsg([\value, 1, 2, 3]);</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-performWithEnvir' href='./../Overviews/Methods.html#performWithEnvir'>performWithEnvir</a>(<span class='argstr'>selector</span>, <span class='argstr'>envir</span>)</h3>
 <div class='method'>
 <p><h4>Arguments:</h4>
@@ -615,8 +683,9 @@ a.performMsg([\value, 1, 2, 3]);</textarea>
 <tr><td class='argumentname'>selector<td class='argumentdesc'>
 <p>A Symbol representing a method selector.<tr><td class='argumentname'>envir<td class='argumentdesc'>
 <p>The remaining arguments derived from the environment and passed as arguments to the method named by the selector.</table><h4>Discussion:</h4>
-<textarea class='editor'>a = { |a, b, c| postf("% plus % plus % is %\n", a, b, c, a + b + c); "" };
+<div class='codeMirrorContainer'><textarea class='editor'>a = { |a, b, c| postf("% plus % plus % is %\n", a, b, c, a + b + c); "" };
 a.performWithEnvir(\value, (a: 1, c: 3, d: 4, b: 2));</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-performKeyValuePairs' href='./../Overviews/Methods.html#performKeyValuePairs'>performKeyValuePairs</a>(<span class='argstr'>selector</span>, <span class='argstr'>pairs</span>)</h3>
 <div class='method'>
 <p><h4>Arguments:</h4>
@@ -624,20 +693,22 @@ a.performWithEnvir(\value, (a: 1, c: 3, d: 4, b: 2));</textarea>
 <tr><td class='argumentname'>selector<td class='argumentdesc'>
 <p>A Symbol representing a method selector.<tr><td class='argumentname'>pairs<td class='argumentdesc'>
 <p>Array or List with key-value pairs.</table><h4>Discussion:</h4>
-<textarea class='editor'>a = { |a, b, c| postf("% plus % plus % is %\n", a, b, c, a + b + c); "" };
+<div class='codeMirrorContainer'><textarea class='editor'>a = { |a, b, c| postf("% plus % plus % is %\n", a, b, c, a + b + c); "" };
 a.performKeyValuePairs(\value, [\a, 1, \b, 2, \c, 3, \d, 4]);</textarea>
-</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-tryPerform' href='./../Overviews/Methods.html#tryPerform'>tryPerform</a>(<span class='argstr'>selector</span> <span class='argstr'>... args</span>)</h3>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-tryPerform' href='./../Overviews/Methods.html#tryPerform'>tryPerform</a>( <span class='argstr'>... args</span>, <span class='argstr'>... kwargs</span>)</h3>
 <div class='method'>
-<p>Like 'perform', but tryPerform passes the method to the receiver only if the receiver understands the method name. If the receiver doesn't implement that method, the result is nil. Note that this does not catch errors like 'try' does (see Exception). If the receiver does have a matching method but that method throws an error, execution will halt. But, 'tryPerform' is faster than 'try'.<textarea class='editor'>(a: 1, b: 2, c: 3).tryPerform(\keysValuesDo, { |key, value| [key, value].postln });
+<p>Like 'perform', but tryPerform passes the method to the receiver only if the receiver understands the method name. If the receiver doesn't implement that method, the result is nil. Note that this does not catch errors like 'try' does (see Exception). If the receiver does have a matching method but that method throws an error, execution will halt. But, 'tryPerform' is faster than 'try'.<div class='codeMirrorContainer'><textarea class='editor'>(a: 1, b: 2, c: 3).tryPerform(\keysValuesDo, { |key, value| [key, value].postln });
 
 // Set does not understand keysValuesDo -- result is nil
 Set[1, 2, 3].tryPerform(\keysValuesDo, { |key, value| [key, value].postln });
 
 // Error occurs within keysValuesDo -- error is thrown back to halt execution
 (a: 1, b: 2, c: 3).tryPerform(\keysValuesDo, { |key, value| [key, value].flippityblargh });</textarea>
-</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-superPerform' href='./../Overviews/Methods.html#superPerform'>superPerform</a>(<span class='argstr'>selector</span> <span class='argstr'>... args</span>)</h3>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-superPerform' href='./../Overviews/Methods.html#superPerform'>superPerform</a>( <span class='argstr'>... args</span>, <span class='argstr'>... kwargs</span>)</h3>
 <div class='method'>
-<p>Like perform, superPerform calls a method, however it calls the method on the superclass. selector: A Symbol representing a method selector. args: Method arguments.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-superPerformList' href='./../Overviews/Methods.html#superPerformList'>superPerformList</a>(<span class='argstr'>selector</span>, <span class='argstr'>arglist</span>)</h3>
+<p>Like perform, superPerform calls a method, however it calls the method on the superclass. selector: A Symbol representing a method selector. args: Method arguments.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-superPerformList' href='./../Overviews/Methods.html#superPerformList'>superPerformList</a>( <span class='argstr'>... args</span>, <span class='argstr'>... kwargs</span>)</h3>
 <div class='method'>
 <p>Like performList, superPerformList calls a method, however it calls the method on the superclass. selector: A Symbol representing a method selector. args: Method arguments. If the last argument is a List or an Array, then its elements are unpacked and passed as arguments.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-multiChannelPerform' href='./../Overviews/Methods.html#multiChannelPerform'>multiChannelPerform</a>(<span class='argstr'>selector</span> <span class='argstr'>... args</span>)</h3>
 <div class='method'>
@@ -646,21 +717,24 @@ Set[1, 2, 3].tryPerform(\keysValuesDo, { |key, value| [key, value].postln });
 <tr><td class='argumentname'>selector<td class='argumentdesc'>
 <p>A Symbol representing a method selector.<tr><td class='argumentname'>... args<td class='argumentdesc'>
 <p>Method arguments which, if they contain an array, will call the method multiple times for each sub-element.</table><h4>Discussion:</h4>
-<textarea class='editor'>a = { |a, b, c| format("% plus % times % is %", a, b, c, a + b * c).quote; };
+<div class='codeMirrorContainer'><textarea class='editor'>a = { |a, b, c| format("% plus % times % is %", a, b, c, a + b * c).quote };
 a.multiChannelPerform(\value, [1, 10, 100, 1000], [2, 7, 9], [3, 7]);
 
-["foo","bar"].multiChannelPerform('++',["l","bro","t"]);</textarea>
+["foo", "bar"].multiChannelPerform('++', ["l", "bro", "t"]);</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3><a class='anchor' name='Unique%20Methods'>Unique Methods</a></h3>
 
 <p>Method definitions not yet implemented may be added to an Object instance.<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-addUniqueMethod' href='./../Overviews/Methods.html#addUniqueMethod'>addUniqueMethod</a>(<span class='argstr'>selector</span>, <span class='argstr'>function</span>)</h3>
 <div class='method'>
-<p>Add a unique method.<textarea class='editor'>a = 5;
+<p>Add a unique method.<div class='codeMirrorContainer'><textarea class='editor'>a = 5;
 a.addUniqueMethod(\sayHello, { |to| "hello " ++ to ++ ", I am 5" });
 a.sayHello;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-removeUniqueMethod' href='./../Overviews/Methods.html#removeUniqueMethod'>removeUniqueMethod</a>(<span class='argstr'>selector</span>)</h3>
 <div class='method'>
-<p>Remove a unique method.<textarea class='editor'>a.removeUniqueMethod(\sayHello);
+<p>Remove a unique method.<div class='codeMirrorContainer'><textarea class='editor'>a.removeUniqueMethod(\sayHello);
 a.sayHello;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-removeUniqueMethods' href='./../Overviews/Methods.html#removeUniqueMethods'>removeUniqueMethods</a></h3>
 <div class='method'>
 <p>Remove all unique methods of an Object.</div><h3><a class='anchor' name='Dependancy'>Dependancy</a></h3>
@@ -678,20 +752,28 @@ a.sayHello;</textarea>
 <div class='method'>
 <p>Remove all dependants of the receiver. Any object that has had dependants added must be released in order for it or its dependants to get garbage collected.</div><h3><a class='anchor' name='Error%20Support'>Error Support</a></h3>
 
-<p>Object implements a number of methods which throw instances of Error. A number of methods (e.g. doesNotUnderstand) are 'private' and do not normally need to be called directly in user code. Others, such as those documented below can be useful for purposes such as object oriented design (e.g. to define an abstract interface which will be implemented in subclasses) and deprecation of methods. The reserved keyword thisMethod can be used to refer to the enclosing method. See also Method and Function (for exception handling).<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-throw' href='./../Overviews/Methods.html#throw'>throw</a></h3>
+<p>Object implements a number of methods which throw instances of Error. A number of methods (e.g. doesNotUnderstand) are 'private' and do not normally need to be called directly in user code. Others, such as those documented below can be useful for purposes such as object oriented design (e.g. to define an abstract interface which will be implemented in subclasses) and deprecation of methods. The reserved keyword thisMethod can be used to refer to the enclosing method. See also Method and Function (for exception handling).<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-doesNotUnderstand' href='./../Overviews/Methods.html#doesNotUnderstand'>doesNotUnderstand</a>(<span class='argstr'>selector</span> <span class='argstr'>... args</span>, <span class='argstr'>... kwargs</span>)</h3>
+<div class='method'>
+<p><h4>Arguments:</h4>
+<table class='arguments'>
+<tr><td class='argumentname'>selector<td class='argumentdesc'>
+<p>The method that was called.<tr><td class='argumentname'>... args<td class='argumentdesc'>
+<p>An <a href="./../Classes/Array.html">Array</a> of arguments.<tr><td class='argumentname'>kwargs<td class='argumentdesc'>
+<p>An <a href="./../Classes/Array.html">Array</a> of keyword argument pairs.</table></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-throw' href='./../Overviews/Methods.html#throw'>throw</a></h3>
 <div class='method'>
 <p>Throws the receiver as an Exception, which may or may not be caught and handled by any enclosing Function.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-subclassResponsibility' href='./../Overviews/Methods.html#subclassResponsibility'>subclassResponsibility</a>(<span class='argstr'>method</span>)</h3>
 <div class='method'>
 <p>Throws a SubclassResponsibilityError. Use this to indicate that this method should be defined in all subclasses of the receiver.<h4>Discussion:</h4>
-<textarea class='editor'>someMethod {
+<div class='codeMirrorContainer'><textarea class='editor'>someMethod {
     this.subclassResponsibility(thisMethod);
 }</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-shouldNotImplement' href='./../Overviews/Methods.html#shouldNotImplement'>shouldNotImplement</a>(<span class='argstr'>method</span>)</h3>
 <div class='method'>
 <p>Throws a ShouldNotImplementError. Use this to indicate that this inherited method should not be defined or used in the receiver.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-deprecated' href='./../Overviews/Methods.html#deprecated'>deprecated</a>(<span class='argstr'>method</span>, <span class='argstr'>alternateMethod</span>)</h3>
 <div class='method'>
 <p>Throws a DeprecatedError. Use this to indicate that the enclosing method has been replaced by a better one (possibly in another class), and that it will likely be removed in the future. Unlike other errors, DeprecatedError only halts execution if <code>Error.debug == true</code>. In all cases it posts a warning indicating that the method is deprecated and what is the recommended alternative.<h4>Discussion:</h4>
-<textarea class='editor'>foo {
+<div class='codeMirrorContainer'><textarea class='editor'>foo {
     this.deprecated(thisMethod, ThisOrSomeOtherObject.findMethod(\foo);
     ... // execution of this method will continue unless Error.debug == true
 }
@@ -701,25 +783,87 @@ a.sayHello;</textarea>
     this.deprecated(thisMethod, OtherClass.class.findMethod(\bar));
     ...
 }</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3><a class='anchor' name='Printing%20and%20Introspection'>Printing and Introspection</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-post' href='./../Overviews/Methods.html#post'>post</a></h3>
 <div class='method'>
-<p>Print a string representation of the receiver to the post window.<textarea class='editor'>"hello".post; "hello".post; "";</textarea>
+<p>Print a string representation of the receiver to the post window.<div class='codeMirrorContainer'><textarea class='editor'>"hello".post; "hello".post; "";</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-postln' href='./../Overviews/Methods.html#postln'>postln</a></h3>
 <div class='method'>
-<p>Print a string representation of the receiver followed by a newline.<textarea class='editor'>"hello".postln; "hello".postln; "";</textarea>
+<p>Print a string representation of the receiver followed by a newline.<div class='codeMirrorContainer'><textarea class='editor'>"hello".postln; "hello".postln; "";</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-postc' href='./../Overviews/Methods.html#postc'>postc</a></h3>
 <div class='method'>
-<p>Print a string representation of the receiver preceded by comments.<textarea class='editor'>"hello".postc; "hello".postc; "";</textarea>
+<p>Print a string representation of the receiver preceded by comments.<div class='codeMirrorContainer'><textarea class='editor'>"hello".postc; "hello".postc; "";</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-postcln' href='./../Overviews/Methods.html#postcln'>postcln</a></h3>
 <div class='method'>
-<p>Print a string representation of the receiver preceded by comments, followed by a newline.<textarea class='editor'>"hello".postcln; "hello".postcln; "";</textarea>
+<p>Print a string representation of the receiver preceded by comments, followed by a newline.<div class='codeMirrorContainer'><textarea class='editor'>"hello".postcln; "hello".postcln; "";</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-postcs' href='./../Overviews/Methods.html#postcs'>postcs</a></h3>
 <div class='method'>
-<p>Print the compile string representation of the receiver, followed by a newline.<textarea class='editor'>"hello".postcs; "hello".postcs; "";</textarea>
+<p>Print the compile string representation of the receiver, followed by a newline.<div class='codeMirrorContainer'><textarea class='editor'>"hello".postcs; "hello".postcs; "";</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-dump' href='./../Overviews/Methods.html#dump'>dump</a></h3>
 <div class='method'>
-<p>Print a detailed low level representation of the receiver to the post window.<textarea class='editor'>List[1, 2, 3].dump;</textarea>
+<p>Print a detailed low level representation of the receiver to the post window. Any object understands this method (this means metaclasses, classes and their instances). Note that in <a href="./../Classes/List.html">List</a> class, this method dumps the list's internal array.<div class='codeMirrorContainer'><textarea class='editor'>Meta_Object.dump // the meta class of the class Object</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+
+<p><div class='codeMirrorContainer'><textarea class='editor'>Object.dump      // the class called Object</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+
+<p><div class='codeMirrorContainer'><textarea class='editor'>Object.new.dump  // an istance of the class Object</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+<h4>Discussion:</h4>
+<ul>
+<li>The detailed low level information varies depending on the receiver.<li>Some instance objects, especially unique objects, return the class name and value (also more data if necessary) of the dumped object:<dl>
+<dt><a href="./../Classes/Float.html">Float</a><dd><div class='codeMirrorContainer'><textarea class='editor'>1.0.dump</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+64-bit version of SuperCollider returns:<pre>   Float 1.000000   00000000 3FF00000
+-&gt; 1.0</pre>
+<p>For the detals, see <a href="./../Classes/Float.html#-dump">Float: -dump</a><dt><a href="./../Classes/Integer.html">Integer</a><dd><div class='codeMirrorContainer'><textarea class='editor'>1.dump</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+<pre>   Integer 1
+-&gt; 1</pre>
+<p><dt><a href="./../Classes/Char.html">Char</a><dd><div class='codeMirrorContainer'><textarea class='editor'>$1.dump</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+<pre>   Character 49 '1'
+-&gt; 1</pre>
+<p>The integer between <em>Character</em> and <em>'1'</em> is the ASCII value of that character.<dt><a href="./../Classes/Symbol.html">Symbol</a><dd><div class='codeMirrorContainer'><textarea class='editor'>\1.dump</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+<pre>   Symbol '1'
+-&gt; 1</pre></dl>
+<li>Some instances return more detailed information, such as<ul>
+<li>address in virtual memory (the hexadecimal number prefixed with 0x),<li><em>garbage collector color</em> (gc),<li><em>data format type</em> (fmt),<li><em>flags for immutablity, finalization and sanity information from the garbage collector</em> (flg),<li><em>size class</em> (set),<li>and so on (the information on the second and subsequent lines varies depending on the class to which the instance belongs)</ul>
+
+<p>with the class name of the instance:<dl>
+<dt><a href="./../Classes/Array.html">Array</a><dd><div class='codeMirrorContainer'><textarea class='editor'>[1, 2].dump;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+<pre>Instance of Array {    (0x1552c9558, gc=78, fmt=01, flg=00, set=02)
+  indexed slots [2]
+      0 : Integer 1
+      1 : Integer 2
+}
+-&gt; [1, 2]</pre>
+<p><dt><a href="./../Classes/List.html">List</a><dd><div class='codeMirrorContainer'><textarea class='editor'>List[1, 2].dump;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+<pre>List's array:
+Instance of Array {    (0x13b3cb5b8, gc=6C, fmt=01, flg=00, set=02)
+  indexed slots [2]
+      0 : Integer 1
+      1 : Integer 2
+}
+-&gt; List[1, 2]</pre>
+<p><dt><a href="./../Classes/Set.html">Set</a><dd><div class='codeMirrorContainer'><textarea class='editor'>Set[1, 2].dump;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+<pre>Instance of Set {    (0x1489e2068, gc=A4, fmt=00, flg=00, set=02)
+  instance variables [2]
+    array : instance of Array (0x13b458838, size=4, set=2)
+    size : Integer 2
+}
+-&gt; Set[2, 1]</pre></dl>
+</ul>
 </div><h3><a class='anchor' name='System%20Information'>System Information</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-gcInfo' href='./../Overviews/Methods.html#gcInfo'>gcInfo</a></h3>
 <div class='method'>
@@ -727,7 +871,7 @@ a.sayHello;</textarea>
 <ul>
 <li>flips: the number of times the GC "flipped", i.e. when it finished incremental scanning of all reachable objects<li>collects: the number of partial collections performed<li>nalloc: total number of allocations<li>alloc: total allocation in bytes<li>grey: the number of "grey" objects, i.e. objects that point to reachable objects and are not determined to be (un)reachable yet</ul>
 
-<p>Then for each size class: numer of black, white and free objects, total number of objects and the total set size.<textarea class='editor'>flips 241  collects 689096   nalloc 40173511   alloc 322496998   grey 346541
+<p>Then for each size class: numer of black, white and free objects, total number of objects and the total set size.<div class='codeMirrorContainer'><textarea class='editor'>flips 241  collects 689096   nalloc 40173511   alloc 322496998   grey 346541
 0  bwf t sz:    882      0 368573   369455    2955640
 1  bwf t sz:   6197    122 5702377   5708696   91339136
 2  bwf t sz:    947      4 1500009   1500960   48030720
@@ -743,26 +887,29 @@ a.sayHello;</textarea>
 13  bwf t sz:      1      0      0        1      65536
 19  bwf t sz:      1      0      3        4   16777216
 tot bwf t sz: 174215  65476 7876722   8116413   341832120</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p>You can also query the amount of free memory with <code>Object.totalFree</code> and dump the currently grey objects with <code>Object.dumpGrey</code>. More memory status methods are: largestFreeBlock, gcDumpSet, and gcSanity.</div><h3><a class='anchor' name='Iteration'>Iteration</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-do' href='./../Overviews/Methods.html#do'>do</a>(<span class='argstr'>function</span>)</h3>
 <div class='method'>
 <p>Object evaluates the function with itself as an argument, returning the result. Different classes respond to this message differently.<h4>Discussion:</h4>
-<textarea class='editor'>f = { |x, i| [x, i].postln; };
+<div class='codeMirrorContainer'><textarea class='editor'>f = { |x, i| [x, i].postln };
 [1, 2, 3].do(f); // Array.do
 10.do(f); // Integer.do
 ($Q).do(f); // Object.do</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-generate' href='./../Overviews/Methods.html#generate'>generate</a>(<span class='argstr'>function</span>, <span class='argstr'>state</span>)</h3>
 <div class='method'>
 <p>Object iterates by the message do, sent to the receiver. This method is used internally by list comprehensions.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-dup' href='./../Overviews/Methods.html#dup'>dup</a>(<span class='argstr'>n: 2</span>)</h3>
 <div class='method'>
 <p>Duplicates the receiver n times, returning an array of n copies. Different classes respond to this message differently. The shortcut "!" can be used in place.<h4>Discussion:</h4>
-<textarea class='editor'>8.dup(10);
+<div class='codeMirrorContainer'><textarea class='editor'>8.dup(10);
 8 ! 10; // same as above
 x = [[1], [2], [3]].dup(5);
 x[0] === x[1]; // false: copies receiver.
 x[0][0] === x[1][0] // true: doesn't deepCopy receiver
 { 1.0.rand }.dup(5) // other objects respond differently to dup</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3><a class='anchor' name='Scheduling'>Scheduling</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-awake' href='./../Overviews/Methods.html#awake'>awake</a>(<span class='argstr'>beats</span>, <span class='argstr'>seconds</span>, <span class='argstr'>clock</span>)</h3>
 <div class='method'>
@@ -788,42 +935,49 @@ x[0][0] === x[1][0] // true: doesn't deepCopy receiver
 <div class='method'>
 <p>Yields the receiver</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-idle' href='./../Overviews/Methods.html#idle'>idle</a>(<span class='argstr'>val</span>)</h3>
 <div class='method'>
-<p>within a routine, return values (the receiver) until this time is over. (see also <a href="./../Classes/Routine.html#-play">Routine: -play</a>) Time is measured relative to the thread's clock.<textarea class='editor'>a = Routine { 1.yield; 0.idle(3); 400.yield };
+<p>within a routine, return values (the receiver) until this time is over. (see also <a href="./../Classes/Routine.html#-play">Routine: -play</a>) Time is measured relative to the thread's clock.<div class='codeMirrorContainer'><textarea class='editor'>a = Routine { 1.yield; 0.idle(3); 400.yield };
 fork { loop { a.next.postln; 0.5.wait } };</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-iter' href='./../Overviews/Methods.html#iter'>iter</a></h3>
 <div class='method'>
-<p>Returns a <a href="./../Classes/OneShotStream.html">OneShotStream</a> with the receiver as return value.<textarea class='editor'>a = 9.iter;
+<p>Returns a <a href="./../Classes/OneShotStream.html">OneShotStream</a> with the receiver as return value.<div class='codeMirrorContainer'><textarea class='editor'>a = 9.iter;
 a.nextN(4);</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-cyc' href='./../Overviews/Methods.html#cyc'>cyc</a>(<span class='argstr'>n: inf</span>)</h3>
 <div class='method'>
-<p>Embeds the receiver in the stream n times (default: inf), each time resetting it.<textarea class='editor'>a = 9.cyc(2);
+<p>Embeds the receiver in the stream n times (default: inf), each time resetting it.<div class='codeMirrorContainer'><textarea class='editor'>a = 9.cyc(2);
 a.nextN(4);</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-fin' href='./../Overviews/Methods.html#fin'>fin</a>(<span class='argstr'>n: 1</span>)</h3>
 <div class='method'>
-<p>Calls next with the receiver n times only (default: 1), yielding the result.<textarea class='editor'>a = (10..0).iter.fin(2);
+<p>Calls next with the receiver n times only (default: 1), yielding the result.<div class='codeMirrorContainer'><textarea class='editor'>a = (10..0).iter.fin(2);
 a.nextN(4);</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-repeat' href='./../Overviews/Methods.html#repeat'>repeat</a>(<span class='argstr'>repeats: inf</span>)</h3>
 <div class='method'>
-<p>Repeatedly embeds the receiver in the stream using a Pn (may thus be used for patterns and other objects alike)<textarea class='editor'>a = (0..3).iter.repeat(2);
+<p>Repeatedly embeds the receiver in the stream using a Pn (may thus be used for patterns and other objects alike)<div class='codeMirrorContainer'><textarea class='editor'>a = (0..3).iter.repeat(2);
 a.nextN(9)</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-loop' href='./../Overviews/Methods.html#loop'>loop</a></h3>
 <div class='method'>
-<p>Indefinitely embeds the receiver in the stream<textarea class='editor'>a = (0..3).iter.loop;
+<p>Indefinitely embeds the receiver in the stream<div class='codeMirrorContainer'><textarea class='editor'>a = (0..3).iter.loop;
 a.nextN(9)</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-nextN' href='./../Overviews/Methods.html#nextN'>nextN</a>(<span class='argstr'>n</span>, <span class='argstr'>inval</span>)</h3>
 <div class='method'>
 <p>Returns an array with the results of calling <a href="#-next">-next</a> a given number of times<h4>Arguments:</h4>
 <table class='arguments'>
 <tr><td class='argumentname'>n<td class='argumentdesc'>
 <p>Number of message calls<tr><td class='argumentname'>inval<td class='argumentdesc'>
-<p>argument passed to the next message<textarea class='editor'>Routine { inf.do { |i| i.rand.yield } }.nextN(8)</textarea>
+<p>argument passed to the next message<div class='codeMirrorContainer'><textarea class='editor'>Routine { inf.do { |i| i.rand.yield } }.nextN(8)</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </table></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-streamArg' href='./../Overviews/Methods.html#streamArg'>streamArg</a>(<span class='argstr'>embed: false</span>)</h3>
 <div class='method'>
 <p> Dependent on whether an object that is passed to a stream the object will behave differently: it may be embedded in the stream or used as stream directly.
 <p> This method allows to switch between the two behaviors. For efficiency, the subclasses <a href="./../Classes/Pattern.html">Pattern</a> and <a href="./../Classes/Stream.html">Stream</a> implement this method simply as "asStream".<h4>Arguments:</h4>
 <table class='arguments'>
 <tr><td class='argumentname'>embed<td class='argumentdesc'>
-<p> If set to true, the object embeds itself into the stream (and thus return only once). If set to false, it returns itself forever. For simplicity, subclasses implement this method without this switch.<textarea class='editor'>// embedding an event
+<p> If set to true, the object embeds itself into the stream (and thus return only once). If set to false, it returns itself forever. For simplicity, subclasses implement this method without this switch.<div class='codeMirrorContainer'><textarea class='editor'>// embedding an event
 a = (z: 77);
 b = Pset(\y, 8, a.streamArg(true)).asStream;
 c = Pset(\y, 8, a.streamArg(false)).asStream;
@@ -836,6 +990,7 @@ b = Pset(\y, 8, a.streamArg(true)).asStream;
 c = Pset(\y, 8, a.streamArg(false)).asStream;
 b.nextN(3, ()); // this ends
 c.nextN(3, ()); // this ends, too</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </table></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-addFunc' href='./../Overviews/Methods.html#addFunc'>addFunc</a>( <span class='argstr'>... functions</span>)</h3>
 <div class='method'></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-addFuncTo' href='./../Overviews/Methods.html#addFuncTo'>addFuncTo</a>(<span class='argstr'>variableName</span> <span class='argstr'>... functions</span>)</h3>
 <div class='method'></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-removeFunc' href='./../Overviews/Methods.html#removeFunc'>removeFunc</a>(<span class='argstr'>function</span>)</h3>
@@ -847,9 +1002,10 @@ c.nextN(3, ()); // this ends, too</textarea>
 <p>The messages <a href="./../Classes/SequenceableCollection.html#-instill">SequenceableCollection: -instill</a> and <a href="./../Classes/SequenceableCollection.html#-obtain">SequenceableCollection: -obtain</a>, are supported by Object.</div><h3><a class='anchor' name='Math%20Support'>Math Support</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-blend' href='./../Overviews/Methods.html#blend'>blend</a>(<span class='argstr'>that</span>, <span class='argstr'>blendFrac: 0.5</span>)</h3>
 <div class='method'>
-<p>Lineraly interpolate between this and argument<textarea class='editor'>blend(10, 100, 0.3);
+<p>Lineraly interpolate between this and argument<div class='codeMirrorContainer'><textarea class='editor'>blend(10, 100, 0.3);
 blend([1, 2, 3], [1, 3, 4], 0.5);
 blend((a: 6, b: 7), (a: 0, b: [1, 2], c: 9), 0.5);</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p></div><h3><a class='anchor' name='Undocumented%20instance%20methods'>Undocumented instance methods</a></h3>
 <h3 class='method-code'><span class='method-prefix'></span><a class='method-name' name='-!' href='./../Overviews/Methods.html#!'>!</a>(<span class='argstr'>n</span>)</h3>
@@ -864,31 +1020,31 @@ blend((a: 6, b: 7), (a: 0, b: [1, 2], c: 9), 0.5);</textarea>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-archiveAsCompileString' href='./../Overviews/Methods.html#archiveAsCompileString'>archiveAsCompileString</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-archiveAsObject' href='./../Overviews/Methods.html#archiveAsObject'>archiveAsObject</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-argNames' href='./../Overviews/Methods.html#argNames'>argNames</a></h3>
-<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/JITLib/ProxySpace/wrapForNodeProxy.sc'>/usr/local/share/SuperCollider/SCClassLibrary/JITLib/ProxySpace/wrapForNodeProxy.sc</a></div>
+<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/JITLib/ProxySpace/wrapForNodeProxy.sc'>/usr/local/share/SuperCollider/SCClassLibrary/JITLib/ProxySpace/wrapForNodeProxy.sc</a></div>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-asArchive' href='./../Overviews/Methods.html#asArchive'>asArchive</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-asAudioRateInput' href='./../Overviews/Methods.html#asAudioRateInput'>asAudioRateInput</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-asBinaryArchive' href='./../Overviews/Methods.html#asBinaryArchive'>asBinaryArchive</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-asCollection' href='./../Overviews/Methods.html#asCollection'>asCollection</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-asControlInput' href='./../Overviews/Methods.html#asControlInput'>asControlInput</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-asDefName' href='./../Overviews/Methods.html#asDefName'>asDefName</a></h3>
-<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/Common/Control/asDefName.sc'>/usr/local/share/SuperCollider/SCClassLibrary/Common/Control/asDefName.sc</a></div>
+<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/Common/Control/asDefName.sc'>/usr/local/share/SuperCollider/SCClassLibrary/Common/Control/asDefName.sc</a></div>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-asNodeArg' href='./../Overviews/Methods.html#asNodeArg'>asNodeArg</a></h3>
-<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/Common/Control/asNodeArg.sc'>/usr/local/share/SuperCollider/SCClassLibrary/Common/Control/asNodeArg.sc</a></div>
+<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/Common/Control/asNodeArg.sc'>/usr/local/share/SuperCollider/SCClassLibrary/Common/Control/asNodeArg.sc</a></div>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-asOSCArgArray' href='./../Overviews/Methods.html#asOSCArgArray'>asOSCArgArray</a></h3>
-<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/Common/Control/extConvertToOSC.sc'>/usr/local/share/SuperCollider/SCClassLibrary/Common/Control/extConvertToOSC.sc</a></div>
+<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/Common/Control/extConvertToOSC.sc'>/usr/local/share/SuperCollider/SCClassLibrary/Common/Control/extConvertToOSC.sc</a></div>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-asOSCArgBundle' href='./../Overviews/Methods.html#asOSCArgBundle'>asOSCArgBundle</a></h3>
-<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/Common/Control/extConvertToOSC.sc'>/usr/local/share/SuperCollider/SCClassLibrary/Common/Control/extConvertToOSC.sc</a></div>
+<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/Common/Control/extConvertToOSC.sc'>/usr/local/share/SuperCollider/SCClassLibrary/Common/Control/extConvertToOSC.sc</a></div>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-asOSCArgEmbeddedArray' href='./../Overviews/Methods.html#asOSCArgEmbeddedArray'>asOSCArgEmbeddedArray</a>(<span class='argstr'>array</span>)</h3>
-<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/Common/Control/extConvertToOSC.sc'>/usr/local/share/SuperCollider/SCClassLibrary/Common/Control/extConvertToOSC.sc</a></div>
+<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/Common/Control/extConvertToOSC.sc'>/usr/local/share/SuperCollider/SCClassLibrary/Common/Control/extConvertToOSC.sc</a></div>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-asRef' href='./../Overviews/Methods.html#asRef'>asRef</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-asSequenceableCollection' href='./../Overviews/Methods.html#asSequenceableCollection'>asSequenceableCollection</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-asStream' href='./../Overviews/Methods.html#asStream'>asStream</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-asString' href='./../Overviews/Methods.html#asString'>asString</a>(<span class='argstr'>limit: 512</span>)</h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-asStringff' href='./../Overviews/Methods.html#asStringff'>asStringff</a>(<span class='argstr'>size: 8</span>)</h3>
-<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/Common/Control/extConvertToOSC.sc'>/usr/local/share/SuperCollider/SCClassLibrary/Common/Control/extConvertToOSC.sc</a></div>
+<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/Common/Control/extConvertToOSC.sc'>/usr/local/share/SuperCollider/SCClassLibrary/Common/Control/extConvertToOSC.sc</a></div>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-asSymbol' href='./../Overviews/Methods.html#asSymbol'>asSymbol</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-asSynthDef' href='./../Overviews/Methods.html#asSynthDef'>asSynthDef</a></h3>
-<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/Common/Control/asDefName.sc'>/usr/local/share/SuperCollider/SCClassLibrary/Common/Control/asDefName.sc</a></div>
+<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/Common/Control/asDefName.sc'>/usr/local/share/SuperCollider/SCClassLibrary/Common/Control/asDefName.sc</a></div>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-asTextArchive' href='./../Overviews/Methods.html#asTextArchive'>asTextArchive</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-asUGenInput' href='./../Overviews/Methods.html#asUGenInput'>asUGenInput</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-atLimit' href='./../Overviews/Methods.html#atLimit'>atLimit</a></h3>
@@ -899,10 +1055,10 @@ blend((a: 6, b: 7), (a: 0, b: [1, 2], c: 9), 0.5);</textarea>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-blendPut' href='./../Overviews/Methods.html#blendPut'>blendPut</a>(<span class='argstr'>index</span>, <span class='argstr'>val</span>, <span class='argstr'>method: 'wrapPut'</span>)</h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-bubble' href='./../Overviews/Methods.html#bubble'>bubble</a>(<span class='argstr'>depth: 0</span>, <span class='argstr'>levels: 1</span>)</h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-buildForProxy' href='./../Overviews/Methods.html#buildForProxy'>buildForProxy</a>(<span class='argstr'>proxy</span>, <span class='argstr'>channelOffset: 0</span>)</h3>
-<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/JITLib/ProxySpace/wrapForNodeProxy.sc'>/usr/local/share/SuperCollider/SCClassLibrary/JITLib/ProxySpace/wrapForNodeProxy.sc</a></div>
+<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/JITLib/ProxySpace/wrapForNodeProxy.sc'>/usr/local/share/SuperCollider/SCClassLibrary/JITLib/ProxySpace/wrapForNodeProxy.sc</a></div>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-canCallOS' href='./../Overviews/Methods.html#canCallOS'>canCallOS</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-canFreeSynth' href='./../Overviews/Methods.html#canFreeSynth'>canFreeSynth</a></h3>
-<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/Common/Audio/canFreeSynth.sc'>/usr/local/share/SuperCollider/SCClassLibrary/Common/Audio/canFreeSynth.sc</a></div>
+<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/Common/Audio/canFreeSynth.sc'>/usr/local/share/SuperCollider/SCClassLibrary/Common/Audio/canFreeSynth.sc</a></div>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-checkCanArchive' href='./../Overviews/Methods.html#checkCanArchive'>checkCanArchive</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-clear' href='./../Overviews/Methods.html#clear'>clear</a></h3>
 </h3>
@@ -912,32 +1068,31 @@ blend((a: 6, b: 7), (a: 0, b: [1, 2], c: 9), 0.5);</textarea>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-contentsCopy' href='./../Overviews/Methods.html#contentsCopy'>contentsCopy</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-crash' href='./../Overviews/Methods.html#crash'>crash</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-debug' href='./../Overviews/Methods.html#debug'>debug</a>(<span class='argstr'>caller</span>)</h3>
-<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/Common/Core/debug.sc'>/usr/local/share/SuperCollider/SCClassLibrary/Common/Core/debug.sc</a></div>
+<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/Common/Core/debug.sc'>/usr/local/share/SuperCollider/SCClassLibrary/Common/Core/debug.sc</a></div>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-deepCollect' href='./../Overviews/Methods.html#deepCollect'>deepCollect</a>(<span class='argstr'>depth</span>, <span class='argstr'>function</span>, <span class='argstr'>index: 0</span>, <span class='argstr'>rank: 0</span>)</h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-deepDo' href='./../Overviews/Methods.html#deepDo'>deepDo</a>(<span class='argstr'>depth</span>, <span class='argstr'>function</span>, <span class='argstr'>index: 0</span>, <span class='argstr'>rank: 0</span>)</h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-defaultArgs' href='./../Overviews/Methods.html#defaultArgs'>defaultArgs</a></h3>
-<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/JITLib/ProxySpace/wrapForNodeProxy.sc'>/usr/local/share/SuperCollider/SCClassLibrary/JITLib/ProxySpace/wrapForNodeProxy.sc</a></div>
+<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/JITLib/ProxySpace/wrapForNodeProxy.sc'>/usr/local/share/SuperCollider/SCClassLibrary/JITLib/ProxySpace/wrapForNodeProxy.sc</a></div>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-dereference' href='./../Overviews/Methods.html#dereference'>dereference</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-dereferenceOperand' href='./../Overviews/Methods.html#dereferenceOperand'>dereferenceOperand</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-doOnCmdPeriod' href='./../Overviews/Methods.html#doOnCmdPeriod'>doOnCmdPeriod</a></h3>
-<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/Common/Control/extSystemActions.sc'>/usr/local/share/SuperCollider/SCClassLibrary/Common/Control/extSystemActions.sc</a></div>
-<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-doesNotUnderstand' href='./../Overviews/Methods.html#doesNotUnderstand'>doesNotUnderstand</a>(<span class='argstr'>selector</span> <span class='argstr'>... args</span>)</h3>
+<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/Common/Control/extSystemActions.sc'>/usr/local/share/SuperCollider/SCClassLibrary/Common/Control/extSystemActions.sc</a></div>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-dumpBackTrace' href='./../Overviews/Methods.html#dumpBackTrace'>dumpBackTrace</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-dumpDetailedBackTrace' href='./../Overviews/Methods.html#dumpDetailedBackTrace'>dumpDetailedBackTrace</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-dumpStack' href='./../Overviews/Methods.html#dumpStack'>dumpStack</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-envirCompileString' href='./../Overviews/Methods.html#envirCompileString'>envirCompileString</a></h3>
-<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/JITLib/ProxySpace/extStoreOn.sc'>/usr/local/share/SuperCollider/SCClassLibrary/JITLib/ProxySpace/extStoreOn.sc</a></div>
+<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/JITLib/ProxySpace/extStoreOn.sc'>/usr/local/share/SuperCollider/SCClassLibrary/JITLib/ProxySpace/extStoreOn.sc</a></div>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-envirKey' href='./../Overviews/Methods.html#envirKey'>envirKey</a>(<span class='argstr'>envir</span>)</h3>
-<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/JITLib/ProxySpace/extStoreOn.sc'>/usr/local/share/SuperCollider/SCClassLibrary/JITLib/ProxySpace/extStoreOn.sc</a></div>
+<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/JITLib/ProxySpace/extStoreOn.sc'>/usr/local/share/SuperCollider/SCClassLibrary/JITLib/ProxySpace/extStoreOn.sc</a></div>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-equals' href='./../Overviews/Methods.html#equals'>equals</a>(<span class='argstr'>that</span>, <span class='argstr'>properties</span>)</h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-eventAt' href='./../Overviews/Methods.html#eventAt'>eventAt</a></h3>
-<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-falseAt' href='./../Overviews/Methods.html#falseAt'>falseAt</a>(<span class='argstr'>key</span>)</h3>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-falseAt' href='./../Overviews/Methods.html#falseAt'>falseAt</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-finishEvent' href='./../Overviews/Methods.html#finishEvent'>finishEvent</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-first' href='./../Overviews/Methods.html#first'>first</a>(<span class='argstr'>inval</span>)</h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-flatSize' href='./../Overviews/Methods.html#flatSize'>flatSize</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-free' href='./../Overviews/Methods.html#free'>free</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-freeze' href='./../Overviews/Methods.html#freeze'>freeze</a></h3>
-<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-functionPerformList' href='./../Overviews/Methods.html#functionPerformList'>functionPerformList</a></h3>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-functionPerformList' href='./../Overviews/Methods.html#functionPerformList'>functionPerformList</a>( <span class='argstr'>... args</span>, <span class='argstr'>... kwargs</span>)</h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-gcDumpGrey' href='./../Overviews/Methods.html#gcDumpGrey'>gcDumpGrey</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-gcDumpSet' href='./../Overviews/Methods.html#gcDumpSet'>gcDumpSet</a>(<span class='argstr'>set</span>)</h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-gcSanity' href='./../Overviews/Methods.html#gcSanity'>gcSanity</a></h3>
@@ -949,7 +1104,7 @@ blend((a: 6, b: 7), (a: 0, b: [1, 2], c: 9), 0.5);</textarea>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-immutableError' href='./../Overviews/Methods.html#immutableError'>immutableError</a>(<span class='argstr'>value</span>)</h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-indexedSize' href='./../Overviews/Methods.html#indexedSize'>indexedSize</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-initBus' href='./../Overviews/Methods.html#initBus'>initBus</a></h3>
-<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/JITLib/ProxySpace/wrapForNodeProxy.sc'>/usr/local/share/SuperCollider/SCClassLibrary/JITLib/ProxySpace/wrapForNodeProxy.sc</a></div>
+<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/JITLib/ProxySpace/wrapForNodeProxy.sc'>/usr/local/share/SuperCollider/SCClassLibrary/JITLib/ProxySpace/wrapForNodeProxy.sc</a></div>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-initFromArchive' href='./../Overviews/Methods.html#initFromArchive'>initFromArchive</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-inspect' href='./../Overviews/Methods.html#inspect'>inspect</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-inspector' href='./../Overviews/Methods.html#inspector'>inspector</a></h3>
@@ -964,7 +1119,7 @@ blend((a: 6, b: 7), (a: 0, b: [1, 2], c: 9), 0.5);</textarea>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-isFunction' href='./../Overviews/Methods.html#isFunction'>isFunction</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-isInputUGen' href='./../Overviews/Methods.html#isInputUGen'>isInputUGen</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-isNeutral' href='./../Overviews/Methods.html#isNeutral'>isNeutral</a></h3>
-<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/JITLib/ProxySpace/wrapForNodeProxy.sc'>/usr/local/share/SuperCollider/SCClassLibrary/JITLib/ProxySpace/wrapForNodeProxy.sc</a></div>
+<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/JITLib/ProxySpace/wrapForNodeProxy.sc'>/usr/local/share/SuperCollider/SCClassLibrary/JITLib/ProxySpace/wrapForNodeProxy.sc</a></div>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-isOutputUGen' href='./../Overviews/Methods.html#isOutputUGen'>isOutputUGen</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-isPlaying' href='./../Overviews/Methods.html#isPlaying'>isPlaying</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-isRest' href='./../Overviews/Methods.html#isRest'>isRest</a></h3>
@@ -974,11 +1129,11 @@ blend((a: 6, b: 7), (a: 0, b: [1, 2], c: 9), 0.5);</textarea>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-isValidUGenInput' href='./../Overviews/Methods.html#isValidUGenInput'>isValidUGenInput</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-largestFreeBlock' href='./../Overviews/Methods.html#largestFreeBlock'>largestFreeBlock</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-makeProxyControl' href='./../Overviews/Methods.html#makeProxyControl'>makeProxyControl</a>(<span class='argstr'>channelOffset: 0</span>)</h3>
-<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/JITLib/ProxySpace/wrapForNodeProxy.sc'>/usr/local/share/SuperCollider/SCClassLibrary/JITLib/ProxySpace/wrapForNodeProxy.sc</a></div>
+<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/JITLib/ProxySpace/wrapForNodeProxy.sc'>/usr/local/share/SuperCollider/SCClassLibrary/JITLib/ProxySpace/wrapForNodeProxy.sc</a></div>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-matchItem' href='./../Overviews/Methods.html#matchItem'>matchItem</a>(<span class='argstr'>item</span>)</h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-mustBeBoolean' href='./../Overviews/Methods.html#mustBeBoolean'>mustBeBoolean</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-nodeMapMapsToControl' href='./../Overviews/Methods.html#nodeMapMapsToControl'>nodeMapMapsToControl</a></h3>
-<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/JITLib/ProxySpace/wrapForNodeProxy.sc'>/usr/local/share/SuperCollider/SCClassLibrary/JITLib/ProxySpace/wrapForNodeProxy.sc</a></div>
+<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/JITLib/ProxySpace/wrapForNodeProxy.sc'>/usr/local/share/SuperCollider/SCClassLibrary/JITLib/ProxySpace/wrapForNodeProxy.sc</a></div>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-notYetImplemented' href='./../Overviews/Methods.html#notYetImplemented'>notYetImplemented</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-numChannels' href='./../Overviews/Methods.html#numChannels'>numChannels</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-outOfContextReturn' href='./../Overviews/Methods.html#outOfContextReturn'>outOfContextReturn</a>(<span class='argstr'>method</span>, <span class='argstr'>result</span>)</h3>
@@ -992,29 +1147,27 @@ blend((a: 6, b: 7), (a: 0, b: [1, 2], c: 9), 0.5);</textarea>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-performBinaryOpOnUGen' href='./../Overviews/Methods.html#performBinaryOpOnUGen'>performBinaryOpOnUGen</a>(<span class='argstr'>aSelector</span>, <span class='argstr'>thing</span>, <span class='argstr'>adverb</span>)</h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-poll' href='./../Overviews/Methods.html#poll'>poll</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-postString' href='./../Overviews/Methods.html#postString'>postString</a></h3>
-<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/JITLib/Patterns/extFunction.sc'>/usr/local/share/SuperCollider/SCClassLibrary/JITLib/Patterns/extFunction.sc</a></div>
+<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/JITLib/Patterns/extFunction.sc'>/usr/local/share/SuperCollider/SCClassLibrary/JITLib/Patterns/extFunction.sc</a></div>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-postff' href='./../Overviews/Methods.html#postff'>postff</a>(<span class='argstr'>size: 8</span>)</h3>
-<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/Common/Control/extConvertToOSC.sc'>/usr/local/share/SuperCollider/SCClassLibrary/Common/Control/extConvertToOSC.sc</a></div>
+<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/Common/Control/extConvertToOSC.sc'>/usr/local/share/SuperCollider/SCClassLibrary/Common/Control/extConvertToOSC.sc</a></div>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-prHalt' href='./../Overviews/Methods.html#prHalt'>prHalt</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-prReverseLazyEquals' href='./../Overviews/Methods.html#prReverseLazyEquals'>prReverseLazyEquals</a>(<span class='argstr'>that</span>)</h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-prepareForProxySynthDef' href='./../Overviews/Methods.html#prepareForProxySynthDef'>prepareForProxySynthDef</a></h3>
-<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/JITLib/ProxySpace/wrapForNodeProxy.sc'>/usr/local/share/SuperCollider/SCClassLibrary/JITLib/ProxySpace/wrapForNodeProxy.sc</a></div>
+<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/JITLib/ProxySpace/wrapForNodeProxy.sc'>/usr/local/share/SuperCollider/SCClassLibrary/JITLib/ProxySpace/wrapForNodeProxy.sc</a></div>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-primitiveFailed' href='./../Overviews/Methods.html#primitiveFailed'>primitiveFailed</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-printClassNameOn' href='./../Overviews/Methods.html#printClassNameOn'>printClassNameOn</a>(<span class='argstr'>stream</span>)</h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-proxyControlClass' href='./../Overviews/Methods.html#proxyControlClass'>proxyControlClass</a></h3>
-<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/JITLib/ProxySpace/wrapForNodeProxy.sc'>/usr/local/share/SuperCollider/SCClassLibrary/JITLib/ProxySpace/wrapForNodeProxy.sc</a></div>
-<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-rank' href='./../Overviews/Methods.html#rank'>rank</a></h3>
+<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/JITLib/ProxySpace/wrapForNodeProxy.sc'>/usr/local/share/SuperCollider/SCClassLibrary/JITLib/ProxySpace/wrapForNodeProxy.sc</a></div>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-reduceFuncProxy' href='./../Overviews/Methods.html#reduceFuncProxy'>reduceFuncProxy</a></h3>
-<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/JITLib/Patterns/extFunction.sc'>/usr/local/share/SuperCollider/SCClassLibrary/JITLib/Patterns/extFunction.sc</a></div>
+<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/JITLib/Patterns/extFunction.sc'>/usr/local/share/SuperCollider/SCClassLibrary/JITLib/Patterns/extFunction.sc</a></div>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-reference' href='./../Overviews/Methods.html#reference'>reference</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-releaseDependants' href='./../Overviews/Methods.html#releaseDependants'>releaseDependants</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-removedFromScheduler' href='./../Overviews/Methods.html#removedFromScheduler'>removedFromScheduler</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-render' href='./../Overviews/Methods.html#render'>render</a>(<span class='argstr'>path</span>, <span class='argstr'>maxTime: 60</span>, <span class='argstr'>sampleRate: 44100</span>, <span class='argstr'>headerFormat: "AIFF"</span>, <span class='argstr'>sampleFormat: "int16"</span>, <span class='argstr'>options</span>, <span class='argstr'>inputFilePath</span>, <span class='argstr'>action</span>)</h3>
-<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/Common/Control/asScore/asScore.sc'>/usr/local/share/SuperCollider/SCClassLibrary/Common/Control/asScore/asScore.sc</a></div>
+<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/Common/Control/asScore/asScore.sc'>/usr/local/share/SuperCollider/SCClassLibrary/Common/Control/asScore/asScore.sc</a></div>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-replaceFunc' href='./../Overviews/Methods.html#replaceFunc'>replaceFunc</a>(<span class='argstr'>find</span>, <span class='argstr'>replace</span>)</h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-reportError' href='./../Overviews/Methods.html#reportError'>reportError</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-setSlots' href='./../Overviews/Methods.html#setSlots'>setSlots</a>(<span class='argstr'>array</span>)</h3>
-<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-shape' href='./../Overviews/Methods.html#shape'>shape</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-simplifyStoreArgs' href='./../Overviews/Methods.html#simplifyStoreArgs'>simplifyStoreArgs</a>(<span class='argstr'>args</span>)</h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-slice' href='./../Overviews/Methods.html#slice'>slice</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-slotAt' href='./../Overviews/Methods.html#slotAt'>slotAt</a>(<span class='argstr'>index</span>)</h3>
@@ -1030,27 +1183,29 @@ blend((a: 6, b: 7), (a: 0, b: [1, 2], c: 9), 0.5);</textarea>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-stop' href='./../Overviews/Methods.html#stop'>stop</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-storeModifiersOn' href='./../Overviews/Methods.html#storeModifiersOn'>storeModifiersOn</a>(<span class='argstr'>stream</span>)</h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-storeParamsOn' href='./../Overviews/Methods.html#storeParamsOn'>storeParamsOn</a>(<span class='argstr'>stream</span>)</h3>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-superPerformArgs' href='./../Overviews/Methods.html#superPerformArgs'>superPerformArgs</a>(<span class='argstr'>selector</span>, <span class='argstr'>args</span>, <span class='argstr'>kwargs</span>)</h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-threadPlayer' href='./../Overviews/Methods.html#threadPlayer'>threadPlayer</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-threadPlayer' href='./../Overviews/Methods.html#threadPlayer'>threadPlayer</a> = </h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-totalFree' href='./../Overviews/Methods.html#totalFree'>totalFree</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-trueAt' href='./../Overviews/Methods.html#trueAt'>trueAt</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-unbubble' href='./../Overviews/Methods.html#unbubble'>unbubble</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-value' href='./../Overviews/Methods.html#value'>value</a></h3>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-valueArgs' href='./../Overviews/Methods.html#valueArgs'>valueArgs</a>(<span class='argstr'>args</span>, <span class='argstr'>kwargs</span>)</h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-valueArray' href='./../Overviews/Methods.html#valueArray'>valueArray</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-valueArrayEnvir' href='./../Overviews/Methods.html#valueArrayEnvir'>valueArrayEnvir</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-valueEnvir' href='./../Overviews/Methods.html#valueEnvir'>valueEnvir</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-valueFuncProxy' href='./../Overviews/Methods.html#valueFuncProxy'>valueFuncProxy</a></h3>
-<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/JITLib/Patterns/extFunction.sc'>/usr/local/share/SuperCollider/SCClassLibrary/JITLib/Patterns/extFunction.sc</a></div>
+<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/JITLib/Patterns/extFunction.sc'>/usr/local/share/SuperCollider/SCClassLibrary/JITLib/Patterns/extFunction.sc</a></div>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-wakeUp' href='./../Overviews/Methods.html#wakeUp'>wakeUp</a></h3>
-<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/JITLib/ProxySpace/wrapForNodeProxy.sc'>/usr/local/share/SuperCollider/SCClassLibrary/JITLib/ProxySpace/wrapForNodeProxy.sc</a></div>
+<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/JITLib/ProxySpace/wrapForNodeProxy.sc'>/usr/local/share/SuperCollider/SCClassLibrary/JITLib/ProxySpace/wrapForNodeProxy.sc</a></div>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-wakeUpToBundle' href='./../Overviews/Methods.html#wakeUpToBundle'>wakeUpToBundle</a></h3>
-<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/JITLib/ProxySpace/NodeMap.sc'>/usr/local/share/SuperCollider/SCClassLibrary/JITLib/ProxySpace/NodeMap.sc</a></div>
+<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/JITLib/ProxySpace/NodeMap.sc'>/usr/local/share/SuperCollider/SCClassLibrary/JITLib/ProxySpace/NodeMap.sc</a></div>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-while' href='./../Overviews/Methods.html#while'>while</a>(<span class='argstr'>body</span>)</h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-writeBinaryArchive' href='./../Overviews/Methods.html#writeBinaryArchive'>writeBinaryArchive</a>(<span class='argstr'>pathname</span>)</h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-writeDefFile' href='./../Overviews/Methods.html#writeDefFile'>writeDefFile</a>(<span class='argstr'>name</span>, <span class='argstr'>dir</span>, <span class='argstr'>overwrite: true</span>)</h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-writeDefFileOld' href='./../Overviews/Methods.html#writeDefFileOld'>writeDefFileOld</a>(<span class='argstr'>name</span>, <span class='argstr'>dir</span>, <span class='argstr'>overwrite: true</span>)</h3>
-<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/Common/Audio/SynthDefOld.sc'>/usr/local/share/SuperCollider/SCClassLibrary/Common/Audio/SynthDefOld.sc</a></div>
+<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/Common/Audio/SynthDefOld.sc'>/usr/local/share/SuperCollider/SCClassLibrary/Common/Audio/SynthDefOld.sc</a></div>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-writeTextArchive' href='./../Overviews/Methods.html#writeTextArchive'>writeTextArchive</a>(<span class='argstr'>pathname</span>)</h3>
 <h3 class='method-code'><span class='method-prefix'></span><a class='method-name' name='-|' href='./../Overviews/Methods.html#|'>|</a>(<span class='argstr'>that</span>)</h3>
-<div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/Object.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/Object.schelp</a><br>link::Classes/Object::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+<div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/Object.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/Object.schelp</a><br>link::Classes/Object::<br></div></div><script src='./../static/editor.js' type='text/javascript'></script>
 </body></html>

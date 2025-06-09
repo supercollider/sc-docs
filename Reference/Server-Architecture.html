@@ -1,21 +1,25 @@
-<!doctype html><html lang='en'><head><title>Server Architecture | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>Server Architecture | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../lib/jquery.min.js'></script>
-<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/jquery.min.js'></script>
+<script src='./../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './..';
 var scdoc_title = 'Server Architecture';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../static/scdoc.js' type='text/javascript'></script>
 <script src='./../docmap.js' type='text/javascript'></script>
+<script src='./../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
@@ -83,7 +87,7 @@ var scdoc_sc_version = '3.13.1';
 <p>Output will be written to output-filename.
 <p>The output file's sample rate is specified by sample-rate. The output file header-format should be one of: AIFF, WAVE, NeXT. The output file sample-format should be one of: int16, int24, int32, float, double. The number of channels in the output file is specified with the -o argument.</dl>
 <h3><a class='anchor' name='Example'>Example</a></h3>
-<textarea class='editor'>scsynth -u 57117 &gt;synth_log &amp;
+<div class='codeMirrorContainer'><textarea class='editor'>scsynth -u 57117 &gt;synth_log &amp;
 
     Accept commands via UDP on port 57117.
     Send output to file "synth_log"
@@ -95,6 +99,7 @@ scsynth -N score.osc _ out.aiff 48000 AIFF int24
     no input file, and output file named out.aiff.
     Sample rate is 48000. Output file header format is aiff,
     sample format is 24 bit integer.</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h2><a class='anchor' name='Binary%20Format%20of%20Messages'>Binary Format of Messages</a></h2>
 
 <p>Messages are similar in format to Open Sound Control messages, except that pattern matching of the command name is not performed. When streamed via TCP, messages are each preceded by a 32 bit integer giving the length in bytes of the message. UDP datagrams contain this length information already.<h3><a class='anchor' name='Types'>Types</a></h3>
@@ -125,5 +130,6 @@ scsynth -N score.osc _ out.aiff 48000 AIFF int24
 <h2><a class='anchor' name='Glossary'>Glossary</a></h2>
 <dl>
 <dt>buffer<dd>a header and array of floating point sample data. Buffers are used for sound files, delay lines, arrays of global controls, and arrays of inter-synth patch points.<dt>group<dd>a linked list of nodes. groups provide ways to control execution of many nodes at once. a group is a kind of node.<dt>MIDI<dd>a protocol for sending music control data between synthesizers.<dt>node<dd>an object in a tree of objects executed in a depth first traversal order by the synth engine. There are two types of nodes, synths and groups.<dt>Open Sound Control<dd>a protocol defined by CNMAT at UCBerkeley for controlling synthesizers. See <a href="http://cnmat.cnmat.berkeley.edu/OSC/">http://cnmat.cnmat.berkeley.edu/OSC/</a> .<dt>OSC<dd>see Open Sound Control.<dt>synth<dd>a sound processing module. Similar to "voice " in other systems. Synths are referred to by a number.<dt>synth definition<dd>a definition for creating new synths. similar to "instrument" in other systems.<dt>TCP<dd>a protocol for streaming data over a network.<dt>UDP<dd>a protocol for sending datagrams over a network.</dl>
-<div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Reference/Server-Architecture.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Reference/Server-Architecture.schelp</a><br>link::Reference/Server-Architecture::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+
+<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Reference/Server-Architecture.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Reference/Server-Architecture.schelp</a><br>link::Reference/Server-Architecture::<br></div></div><script src='./../static/editor.js' type='text/javascript'></script>
 </body></html>

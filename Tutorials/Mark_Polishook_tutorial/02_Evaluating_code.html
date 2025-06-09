@@ -1,21 +1,25 @@
-<!doctype html><html lang='en'><head><title>02_Evaluating_code | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>02_Evaluating_code | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../../lib/jquery.min.js'></script>
-<script src='./../../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../../static/lib/jquery.min.js'></script>
+<script src='./../../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './../..';
 var scdoc_title = '02_Evaluating_code';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../../scdoc.js' type='text/javascript'></script>
+<script src='./../../static/scdoc.js' type='text/javascript'></script>
 <script src='./../../docmap.js' type='text/javascript'></script>
+<script src='./../../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
@@ -39,16 +43,18 @@ var scdoc_sc_version = '3.13.1';
 
 <p>This document is macOS (SCapp) specific in key commands, though the principles extend to all platforms. See the helpfile <a href="./../../Reference/KeyboardShortcuts.html">Keyboard Shortcuts</a> for key commands in other editors.<h2><a class='anchor' name='Synthesizing%20sound'>Synthesizing sound</a></h2>
 
-<p>To run (evaluate) one line of code, such as<textarea class='editor'>{ SinOsc.ar([400, 401], 0, 0.1) * Saw.ar([11, 33], 1) * EnvGen.kr(Env.sine(10)) }.play</textarea>
+<p>To run (evaluate) one line of code, such as<div class='codeMirrorContainer'><textarea class='editor'>{ SinOsc.ar([400, 401], 0, 0.1) * Saw.ar([11, 33], 1) * EnvGen.kr(Env.sine(10)) }.play</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>first make sure that the localhost server is booted. Then put the cursor anywhere on the line (shown above) and press &lt;enter&gt;. If you don't have an enter key, then you can use ctrl-Return, Ctrl-c, fn-Return( on Some Macs), or Shift-Return. The server will synthesize audio and text that looks something like<textarea class='editor'>Synth("-613784702" : 1000)</textarea>
+<p>first make sure that the localhost server is booted. Then put the cursor anywhere on the line (shown above) and press &lt;enter&gt;. If you don't have an enter key, then you can use ctrl-Return, Ctrl-c, fn-Return( on Some Macs), or Shift-Return. The server will synthesize audio and text that looks something like<div class='codeMirrorContainer'><textarea class='editor'>Synth("-613784702" : 1000)</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p>will appear in the post window.
 <p>Press command-period (cmd-.) to stop synthesis.
 <p>////////////////////////////////////////////////////////////////////////////////////////////////////
 <p>To run more than one line of code, select all the lines and press &lt;enter&gt;.
 <p>To help with the selection process, examples with more than one line often are placed in enclosing parentheses. In such cases, select the text by clicking immediately to the right of the top parenthesis or to the left of the bottom parenthesis. Or, with the cursor to the right of the top parenthesis or the left of the bottom one, press cmd-shift-b.
-<p>Then press enter (to run the example).<textarea class='editor'>(
+<p>Then press enter (to run the example).<div class='codeMirrorContainer'><textarea class='editor'>(
 {
     RLPF.ar(
         in: Saw.ar([100, 102], 0.15),
@@ -57,26 +63,32 @@ var scdoc_sc_version = '3.13.1';
     )
 }.play
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>The server will synthesize audio and text that looks something like<textarea class='editor'>Synth("-393573063" : 1000)</textarea>
+<p>The server will synthesize audio and text that looks something like<div class='codeMirrorContainer'><textarea class='editor'>Synth("-393573063" : 1000)</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p>will appear in the post window.
 <p>Press command-period (cmd-.) to stop synthesis.<h2><a class='anchor' name='Scoping%20sound'>Scoping sound</a></h2>
 
 <p>To scope whatever it is you're synthesizing (create a graphical display of the waveform):<ol>
 <li>make sure the server is running (press the boot button)<li>evaluate your code as described above.
-<p>For example, run<textarea class='editor'>{ SinOsc.ar([400, 401], 0, 0.5) * Saw.ar([11, 33], 0.5) }.play</textarea>
-<li>then evaluate<textarea class='editor'>s.scope(2)</textarea>
+<p>For example, run<div class='codeMirrorContainer'><textarea class='editor'>{ SinOsc.ar([400, 401], 0, 0.5) * Saw.ar([11, 33], 0.5) }.play</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+<li>then evaluate<div class='codeMirrorContainer'><textarea class='editor'>s.scope(2)</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p>which will produce a window with the title of "stethoscope."</ol>
 
-<p>As a shortcut to steps 2 through 4, send the scope message directly to the example.<textarea class='editor'>{ SinOsc.ar([400, 401], 0, 0.5) * Saw.ar([11, 33], 0.5) }.scope(2)</textarea>
+<p>As a shortcut to steps 2 through 4, send the scope message directly to the example.<div class='codeMirrorContainer'><textarea class='editor'>{ SinOsc.ar([400, 401], 0, 0.5) * Saw.ar([11, 33], 0.5) }.scope(2)</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p>Press cmd-. to stop sound synthesis.<h2><a class='anchor' name='Recording%20sound'>Recording sound</a></h2>
 
 <p>The localhost and the internal server windows have buttons, on the far right, to activate recording. To record, choose the a default server. The button on the default server of your choice initially will say "record" Press it to start recording.
-<p>Run the following line of code to see where your sound file was saved...<textarea class='editor'>thisProcess.platform.recordingsDir;</textarea>
+<p>Run the following line of code to see where your sound file was saved...<div class='codeMirrorContainer'><textarea class='editor'>thisProcess.platform.recordingsDir;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p>////////////////////////////////////////////////////////////////////////////////////////////////////
-<p>go to <a href="./../../Tutorials/Mark_Polishook_tutorial/03_Comments.html">03_Comments</a><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Tutorials/Mark_Polishook_tutorial/02_Evaluating_code.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Tutorials/Mark_Polishook_tutorial/02_Evaluating_code.schelp</a><br>link::Tutorials/Mark_Polishook_tutorial/02_Evaluating_code::<br></div></div><script src='./../../editor.js' type='text/javascript'></script>
+<p>go to <a href="./../../Tutorials/Mark_Polishook_tutorial/03_Comments.html">03_Comments</a><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Tutorials/Mark_Polishook_tutorial/02_Evaluating_code.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Tutorials/Mark_Polishook_tutorial/02_Evaluating_code.schelp</a><br>link::Tutorials/Mark_Polishook_tutorial/02_Evaluating_code::<br></div></div><script src='./../../static/editor.js' type='text/javascript'></script>
 </body></html>

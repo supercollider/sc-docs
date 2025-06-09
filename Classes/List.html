@@ -1,28 +1,33 @@
-<!doctype html><html lang='en'><head><title>List | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>List | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../lib/jquery.min.js'></script>
-<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/jquery.min.js'></script>
+<script src='./../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './..';
 var scdoc_title = 'List';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../static/scdoc.js' type='text/javascript'></script>
 <script src='./../docmap.js' type='text/javascript'></script>
+<script src='./../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
 <div id='toc'>
 <div id='toctitle'>List:</div>
 <span class='toc_search'>Filter: <input id='toc_search'></span><ul class='toc'><li class='toc1'><a href='#description'>Description</a></li>
-<ul class='toc'></ul><li class='toc1'><a href='#classmethods'>Class methods</a></li>
+<ul class='toc'><li class='toc2'><a href='#Size%20limitations%20of%20arrays%20and%20flexibility%20of%20lists%20in%20SuperCollider'>Size limitations of arrays and flexibility of lists in SuperCollider</a></li>
+<ul class='toc'></ul></ul><li class='toc1'><a href='#classmethods'>Class methods</a></li>
 <ul class='toc'><li class='toc3'><a href='#*new'>new</a> </li>
 <li class='toc3'><a href='#*newClear'>newClear</a> </li>
 <li class='toc3'><a href='#*copyInstance'>copyInstance</a> </li>
@@ -43,6 +48,7 @@ var scdoc_sc_version = '3.13.1';
 <li class='toc3'><a href='#-add'>add</a> </li>
 <li class='toc3'><a href='#-addFirst'>addFirst</a> </li>
 <li class='toc3'><a href='#-insert'>insert</a> </li>
+<li class='toc3'><a href='#-boundedInsert'>boundedInsert</a> </li>
 <li class='toc3'><a href='#-pop'>pop</a> </li>
 <li class='toc3'><a href='#-grow'>grow</a> </li>
 <li class='toc3'><a href='#-removeAt'>removeAt</a> </li>
@@ -90,20 +96,58 @@ var scdoc_sc_version = '3.13.1';
 <div id='summary'>list of items of variable size</div>
 </div>
 <div class='subheader'>
-<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/Common/Collections/List.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Collections/List.sc'>List.sc</a></div><div id='subclasses'>Subclasses: <a href="../Classes/SortedList.html">SortedList</a></div>
+<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/Common/Collections/List.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Collections/List.sc'>List.sc</a></div><div id='subclasses'>Subclasses: <a href="../Classes/SortedList.html">SortedList</a></div>
 <div id='related'>See also: <a href="./../Classes/Array.html">Array</a></div>
 </div>
 <h2><a class='anchor' name='description'>Description</a></h2>
 
 <p>List is a subclass of SequenceableCollection with unlimited growth in size. Although not a subclass of <a href="./../Classes/Array.html">Array</a> or its superclass <a href="./../Classes/ArrayedCollection.html">ArrayedCollection</a> it uses an Array in its implementation and is in many cases interchangeable with one. (List implements many of the same methods as Array.)
-<p>Arrays have a fixed maximum size. If you add beyond that size a new Array is created and returned, but you must use an assignment statement or the new array will be lost. (See the <a href="./../Classes/Array.html">Array</a> helpfile.) List has no size limitation and is thus more flexible, but has slightly more overhead.<textarea class='editor'>(
-x = Array.new(3);
-y = List.new(3);
-5.do({ arg i; z = x.add(i); y.add(i); });
-x.postln; z.postln; y.postln;
-)</textarea>
+<p>Many of List's methods are inherited from <a href="./../Classes/SequenceableCollection.html">SequenceableCollection</a> or <a href="./../Classes/Collection.html">Collection</a> and are documented in those helpfiles.<h3><a class='anchor' name='Size%20limitations%20of%20arrays%20and%20flexibility%20of%20lists%20in%20SuperCollider'>Size limitations of arrays and flexibility of lists in SuperCollider</a></h3>
 
-<p>Many of List's methods are inherited from <a href="./../Classes/SequenceableCollection.html">SequenceableCollection</a> or <a href="./../Classes/Collection.html">Collection</a> and are documented in those helpfiles.<h2><a class='anchor' name='classmethods'>Class Methods</a></h2>
+<p>Arrays have a fixed maximum size. Adding beyond that size, a new <a href="./../Classes/Array.html">Array</a> is created and returned. In order to be able to use it, the variable holding the old array can be reassigned to the new one. Threfore, the idiomatic way to add new item in <a href="./../Classes/Array.html">Array</a> is:<div class='codeMirrorContainer'><textarea class='editor'>x = x.add(i);</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+
+<p>Example:<div class='codeMirrorContainer'><textarea class='editor'>// Create a new empty collections with size 3:
+x = Array.new(3); 
+y = Array.new(3); 
+z = List.new(3);
+
+// Try to add 7 items to the array and list.
+// If the array exceeds maxSize, it will only
+// grow to an internally specified max size.
+( 
+7.do { |i|
+    x.add(i);
+    y = y.add(i); // reassign array y on each add
+    z.add(i);
+};
+)
+
+// Attempt to access the 5th item:
+x.at(4); // -&gt; nil (out of bounds)
+y.at(4); // -&gt; 4
+z.at(4); // -&gt; 4
+
+// x grew only to size 4
+x.postln; // -&gt; [ 0, 1, 2, 3 ]
+y.postln; // -&gt; [ 0, 1, 2, 3, 4, 5, 6 ]
+z.postln; // -&gt; List[ 0, 1, 2, 3, 4, 5, 6 ]</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+
+<p>List has no size limitation and is thus more flexible, but has slightly more overhead:<div class='codeMirrorContainer'><textarea class='editor'>(
+// Create a new empty List with size: 3
+x = List.new(3);
+
+x.postln; // -&gt; List[ ]
+
+// Add numbers 0 to 4 to the List
+5.do({ |i| x.add(i) });
+
+// The list has been modified in-place with each added item
+x.postln; // -&gt; List[ 0, 1, 2, 3, 4 ]
+)</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+<h2><a class='anchor' name='classmethods'>Class Methods</a></h2>
 <h3 class='method-code'><span class='method-prefix'>List.</span><a class='method-name' name='*new' href='./../Overviews/Methods.html#new'>new</a>(<span class='argstr'>size: 8</span>)</h3>
 <div class='method'>
 <p>Creates a List with the initial capacity given by <strong>size</strong>.</div><h3 class='method-code'><span class='method-prefix'>List.</span><a class='method-name' name='*newClear' href='./../Overviews/Methods.html#newClear'>newClear</a>(<span class='argstr'>size: 0</span>)</h3>
@@ -119,175 +163,271 @@ x.postln; z.postln; y.postln;
 <p>Returns a new <a href="./../Classes/Array.html">Array</a> based upon this List.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-array' href='./../Overviews/Methods.html#array'>array</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-array' href='./../Overviews/Methods.html#array'>array</a> = value</h3>
 <div class='method'>
-<p>Returns the List's Array, allowing it to be manipulated directly. This should only be necessary for exotic manipulations not implemented in List or its superclasses.<textarea class='editor'>(
+<p>Returns the List's Array, allowing it to be manipulated directly. This should only be necessary for exotic manipulations not implemented in List or its superclasses.<div class='codeMirrorContainer'><textarea class='editor'>(
 x = List[1, 2, 3];
 x.array.add("foo");
 x.postln;
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-array' href='./../Overviews/Methods.html#array'>array</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-array' href='./../Overviews/Methods.html#array'>array</a> = value</h3>
 <div class='method'>
 <p>Sets the List's Array.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-at' href='./../Overviews/Methods.html#at'>at</a>(<span class='argstr'>i</span>)</h3>
 <div class='method'>
-<p>Return the item at <strong>index</strong>.<textarea class='editor'>List[ 1, 2, 3 ].at(0).postln;</textarea>
+<p>Return the item at <strong>index</strong>. See <a href="./../Classes/SequenceableCollection.html#Indexing">SequenceableCollection: Indexing</a>.. Accepts either a single index or an array of indices, in which case an Array of elements is returned. <a href="./../Classes/Array.html">Array</a> is its syntactic shortcut.<div class='codeMirrorContainer'><textarea class='editor'>x = List[1, 2, 3] //-&gt; [1, 2, 3]
+
+// Retrieve the value at index 1:
+x.at(1) //-&gt; 2
+// Equivalent shorthand syntax:
+x[1] //-&gt; 2
+
+// An index can also be retrieved from an array (returns not a list, but an array):
+y = [0, 0, 2, 2, 1] //-&gt; [0, 0, 2, 2, 1]
+x[y]; //-&gt; [1, 1, 3, 3, 2]
+
+(
+var pitches =  [43.0, 55.0, 58.86, 57.42, 67.0];
+fork {
+    pitches.size.do{ |i|
+        {
+            var freq = pitches[i].midicps;
+            var env = Env.perc.ar(Done.freeSelf);
+            SinOsc.ar(freq) * 0.1 * env
+        }.play;
+        0.2.wait
+    }
+}
+)</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-clipAt' href='./../Overviews/Methods.html#clipAt'>clipAt</a>(<span class='argstr'>i</span>)</h3>
 <div class='method'>
-<p>Same as <a href="#-at">-at</a>, but values for <strong>index</strong> greater than the size of the List will be clipped to the last index.<textarea class='editor'>y = List[ 1, 2, 3 ];
-y.clipAt(13).postln;</textarea>
+<p>Similar to <a href="#-at">-at</a>, but guarantees that any value for index is valid by clipping values outside the collection's bounds. Values greater than <code>size - 1</code> are clipped to that last index, and values below <code>0</code> (negative) are clipped to 0. When passed an array of indices, returns a new Array containing the elements at the specified positions. <a href="./../Classes/SequenceableCollection.html#-|@|">SequenceableCollection: -|@|</a> is its syntactic shortcut.<div class='codeMirrorContainer'><textarea class='editor'>a = List[1, 2, 3]
+a.clipAt(2) // same as at
+a.clipAt(3) // clips
+a.clipAt([-1, 3, 1]) // array of indices (returns not a list, but an array)
+a|@|3 //syntactic shortcut</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-wrapAt' href='./../Overviews/Methods.html#wrapAt'>wrapAt</a>(<span class='argstr'>i</span>)</h3>
 <div class='method'>
-<p>Same as <a href="#-at">-at</a>, but values for <strong>index</strong> greater than the size of the List will be wrapped around to 0.<textarea class='editor'>y = List[ 1, 2, 3 ];
-y.wrapAt(3).postln; // this returns the value at index 0
-y.wrapAt(4).postln; // this returns the value at index 1</textarea>
+<p>Similar to <a href="#-at">-at</a>, but guarantees that any value for index is valid by wrapping values outside the collection's bounds. If the index exceeds <code>size - 1</code>, it wraps back around to <code>0</code>. Similarly, if the index is below <code>0</code> (negative), it wraps to access elements from the end of the collection. <code>this.wrapAt(index)</code> is equivalent to <code>this.at(index mod: size)</code>, ensuring the index is always within the valid range of the collection. The index can also be an array of indices to extract the specified elements. <a href="./../Classes/SequenceableCollection.html#-@@">SequenceableCollection: -@@</a> is its syntactic shortcut.<div class='codeMirrorContainer'><textarea class='editor'>a = List[1, 2, 3]
+a.wrapAt(2) // same as at
+a.wrapAt(3) // wraps
+a.wrapAt([-1, 3, 1]) // array of indices (returns not a list, but an array)
+a@@3 //syntactic shortcut
+
+(
+var pitches =  [43.0, 55.0, 58.86, 57.42, 67.0];
+fork {
+    32.do{ |i|
+        {
+            var freq = pitches.wrapAt(i).midicps;
+            var env = Env.perc.ar(Done.freeSelf);
+            SinOsc.ar(freq) * 0.1 * env
+        }.play;
+        0.2.wait
+    }
+}
+)</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-foldAt' href='./../Overviews/Methods.html#foldAt'>foldAt</a>(<span class='argstr'>i</span>)</h3>
 <div class='method'>
-<p>Same as <a href="#-at">-at</a>, but values for <strong>index</strong> greater than the size of the List will be folded back.<textarea class='editor'>y = List[ 1, 2, 3 ];
-y.foldAt(3).postln; // this returns the value at index 1
-y.foldAt(4).postln; // this returns the value at index 0
-y.foldAt(5).postln; // this returns the value at index 1</textarea>
+<p>Similar to <a href="#-at">-at</a>, but guarantees that any value for index is valid by reflecting values outside the collection's bounds. Values greater than <code>size - 1</code> are reflected back toward lower indices. Similarly, if the index is below <code>0</code> (negative), it folds in the opposite direction. This creates a symmetrical mapping of any index within the collection's boundaries. The index can also be an array of indices to extract the specified elements. <a href="./../Classes/SequenceableCollection.html#-@|@">SequenceableCollection: -@|@</a> is its syntactic shortcut.<div class='codeMirrorContainer'><textarea class='editor'>a = List[1, 2, 3]
+a.foldAt(2) // same as at
+a.foldAt(3) // folds back
+a.foldAt([-1, 3, 1]) // array of indices (returns not a list, but an array)
+a@|@3 //syntactic shortcut
+
+(
+var pitches =  [43.0, 55.0, 58.86, 57.42, 67.0];
+fork {
+    32.do{ |i|
+        {
+            var freq = pitches.foldAt(i).midicps;
+            var env = Env.perc.ar(Done.freeSelf);
+            SinOsc.ar(freq) * 0.1 * env
+        }.play;
+        0.2.wait
+    }
+}
+)</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-put' href='./../Overviews/Methods.html#put'>put</a>(<span class='argstr'>i</span>, <span class='argstr'>item</span>)</h3>
 <div class='method'>
-<p>Put <strong>item</strong> at <strong>index</strong>, replacing what is there.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-clipPut' href='./../Overviews/Methods.html#clipPut'>clipPut</a>(<span class='argstr'>i</span>, <span class='argstr'>item</span>)</h3>
+<p>Put <strong>item</strong> at <strong>index</strong>, replacing what is there. See <a href="./../Classes/SequenceableCollection.html#Indexing">SequenceableCollection: Indexing</a>..</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-clipPut' href='./../Overviews/Methods.html#clipPut'>clipPut</a>(<span class='argstr'>i</span>, <span class='argstr'>item</span>)</h3>
 <div class='method'>
-<p>Same as <a href="#-put">-put</a>, but values for <strong>index</strong> greater than the size of the List will be clipped to the last index.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-wrapPut' href='./../Overviews/Methods.html#wrapPut'>wrapPut</a>(<span class='argstr'>i</span>, <span class='argstr'>item</span>)</h3>
+<p>Same as <a href="#-put">-put</a>, but values for <strong>index</strong> greater than the <a href="./../Classes/List.html">List</a> instance size minus one will be clipped to <code>size - 1</code>, which is the last index.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-wrapPut' href='./../Overviews/Methods.html#wrapPut'>wrapPut</a>(<span class='argstr'>i</span>, <span class='argstr'>item</span>)</h3>
 <div class='method'>
-<p>Same as <a href="#-put">-put</a>, but values for <strong>index</strong> greater than the size of the List will be wrapped around to 0.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-foldPut' href='./../Overviews/Methods.html#foldPut'>foldPut</a>(<span class='argstr'>i</span>, <span class='argstr'>item</span>)</h3>
+<p>Same as <a href="#-put">-put</a>, but values for <strong>index</strong> greater than the <a href="./../Classes/List.html">List</a> instance size minus one will be wrapped around to 0.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-foldPut' href='./../Overviews/Methods.html#foldPut'>foldPut</a>(<span class='argstr'>i</span>, <span class='argstr'>item</span>)</h3>
 <div class='method'>
-<p>Same as <a href="#-put">-put</a>, but values for <strong>index</strong> greater than the size of the List will be folded back.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-add' href='./../Overviews/Methods.html#add'>add</a>(<span class='argstr'>item</span>)</h3>
+<p>Same as <a href="#-put">-put</a>, but values for <strong>index</strong> greater than the <a href="./../Classes/List.html">List</a> instance size minus one will be folded back.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-add' href='./../Overviews/Methods.html#add'>add</a>(<span class='argstr'>item</span>)</h3>
 <div class='method'>
 <p>Adds an <strong>item</strong> to the end of the List.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-addFirst' href='./../Overviews/Methods.html#addFirst'>addFirst</a>(<span class='argstr'>item</span>)</h3>
 <div class='method'>
 <p>Inserts the <strong>item</strong> at the beginning of the List.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-insert' href='./../Overviews/Methods.html#insert'>insert</a>(<span class='argstr'>index</span>, <span class='argstr'>item</span>)</h3>
 <div class='method'>
-<p>Inserts the <strong>item</strong> into the contents of the List at the indicated <strong>index</strong>.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-pop' href='./../Overviews/Methods.html#pop'>pop</a></h3>
+<p>Inserts the <strong>item</strong> into the contents of the <a href="./../Classes/List.html">List</a> at the indicated <strong>index</strong>.<div class='codeMirrorContainer'><textarea class='editor'>x = List[1, 2, 3, 4]; // -&gt; List[1, 2, 3, 4]
+x.insert(0, 999); // -&gt; List[999, 1, 2, 3, 4]
+x; // -&gt; List[999, 1, 2, 3, 4]</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-boundedInsert' href='./../Overviews/Methods.html#boundedInsert'>boundedInsert</a>(<span class='argstr'>index</span>, <span class='argstr'>item</span>)</h3>
+<div class='method'>
+<p>Same as <a href="#-insert">-insert</a>, but removes the receiver's last element before inserting <strong>item</strong>. This changes the receiver but maintains its size.<div class='codeMirrorContainer'><textarea class='editor'>x = List[1, 2, 3, 4]; // -&gt; List[1, 2, 3, 4]
+x.boundedInsert(1, 999); // -&gt; List[1, 999, 2, 3]
+x; // -&gt; List[1, 999, 2, 3]
+x.boundedInsert(20, \a); // -&gt; List[1, 999, 2, a]
+x.boundedInsert(-2, \b); // -&gt; List[b, 1, 999, 2]</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-pop' href='./../Overviews/Methods.html#pop'>pop</a></h3>
 <div class='method'>
 <p>Remove and return the last element of the List.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-grow' href='./../Overviews/Methods.html#grow'>grow</a>(<span class='argstr'>sizeIncrease</span>)</h3>
 <div class='method'>
 <p>Increase the size of the List by <strong>sizeIncrease</strong> number of slots.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-removeAt' href='./../Overviews/Methods.html#removeAt'>removeAt</a>(<span class='argstr'>index</span>)</h3>
 <div class='method'>
-<p>Remove and return the element at <strong>index</strong>, shrinking the size of the List.<textarea class='editor'>y = List[ 1, 2, 3 ];
+<p>Remove and return the item at <strong>index</strong>, shrinking the size of the List. See <a href="./../Classes/SequenceableCollection.html#Indexing">SequenceableCollection: Indexing</a>..<div class='codeMirrorContainer'><textarea class='editor'>y = List[1, 2, 3];
 y.removeAt(1);
 y.postln;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-fill' href='./../Overviews/Methods.html#fill'>fill</a>(<span class='argstr'>item</span>)</h3>
 <div class='method'>
 <p>Inserts the item into the contents of the receiver, possibly returning a new collection.<div class='note'><span class='notelabel'>NOTE:</span> the difference between this and <a href="./../Classes/Collection.html#*fill">Collection's *fill</a>.</div>
-<p><textarea class='editor'>(
+<p><div class='codeMirrorContainer'><textarea class='editor'>(
 var z;
 z = List[1, 2, 3, 4];
 z.fill(4).postln;
-z.fill([1,2,3,4]).postln;
+z.fill([1, 2, 3, 4]).postln;
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-do' href='./../Overviews/Methods.html#do'>do</a>(<span class='argstr'>function</span>)</h3>
 <div class='method'>
-<p>Iterate over the elements in order, calling the function for each element. The function is passed two arguments, the element and an index.<textarea class='editor'>List['a', 'b', 'c'].do({ arg item, i; [i, item].postln; });</textarea>
+<p>Iterate over the elements in order, calling the function for each element. The function is passed two arguments, the element and an index.<div class='codeMirrorContainer'><textarea class='editor'>List['a', 'b', 'c'].do({ |item, i| [i, item].postln });</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-reverseDo' href='./../Overviews/Methods.html#reverseDo'>reverseDo</a>(<span class='argstr'>function</span>)</h3>
 <div class='method'>
-<p>Iterate over the elements in reverse order, calling the function for each element. The function is passed two arguments, the element and an index.<textarea class='editor'>List['a', 'b', 'c'].reverseDo({ arg item, i; [i, item].postln; });</textarea>
+<p>Iterate over the elements in reverse order, calling the function for each element. The function is passed two arguments, the element and an index.<div class='codeMirrorContainer'><textarea class='editor'>List['a', 'b', 'c'].reverseDo({ |item, i| [i, item].postln });</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-pairsDo' href='./../Overviews/Methods.html#pairsDo'>pairsDo</a>(<span class='argstr'>function</span>)</h3>
 <div class='method'>
-<p>Calls function for each subsequent pair of elements in the List. The function is passed the two elements and an index.<textarea class='editor'>List[1, 2, 3, 4, 5, 6].pairsDo({ arg a, b; [a, b].postln; });</textarea>
+<p>Calls function for each subsequent pair of elements in the List. The function is passed the two elements and an index.<div class='codeMirrorContainer'><textarea class='editor'>List[1, 2, 3, 4, 5, 6].pairsDo({ |a, b| [a, b].postln });</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-copyRange' href='./../Overviews/Methods.html#copyRange'>copyRange</a>(<span class='argstr'>start</span>, <span class='argstr'>end</span>)</h3>
 <div class='method'>
-<p>Return a new List which is a copy of the indexed slots of the receiver from start to end.<textarea class='editor'>(
+<p>Return a new List which is a copy of the indexed slots of the receiver from start to end. See <a href="./../Classes/SequenceableCollection.html#Indexing">SequenceableCollection: Indexing</a>..<div class='codeMirrorContainer'><textarea class='editor'>(
 var y, z;
 z = List[1, 2, 3, 4, 5];
-y = z.copyRange(1,3);
+y = z.copyRange(1, 3);
 z.postln;
 y.postln;
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-copySeries' href='./../Overviews/Methods.html#copySeries'>copySeries</a>(<span class='argstr'>first</span>, <span class='argstr'>second</span>, <span class='argstr'>last</span>)</h3>
 <div class='method'>
-<p>Return a new List consisting of the values starting at <strong>first</strong>, then every step of the distance between <strong>first</strong> and <strong>second</strong>, up until <strong>last</strong>.<textarea class='editor'>(
+<p>Return a new List consisting of the values starting at <strong>first</strong>, then every step of the distance between <strong>first</strong> and <strong>second</strong>, up until <strong>last</strong>. See <a href="./../Classes/SequenceableCollection.html#Indexing">SequenceableCollection: Indexing</a>..<div class='codeMirrorContainer'><textarea class='editor'>(
 var y, z;
 z = List[1, 2, 3, 4, 5, 6];
 y = z.copySeries(0, 2, 5);
 y.postln;
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-putSeries' href='./../Overviews/Methods.html#putSeries'>putSeries</a>(<span class='argstr'>first</span>, <span class='argstr'>second</span>, <span class='argstr'>last</span>, <span class='argstr'>value</span>)</h3>
 <div class='method'>
-<p>Put <strong>value</strong> at every index starting at <strong>first</strong>, then every step of the distance between <strong>first</strong> and <strong>second</strong>, up until <strong>last</strong>.<textarea class='editor'>(
+<p>Put <strong>value</strong> at every index starting at <strong>first</strong>, then every step of the distance between <strong>first</strong> and <strong>second</strong>, up until <strong>last</strong>. See <a href="./../Classes/SequenceableCollection.html#Indexing">SequenceableCollection: Indexing</a>..<div class='codeMirrorContainer'><textarea class='editor'>(
 var y, z;
 z = List[1, 2, 3, 4, 5, 6];
 y = z.putSeries(0, 2, 5, "foo");
 y.postln;
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-reverse' href='./../Overviews/Methods.html#reverse'>reverse</a></h3>
 <div class='method'>
-<p>Return a new List whose elements are reversed.<textarea class='editor'>(
+<p>Return a new List whose elements are reversed.<div class='codeMirrorContainer'><textarea class='editor'>(
 var y, z;
 z = List[1, 2, 3, 4];
 y = z.reverse;
 z.postln;
 y.postln;
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-scramble' href='./../Overviews/Methods.html#scramble'>scramble</a></h3>
 <div class='method'>
-<p>Returns a new List whose elements have been scrambled. The receiver is unchanged.<textarea class='editor'>List[1, 2, 3, 4, 5, 6].scramble.postln;</textarea>
+<p>Returns a new List whose elements have been scrambled. The receiver is unchanged.<div class='codeMirrorContainer'><textarea class='editor'>List[1, 2, 3, 4, 5, 6].scramble.postln;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-mirror' href='./../Overviews/Methods.html#mirror'>mirror</a></h3>
 <div class='method'>
-<p>Return a new List which is the receiver made into a palindrome. The receiver is unchanged.<textarea class='editor'>List[1, 2, 3, 4].mirror.postln;</textarea>
+<p>Return a new List which is the receiver made into a palindrome. The receiver is unchanged.<div class='codeMirrorContainer'><textarea class='editor'>List[1, 2, 3, 4].mirror.postln;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-mirror1' href='./../Overviews/Methods.html#mirror1'>mirror1</a></h3>
 <div class='method'>
-<p>Return a new List which is the receiver made into a palindrome with the last element removed. This is useful if the list will be repeated cyclically, the first element will not get played twice. The receiver is unchanged.<textarea class='editor'>List[1, 2, 3, 4].mirror1.postln;</textarea>
+<p>Return a new List which is the receiver made into a palindrome with the last element removed. This is useful if the list will be repeated cyclically, the first element will not get played twice. The receiver is unchanged.<div class='codeMirrorContainer'><textarea class='editor'>List[1, 2, 3, 4].mirror1.postln;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-mirror2' href='./../Overviews/Methods.html#mirror2'>mirror2</a></h3>
 <div class='method'>
-<p>Return a new List which is the receiver concatenated with a reversal of itself. The center element is duplicated. The receiver is unchanged.<textarea class='editor'>List[1, 2, 3, 4].mirror2.postln;</textarea>
+<p>Return a new List which is the receiver concatenated with a reversal of itself. The center element is duplicated. The receiver is unchanged.<div class='codeMirrorContainer'><textarea class='editor'>List[1, 2, 3, 4].mirror2.postln;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-stutter' href='./../Overviews/Methods.html#stutter'>stutter</a>(<span class='argstr'>n: 2</span>)</h3>
 <div class='method'>
 <p>Return a new List whose elements are repeated <strong>n</strong> times. The receiver is unchanged.<div class='note'><span class='notelabel'>NOTE:</span> It is recommended to use <code>dupEach</code> instead. This method is retained for backwards compatibility.</div>
-<p><textarea class='editor'>List[1, 2, 3].stutter(2).postln;</textarea>
+<p><div class='codeMirrorContainer'><textarea class='editor'>List[1, 2, 3].stutter(2).postln;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-dupEach' href='./../Overviews/Methods.html#dupEach'>dupEach</a>(<span class='argstr'>n: 2</span>)</h3>
 <div class='method'>
-<p>Return a new List whose elements are repeated <strong>n</strong> times. The receiver is unchanged.<textarea class='editor'>List[1, 2, 3].dupEach(2).postln;</textarea>
+<p>Return a new List whose elements are repeated <strong>n</strong> times. The receiver is unchanged.<div class='codeMirrorContainer'><textarea class='editor'>List[1, 2, 3].dupEach(2).postln;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-rotate' href='./../Overviews/Methods.html#rotate'>rotate</a>(<span class='argstr'>n: 1</span>)</h3>
 <div class='method'>
-<p>Return a new List whose elements are in rotated order. Negative <strong>n</strong> values rotate left, positive <strong>n</strong> values rotate right. The receiver is unchanged.<textarea class='editor'>List[1, 2, 3, 4, 5].rotate(1).postln;
+<p>Return a new List whose elements are in rotated order. Negative <strong>n</strong> values rotate left, positive <strong>n</strong> values rotate right. The receiver is unchanged.<div class='codeMirrorContainer'><textarea class='editor'>List[1, 2, 3, 4, 5].rotate(1).postln;
 List[1, 2, 3, 4, 5].rotate(-1).postln;
 List[1, 2, 3, 4, 5].rotate(3).postln;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-pyramid' href='./../Overviews/Methods.html#pyramid'>pyramid</a>(<span class='argstr'>patternType: 1</span>)</h3>
 <div class='method'>
-<p>Return a new List whose elements have been reordered via one of 10 "counting" algorithms. The algorithms are numbered 1 through 10. Run the examples to see the algorithms.<textarea class='editor'>List[1, 2, 3, 4].pyramid(1).postln;
+<p>Return a new List whose elements have been reordered via one of 10 "counting" algorithms. The algorithms are numbered 1 through 10. Run the examples to see the algorithms.<div class='codeMirrorContainer'><textarea class='editor'>List[1, 2, 3, 4].pyramid(1).postln;
 
 (
-10.do({ arg i;
+10.do({ |i|
     List[1, 2, 3, 4].pyramid(i + 1).postcs;
 });
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-lace' href='./../Overviews/Methods.html#lace'>lace</a>(<span class='argstr'>length</span>)</h3>
 <div class='method'>
-<p>Returns a new List whose elements are interlaced sequences of the elements of the receiver's subcollections, up to size <strong>length</strong>. The receiver is unchanged.<textarea class='editor'>(
-x = List[ [1, 2, 3], 6, List["foo", 'bar']];
+<p>Returns a new List whose elements are interlaced sequences of the elements of the receiver's subcollections, up to size <strong>length</strong>. The receiver is unchanged.<div class='codeMirrorContainer'><textarea class='editor'>(
+x = List[[1, 2, 3], 6, List["foo", 'bar']];
 y = x.lace(12);
 x.postln;
 y.postln;
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-permute' href='./../Overviews/Methods.html#permute'>permute</a>(<span class='argstr'>nthPermutation</span>)</h3>
 <div class='method'>
-<p>Returns a new List whose elements are the <strong>nthPermutation</strong> of the elements of the receiver. The receiver is unchanged.<textarea class='editor'>(
-x = List[ 1, 2, 3];
-6.do({|i| x.permute(i).postln;});
+<p>Returns a new List whose elements are the <strong>nthPermutation</strong> of the elements of the receiver. The receiver is unchanged.<div class='codeMirrorContainer'><textarea class='editor'>(
+x = List[1, 2, 3];
+6.do({ |i| x.permute(i).postln });
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-wrapExtend' href='./../Overviews/Methods.html#wrapExtend'>wrapExtend</a>(<span class='argstr'>length</span>)</h3>
 <div class='method'>
-<p>Returns a new List whose elements are repeated sequences of the receiver, up to size <strong>length</strong>. The receiver is unchanged.<textarea class='editor'>(
-x = List[ 1, 2, 3, "foo", 'bar' ];
+<p>Returns a new List whose elements are repeated sequences of the receiver, up to size <strong>length</strong>. The receiver is unchanged.<div class='codeMirrorContainer'><textarea class='editor'>(
+x = List[1, 2, 3, "foo", 'bar'];
 y = x.wrapExtend(9);
 x.postln;
 y.postln;
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-foldExtend' href='./../Overviews/Methods.html#foldExtend'>foldExtend</a>(<span class='argstr'>length</span>)</h3>
 <div class='method'>
-<p>Same as <a href="#-wrapExtend">-wrapExtend</a> but the sequences fold back on the list elements.<textarea class='editor'>(
-x = List[ 1, 2, "foo"];
+<p>Same as <a href="#-wrapExtend">-wrapExtend</a> but the sequences fold back on the list elements.<div class='codeMirrorContainer'><textarea class='editor'>(
+x = List[1, 2, "foo"];
 y = x.foldExtend(9);
 x.postln;
 y.postln;
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-slide' href='./../Overviews/Methods.html#slide'>slide</a>(<span class='argstr'>windowLength: 3</span>, <span class='argstr'>stepSize: 1</span>)</h3>
 <div class='method'>
-<p>Return a new List whose elements are repeated subsequences from the receiver. Easier to demonstrate than explain.<textarea class='editor'>List[1, 2, 3, 4, 5, 6].slide(3, 1).postcs;
+<p>Return a new List whose elements are repeated subsequences from the receiver. Easier to demonstrate than explain.<div class='codeMirrorContainer'><textarea class='editor'>List[1, 2, 3, 4, 5, 6].slide(3, 1).postcs;
 List[1, 2, 3, 4, 5, 6].slide(3, 2).postcs;
 List[1, 2, 3, 4, 5, 6].slide(4, 1).postcs;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-dump' href='./../Overviews/Methods.html#dump'>dump</a></h3>
 <div class='method'>
 <p>Dump the List's Array.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-clear' href='./../Overviews/Methods.html#clear'>clear</a></h3>
@@ -302,5 +442,5 @@ List[1, 2, 3, 4, 5, 6].slide(4, 1).postcs;</textarea>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-setCollection' href='./../Overviews/Methods.html#setCollection'>setCollection</a>(<span class='argstr'>aColl</span>)</h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-size' href='./../Overviews/Methods.html#size'>size</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-swap' href='./../Overviews/Methods.html#swap'>swap</a>(<span class='argstr'>i</span>, <span class='argstr'>j</span>)</h3>
-<div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/List.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/List.schelp</a><br>link::Classes/List::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+<div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/List.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/List.schelp</a><br>link::Classes/List::<br></div></div><script src='./../static/editor.js' type='text/javascript'></script>
 </body></html>

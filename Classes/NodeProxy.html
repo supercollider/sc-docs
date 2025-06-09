@@ -1,21 +1,25 @@
-<!doctype html><html lang='en'><head><title>NodeProxy | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>NodeProxy | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../lib/jquery.min.js'></script>
-<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/jquery.min.js'></script>
+<script src='./../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './..';
 var scdoc_title = 'NodeProxy';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../static/scdoc.js' type='text/javascript'></script>
 <script src='./../docmap.js' type='text/javascript'></script>
+<script src='./../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
@@ -111,6 +115,8 @@ var scdoc_sc_version = '3.13.1';
 <li class='toc3'><a href='#-wakeUp'>wakeUp</a> </li>
 </ul><li class='toc2'><a href='#Storing%20as%20code'>Storing as code</a></li>
 <ul class='toc'><li class='toc3'><a href='#-asCode'>asCode</a> </li>
+</ul><li class='toc2'><a href='#GUI'>GUI</a></li>
+<ul class='toc'><li class='toc3'><a href='#-edit'>edit</a> </li>
 </ul><li class='toc2'><a href='#Inherited%20instance%20methods'>Inherited instance methods</a></li>
 <li class='toc2'><a href='#Undocumented%20instance%20methods'>Undocumented instance methods</a></li>
 <ul class='toc'><li class='toc3'><a href='#-addChild'>addChild</a> </li>
@@ -124,7 +130,6 @@ var scdoc_sc_version = '3.13.1';
 <li class='toc3'><a href='#-deepWakeUp'>deepWakeUp</a> </li>
 <li class='toc3'><a href='#-defaultGroupID'>defaultGroupID</a> </li>
 <li class='toc3'><a href='#-document'>document</a> </li>
-<li class='toc3'><a href='#-edit'>edit</a> </li>
 <li class='toc3'><a href='#-filter'>filter</a> </li>
 <li class='toc3'><a href='#-findFirstSpecFor'>findFirstSpecFor</a> </li>
 <li class='toc3'><a href='#-findInOpenDocuments'>findInOpenDocuments</a> </li>
@@ -196,7 +201,7 @@ var scdoc_sc_version = '3.13.1';
 <div id='summary'>a reference on a server</div>
 </div>
 <div class='subheader'>
-<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/JITLib/ProxySpace/NodeProxy.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/JITLib/ProxySpace/NodeProxy.sc'>NodeProxy.sc</a></div><div id='subclasses'>Subclasses: <a href="../Classes/Ndef.html">Ndef</a></div>
+<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/JITLib/ProxySpace/NodeProxy.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/JITLib/ProxySpace/NodeProxy.sc'>NodeProxy.sc</a></div><div id='subclasses'>Subclasses: <a href="../Classes/Ndef.html">Ndef</a></div>
 <div id='related'>See also: <a href="./../Classes/ProxySpace.html">ProxySpace</a></div>
 </div>
 <h2><a class='anchor' name='description'>Description</a></h2>
@@ -207,7 +212,7 @@ var scdoc_sc_version = '3.13.1';
 <ul>
 <li><a href="./../Tutorials/JITLib/the_lazy_proxy.html">the_lazy_proxy</a><li><a href="./../Tutorials/JITLib/jitlib_efficiency.html">jitlib_efficiency</a><li><a href="./../Tutorials/JITLib/jitlib_fading.html">jitlib_fading</a><li><a href="./../Tutorials/JITLib/jitlib_asCompileString.html">jitlib_asCompileString</a><li><a href="./../Reference/NodeProxy_roles.html">NodeProxy roles</a></ul>
 <h3><a class='anchor' name='First%20Example'>First Example</a></h3>
-<textarea class='editor'>s.boot;
+<div class='codeMirrorContainer'><textarea class='editor'>s.boot;
 
 a = NodeProxy.new.play; // play to hardware output.
 a.fadeTime = 2; // fadeTime specifies crossfade
@@ -222,15 +227,17 @@ b.source = { Impulse.ar([5, 7]/2, [0, 0.5]) };
 
 a.clear(3); // clear after 3 seconds
 b.clear(3);</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h2><a class='anchor' name='classmethods'>Class Methods</a></h2>
 <h3><a class='anchor' name='Creation'>Creation</a></h3>
 <h3 class='method-code'><span class='method-prefix'>NodeProxy.</span><a class='method-name' name='*new' href='./../Overviews/Methods.html#new'>new</a>(<span class='argstr'>server</span>, <span class='argstr'>rate</span>, <span class='argstr'>numChannels</span>, <span class='argstr'>inputs</span>)</h3>
 <div class='method'>
-<p>Return a new instance of NodeProxy.<textarea class='editor'>// new node proxy
+<p>Return a new instance of NodeProxy.<div class='codeMirrorContainer'><textarea class='editor'>// new node proxy
 a = NodeProxy(s, \audio, 4);
 a.numChannels;
 a.clear; // remove bus.
 a.numChannels; // nil.</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h4>Arguments:</h4>
 <table class='arguments'>
 <tr><td class='argumentname'>server<td class='argumentdesc'>
@@ -311,19 +318,21 @@ a.numChannels; // nil.</textarea>
 <p>Channel offset when reading a bus that has more channels than numChannels, cross fading between adjacent channels.<tr><td class='argumentname'>clip<td class='argumentdesc'>
 <p>If set to 'wrap', exceeding channels will wrap around, if set to 'clip', repeat the last one.</table></div><h3 class='method-code'><span class='method-prefix'></span><a class='method-name' name='-<--' href='./../Overviews/Methods.html#&lt;--'>&lt;--</a>(<span class='argstr'>proxy</span>)</h3>
 <div class='method'>
-<p>Usage: <strong>proxyA &lt;-- proxyB</strong>. Set proxyA source to proxyB and play proxyA. If proxyB was playing, fade it out. This is convenient in the following situation:<textarea class='editor'>b = NodeProxy.new.play;
+<p>Usage: <strong>proxyA &lt;-- proxyB</strong>. Set proxyA source to proxyB and play proxyA. If proxyB was playing, fade it out. This is convenient in the following situation:<div class='codeMirrorContainer'><textarea class='editor'>b = NodeProxy.new.play;
 b.source = { PinkNoise.ar(0.2.dup) };
 // now I want to filter b through a new proxy.
 a = NodeProxy.new;
 a &lt;-- b; a.source = { HPF.ar(b.ar, 7000) };
-a.source = { HPF.ar(b.ar, 3000) };// changing the source
+a.source = { HPF.ar(b.ar, 3000) }; // changing the source
 a.clear; b.clear;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'></span><a class='method-name' name='-<<>' href='./../Overviews/Methods.html#&lt;&lt;&gt;'>&lt;&lt;&gt;</a>(<span class='argstr'>proxy</span>, <span class='argstr'>key: 'in'</span>)</h3>
 <div class='method'>
-<p>Chaining. Usage: <strong>proxyA &lt;&lt;&gt; proxyB    &lt;&lt;&gt; proxyC &lt;&lt;&gt; ...</strong> . Map proxyC source to proxyB <code>\in</code> argument, and proxyB to proxyA's in argument.<textarea class='editor'>a = NodeProxy.new.play;
+<p>Chaining. Usage: <strong>proxyA &lt;&lt;&gt; proxyB    &lt;&lt;&gt; proxyC &lt;&lt;&gt; ...</strong> . Map proxyC source to proxyB <code>\in</code> argument, and proxyB to proxyA's in argument.<div class='codeMirrorContainer'><textarea class='editor'>a = NodeProxy.new.play;
 a.source = { RLPF.ar(\in.ar(0!2), [4600, 7000], 0.1) };
 b = NodeProxy.new.source_ { Impulse.ar([5, 7] / 2) };
 a &lt;&lt;&gt; b;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'></span><a class='method-name' name='-<>>' href='./../Overviews/Methods.html#&lt;&gt;&gt;'>&lt;&gt;&gt;</a>(<span class='argstr'>proxy</span>, <span class='argstr'>key: 'in'</span>)</h3>
 <div class='method'>
 <p>Inverse of the above. Usage: <strong>proxyA &lt;&gt;&gt; proxyB    &lt;&gt;&gt; proxyC &lt;&gt;&gt; ...</strong> .</div><h3><a class='anchor' name='Setting%20the%20source'>Setting the source</a></h3>
@@ -332,9 +341,10 @@ a &lt;&lt;&gt; b;</textarea>
 <p>See the list under section <a href="#Supported%20sources">Supported sources</a><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-source' href='./../Overviews/Methods.html#source'>source</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-source' href='./../Overviews/Methods.html#source'>source</a> = <span class='argstr'>obj</span></h3>
 <div class='method'>
-<p>Play a new synth through proxy and release/remove any old ones.<textarea class='editor'>a = NodeProxy(s);
+<p>Play a new synth through proxy and release/remove any old ones.<div class='codeMirrorContainer'><textarea class='editor'>a = NodeProxy(s);
 a.play;
 a.source = { Pulse.ar(130, Saw.kr(0.3)) * 0.1 }; // change this line while running</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h4>Arguments:</h4>
 <table class='arguments'>
 <tr><td class='argumentname'>obj<td class='argumentdesc'>
@@ -342,49 +352,54 @@ a.source = { Pulse.ar(130, Saw.kr(0.3)) * 0.1 }; // change this line while runni
 
 <p>Signals can be routed between any number of node proxies.
 <p>See also: <a href="./../Classes/BusPlug.html#-ar">BusPlug: -ar</a>, <a href="./../Classes/BusPlug.html#-value">BusPlug: -value</a>, <a href="#Reshaping">Reshaping</a>.
-<p>Here is a simple example, using Ndef (NodeProxy works similarly):<textarea class='editor'>Ndef(\maus, { MouseX.kr });
+<p>Here is a simple example, using Ndef (NodeProxy works similarly):<div class='codeMirrorContainer'><textarea class='editor'>Ndef(\maus, { MouseX.kr });
 Ndef(\haus, { Pan2.ar(Blip.ar(Ndef.kr(\maus, 1) * 70), SinOsc.kr(Ndef.ar(\maus, 1) * 5)) }).play;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <div class='note'><span class='notelabel'>NOTE:</span> If you don't specify the number of channels, an expression like <code>Ndef.kr(\maus)</code> will return an Array. Subsequently, e.g. by a <code>Pan2</code> UGen, you may get the message:
 <p><code>WARNING: Synth output should be a flat array.</code>
 <p>If you intend the output to be really mono, make it explicit by writing: <code>Ndef.kr(\maus, 1)</code></div>
-<p>With elastic reshaping, you can use the parent to expand the child, if you omit the number of channels in the routing:<textarea class='editor'>Ndef(\maus, { MouseX.kr });
+<p>With elastic reshaping, you can use the parent to expand the child, if you omit the number of channels in the routing:<div class='codeMirrorContainer'><textarea class='editor'>Ndef(\maus, { MouseX.kr });
 Ndef(\haus, { Blip.ar(Ndef.kr(\maus) * 70) }).play;
 Ndef(\haus).reshaping = \elastic;
 Ndef(\maus).reshaping = \elastic;
 Ndef(\maus, { LFNoise0.kr(1 ! 8) + 1 }); // now 8 parallel channels of audio are audible.</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h3><a class='anchor' name='Reserved%20parameters'>Reserved parameters</a></h3>
 
 <p>Three parameters are automatically specified if they don't exist in a given UGen function. You can override their use: <code>[\out, \gate, \fadeTime]</code><h3><a class='anchor' name='Specifying%20your%20own%20envelope'>Specifying your own envelope</a></h3>
 
-<p>If a UGen function that is passed to the proxy has its own envelope, and if this envelope can free the synth, the node proxy uses this envelope instead of making its own. If you provide a <code>fadeTime</code> argument, the proxy's fadeTime will be used.<textarea class='editor'>Ndef(\sound).fadeTime = 3;
+<p>If a UGen function that is passed to the proxy has its own envelope, and if this envelope can free the synth, the node proxy uses this envelope instead of making its own. If you provide a <code>fadeTime</code> argument, the proxy's fadeTime will be used.<div class='codeMirrorContainer'><textarea class='editor'>Ndef(\sound).fadeTime = 3;
 (
 Ndef(\sound, { |fadeTime = 1, gate = 1|
     var e = Env.adsr(fadeTime, 0.01, 0.4, fadeTime).ar(2, gate);
     SinOsc.ar(100 + (e * 700), SinOsc.ar(208) * (1 - e) * 6) * e * 0.1
 }).play
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h3><a class='anchor' name='Making%20copies'>Making copies</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-copy' href='./../Overviews/Methods.html#copy'>copy</a></h3>
 <div class='method'>
-<p>copies the hidden internal state to make the new proxy independent of the old, but will keep the reference to the source object. The rendered SynthDef is cached, which makes this method more efficient than simply assigning the same function to a new proxy. By design, the monitor is copied, but is not running (use play to start it in the same configuration).<textarea class='editor'>a = NodeProxy(s);
+<p>copies the hidden internal state to make the new proxy independent of the old, but will keep the reference to the source object. The rendered SynthDef is cached, which makes this method more efficient than simply assigning the same function to a new proxy. By design, the monitor is copied, but is not running (use play to start it in the same configuration).<div class='codeMirrorContainer'><textarea class='editor'>a = NodeProxy(s);
 a.source = { |freq = 444| Blip.ar(freq * [1, 1.03], 200) * 0.1 };
 a.play;
 a.set(\freq, 555);
 b = a.copy;
 b.play;
 b.set(\freq, 222);</textarea>
-<div class='note'><span class='notelabel'>NOTE:</span> If needed, you can also copy parts of a proxy, such as the <a href="./../Classes/Monitor.html">Monitor</a> (which usually routes the output back onto hardware busses) and the <a href="./../Classes/NodeMap.html">NodeMap</a>, which keeps a mapping and setting scope.</div><textarea class='editor'>s.scope(4);
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+<div class='note'><span class='notelabel'>NOTE:</span> If needed, you can also copy parts of a proxy, such as the <a href="./../Classes/Monitor.html">Monitor</a> (which usually routes the output back onto hardware busses) and the <a href="./../Classes/NodeMap.html">NodeMap</a>, which keeps a mapping and setting scope.</div><div class='codeMirrorContainer'><textarea class='editor'>s.scope(4);
 a = NodeProxy(s);
 a.source = { |freq = 234| Blip.ar(freq * [1, 1.03], 20) * 0.5 };
 a.playN([0, 1, 3], [0.04, 0.3, 0.1], vol: 1); // some complicated routing
 a.set(\freq, 123);
 
 b = NodeProxy(s);
-b.source = { |freq = 1000| SinOsc.ar(freq * 3 * {{ rrand(0.9, 1.1) }.dup(8) }.dup(2)).mean * 0.5 };
+b.source = { |freq = 1000| SinOsc.ar(freq * 3 * { { rrand(0.9, 1.1) }.dup(8) }.dup(2)).mean * 0.5 };
 b.monitor = a.monitor.copy;
 b.nodeMap = a.nodeMap.copy;
 b.play;
 a.stop;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-copyState' href='./../Overviews/Methods.html#copyState'>copyState</a>(<span class='argstr'>proxy</span>)</h3>
 <div class='method'>
 <p>Copy the internal settings of one proxy into another. Old state is cleared.<h4>Arguments:</h4>
@@ -397,19 +412,21 @@ a.stop;</textarea>
 <div class='method'>
 <p>Determines how to behave when a new source is added. Current options:<table>
 <tr><td>nil<td>Once initialized, keep the same bus - this is the default<tr><td>\elastic<td>On a change, shrink and grow according to need, replace bus. The monitor and child proxies are adjusted.<tr><td>\expanding<td>On a change, only grow according to need, replace bus. The monitor and child proxies are adjusted.</table>
-<textarea class='editor'>a = NodeProxy(s);
+<div class='codeMirrorContainer'><textarea class='editor'>a = NodeProxy(s);
 a.reshaping = \elastic;
 a.play(0, 2); // play stereo
 a.source = { BPF.ar(Dust.ar(8 ! 8), (0..5).nthPrime * 300, 0.01) * 20 };
 a.numChannels; // 8</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-mold' href='./../Overviews/Methods.html#mold'>mold</a>(<span class='argstr'>numChannels</span>, <span class='argstr'>rate</span>, <span class='argstr'>argReshaping</span>, <span class='argstr'>fadeTime</span>)</h3>
 <div class='method'>
-<p>Adjust the proxy to a given rate / numChannels. If there are any child proxies that have elastic <a href="#-reshaping">-reshaping</a>, they are adjusted accordingly.<textarea class='editor'>a = NodeProxy(s);
+<p>Adjust the proxy to a given rate / numChannels. If there are any child proxies that have elastic <a href="#-reshaping">-reshaping</a>, they are adjusted accordingly.<div class='codeMirrorContainer'><textarea class='editor'>a = NodeProxy(s);
 a.play;
 a.source = { BPF.ar(Impulse.ar({ rrand(1.0, 2.0) } ! a.numChannels), (0..5).nthPrime * 300, 0.01) * 20 };
 a.numChannels; // 2
 a.mold(8);
 a.numChannels; // 8</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3><a class='anchor' name='Other%20ways%20to%20set%20or%20change%20the%20sources'>Other ways to set or change the sources</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-prime' href='./../Overviews/Methods.html#prime'>prime</a>(<span class='argstr'>obj</span>)</h3>
 <div class='method'>
@@ -428,7 +445,7 @@ a.numChannels; // 8</textarea>
 <p>A valid source (see <a href="#Supported%20sources">Supported sources</a>).<tr><td class='argumentname'>channelOffset<td class='argumentdesc'>
 <p>using a multichannel setup it can be useful to set this, when the objects numChannels is smaller than the proxy<tr><td class='argumentname'>extraArgs<td class='argumentdesc'>
 <p>Arguments that can be sent with the object directly (not cached)<tr><td class='argumentname'>now<td class='argumentdesc'>
-<p>if set to false, only prepare the source and do not start the object (see <a href="#-prime">-prime</a>)<textarea class='editor'>// put can be used with the array indexing syntax:
+<p>if set to false, only prepare the source and do not start the object (see <a href="#-prime">-prime</a>)<div class='codeMirrorContainer'><textarea class='editor'>// put can be used with the array indexing syntax:
 a = NodeProxy.new.play;
 a[0] = { SinOsc.ar(Rand(200, 899)) * 0.1.dup };
 a[2] = { SinOsc.ar(Rand(200, 899)) * 0.1.dup };
@@ -438,6 +455,7 @@ a[0..5] = { SinOsc.ar(Rand(200, 899)) * 0.1.dup };
 a.sources.do(_.postcs);
 a.send; // exchange synths, using the sources as definitions
 a.clear;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </table></div><h3><a class='anchor' name='Controlling%20the%20running%20processes'>Controlling the running processes</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-pause' href='./../Overviews/Methods.html#pause'>pause</a></h3>
 <div class='method'>
@@ -526,13 +544,14 @@ a.clear;</textarea>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-map' href='./../Overviews/Methods.html#map'>map</a>( <span class='argstr'>... args</span>)</h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-setn' href='./../Overviews/Methods.html#setn'>setn</a>( <span class='argstr'>... args</span>)</h3>
 <div class='method'>
-<p>NodeProxy behaves like its <a href="./../Classes/NodeMap.html">NodeMap</a> and very similar to a <a href="./../Classes/Synth.html">Synth</a>.<div class='note'><span class='notelabel'>NOTE:</span> Now the methods map, setn, mapn, and xmap are there just for backward compatibility reasons. Everything is done by set.</div><textarea class='editor'>a = NodeProxy(s); a.play;
+<p>NodeProxy behaves like its <a href="./../Classes/NodeMap.html">NodeMap</a> and very similar to a <a href="./../Classes/Synth.html">Synth</a>.<div class='note'><span class='notelabel'>NOTE:</span> Now the methods map, setn, mapn, and xmap are there just for backward compatibility reasons. Everything is done by set.</div><div class='codeMirrorContainer'><textarea class='editor'>a = NodeProxy(s); a.play;
 a.source = { Splay.ar(Blip.ar(\freq.kr(18 ! 4))) * 0.2 };
 a.set(\freq, [1, 3, 56, 13]);
 a.source = { Splay.ar(SinOsc.ar(LFSaw.ar(\freq.kr(18 ! 4)) * 250 + 400)) * 0.2 };
 b = NodeProxy(s); b.source = { MouseX.kr(0, 3) *  [1, 3, 56, 13] };
 a.set(\freq, b);
 a.clear; b.clear;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h4>Arguments:</h4>
 <table class='arguments'>
 <tr><td class='argumentname'>... args<td class='argumentdesc'>
@@ -548,7 +567,7 @@ a.clear; b.clear;</textarea>
 <p>A sequence of <strong>name, index, value</strong> triplets.<dl>
 <dt>name<dd>The name of the arrayed control<dt>index<dd>The index into the array<dt>value<dd>The new value to set, can be an array to set a range of elements.</dl>
 </table><h4>Discussion:</h4>
-<textarea class='editor'>// 5 channel NodeProxy, for convenience initialized in an Ndef
+<div class='codeMirrorContainer'><textarea class='editor'>// 5 channel NodeProxy, for convenience initialized in an Ndef
 (
 Ndef(\sin).mold(5, \audio, \elastic);
 Ndef(\sin)[0] = {
@@ -583,9 +602,10 @@ Ndef(\sin).seti(\freq, [0, 2], [310, 207])
 // exceeding indices, argument arrays of different length
 // 34 % 5 =&gt; 4, 12 % 5 =&gt; 2, 56 % 5 =&gt; 1
 Ndef(\sin).seti(\freq, [34, 12, 56], [376, 199])
-Ndef(\sin).getKeysValues // -&gt; [ [ freq, [ 310, 376, 199, 137, 376 ] ] ]
+Ndef(\sin).getKeysValues // -&gt; [[freq, [310, 376, 199, 137, 376]]]
 
 Ndef.clear(10)</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-unset' href='./../Overviews/Methods.html#unset'>unset</a>( <span class='argstr'>... keys</span>)</h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-unmap' href='./../Overviews/Methods.html#unmap'>unmap</a>( <span class='argstr'>... keys</span>)</h3>
 <div class='method'>
@@ -597,7 +617,7 @@ Ndef.clear(10)</textarea>
 <div class='method'>
 <p>set the default rate (\tr, \ir, numerical) for synthDef arg. A rate of nil removes setting.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-controlNames' href='./../Overviews/Methods.html#controlNames'>controlNames</a>(<span class='argstr'>except</span>, <span class='argstr'>addNodeMap: true</span>)</h3>
 <div class='method'>
-<p>Returns the <a href="./../Classes/ControlName.html">ControlName</a> objects of all slots, <strong>except</strong> the names of this list (default: <code>[\out, \i_out, \gate, \fadeTime]</code> , which are used internally). When the node proxy received a <code>set</code> for a given key, the <code>defaultValue</code> of the corresponding <code>ControlName</code> contains the object that was passed, which might be any object whatsoever.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-controlKeys' href='./../Overviews/Methods.html#controlKeys'>controlKeys</a>(<span class='argstr'>except</span>, <span class='argstr'>noInternalKeys: true</span>)</h3>
+<p>Returns the <a href="./../Classes/ControlName.html">ControlName</a> objects of all slots, <strong>except</strong> the names of this list (default: <code>[\out, \i_out, \gate, \fadeTime]</code>, which are used internally). When the node proxy received a <code>set</code> for a given key, the <code>defaultValue</code> of the corresponding <code>ControlName</code> contains the object that was passed, which might be any object whatsoever.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-controlKeys' href='./../Overviews/Methods.html#controlKeys'>controlKeys</a>(<span class='argstr'>except</span>, <span class='argstr'>noInternalKeys: true</span>)</h3>
 <div class='method'>
 <p>Returns the keys (symbols) of all control names objects of all slots, <strong>except</strong> the names of this list. (default: none).<h4>Arguments:</h4>
 <table class='arguments'>
@@ -611,10 +631,11 @@ Ndef.clear(10)</textarea>
 <div class='method'>
 <p>Search the source objects for a given control name symbol and return the <a href="./../Classes/ControlName.html">ControlName</a>.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-specs' href='./../Overviews/Methods.html#specs'>specs</a></h3>
 <div class='method'>
-<p>Get the specs array from SynthDef metadata. Note that, for a NodeProxy with multiple sources, result will be a dictionary containing specs of ALL source SynthDefs.<textarea class='editor'>~p = NodeProxy.audio(Server.default, 2);
-~p.put(0, { SinOsc.ar(\freq.kr(100, spec:[50, 400])) });
-~p.put(1, { WhiteNoise.ar(\noiseAmp.kr(0.1, spec:[0, 1])) });
+<p>Get the specs array from SynthDef metadata. Note that, for a NodeProxy with multiple sources, result will be a dictionary containing specs of ALL source SynthDefs.<div class='codeMirrorContainer'><textarea class='editor'>~p = NodeProxy.audio(Server.default, 2);
+~p.put(0, { SinOsc.ar(\freq.kr(100, spec: [50, 400])) });
+~p.put(1, { WhiteNoise.ar(\noiseAmp.kr(0.1, spec: [0, 1])) });
 ~p.specs.postln;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3><a class='anchor' name='Sending%20synths%20to%20server%20explicitly'>Sending synths to server explicitly</a></h3>
 
 <p>Normally, processes (usually synths) are started when their respective source is added to the proxy. The processes can also be restarted, however, or the proxy can be used while asleep and the processes can then be started explicitly.<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-send' href='./../Overviews/Methods.html#send'>send</a>(<span class='argstr'>extraArgs</span>, <span class='argstr'>index</span>, <span class='argstr'>freeLast: true</span>)</h3>
@@ -634,11 +655,11 @@ Ndef.clear(10)</textarea>
 <div class='method'>
 <p>Like send, just iterating separately over the objects.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-wakeUp' href='./../Overviews/Methods.html#wakeUp'>wakeUp</a></h3>
 <div class='method'>
-<p>Until the proxy is not used by any output ( either .play or .ar/.kr ) it is not running on the server. you can wake it up to force it playing. Normally this is not needed.</div><h3><a class='anchor' name='Storing%20as%20code'>Storing as code</a></h3>
+<p>Until the proxy is not used by any output (either .play or .ar/.kr) it is not running on the server. you can wake it up to force it playing. Normally this is not needed.</div><h3><a class='anchor' name='Storing%20as%20code'>Storing as code</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-asCode' href='./../Overviews/Methods.html#asCode'>asCode</a>(<span class='argstr'>includeSettings: true</span>, <span class='argstr'>includeMonitor: true</span>, <span class='argstr'>envir</span>)</h3>
-<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/JITLib/ProxySpace/extStoreOn.sc'>/usr/local/share/SuperCollider/SCClassLibrary/JITLib/ProxySpace/extStoreOn.sc</a></div>
+<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/JITLib/ProxySpace/extStoreOn.sc'>/usr/local/share/SuperCollider/SCClassLibrary/JITLib/ProxySpace/extStoreOn.sc</a></div>
 <div class='method'>
-<p>stores the proxy as executable code. see also <a href="./../Tutorials/JITLib/jitlib_asCompileString.html">jitlib_asCompileString</a> for more examples.<textarea class='editor'>// Ndef
+<p>stores the proxy as executable code. see also <a href="./../Tutorials/JITLib/jitlib_asCompileString.html">jitlib_asCompileString</a> for more examples.<div class='codeMirrorContainer'><textarea class='editor'>// Ndef
 Ndef(\a, { Saw.ar(12) }).asCode;
 
 // in a pushed proxy space
@@ -653,15 +674,12 @@ p.end.pop;
 x = NodeProxy.new.source = { DC.ar };
 x.asCode;
 
-x.free;
-
-subsection::GUI
-
-method::edit
-Returns a new instance of link::Classes/NodeProxyEditor:: for this proxy.
-
-code::
-a = NodeProxy.new;
+x.free;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+</div><h3><a class='anchor' name='GUI'>GUI</a></h3>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-edit' href='./../Overviews/Methods.html#edit'>edit</a>(<span class='argstr'>nSliders</span>, <span class='argstr'>parent</span>, <span class='argstr'>bounds</span>)</h3>
+<div class='method'>
+<p>Returns a new instance of <a href="./../Classes/NodeProxyEditor.html">NodeProxyEditor</a> for this proxy.<div class='codeMirrorContainer'><textarea class='editor'>a = NodeProxy.new;
 a.edit;
 
 (
@@ -669,10 +687,11 @@ a.source = { |freq = 440, rate = 2|
     SinOsc.ar(freq * [1, 1.625]) * SinOsc.kr(rate).max(0) * 0.2
 }
 );</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3><a class='anchor' name='Inherited%20instance%20methods'>Inherited instance methods</a></h3>
 <div id='inheritedinstmets'></div><h3><a class='anchor' name='Undocumented%20instance%20methods'>Undocumented instance methods</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-addChild' href='./../Overviews/Methods.html#addChild'>addChild</a>(<span class='argstr'>proxy</span>)</h3>
-<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-addNodeMapControlNames' href='./../Overviews/Methods.html#addNodeMapControlNames'>addNodeMapControlNames</a>(<span class='argstr'>objCtlNames</span>, <span class='argstr'>except: [  ]</span>)</h3>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-addNodeMapControlNames' href='./../Overviews/Methods.html#addNodeMapControlNames'>addNodeMapControlNames</a>(<span class='argstr'>objCtlNames</span>, <span class='argstr'>except: []</span>)</h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-asGroup' href='./../Overviews/Methods.html#asGroup'>asGroup</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-asNodeID' href='./../Overviews/Methods.html#asNodeID'>asNodeID</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-asTarget' href='./../Overviews/Methods.html#asTarget'>asTarget</a></h3>
@@ -682,12 +701,11 @@ a.source = { |freq = 440, rate = 2|
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-deepWakeUp' href='./../Overviews/Methods.html#deepWakeUp'>deepWakeUp</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-defaultGroupID' href='./../Overviews/Methods.html#defaultGroupID'>defaultGroupID</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-document' href='./../Overviews/Methods.html#document'>document</a>(<span class='argstr'>includeSettings: true</span>, <span class='argstr'>includeMonitor: true</span>)</h3>
-<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/JITLib/ProxySpace/extStoreOn.sc'>/usr/local/share/SuperCollider/SCClassLibrary/JITLib/ProxySpace/extStoreOn.sc</a></div>
-<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-edit' href='./../Overviews/Methods.html#edit'>edit</a>(<span class='argstr'>nSliders</span>, <span class='argstr'>parent</span>, <span class='argstr'>bounds</span>)</h3>
+<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/JITLib/ProxySpace/extStoreOn.sc'>/usr/local/share/SuperCollider/SCClassLibrary/JITLib/ProxySpace/extStoreOn.sc</a></div>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-filter' href='./../Overviews/Methods.html#filter'>filter</a>(<span class='argstr'>i</span>, <span class='argstr'>func</span>)</h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-findFirstSpecFor' href='./../Overviews/Methods.html#findFirstSpecFor'>findFirstSpecFor</a>(<span class='argstr'>controlName</span>)</h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-findInOpenDocuments' href='./../Overviews/Methods.html#findInOpenDocuments'>findInOpenDocuments</a>(<span class='argstr'>index: 0</span>)</h3>
-<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/JITLib/ProxySpace/extStoreOn.sc'>/usr/local/share/SuperCollider/SCClassLibrary/JITLib/ProxySpace/extStoreOn.sc</a></div>
+<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/JITLib/ProxySpace/extStoreOn.sc'>/usr/local/share/SuperCollider/SCClassLibrary/JITLib/ProxySpace/extStoreOn.sc</a></div>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-freeBus' href='./../Overviews/Methods.html#freeBus'>freeBus</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-getBundle' href='./../Overviews/Methods.html#getBundle'>getBundle</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-getFamily' href='./../Overviews/Methods.html#getFamily'>getFamily</a>(<span class='argstr'>set</span>, <span class='argstr'>alreadyAsked</span>)</h3>
@@ -695,7 +713,7 @@ a.source = { |freq = 440, rate = 2|
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-internalKeys' href='./../Overviews/Methods.html#internalKeys'>internalKeys</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-isPlaying' href='./../Overviews/Methods.html#isPlaying'>isPlaying</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-key' href='./../Overviews/Methods.html#key'>key</a>(<span class='argstr'>envir</span>)</h3>
-<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/JITLib/ProxySpace/extStoreOn.sc'>/usr/local/share/SuperCollider/SCClassLibrary/JITLib/ProxySpace/extStoreOn.sc</a></div>
+<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/JITLib/ProxySpace/extStoreOn.sc'>/usr/local/share/SuperCollider/SCClassLibrary/JITLib/ProxySpace/extStoreOn.sc</a></div>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-loadToBundle' href='./../Overviews/Methods.html#loadToBundle'>loadToBundle</a>(<span class='argstr'>bundle</span>)</h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-mapEnvir' href='./../Overviews/Methods.html#mapEnvir'>mapEnvir</a>( <span class='argstr'>... keys</span>)</h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-moveBeforeMsg' href='./../Overviews/Methods.html#moveBeforeMsg'>moveBeforeMsg</a>( <span class='argstr'>... proxies</span>)</h3>
@@ -705,13 +723,13 @@ a.source = { |freq = 440, rate = 2|
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-nodeMap' href='./../Overviews/Methods.html#nodeMap'>nodeMap</a> = <span class='argstr'>map</span></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-objects' href='./../Overviews/Methods.html#objects'>objects</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-playEditString' href='./../Overviews/Methods.html#playEditString'>playEditString</a>(<span class='argstr'>usePlayN</span>, <span class='argstr'>dropDefaults: false</span>, <span class='argstr'>nameStr</span>)</h3>
-<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/JITLib/ProxySpace/extStoreOn.sc'>/usr/local/share/SuperCollider/SCClassLibrary/JITLib/ProxySpace/extStoreOn.sc</a></div>
+<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/JITLib/ProxySpace/extStoreOn.sc'>/usr/local/share/SuperCollider/SCClassLibrary/JITLib/ProxySpace/extStoreOn.sc</a></div>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-playNDialog' href='./../Overviews/Methods.html#playNDialog'>playNDialog</a>(<span class='argstr'>bounds</span>, <span class='argstr'>usePlayN</span>)</h3>
-<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/JITLib/ProxySpace/extStoreOn.sc'>/usr/local/share/SuperCollider/SCClassLibrary/JITLib/ProxySpace/extStoreOn.sc</a></div>
+<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/JITLib/ProxySpace/extStoreOn.sc'>/usr/local/share/SuperCollider/SCClassLibrary/JITLib/ProxySpace/extStoreOn.sc</a></div>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-playNString' href='./../Overviews/Methods.html#playNString'>playNString</a>(<span class='argstr'>dropDefaults: false</span>)</h3>
-<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/JITLib/ProxySpace/extStoreOn.sc'>/usr/local/share/SuperCollider/SCClassLibrary/JITLib/ProxySpace/extStoreOn.sc</a></div>
+<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/JITLib/ProxySpace/extStoreOn.sc'>/usr/local/share/SuperCollider/SCClassLibrary/JITLib/ProxySpace/extStoreOn.sc</a></div>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-playString' href='./../Overviews/Methods.html#playString'>playString</a>(<span class='argstr'>dropDefaults: false</span>)</h3>
-<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/JITLib/ProxySpace/extStoreOn.sc'>/usr/local/share/SuperCollider/SCClassLibrary/JITLib/ProxySpace/extStoreOn.sc</a></div>
+<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/JITLib/ProxySpace/extStoreOn.sc'>/usr/local/share/SuperCollider/SCClassLibrary/JITLib/ProxySpace/extStoreOn.sc</a></div>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-prepareOtherObjects' href='./../Overviews/Methods.html#prepareOtherObjects'>prepareOtherObjects</a>(<span class='argstr'>bundle</span>, <span class='argstr'>index</span>, <span class='argstr'>busChanged</span>)</h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-prepareToBundle' href='./../Overviews/Methods.html#prepareToBundle'>prepareToBundle</a>(<span class='argstr'>argGroup</span>, <span class='argstr'>bundle</span>, <span class='argstr'>addAction: 'addToTail'</span>)</h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-putAll' href='./../Overviews/Methods.html#putAll'>putAll</a>(<span class='argstr'>list</span>, <span class='argstr'>index: 0</span>, <span class='argstr'>channelOffset: 0</span>)</h3>
@@ -732,7 +750,7 @@ a.source = { |freq = 440, rate = 2|
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-sendEachToBundle' href='./../Overviews/Methods.html#sendEachToBundle'>sendEachToBundle</a>(<span class='argstr'>bundle</span>, <span class='argstr'>extraArgs</span>)</h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-sendObjectToBundle' href='./../Overviews/Methods.html#sendObjectToBundle'>sendObjectToBundle</a>(<span class='argstr'>bundle</span>, <span class='argstr'>object</span>, <span class='argstr'>extraArgs</span>, <span class='argstr'>index</span>)</h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-servStr' href='./../Overviews/Methods.html#servStr'>servStr</a></h3>
-<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/JITLib/ProxySpace/extStoreOn.sc'>/usr/local/share/SuperCollider/SCClassLibrary/JITLib/ProxySpace/extStoreOn.sc</a></div>
+<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/JITLib/ProxySpace/extStoreOn.sc'>/usr/local/share/SuperCollider/SCClassLibrary/JITLib/ProxySpace/extStoreOn.sc</a></div>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-serverQuit' href='./../Overviews/Methods.html#serverQuit'>serverQuit</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-setBus' href='./../Overviews/Methods.html#setBus'>setBus</a>(<span class='argstr'>argBus</span>)</h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-setGroup' href='./../Overviews/Methods.html#setGroup'>setGroup</a>(<span class='argstr'>args</span>, <span class='argstr'>useLatency: false</span>)</h3>
@@ -752,7 +770,7 @@ a.source = { |freq = 440, rate = 2|
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-xunset' href='./../Overviews/Methods.html#xunset'>xunset</a>( <span class='argstr'>... args</span>)</h3>
 <h2><a class='anchor' name='examples'>Examples</a></h2>
 
-<p>For more, see <a href="./../Classes/ProxySpace.html">ProxySpace</a><textarea class='editor'>///////////////////// using node proxy with ugen functions /////////////////////
+<p>For more, see <a href="./../Classes/ProxySpace.html">ProxySpace</a><div class='codeMirrorContainer'><textarea class='editor'>///////////////////// using node proxy with ugen functions /////////////////////
 
 s.boot;
 
@@ -770,10 +788,10 @@ a.source = { SinOsc.ar([390, 286] * 1.2, 0, 0.2) };
 a.source = { SinOsc.ar([390, 286, 400, 420, 300] * 1.2, 0, 0.2) };
 
 // other inputs
-a.source = { WhiteNoise.ar([0.01,0.01]) };
+a.source = { WhiteNoise.ar([0.01, 0.01]) };
 a.source = 0;
 a.source = \default; // synthDef on server
-a.source = SynthDef("w", { arg out=0; Out.ar(out,SinOsc.ar([Rand(430, 600), 600], 0, 0.2)) });
+a.source = SynthDef("w", { |out = 0| Out.ar(out, SinOsc.ar([Rand(430, 600), 600], 0, 0.2)) });
 a.source = nil; // removes any object
 
 // feedback
@@ -787,29 +805,29 @@ a.source = { SinOsc.ar([390, 286] * ExpRand(1, 3), 0, 0.2) };
 
 // adding nodes
 a.add({ SinOsc.ar([50, 390]*1.25, 0, 0.1) });
-a.add({ BrownNoise.ar([0.02,0.02]) });
+a.add({ BrownNoise.ar([0.02, 0.02]) });
 
 // setting nodes at indices:
-a[0] = { SinOsc.ar( 700 * LFNoise1.kr(1, 0.3, 0.6) + 200, 0, 0.1) };
+a[0] = { SinOsc.ar(700 * LFNoise1.kr(1, 0.3, 0.6) + 200, 0, 0.1) };
 a[1] = { LFPulse.kr(3, 0.3) * SinOsc.ar(500, 0, 0.1) };
 a[2] = { LFPulse.kr(3.5, 0.3) * SinOsc.ar(600, 0, 0.1) };
-a[3] = { SinOsc.ar([1,1.25] * 840, 0, 0.1) };
+a[3] = { SinOsc.ar([1, 1.25] * 840, 0, 0.1) };
 
 // filtering: the first argument is the previous bus content. more args can be used as usual.
-a[3] = \filter -&gt; { arg in; in * SinOsc.ar(Rand(100,1000)) };
-a[2] = \filter -&gt; { arg in; in * MouseY.kr(0,1) };
-a[8] = \filter -&gt; { arg in; in * MouseX.kr(0,1) };
-a[4] = \filter -&gt; { arg in; in * SinOsc.ar(ExpRand(1,5)).max(0) };
+a[3] = \filter -&gt; { |in| in * SinOsc.ar(Rand(100, 1000)) };
+a[2] = \filter -&gt; { |in| in * MouseY.kr(0, 1) };
+a[8] = \filter -&gt; { |in| in * MouseX.kr(0, 1) };
+a[4] = \filter -&gt; { |in| in * SinOsc.ar(ExpRand(1, 5)).max(0) };
 
 
 
 // setting controls
 a.fadeTime = 2.0;
-a.source = { arg f=400; SinOsc.ar(f * [1,1.2] * rrand(0.9, 1.1), 0, 0.1) };
+a.source = { |f = 400| SinOsc.ar(f * [1, 1.2] * rrand(0.9, 1.1), 0, 0.1) };
 a.set(\f, rrand(900, 300));
 a.set(\f, rrand(1500, 700));
 a.xset(\f, rrand(1500, 700)); // crossfaded setting
-a.source = { arg f=400; RLPF.ar(Pulse.ar(f * [1,1.02] * 0.05, 0.5, 0.2), f * 0.58, 0.2) };
+a.source = { |f = 400| RLPF.ar(Pulse.ar(f * [1, 1.02] * 0.05, 0.5, 0.2), f * 0.58, 0.2) };
 
 // control lags
 a.lag(\f, 0.5); // the objects are built again internally and sent to the server.
@@ -822,20 +840,20 @@ a.fadeTime = 1.0;
 // mapping controls to other node proxies
 
 c = NodeProxy.control(s, 2);
-c.source = { SinOsc.kr([10,20] * 0.1, 0, 150, 1300) };
+c.source = { SinOsc.kr([10, 20] * 0.1, 0, 150, 1300) };
 a.map(\f, c);
-a[0] = { arg f=400; RHPF.ar(Pulse.ar(f * [1,1.2] * 0.05, 0.5, 0.2), f * 0.58, 0.2) };
-c.source = { SinOsc.kr([10,16] * 0.02, 0, 50, 700) };
-c.source = { Line.kr(300, 1500, 10) + SinOsc.kr(20 * [1,2], 0, 100) };
-a[1] = { arg f; LFPar.ar(f % MouseX.kr(1, 40, 1) * 4 + 360, 0, 0.2) };
+a[0] = { |f = 400| RHPF.ar(Pulse.ar(f * [1, 1.2] * 0.05, 0.5, 0.2), f * 0.58, 0.2) };
+c.source = { SinOsc.kr([10, 16] * 0.02, 0, 50, 700) };
+c.source = { Line.kr(300, 1500, 10) + SinOsc.kr(20 * [1, 2], 0, 100) };
+a[1] = { |f| LFPar.ar(f % MouseX.kr(1, 40, 1) * 4 + 360, 0, 0.2) };
 
 // map multiple channels of one proxy to multiple controls of another
 // recently changed behaviour!
 
-a.source = { arg f=#[400, 400]; LPF.ar(Pulse.ar(f[0] * [0.4,1], 0.2, 0.2), f[1] * 3) };
+a.source = { |f = #[400, 400]| LPF.ar(Pulse.ar(f[0] * [0.4, 1], 0.2, 0.2), f[1] * 3) };
 a.map(\f, c); // multichannel proxy c is mapped to multichannel control of a
-a.source = { arg f=#[400, 400]; LPF.ar(Pulse.ar(f, 0.2, 0.2), f[1]) };
-a.source = { arg f=#[400, 400]; Formant.ar(140, f * 1.5, 100, 0.1) };
+a.source = { |f = #[400, 400]| LPF.ar(Pulse.ar(f, 0.2, 0.2), f[1]) };
+a.source = { |f = #[400, 400]| Formant.ar(140, f * 1.5, 100, 0.1) };
 c.source = { SinOsc.kr([Line.kr(1, 30, 10), 1], 0, [100, 700], [300, 700]) };
 c.source = 400;
 
@@ -870,10 +888,10 @@ a.map(\f, c); // restore mapping
 
 
 // sending envelopes (up to 8 levels)
-w = Env.new(Array.rand(3, 400, 1000),Array.rand(2, 0.3, 0.001), -4);
+w = Env.new(Array.rand(3, 400, 1000), Array.rand(2, 0.3, 0.001), -4);
 c.env(w);
 c.env(w);
-w = Env.new(Array.rand(8, 400, 1000),Array.rand(7, 0.03, 0.1));
+w = Env.new(Array.rand(8, 400, 1000), Array.rand(7, 0.03, 0.1));
 c.env(w);
 c.env(w);
 
@@ -883,22 +901,24 @@ a.stop; // stop the monitor
 a.play; // start the monitor
 a.end;    // release the synths and stop the monitor
 c.free;    // free the control proxy c</textarea>
-<textarea class='editor'>///////////////////// channel offset/object index /////////////////////
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+<div class='codeMirrorContainer'><textarea class='editor'>///////////////////// channel offset/object index /////////////////////
 
 
-a = NodeProxy.audio(s,2);
+a = NodeProxy.audio(s, 2);
 a.play;
 a[0] = { Ringz.ar(Impulse.ar(5, 0, 0.1), 1260) };
 a.put(1, { Ringz.ar(Impulse.ar(5.3, 0, 0.1), 420) }, 1);
-a.put(0, { Ringz.ar(Dust.ar([1,1]*15.3, 0.1), 720) }, 1);
+a.put(0, { Ringz.ar(Dust.ar([1, 1]*15.3, 0.1), 720) }, 1);
 a.put(1, { Ringz.ar(Impulse.ar(5.3, 0, 0.1), 420) }, 1);
 a.end;</textarea>
-<textarea class='editor'>///////////////////// beat accurate playing /////////////////////
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+<div class='codeMirrorContainer'><textarea class='editor'>///////////////////// beat accurate playing /////////////////////
 
 
 
 
-a = NodeProxy.audio(s,2);
+a = NodeProxy.audio(s, 2);
 a.play;
 
 a.quant = 2.0; // quantize changes to the next 2.0-beat multiple
@@ -911,12 +931,13 @@ a.removeLast;
 a.removeAt(2);
 
 a.clear;</textarea>
-<textarea class='editor'>///////////////////// using patterns - event streams /////////////////////
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+<div class='codeMirrorContainer'><textarea class='editor'>///////////////////// using patterns - event streams /////////////////////
 
 
 (
 // must have 'out' or 'i_out' argument to work properly
-SynthDef("who", { arg freq, gate=1, out=0, ffreq=800, amp=0.1;
+SynthDef("who", { |freq, gate = 1, out = 0, ffreq = 800, amp = 0.1|
     var env;
     env = Env.asr(0.01, amp, 0.5);
     Out.ar(out, Pan2.ar(
@@ -931,7 +952,7 @@ SynthDef("who", { arg freq, gate=1, out=0, ffreq=800, amp=0.1;
 s.boot;
 a = NodeProxy.audio(s, 2);
 a.fadeTime = 2;
-b = NodeProxy.audio(s,2);
+b = NodeProxy.audio(s, 2);
 b.fadeTime = 3;
 )
 
@@ -969,7 +990,7 @@ c.source = { MouseX.kr(100, 5500, 1) };
 (
 b.source = Pbind(
             \instrument, \who,
-            \freq, Pseq([600, 350, 300],inf),
+            \freq, Pseq([600, 350, 300], inf),
             \legato, 0.1,
             \ffreq, Pseq([c, 100, c, 100, 300, 600], inf), // use proxy in a pattern
             \dur, Pseq([1, 0.5, 0.75, 0.25] * 0.4, inf),
@@ -979,11 +1000,11 @@ b.source = Pbind(
 
 
 
-b[2] = Pbind(\instrument, \who, \freq, 620, \ffreq, Prand([500,c],inf), \legato, 0.1, \dur, 0.1);
-b[3] = Pbind(\instrument, \who, \ffreq, 5000, \freq, Pseq([720, 800],inf), \legato, 0.1, \dur, 0.1, \amp, 0.01);
-b[4] = Pbind(\instrument, \who, \freq, Pseq([700, 400],inf), \legato, 0.1, \ffreq, 200);
-b[1] = { WhiteNoise.ar([0.01,0.01]) };
-b[4] = { arg ffreq=800; Resonz.ar(WhiteNoise.ar([1,1]), ffreq, 0.05) };
+b[2] = Pbind(\instrument, \who, \freq, 620, \ffreq, Prand([500, c], inf), \legato, 0.1, \dur, 0.1);
+b[3] = Pbind(\instrument, \who, \ffreq, 5000, \freq, Pseq([720, 800], inf), \legato, 0.1, \dur, 0.1, \amp, 0.01);
+b[4] = Pbind(\instrument, \who, \freq, Pseq([700, 400], inf), \legato, 0.1, \ffreq, 200);
+b[1] = { WhiteNoise.ar([0.01, 0.01]) };
+b[4] = { |ffreq = 800| Resonz.ar(WhiteNoise.ar([1, 1]), ffreq, 0.05) };
 
 
 b.map(\ffreq, c); // map the control to the proxy
@@ -995,6 +1016,7 @@ a.source = { b.ar * WhiteNoise.ar(0.1, 1) + (b.ar * SinOsc.ar(SinOsc.kr(0.01, 0,
 c.source = { XLine.kr(1900, 10, 10) };
 
 a.clear(10); b.clear(10); c.clear(10); // fade out and clear all (free bus, group and synths)</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p><h2><a class='anchor' name='Supported%20sources'>Supported sources</a></h2>
 <dl>
@@ -1004,5 +1026,5 @@ a.clear(10); b.clear(10); c.clear(10); // fade out and clear all (free bus, grou
 <dt>AbstractPlayer<dd>started in a separate bus, mapped to this bus<dt>Instr<dd>converted to player and started</dl>
 </dl>
 
-<p>Definitions for other sources can be added - see: <a href="./../Reference/NodeProxy_roles.html">NodeProxy roles</a><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/NodeProxy.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/NodeProxy.schelp</a><br>link::Classes/NodeProxy::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+<p>Definitions for other sources can be added - see: <a href="./../Reference/NodeProxy_roles.html">NodeProxy roles</a><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/NodeProxy.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/NodeProxy.schelp</a><br>link::Classes/NodeProxy::<br></div></div><script src='./../static/editor.js' type='text/javascript'></script>
 </body></html>

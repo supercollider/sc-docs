@@ -1,21 +1,25 @@
-<!doctype html><html lang='en'><head><title>Pattern Guide 05: Math on Patterns | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>Pattern Guide 05: Math on Patterns | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../../lib/jquery.min.js'></script>
-<script src='./../../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../../static/lib/jquery.min.js'></script>
+<script src='./../../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './../..';
 var scdoc_title = 'Pattern Guide 05: Math on Patterns';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../../scdoc.js' type='text/javascript'></script>
+<script src='./../../static/scdoc.js' type='text/javascript'></script>
 <script src='./../../docmap.js' type='text/javascript'></script>
+<script src='./../../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
@@ -31,7 +35,7 @@ var scdoc_sc_version = '3.13.1';
 <div class='header'>
 <div id='label'>
 <span id='folder'>Tutorials/A-Practical-Guide</span>
- | <span id='categories'><a href='./../../Browse.html#Streams-Patterns-Events'>Streams-Patterns-Events</a>&#8201;&gt;&#8201;<a href='./../../Browse.html#Streams-Patterns-Events>A-Practical-Guide'>A-Practical-Guide</a></span>
+ | <span id='categories'><a href='./../../Browse.html#Streams-Patterns-Events'>Streams-Patterns-Events</a>&#8201;&gt;&#8201;<a href='./../../Browse.html#Streams-Patterns-Events>A-Practical-Guide'>A-Practical-Guide</a> | <a href='./../../Browse.html#Tutorials'>Tutorials</a>&#8201;&gt;&#8201;<a href='./../../Browse.html#Tutorials>Pattern-Guide'>Pattern-Guide</a></span>
 </div><h1>Pattern Guide 05: Math on Patterns</h1>
 <div id='summary'>Performing math and collection operations on patterns</div>
 </div>
@@ -42,15 +46,16 @@ var scdoc_sc_version = '3.13.1';
 
 <p>Often, there is not a pattern that delivers exactly the desired result by itself. But, other operations can be applied to patterns, to manipulate one pattern's output and turn it into something else.
 <p>Some of these operations look like things you would do to an array, but there is a critical difference. Doing math on an array performs the operation on every array item all at once. By contrast, patterns are "lazy" -- they evaluate one value at the time, only when asked, and they only do as much as they need to do to deliver the next value. An operation on a pattern produces another pattern that remembers the work that is to be done. Making a stream out of the composite pattern creates the structure to perform the operation upon request.
-<p>For example, multiplying a pattern by a number produces a "binary operator pattern": <a href="./../../Classes/Pbinop.html">Pbinop</a>. Looking at the Pbinop's variables reveals everything that is needed to reconstruct the operation on demand.<textarea class='editor'>p = Pwhite(1, 5, inf) * 2;    // a Pbinop
+<p>For example, multiplying a pattern by a number produces a "binary operator pattern": <a href="./../../Classes/Pbinop.html">Pbinop</a>. Looking at the Pbinop's variables reveals everything that is needed to reconstruct the operation on demand.<div class='codeMirrorContainer'><textarea class='editor'>p = Pwhite(1, 5, inf) * 2;    // a Pbinop
 
 p.operator    // == '*'
 p.a        // == a Pwhite
 p.b        // == 2</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p>In other words, the multiplication here produces not the result of a single multiplication, but a template for an infinite stream of multiplications to follow.<h3><a class='anchor' name='Math%20on%20patterns'>Math on patterns</a></h3>
 
-<p>Not only can patterns generate numbers, but they also support all the standard math operators: unary (abs, reciprocal, etc.), binary (+, -, *, /, **, min, max, etc.) and n-ary (clip, wrap, fold, linlin, linexp, etc.) operators are all valid with patterns.<textarea class='editor'>// Random integers, 1-5
+<p>Not only can patterns generate numbers, but they also support all the standard math operators: unary (abs, reciprocal, etc.), binary (+, -, *, /, **, min, max, etc.) and n-ary (clip, wrap, fold, linlin, linexp, etc.) operators are all valid with patterns.<div class='codeMirrorContainer'><textarea class='editor'>// Random integers, 1-5
 Pwhite(1, 5, inf).asStream.nextN(10);
 
 // Random integers 1-5, multiplied by two gives even integers 2-10
@@ -61,11 +66,13 @@ Pwhite(1, 5, inf).asStream.nextN(10);
 
 // Random integers 1-5, with the sign (positive or negative) randomly chosen
 (Pwhite(1, 5, inf) * Prand(#[-1, 1], inf)).asStream.nextN(10);</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>If a binary operation occurs on two patterns, every time a value is requested from the resulting stream, both of the component streams are asked for a value, and the operator applies to those results. If either stream ends, the binary operator stream also ends.<textarea class='editor'>// The resulting stream has two values, because the shorter operand stream has two values
+<p>If a binary operation occurs on two patterns, every time a value is requested from the resulting stream, both of the component streams are asked for a value, and the operator applies to those results. If either stream ends, the binary operator stream also ends.<div class='codeMirrorContainer'><textarea class='editor'>// The resulting stream has two values, because the shorter operand stream has two values
 (Pseq([10, 9, 8], 1) + Pseq([1, 2], 1)).do { |x| x.postln };</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>The binary operator adverb <code>.x</code> is supported with patterns. (See <a href="./../../Reference/Adverbs.html">Adverbs for Binary Operators</a>.) This adverb is like a nested loop: in <code>streamA +.x streamB</code>, the first value of streamA is added to every value of streamB in succession, then the second value of streamA is added to every streamB value, and so on. This is an easy way to transpose a pattern to different levels successively.<textarea class='editor'>// Play a major-7th arpeggio, transposed to different scale degrees
+<p>The binary operator adverb <code>.x</code> is supported with patterns. (See <a href="./../../Reference/Adverbs.html">Adverbs for Binary Operators</a>.) This adverb is like a nested loop: in <code>streamA +.x streamB</code>, the first value of streamA is added to every value of streamB in succession, then the second value of streamA is added to every streamB value, and so on. This is an easy way to transpose a pattern to different levels successively.<div class='codeMirrorContainer'><textarea class='editor'>// Play a major-7th arpeggio, transposed to different scale degrees
 // Pwhite is the transposer; Pseq is the chord
 // The chord is like an "inner loop"
 (
@@ -76,10 +83,11 @@ p = Pbind(
 )
 
 p.stop;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h3><a class='anchor' name='Collection%20operations%20on%20patterns'>Collection operations on patterns</a></h3>
 
 <p>Some of the things you can do to arrays also work with patterns.<dl>
-<dt><code>collect(func)</code><dd>Applies the function to each return value from the pattern. Good for generic transformations.<dt><code>select(func)</code><dd>Preserve values from the output stream that pass the Boolean test; discard the rest.<dt><code>reject(func)</code><dd>Discard values from the output stream that pass the test; return the rest to the user.<textarea class='editor'>// Arbitrary/custom operation: Turn each number into a two-digit hex string
+<dt><code>collect(func)</code><dd>Applies the function to each return value from the pattern. Good for generic transformations.<dt><code>select(func)</code><dd>Preserve values from the output stream that pass the Boolean test; discard the rest.<dt><code>reject(func)</code><dd>Discard values from the output stream that pass the test; return the rest to the user.<div class='codeMirrorContainer'><textarea class='editor'>// Arbitrary/custom operation: Turn each number into a two-digit hex string
 Pwhite(0, 255, 20).collect({ |x| x.asHexString(2) }).do { |x| x.postln };
 
 // Keep odd numbers in the result (which is now less than 20 items)
@@ -87,7 +95,8 @@ Pwhite(0, 255, 20).select({ |x| x.odd }).do { |x| x.postln };
 
 // Throw out odd numbers in the result
 Pwhite(0, 255, 20).reject({ |x| x.odd }).do { |x| x.postln };</textarea>
-<dt><code>clump(n)</code><dd>Calling <code>.clump</code> on an array turns a flat array into a multilevel array. Similarly, <code>.clump</code> on a pattern gets <em>n</em> values from the pattern at once and returns all of them as an array. <em>n</em> can be a number or a numeric pattern.<dt><code>flatten(levels)</code><dd>The reverse operation: if a pattern returns an array, its values will be output one by one.<textarea class='editor'>// A flat stream becomes an array of 4-item arrays
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+<dt><code>clump(n)</code><dd>Calling <code>.clump</code> on an array turns a flat array into a multilevel array. Similarly, <code>.clump</code> on a pattern gets <em>n</em> values from the pattern at once and returns all of them as an array. <em>n</em> can be a number or a numeric pattern.<dt><code>flatten(levels)</code><dd>The reverse operation: if a pattern returns an array, its values will be output one by one.<div class='codeMirrorContainer'><textarea class='editor'>// A flat stream becomes an array of 4-item arrays
 Pwhite(0, 255, 20).clump(4).do { |x| x.postln };
 
     // a two-dimensional array
@@ -101,14 +110,17 @@ p.do { |x| x.postln };
 
     // flattening the pattern returns a one-dimensional stream of numbers
 p.flatten.do { |x| x.postln };</textarea>
-<dt><code>drop(n)</code><dd>Discard the first <em>n</em> values, and return whatever is left.<textarea class='editor'>Pseries(1, 1, 20).drop(5).do { |x| x.postln };</textarea>
-<dt><code>differentiate</code><dd>Return the difference between successive values: second - first, third - second, and so on.<textarea class='editor'>Array.geom(20, 1, 1.01).differentiate;
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+<dt><code>drop(n)</code><dd>Discard the first <em>n</em> values, and return whatever is left.<div class='codeMirrorContainer'><textarea class='editor'>Pseries(1, 1, 20).drop(5).do { |x| x.postln };</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+<dt><code>differentiate</code><dd>Return the difference between successive values: second - first, third - second, and so on.<div class='codeMirrorContainer'><textarea class='editor'>Array.geom(20, 1, 1.01).differentiate;
 Pgeom(1, 1.01, 20).differentiate.do { |x| x.postln };</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </dl>
 <h3><a class='anchor' name='Miscellaneous%20calculation%20patterns'>Miscellaneous calculation patterns</a></h3>
 
 <p>These are some other numeric calculations that don't exactly fall in the category of math operators.<dl>
-<dt><code>Pavaroh(pattern, aroh, avaroh, stepsPerOctave)</code><dd>Convert scale degrees to note numbers, with separate ascending and descending scale patterns. Originally written for Indian ragas, it also works well for the western melodic minor scale.<dt><code>PdegreeToKey(pattern, scale, stepsPerOctave)</code><dd>Given a pattern yielding scale degrees, convert the degrees into note numbers according to the provided scale and steps per octave. This is done automatically when you use the <code>'degree'</code> event key, but there might be cases where you would want to do some further math on the note numbers, and it might be necessary to make the conversion explicit.<dt><code>Pdiff(pattern)</code><dd>Returns the difference between the source stream's latest and previous values. Among other uses, this can measure whether a stream is ascending or descending. This is the underlying implementation of the <code>differentiate</code> method discussed just above.<dt><code>Prorate(proportion, pattern)</code><dd>Splits up a number from <code>pattern</code> according to proportion(s) given by the <code>proportion</code> pattern. This is tricky to explain briefly; see the help file for some good examples.<textarea class='editor'>// Swing notes with Prorate
+<dt><code>Pavaroh(pattern, aroh, avaroh, stepsPerOctave)</code><dd>Convert scale degrees to note numbers, with separate ascending and descending scale patterns. Originally written for Indian ragas, it also works well for the western melodic minor scale.<dt><code>PdegreeToKey(pattern, scale, stepsPerOctave)</code><dd>Given a pattern yielding scale degrees, convert the degrees into note numbers according to the provided scale and steps per octave. This is done automatically when you use the <code>'degree'</code> event key, but there might be cases where you would want to do some further math on the note numbers, and it might be necessary to make the conversion explicit.<dt><code>Pdiff(pattern)</code><dd>Returns the difference between the source stream's latest and previous values. Among other uses, this can measure whether a stream is ascending or descending. This is the underlying implementation of the <code>differentiate</code> method discussed just above.<dt><code>Prorate(proportion, pattern)</code><dd>Splits up a number from <code>pattern</code> according to proportion(s) given by the <code>proportion</code> pattern. This is tricky to explain briefly; see the help file for some good examples.<div class='codeMirrorContainer'><textarea class='editor'>// Swing notes with Prorate
 (
 p = Pbind(
     \degree, Pseries(4, Pwhite(-2, 2, inf).reject({ |x| x == 0 }), inf).fold(-7, 11),
@@ -117,10 +129,11 @@ p = Pbind(
 )
 
 p.stop;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </dl>
 <h3><a class='anchor' name='Calculations%20based%20on%20other%20event%20values'>Calculations based on other event values</a></h3>
 
 <p>In a Pbind, normally the patterns for the various keys calculate independently. But it's possible for one or more child patterns to depend on the result of another pattern inside the same Pbind. This is done with <a href="./../../Classes/Pkey.html">Pkey</a>, described in <a href="./../../Tutorials/A-Practical-Guide/PG_06g_Data_Sharing.html">Pattern Guide 06g: Data Sharing</a>.
 <p>Previous: <a href="./../../Tutorials/A-Practical-Guide/PG_04_Words_to_Phrases.html">Pattern Guide 04: Words to Phrases</a>
-<p>Next: <a href="./../../Tutorials/A-Practical-Guide/PG_060_Filter_Patterns.html">Pattern Guide 060: Filter Patterns</a><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Tutorials/A-Practical-Guide/PG_05_Math_on_Patterns.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Tutorials/A-Practical-Guide/PG_05_Math_on_Patterns.schelp</a><br>link::Tutorials/A-Practical-Guide/PG_05_Math_on_Patterns::<br></div></div><script src='./../../editor.js' type='text/javascript'></script>
+<p>Next: <a href="./../../Tutorials/A-Practical-Guide/PG_060_Filter_Patterns.html">Pattern Guide 060: Filter Patterns</a><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Tutorials/A-Practical-Guide/PG_05_Math_on_Patterns.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Tutorials/A-Practical-Guide/PG_05_Math_on_Patterns.schelp</a><br>link::Tutorials/A-Practical-Guide/PG_05_Math_on_Patterns::<br></div></div><script src='./../../static/editor.js' type='text/javascript'></script>
 </body></html>

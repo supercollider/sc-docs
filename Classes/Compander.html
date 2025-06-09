@@ -1,21 +1,25 @@
-<!doctype html><html lang='en'><head><title>Compander | SuperCollider 3.13.1 Help</title>
-<link rel='stylesheet' href='./../scdoc.css' type='text/css' />
-<link rel='stylesheet' href='./../codemirror.css' type='text/css' />
-<link rel='stylesheet' href='./../editor.css' type='text/css' />
+<!doctype html><html lang='en'><head><title>Compander | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../static/themes/default.css' type='text/css' />
 <link rel='stylesheet' href='./../frontend.css' type='text/css' />
 <link rel='stylesheet' href='./../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../static/lib/katex/katex.min.css' />
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-<script src='./../lib/jquery.min.js'></script>
-<script src='./../lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
-<script src='./../lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/jquery.min.js'></script>
+<script src='./../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../static/lib/katex/katex.min.js' type='text/javascript'></script>
 <script>
 var helpRoot = './..';
 var scdoc_title = 'Compander';
-var scdoc_sc_version = '3.13.1';
+var scdoc_sc_version = '3.14.0-rc1';
 </script>
-<script src='./../scdoc.js' type='text/javascript'></script>
+<script src='./../static/scdoc.js' type='text/javascript'></script>
 <script src='./../docmap.js' type='text/javascript'></script>
+<script src='./../frontend.js' type='text/javascript'></script>
 <script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
 </head>
 <body onload='fixTOC()'>
@@ -39,7 +43,7 @@ var scdoc_sc_version = '3.13.1';
 <div id='summary'>Compressor, expander, limiter, gate, ducker</div>
 </div>
 <div class='subheader'>
-<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.13/SCClassLibrary/Common/Audio/Compander.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Audio/Compander.sc'>Compander.sc</a></div><div id='related'>See also: <a href="./../Classes/Normalizer.html">Normalizer</a>, <a href="./../Classes/CompanderD.html">CompanderD</a>, <a href="./../Classes/Limiter.html">Limiter</a></div>
+<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/Common/Audio/Compander.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Audio/Compander.sc'>Compander.sc</a></div><div id='related'>See also: <a href="./../Classes/Normalizer.html">Normalizer</a>, <a href="./../Classes/CompanderD.html">CompanderD</a>, <a href="./../Classes/Limiter.html">Limiter</a></div>
 </div>
 <h2><a class='anchor' name='description'>Description</a></h2>
 
@@ -63,7 +67,7 @@ var scdoc_sc_version = '3.13.1';
 <h3><a class='anchor' name='Inherited%20instance%20methods'>Inherited instance methods</a></h3>
 <div id='inheritedinstmets'></div><h2><a class='anchor' name='examples'>Examples</a></h2>
 
-<p>Clean signal (for reference)<textarea class='editor'>(
+<p>Clean signal (for reference)<div class='codeMirrorContainer'><textarea class='editor'>(
 {
     Decay2.ar(
         Impulse.ar(8, 0, LFSaw.kr(0.3, 1, -0.3, 0.3)),
@@ -73,8 +77,9 @@ var scdoc_sc_version = '3.13.1';
     * Mix.ar(Pulse.ar([80, 81], 0.3))
 }.play;
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>Noise gate<textarea class='editor'>(
+<p>Noise gate<div class='codeMirrorContainer'><textarea class='editor'>(
 {
     var z;
 
@@ -96,8 +101,9 @@ var scdoc_sc_version = '3.13.1';
     )
 }.play;
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>Compressor<textarea class='editor'>(
+<p>Compressor<div class='codeMirrorContainer'><textarea class='editor'>(
 {
     var z;
 
@@ -119,8 +125,9 @@ var scdoc_sc_version = '3.13.1';
     )
 }.play;
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>Limiter<textarea class='editor'>(
+<p>Limiter<div class='codeMirrorContainer'><textarea class='editor'>(
 {
     var z;
 
@@ -143,8 +150,9 @@ var scdoc_sc_version = '3.13.1';
     )
 }.play;
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>Sustainer<textarea class='editor'>(
+<p>Sustainer<div class='codeMirrorContainer'><textarea class='editor'>(
 // note the pops at the beginning of signal due to lack of lookahead
 {
     var z;
@@ -167,6 +175,7 @@ var scdoc_sc_version = '3.13.1';
     ) * 0.1
 }.play;
 )</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/Compander.schelp'>https://github.com/supercollider/supercollider/tree/3.13/HelpSource/Classes/Compander.schelp</a><br>link::Classes/Compander::<br></div></div><script src='./../editor.js' type='text/javascript'></script>
+<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/Compander.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/Compander.schelp</a><br>link::Classes/Compander::<br></div></div><script src='./../static/editor.js' type='text/javascript'></script>
 </body></html>
