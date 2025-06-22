@@ -176,7 +176,7 @@ var scdoc_sc_version = '3.14.0-rc1';
 <p>Post system information that is useful to attach to bug reports.</div><h3><a class='anchor' name='Features'>Features</a></h3>
 <h3 class='method-code'><span class='method-prefix'>Platform.</span><a class='method-name' name='*when' href='./../Overviews/Methods.html#when'>when</a>(<span class='argstr'>features</span>, <span class='argstr'>ifFunction</span>, <span class='argstr'>elseFunction</span>)</h3>
 <div class='method'>
-<p>Evaluate ifFunction if all features are present, otherwise evaluate elseFunction.<div class='codeMirrorContainer'><textarea class='editor'>Platform.when(#[\Document, \SCWindow], { "yeehah!".postln });</textarea>
+<p>Evaluate ifFunction if all features are present, otherwise evaluate elseFunction.<div class='codeMirrorContainer'><textarea class='editor'>Platform.when(#[\Document, \Window], { "yeehah!".postln });</textarea>
 <button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3><a class='anchor' name='Inherited%20class%20methods'>Inherited class methods</a></h3>
 <div id='inheritedclassmets'></div><h3><a class='anchor' name='Undocumented%20class%20methods'>Undocumented class methods</a></h3>
@@ -269,7 +269,6 @@ thisProcess.platform.killProcessByID(~pid);</textarea>
 <p>Declare aSymbol to be a feature present in the runtime. Class names and primitive names cannot be declared as features.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-hasFeature' href='./../Overviews/Methods.html#hasFeature'>hasFeature</a>(<span class='argstr'>symbol</span>)</h3>
 <div class='method'>
 <p>Return true if the feature aSymbol is present in the runtime system. aSymbol can refer to explicitly declared features as well as class and primitive names.<div class='codeMirrorContainer'><textarea class='editor'>thisProcess.platform.hasFeature(\Object);
-thisProcess.platform.hasFeature('_SCWindow_BeginFullScreen');
 thisProcess.platform.hasFeature('_myFuncyPrimitive');
 
 thisProcess.platform.declareFeature('superCrazyCompositionSystem');
@@ -277,7 +276,7 @@ thisProcess.platform.hasFeature('superCrazyCompositionSystem');</textarea>
 <button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-when' href='./../Overviews/Methods.html#when'>when</a>(<span class='argstr'>features</span>, <span class='argstr'>ifFunction</span>, <span class='argstr'>elseFunction</span>)</h3>
 <div class='method'>
-<p>Evaluate ifFunction if all features are present, otherwise evaluate elseFunction.<div class='codeMirrorContainer'><textarea class='editor'>thisProcess.platform.when(#[\Document, \SCWindow], { "yeehah!".postln });</textarea>
+<p>Evaluate ifFunction if all features are present, otherwise evaluate elseFunction.<div class='codeMirrorContainer'><textarea class='editor'>thisProcess.platform.when(#[\Document, \Window], { "yeehah!".postln });</textarea>
 <button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p></div><h3><a class='anchor' name='Inherited%20instance%20methods'>Inherited instance methods</a></h3>

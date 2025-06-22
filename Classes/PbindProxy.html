@@ -58,9 +58,17 @@ var scdoc_sc_version = '3.14.0-rc1';
 <h2><a class='anchor' name='description'>Description</a></h2>
 
 <p>keeps a reference to a <a href="./../Classes/Pbind.html">Pbind</a> in which single keys can be replaced. It plays on when the old stream ended and a new stream is set and schedules the changes to the beat.<h2><a class='anchor' name='classmethods'>Class Methods</a></h2>
-<h3 class='method-code'><span class='method-prefix'>PbindProxy.</span><a class='method-name' name='*new' href='./../Overviews/Methods.html#new'>new</a>( <span class='argstr'>... pairs</span>)</h3>
+<h3 class='method-code'><span class='method-prefix'>PbindProxy.</span><a class='method-name' name='*new' href='./../Overviews/Methods.html#new'>new</a>( <span class='argstr'>... pairs</span>, <span class='argstr'>... kwargs</span>)</h3>
 <div class='method'>
-<p>create a new instance of PbindProxy with the given patternpairs</div><h3><a class='anchor' name='Inherited%20class%20methods'>Inherited class methods</a></h3>
+<p>Return a new instance of PbindProxy with the given patternpairs. Unlike <a href="./../Classes/Pbindef.html">Pbindef</a>, it has no internal name.<div class='codeMirrorContainer'><textarea class='editor'>a = PbindProxy(\note, Pseq([0, 7, 9], inf), \dur, 0.2).play;
+a.set(\note, Pseq([0, 6, 10]));
+a.stop;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+
+<p>It also supports keyword argument syntax:<div class='codeMirrorContainer'><textarea class='editor'>a = PbindProxy(note: Pseq([0, 7, 9]), dur: 0.2).play;
+a.stop;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+</div><h3><a class='anchor' name='Inherited%20class%20methods'>Inherited class methods</a></h3>
 <div id='inheritedclassmets'></div><h2><a class='anchor' name='instancemethods'>Instance Methods</a></h2>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-source' href='./../Overviews/Methods.html#source'>source</a></h3>
 <div class='method'>
@@ -84,12 +92,12 @@ var scdoc_sc_version = '3.14.0-rc1';
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-pairs' href='./../Overviews/Methods.html#pairs'>pairs</a> = value</h3>
 <h2><a class='anchor' name='examples'>Examples</a></h2>
 <div class='codeMirrorContainer'><textarea class='editor'>(
-SynthDef("Pdefhelp", { |out, freq, sustain = 1, amp = 1, pan|
-    var env, u = 1;
-    env = EnvGen.kr(Env.perc(0.03, sustain), 1, doneAction: Done.freeSelf);
-    5.do { var d; d = exprand(0.01, 1); u = SinOsc.ar(d * 300, u, rrand(0.1, 1.2) * d, 1) };
-    Out.ar(out, Pan2.ar(SinOsc.ar(u + 1 * freq, 0, amp * env), pan));
-}).add;
+    SynthDef(\Pdefhelp, { |out, freq, sustain = 1, amp = 1, pan|
+        var env, u = 1;
+        env = EnvGen.ar(Env.perc(0.03, sustain), 1, doneAction: Done.freeSelf);
+        5.do { var d; d = exprand(0.01, 1); u = SinOsc.ar(d * 300, u, rrand(0.1, 1.2) * d, 1) };
+        Out.ar(out, Pan2.ar(SinOsc.ar(u + 1 * freq, 0, amp * env), pan));
+    }).add;
 )
 s.boot;
 
@@ -112,16 +120,16 @@ x.set(\degree, Pseq([1, 2, 3, 4, 5, 6], 3), \dur, 0.02);
 x.play;
 
 x.set(\degree, Pseq([1, 2, 3, 4, 5, 6], 3), \dur, 0.1);
+x.set(\degree, Pseq([1b, 5, 3, 1b, 6, 2, 5, 0, 3, 0, 2], inf));
 x.play;
 
 
 // embed in other patterns:
 (
-x.set(\degree, Pseq([1b, 5, 3, 1b, 6, 2, 5, 0, 3, 0, 2], inf));
-Ppar([
-x,
-Pbindf(x, \ctranspose, 4)
-]).play;
+    Ppar([
+        x,
+        Pbindf(x, \ctranspose, 4)
+    ]).play;
 )
 
 
