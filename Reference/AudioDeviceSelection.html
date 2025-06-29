@@ -115,7 +115,7 @@ export SC_JACK_DEFAULT_OUTPUTS="system"</textarea>
 <button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 <h2><a class='anchor' name='Windows'>Windows</a></h2>
 
-<p>By default the server will boot to your system's default audio devices using <code>MME</code> driver (which usually means higher latency).
+<p>By default the server will boot to your system's default audio devices using a <code>WASAPI</code> driver.
 <p>On Windows there are multiple audio driver APIs (e.g. <code>MME</code>, <code>WASAPI</code>, <code>ASIO</code> etc.) that can be used to communicate with audio devices. The API (listed before the device name) needs to match between the input and the output, for example:<div class='codeMirrorContainer'><textarea class='editor'>o = Server.default.options;
 o.inDevice_("Windows WASAPI : Microphone");
 o.outDevice_("Windows WASAPI : Speakers");
