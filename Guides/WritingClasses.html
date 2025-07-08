@@ -31,6 +31,8 @@ var scdoc_sc_version = '3.14.0-rc1';
 <ul class='toc'></ul><li class='toc2'><a href='#Class%20Methods'>Class Methods</a></li>
 <ul class='toc'></ul><li class='toc2'><a href='#Overriding%20methods%20(overloading)'>Overriding methods (overloading)</a></li>
 <ul class='toc'></ul></ul><li class='toc1'><a href='#Instances'>Instances</a></li>
+<ul class='toc'><li class='toc2'><a href='#Instance%20Variables%20and%20Initialisation%20Logic'>Instance Variables and Initialisation Logic</a></li>
+<ul class='toc'></ul></ul><li class='toc1'><a href='#Class%20instances'>Class instances</a></li>
 <ul class='toc'></ul><li class='toc1'><a href='#Alternatives%20to%20inheritance'>Alternatives to inheritance</a></li>
 <ul class='toc'><li class='toc2'><a href='#Polymorphism'>Polymorphism</a></li>
 <ul class='toc'></ul><li class='toc2'><a href='#Object%20Composition'>Object Composition</a></li>
@@ -157,35 +159,90 @@ MyClass : SomeSuperclass {
 <h2><a class='anchor' name='Instances'>Instances</a></h2>
 
 <p><code>Object.new</code> will return a new object. When overriding the class method <code>.new</code> you must call the superclass, which in turn calls its superclass, up until <code>Object.new</code> is called and an object is actually created and its memory allocated.<div class='codeMirrorContainer'><textarea class='editor'>MyClass {
-
-    // this is a normal constructor method
-    *new { | arga, argb, argc |
-        ^super.new.init(arga, argb, argc)
-    }
-
-    init { | arga, argb, argc |
-        // do initiation here
-    }
+    // This is a normal constructor method.
+    *new { ^super.new }
 }</textarea>
 <button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>In this case note that <code>super.new</code> called the method new on the superclass and returned a new object. Subsequently we are calling the <code>.init</code> method on that object, which is an instance method.<div class='warning'><span class='warninglabel'>WARNING:</span> If the superclass also happened to call super.new.init it will have expected to call the .init method defined in that class (the superclass), but instead the message .init will find the implementation of the class that the object actually is, which is our new subclass. In such cases, a unique method name like myclassInit should be used.</div>
-<p>One easy way to copy the arguments passed to the instance variables when creating a class is to use <a href="./../Classes/Object.html#*newCopyArgs">Object: *newCopyArgs</a>. This method will copy the arguments to the instance variables in the order that the variables were defined in the class, starting from the parent classes and working it's way down to the current class.<div class='codeMirrorContainer'><textarea class='editor'>MyClass {
-    var a,b,c;
+<p>In this case note that <code>super.new</code> calls the method <code>new</code> on the superclass and returns a new object.<h3><a class='anchor' name='Instance%20Variables%20and%20Initialisation%20Logic'>Instance Variables and Initialisation Logic</a></h3>
 
-    *new { | a, b, c |
-        ^super.newCopyArgs(a, b, c)
+<p>Instance can have variables associated with them — known as members is other languages.<div class='codeMirrorContainer'><textarea class='editor'>Foo {
+    var a, b, c; // Instance variables.
+}</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+
+<p>These can be assigned in two ways. Through <code>newCopyArgs</code> or through an <code>init</code> method. The former is recommend and discussed first.
+<p>Rather than calling the method <code>new</code> a call to <a href="./../Classes/Object.html#*newCopyArgs">Object: *newCopyArgs</a> can be used to initialise members.
+<p>The code below allows the call–site to decide the initial value of <code>c</code> and defaults <code>a</code> to 10 and <code>b</code> to 20.<div class='codeMirrorContainer'><textarea class='editor'>Foo {
+    var a, b, c;
+    *new { |myC| ^super.newCopyArgs(a: 10, b: 20, c: myC) }
+}</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+
+<p>If initialisation logic that prepares the arguments before assignment is required, ideally, it should go before the call to <code>super.newCopyArgs</code>. This way the final object never exists in an invalid state — an alternative is the use of an <code>init</code> method and shall be shown shortly.
+<p>However, when there is a hierarchy of classes, <code>newCopyArgs</code> requires that all the base class arguments be passed in the order they are defined.  This makes changing the base class difficult. Here is one way to mitigate this issue using variable keyword arguments <a href="./../Reference/Functions.html#Variable%20Arguments">Functions: Variable Arguments</a> and <a href="./../Classes/Object.html#-superPerformArgs">Object: -superPerformArgs</a>.<div class='codeMirrorContainer'><textarea class='editor'>Base {
+    var &lt;&gt;a, &lt;&gt;b;
+    *new { |a, b ...args, kwargs|
+        ^super.superPerformArgs(\newCopyArgs, [a, b] ++ args, kwargs);
     }
 }
 
-MyChildClass : MyClass {
-    var d;
-
-    *new { | a, b, c, d |
-        ^super.newCopyArgs(a, b, c, d)
+Derived : Base {
+    var &lt;&gt;c;
+    *new { |a, b, c ...args, kwargs|
+        ^super.superPerformArgs(\new, [a, b, c] ++ args, kwargs)
     }
 }</textarea>
 <button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+
+<p>Calling <code>Derived(1, 2, 3)</code> will set <code>a</code> to <code>1</code>, <code>b</code> to <code>2</code>, and <code>c</code> to 3. Here are some more examples:<div class='codeMirrorContainer'><textarea class='editor'>Derived(c: 10) // a: nil, b: nil, c: 10
+Derived(1, 2, c: 10) // a: 1, b: 2, c: 10
+Derived(d: 10) // If 'd' existed somewhere in the hierarchy, it would be assigned the value 10.</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+
+<p>Although this approach might seem complex, the benefit is that the new instance variables can be added to either class and it will always be clear which one you meant to assign to.
+<p>Should it be desirable to remove instance variables of the base class in the future, it is good to require that only keyword arguments be used. This can be achieved by removing the named arguments and throwing an error if <code>args</code> is not empty. One disadvantage here is that autocomplete in the IDE will not work.<div class='codeMirrorContainer'><textarea class='editor'>Foo {
+    *new { |... args, kwargs| 
+        if(args.empty.not) { Error().throw };
+        ^super.superPerformArgs(\newCopyArgs, #[], kwargs);
+    }
+}</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+
+<p>Another benefit is that the instance is never in an incomplete state: either all the instance members have been assigned to, or the object does not exist.
+<p>The disadvantages come when you have complex initialisation logic where the arguments in <code>Derived</code> require knowledge of the arguments in <code>Base</code>. Traditionally in SuperCollider this has been solved with an <code>init</code> method as seen below, although a 'builder' pattern might be considered for complex cases.<div class='codeMirrorContainer'><textarea class='editor'>Base {
+    var a, b;
+    *new {|a, b| ^super.new.init(a, b) }
+    init {|newA, newB|
+        // Initialization logic goes here.
+        a = newA;
+        b = newB;
+    }
+}</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+
+<p>This works but becomes more complex in inheritance chains.<div class='codeMirrorContainer'><textarea class='editor'>Base {
+    var a, b;
+    *new {|a, b| ^super.new.init(a, b) }
+    init {|newA, newB|
+        // Initialization logic goes here.
+        a = newA;
+        b = newB;
+    }
+}
+
+Derived : Base {
+    var c;
+    *new { |a, b, c| ^super.new.derivedInit(a, b, c) }
+    derivedInit { |newA, newB, newC|
+        // do initialisation with all the arguments
+        this.init(newA, newB) // call Base.init
+        c = newC; // assign to Derived's c
+    }
+}</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+<div class='warning'><span class='warninglabel'>WARNING:</span> If both the <code>Base</code> and <code>Derived</code> class define an <code>init</code> method, the <code>Derived</code> class will override the <code>Base</code>'s implementation,  meaning it will no longer be possible to call that implementation. In such cases, a unique method name like <code>myclassInit</code> should be used, or better yet, a specialised name that indicates what kind of initialization is performed.</div>
+<p>While the <code>init</code> pattern is the most flexible, care must be taken as inside the <code>init</code> functions, the instance is in an incomplete state and other methods might not work as expected; for example, this may become confusing when combined with threads and asynchronous execution, for example, when interacting with the server.<h2><a class='anchor' name='Class%20instances'>Class instances</a></h2>
 
 <p>Class variables are accessible within class methods and in any instance methods.<div class='codeMirrorContainer'><textarea class='editor'>MyClass {
     classvar myClassvar;
@@ -404,7 +461,7 @@ MyTestPoint {
 
 <p>When a message is received that is undefined, the receiver calls the method <code>doesNotUnderstand</code>. Normally this throws an error. By overriding <code>doesNotUnderstand</code>, it is possible to catch those calls and use them. For an example, see the class definition of <code>IdentityDictionary</code>.<div class='codeMirrorContainer'><textarea class='editor'>MyClass {
 
-    doesNotUnderstand { | selector...args |
+    doesNotUnderstand { | selector... args, kwargs |
         (this.class ++ " does not understand method " ++ selector);
 
         if(UGen.findRespondingMethodFor(selector).notNil) {

@@ -27,6 +27,7 @@ var scdoc_sc_version = '3.14.0-rc1';
 <div id='toctitle'>Functions:</div>
 <span class='toc_search'>Filter: <input id='toc_search'></span><ul class='toc'><li class='toc1'><a href='#Introduction'>Introduction</a></li>
 <ul class='toc'></ul><li class='toc1'><a href='#Arguments'>Arguments</a></li>
+<ul class='toc'></ul><li class='toc1'><a href='#Variable%20Arguments'>Variable Arguments</a></li>
 <ul class='toc'><li class='toc2'><a href='#[1]%20Literal%20argument%20defaults'>[1] Literal argument defaults</a></li>
 <ul class='toc'></ul><li class='toc2'><a href='#[2]%20Expression%20argument%20defaults'>[2] Expression argument defaults</a></li>
 <ul class='toc'></ul></ul><li class='toc1'><a href='#Variables'>Variables</a></li>
@@ -44,17 +45,33 @@ var scdoc_sc_version = '3.14.0-rc1';
 </div>
 <h2><a class='anchor' name='Introduction'>Introduction</a></h2>
 
-<p>A <a href="./../Classes/Function.html">Function</a> is an expression which defines operations to be performed when it is sent the <code>value</code> message. In functional languages, a function would be known as a lambda expression. Function definitions are enclosed in curly brackets <code>{}</code>. Argument declarations, if any, follow the open bracket. Variable declarations follow argument declarations. An expression follows the declarations.<div class='codeMirrorContainer'><textarea class='editor'>{ arg a, b, c;  var d;   d = a * b; c + d }</textarea>
+<p>A <a href="./../Classes/Function.html">Function</a> is an expression which defines operations to be performed when it is sent the <code>value</code> message. In functional languages, a function would be known as a lambda expression. Function definitions are enclosed in curly brackets <code>{}</code>. Argument declarations, if any, follow the open bracket. Variable declarations follow argument declarations. An expression follows the declarations.<div class='codeMirrorContainer'><textarea class='editor'>{ |a, b, c|
+    var d;
+    d = a * b;
+    c + d
+}</textarea>
 <button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>Functions are not evaluated immediately when they occur in code, but are passed as values just like integers or strings.
-<p>A function may be evaluated by passing it the <code>value</code> message and a list of arguments.
-<p>When evaluated, the function returns the value of its expression.<div class='codeMirrorContainer'><textarea class='editor'>f = { arg a, b; a + b };
+<p>Functions are not evaluated immediately when they occur in code, but are themselves objects that can be passed around.
+<p>A function object may be evaluated by passing it the <code>value</code> message, or its shorthand <code>.()</code>, and a list of arguments.
+<p>When evaluated, the function object returns the final value of its expression.<div class='codeMirrorContainer'><textarea class='editor'>f = { |a, b| a + b };
 f.value(4, 5).postln;
-f.value(10, 200).postln;</textarea>
+f.(4, 5).postln; // same as above
+f.(10, 200).postln;</textarea>
 <button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>An empty function returns the value nil when evaluated.<div class='codeMirrorContainer'><textarea class='editor'>{}.value.postln;</textarea>
+<p>An empty function object returns the value nil when evaluated.<div class='codeMirrorContainer'><textarea class='editor'>{}.value.postln;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+
+<p>Arguments can also be provided by name.<div class='codeMirrorContainer'><textarea class='editor'>f = { |a, b| a + b };
+f.(a: 10, b: 2) // 12
+
+f.(b: 3, a: 10) // 13, order does not matter for keywords
+f.(3, b: 4) // 7, 'a' is always first argument
+
+f.(3, a: 4) // Error: Duplicate keyword 'a' at position 0.
+
+f.(a: 3) // Error: binary operator '+' failed, b is 'nil' and you cannot add a number and 'nil'</textarea>
 <button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p>A function can be thought as a machine able to perform a task on demand, e.g. a calculator. The calculator can receive input (args) and can output a value, the result of the performed operations. The function definition can then be thought as the building of the calculator: once built, the calculator does nothing until it is requested to work (by passing the value method to a function). The following figure depicts an empty function, input without output, output without input, and the general case with input and output.<div class='image'><img src='functions.png'/><br><b>Functions</b></div>
@@ -67,20 +84,7 @@ f.value(10, 200).postln;</textarea>
 <p>"arg" style, default value is a literal but you want to treat it like an expression: <code>{ arg x = (2); ... }</code> <a href="#[2]">[2]</a>
 <p>Pipe style, default value is a literal: <code>{ |x = 1| ... }</code> <a href="#[1]">[1]</a>
 <p>Pipe style, default value is an expression: <code>{ |x = (10.rand)| ... }</code> <a href="#[2]">[2]</a>
-<p>If the last argument in the list is preceded by three dots (an ellipsis), then all the remaining arguments that were passed will be assigned to that variable as an <a href="./../Classes/Array.html">Array</a>. Arguments must be separated by commas.
-<p>examples:<div class='codeMirrorContainer'><textarea class='editor'>{ arg a, b, c=3; } // is equivalent to:
-
-{ |a, b, c=3| }
-
-{ arg x='stop', y, z=0; } // these args are initialised
-
-{ arg a, b, c ... d; } // any arguments after the first 3 will be assigned to d as an Array</textarea>
-<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
-
-<p>If you want all the arguments put in an Array<div class='codeMirrorContainer'><textarea class='editor'>arg ... z;</textarea>
-<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
-
-<p>In general arguments may be initialized to literals or expressions, but in the case of Function:play or SynthDef:play, they may only be initialized to literals.<div class='codeMirrorContainer'><textarea class='editor'>// this is okay:
+<p>In general arguments may be initialized to literals or expressions, but in the case of <a href="./../Classes/Function.html#-play">Function: -play</a> or <a href="./../Classes/SynthDef.html#-play">SynthDef: -play</a>, they may only be initialized to literals.<div class='codeMirrorContainer'><textarea class='editor'>// this is okay:
 
 { arg a = Array.geom(4, 100, 3); a * 4 }.value;
 
@@ -89,32 +93,65 @@ f.value(10, 200).postln;</textarea>
 { arg freq = Array.geom(4, 100, 3); Mix(SinOsc.ar(freq, 0, 0.1)) }.play; // silence
 
 // but this is:
-{ arg freq =  #[ 100, 300, 900, 2700 ]; Mix(SinOsc.ar(freq, 0, 0.1)) }.play; // silence</textarea>
+{ arg freq =  #[ 100, 300, 900, 2700 ]; Mix(SinOsc.ar(freq, 0, 0.1)) }.play; // produces sound!</textarea>
 <button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>See <a href="./../Reference/Literals.html">Literals</a> for more information.
+<p>See <a href="./../Reference/Literals.html">Literals</a> for more information.<h2><a class='anchor' name='Variable%20Arguments'>Variable Arguments</a></h2>
+
+<p>Variable arguments are how functions catch an unknown number of arguments or keyword arguments.  There are two possible variable arguments, the first for positional arguments, and second for keyword arguments. They are marked by an ellipsis after any normal arguments and separated by a comma.
+<p>The first variable argument (positional) catches all remaining arguments in an <a href="./../Classes/Array.html">Array</a><div class='codeMirrorContainer'><textarea class='editor'>f = { |a ... args| "a: %, args: %".format(a, args) };
+
+f.(1, 2, 3) // a: 1, args: [2, 3]
+f.(1) // a: 1, args: []
+f.(a: 1) // a: 1, args: []
+
+// catches all arguments
+g = { |...args| "args: %".format(args) };
+
+g.(1, 2, 3) // args: [1, 2, 3]
+g.() // args: []</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+
+<p>The second variable argument catches all keyword arguments. It puts them in an <a href="./../Classes/Array.html">Array</a> of key-value pairs.<div class='codeMirrorContainer'><textarea class='editor'>f = { |...args, kwargs| "args: %, kwargs: %".format(args, kwargs) };
+
+f.(1, 2, 3) // args: [1, 2, 3], kwargs: []
+
+f.(a: 10) // args: [], kwargs: [a, 10]
+
+f.(1, 2, 3, meow: 10, woof: 20) // args: [1, 2, 3], kwargs: [meow, 10, woof, 20]</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+
+<p>The use of variable keyword arguments is often paired with <a href="./../Classes/Object.html#-performArgs">Object: -performArgs</a>.
+<p>While you can pick any name for the variable arguments, they always refer to the unmatched positional and keyword arguments, so it is often best to name them <code>args</code> and <code>kwargs</code>.
+<p>You cannot reassign the value of the variable arguments at the call–site even if they share the same name (see below for example).<div class='codeMirrorContainer'><textarea class='editor'>f = { |...args, kwargs| "args: %, kwargs: %".format(args, kwargs) };
+f.(args: 10, kwargs: 20) // args: [], kwargs: [args: 10, kwargs: 20]
+
+f = { |...a, b| "a: %, b: %".format(a, b) };
+f.(a: 10, b: 20) // a: [], b: [a: 10, b: 20]</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+
 <p><a class='anchor' name='[1]'>&nbsp;</a><h3><a class='anchor' name='[1]%20Literal%20argument%20defaults'>[1] Literal argument defaults</a></h3>
 
-<p>Argument defaults that are literals are stored as part of the <a href="./../Classes/FunctionDef.html">FunctionDef</a>. Arguments passed at runtime -- including nil -- always override the defaults:<div class='codeMirrorContainer'><textarea class='editor'>f = { arg x = 1; x };
-f.value(2);  // prints 2
+<p>Argument defaults that are literals are stored as part of the <a href="./../Classes/FunctionDef.html">FunctionDef</a>. Arguments passed at runtime — including nil — always override the defaults:<div class='codeMirrorContainer'><textarea class='editor'>f = { |x = 1| x };
+f.(2);  // prints 2
 
-f.value;   // prints 1
+f.();   // prints 1
 
-f.value(nil);  // prints nil</textarea>
+f.(nil);  // prints nil</textarea>
 <button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p><a class='anchor' name='[2]'>&nbsp;</a><h3><a class='anchor' name='[2]%20Expression%20argument%20defaults'>[2] Expression argument defaults</a></h3>
 
-<p>Since expressions are evaluated when the function is called, they cannot be stored in the <a href="./../Classes/FunctionDef.html">FunctionDef</a>. They are executed only if the passed-in value is nil.<div class='codeMirrorContainer'><textarea class='editor'>f = { arg x = 10.rand; x };
+<p>Since expressions are evaluated when the function is called, they cannot be stored in the <a href="./../Classes/FunctionDef.html">FunctionDef</a>. They are executed only if the passed-in value is nil.<div class='codeMirrorContainer'><textarea class='editor'>f = { |x = (10.rand)| x };
 f.value(100);  // prints 100
 
 f.value;   // prints a number 0-9
 
-f.value(nil);   // prints a number 0-9!</textarea>
+f.(nil);   // prints a number 0-9!</textarea>
 <button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p>This means you can use expression-style to define a default that cannot be overridden by nil.<div class='codeMirrorContainer'><textarea class='editor'>f = { arg x = (3); x };
-f.value(nil);   // prints 3</textarea>
+<p>This means you can use expression-style to define a default that cannot be overridden by nil.<div class='codeMirrorContainer'><textarea class='editor'>f = { |x = (3)| x };
+f.(nil);   // prints 3</textarea>
 <button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p>Note: Parentheses are required when initializing an argument to an expression, if the argument list is written inside <code>||</code> pipes.<div class='codeMirrorContainer'><textarea class='editor'>(

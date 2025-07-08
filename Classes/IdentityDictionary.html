@@ -65,11 +65,12 @@ var scdoc_sc_version = '3.14.0-rc1';
 </div>
 <div class='subheader'>
 <div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/Common/Collections/Dictionary.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Collections/Dictionary.sc'>Dictionary.sc</a></div><div id='subclasses'>Subclasses: <a href="../Classes/Environment.html">Environment</a>, <a href="../Classes/NodeMap.html">NodeMap</a></div>
-<div id='related'>See also: <a href="./../Classes/Environment.html">Environment</a>, <a href="./../Classes/Event.html">Event</a></div>
+<div id='related'>See also: <a href="./../Classes/Environment.html">Environment</a>, <a href="./../Classes/Event.html">Event</a>, <a href="./../Guides/ObjectPrototyping.html">Object Prototyping</a></div>
 </div>
 <h2><a class='anchor' name='description'>Description</a></h2>
 
-<p>An IdentityDictionary is an associative collection mapping keys to values. Keys and values can be arbitrary objects, but for keys, often a <a href="./../Classes/Symbol.html">Symbol</a> is used.
+<p>An IdentityDictionary is an associative collection mapping keys to values.  Keys and values can be arbitrary objects, but for keys, often a <a href="./../Classes/Symbol.html">Symbol</a> is used.
+<p>An IdentityDictionary can be used to implement prototype objects (<a href="./../Guides/ObjectPrototyping.html">Object Prototyping</a>), which behave like objects whose methods can be programmed at runtime.
 <p>Often, the subclass <a href="./../Classes/Event.html">Event</a> is used as an IdentityDictionary, because there is a syntactical shortcut:<div class='codeMirrorContainer'><textarea class='editor'>a = (); // return a new Event.
 a.put(\foo, 2.718);
 a.at(\foo);</textarea>

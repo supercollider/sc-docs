@@ -126,7 +126,8 @@ var scdoc_sc_version = '3.14.0-rc1';
 <div class='subheader'>
 <div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/Common/Core/Function.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Core/Function.sc'>Function.sc</a></div><div id='related'>See also: <a href="./../Reference/Functions.html">Functions</a>, <a href="./../Classes/AbstractFunction.html">AbstractFunction</a>, <a href="./../Classes/FunctionDef.html">FunctionDef</a></div>
 </div>
-<h2><a class='anchor' name='description'>Description</a></h2>
+
+<p>This document deals with the usage of Function objects.  For a more general introduction and documentation of syntax, see <a href="./../Reference/Functions.html">Functions</a>.<h2><a class='anchor' name='description'>Description</a></h2>
 
 <p>A Function is a reference to a FunctionDef and its defining context Frame. When a FunctionDef is encountered in your code it is pushed on the stack as a Function. A Function can be evaluated by using the 'value' method. See the Functions help file for a basic introduction.
 <p>Because it inherits from AbstractFunction, Functions respond to math operations by creating a new Function.<div class='codeMirrorContainer'><textarea class='editor'>// example

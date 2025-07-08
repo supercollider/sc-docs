@@ -1,0 +1,131 @@
+<!doctype html><html lang='en'><head><title>Object Prototyping | SuperCollider 3.14.0-rc1 Help</title>
+<link rel='stylesheet' href='./../static/scdoc.css' type='text/css' />
+<link rel='stylesheet' href='./../static/codemirror.css' type='text/css' />
+<link rel='stylesheet' href='./../static/editor.css' type='text/css' />
+<link rel='stylesheet' id='scdoc-theme' href='./../static/themes/default.css' type='text/css' />
+<link rel='stylesheet' href='./../frontend.css' type='text/css' />
+<link rel='stylesheet' href='./../custom.css' type='text/css' />
+<link rel='stylesheet' href='./../static/lib/katex/katex.min.css' />
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+<script src='./../static/lib/jquery.min.js'></script>
+<script src='./../static/lib/codemirror-5.39.2.min.js' type='text/javascript'></script>
+<script src='./../static/lib/codemirror-addon-simple-5.39.2.min.js' type='text/javascript'></script>
+<script defer src='./../static/lib/katex/katex.min.js' type='text/javascript'></script>
+<script>
+var helpRoot = './..';
+var scdoc_title = 'Object Prototyping';
+var scdoc_sc_version = '3.14.0-rc1';
+</script>
+<script src='./../static/scdoc.js' type='text/javascript'></script>
+<script src='./../docmap.js' type='text/javascript'></script>
+<script src='./../frontend.js' type='text/javascript'></script>
+<script src='qrc:///qtwebchannel/qwebchannel.js' type='text/javascript'></script>
+</head>
+<body onload='fixTOC()'>
+<div id='toc'>
+<div id='toctitle'>Object Prototyping:</div>
+<span class='toc_search'>Filter: <input id='toc_search'></span><ul class='toc'><li class='toc1'><a href='#Instance%20Variables%20(Members)'>Instance Variables (Members)</a></li>
+<ul class='toc'></ul><li class='toc1'><a href='#Methods'>Methods</a></li>
+<ul class='toc'></ul><li class='toc1'><a href='#Constructors'>Constructors</a></li>
+<ul class='toc'></ul><li class='toc1'><a href='#Private%20Instance%20Variables%20(Members)'>Private Instance Variables (Members)</a></li>
+<ul class='toc'></ul><li class='toc1'><a href='#Dangers'>Dangers</a></li>
+<ul class='toc'></ul><li class='toc1'><a href='#Inheritance'>Inheritance</a></li>
+<ul class='toc'></ul></ul></div><div id='menubar'></div>
+<div class='contents'>
+<div class='header'>
+<div id='label'>
+<span id='folder'>Guides</span>
+ | <span id='categories'><a href='./../Browse.html#Guides'>Guides</a></span>
+</div><h1>Object Prototyping</h1>
+<div id='summary'>Writing runtime 'classes'</div>
+</div>
+<div class='subheader'>
+<div id='related'>See also: <a href="./../Classes/IdentityDictionary.html">IdentityDictionary</a></div>
+</div>
+
+<p>You cannot create nor edit a class without recompiling the language... but what if you need that?
+<p>Object prototyping is a middle ground that lets you build class–like structures at runtime. It works by taking advantage of the class <a href="./../Classes/IdentityDictionary.html">IdentityDictionary</a> (often the subclass <a href="./../Classes/Event.html">Event</a> is used) and the special method <a href="./../Classes/Object.html#-doesNotUnderstand">Object: -doesNotUnderstand</a>. While there are some oddities with this approach, it is extremely powerful.<h2><a class='anchor' name='Instance%20Variables%20(Members)'>Instance Variables (Members)</a></h2>
+
+<p>Instance variable–like things can be created by just adding keys to an <a href="./../Classes/IdentityDictionary.html">IdentityDictionary</a><div class='codeMirrorContainer'><textarea class='editor'>a = (meow: 10)
+a.meow // 10
+a.meow = 20;
+a.meow // 20;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+
+<p>Unlike normal classes, you can create new instance variables at runtime.<div class='codeMirrorContainer'><textarea class='editor'>a = (meow: 10)
+a.woof = 4;
+a.woof // 4
+a.meow // 10</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+<h2><a class='anchor' name='Methods'>Methods</a></h2>
+
+<p>By assigning a function to a key, you can call that function as if it were a normal instance method.
+<p>However, the <a href="./../Classes/IdentityDictionary.html">IdentityDictionary</a> is passed into the function as the first argument. Usually, we call this argument <code>self</code> as it performs a similar role to the keyword <code>this</code>.<div class='codeMirrorContainer'><textarea class='editor'>a = ( speak: { |self, adverb| "I say '%' %.".format(self.word, adverb) } );
+a.word = "meow";
+a.speak(adverb: "loudly") // I say 'meow' loudly.</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+
+<p><a href="./../Reference/Functions.html#Variable%20Arguments">Functions: Variable Arguments</a> also work.<div class='codeMirrorContainer'><textarea class='editor'>a = ( speak: {|self... words, kwargs| "I say '%' %.".format(words, kwargs.asDict[\adverb]) } );
+
+a.speak("meow", "woof", adverb: "loudly") // I say "[meow, woof]" loudly.</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+<h2><a class='anchor' name='Constructors'>Constructors</a></h2>
+
+<p>There is no direct way to mimic a constructor, but this isn't a problem, as we can simply make a function that returns the <a href="./../Classes/IdentityDictionary.html">IdentityDictionary</a>.<div class='codeMirrorContainer'><textarea class='editor'>(
+var makeSpeaker = { |word|
+    (
+        word: word,
+        speak: { |self, adverb| "I say \"%\" %.".format(self.word, adverb) }
+    )
+};
+
+var cat = makeSpeaker.("meow");
+var dog = makeSpeaker.("woof");
+
+cat.speak("loudly").postln; // I say "meow" loudly.
+dog.speak("quietly").postln; // I say "woof" quietly.
+)</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+<h2><a class='anchor' name='Private%20Instance%20Variables%20(Members)'>Private Instance Variables (Members)</a></h2>
+
+<p>These can be implemented inside the constructor function as normal variables, however, you don't add them to the dictionary.<div class='codeMirrorContainer'><textarea class='editor'>(
+var makeSpeaker = {
+    var secretWords = "I'm a cat";
+    (
+        assign_secret: { |self, secret| secretWords = secret },
+        speak_secrets: { |self| "My secret is \"%\".".format(secretWords.value) }
+    )
+};
+
+var p1 = makeSpeaker.();
+
+p1.speak_secrets().postln; // My secret is "I'm a cat".
+p1.assign_secret("I'm a dog");
+p1.speak_secrets().postln; // My secret is "I'm a dog".
+)</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+<h2><a class='anchor' name='Dangers'>Dangers</a></h2>
+
+<p>There are two drawbacks over classes.
+<p>The first, is that any key, including 'methods', can be overridden at any time. Essentially, what makes <a href="./../Classes/IdentityDictionary.html">IdentityDictionary</a> powerful, also makes it fragile and easy to break. The only way to avoid this mistake is by being vigilant when adding keys to an object prototype.
+<p>The second drawback is that you cannot have a key with the same name as a method in <a href="./../Classes/Event.html">Event</a> or any parent class, otherwise the real class's method will be called, not the pseudo–method you have written.<div class='codeMirrorContainer'><textarea class='editor'>a = (numChannels: 10)
+a.numChannels // 1</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+
+<p>As seen above, one expects the value <code>10</code> to be returned, but instead <a href="./../Classes/Object.html#-numChannels">Object: -numChannels</a> is called and the value <code>1</code> returned.
+<p>There are two ways to mitigate this. <strong>One</strong>, use longer keys or names in snake case rather than pascal case: that is names_written_like_this, ratherThanNamesWrittenLikeThis, as SuperCollider only uses the latter.
+<p><strong>Two</strong>, assign outside of the brackets, where a warning will be generated.<div class='codeMirrorContainer'><textarea class='editor'>a = ();
+a.numChannels = 30; // WARNING: ...</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+<h2><a class='anchor' name='Inheritance'>Inheritance</a></h2>
+
+<p>This is implemented with <a href="./../Classes/IdentityDictionary.html#-'parent'%20and%20'proto'%20variables">IdentityDictionary: -'parent' and 'proto' variables</a>. Technically, this can be used to do more than inheritance, but only inheritance is shown here.
+<p>This is done by assigning the <code>parent</code> to another dictionary to lookup keys in.<div class='codeMirrorContainer'><textarea class='editor'>a = (word: "meow" );
+b = (speak: {|self| "I say \"%\".".format(self.word) } );
+b.parent = a; // assign 'a' as a parent.
+b.speak // I say "meow".</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+
+<p>This is similar to how Javascript and other prototyping languages work.<div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Guides/ObjectPrototyping.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Guides/ObjectPrototyping.schelp</a><br>link::Guides/ObjectPrototyping::<br></div></div><script src='./../static/editor.js' type='text/javascript'></script>
+</body></html>
