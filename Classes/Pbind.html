@@ -1,4 +1,4 @@
-<!doctype html><html lang='en'><head><title>Pbind | SuperCollider 3.14.0-rc1 Help</title>
+<!doctype html><html lang='en'><head><title>Pbind | SuperCollider 3.14.0-rc2 Help</title>
 <link rel='stylesheet' href='./../static/scdoc.css' type='text/css' />
 <link rel='stylesheet' href='./../static/codemirror.css' type='text/css' />
 <link rel='stylesheet' href='./../static/editor.css' type='text/css' />
@@ -15,7 +15,7 @@
 <script>
 var helpRoot = './..';
 var scdoc_title = 'Pbind';
-var scdoc_sc_version = '3.14.0-rc1';
+var scdoc_sc_version = '3.14.0-rc2';
 </script>
 <script src='./../static/scdoc.js' type='text/javascript'></script>
 <script src='./../docmap.js' type='text/javascript'></script>
@@ -30,11 +30,10 @@ var scdoc_sc_version = '3.14.0-rc1';
 <ul class='toc'><li class='toc3'><a href='#*new'>new</a> </li>
 <li class='toc2'><a href='#Inherited%20class%20methods'>Inherited class methods</a></li>
 </ul><li class='toc1'><a href='#instancemethods'>Instance methods</a></li>
-<ul class='toc'><li class='toc2'><a href='#Inherited%20instance%20methods'>Inherited instance methods</a></li>
-<li class='toc2'><a href='#Undocumented%20instance%20methods'>Undocumented instance methods</a></li>
-<ul class='toc'><li class='toc3'><a href='#-embedInStream'>embedInStream</a> </li>
-<li class='toc3'><a href='#-patternpairs'>patternpairs</a> </li>
-</ul></ul><li class='toc1'><a href='#examples'>Examples</a></li>
+<ul class='toc'><li class='toc3'><a href='#-patternpairs'>patternpairs</a> </li>
+<li class='toc3'><a href='#-embedInStream'>embedInStream</a> </li>
+<li class='toc2'><a href='#Inherited%20instance%20methods'>Inherited instance methods</a></li>
+</ul><li class='toc1'><a href='#examples'>Examples</a></li>
 <ul class='toc'><li class='toc2'><a href='#SynthDef%20and%20Event'>SynthDef and Event</a></li>
 <ul class='toc'></ul><li class='toc2'><a href='#Rests'>Rests</a></li>
 <ul class='toc'></ul><li class='toc2'><a href='#The%20Play%20Method'>The Play Method</a></li>
@@ -63,14 +62,32 @@ var scdoc_sc_version = '3.14.0-rc1';
 <p>The keys used in a Pbind are usually determined by <a href="./../Classes/Event.html">Event</a>'s default mechanism and the controls defined for the <a href="./../Classes/SynthDef.html">SynthDef</a> to be played. (See <a href="#SynthDef%20and%20Event">SynthDef and Event</a> below for a brief discussion of both in relation to Pbind.)<h2><a class='anchor' name='classmethods'>Class Methods</a></h2>
 <h3 class='method-code'><span class='method-prefix'>Pbind.</span><a class='method-name' name='*new' href='./../Overviews/Methods.html#new'>new</a>( <span class='argstr'>... pairs</span>, <span class='argstr'>... kwargs</span>)</h3>
 <div class='method'>
-<p>The arguments to Pbind are an alternating sequence of keys and patterns, this can alternatively be specified using keyword arguments. A pattern can also be bound to an array of keys. In this case, the pattern must specify a sequence whose elements are arrays with at least as many elements as there are keys.</div><h3><a class='anchor' name='Inherited%20class%20methods'>Inherited class methods</a></h3>
+<p>The arguments to Pbind are an alternating sequence of keys and patterns.<div class='codeMirrorContainer'><textarea class='editor'>Pbind(\note, Pseq([0, 4, 7]), \amp, 0.1, \dur, 0.2).play</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+
+<p>The message <code>new</code> converts keyword arguments into key value pairs, so that we can write:<div class='codeMirrorContainer'><textarea class='editor'>Pbind(note: Pseq([0, 4, 7]), amp: 0.1, dur: 0.2).play</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+
+<p>A pattern can also be bound to an array of keys. In this case, the pattern must specify a sequence whose elements are arrays with at least as many elements as there are keys.<div class='codeMirrorContainer'><textarea class='editor'>Pbind([\note, \amp], Pseq([[0, 0.05],  [4, 0.5],  [7, 0.1]]), dur: 0.2).play</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+</div><h3><a class='anchor' name='Inherited%20class%20methods'>Inherited class methods</a></h3>
 <div id='inheritedclassmets'></div><h2><a class='anchor' name='instancemethods'>Instance Methods</a></h2>
-<h3><a class='anchor' name='Inherited%20instance%20methods'>Inherited instance methods</a></h3>
-<div id='inheritedinstmets'></div><h3><a class='anchor' name='Undocumented%20instance%20methods'>Undocumented instance methods</a></h3>
-<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-embedInStream' href='./../Overviews/Methods.html#embedInStream'>embedInStream</a>(<span class='argstr'>inevent</span>)</h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-patternpairs' href='./../Overviews/Methods.html#patternpairs'>patternpairs</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-patternpairs' href='./../Overviews/Methods.html#patternpairs'>patternpairs</a> = value</h3>
-<h2><a class='anchor' name='examples'>Examples</a></h2>
+<div class='method'>
+<p>The defined key value pairs mapping symbols to value patterns.<div class='codeMirrorContainer'><textarea class='editor'>Pbind(x:7, y:Pseq([1, 2, 3])).patternpairs</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-embedInStream' href='./../Overviews/Methods.html#embedInStream'>embedInStream</a>(<span class='argstr'>inevent</span>)</h3>
+<div class='method'>
+<p>From within a <a href="./../Classes/Stream.html">Stream</a> like e.g. <a href="./../Classes/Routine.html">Routine</a>, yield all events from this pattern before continuing. One pattern can be used to produce values for any number of independent streams.<h4>Arguments:</h4>
+<table class='arguments'>
+<tr><td class='argumentname'>inevent<td class='argumentdesc'>
+<p>An event that is passed into all substreams and is used by them to produce the output events.<div class='codeMirrorContainer'><textarea class='editor'>a = Pbind(note: Pseq([0, 4, 7]), amp: 0.1, dur: 0.2);
+r = Routine { |inevent| (note:9, dur: 1).yield;  a.embedInStream(inevent);  };
+r.nextN(5, (x:7)); // passing in an event for the next 5 values from r, \x of 7 is passed through the Pbind stream</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+</table></div><h3><a class='anchor' name='Inherited%20instance%20methods'>Inherited instance methods</a></h3>
+<div id='inheritedinstmets'></div><h2><a class='anchor' name='examples'>Examples</a></h2>
 <div class='codeMirrorContainer'><textarea class='editor'>(
 a = Pbind(
     x:    Pseq([1, 2, 3]),

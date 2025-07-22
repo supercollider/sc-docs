@@ -1,4 +1,4 @@
-<!doctype html><html lang='en'><head><title>FunctionDef | SuperCollider 3.14.0-rc1 Help</title>
+<!doctype html><html lang='en'><head><title>FunctionDef | SuperCollider 3.14.0-rc2 Help</title>
 <link rel='stylesheet' href='./../static/scdoc.css' type='text/css' />
 <link rel='stylesheet' href='./../static/codemirror.css' type='text/css' />
 <link rel='stylesheet' href='./../static/editor.css' type='text/css' />
@@ -15,7 +15,7 @@
 <script>
 var helpRoot = './..';
 var scdoc_title = 'FunctionDef';
-var scdoc_sc_version = '3.14.0-rc1';
+var scdoc_sc_version = '3.14.0-rc2';
 </script>
 <script src='./../static/scdoc.js' type='text/javascript'></script>
 <script src='./../docmap.js' type='text/javascript'></script>
@@ -34,6 +34,12 @@ var scdoc_sc_version = '3.14.0-rc1';
 <ul class='toc'><li class='toc2'><a href='#Accessing'>Accessing</a></li>
 <ul class='toc'><li class='toc3'><a href='#-code'>code</a> </li>
 <li class='toc3'><a href='#-sourceCode'>sourceCode</a> </li>
+<li class='toc3'><a href='#-numArgs'>numArgs</a> </li>
+<li class='toc3'><a href='#-numVars'>numVars</a> </li>
+<li class='toc3'><a href='#-varArgs'>varArgs</a> </li>
+<li class='toc3'><a href='#-hasKwArgs'>hasKwArgs</a> </li>
+<li class='toc3'><a href='#-varArgsValue'>varArgsValue</a> </li>
+<li class='toc3'><a href='#-hasVarArgs'>hasVarArgs</a> </li>
 <li class='toc3'><a href='#-context'>context</a> </li>
 <li class='toc3'><a href='#-findReferences'>findReferences</a> </li>
 <li class='toc3'><a href='#-argNames'>argNames</a> </li>
@@ -52,17 +58,11 @@ var scdoc_sc_version = '3.14.0-rc1';
 <li class='toc3'><a href='#-checkCanArchive'>checkCanArchive</a> </li>
 <li class='toc3'><a href='#-constants'>constants</a> </li>
 <li class='toc3'><a href='#-dumpContexts'>dumpContexts</a> </li>
-<li class='toc3'><a href='#-hasKwArgs'>hasKwArgs</a> </li>
 <li class='toc3'><a href='#-hasPartialApplication'>hasPartialApplication</a> </li>
-<li class='toc3'><a href='#-hasVarArgs'>hasVarArgs</a> </li>
 <li class='toc3'><a href='#-inspectorClass'>inspectorClass</a> </li>
 <li class='toc3'><a href='#-keyValuePairsFromArgs'>keyValuePairsFromArgs</a> </li>
-<li class='toc3'><a href='#-numArgs'>numArgs</a> </li>
-<li class='toc3'><a href='#-numVars'>numVars</a> </li>
 <li class='toc3'><a href='#-selectors'>selectors</a> </li>
 <li class='toc3'><a href='#-shallowCopy'>shallowCopy</a> </li>
-<li class='toc3'><a href='#-varArgs'>varArgs</a> </li>
-<li class='toc3'><a href='#-varArgsValue'>varArgsValue</a> </li>
 </ul></ul></ul></div><div id='menubar'></div>
 <div class='contents'>
 <div class='header'>
@@ -94,6 +94,42 @@ var scdoc_sc_version = '3.14.0-rc1';
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-sourceCode' href='./../Overviews/Methods.html#sourceCode'>sourceCode</a></h3>
 <div class='method'>
 <p>Get the source code string.<div class='codeMirrorContainer'><textarea class='editor'>{ |a = 9, b = 10, c| a + b }.def.sourceCode.postcs;</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-numArgs' href='./../Overviews/Methods.html#numArgs'>numArgs</a></h3>
+<div class='method'>
+<p>Return the number of arguments (the arity) of the function.<div class='codeMirrorContainer'><textarea class='editor'>{ |a = 9, b = 10, c| a + b }.def.numArgs; // 3</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-numVars' href='./../Overviews/Methods.html#numVars'>numVars</a></h3>
+<div class='method'>
+<p>Return the number of variables in the function body.<div class='codeMirrorContainer'><textarea class='editor'>(
+{ |x|
+    var y, z;
+    x + y + z
+}.def.numVars; // 2
+)</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-varArgs' href='./../Overviews/Methods.html#varArgs'>varArgs</a></h3>
+<div class='method'>
+<p>Return whether function has ellipsis argument.<div class='codeMirrorContainer'><textarea class='editor'>{ |a, b ... c| a + b * c }.def.varArgs; // true
+{ |a, b, c| a + b * c }.def.varArgs; // false</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-hasKwArgs' href='./../Overviews/Methods.html#hasKwArgs'>hasKwArgs</a></h3>
+<div class='method'>
+<p>Returns whether the function has variable keyword arguments<div class='codeMirrorContainer'><textarea class='editor'>{ |a, b, c| a + b * c }.def.hasKwArgs; // false
+{ |a, b ... c| a + b * c }.def.hasKwArgs; // false
+{ |a ... b, c| a * b }.def.hasVarArgs; // true</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-varArgsValue' href='./../Overviews/Methods.html#varArgsValue'>varArgsValue</a></h3>
+<div class='method'>
+<p>Returns how many sets of variable arguments the function has. 0 for none, 1 for ellipsis arguments, 2 for keyword arguments.<div class='codeMirrorContainer'><textarea class='editor'>{ |a, b, c| a + b * c }.def.varArgsValue; // 0
+{ |a, b ... c| a + b * c }.def.varArgsValue; // 1
+{ |a ... b, c| a * b }.def.varArgsValue; // 1</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-hasVarArgs' href='./../Overviews/Methods.html#hasVarArgs'>hasVarArgs</a></h3>
+<div class='method'>
+<p>Returns whether the function has variable args of any kind<div class='codeMirrorContainer'><textarea class='editor'>{ |a, b, c| a + b * c }.def.hasVarArgs; // false
+{ |a, b ... c| a + b * c }.def.hasVarArgs; // true
+{ |a ... b, c| a * b }.def.hasVarArgs; // true</textarea>
 <button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-context' href='./../Overviews/Methods.html#context'>context</a></h3>
 <div class='method'>
@@ -184,16 +220,10 @@ h.([1, 0], [6, 7]); // [6, 0]</textarea>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-checkCanArchive' href='./../Overviews/Methods.html#checkCanArchive'>checkCanArchive</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-constants' href='./../Overviews/Methods.html#constants'>constants</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-dumpContexts' href='./../Overviews/Methods.html#dumpContexts'>dumpContexts</a></h3>
-<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-hasKwArgs' href='./../Overviews/Methods.html#hasKwArgs'>hasKwArgs</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-hasPartialApplication' href='./../Overviews/Methods.html#hasPartialApplication'>hasPartialApplication</a></h3>
-<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-hasVarArgs' href='./../Overviews/Methods.html#hasVarArgs'>hasVarArgs</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-inspectorClass' href='./../Overviews/Methods.html#inspectorClass'>inspectorClass</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-keyValuePairsFromArgs' href='./../Overviews/Methods.html#keyValuePairsFromArgs'>keyValuePairsFromArgs</a></h3>
-<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-numArgs' href='./../Overviews/Methods.html#numArgs'>numArgs</a></h3>
-<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-numVars' href='./../Overviews/Methods.html#numVars'>numVars</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-selectors' href='./../Overviews/Methods.html#selectors'>selectors</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-shallowCopy' href='./../Overviews/Methods.html#shallowCopy'>shallowCopy</a></h3>
-<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-varArgs' href='./../Overviews/Methods.html#varArgs'>varArgs</a></h3>
-<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-varArgsValue' href='./../Overviews/Methods.html#varArgsValue'>varArgsValue</a></h3>
 <div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/FunctionDef.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/FunctionDef.schelp</a><br>link::Classes/FunctionDef::<br></div></div><script src='./../static/editor.js' type='text/javascript'></script>
 </body></html>

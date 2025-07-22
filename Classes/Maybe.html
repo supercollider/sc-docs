@@ -1,4 +1,4 @@
-<!doctype html><html lang='en'><head><title>Maybe | SuperCollider 3.14.0-rc1 Help</title>
+<!doctype html><html lang='en'><head><title>Maybe | SuperCollider 3.14.0-rc2 Help</title>
 <link rel='stylesheet' href='./../static/scdoc.css' type='text/css' />
 <link rel='stylesheet' href='./../static/codemirror.css' type='text/css' />
 <link rel='stylesheet' href='./../static/editor.css' type='text/css' />
@@ -15,7 +15,7 @@
 <script>
 var helpRoot = './..';
 var scdoc_title = 'Maybe';
-var scdoc_sc_version = '3.14.0-rc1';
+var scdoc_sc_version = '3.14.0-rc2';
 </script>
 <script src='./../static/scdoc.js' type='text/javascript'></script>
 <script src='./../docmap.js' type='text/javascript'></script>
@@ -40,17 +40,18 @@ var scdoc_sc_version = '3.14.0-rc1';
 <ul class='toc'><li class='toc3'><a href='#-source'>source</a> </li>
 <li class='toc3'><a href='#-value'>value</a> </li>
 <li class='toc3'><a href='#-apply'>apply</a> </li>
+<li class='toc3'><a href='#-clear'>clear</a> </li>
 <li class='toc3'><a href='#-doesNotUnderstand'>doesNotUnderstand</a> </li>
+<li class='toc3'><a href='#-<>'>&lt;&gt;</a> </li>
+<li class='toc3'><a href='#-o'>o</a> </li>
 <li class='toc2'><a href='#Inherited%20instance%20methods'>Inherited instance methods</a></li>
 <li class='toc2'><a href='#Undocumented%20instance%20methods'>Undocumented instance methods</a></li>
-<ul class='toc'><li class='toc3'><a href='#-<>'>&lt;&gt;</a> </li>
-<li class='toc3'><a href='#-add'>add</a> </li>
+<ul class='toc'><li class='toc3'><a href='#-add'>add</a> </li>
 <li class='toc3'><a href='#-addAll'>addAll</a> </li>
 <li class='toc3'><a href='#-all'>all</a> </li>
 <li class='toc3'><a href='#-at'>at</a> </li>
 <li class='toc3'><a href='#-atAll'>atAll</a> </li>
 <li class='toc3'><a href='#-catchRecursion'>catchRecursion</a> </li>
-<li class='toc3'><a href='#-clear'>clear</a> </li>
 <li class='toc3'><a href='#-composeBinaryOp'>composeBinaryOp</a> </li>
 <li class='toc3'><a href='#-composeNAryOp'>composeNAryOp</a> </li>
 <li class='toc3'><a href='#-composeUnaryOp'>composeUnaryOp</a> </li>
@@ -60,7 +61,6 @@ var scdoc_sc_version = '3.14.0-rc1';
 <li class='toc3'><a href='#-functionPerformList'>functionPerformList</a> </li>
 <li class='toc3'><a href='#-includedInCallers'>includedInCallers</a> </li>
 <li class='toc3'><a href='#-infoString'>infoString</a> </li>
-<li class='toc3'><a href='#-o'>o</a> </li>
 <li class='toc3'><a href='#-postString'>postString</a> </li>
 <li class='toc3'><a href='#-put'>put</a> </li>
 <li class='toc3'><a href='#-putAll'>putAll</a> </li>
@@ -70,8 +70,7 @@ var scdoc_sc_version = '3.14.0-rc1';
 <li class='toc3'><a href='#-valueArrayEnvir'>valueArrayEnvir</a> </li>
 <li class='toc3'><a href='#-valueEnvir'>valueEnvir</a> </li>
 <li class='toc3'><a href='#-valueFuncProxy'>valueFuncProxy</a> </li>
-</ul></ul><li class='toc1'><a href='#examples'>Examples</a></li>
-<ul class='toc'></ul></ul></div><div id='menubar'></div>
+</ul></ul></ul></div><div id='menubar'></div>
 <div class='contents'>
 <div class='header'>
 <div id='label'>
@@ -91,8 +90,8 @@ var scdoc_sc_version = '3.14.0-rc1';
 <p>The name <strong>Maybe</strong> stems from the programming language Haskell, where it represents a somewhat similar entity. See also: <a href="./../Classes/Fdef.html">Fdef</a><div class='note'><span class='notelabel'>NOTE:</span> A Maybe object lazily constructs an operation as an object instead of performing it immediately. Its implementation remains incomplete necessarily, in the current form: it is limited to the arithmetic operations that AbstractFunction implements and the following collection methods: <code>put, addAll, add, putAll, atAll</code>.
 <p>You can extend Maybe as you need for your purpose, by the following schema:<div class='codeMirrorContainer'><textarea class='editor'>// replace "myMethod" with your method name
 + Maybe {
-    myMethod { |...args|
-        ^this.composeNAryOp(\myMethod, args)
+    myMethod { |...args, kwargs|
+        ^this.composeNAryOp(\myMethod, args, kwargs)
     }
 }</textarea>
 <button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
@@ -125,12 +124,31 @@ b.value; // =&gt; 7</textarea>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-source' href='./../Overviews/Methods.html#source'>source</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-source' href='./../Overviews/Methods.html#source'>source</a> = <span class='argstr'>obj</span></h3>
 <div class='method'>
-<p>return or set the contained object</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-value' href='./../Overviews/Methods.html#value'>value</a></h3>
+<p>return or set the contained object<div class='codeMirrorContainer'><textarea class='editor'>a = Maybe.new;
+a.source = 5;
+a.source // 5</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-value' href='./../Overviews/Methods.html#value'>value</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-value' href='./../Overviews/Methods.html#value'>value</a> = value</h3>
 <div class='method'>
-<p>set the contained object or return the source, or the value of the contained object, if it is a Maybe. If there is a recursion, return nil.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-apply' href='./../Overviews/Methods.html#apply'>apply</a>( <span class='argstr'>... args</span>, <span class='argstr'>... kwargs</span>)</h3>
+<p>set the contained object or return the source, or the value of the contained object, if it is a Maybe. If there is a recursion, return nil.<div class='codeMirrorContainer'><textarea class='editor'>a = Maybe.new;
+a.source = 5;
+a.value; // 5
+a.source = { [1, 2, 3].rotate };
+a.value; // [3, 2, 1]
+a.source = a; // deliberately make recursion
+a.value; // nil
+Maybe.verbose = true;
+a.value; // posts a warning and returns nil</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-apply' href='./../Overviews/Methods.html#apply'>apply</a>( <span class='argstr'>... args</span>, <span class='argstr'>... kwargs</span>)</h3>
 <div class='method'>
-<p>return the value, or the value of the contained object, if it is a Maybe. This method allows recursion, so that recursive calculations can be made.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-doesNotUnderstand' href='./../Overviews/Methods.html#doesNotUnderstand'>doesNotUnderstand</a>(<span class='argstr'>selector</span> <span class='argstr'>... args</span>, <span class='argstr'>... kwargs</span>)</h3>
+<p>return the value, or the value of the contained object, if it is a Maybe. This method allows recursion, so that recursive calculations can be made.<div class='codeMirrorContainer'><textarea class='editor'>a = Maybe({ |a, b| a + b });
+[1, 2, 3, 4].reduce(a); // returns 10. reduce calls apply on the first argument and passes the receiver</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-clear' href='./../Overviews/Methods.html#clear'>clear</a></h3>
+<div class='method'>
+<p>Set the source to <code>nil</code></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-doesNotUnderstand' href='./../Overviews/Methods.html#doesNotUnderstand'>doesNotUnderstand</a>(<span class='argstr'>selector</span> <span class='argstr'>... args</span>, <span class='argstr'>... kwargs</span>)</h3>
 <div class='method'>
 <p>(called by any message that Maybe doesn't understand.)
 <p>returns a composition function that, when evaluated, returns the value.<div class='codeMirrorContainer'><textarea class='editor'>a = Maybe.new;
@@ -140,37 +158,30 @@ b.value; // =&gt; nil
 a.value = [1, 2, [2, 3]];
 b.value;    // =&gt; [[1, 2, 2], [1, 2, 3]]</textarea>
 <button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
-</div><h3><a class='anchor' name='Inherited%20instance%20methods'>Inherited instance methods</a></h3>
-<div id='inheritedinstmets'></div><h3><a class='anchor' name='Undocumented%20instance%20methods'>Undocumented instance methods</a></h3>
-<h3 class='method-code'><span class='method-prefix'></span><a class='method-name' name='-<>' href='./../Overviews/Methods.html#&lt;&gt;'>&lt;&gt;</a>(<span class='argstr'>that</span>)</h3>
-<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-add' href='./../Overviews/Methods.html#add'>add</a>( <span class='argstr'>... args</span>)</h3>
-<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-addAll' href='./../Overviews/Methods.html#addAll'>addAll</a>( <span class='argstr'>... args</span>)</h3>
-<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-all' href='./../Overviews/Methods.html#all'>all</a></h3>
-<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-at' href='./../Overviews/Methods.html#at'>at</a>( <span class='argstr'>... args</span>)</h3>
-<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-atAll' href='./../Overviews/Methods.html#atAll'>atAll</a>( <span class='argstr'>... args</span>)</h3>
-<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-catchRecursion' href='./../Overviews/Methods.html#catchRecursion'>catchRecursion</a>(<span class='argstr'>func</span>)</h3>
-<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-clear' href='./../Overviews/Methods.html#clear'>clear</a></h3>
-<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-composeBinaryOp' href='./../Overviews/Methods.html#composeBinaryOp'>composeBinaryOp</a>(<span class='argstr'>aSelector</span>, <span class='argstr'>something</span>, <span class='argstr'>adverb</span>)</h3>
-<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-composeNAryOp' href='./../Overviews/Methods.html#composeNAryOp'>composeNAryOp</a>(<span class='argstr'>aSelector</span>, <span class='argstr'>anArgList</span>, <span class='argstr'>aKeywordArgList</span>)</h3>
-<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-composeUnaryOp' href='./../Overviews/Methods.html#composeUnaryOp'>composeUnaryOp</a>(<span class='argstr'>aSelector</span>)</h3>
-<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-do' href='./../Overviews/Methods.html#do'>do</a>(<span class='argstr'>function</span>)</h3>
-<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-embedInStream' href='./../Overviews/Methods.html#embedInStream'>embedInStream</a>(<span class='argstr'>inval</span>)</h3>
-<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-findKey' href='./../Overviews/Methods.html#findKey'>findKey</a></h3>
-<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-functionPerformList' href='./../Overviews/Methods.html#functionPerformList'>functionPerformList</a>(<span class='argstr'>selector</span>, <span class='argstr'>arglist</span>)</h3>
-<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-includedInCallers' href='./../Overviews/Methods.html#includedInCallers'>includedInCallers</a></h3>
-<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-infoString' href='./../Overviews/Methods.html#infoString'>infoString</a>(<span class='argstr'>args</span>)</h3>
-<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-o' href='./../Overviews/Methods.html#o'>o</a>( <span class='argstr'>... args</span>)</h3>
-<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-postString' href='./../Overviews/Methods.html#postString'>postString</a></h3>
-<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-put' href='./../Overviews/Methods.html#put'>put</a>( <span class='argstr'>... args</span>)</h3>
-<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-putAll' href='./../Overviews/Methods.html#putAll'>putAll</a>( <span class='argstr'>... args</span>)</h3>
-<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-reduceFuncProxy' href='./../Overviews/Methods.html#reduceFuncProxy'>reduceFuncProxy</a>(<span class='argstr'>args</span>, <span class='argstr'>protect: true</span>, <span class='argstr'>kwargs</span>)</h3>
-<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-reverseComposeBinaryOp' href='./../Overviews/Methods.html#reverseComposeBinaryOp'>reverseComposeBinaryOp</a>(<span class='argstr'>aSelector</span>, <span class='argstr'>something</span>, <span class='argstr'>adverb</span>)</h3>
-<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-valueArray' href='./../Overviews/Methods.html#valueArray'>valueArray</a>(<span class='argstr'>args</span>)</h3>
-<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-valueArrayEnvir' href='./../Overviews/Methods.html#valueArrayEnvir'>valueArrayEnvir</a>( <span class='argstr'>... args</span>)</h3>
-<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-valueEnvir' href='./../Overviews/Methods.html#valueEnvir'>valueEnvir</a>( <span class='argstr'>... args</span>)</h3>
-<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-valueFuncProxy' href='./../Overviews/Methods.html#valueFuncProxy'>valueFuncProxy</a>(<span class='argstr'>args</span>, <span class='argstr'>kwargs</span>)</h3>
-<h2><a class='anchor' name='examples'>Examples</a></h2>
-<div class='codeMirrorContainer'><textarea class='editor'>// the following examples use a LazyEnvir with a Maybe as a proxy class.
+</div><h3 class='method-code'><span class='method-prefix'></span><a class='method-name' name='-<>' href='./../Overviews/Methods.html#&lt;&gt;'>&lt;&gt;</a>(<span class='argstr'>that</span>)</h3>
+<div class='method'>
+<p>Compose receiver with first argument.<div class='codeMirrorContainer'><textarea class='editor'>a = Maybe({ |x| x + 1 });
+b = Maybe();
+c = a &lt;&gt; b;
+c.value(1); // nil, not yet specified
+b.source = { |x| x * 2 };
+c.value(1);  // 1 * 2 + 1 = 3</textarea>
+<button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
+</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-o' href='./../Overviews/Methods.html#o'>o</a>( <span class='argstr'>... args</span>)</h3>
+<div class='method'>
+<p>Compose receiver together with all arguments<div class='codeMirrorContainer'><textarea class='editor'>a = Array.fill(8, { |i| var k = (1/(i+1)).rand; Maybe({ |x| x * k }) });
+b = o(Maybe({ |x| x }), *a);
+b.value(1);
+
+method::do
+Calls the source, like in link::Classes/Function::.
+
+
+
+Examples::
+
+code::
+// the following examples use a LazyEnvir with a Maybe as a proxy class.
 // instead of writing a = Maybe.new; a.value = something;
 // one can simply write ~a = something.
 // the Maybe is implicitly created for you.
@@ -350,5 +361,31 @@ Maybe.maxDepth = nil; // unsafe again.*/
 ~x.value; // return random between [610..620, 800..810]</textarea>
 <button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/Maybe.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/Maybe.schelp</a><br>link::Classes/Maybe::<br></div></div><script src='./../static/editor.js' type='text/javascript'></script>
+<p></div><h3><a class='anchor' name='Inherited%20instance%20methods'>Inherited instance methods</a></h3>
+<div id='inheritedinstmets'></div><h3><a class='anchor' name='Undocumented%20instance%20methods'>Undocumented instance methods</a></h3>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-add' href='./../Overviews/Methods.html#add'>add</a>( <span class='argstr'>... args</span>)</h3>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-addAll' href='./../Overviews/Methods.html#addAll'>addAll</a>( <span class='argstr'>... args</span>)</h3>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-all' href='./../Overviews/Methods.html#all'>all</a></h3>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-at' href='./../Overviews/Methods.html#at'>at</a>( <span class='argstr'>... args</span>)</h3>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-atAll' href='./../Overviews/Methods.html#atAll'>atAll</a>( <span class='argstr'>... args</span>)</h3>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-catchRecursion' href='./../Overviews/Methods.html#catchRecursion'>catchRecursion</a>(<span class='argstr'>func</span>)</h3>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-composeBinaryOp' href='./../Overviews/Methods.html#composeBinaryOp'>composeBinaryOp</a>(<span class='argstr'>aSelector</span>, <span class='argstr'>something</span>, <span class='argstr'>adverb</span>)</h3>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-composeNAryOp' href='./../Overviews/Methods.html#composeNAryOp'>composeNAryOp</a>(<span class='argstr'>aSelector</span>, <span class='argstr'>anArgList</span>, <span class='argstr'>aKeywordArgList</span>)</h3>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-composeUnaryOp' href='./../Overviews/Methods.html#composeUnaryOp'>composeUnaryOp</a>(<span class='argstr'>aSelector</span>)</h3>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-do' href='./../Overviews/Methods.html#do'>do</a>(<span class='argstr'>function</span>)</h3>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-embedInStream' href='./../Overviews/Methods.html#embedInStream'>embedInStream</a>(<span class='argstr'>inval</span>)</h3>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-findKey' href='./../Overviews/Methods.html#findKey'>findKey</a></h3>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-functionPerformList' href='./../Overviews/Methods.html#functionPerformList'>functionPerformList</a>(<span class='argstr'>selector</span>, <span class='argstr'>arglist</span>)</h3>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-includedInCallers' href='./../Overviews/Methods.html#includedInCallers'>includedInCallers</a></h3>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-infoString' href='./../Overviews/Methods.html#infoString'>infoString</a>(<span class='argstr'>args</span>)</h3>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-postString' href='./../Overviews/Methods.html#postString'>postString</a></h3>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-put' href='./../Overviews/Methods.html#put'>put</a>( <span class='argstr'>... args</span>)</h3>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-putAll' href='./../Overviews/Methods.html#putAll'>putAll</a>( <span class='argstr'>... args</span>)</h3>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-reduceFuncProxy' href='./../Overviews/Methods.html#reduceFuncProxy'>reduceFuncProxy</a>(<span class='argstr'>args</span>, <span class='argstr'>protect: true</span>, <span class='argstr'>kwargs</span>)</h3>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-reverseComposeBinaryOp' href='./../Overviews/Methods.html#reverseComposeBinaryOp'>reverseComposeBinaryOp</a>(<span class='argstr'>aSelector</span>, <span class='argstr'>something</span>, <span class='argstr'>adverb</span>)</h3>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-valueArray' href='./../Overviews/Methods.html#valueArray'>valueArray</a>(<span class='argstr'>args</span>)</h3>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-valueArrayEnvir' href='./../Overviews/Methods.html#valueArrayEnvir'>valueArrayEnvir</a>( <span class='argstr'>... args</span>)</h3>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-valueEnvir' href='./../Overviews/Methods.html#valueEnvir'>valueEnvir</a>( <span class='argstr'>... args</span>)</h3>
+<h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-valueFuncProxy' href='./../Overviews/Methods.html#valueFuncProxy'>valueFuncProxy</a>(<span class='argstr'>args</span>, <span class='argstr'>kwargs</span>)</h3>
+<div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/Maybe.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/Maybe.schelp</a><br>link::Classes/Maybe::<br></div></div><script src='./../static/editor.js' type='text/javascript'></script>
 </body></html>
