@@ -38,7 +38,8 @@ RUN git clone \
         -DSC_IDE=OFF \
         -DNO_X11=ON \
         -DSC_ABLETON_LINK=OFF \
-        -DSC_QT=OFF .. && \
+        -DSC_QT=OFF \
+        .. && \
 	cmake --build . --config Debug --target all -j${MAKE_JOBS} && \
     cmake --build . --config Debug --target install -j${MAKE_JOBS} && \
     rm -rf /root/SuperCollider
