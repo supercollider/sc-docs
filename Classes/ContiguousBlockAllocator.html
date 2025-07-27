@@ -1,4 +1,4 @@
-<!doctype html><html lang='en'><head><title>ContiguousBlockAllocator | SuperCollider 3.14.0-rc2 Help</title>
+<!doctype html><html lang='en'><head><title>ContiguousBlockAllocator | SuperCollider 3.14.0 Help</title>
 <link rel='stylesheet' href='./../static/scdoc.css' type='text/css' />
 <link rel='stylesheet' href='./../static/codemirror.css' type='text/css' />
 <link rel='stylesheet' href='./../static/editor.css' type='text/css' />
@@ -15,7 +15,7 @@
 <script>
 var helpRoot = './..';
 var scdoc_title = 'ContiguousBlockAllocator';
-var scdoc_sc_version = '3.14.0-rc2';
+var scdoc_sc_version = '3.14.0';
 </script>
 <script src='./../static/scdoc.js' type='text/javascript'></script>
 <script src='./../docmap.js' type='text/javascript'></script>
@@ -54,7 +54,7 @@ var scdoc_sc_version = '3.14.0-rc2';
 <div id='summary'>for better handling of dynamic allocation</div>
 </div>
 <div class='subheader'>
-<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/Common/Control/Engine.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Control/Engine.sc'>Engine.sc</a></div><div id='related'>See also: <a href="./../Classes/Server.html">Server</a>, <a href="./../Classes/PowerOfTwoAllocator.html">PowerOfTwoAllocator</a>, <a href="./../Guides/MultiClient_Setups.html">Multi-client Setups</a></div>
+<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/main/SCClassLibrary/Common/Control/Engine.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Control/Engine.sc'>Engine.sc</a></div><div id='related'>See also: <a href="./../Classes/Server.html">Server</a>, <a href="./../Classes/PowerOfTwoAllocator.html">PowerOfTwoAllocator</a>, <a href="./../Guides/MultiClient_Setups.html">Multi-client Setups</a></div>
 </div>
 <h2><a class='anchor' name='description'>Description</a></h2>
 
@@ -112,5 +112,5 @@ c = ContiguousBlockAllocator(24);
 <button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p>In the last line of the second example, <code>findAvailable</code> may locate any of indices 1, 5, 9, 13, or 17. (21 would not be used until a suitable block could not be found in the other empty spaces.) If you were to allocate a single address, then the empty block of three would always be reduced to an empty block of two (instead of dividing the empty space in half and having two empty single-address blocks).
-<p>It may be surprising that the algorithm does not favor lower-index blocks, but if two addresses A and B have been previously used and freed, there is no inherent reason to prefer A if A &lt; B.<div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/ContiguousBlockAllocator.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/ContiguousBlockAllocator.schelp</a><br>link::Classes/ContiguousBlockAllocator::<br></div></div><script src='./../static/editor.js' type='text/javascript'></script>
+<p>It may be surprising that the algorithm does not favor lower-index blocks, but if two addresses A and B have been previously used and freed, there is no inherent reason to prefer A if A &lt; B.<div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/main/HelpSource/Classes/ContiguousBlockAllocator.schelp'>https://github.com/supercollider/supercollider/tree/main/HelpSource/Classes/ContiguousBlockAllocator.schelp</a><br>link::Classes/ContiguousBlockAllocator::<br></div></div><script src='./../static/editor.js' type='text/javascript'></script>
 </body></html>

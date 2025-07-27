@@ -1,4 +1,4 @@
-<!doctype html><html lang='en'><head><title>AbstractFunction | SuperCollider 3.14.0-rc2 Help</title>
+<!doctype html><html lang='en'><head><title>AbstractFunction | SuperCollider 3.14.0 Help</title>
 <link rel='stylesheet' href='./../static/scdoc.css' type='text/css' />
 <link rel='stylesheet' href='./../static/codemirror.css' type='text/css' />
 <link rel='stylesheet' href='./../static/editor.css' type='text/css' />
@@ -15,7 +15,7 @@
 <script>
 var helpRoot = './..';
 var scdoc_title = 'AbstractFunction';
-var scdoc_sc_version = '3.14.0-rc2';
+var scdoc_sc_version = '3.14.0';
 </script>
 <script src='./../static/scdoc.js' type='text/javascript'></script>
 <script src='./../docmap.js' type='text/javascript'></script>
@@ -207,7 +207,7 @@ var scdoc_sc_version = '3.14.0-rc2';
 <div id='summary'>An object which responds to a set of messages that represent mathematical functions</div>
 </div>
 <div class='subheader'>
-<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/Common/Core/AbstractFunction.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Core/AbstractFunction.sc'>AbstractFunction.sc</a></div><div id='subclasses'>Subclasses: <a href="../Classes/AbstractOpPlug.html">AbstractOpPlug</a>, <a href="../Classes/BinaryOpFunction.html">BinaryOpFunction</a>, <a href="../Classes/BusPlug.html">BusPlug</a>, <a href="../Classes/Function.html">Function</a>, <span id='hiddensubclasses' style='display:none;'><a href="../Classes/FunctionList.html">FunctionList</a>, <a href="../Classes/NAryOpFunction.html">NAryOpFunction</a>, <a href="../Classes/Operand.html">Operand</a>, <a href="../Classes/Pattern.html">Pattern</a>, <a href="../Classes/Ref.html">Ref</a>, <a href="../Classes/Stream.html">Stream</a>, <a href="../Classes/Thunk.html">Thunk</a>, <a href="../Classes/UGen.html">UGen</a>, <a href="../Classes/UnaryOpFunction.html">UnaryOpFunction</a></span><a class='subclass_toggle' href='#' onclick='javascript:showAllSubclasses(this); return false'>&hellip;&nbsp;see&nbsp;all</a></div>
+<div id='filename'>Source: <a href='https://github.com/supercollider/supercollider/tree/main/SCClassLibrary/Common/Core/AbstractFunction.sc' title='/usr/local/share/SuperCollider/SCClassLibrary/Common/Core/AbstractFunction.sc'>AbstractFunction.sc</a></div><div id='subclasses'>Subclasses: <a href="../Classes/AbstractOpPlug.html">AbstractOpPlug</a>, <a href="../Classes/BinaryOpFunction.html">BinaryOpFunction</a>, <a href="../Classes/BusPlug.html">BusPlug</a>, <a href="../Classes/Function.html">Function</a>, <span id='hiddensubclasses' style='display:none;'><a href="../Classes/FunctionList.html">FunctionList</a>, <a href="../Classes/NAryOpFunction.html">NAryOpFunction</a>, <a href="../Classes/Operand.html">Operand</a>, <a href="../Classes/Pattern.html">Pattern</a>, <a href="../Classes/Ref.html">Ref</a>, <a href="../Classes/Stream.html">Stream</a>, <a href="../Classes/Thunk.html">Thunk</a>, <a href="../Classes/UGen.html">UGen</a>, <a href="../Classes/UnaryOpFunction.html">UnaryOpFunction</a></span><a class='subclass_toggle' href='#' onclick='javascript:showAllSubclasses(this); return false'>&hellip;&nbsp;see&nbsp;all</a></div>
 <div id='related'>See also: <a href="./../Classes/UGen.html">UGen</a>, <a href="./../Classes/Pattern.html">Pattern</a>, <a href="./../Classes/Function.html">Function</a>, <a href="./../Overviews/Operators.html">Operators</a></div>
 </div>
 <h2><a class='anchor' name='description'>Description</a></h2>
@@ -250,7 +250,7 @@ a = Pseries(3, -1.8, inf).abs; a.asStream.nextN(8);
 <button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
 <p></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-asInt' href='./../Overviews/Methods.html#asInt'>asInt</a></h3>
-<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/deprecated/3.11/deprecated-3.11.sc'>/usr/local/share/SuperCollider/SCClassLibrary/deprecated/3.11/deprecated-3.11.sc</a></div>
+<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/main/SCClassLibrary/deprecated/3.11/deprecated-3.11.sc'>/usr/local/share/SuperCollider/SCClassLibrary/deprecated/3.11/deprecated-3.11.sc</a></div>
 <div class='method'>
 <p>Deprecated. Use <code>asInteger</code> instead.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-asInteger' href='./../Overviews/Methods.html#asInteger'>asInteger</a></h3>
 <div class='method'><div class='codeMirrorContainer'><textarea class='editor'>a = { "123471".scramble }; b = a.asInteger; b.value;</textarea>
@@ -734,7 +734,7 @@ g.value;  // true or false, depending on f's result</textarea>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-degrad' href='./../Overviews/Methods.html#degrad'>degrad</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-degreeToKey' href='./../Overviews/Methods.html#degreeToKey'>degreeToKey</a>(<span class='argstr'>scale</span>, <span class='argstr'>stepsPerOctave: 12</span>)</h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-eq' href='./../Overviews/Methods.html#eq'>eq</a>(<span class='argstr'>function</span>, <span class='argstr'>adverb</span>)</h3>
-<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/Common/Control/extConvertToOSC.sc'>/usr/local/share/SuperCollider/SCClassLibrary/Common/Control/extConvertToOSC.sc</a></div>
+<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/main/SCClassLibrary/Common/Control/extConvertToOSC.sc'>/usr/local/share/SuperCollider/SCClassLibrary/Common/Control/extConvertToOSC.sc</a></div>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-firstArg' href='./../Overviews/Methods.html#firstArg'>firstArg</a>(<span class='argstr'>function</span>, <span class='argstr'>adverb</span>)</h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-fold2' href='./../Overviews/Methods.html#fold2'>fold2</a>(<span class='argstr'>function: 1</span>, <span class='argstr'>adverb</span>)</h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-hanWindow' href='./../Overviews/Methods.html#hanWindow'>hanWindow</a></h3>
@@ -746,7 +746,7 @@ g.value;  // true or false, depending on f's result</textarea>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-modSeaside' href='./../Overviews/Methods.html#modSeaside'>modSeaside</a>(<span class='argstr'>function</span>, <span class='argstr'>adverb</span>)</h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-nand' href='./../Overviews/Methods.html#nand'>nand</a>(<span class='argstr'>function</span>, <span class='argstr'>adverb</span>)</h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-ne' href='./../Overviews/Methods.html#ne'>ne</a>(<span class='argstr'>function</span>, <span class='argstr'>adverb</span>)</h3>
-<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/Common/Control/extConvertToOSC.sc'>/usr/local/share/SuperCollider/SCClassLibrary/Common/Control/extConvertToOSC.sc</a></div>
+<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/main/SCClassLibrary/Common/Control/extConvertToOSC.sc'>/usr/local/share/SuperCollider/SCClassLibrary/Common/Control/extConvertToOSC.sc</a></div>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-not' href='./../Overviews/Methods.html#not'>not</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-performBinaryOpOnComplex' href='./../Overviews/Methods.html#performBinaryOpOnComplex'>performBinaryOpOnComplex</a>(<span class='argstr'>aSelector</span>, <span class='argstr'>aComplex</span>, <span class='argstr'>adverb</span>)</h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-performBinaryOpOnSeqColl' href='./../Overviews/Methods.html#performBinaryOpOnSeqColl'>performBinaryOpOnSeqColl</a>(<span class='argstr'>aSelector</span>, <span class='argstr'>aSeqColl</span>, <span class='argstr'>adverb</span>)</h3>
@@ -755,13 +755,13 @@ g.value;  // true or false, depending on f's result</textarea>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-pow' href='./../Overviews/Methods.html#pow'>pow</a>(<span class='argstr'>function</span>, <span class='argstr'>adverb</span>)</h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-prReverseLazyEquals' href='./../Overviews/Methods.html#prReverseLazyEquals'>prReverseLazyEquals</a>(<span class='argstr'>that</span>)</h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-prepareForProxySynthDef' href='./../Overviews/Methods.html#prepareForProxySynthDef'>prepareForProxySynthDef</a></h3>
-<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/JITLib/ProxySpace/wrapForNodeProxy.sc'>/usr/local/share/SuperCollider/SCClassLibrary/JITLib/ProxySpace/wrapForNodeProxy.sc</a></div>
+<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/main/SCClassLibrary/JITLib/ProxySpace/wrapForNodeProxy.sc'>/usr/local/share/SuperCollider/SCClassLibrary/JITLib/ProxySpace/wrapForNodeProxy.sc</a></div>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-raddeg' href='./../Overviews/Methods.html#raddeg'>raddeg</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-ramp' href='./../Overviews/Methods.html#ramp'>ramp</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-real' href='./../Overviews/Methods.html#real'>real</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-rectWindow' href='./../Overviews/Methods.html#rectWindow'>rectWindow</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-reduceFuncProxy' href='./../Overviews/Methods.html#reduceFuncProxy'>reduceFuncProxy</a>(<span class='argstr'>args</span>, <span class='argstr'>protect: true</span>, <span class='argstr'>kwargs</span>)</h3>
-<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/3.14/SCClassLibrary/JITLib/Patterns/extFunction.sc'>/usr/local/share/SuperCollider/SCClassLibrary/JITLib/Patterns/extFunction.sc</a></div>
+<div class='extmethod'>From extension in <a href='https://github.com/supercollider/supercollider/tree/main/SCClassLibrary/JITLib/Patterns/extFunction.sc'>/usr/local/share/SuperCollider/SCClassLibrary/JITLib/Patterns/extFunction.sc</a></div>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-ref' href='./../Overviews/Methods.html#ref'>ref</a></h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-reverseComposeBinaryOp' href='./../Overviews/Methods.html#reverseComposeBinaryOp'>reverseComposeBinaryOp</a>(<span class='argstr'>aSelector</span>, <span class='argstr'>something</span>, <span class='argstr'>adverb</span>)</h3>
 <h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-rightShift' href='./../Overviews/Methods.html#rightShift'>rightShift</a>(<span class='argstr'>function</span>, <span class='argstr'>adverb</span>)</h3>
@@ -818,5 +818,5 @@ a.value(0.5);
 a.value((0, 0.06..1)); // creates a range of values..</textarea>
 <button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 
-<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/AbstractFunction.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Classes/AbstractFunction.schelp</a><br>link::Classes/AbstractFunction::<br></div></div><script src='./../static/editor.js' type='text/javascript'></script>
+<p><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/main/HelpSource/Classes/AbstractFunction.schelp'>https://github.com/supercollider/supercollider/tree/main/HelpSource/Classes/AbstractFunction.schelp</a><br>link::Classes/AbstractFunction::<br></div></div><script src='./../static/editor.js' type='text/javascript'></script>
 </body></html>

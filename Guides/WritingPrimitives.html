@@ -1,4 +1,4 @@
-<!doctype html><html lang='en'><head><title>Writing Primitives | SuperCollider 3.14.0-rc2 Help</title>
+<!doctype html><html lang='en'><head><title>Writing Primitives | SuperCollider 3.14.0 Help</title>
 <link rel='stylesheet' href='./../static/scdoc.css' type='text/css' />
 <link rel='stylesheet' href='./../static/codemirror.css' type='text/css' />
 <link rel='stylesheet' href='./../static/editor.css' type='text/css' />
@@ -15,7 +15,7 @@
 <script>
 var helpRoot = './..';
 var scdoc_title = 'Writing Primitives';
-var scdoc_sc_version = '3.14.0-rc2';
+var scdoc_sc_version = '3.14.0';
 </script>
 <script src='./../static/scdoc.js' type='text/javascript'></script>
 <script src='./../docmap.js' type='text/javascript'></script>
@@ -266,5 +266,5 @@ It is good practice to avoid creating objects in a primitive at all where possib
 <dt>Now where do I put the thing to return it?<dd>Store your return value at <code>g-&gt;sp - inNumArgsPushed + 1</code>. (In most primitives this is referred to by the variable <code>a</code>.)</dl>
 
 <p><div class='footnotes'>
-<a class='anchor' name='footnote_1'/><div class='footnote'>[<a href='#footnote_org_1'>1</a>] - Some SC language objects, such as numbers, boolean types, chars, and symbols are stored directly within a PyrSlot, and do not require allocation. (Symbols are a special case: A reference to a location in the global symbol table is stored, where each defined symbol is permanently stored.)</div></div><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Guides/WritingPrimitives.schelp'>https://github.com/supercollider/supercollider/tree/3.14/HelpSource/Guides/WritingPrimitives.schelp</a><br>link::Guides/WritingPrimitives::<br></div></div><script src='./../static/editor.js' type='text/javascript'></script>
+<a class='anchor' name='footnote_1'/><div class='footnote'>[<a href='#footnote_org_1'>1</a>] - Some SC language objects, such as numbers, boolean types, chars, and symbols are stored directly within a PyrSlot, and do not require allocation. (Symbols are a special case: A reference to a location in the global symbol table is stored, where each defined symbol is permanently stored.)</div></div><div class='doclink'>helpfile source: <a href='https://github.com/supercollider/supercollider/tree/main/HelpSource/Guides/WritingPrimitives.schelp'>https://github.com/supercollider/supercollider/tree/main/HelpSource/Guides/WritingPrimitives.schelp</a><br>link::Guides/WritingPrimitives::<br></div></div><script src='./../static/editor.js' type='text/javascript'></script>
 </body></html>
