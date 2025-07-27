@@ -33,7 +33,7 @@ RUN git clone \
         -DSUPERNOVA=OFF \
         -DSC_ED=OFF \
         -DSC_EL=OFF \
-        -DSC_VIM=ON \
+        -DSC_VIM=OFF \
         -DNATIVE=ON \
         -DSC_IDE=OFF \
         -DNO_X11=ON \
