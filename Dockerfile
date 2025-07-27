@@ -18,7 +18,7 @@ RUN apt-get update && \
         libudev-dev \
         sed
 
-ENV SC_BRANCH=3.14
+ENV SC_BRANCH=main
 
 RUN git clone \
     --depth 1 \
