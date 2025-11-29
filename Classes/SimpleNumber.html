@@ -1,4 +1,4 @@
-<!doctype html><html lang='en'><head><title>SimpleNumber | SuperCollider 3.14.0 Help</title>
+<!doctype html><html lang='en'><head><title>SimpleNumber | SuperCollider 3.14.1 Help</title>
 <link rel='stylesheet' href='./../static/scdoc.css' type='text/css' />
 <link rel='stylesheet' href='./../static/codemirror.css' type='text/css' />
 <link rel='stylesheet' href='./../static/editor.css' type='text/css' />
@@ -15,7 +15,7 @@
 <script>
 var helpRoot = './..';
 var scdoc_title = 'SimpleNumber';
-var scdoc_sc_version = '3.14.0';
+var scdoc_sc_version = '3.14.1';
 </script>
 <script src='./../static/scdoc.js' type='text/javascript'></script>
 <script src='./../docmap.js' type='text/javascript'></script>
@@ -1094,12 +1094,9 @@ a.action = {
 <div class='method'>
 <p>Returns a random number from a uniform distribution with the range [-this, +this], i.e. between -this and +this (including -this and +this).</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-rrand' href='./../Overviews/Methods.html#rrand'>rrand</a>(<span class='argstr'>aNumber</span>, <span class='argstr'>adverb</span>)</h3>
 <div class='method'>
-<p>Returns a random number from a uniform distribution with the range between <code>this</code> and <code>arg</code>.<h4>Arguments:</h4>
-<table class='arguments'>
-<tr><td class='argumentname'>arg<td class='argumentdesc'>
-<p>The other (upper or lower) limit of the range.</table><h4>Discussion:</h4>
+<p>Returns a random number from a uniform distribution with the range between <code>this</code> and <code>aNumber</code>.<h4>Discussion:</h4>
 
-<p><code>arg</code> can be lower than <code>this</code>. If either <code>this</code> or <code>arg</code> is a <a href="./../Classes/Float.html">Float</a>, the <code>arg</code> bound will be excluded from the range. If both <code>this</code> and <code>arg</code> are <a href="./../Classes/Integer.html">Integer</a>, both bounds are included.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-linrand' href='./../Overviews/Methods.html#linrand'>linrand</a></h3>
+<p><code>aNumber</code> can be lower than <code>this</code>. If either <code>this</code> or <code>aNumber</code> is a <a href="./../Classes/Float.html">Float</a>, the <code>aNumber</code> bound will be excluded from the range, and sclang returns a <a href="./../Classes/Float.html">float</a>. If both <code>this</code> and <code>aNumber</code> are <a href="./../Classes/Integer.html">Integer</a>, both bounds are included, and sclang returns an <a href="./../Classes/Integer.html">integer</a>.</div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-linrand' href='./../Overviews/Methods.html#linrand'>linrand</a></h3>
 <div class='method'>
 <p>Returns a random number from a linear distribution with the range [0, this). Histogram will approximate a diagonal line, hence the name. More formally, <code>.linrand</code> samples from a distribution over [0, 1) with a probability density function of 2(1 - x) and multiplies by <code>this</code>.<h4>Discussion:</h4>
 
@@ -1121,16 +1118,13 @@ a.action = {
 <button class='copy-button' aria-label='Copy code'><span class='copy-ico'>⧉</span><span class='check-ico'>✔</span></button></div>
 </div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-exprand' href='./../Overviews/Methods.html#exprand'>exprand</a>(<span class='argstr'>aNumber</span>, <span class='argstr'>adverb</span>)</h3>
 <div class='method'>
-<p>Returns a <a href="./../Classes/Float.html">Float</a> in the range [this, arg) drawn from a log-uniform distribution. Receiver (i.e., <code>this</code>) must not be zero. Note that the value is <em>not</em> drawn from an exponential distribution.<h4>Arguments:</h4>
-<table class='arguments'>
-<tr><td class='argumentname'>arg<td class='argumentdesc'>
-<p>The other (upper or lower) limit of the range. Must be of same sign as <code>this</code>, and must not be zero.</table><h4>Returns:</h4>
+<p>Returns a <a href="./../Classes/Float.html">Float</a> in the range [this, aNumber),  i.e. between this and aNumber (including this, not including aNumber),  drawn from a log-uniform distribution. Receiver (i.e., <code>this</code>) must not be zero. Note that the value is <em>not</em> drawn from an exponential distribution.<h4>Returns:</h4>
 <div class='returnvalue'>
 <p>Always returns a <a href="./../Classes/Float.html">Float</a>.</div></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-gauss' href='./../Overviews/Methods.html#gauss'>gauss</a>(<span class='argstr'>standardDeviation</span>)</h3>
 <div class='method'>
-<p>Returns a <a href="./../Classes/Float.html">Float</a> sampled from a Gaussian distribution with mean <code>this</code> and standard deviation <code>stddev</code>. The range of the gaussian distribution is unbounded and thus may return +/-inf; consider using <a href="./../Classes/SimpleNumber.html#-clip">clip</a>.<h4>Arguments:</h4>
+<p>Returns a <a href="./../Classes/Float.html">Float</a> sampled from a Gaussian distribution with mean <code>this</code> and standard deviation <code>standardDeviation</code>. The range of the gaussian distribution is unbounded and thus may return +/-inf; consider using <a href="./../Classes/SimpleNumber.html#-clip">clip</a>.<h4>Arguments:</h4>
 <table class='arguments'>
-<tr><td class='argumentname'>stddev<td class='argumentdesc'>
+<tr><td class='argumentname'>standardDeviation<td class='argumentdesc'>
 <p>The standard deviation.</table><h4>Returns:</h4>
 <div class='returnvalue'>
 <p>Always returns a <a href="./../Classes/Float.html">Float</a>.</div></div><h3 class='method-code'><span class='method-prefix'>.</span><a class='method-name' name='-partition' href='./../Overviews/Methods.html#partition'>partition</a>(<span class='argstr'>parts: 2</span>, <span class='argstr'>min: 1</span>)</h3>
